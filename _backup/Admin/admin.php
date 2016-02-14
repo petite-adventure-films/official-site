@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+CSS Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Pollination  
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20100925
+Modified by: Petite Adventure Films - 20110223
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Petite Adventure Films</title>
+<link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+<?php
+	error_reporting(E_ALL);
+	ini_set('display_errors', '1');
+	include('../php/functions/db_func.php');
+	$success = 0;
+	$editArray = 0;
+	if(isset($_POST['execute2']))
+	{
+		$queryYear = $_POST['dateQuery'];	
+	}
+	else
+	{
+		if(isset($_GET['queryyear']))
+		{
+			$queryYear = $_GET['queryyear'];
+		}
+		else
+		{
+			$queryYear = '2011';	
+		}
+	}
+	if(isset($_POST['execute']) || isset($_GET['scrid']))
+	{
+		$userConnection = ConncetDB();
+		if(isset($_GET['func']))
+		{
+			if(strcmp($_GET['func'],'edit') === 0)
+			{
+				$query = 'SELECT * from screening WHERE idscreening = ' . $_GET['scrid'];
+				$result = mysql_query($query);
+				if(!$result)
+				{
+					print "Edit Query failed" . mysql_error();
+					die;
+				}
+				$editArray = mysql_fetch_assoc($result);
+			}
+			if(strcmp($_GET['func'],'delete') === 0)
+			{
+				$query = 'UPDATE screening SET scr_deleted = 1 WHERE idscreening = ' . $_GET['scrid'];
+				$result = mysql_query($query);
+				if(!$result)
+				{
+					print "Edit Query failed" . mysql_error();
+					die;
+				}
+				header("Location:admin.php?queryyear=" . $queryYear);
+				exit;
+			}
+			if(strcmp($_GET['func'],'undelete') === 0)
+			{
+				$query = 'UPDATE screening SET scr_deleted = 0 WHERE idscreening = ' . $_GET['scrid'];
+				$result = mysql_query($query);
+				if(!$result)
+				{
+					print "Edit Query failed" . mysql_error();
+					die;
+				}
+				header("Location:admin.php?queryyear=" . $queryYear);
+				exit;
+			}
+		}
+		else
+		{
+			if(strcmp($_POST['scrid'],'noid')===0)
+			{
+				$sqlInsert="INSERT INTO screening ";
+				$fieldNames = '(scr_film, scr_posted_date, scr_date, scr_date_for_display, scr_time,scr_venue,scr_language,
+						scr_location,scr_directions,scr_price,scr_notes,scr_deleted)';
+				$fieldValues = "('" . sqlClean($_POST['film']) . "','" .
+						     sqlClean($_POST['date_post']) . "','" .
+						     sqlClean($_POST['date']) . "','" .
+						     sqlClean($_POST['display_date']) . "','" .
+						     sqlClean($_POST['time']) . "','" .
+						     sqlClean($_POST['venue']) . "','" .
+						     sqlClean($_POST['language']) . "','" .
+						     sqlClean($_POST['address']) . "','" .
+						     sqlClean($_POST['directions']) . "','" .
+						     sqlClean($_POST['price']) . "','" .
+						     sqlClean($_POST['notes']) . "','0')";
+				$sqlInsert = $sqlInsert . $fieldNames . ' VALUES ' . $fieldValues;
+				if (!mysql_query($sqlInsert,$userConnection))
+				{
+				    die('Error in update database.<br/>' . mysql_error());
+				}
+				$success = ' ' . $_POST['film'] . ' ' . $_POST['date'] . ' ' . $_POST['address'];
+			}
+			else
+			{
+				$sqlUpdate = "UPDATE screening SET " .
+				"scr_film='"   . sqlClean($_POST['film']) .
+				"', scr_posted_date='" . sqlClean($_POST['date_post']) .
+				"', scr_date='" . sqlClean($_POST['date']) .
+				"', scr_date_for_display ='" . sqlClean($_POST['display_date']) .
+				"', scr_time='" . sqlClean($_POST['time'])  .
+				"', scr_venue='" . sqlClean($_POST['venue'])  .
+				"', scr_language='" . sqlClean($_POST['language']) .
+				"', scr_location='" . sqlClean($_POST['address']) .
+				"', scr_directions='" . sqlClean($_POST['directions']) .
+				"', scr_price='" . sqlClean($_POST['price']) .
+				"', scr_notes='" . sqlClean($_POST['notes']) .
+				"' WHERE idscreening = " . sqlClean($_POST['scrid']);
+				if (!mysql_query($sqlUpdate,$userConnection))
+				{
+				    die('Error in update database.<br/>' . mysql_error());
+				}				
+				$success = ' ' . $_POST['film'] . ' ' . $_POST['date'] . ' ' . $_POST['address'];
+			}
+		}
+		mysql_close($userConnection);
+	}
+?>
+<div id="wrapper">
+	<div id="logo">
+		<h1><a href="#">Petite Adventure Films </a></h1>
+		<p>プチ・アドベンチャー・フィルムズ</p>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="current_page_item"><span><a href="#">Add Screening</a></span></li>
+			<li><span><a href="admin2.php">Add News</a></span></li>
+			<li><span><a href="admin3.php">File Manager</a></span></li>
+		</ul>
+	</div>
+
+	<!-- end #menu -->
+	<div id="header">
+	</div>
+	<!-- end #header -->
+	<div id="page">
+		<div id="page-bgtop">
+			<div id="page-bgbtm">
+				<div id="content">
+					<h4>Petite Admin (add screening)</h4>
+					<?php
+						if($success)
+						{
+							print "<b>Database update:</b> $success";
+						}
+					?>
+					<form accept-charset="UTF-8,ISO-8859-1" class="standardform" action=<?php echo '"admin.php?queryyear=' . $queryYear . '"';?> method="post">
+					<table>
+						<tr>
+							<td>Language</td>
+							<td>
+								<select name="language" id="language">
+								<option value="jp"
+								<?php if($editArray)
+								{
+								   if(strcmp($editArray['scr_language'],'jp')===0)
+								   {
+								      print ' SELECTED ';
+								   }
+								}
+								?>
+								>Japanese</option>
+								<option value="en"
+								<?php if($editArray)
+								{
+								   if(strcmp($editArray['scr_language'],'en')===0)
+								   {
+								      print ' SELECTED ';
+								   }
+								}
+								?>								
+								>English</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Film</td>
+							<td>
+								<select name="film" id="film">
+									<option value="bac"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'bac')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Brian And Co</option>
+									<option value="ur"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'ur')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Goodbye UR</option>
+									<option value="evt"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'evt')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Event</option>
+									<option value="otome"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'otome')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Otome</option>
+									<option value="kida"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'kida')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Kida</option>
+									<option value="zemp"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'zemp')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Zempukuji</option>									
+									<option value="homl"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'homl')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Homeless</option>									
+									<option value="oth"
+									<?php if($editArray)
+									{
+									   if(strcmp($editArray['scr_film'],'oth')===0)
+									   {
+									      print ' SELECTED ';
+									   }
+									}
+									?>									
+									>Other</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+								<td>Date</td>
+								<td><input <?php if($editArray){print 'value ="'.$editArray['scr_date'].'" ';}?> type="text" name="date" id="date" maxlength="10" size="10" /> yyyy-mm-dd <br/><small>This date is used by the database for searching and sorting</small></td>
+						</tr>
+						<tr>
+								<td>Date Posted</td>
+								<td><input <?php if($editArray){print 'value ="'.$editArray['scr_posted_date'].'" ';}else{print 'value ="'.date("Y-m-d").'" ';}?> type="text" name="date_post" id="date_post" maxlength="10" size="10" /> yyyy-mm-dd <br/><small>This date is the date the screeing was posted on the screening page</small></td>
+						</tr>
+						<tr>
+								<td>
+									Special Notes
+								</td>
+								<td>
+									The fields below (from Display Date onwards) can contain html to allow formatting of text. You can for example do the following<br/><br/>
+									&#060;br/&#062; - insert new line<br/>
+									&#060;b&#062;<b>your text here</b>&#060;/b&#062; - <b>bold</b><br/>
+									&#060;u&#062;<u>your text here</u>&#060;/u&#062; - <u>underline</u><br/>
+									&#060;i&#062;<i>your text here</i>&#060;/i&#062; - <i>italic</i>
+								</td>
+						</tr>										
+						<tr>
+								<td>Screening Display Date</td>
+								<td><input type="text" name="display_date" id="display_date" maxlength="50" size="50" <?php if($editArray){print 'value ="'.$editArray['scr_date_for_display'].'" ';}?>/> <br/><small>This screening date will be displayed on the screening information page</small></td>
+						</tr>	
+						<tr>
+								<td>Time</td>
+								<td><textarea maxlength=300 cols="50" rows="6" name="time" id="time"><?php if($editArray){print $editArray['scr_time'];}?></textarea></td>
+						</tr>
+						<tr>
+								<td>Venue</td>
+								<td><textarea maxlength=300 cols="50" rows="6" name="venue" id="venue"><?php if($editArray){print $editArray['scr_venue'];}?></textarea></td>
+						</tr>
+						<tr>
+								<td>Location</td>
+								<td><textarea maxlength=300 cols="50" rows="6" name="address" id="address"><?php if($editArray){print $editArray['scr_location'];}?></textarea></td>
+						</tr>
+						<tr>
+								<td>Directions</td>
+								<td><textarea maxlength=500 cols="50" rows="10" name="directions" id="directions"><?php if($editArray){print $editArray['scr_directions'];}?></textarea></td>
+						</tr>
+						<tr>
+								<td>Price</td>
+								<td><textarea maxlength=300 cols="50" rows="6" name="price" id="price"><?php if($editArray){print $editArray['scr_price'];}?></textarea></td>
+						</tr>
+						<tr>
+								<td>Notes</td>
+								<td><textarea maxlength=500 cols="50" rows="10" name="notes" id="notes"><?php if($editArray){print $editArray['scr_notes'];}?></textarea></td>
+						</tr>
+					</table>
+					<p class="hiddenpara">
+					<input type="hidden" name="execute" id="execute" value="OK" /></p>
+					<p class="hiddenpara">
+					<input type="hidden" name="scrid" id="scrid" value=<?php if(isset($_GET['scrid'])){ echo '"' . $_GET['scrid'] . '"';}else{echo'"noid"';}?> /></p>
+					<p class="hiddenpara">
+					<input type="submit" class="stdformbtn" value=<?php if(isset($_GET['scrid'])){ echo '"Submit EDIT"';}else{echo'"Submit Screening"';}?> /></p>
+					</form>
+				</div>
+				<!-- end #content -->
+				<div id="sidebar">
+				<?php
+					echo '<h1>Edit - ' . $queryYear . '</h1>';
+					$userConnection = ConncetDB();
+					$query = 'SELECT * FROM screening WHERE EXTRACT(YEAR FROM `scr_date`) = ' . $queryYear;
+					$result = mysql_query($query);
+					if (!$result)
+					{
+						print "Query failed" . mysql_error();
+						die;
+					}
+					echo '<hr/>';
+					while($row = mysql_fetch_assoc($result))
+					{
+					    echo $row['scr_film'] . ' - ';
+					    echo $row['scr_date'] . '<br>';
+					    echo $row['scr_location'] . '<br>';
+					    if($row['scr_deleted'])
+					    {
+						echo 'screening deleted: <a href="admin.php?queryyear=' . $queryYear . '&func=undelete&scrid=' . $row['idscreening'] . '">undelete</a>'; 	
+					    }
+					    else
+					    {
+						echo '<a href="admin.php?queryyear=' . $queryYear . '&func=edit&scrid=' . $row['idscreening'] . '">edit</a>' . ' - ';
+						echo '<a href="admin.php?queryyear=' . $queryYear . '&func=delete&scrid=' . $row['idscreening'] . '">delete</a>'; 
+					    }
+					    
+					    echo '<hr/>';
+					}
+					mysql_close($userConnection);
+					if(isset($_GET['scrid']))
+					{
+						echo 'To cancel edit click <a href="admin.php?queryyear=' . $queryYear . '">*here*</a>'; 
+						echo '<hr/>';
+					}
+				?>
+					<form accept-charset="UTF-8,ISO-8859-1" class="standardform" action="admin.php" method="post">
+						<select name="dateQuery" id="dateQuery">
+						<?php
+							$result = 0;
+							$userConnection = GetScreeningYears($result);
+							while($row = mysql_fetch_row($result))
+							{
+								echo '<option value="' . $row[0] . '" ';
+								if($queryYear == $row[0])
+								{
+									echo 'SELECTED';
+								}
+								echo ' >' . $row[0] . '</option>';
+							}
+						?>
+						</select>
+					<p class="hiddenpara">
+					<input type="hidden" name="execute2" id="execute2" value="OK" /></p>
+					<p class="hiddenpara">
+					<input type="submit" class="stdformbtn" value="Query Edit Date" /></p>					
+					</form>	
+				</div>
+				<br>
+				<!-- end #sidebar -->
+				<div style="clear: both;">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<!-- end #page -->
+</div>
+
+<div id="footer">
+	<p>Copyright (c) 2011 petiteadventurefilms.com. All rights reserved. Design by: Petite Adventure Films with help from <a href="http://www.freecsstemplates.org/"> CSS Templates</a>.</p>
+</div>
+<!-- end #footer -->
+</body>
+</html>

@@ -1,0 +1,102 @@
+body {
+	background-color: #DEDECA;
+}
+
+body, td, th {
+	color: #666633;
+}
+
+h1, h2 {
+	color: #663300;
+}
+
+h3, h4, h5, h6 {
+	color: #996633;
+}
+
+a {
+  color: #336600;
+}
+.MenuText {
+	font-size: 18px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #996633;
+
+
+}
+.HeadlineText {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #663300;
+}
+.HeadLineDate {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: Å@12pt;
+	color: #CC0000
+}
+.MenuHighlight {
+	font-size: 18px;
+	color: #CC0000;
+	font-weight: normal;
+
+}
+p {
+	color: #000000;
+	font-size: 16px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: justify;
+
+}
+
+.jpMenuText {
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #0066FF
+
+
+}
+
+.jpMainText {
+	font-size: 14px;
+	font-weight: normal;
+	text-decoration: none;
+
+}
+
+.jpMainText2{
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.jpMainText3{
+	font-size: 18px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #4f400a
+}
+
+.jpMainLinkText {
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #0066FF
+}
+
+.jpupdateText {
+	font-size: 11px;
+	color: #FF6600;
+	font-weight: normal;
+	text-decoration: none;
+
+}
+
+.jpMenuHighlight {
+	font-size: 13px;
+	color: #CC0000;
+	font-weight: normal;
+
+}

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+#site_footer{
+
+	padding-top: 32px;
+	background: $white;
+	@extend .caption1;
+
+	ul{
+		li{
+			display: inline-block;
+			&:not(:last-of-type){
+				margin-right: 4px;
+			}
+		}
+	}
+
+	p{
+		display: inline-block;
+	}
+
+	a{
+		color: $black2;
+		&:hover{
+			color: $pink6;
+		}
+	}
+
+	@media all and (min-width: $min_width){
+		padding-bottom: 32px;
+		text-align: center;
+	}
+
+	@media all and (max-width: $max_width){
+		padding-bottom: 56px;
+	}
+
+}

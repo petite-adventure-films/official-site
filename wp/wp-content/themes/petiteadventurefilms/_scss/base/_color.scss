@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+$red: #ff0000;
+
+$black: #000000;
+$black1: #2c2c2c;
+$black2: #868686;
+$black3: #c8c8c8;
+$black4: #e6e6e6;
+$black5: #f0f0f0;
+
+$white: #ffffff;
+
+$brown: #996d63;
+
+$pink: #ff3f80;
+$pink1: #ffe6f2;
+$pink2: #ffcce4;
+$pink3: #ff99c9;
+$pink4: #ff66ae;
+$pink5: #ff3393;
+$pink6: #ff3f80;
+$pink7: #f2006a;
+$pink8: #d4005d;
+$pink9: #7f0038;
+$pink10: #240410;
+
+$blue: #53dbff;
+$blue1: #e6fcff;
+$blue2: #ccf9ff;
+$blue3: #99f3ff;
+$blue4: #66ebff;
+$blue5: #33e5ff;
+$blue6: #53dbff;
+$blue7: #00c4e3;
+$blue8: #00acc7;
+$blue9: #026777;
+$blue10: #061d22;
+
+$green: #84cc1e;
+$green1: #f0fbe8;
+$green2: #dff7cf;
+$green3: #c1ef9f;
+$green4: #a2e66f;
+$green5: #84df3f;
+$green6: #84cc1e;
+$green7: #57be0e;
+$green8: #4ea60d;
+$green9: #2f630a;
+$green10: #0d1d03;
+
+$twitter: #00aced;
+$facebook: #305097;
+
+.pink{ color: $pink !important; }
+.pink1{ color: $pink1 !important; }
+.pink2{ color: $pink2 !important; }
+.pink3{ color: $pink3 !important; }
+.pink4{ color: $pink4 !important; }
+.pink5{ color: $pink5 !important; }
+.pink6{ color: $pink6 !important; }
+.pink7{ color: $pink7 !important; }
+.pink8{ color: $pink8 !important; }
+.pink9{ color: $pink9 !important; }
+.pink10{ color: $pink10 !important; }
+
+.blue{ color: $blue !important; }
+.blue1{ color: $blue1 !important; }
+.blue2{ color: $blue2 !important; }
+.blue3{ color: $blue3 !important; }
+.blue4{ color: $blue4 !important; }
+.blue5{ color: $blue5 !important; }
+.blue6{ color: $blue6 !important; }
+.blue7{ color: $blue7 !important; }
+.blue8{ color: $blue8 !important; }
+.blue9{ color: $blue9 !important; }
+.blue10{ color: $blue10 !important; }
+
+.green{ color: $green !important; }
+.green1{ color: $green1 !important; }
+.green2{ color: $green2 !important; }
+.green3{ color: $green3 !important; }
+.green4{ color: $green4 !important; }
+.green5{ color: $green5 !important; }
+.green6{ color: $green6 !important; }
+.green7{ color: $green7 !important; }
+.green8{ color: $green8 !important; }
+.green9{ color: $green9 !important; }
+.green10{ color: $green10 !important; }
+
+.twitter{ color: $twitter !important; }
+.facebook{ color: $facebook !important; }
+
+.bg_white{
+	background-color: $white;
+}
+

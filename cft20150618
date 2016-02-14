@@ -1,0 +1,1144 @@
+a:23:{s:44:"custom_field_template_replace_keys_by_labels";s:0:"";s:41:"custom_field_template_use_multiple_insert";s:0:"";s:33:"custom_field_template_use_wpautop";i:1;s:34:"custom_field_template_use_autosave";s:0:"";s:40:"custom_field_template_use_disable_button";s:0:"";s:47:"custom_field_template_disable_initialize_button";i:1;s:41:"custom_field_template_disable_save_button";i:1;s:51:"custom_field_template_disable_default_custom_fields";s:0:"";s:40:"custom_field_template_disable_quick_edit";s:0:"";s:49:"custom_field_template_disable_custom_field_column";s:0:"";s:39:"custom_field_template_replace_the_title";s:0:"";s:32:"custom_field_template_deploy_box";s:0:"";s:38:"custom_field_template_widget_shortcode";s:0:"";s:39:"custom_field_template_excerpt_shortcode";s:0:"";s:36:"custom_field_template_use_validation";s:0:"";s:33:"custom_field_template_before_list";s:4:"<ul>";s:32:"custom_field_template_after_list";s:5:"</ul>";s:34:"custom_field_template_before_value";s:4:"<li>";s:33:"custom_field_template_after_value";s:5:"</li>";s:32:"custom_field_template_disable_ad";s:0:"";s:3:"css";s:585:".cft { overflow:hidden; }
+.cft:after { content:" "; clear:both; height:0; display:block; visibility:hidden; }
+.cft dl { margin:10px 0; }
+.cft dl:after { content:" "; clear:both; height:0; display:block; visibility:hidden; }
+.cft dt { width:20%; clear:both; float:left; display:inline; font-weight:bold; text-align:center; }
+.cft dt .hideKey { visibility:hidden; }
+.cft dd { margin:0 0 0 21%; }
+.cft dd p.label { font-weight:bold; margin:0; }
+.cft_instruction { margin:10px; }
+.cft fieldset { border:1px solid #CCC; margin:5px; padding:5px; }
+.cft .dl_checkbox { margin:0; }
+";s:5:"posts";a:295:{i:167;s:1:"1";i:195;s:1:"1";i:1254;s:1:"1";i:1485;s:1:"0";i:1488;s:1:"0";i:1490;s:1:"0";i:1571;s:1:"1";i:1842;s:1:"1";i:2403;s:1:"0";i:3252;s:1:"4";i:3250;s:1:"4";i:3248;s:1:"4";i:3246;s:1:"4";i:3244;s:1:"4";i:3282;s:1:"4";i:3382;s:1:"9";i:3384;s:1:"6";i:3400;s:1:"6";i:3405;s:1:"6";i:4148;s:1:"7";i:4151;s:1:"4";i:4154;s:1:"6";i:630;s:1:"4";i:4676;s:1:"4";i:4673;s:1:"4";i:4669;s:2:"17";i:4665;s:1:"4";i:4663;s:1:"4";i:4661;s:1:"4";i:4071;s:2:"10";i:5164;s:1:"4";i:5166;s:1:"4";i:2385;s:1:"7";i:4884;s:1:"4";i:4877;s:1:"4";i:4901;s:1:"4";i:4899;s:1:"4";i:4894;s:1:"4";i:4886;s:1:"4";i:4882;s:1:"4";i:4869;s:1:"4";i:4867;s:1:"4";i:4875;s:1:"4";i:5471;s:1:"4";i:5474;s:1:"4";i:4873;s:1:"4";i:4871;s:1:"4";i:5138;s:1:"4";i:5155;s:1:"4";i:5494;s:1:"4";i:5496;s:1:"4";i:5498;s:1:"4";i:5504;s:1:"4";i:5506;s:1:"4";i:5508;s:1:"4";i:5510;s:1:"4";i:5514;s:1:"4";i:5517;s:1:"4";i:5519;s:1:"4";i:5521;s:1:"4";i:5526;s:1:"4";i:5528;s:1:"4";i:5530;s:1:"4";i:5532;s:1:"4";i:5570;s:1:"7";i:4519;s:1:"6";i:4068;s:1:"7";i:3399;s:1:"6";i:4800;s:1:"4";i:831;s:1:"4";i:3458;s:1:"4";i:1444;s:1:"4";i:4903;s:1:"4";i:5075;s:1:"4";i:5077;s:1:"4";i:1213;s:1:"4";i:5081;s:1:"4";i:5083;s:1:"4";i:5085;s:1:"4";i:5088;s:1:"4";i:5090;s:1:"4";i:5092;s:1:"4";i:5094;s:1:"4";i:5097;s:1:"4";i:5100;s:1:"4";i:5102;s:1:"4";i:5104;s:1:"4";i:5106;s:1:"4";i:5108;s:1:"4";i:2529;s:1:"4";i:5111;s:1:"4";i:5172;s:1:"4";i:5113;s:1:"4";i:5115;s:1:"4";i:5117;s:1:"4";i:5119;s:1:"4";i:5121;s:1:"4";i:5124;s:1:"4";i:5126;s:1:"4";i:5128;s:1:"4";i:5130;s:1:"4";i:5132;s:1:"4";i:5134;s:1:"4";i:5136;s:1:"4";i:4659;s:1:"4";i:4657;s:1:"4";i:4655;s:1:"4";i:4650;s:1:"4";i:4644;s:1:"4";i:4642;s:1:"4";i:4640;s:1:"4";i:4638;s:1:"4";i:4636;s:1:"4";i:4634;s:1:"4";i:4632;s:1:"4";i:4628;s:1:"4";i:4626;s:1:"4";i:629;s:2:"17";i:627;s:2:"13";i:5140;s:1:"4";i:5142;s:1:"4";i:5144;s:1:"4";i:5146;s:1:"4";i:5148;s:1:"4";i:5158;s:1:"4";i:5160;s:1:"4";i:458;s:1:"4";i:5193;s:1:"4";i:2533;s:1:"4";i:748;s:1:"4";i:5197;s:1:"4";i:5199;s:1:"4";i:5201;s:1:"4";i:5203;s:1:"4";i:1450;s:1:"4";i:5287;s:1:"4";i:5290;s:1:"4";i:5289;s:1:"4";i:5293;s:1:"4";i:5295;s:1:"4";i:5297;s:1:"4";i:5299;s:1:"4";i:5301;s:1:"4";i:5303;s:1:"4";i:5305;s:1:"4";i:5307;s:1:"4";i:5500;s:1:"4";i:4689;s:2:"12";i:4691;s:2:"12";i:4701;s:1:"4";i:4717;s:1:"4";i:4728;s:1:"4";i:4613;s:1:"4";i:4611;s:1:"4";i:622;s:2:"13";i:460;s:2:"13";i:4667;s:1:"4";i:4679;s:2:"17";i:1625;s:1:"4";i:4814;s:1:"4";i:4812;s:1:"4";i:4833;s:1:"4";i:4836;s:1:"4";i:4850;s:1:"4";i:847;s:1:"4";i:4827;s:1:"4";i:4805;s:1:"4";i:4822;s:1:"4";i:4830;s:1:"4";i:4846;s:1:"4";i:4842;s:1:"4";i:829;s:1:"4";i:4848;s:1:"4";i:4844;s:1:"4";i:4840;s:1:"4";i:4802;s:1:"4";i:4838;s:1:"4";i:837;s:1:"4";i:4816;s:1:"4";i:4808;s:1:"4";i:3279;s:1:"8";i:1437;s:1:"4";i:4820;s:1:"4";i:5731;s:2:"14";i:5737;s:1:"4";i:5741;s:1:"4";i:5745;s:1:"4";i:5748;s:1:"4";i:5751;s:1:"4";i:5755;s:1:"4";i:5759;s:1:"4";i:5762;s:1:"4";i:5767;s:1:"4";i:3073;s:1:"8";i:5884;s:1:"7";i:5941;s:1:"8";i:5942;s:1:"8";i:5943;s:1:"8";i:5944;s:1:"8";i:5945;s:1:"8";i:5946;s:1:"8";i:5947;s:1:"8";i:6153;s:2:"14";i:6156;s:2:"14";i:6159;s:2:"14";i:6161;s:1:"4";i:6164;s:2:"14";i:623;s:2:"13";i:6458;s:1:"8";i:6459;s:1:"8";i:6457;s:1:"7";i:6618;s:1:"4";i:6619;s:2:"17";i:6621;s:1:"4";i:6620;s:1:"4";i:6622;s:2:"14";i:6691;s:1:"4";i:6697;s:1:"4";i:6699;s:1:"4";i:6701;s:1:"4";i:6703;s:1:"4";i:6705;s:1:"4";i:6707;s:2:"17";i:6710;s:1:"4";i:6822;s:1:"6";i:4736;s:2:"13";i:4671;s:2:"17";i:6951;s:2:"16";i:6956;s:2:"16";i:6957;s:2:"16";i:6958;s:2:"16";i:6959;s:2:"16";i:6960;s:2:"16";i:6961;s:2:"16";i:6962;s:2:"16";i:6963;s:2:"16";i:6964;s:2:"16";i:6965;s:2:"16";i:6966;s:2:"16";i:6967;s:2:"16";i:6968;s:2:"16";i:6969;s:2:"16";i:6970;s:2:"16";i:6971;s:2:"16";i:6972;s:2:"16";i:6973;s:2:"16";i:6974;s:2:"16";i:6975;s:2:"16";i:6976;s:2:"16";i:6977;s:2:"16";i:6978;s:2:"16";i:6985;s:2:"16";i:4687;s:2:"12";i:4703;s:2:"12";i:4683;s:2:"12";i:5322;s:2:"12";i:7097;s:1:"4";i:7110;s:1:"4";i:7126;s:1:"4";i:7131;s:1:"4";i:5958;s:1:"4";i:154;s:1:"4";i:7190;s:1:"4";i:159;s:1:"4";i:7193;s:1:"4";i:7195;s:1:"1";i:7217;s:2:"20";i:7227;s:1:"4";i:7232;s:1:"4";i:7234;s:1:"4";i:7237;s:1:"4";i:7239;s:1:"4";i:7241;s:1:"4";i:7265;s:1:"4";i:7268;s:1:"4";i:7270;s:1:"4";i:7273;s:1:"4";i:7275;s:1:"4";i:7278;s:1:"4";i:7280;s:1:"4";i:7282;s:1:"4";i:4141;s:1:"7";i:7384;s:2:"20";i:8089;s:1:"4";i:8090;s:1:"4";i:8091;s:1:"4";i:8092;s:1:"4";i:8093;s:1:"4";i:8088;s:1:"4";i:8103;s:1:"5";i:8097;s:1:"5";i:8102;s:1:"5";i:8107;s:1:"5";i:8108;s:1:"5";i:8123;s:2:"21";}s:13:"custom_fields";a:22:{i:0;a:9:{s:5:"title";s:24:"かんたん見積依頼";s:7:"content";s:1407:"[estmtInfo1]
+label = 県
+type = textfield
+size = 35
+
+[estmtInfo2]
+label = 市町村区
+type = textfield
+size = 35
+
+[estmtInfo3]
+label = 住居形態
+type = textfield
+size = 35
+
+[estmtInfo11]
+label = 住居形態その他
+type = textfield
+size = 35
+
+[estmtInfo4]
+label = エレベーター
+type = textfield
+size = 35
+
+[estmtInfo5]
+label = トラック止めるスペース
+type = textfield
+size = 35
+
+[estmtInfo6]
+label = 階数
+type = textfield
+size = 35
+
+[estmtInfo7]
+label = お名前
+type = textfield
+size = 35
+
+[estmtInfo8]
+label = 法人
+type = textfield
+size = 35
+
+[estmtInfo9]
+label = メールアドレス
+type = textfield
+size = 35
+
+[estmtInfo10]
+label = 電話晩冬
+type = textfield
+size = 35
+
+[estmtInfo13]
+label = キャンペーン対象品
+type = textfield
+size = 35
+
+[estmtInfo14]
+label = 第1希望
+type = textfield
+size = 35
+
+[estmtInfo15]
+label = 第2希望
+type = textfield
+size = 35
+
+[estmtInfo16]
+label = 第3希望
+type = textfield
+size = 35
+
+[estmtInfo17]
+label = 集荷時間
+type = textfield
+size = 35
+
+[estmtInfo18]
+label = 返答方法
+type = textfield
+size = 35
+
+[estmtInfo22]
+label = クーポン番号
+type = textfield
+size = 35
+
+[estmtInfo20]
+label = ユーザーエージェント
+type = textfield
+size = 35
+
+[estmtInfo21]
+label = サイトコード
+type = textfield
+size = 35";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:17:"estimationrequest";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:1;a:9:{s:5:"title";s:12:"完了画面";s:7:"content";s:334:"[thanksCf1]
+label = 失敗時のタイトル
+type = textfield
+size = 35
+
+[thanksCf2]
+label = 失敗時のコンテンツ
+type = textarea
+row = 80
+cols = 100
+
+[thanksCf3]
+label = 成功時のタイトル
+type = textfield
+size = 35
+
+[thanksCf4]
+label = 成功時のコンテンツ
+type = textarea
+row = 80
+cols = 100";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:41:"195,167,200,1254,1571,1842,2926,6829,7195";s:9:"post_type";s:4:"page";s:16:"custom_post_type";s:0:"";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:2;a:9:{s:5:"title";s:15:"アンケート";s:7:"content";s:3879:"[worksInfo01]
+label = 名前
+type = textfield
+size = 80
+
+[worksInfo02]
+label = ふりがな
+type = textfield
+size = 80
+
+[worksInfo36]
+label = 法人
+type = checkbox
+value = 法人
+
+[worksInfo37]
+label = メールアドレス
+type = textfield
+size = 80
+
+[worksInfo03]
+label = 電話番号
+type = textfield
+size = 80
+
+[worksInfo07]
+label = 不用品を出そうと思ったきっかけ
+type = textfield
+size = 80
+
+[worksInfo08]
+label = 不用品を出そうと思ったきっかけその他
+type = textfield
+size = 80
+
+[worksInfo09]
+label = エコランドを知った経由
+type = textfield
+size = 80
+
+[worksInfo10]
+label = エコランドを知った経由その他
+type = textfield
+size = 80
+
+[worksInfo11]
+label = エコランドを選んだ理由
+type = textfield
+size = 80
+
+[worksInfo12]
+label = エコランドを選んだ理由その他
+type = textfield
+size = 80
+
+[worksInfo13]
+label = エコランドを選んだ1番の理由
+type = textfield
+size = 80
+
+[worksInfo14]
+label = エコランドを選んだ2番の理由
+type = textfield
+size = 80
+
+[worksInfo15]
+label = エコランドを選んだ3番の理由
+type = textfield
+size = 80
+
+[worksInfo16]
+label = 受付スタッフの対応への評価
+type = select
+value = 大変よかった # まあまあよかった # 普通 # いまいち # 悪かった
+
+[worksInfo17]
+label = 受付スタッフの対応へのコメント
+type = textarea
+htmlEditor = true
+
+[worksInfo40]
+label = 受付スタッフ対応コメントへのエコランドの回答
+type = textarea
+htmlEditor = true
+
+[worksInfo18]
+label = 回収スタッフの対応への評価
+type = select
+value = 大変よかった # まあまあよかった # 普通 # いまいち # 悪かった
+
+[worksInfo19]
+label = 回収スタッフの対応へのコメント
+type = textarea
+htmlEditor = true
+
+[worksInfo41]
+label = 回収スタッフ対応コメントへのエコランドの回答
+type = textarea
+htmlEditor = true
+
+[worksInfo20]
+label = 回収料金についての評価
+type = select
+value = 安すぎる # まあまあ安い # 普通 # ちょっと高い # 高すぎるけど仕方なかった
+
+[worksInfo21]
+label = 回収料金についてのコメント
+type = textarea
+htmlEditor = true
+
+[worksInfo22]
+label = HPについての評価
+type = select
+value = 大変よかった # まあまあよかった # 普通 # いまいち # 悪かった
+
+[worksInfo23]
+label = HPについてのコメント
+type = textarea
+htmlEditor = true
+
+[worksInfo24]
+label = 今後あってほしいサービス
+type = textarea
+htmlEditor = true
+
+[worksInfo25]
+label = その他のコメント
+type = textarea
+htmlEditor = true
+
+[worksInfo26]
+label = 他社は相談したか
+type = select
+value = はい # いいえ
+
+[worksInfo27]
+label = 相談した会社
+type = textfield
+size = 80
+
+[worksInfo28]
+label = 相談した会社その他
+type = textfield
+size = 80
+
+[worksInfo29]
+label = 他社を選ばなかった理由
+type = textfield
+size = 80
+
+[worksInfo30]
+label = 他社を選ばなかった理由その他
+type = textfield
+size = 80
+
+[worksInfo31]
+label = 自治体に相談したか
+type = select
+value = はい # いいえ
+
+[worksInfo32]
+label = 自治体を選ばなかった理由
+type = textfield
+size = 80
+
+[worksInfo33]
+label = 自治体を選ばなかった理由その他
+type = textfield
+size = 80
+
+[worksInfo34]
+label = 自治体を相談しなかった理由
+type = textfield
+size = 80
+
+[worksInfo35]
+label = 自治体を相談しなかった理由その他
+type = textfield
+size = 80
+
+[worksInfo38]
+label = 回収した品物その他
+type = textfield
+size = 80
+
+[worksInfo06]
+label = クーポン受け取る
+type = select
+value = 受け取る # 受け取らない";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:5:"works";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:3;a:8:{s:5:"title";s:24:"ヤフオク無料引取";s:7:"content";s:1102:"[yCollInfo1]
+label = 市町村区
+type = textfield
+size = 35
+
+[yCollInfo2]
+label = 住居形態
+type = textfield
+size = 35
+
+[yCollInfo3]
+label = 住居形態その他
+type = textfield
+size = 35
+
+[yCollInfo4]
+label = 階数
+type = textfield
+size = 35
+
+[yCollInfo5]
+label = エレベーター
+type = textfield
+size = 35
+
+[yCollInfo6]
+label = お名前
+type = textfield
+size = 35
+
+[yCollInfo7]
+label = 法人
+type = textfield
+size = 35
+
+[yCollInfo8]
+label = ふりがな
+type = textfield
+size = 35
+
+[yCollInfo9]
+label = メールアドレス
+type = textfield
+size = 35
+
+[yCollInfo10]
+label = 電話番号
+type = textfield
+size = 35
+
+[yCollInfo11]
+label = 第1希望
+type = textfield
+size = 35
+
+[yCollInfo12]
+label = 第2希望
+type = textfield
+size = 35
+
+[yCollInfo13]
+label = 第3希望
+type = textfield
+size = 35
+
+[yCollInfo14]
+label = 返答方法
+type = textfield
+size = 35
+
+[yCollInfo15]
+label = ユーザーエージェント
+type = textfield
+size = 35
+
+[yCollInfo16]
+label = サイトコード
+type = textfield
+size = 35";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:5:"ycoll";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:4;a:8:{s:5:"title";s:15:"コンテンツ";s:7:"content";s:1525:"[contentsInfo04]
+type = text
+size = 35
+label = H1タグ
+blank = true
+
+[pattern]
+type = fieldset_open
+legend = コンテンツセット1 
+multiple = true
+multipleButton = true
+ 
+[contentsInfo01]
+type = text
+size = 35
+label = タイトル
+blank = true
+ 
+[contentsInfo02]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = コンテンツ
+blank = true
+
+[contentsInfo03]
+type = file
+label = 画像
+blank = true
+
+[contentsInfo05]
+type = text
+size = 35
+label = video
+blank = true
+
+[pattern]
+type = fieldset_close 
+
+
+[pattern1]
+type = fieldset_open
+legend = コンテンツセット2
+multiple = true
+multipleButton = true
+ 
+[contentsInfo06]
+type = text
+size = 35
+label = タイトル
+blank = true
+ 
+[contentsInfo07]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = コンテンツ
+blank = true
+
+[contentsInfo08]
+type = file
+label = 画像
+blank = true
+
+[contentsInfo09]
+type = text
+size = 35
+label = video
+blank = true
+
+[pattern1]
+type = fieldset_close 
+
+[pattern2]
+type = fieldset_open
+legend = コンテンツセット3
+multiple = true
+multipleButton = true
+ 
+[contentsInfo10]
+type = text
+size = 35
+label = タイトル
+blank = true
+ 
+[contentsInfo11]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = コンテンツ
+blank = true
+
+[contentsInfo12]
+type = file
+label = 画像
+blank = true
+
+[contentsInfo13]
+type = text
+size = 35
+label = video
+blank = true
+
+[pattern2]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:46:"post,page,items,area,report,web-blog,item-tips";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:5;a:8:{s:5:"title";s:12:"案件情報";s:7:"content";s:532:"[voiceInfo24]
+label = エコNo.
+type = text
+size = 35
+
+[voiceInfo32]
+label = リピーター
+type = checkbox
+valueLabel = リピーター
+value = 1
+
+[voiceInfo23]
+label = 回収日
+type = text
+date = true
+dateFormat = yyyy-mm-dd
+startDate = \'1970/01/01\'
+endDate = (new Date()).asString()
+
+[voiceInfo29]
+label = エコ回収金額
+type = text
+size = 10
+before = ¥ 
+
+[voiceInfo30]
+label = 買取金額
+type = text
+size = 10
+before = ¥ 
+
+[voiceInfo31]
+label = 紹介企業名
+type = text
+size = 80";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:6:"voices";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:6;a:9:{s:5:"title";s:35:"[キャンペーン]利用の流れ";s:7:"content";s:557:"[campFlowInfo03]
+type = text
+size = 35
+label = タイトル
+
+[campFlowInfo04]
+type = text
+size = 80
+label = 説明
+
+[flow]
+type = fieldset_open
+legend = 流れ
+multiple = true
+multipleButton = true
+
+[campFlowInfo01]
+type = text
+size = 10
+label = POST ID
+blank = true
+
+[campFlowInfo02]
+type = text
+size = 35
+label = 流れのタイトル
+blank = true
+
+[campFlowInfo05]
+type = select
+value = 0 # 1
+valueLabel = アイコン # イメージ 
+label = イメージ表示
+default = 0
+blank = true
+
+[flow]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:8:"campaign";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:7;a:8:{s:5:"title";s:32:"[キャンペーン]詳細情報";s:7:"content";s:797:"[campInfo01]
+type = text
+size = 35
+label = キャンペーン名(略)
+
+[campInfo02]
+type = text
+size = 80
+label = キャンペーン名(正式)
+
+[campInfo03]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = 説明
+
+[campInfo04]
+type = text
+date = true
+dateFormat = yyyy年mm月dd日
+label = キャンペーン開始日
+
+[campInfo05]
+type = text
+date = true
+dateFormat = yyyy年mm月dd日
+label = キャンペーン締切日
+
+[campInfo06]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = 対象
+
+[campInfo07]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = 内容
+
+[campInfo08]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = 注意事項
+
+[campInfo09]
+type = text
+size = 35
+label = フォーム";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:8:"campaign";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:8;a:8:{s:5:"title";s:18:"ご利用の流れ";s:7:"content";s:561:"[pattern]
+type = fieldset_open
+legend = パターン 
+multiple = true
+multipleButton = true
+ 
+[flowInfo01]
+type = text
+size = 35
+label = タイトル
+blank = true
+ 
+[flowInfo02]
+type = text
+size = 80
+label = 概要
+blank = true
+ 
+[flowInfo03]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = 説明
+blank = true
+ 
+[flowInfo04]
+type = text
+size = 35
+label = アイコン
+blank = true
+ 
+[flowInfo05]
+type = file
+mediaPicker = true
+mediaRemove = true
+label = 画像
+blank = true
+
+[pattern]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:4:"flow";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:9;a:9:{s:5:"title";s:21:"こちら都合です";s:7:"content";s:400:"[pattern]
+type = fieldset_open
+legend = パターン 
+multiple = true
+multipleButton = true
+ 
+[campConvInfo01]
+label = 地域
+type = text
+blank = true
+ 
+[campConvInfo02]
+type = text
+date = true
+dateFormat = yyyymmdd
+label = キャンペーン日
+blank = true
+
+[campConvInfo03]
+label = 説明
+type = textarea
+row = 80
+cols = 100
+blank = true
+
+[pattern]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:4:"4068";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:8:"campaign";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:10;a:9:{s:5:"title";s:21:"配車カレンダー";s:7:"content";s:128:"[reservInfo01]
+label = カレンダー
+type = text
+date = true
+dateFormat = yyyymmdd
+multiple = true
+multipleButton = true";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:4:"4071";s:9:"post_type";s:4:"page";s:16:"custom_post_type";s:0:"";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:11;a:9:{s:5:"title";s:21:"アーカイブ情報";s:7:"content";s:293:"[pattern]
+type = fieldset_open
+legend = パターン 
+multiple = true
+multipleButton = true
+ 
+[achiveInfo01]
+type = text
+size = 35
+label = タイトル
+blank = true
+ 
+[achiveInfo02]
+type = text
+size = 80
+label = コンテンツ
+blank = true
+
+[pattern]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:4:"post";s:16:"custom_post_type";s:11:"flow, price";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:12;a:8:{s:5:"title";s:15:"エリア情報";s:7:"content";s:73:"[areaInfo01]
+label = エリアイメージ
+type = file
+relation = true";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:4:"area";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:13;a:8:{s:5:"title";s:18:"アイテム情報";s:7:"content";s:852:"[itemsInfo01]
+label = 料金例
+type = textarea
+row = 80
+cols = 100
+
+[rank]
+type = fieldset_open
+legend = 料金
+multiple = true
+multipleButton = true
+ 
+[itemsInfo02]
+label = ランク
+type = select
+valueLabel = Aランク # Bランク # Cランク # Dランク # Eランク # Fランク # Gランク # Hランク # Iランク # Jランク # Kランク
+value = Aランク # Bランク # Cランク # Dランク # Eランク # Fランク # Gランク # Hランク # Iランク # Jランク # Kランク
+blank = true
+ 
+[itemsInfo03]
+label = 品物
+type = text
+size = 35
+blank = true
+
+[itemsInfo04]
+label = サイズ
+type = text
+size = 35
+blank = true
+
+[rank]
+type = fieldset_close 
+
+[itemsInfo05]
+label = 料金注釈
+type = textarea
+row = 80
+cols = 100
+
+[itemsInfo06]
+label = アイコン
+type = text
+size = 10";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:5:"items";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:14;a:9:{s:5:"title";s:29:"KIJITASUアンケート情報";s:7:"content";s:776:"[kijitasuinfo]
+type = fieldset_open
+legend = KIJITASU回答まとめ
+multiple = true
+multipleButton = true
+
+[kijitasuInfo01]
+type = text
+size = 35
+label = 回答
+blank = true
+
+[kijitasuInfo02]
+label = 回答数
+type = textarea
+row = 80
+cols = 100
+htmlEditor = true
+
+[kijitasuInfo03]
+label = アンケート結果画像
+type = file
+relation = true
+
+[kijitasuinfo]
+type = fieldset_close 
+
+[kijitasuInfo04]
+type = text
+size = 35
+label = 調査地域
+blank = true
+
+[kijitasuInfo05]
+type = text
+size = 35
+label = 調査対象
+blank = true
+
+[kijitasuInfo06]
+type = text
+date = true
+dateFormat = yyyy年mm月dd日
+label = 調査開始日
+
+[kijitasuInfo07]
+type = text
+date = true
+dateFormat = yyyy年mm月dd日
+label = 調査終了日";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:4:"post";s:16:"custom_post_type";s:0:"";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:15;a:8:{s:5:"title";s:12:"レビュー";s:7:"content";s:5707:"[voiceInfo09]
+label = エコ回収品その他
+type = text
+size = 80
+
+[voiceInfo10]
+label = きっかけその他
+type = text
+size = 80
+
+[voiceInfo11]
+label = エコランドを選んだ理由
+type = select
+valueLabel = 急な対応が可能だった # 日時が指定できる # 運び出ししてもらえる # 土日も対応できる # 買取対応もしている # 解体作業もしてくれる # メールで見積できる # 1品から対応できる # 1点ずつ料金が決まっている # 料金が安い # サービス内容が分かりやすかった # 知人/他企業からの紹介だったから # 受付スタッフの対応が良かったから # 見積スタッフの対応が良かったから # 運営会社が信頼できた # 以前利用した時に良かった # スタッフが事前に分かる # 明確な料金が事前に分かる # リユース・リサイクルしている # オークションに出品できる
+value = feature0 # feature1 # feature2 # feature3 # feature4 # feature5 # feature6 # feature7 # feature8 # feature9 # feature10 # feature11 # feature12 # feature13 # feature14 # feature15 # feature16 # feature17 # feature18 # feature19
+multiple = true
+
+[voiceInfo26]
+label = エコランドを選んだ理由
+type = select
+valueLabel = 急な対応が可能だった # 日時が指定できる # 運び出ししてもらえる # 土日も対応できる # 買取対応もしている # 解体作業もしてくれる # メールで見積できる # 1品から対応できる # 1点ずつ料金が決まっている # 料金が安い # サービス内容が分かりやすかった # 知人/他企業からの紹介だったから # 受付スタッフの対応が良かったから # 見積スタッフの対応が良かったから # 運営会社が信頼できた # 以前利用した時に良かった # スタッフが事前に分かる # 明確な料金が事前に分かる # リユース・リサイクルしている # オークションに出品できる
+value = feature0 # feature1 # feature2 # feature3 # feature4 # feature5 # feature6 # feature7 # feature8 # feature9 # feature10 # feature11 # feature12 # feature13 # feature14 # feature15 # feature16 # feature17 # feature18 # feature19
+
+[voiceInfo27]
+label = エコランドを選んだ理由
+type = select
+valueLabel = 急な対応が可能だった # 日時が指定できる # 運び出ししてもらえる # 土日も対応できる # 買取対応もしている # 解体作業もしてくれる # メールで見積できる # 1品から対応できる # 1点ずつ料金が決まっている # 料金が安い # サービス内容が分かりやすかった # 知人/他企業からの紹介だったから # 受付スタッフの対応が良かったから # 見積スタッフの対応が良かったから # 運営会社が信頼できた # 以前利用した時に良かった # スタッフが事前に分かる # 明確な料金が事前に分かる # リユース・リサイクルしている # オークションに出品できる
+value = feature0 # feature1 # feature2 # feature3 # feature4 # feature5 # feature6 # feature7 # feature8 # feature9 # feature10 # feature11 # feature12 # feature13 # feature14 # feature15 # feature16 # feature17 # feature18 # feature19
+
+[voiceInfo28]
+label = エコランドを選んだ理由
+type = select
+valueLabel = 急な対応が可能だった # 日時が指定できる # 運び出ししてもらえる # 土日も対応できる # 買取対応もしている # 解体作業もしてくれる # メールで見積できる # 1品から対応できる # 1点ずつ料金が決まっている # 料金が安い # サービス内容が分かりやすかった # 知人/他企業からの紹介だったから # 受付スタッフの対応が良かったから # 見積スタッフの対応が良かったから # 運営会社が信頼できた # 以前利用した時に良かった # スタッフが事前に分かる # 明確な料金が事前に分かる # リユース・リサイクルしている # オークションに出品できる
+value = feature0 # feature1 # feature2 # feature3 # feature4 # feature5 # feature6 # feature7 # feature8 # feature9 # feature10 # feature11 # feature12 # feature13 # feature14 # feature15 # feature16 # feature17 # feature18 # feature19
+
+[voiceInfo12]
+label = エコランドコンシェルジュスタッフ評価
+type = select
+valueLabel = 感動(期待以上) # 満足(期待通り) # 普通(まぁまぁ) # 不満(がっかり) # 非常に不満(もう頼まない)
+value= 5 # 4 # 3 # 2 # 1
+
+[voiceInfo13]
+label = エコランドコンシェルジュスタッフ評価(記述式)
+type = textarea
+rows = 5
+cols = 80
+
+[voiceInfo14]
+label = エコ回収スタッフ評価
+type = select
+valueLabel = 感動(期待以上) # 満足(期待通り) # 普通(まぁまぁ) # 不満(がっかり) # 非常に不満(もう頼まない)
+value= 5 # 4 # 3 # 2 # 1
+
+[voiceInfo15]
+label = エコ回収スタッフ評価(記述式)
+type = textarea
+rows = 5
+cols = 80
+
+[voiceInfo16]
+label = サービス全体評価
+type = select
+valueLabel = 感動(期待以上) # 満足(期待通り) # 普通(まぁまぁ) # 不満(がっかり) # 非常に不満(もう頼まない)
+value= 5 # 4 # 3 # 2 # 1
+
+[voiceInfo17]
+label = サービス全体評価(記述式)
+type = textarea
+rows = 5
+cols = 80
+
+[voiceInfo18]
+label = エコ回収サービスオススメ
+type = select
+valueLabel = オススメする # オススメしない
+value= 0 # 1
+
+[voiceInfo19]
+label = エコ回収サービスオススメ(記述式)
+type = textarea
+rows = 5
+cols = 80";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:6:"voices";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:16;a:8:{s:5:"title";s:12:"料金詳細";s:7:"content";s:655:"[price]
+type = fieldset_open
+legend = 料金
+multiple = true
+multipleButton = true
+
+[priceInfo01]
+label = 金額(税抜)
+type = text
+size = 10
+before = ¥
+blank = true
+
+[priceInfo07]
+label = 項目
+type = text
+size = 35
+blank = true
+
+[rank]
+type = fieldset_close 
+
+[priceInfo05]
+label = 単位
+type = text
+size = 10
+
+[priceInfo02]
+label = 幅・奥行・高さの合計
+type = text
+size = 10
+after = cm以下
+
+[priceInfo03]
+label = 重さ
+type = text
+size = 10
+after = kg以下
+
+[priceInfo04]
+label = 例
+type = textarea
+row = 80
+cols = 100
+
+[priceInfo06]
+label = 内容
+type = textarea
+row = 80
+cols = 100";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:5:"price";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:17;a:9:{s:5:"title";s:29:"KIJITASU回答コンテンツ";s:7:"content";s:772:"[kijitasuInfo08]
+type = text
+size = 35
+label = 回答
+blank = true
+
+[kijitasuInfo09]
+type = text
+size = 80
+label = コメント
+multiple = true
+multipleButton = true
+blank = true
+
+[kijitasuInfo10]
+type = text
+size = 35
+label = 回答
+blank = true
+
+[kijitasuInfo11]
+type = text
+size = 80
+label = コメント
+multiple = true
+multipleButton = true
+blank = true
+
+[kijitasuInfo12]
+type = text
+size = 35
+label = 回答
+blank = true
+
+[kijitasuInfo13]
+type = text
+size = 80
+label = コメント
+multiple = true
+multipleButton = true
+blank = true
+
+[kijitasuInfo14]
+type = text
+size = 35
+label = 回答
+blank = true
+
+[kijitasuInfo15]
+type = text
+size = 80
+label = コメント
+multiple = true
+multipleButton = true
+blank = true";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:4:"post";s:16:"custom_post_type";s:0:"";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:18;a:9:{s:5:"title";s:21:"インタービュー";s:7:"content";s:851:"[voiceInfo38]
+label = 抜粋
+type = text
+size = 80
+
+[voiceInfo10]
+label = きっかけその他
+type = text
+size = 80
+
+[interview]
+type = fieldset_open
+legend = インタービュー
+multiple = true
+multipleButton = true
+
+[voiceInfo02]
+type = text
+size = 80
+label = 質問
+
+[voiceInfo03]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = 回答
+
+[interview]
+type = fieldset_close 
+
+[voiceInfo01]
+label = メインイメージ
+type = file
+relation = true
+
+[voiceInfo34]
+label = イメージ
+type = file
+relation = true
+multiple = true
+multipleButton = true
+
+[voiceInfo35]
+label = インタビュアー
+type = select
+valueLabel = 永廣 亜沙美 
+value = 1608
+default = 0
+
+[voiceInfo39]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = インタビュアーのコメント
+";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:6:"voices";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:19;a:9:{s:5:"title";s:15:"お客様情報";s:7:"content";s:598:"[voiceInfo06]
+label = 名前(公開用)
+type = text
+size = 35
+
+[voiceInfo07]
+label = 性別
+type = radio
+valueLabel = 女性 # 男性 
+value = 0 # 1
+
+[voiceInfo08]
+label = 年代
+type = select
+valueLabel = 20代 # 30代 # 40代 # 50代 # 60代 # 70代以上
+value = 0 # 1 # 2 # 3 # 4 # 5
+
+[voiceInfo20]
+label = 名前(非公開)
+type = text
+size = 35
+
+[voiceInfo21]
+label = メールアドレス(非公開)
+type = text
+size = 35　
+
+[voiceInfo22]
+label = 電話番号(非公開)
+type = text
+size = 35
+
+[voiceInfo25]
+label = パスワード
+type = text
+size = 35
+";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:6:"voices";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:20;a:8:{s:5:"title";s:15:"当選者の声";s:7:"content";s:301:"[voices]
+type = fieldset_open
+legend = 料金
+multiple = true
+multipleButton = true
+
+[campInfo10]
+label = 当選者の声
+type = textarea
+row = 80
+cols = 100
+blank = true
+
+[campInfo11]
+label = 当選者情報
+type = textfield
+size = 35
+blank = true
+
+[voices]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:8:"campaign";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:21;a:9:{s:5:"title";s:6:"事例";s:7:"content";s:552:"[caseInfo01]
+type = file
+label = before画像
+
+[caseInfo02]
+type = file
+label = after画像
+
+[caseInfo03]
+type = select
+valueLabel = 選択 # 戸建 # 集合住宅
+value = 0 # 1 # 2
+label = 家のタイプ
+
+[caseInfo04]
+label = 広さ
+type = textfield
+size = 10
+after = 平米
+
+[caseInfo05]
+label = 金額
+type = textfield
+size = 10
+after = 円
+
+[caseInfo06]
+label = お客様・営業マンの感想
+type = textarea
+row = 80
+cols = 100
+blank = true
+
+[caseInfo07]
+type = file
+label = お客様・営業マンの画像";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:5:"cases";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}}}

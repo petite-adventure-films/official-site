@@ -1,0 +1,7 @@
+
+
+AuthType basic
+AuthUserFile "/home/sites/petiteadventurefilms.com/public_html/Admin/.htpasswd"
+AuthGroupFile /dev/null
+AuthName "Secure directory"
+Require valid-user
