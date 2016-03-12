@@ -34,6 +34,7 @@ $credits_contents = get_post_meta_arr($post->ID, "films_info_11");
 
 $national_screenings = get_post_meta($post->ID, "films_info_14");
 $global_screenings = get_post_meta($post->ID, "films_info_15");
+$media_screenings = get_post_meta($post->ID, "films_info_27");
 
 $related_infomation = get_post_meta($post->ID, "films_info_16");
 
@@ -205,7 +206,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 
 	<?php if($credits_indexs): ?>
 		<div class="contents" id="credits">
-			<h2 class="col col_9 last contents_title">制作クレジット</h2>
+			<h2 class="col col_9 last contents_title">制作クレジット<span class="inline-block caption1">（敬称略）</span></h2>
 			<ul class="floating_grids">
 			<?php for($i=0; $i<count($credits_indexs); $i++): ?>
 				<li class="col col_3 grid_item">
@@ -217,40 +218,55 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 		</div>
 	<?php endif;?>
 
-<?php if($national_screenings || $global_screenings): ?>
-	<div class="contents">
-		<div class="col col_9 last">
-			<h2 class="contents_title">映画祭上映履歴</h2>
-			<?php if($national_screenings): ?>
-				<h3>国内</h3>
-				<ul class="m1_t">
-				<?php for($i=0; $i<count($national_screenings); $i++): ?>
-					<li><?php echo $national_screenings[$i]; ?></li>
-				<?php endfor; ?>
-				</ul>
-			<?php endif; ?>
-			<?php if($global_screenings): ?>
-				<h3 class="m2_t">海外</h3>
-				<ul class="m1_t">
-				<?php for($i=0; $i<count($global_screenings); $i++): ?>
-					<li><?php echo $global_screenings[$i]; ?></li>
-				<?php endfor; ?>
-				</ul>
-			<?php endif; ?>
+	<?php if($national_screenings || $global_screenings): ?>
+		<div class="contents">
+			<div class="col col_9 last">
+				<h2 class="contents_title">映画祭上映履歴</h2>
+				<?php if($national_screenings): ?>
+					<h3>国内</h3>
+					<ul class="m1_t">
+					<?php for($i=0; $i<count($national_screenings); $i++): ?>
+						<li><?php echo $national_screenings[$i]; ?></li>
+					<?php endfor; ?>
+					</ul>
+				<?php endif; ?>
+				<?php if($global_screenings): ?>
+					<h3 class="m2_t">海外</h3>
+					<ul class="m1_t">
+					<?php for($i=0; $i<count($global_screenings); $i++): ?>
+						<li><?php echo $global_screenings[$i]; ?></li>
+					<?php endfor; ?>
+					</ul>
+				<?php endif; ?>
+			</div>
 		</div>
-	</div>
-<?php endif;?>
+	<?php endif;?>
 
-<?php if($related_infomation): ?>
-	<div class="contents">
-		<div class="col col_9 last">
-			<h2 class="contents_title">関連情報<span class="inline-block caption1">（敬称略）</span></h2>
-			<?php for($i=0; $i<count($related_infomation); $i++): ?>
-				<div class="m2_b<?php echo $last_class; ?>"><?php echo $related_infomation[$i]; ?></div>
-			<?php endfor; ?>
+	<?php if($media_screenings): ?>
+		<div class="contents">
+			<div class="col col_9 last">
+				<h2 class="contents_title">放映・劇場公開履歴</h2>
+				<?php if($media_screenings): ?>
+					<ul class="m1_t">
+					<?php for($i=0; $i<count($media_screenings); $i++): ?>
+						<li><?php echo $media_screenings[$i]; ?></li>
+					<?php endfor; ?>
+					</ul>
+				<?php endif; ?>
+			</div>
 		</div>
-	</div>
-<?php endif;?>
+	<?php endif;?>
+
+	<?php if($related_infomation): ?>
+		<div class="contents">
+			<div class="col col_9 last">
+				<h2 class="contents_title">関連情報<span class="inline-block caption1">（敬称略）</span></h2>
+				<?php for($i=0; $i<count($related_infomation); $i++): ?>
+					<div class="m2_b<?php echo $last_class; ?>"><?php echo $related_infomation[$i]; ?></div>
+				<?php endfor; ?>
+			</div>
+		</div>
+	<?php endif;?>
 
 </div>
 

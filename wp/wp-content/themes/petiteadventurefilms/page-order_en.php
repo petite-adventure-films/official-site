@@ -39,13 +39,13 @@ get_header(); ?>
 	<div class="m7_t">
 
 		<p>Welcome to the online DVD Shop!<p>
-		<p>To order, please click the Buy DVD button below. Within a few days, you will receive instructions on how to pay securely via PayPal.</p>
+		<p>To order, please fill in the form below. Within a few days, you will receive instructions on how to pay securely via PayPal.</p>
 
 		<dl class="m2_t list_definition">
 			<dt>DVD format</dt>
-			<dd>DVD-R, Region 0 (free), NTSC/PAL available</dd>
+			<dd>DVD-R, Region 0 (free), NTSC/PAL available.</dd>
 			<dt>DVD types</dt>
-			<dd>For Home use/For Library use. Please choose "Library" if you purchase for group/library use</dd>
+			<dd>For Home use/For Library use. Please choose "Library" if you purchase for group/library use.</dd>
 		</dl>
 
 		<p class="m2_t">Postage & packing prices</p>

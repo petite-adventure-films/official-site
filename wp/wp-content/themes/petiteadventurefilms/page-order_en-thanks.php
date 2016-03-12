@@ -97,7 +97,8 @@ if($_POST){
 			"contact_receipt_name" => $contact_receipt_name,
 			"contact_receipt_proviso" => $contact_receipt_proviso,
 			"contact_contents" => $contact_contents,
-			"contact_id" => $post_title
+			"contact_id" => $post_title,
+			"contact_lang" => "EN"
 		);
 
 		order_ntfct($contact_email, $order_values);

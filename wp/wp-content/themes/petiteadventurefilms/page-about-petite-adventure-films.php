@@ -65,7 +65,7 @@ get_header(); ?>
 	<section class="contents">
 		<div class="col col_6">
 			<h2 class="contents_title">About the Director</h2>
-			<p>Yumiko HAYAKAWA was born in Tokyo, Japan in 1975. She graduated from Seikei University in Japan, and the London School of Journalism in the UK. During her studies in London, she began her filmmaking career and in 2009, she completed her first documentary film, "Brian and Co. Parliament Square SW1". With this film, she won the, "New Face Award 2009" from the Japanese Congress of Journalists. Her second film, "Goodbye UR - The Japanese Social Housing Crisis" won the, "Sky Perfect IDEHA Prize" from Yamagata International Documentary Film Festival 2011. HAYAKAWA's films focus on various social issues and inequality in today's Japan from various perceptions. She also organizes filmmaking workshops for alternative media and students. She is known as one of the most active independent documentary filmmakers in Japan.</p>
+			<p>Yumiko HAYAKAWA was born in Tokyo, Japan in 1975. She graduated from Seikei University in Japan, and the London School of Journalism in the UK. During her studies in London, she began her filmmaking career and in 2009, she completed her first documentary film, "Brian and Co. Parliament Square SW1". With this film, she won the, "New Face Award 2009" from the Japanese Congress of Journalists. Her second film, "Goodbye UR - The Japanese Social Housing Crisis" won the, "Sky Perfect IDEHA Prize" from Yamagata International Documentary Film Festival 2011. Her films focus on various social issues and inequality in today's Japan. She also organizes filmmaking workshops at alternative media centres and universities. She is known as one of the most active independent documentary filmmakers in Japan.</p>
 		</div>
 		<div class="col col_3 last">
 			<div id="director_profile_img">
@@ -93,7 +93,7 @@ get_header(); ?>
 					<dd>Yumiko Hayakawa</dd>
 				</dl>
 				<h4 class="m2_t bold">Story</h4>
-				<p>The Japan's most "radical" graffiti artist, 281 Anti nuke's documentary film. Full version of the film (with English/French subtitles) is now on Youtube!</p>
+				<p>The Japan's most "radical" graffiti artist, 281 Anti nuke's documentary film. Full version of the film (with English/French subtitles) is now on YouTube!</p>
 				<div class="m1_t video">
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/1udWacAJJx4" frameborder="0" allowfullscreen></iframe>
 				</div>
@@ -116,7 +116,7 @@ get_header(); ?>
 					<dt>Language</dt>
 					<dd>Japanese</dd>
 					<dt>Subtitles</dt>
-					<dd>English</dd>
+					<dd>English / German</dd>
 					<dt>Director</dt>
 					<dd>Yumiko Hayakawa</dd>
 				</dl>
@@ -202,7 +202,7 @@ get_header(); ?>
 					<dt>Language</dt>
 					<dd>Japanese</dd>
 					<dt>Subtitles</dt>
-					<dd>English</dd>
+					<dd>English / German</dd>
 					<dt>Director</dt>
 					<dd>Yumiko Hayakawa</dd>
 				</dl>
@@ -218,14 +218,14 @@ get_header(); ?>
 			</div>
 			<div class="col col_9 last">
 				<h4 class="m2_t bold">Story</h4>
-				<p>Setsuko Kida lost her way of life due to the Great East Japan Earthquake and subsequent Fukushima Daiichi Nuclear Power Plant disaster on 11th March 2011.<br />
+				<p>Setsuko KIDA lost her way of life due to the Great East Japan Earthquake and subsequent Fukushima Daiichi Nuclear Power Plant disaster on 11th March 2011.<br />
 				The Japanese government has claimed to have resolved the disaster, but even now irradiated water continues to flow directly into the sea. Even the very fear of radiation invisible to the eye has caused rifts in communities and families.<br />
 				Determined to prevent a second Fukushima, Setsuko has come to speak out. And as we hear her words what are we to think and how are we to live?</p>
 				<h4 class="m2_t bold">Synopsis</h4>
-				<h5 class="m1_t">Part 1</h5>
-				<p>As a result of the nuclear disaster Setsuko Kida was forced from her home in Tomioka, Fukushima. Here she talks about her home and family, from the building of her house close to the Fukushima Daiichi Nuclear Power Plant, to her son working at the nuclear power station, to the changes in relations with her husband as a result of the nuclear accident, as well as her current thoughts towards "Japan" since becoming a "nuclear evacuee".</p>
+				<h5 class="m1_t">Part 1 : </h5>
+				<p>As a result of the nuclear disaster Setsuko KIDA was forced from her home in Tomioka, Fukushima. Here she talks about her home and family, from the building of her house close to the Fukushima Daiichi Nuclear Power Plant, to her son working at the nuclear power station, to the changes in relations with her husband as a result of the nuclear accident, as well as her current thoughts towards "Japan" since becoming a "nuclear evacuee".</p>
 				<p>Up until now, having been sited by the media as "the mother of a nuclear plant worker", this film shifts the focus to highlight her changing relationship with her husband. Emerging from her self imposed isolation, Setsuko carries a new wind as she comes to raise her voice.</p>
-				<h5 class="m1_t">Part 2: </h5>
+				<h5 class="m1_t">Part 2 : </h5>
 				<p>In July 2013, Setsuko stood as a candidate for the House of Councilors elections. What was driving Setsuko to take such a challenge? In heat exceeding 35 degrees centigrade, we follow her on the campaign trail through the crowded shopping streets of Ginza, Tokyo.</p>
 				<p>Running for the election with an anti-nuclear message, the issues which she faces along this road may be said to be a reflection of wider Japanese society. From her husband opposing his "wife" joining the election, to the mass media's refusal to refer to her as a "refugee of nuclear disaster".</p>
 				<p>Here we observe the confrontation between a woman moved to speak out, and the structure of Japanese society which has continued to support nuclear power.</p>
@@ -253,6 +253,8 @@ get_header(); ?>
 				<dl class="list_definition">
 					<dt>Language</dt>
 					<dd>Japanese</dd>
+					<dt>Subtitles</dt>
+					<dd>English / Korean</dd>
 					<dt>Director</dt>
 					<dd>Yumiko Hayakawa</dd>
 				</dl>
@@ -280,7 +282,7 @@ get_header(); ?>
 				<p>Through interviews with the residents, housing experts, lawyers and UR's president, this film highlights the complex social housing situation in Japan.</p>
 
 				<h4 class="m2_t bold">Awards</h4>
-				<p>Sky Perfect IDEHA Prize - Yamagata International Documentary Film Festival, Japan(2011)</p>
+				<p>Sky Perfect IDEHA Prize - Yamagata International Documentary Film Festival, Japan (2011)</p>
 
 				<h4 class="m2_t bold">Festivals</h4>
 				<h5 class="m1_t">Domestic</h5>
@@ -302,6 +304,9 @@ get_header(); ?>
 
 				<h4 class="m2_t bold">Theatrical screenings</h4>
 				<p>Cine Nouveau (2012) - Osaka, Japan</p>
+
+				<h4 class="m2_t bold">TV broadcastings</h4>
+				<p>SKY PerfecTV! (2013) - Japan</p>
 			</div>
 		</section>
 
@@ -312,7 +317,9 @@ get_header(); ?>
 				<p class="m2_t">Documentary/2009/Video/Colour/97 minutes/UK, Japan</p>
 				<dl class="list_definition">
 					<dt>Language</dt>
-					<dd>English/Japanese</dd>
+					<dd>English / Japanese</dd>
+					<dt>Subtitles</dt>
+					<dd>English / Japanese</dd>
 					<dt>Director</dt>
 					<dd>Yumiko Hayakawa</dd>
 				</dl>
@@ -369,15 +376,6 @@ get_header(); ?>
 		</section>
 
 	</section>
-
-
-
-
-
-
-
-
-
 
 </div>
 

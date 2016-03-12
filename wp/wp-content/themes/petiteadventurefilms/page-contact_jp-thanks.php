@@ -36,7 +36,8 @@ if($_POST){
 			"contact_name" => $contact_name,
 			"contact_email" => $contact_email,
 			"contact_contents" => $contact_contents,
-			"contact_id" => $post_title
+			"contact_id" => $post_title,
+			"contact_lang" => "JP"
 		);
 
 		contact_ntfct($contact_email, $contact_values);

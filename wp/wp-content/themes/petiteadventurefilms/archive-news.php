@@ -58,6 +58,8 @@ get_header(); ?>
 		</ul>
 	<?php endif; ?>
 
+	<?php wp_pagenavi(); ?>
+
 
 		<div class="m7_t btn priority2 more">
 			<a href="#" id="">LOAD MORE</a>

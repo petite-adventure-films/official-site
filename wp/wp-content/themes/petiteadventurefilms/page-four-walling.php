@@ -47,17 +47,18 @@ get_header(); ?>
 		</h1>
 	<!--.header_page--></header>
 
-	<div class="m7_t  owl-carousel">
+	<p class="m7_t">自主上映会サポーター募集！　お住まいの地域、学校、グループで、映画を上映しませんか？</p>
+	<div class="m2_t  owl-carousel">
 		<?php foreach($gallery_imgs as $img):?>
-			<div class="slide"><?php echo get_post_meta_img($img, "large", "lazyOwl", TRUE); ?></div>
+			<div class="slide"><?php echo get_post_meta_img($img, "large"); ?></div>
 		<?php endforeach; ?>
 	</div>
 	<div class="last"></div>
-	<div class="inline_block m8_t btn priority1">
+	<p class="m7_t">自主上映会を開催してくださるサポーターの方を、大募集中です！<br />
+	地域で、職場で、学校で、グループで…など、自主上映会開催に興味のある方は、以下「お問い合わせ」よりご連絡ください。</p>
+	<div class="inline_block m2_t btn priority1">
 		<a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
 	</div>
-
-
 
 	<section class="contents">
 		<h2 class="contents_title">上映料（全作品共通）</h2>
@@ -136,10 +137,9 @@ get_header(); ?>
 
 	<div class="m4_t">
 		<div class="col col_9 last">
-			<h3>ASRACへの楽曲使用料</h3>
-			<p class="m2_t">『ブライアンと仲間たち』、『さようならUR』のみ</p>
-			<p>入場料が有料の場合は、日本音楽著作権協会（JASRAC）への楽曲使用料支払い義務が発生します。
-				JASRACへの手続きと使用料計算方法の目安は<a href="http://www.jasrac.or.jp/info/event/movie.html" target="_blank">こちら</a> 主催者様の名義で、上映日の5日前までにJASRACへ手続きをお願いします。</p>
+			<h3>JASRACへの楽曲使用料 <span class="caption1">（『ブライアンと仲間たち』、『さようならUR』のみ）</span></h3>
+			<p class="m2_t">入場料が有料の場合は、日本音楽著作権協会（JASRAC）への楽曲使用料支払い義務が発生します。主催者様の名義で、上映日の5日前までにJASRACへ手続きをお願いします。</p>
+			<p>JASRACへの手続きと使用料計算方法の目安は<a href="http://www.jasrac.or.jp/info/event/movie.html" target="_blank">こちら</a> </p>
 			<p>JASRACの楽曲使用料（ビデオ上映使用料）の目安：座席数、入場料等により異なりますが、100名収容の会場で入場料500円の場合、1回の上映につき約300～400円です。</p>
 		</div>
 	</div>

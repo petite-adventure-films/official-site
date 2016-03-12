@@ -39,7 +39,7 @@ get_header(); ?>
 
 <div class="single">
 
-	<div class="col col_7">
+	<div class="col col_8">
 
 		<header class="page_header">
 			<nav class="crumbs">

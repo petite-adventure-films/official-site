@@ -14,7 +14,7 @@ module.exports = function(grunt){
 
 		//package.jason
 		pkg: pkg,
-		banner: '/*\n* Theme name: <%= pkg.name %>\n* Version: <%= pkg.version %>\n* Author: <%= pkg.author %>\n* Description: <%= pkg.description %>\n*/\n',
+		banner: '/*\n* Theme name: <%= pkg.name %>\n* Version: <%= pkg.version %>\n* Author: <%= pkg.author %>\n* Description: <%= pkg.description %>\n* Theme URI: <%= pkg.homepage %>\n* Update: <%= grunt.template.today("yyyy-mm-dd") %>\n*/\n',
 
 		// watch for changes and trigger compass, jshint, uglify and livereload
 		watch: {
@@ -26,8 +26,11 @@ module.exports = function(grunt){
 				tasks: []
 			},
 			compass: {
-				files: ["wp/wp-content/themes/petiteadventurefilms/_scss/**/*.scss"],
-				tasks: ["compassMultiple", "cssmin"]
+				files: [
+					"wp/wp-content/themes/petiteadventurefilms/_scss/**/*.scss",
+					"wp/wp-content/themes/petiteadventurefilms/assets/css/**/*.css"
+				],
+				tasks: ["compassMultiple", "cssmin", "usebanner"]
 			},
 			js: {
 				files: "wp/wp-content/themes/petiteadventurefilms/**/*.js",
@@ -55,13 +58,22 @@ module.exports = function(grunt){
 
 		//cssmin
 		cssmin: {
+			files: {
+				src: "wp/wp-content/themes/petiteadventurefilms/assets/css/**/*.css",
+				dest: "wp/wp-content/themes/petiteadventurefilms/style.css"
+			}
+		},
+
+		usebanner: {
+			dist: {
 				options: {
+					position: 'top',
 					banner: '<%= banner %>'
 				},
 				files: {
-					src: ["wp/wp-content/themes/petiteadventurefilms/assets/css/style.css", "wp/wp-content/themes/petiteadventurefilms/assets/css/plugins/**/*.{scss,css,sass}"],
-					dest: "wp/wp-content/themes/petiteadventurefilms/style.css"
+					src: [ "wp/wp-content/themes/petiteadventurefilms/style.css"]
 				}
+			}
 		},
 
 		// combine-media-queries メディアクエリをまとめる
@@ -113,7 +125,7 @@ module.exports = function(grunt){
 	});
 
 	// register task
-	grunt.registerTask("default", ["watch"]);
+	grunt.registerTask("default", ["watch", "usebanner"]);
 
 	// register task
 	//grunt.registerTask("release", ["wp/wp-content/themes/petiteadventurefilms/clean:deleteReleaseDir","copy"]);

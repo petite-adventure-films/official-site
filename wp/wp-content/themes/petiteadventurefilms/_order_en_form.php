@@ -13,7 +13,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 <div class="form_contents required">
 	<div class="form_title"><label for="contact_address1">Address</label></div>
 	<div class="form_elements">
-		<input type="text" name="contact_address1" id="contact_address1" placeholder="ex) Marunochi , Chiyoda-ku, Tokyo" value="<?php echo ($contact_address1) ? $contact_address1 : ""; ?>"<?php echo $disabled; ?> />
+		<input type="text" name="contact_address1" id="contact_address1" placeholder="ex) 1-9 Marunochi,Chiyoda-ku,Tokyo" value="<?php echo ($contact_address1) ? $contact_address1 : ""; ?>"<?php echo $disabled; ?> />
 	</div>
 </div>
 <div class="form_contents required">
@@ -34,7 +34,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 <div class="form_contents required">
 	<div class="form_title"><label for="contact_tel">Telephone</label></div>
 	<div class="form_elements">
-		<input type="text" name="contact_tel" id="contact_tel" placeholder="ex) 08012345678" value="<?php echo ($contact_tel) ? $contact_tel : ""; ?>"<?php echo $disabled; ?> />
+		<input type="text" name="contact_tel" id="contact_tel" placeholder="ex) +81 (0)8012345678" value="<?php echo ($contact_tel) ? $contact_tel : ""; ?>"<?php echo $disabled; ?> />
 	</div>
 </div>
 </div>
@@ -43,13 +43,13 @@ $disabled = is_page("confirm") ? " disabled" : "";
 <div class="form_contents required">
 	<div class="form_title"><label for="contact_email">E-mail</label></div>
 	<div class="form_elements">
-		<input type="email" name="contact_email" id="contact_email" placeholder="abc@example.com" value="<?php echo ($contact_email) ? $contact_email : ""; ?>"<?php echo $disabled; ?> />
+		<input type="email" name="contact_email" id="contact_email" placeholder="ex) abc@example.com" value="<?php echo ($contact_email) ? $contact_email : ""; ?>"<?php echo $disabled; ?> />
 	</div>
 </div>
 <div class="form_contents required" id="contact_email_confirm_form">
-	<div class="form_title"><label for="contact_email_confirm">Retype e-mail</label></div>
+	<div class="form_title"><label for="contact_email_confirm">Retype E-mail</label></div>
 	<div class="form_elements">
-		<input type="email" name="contact_email_confirm" id="contact_email_confirm" placeholder="abc@example.com" onpaste="return false" value="<?php echo ($contact_email_confirm) ? $contact_email_confirm : ""; ?>"<?php echo $disabled; ?> />
+		<input type="email" name="contact_email_confirm" id="contact_email_confirm" placeholder="ex) abc@example.com" onpaste="return false" value="<?php echo ($contact_email_confirm) ? $contact_email_confirm : ""; ?>"<?php echo $disabled; ?> />
 	</div>
 </div>
 </div>
@@ -84,7 +84,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 				<option value="1"<?php echo ($contact_film1_kind == 1) ? " selected" : ""; ?>>Home</option>
 				<option value="2"<?php echo ($contact_film1_kind == 2) ? " selected" : "";?>>Library</option>
 			</select>
-			<label for="contact_film1_unit">No</label>
+			<label for="contact_film1_unit">Quantity</label>
 			<select name="contact_film1_unit" class="contact_film_unit" id="contact_film1_unit"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film1_unit) ? " selected" : ""; ?>>-</option>
 				<option value="1"<?php echo ($contact_film1_unit == 1) ? " selected" : "";?>>1</option>
@@ -109,7 +109,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 				<option value="1"<?php echo ($contact_film3_kind == 1) ? " selected" : ""; ?>>Home</option>
 				<option value="2"<?php echo ($contact_film3_kind == 2) ? " selected" : "";?>>Library</option>
 			</select>
-			<label for="contact_film3_unit">No</label>
+			<label for="contact_film3_unit">Quantity</label>
 			<select name="contact_film3_unit" class="contact_film_unit" id="contact_film3_unit"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film3_unit) ? " selected" : ""; ?>>-</option>
 				<option value="1"<?php echo ($contact_film3_unit == 1) ? " selected" : "";?>>1</option>
@@ -133,7 +133,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 				<option value="1"<?php echo ($contact_film4_kind == 1) ? " selected" : ""; ?>>Home</option>
 				<option value="2"<?php echo ($contact_film4_kind == 2) ? " selected" : "";?>>Library</option>
 			</select>
-			<label for="contact_film4_unit">No</label>
+			<label for="contact_film4_unit">Quantity</label>
 			<select name="contact_film4_unit" class="contact_film_unit" id="contact_film4_unit"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film4_unit) ? " selected" : ""; ?>>-</option>
 				<option value="1"<?php echo ($contact_film4_unit == 1) ? " selected" : "";?>>1</option>
@@ -157,7 +157,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 				<option value="1"<?php echo ($contact_film5_kind == 1) ? " selected" : ""; ?>>Home</option>
 				<option value="2"<?php echo ($contact_film5_kind == 2) ? " selected" : "";?>>Library</option>
 			</select>
-			<label for="contact_film5_unit">No</label>
+			<label for="contact_film5_unit">Quantity</label>
 			<select name="contact_film5_unit" class="contact_film_unit" id="contact_film5_unit"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film5_unit) ? " selected" : ""; ?>>-</option>
 				<option value="1"<?php echo ($contact_film5_unit == 1) ? " selected" : "";?>>1</option>
@@ -181,7 +181,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 				<option value="1"<?php echo ($contact_film6_kind == 1) ? " selected" : ""; ?>>Home</option>
 				<option value="2"<?php echo ($contact_film6_kind == 2) ? " selected" : "";?>>Library</option>
 			</select>
-			<label for="contact_film6_unit">No</label>
+			<label for="contact_film6_unit">Quantity</label>
 			<select name="contact_film6_unit" class="contact_film_unit" id="contact_film6_unit"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film6_unit) ? " selected" : ""; ?>>-</option>
 				<option value="1"<?php echo ($contact_film6_unit == 1) ? " selected" : "";?>>1</option>

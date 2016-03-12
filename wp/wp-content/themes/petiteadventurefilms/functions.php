@@ -75,7 +75,7 @@ function get_post_meta_img($attached, $size="medium", $class=NULL, $data_src=NUL
 		"class" => $class,
 		"alt" => $alt
 	);
-	if($data_src) $attrs["data=src"] = $src;
+	if($data_src) $attrs["data-src"] = $src;
 	if($src){
 		$html = "<img";
 		foreach($attrs as $key=>$value){
@@ -411,7 +411,7 @@ return $mail_footer;
 *****************************************************************************************/
 
 function order_ntfct($email, $values){
-	$subject = "【Petite Adventure Films】DVD注文ありがとうございます";
+	$subject = "【PAF DVD注文 : ".$values['contact_lang']."】".$values['contact_name']."様";
 	$message = $values['contact_name'].'様
 
 ご注文をいただき誠にありがとうございます。
@@ -511,7 +511,7 @@ mail_footer();
 }
 
 function contact_ntfct($email, $values){
-	$subject = '【Petite Adventure Films】お問い合わせの受付が完了いたしました';
+	$subject = "【PAF お問い合わせ : ".$values['contact_lang']."】".$values['contact_name']."様";
 	$message = $values['contact_name'].'様
 
 お問合せをいただき誠にありがとうございます。
