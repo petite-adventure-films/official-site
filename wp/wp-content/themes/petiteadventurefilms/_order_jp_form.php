@@ -59,12 +59,11 @@ $disabled = is_page("confirm") ? " disabled" : "";
 <div class="form_contents required" id="pick_dvd">
 	<div class="form_title">
 		<label>ご希望の商品</label>
-		<p>お求めになるDVDの種別（一般/団体・ライブラリー）と枚数をお選びください</p>
+		<p>お求めになるDVDの種別と枚数をお選びください</p>
 	</div>
 	<ul class="form_elements">
 		<li>
 			<p class="bold">踊る善福寺/ホームレスごっこ</p>
-			<p>一般価格：1,500円 / 団体・ライブラリー価格：10,000円</p>
 			<label for="contact_film1_kind">種別</label>
 			<select name="contact_film1_kind" class="contact_film_kind" id="contact_film1_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film1_kind) ? " selected" : ""; ?>>-</option>
@@ -88,8 +87,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 
 		</li>
 		<li>
-			<p class="bold">木田さんと原発、そして日本（日本語版）</p>
-			<p>一般価格：1,000円 / 団体・ライブラリー価格：10,000円</p>
+			<p class="bold">木田さんと原発、そして日本<br />- 日本語版</p>
 			<label for="contact_film2_kind">種別</label>
 			<select name="contact_film2_kind" class="contact_film_kind" id="contact_film2_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film2_kind) ? " selected" : ""; ?>>-</option>
@@ -112,8 +110,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 			</select>
 		</li>
 		<li>
-			<p class="bold">木田さんと原発、そして日本（英語字幕版）</p>
-			<p>一般価格：1,000円 / 団体・ライブラリー価格：10,000円</p>
+			<p class="bold">木田さんと原発、そして日本<br />- 英語字幕版</p>
 			<label for="contact_film3_kind">種別</label>
 			<select name="contact_film3_kind" class="contact_film_kind" id="contact_film3_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film3_kind) ? " selected" : ""; ?>>-</option>
@@ -137,7 +134,6 @@ $disabled = is_page("confirm") ? " disabled" : "";
 		</li>
 		<li>
 			<p class="bold">乙女ハウス</p>
-			<p>一般価格：1,000円 / 団体・ライブラリー価格：10,000円</p>
 			<label for="contact_film4_kind">種別</label>
 			<select name="contact_film4_kind" class="contact_film_kind" id="contact_film4_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film4_kind) ? " selected" : ""; ?>>-</option>
@@ -161,7 +157,6 @@ $disabled = is_page("confirm") ? " disabled" : "";
 		</li>
 		<li>
 			<p class="bold">さようならUR</p>
-			<p>一般価格：2,500円 / 団体・ライブラリー価格：10,000円</p>
 			<label for="contact_film5_kind">種別</label>
 			<select name="contact_film5_kind" class="contact_film_kind" id="contact_film5_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film5_kind) ? " selected" : ""; ?>>-</option>
@@ -185,7 +180,6 @@ $disabled = is_page("confirm") ? " disabled" : "";
 		</li>
 		<li>
 			<p class="bold">ブライアンと仲間たち</p>
-			<p>一般価格：1,500円 / 団体・ライブラリー価格：10,000円</p>
 			<label for="contact_film6_kind">種別</label>
 			<select name="contact_film6_kind" class="contact_film_kind" id="contact_film6_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film6_kind) ? " selected" : ""; ?>>-</option>

@@ -4896,3 +4896,81 @@ option {
   #director_history dl dd {
     margin-left: 80px;
     margin-bottom: 8px; }
+
+@media all and (min-width: 961px) {
+  /* line 8, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_contents,
+  .order_en .dvd_contents {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(240, 240, 240, 0.5); }
+  /* line 13, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_img,
+  .order_en .dvd_img {
+    width: 144px;
+    float: left; }
+  /* line 17, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_info,
+  .order_en .dvd_info {
+    width: 464px; } }
+@media all and (max-width: 960px) {
+  /* line 25, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_contents,
+  .order_en .dvd_contents {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(240, 240, 240, 0.5);
+    line-height: 24px !important; }
+    /* line 30, ../../_scss/pages/_order.scss */
+    .order_jp .dvd_contents:last-of-type,
+    .order_en .dvd_contents:last-of-type {
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(240, 240, 240, 0.5); }
+  /* line 36, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_title,
+  .order_en .dvd_title {
+    float: left;
+    width: 80%;
+    line-height: 28px !important; }
+  /* line 41, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_price,
+  .order_en .dvd_price {
+    float: left;
+    width: 80%; }
+  /* line 45, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_img,
+  .order_en .dvd_img {
+    width: 64px;
+    float: right; }
+  /* line 49, ../../_scss/pages/_order.scss */
+  .order_jp .dvd_title_price,
+  .order_en .dvd_title_price {
+    position: relative; }
+  /* line 52, ../../_scss/pages/_order.scss */
+  .order_jp .more_details,
+  .order_en .more_details {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: rgba(240, 240, 240, 0.5);
+    font-size: 12px; }
+    /* line 59, ../../_scss/pages/_order.scss */
+    .order_jp .more_details:after,
+    .order_en .more_details:after {
+      display: inline-block;
+      margin-left: 4px;
+      font-family: meterial_design;
+      text-align: center;
+      content: "\e7c1"; }
+    /* line 66, ../../_scss/pages/_order.scss */
+    .order_jp .more_details.close,
+    .order_en .more_details.close {
+      background-color: rgba(83, 219, 255, 0.1); }
+      /* line 68, ../../_scss/pages/_order.scss */
+      .order_jp .more_details.close:after,
+      .order_en .more_details.close:after {
+        content: "\e7c4"; } }
