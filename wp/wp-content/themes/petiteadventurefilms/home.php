@@ -64,7 +64,7 @@
 						<div class="film_poster">
 						<?php
 						$poster_img = get_post_meta($post->ID, "films_info_00", TRUE);
-						echo get_post_meta_img($poster_img, "medium");
+						echo get_post_meta_img($poster_img, "medium", "lazyOwl", TRUE);
 						?>
 						</div>
 						<p class="film_title"><?php echo $post->post_title; ?></p>
@@ -92,6 +92,7 @@
 
 		$(".owl-carousel").owlCarousel({
 			autoplay: true,
+			lazyLoad : true,
 			loop: true,
 			dots: true,
 			margin: 16,

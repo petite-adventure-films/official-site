@@ -272,11 +272,11 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 
 <script type="text/javascript">
 
-	$(function(){
+	$(document).ready(function(){
 		$(".owl-carousel").owlCarousel({
 			items: 1,
 			autoHeight: true,
-			lazyLoad : true,
+			lazyLoad:true,
 			loop: true,
 			dots: true,
 			nav: true,

@@ -115,7 +115,6 @@ module.exports = function(grunt){
 					"wp/wp-content/themes/petiteadventurefilms/assets/js/ajaxzip3.js",
 					"wp/wp-content/themes/petiteadventurefilms/assets/js/owl.carousel.js",
 					"wp/wp-content/themes/petiteadventurefilms/assets/js/masonry.pkgd.js",
-					"wp/wp-content/themes/petiteadventurefilms/assets/js/imagesloaded.pkgd.min.js",
 					"wp/wp-content/themes/petiteadventurefilms/assets/js/base.js"
 				],
 				dest: "wp/wp-content/themes/petiteadventurefilms/script.min.js"

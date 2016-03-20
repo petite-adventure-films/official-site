@@ -8,9 +8,6 @@ $(function(){
 	$(".last, .list_definition").after('<div class="clear"></div>');
 
 	//
-	$(".owl-carousel").imagesLoaded(function(){});
-
-	//
 	$("body").append('<div class="overlay"></div>');
 
 	//move within page

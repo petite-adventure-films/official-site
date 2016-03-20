@@ -50,7 +50,7 @@ get_header(); ?>
 	<p class="m7_t">自主上映会サポーター募集！　お住まいの地域、学校、グループで、映画を上映しませんか？</p>
 	<div class="m2_t  owl-carousel">
 		<?php foreach($gallery_imgs as $img):?>
-			<div class="slide"><?php echo get_post_meta_img($img, "large"); ?></div>
+			<div class="slide"><?php echo get_post_meta_img($img, "large", "lazyOwl", TRUE); ?></div>
 		<?php endforeach; ?>
 	</div>
 	<div class="last"></div>
@@ -149,21 +149,8 @@ get_header(); ?>
 		<a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
 	</div>
 
-
-
 </section>
-
-
-
-
-
-
-
-
-
-
 </div>
-
 
 <script type="text/javascript">
 

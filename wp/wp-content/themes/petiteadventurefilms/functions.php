@@ -282,24 +282,23 @@ function get_date_info($post){
 	return $dates;
 }
 
-function get_events($month, $init=FALSE){
-
+function get_events($date, $init=FALSE){
 	if($init){
 		$init_args = array(
 			"tax_query" => array(
 				array(
 					"taxonomy" => "eventsdate",
 					"field" => "slug",
-					"terms" => future_events($month)
+					"terms" => future_events($date)
 				)
 			)
 		);
 	}else{
-		$init_args = array("eventsdate" => $month);
+		$init_args = array("eventsdate" => $date);
 	}
 	$args = array(
 		"post_type" => "events",
-		"posts_per_type" => -1,
+		"posts_per_page" => -1,
 	);
 	$posts = query_posts(array_merge($args, $init_args));
 	if($posts){
