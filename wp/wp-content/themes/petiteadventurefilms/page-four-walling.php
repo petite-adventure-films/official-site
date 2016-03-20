@@ -48,10 +48,12 @@ get_header(); ?>
 	<!--.header_page--></header>
 
 	<p class="m7_t">自主上映会サポーター募集！　お住まいの地域、学校、グループで、映画を上映しませんか？</p>
-	<div class="m2_t  owl-carousel">
-		<?php foreach($gallery_imgs as $img):?>
-			<div class="slide"><?php echo get_post_meta_img($img, "large", "owl-lazy", TRUE); ?></div>
-		<?php endforeach; ?>
+	<div class="slides m2_t">
+		<div class="owl-carousel">
+			<?php foreach($gallery_imgs as $img):?>
+				<div class="slide"><?php echo get_post_meta_img($img, "large", "preload"); ?></div>
+			<?php endforeach; ?>
+		</div>
 	</div>
 	<div class="last"></div>
 	<p class="m7_t">自主上映会を開催してくださるサポーターの方を、大募集中です！<br />
@@ -154,7 +156,8 @@ get_header(); ?>
 
 <script type="text/javascript">
 
-	$(function(){
+	$(window).load(function(){
+
 		$(".owl-carousel").owlCarousel({
 			items: 1,
 			autoHeight: true,
@@ -164,6 +167,7 @@ get_header(); ?>
 			nav: true,
 			navText: ["",""]
 		});
+
 	});
 
 </script>

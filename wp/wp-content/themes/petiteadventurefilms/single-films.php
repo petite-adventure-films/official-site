@@ -192,11 +192,11 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 		</div>
 
 		<?php if($gallery_imgs): ?>
-			<div class="contents">
+			<div class="contents slides">
 				<h2 class="contents_title">フォトギャラリー</h2>
 				<div class="owl-carousel">
 					<?php foreach($gallery_imgs as $img):?>
-						<div class="slide"><?php echo get_post_meta_img($img, "large", "owl-lazy", TRUE); ?></div>
+						<div class="slide"><?php echo get_post_meta_img($img, "large", "preload"); ?></div>
 					<?php endforeach; ?>
 				</div>
 			</div>
@@ -272,7 +272,8 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
+	$(window).load(function(){
+
 		$(".owl-carousel").owlCarousel({
 			items: 1,
 			autoHeight: true,
