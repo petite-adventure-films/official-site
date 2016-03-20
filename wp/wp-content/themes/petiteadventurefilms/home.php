@@ -64,7 +64,7 @@
 						<div class="film_poster">
 						<?php
 						$poster_img = get_post_meta($post->ID, "films_info_00", TRUE);
-						echo get_post_meta_img($poster_img, "medium", "lazyOwl", TRUE);
+						echo get_post_meta_img($poster_img, "medium", "owl-lazy", TRUE);
 						?>
 						</div>
 						<p class="film_title"><?php echo $post->post_title; ?></p>

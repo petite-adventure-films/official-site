@@ -196,7 +196,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 				<h2 class="contents_title">フォトギャラリー</h2>
 				<div class="owl-carousel">
 					<?php foreach($gallery_imgs as $img):?>
-						<div class="slide"><?php echo get_post_meta_img($img, "large", "lazyOwl", TRUE); ?></div>
+						<div class="slide"><?php echo get_post_meta_img($img, "large", "owl-lazy", TRUE); ?></div>
 					<?php endforeach; ?>
 				</div>
 			</div>
