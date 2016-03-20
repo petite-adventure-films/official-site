@@ -1,0 +1,492 @@
+a:24:{s:33:"custom_field_template_before_list";s:4:"<ul>";s:32:"custom_field_template_after_list";s:5:"</ul>";s:34:"custom_field_template_before_value";s:4:"<li>";s:33:"custom_field_template_after_value";s:5:"</li>";s:16:"shortcode_format";a:1:{i:0;s:360:"<table class="cft">
+<tbody>
+<tr>
+<th>Plan</th><td colspan="3">[Plan]</td>
+</tr>
+<tr>
+<th>Favorite Fruits</th><td>[Favorite Fruits]</td>
+<th>Miles Walked</th><td>[Miles Walked]</td>
+</tr>
+<tr>
+<th>Temper Level</th><td colspan="3">[Temper Level]</td>
+</tr>
+<tr>
+<th>Hidden Thought</th><td colspan="3">[Hidden Thought]</td>
+</tr>
+</tbody>
+</table>";}s:3:"css";s:585:".cft { overflow:hidden; }
+.cft:after { content:" "; clear:both; height:0; display:block; visibility:hidden; }
+.cft dl { margin:10px 0; }
+.cft dl:after { content:" "; clear:both; height:0; display:block; visibility:hidden; }
+.cft dt { width:20%; clear:both; float:left; display:inline; font-weight:bold; text-align:center; }
+.cft dt .hideKey { visibility:hidden; }
+.cft dd { margin:0 0 0 21%; }
+.cft dd p.label { font-weight:bold; margin:0; }
+.cft_instruction { margin:10px; }
+.cft fieldset { border:1px solid #CCC; margin:5px; padding:5px; }
+.cft .dl_checkbox { margin:0; }
+";s:5:"posts";a:28:{i:16;s:1:"1";i:2169;s:1:"1";i:2171;s:1:"1";i:2173;s:1:"1";i:2183;s:1:"1";i:2184;s:1:"1";i:4050;s:1:"5";i:2146;s:1:"5";i:3983;s:1:"5";i:2260;s:1:"5";i:3965;s:1:"5";i:3968;s:1:"5";i:4068;s:1:"5";i:4070;s:1:"5";i:4072;s:1:"5";i:4075;s:1:"5";i:4078;s:1:"5";i:4080;s:1:"5";i:3980;s:1:"5";i:4054;s:1:"5";i:4055;s:1:"5";i:2245;s:1:"5";i:2263;s:1:"5";i:2161;s:1:"1";i:4140;s:1:"5";i:2254;s:1:"0";i:4033;s:1:"0";i:4142;s:1:"5";}s:44:"custom_field_template_replace_keys_by_labels";s:0:"";s:41:"custom_field_template_use_multiple_insert";s:0:"";s:33:"custom_field_template_use_wpautop";i:1;s:34:"custom_field_template_use_autosave";s:0:"";s:40:"custom_field_template_use_disable_button";s:0:"";s:47:"custom_field_template_disable_initialize_button";s:0:"";s:41:"custom_field_template_disable_save_button";s:0:"";s:51:"custom_field_template_disable_default_custom_fields";s:0:"";s:40:"custom_field_template_disable_quick_edit";s:0:"";s:49:"custom_field_template_disable_custom_field_column";s:0:"";s:39:"custom_field_template_replace_the_title";s:0:"";s:32:"custom_field_template_deploy_box";s:0:"";s:38:"custom_field_template_widget_shortcode";s:0:"";s:39:"custom_field_template_excerpt_shortcode";s:0:"";s:36:"custom_field_template_use_validation";s:0:"";s:32:"custom_field_template_disable_ad";s:0:"";s:13:"custom_fields";a:6:{i:0;a:9:{s:5:"title";s:24:"上映会・イベント";s:7:"content";s:529:"[events_info_01]
+label = 開催地
+type = textfield
+size = 35
+
+[events_info_02]
+label = 開催地住所
+type = textfield
+size = 35
+
+[events_info_03]
+label = MAP
+type = textfield
+size = 35
+
+[events_info_04]
+label = アクセス
+type = textarea
+rows = 4
+cols = 40
+
+[events_info_09]
+label = 日程について
+type = textarea
+rows = 4
+cols = 40
+
+[events_info_13]
+label = 入場料について
+type = textarea
+rows = 4
+cols = 40
+
+[events_info_06]
+label = 備考
+type = textarea
+rows = 4
+cols = 40";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:6:"events";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:1;a:9:{s:5:"title";s:6:"映画";s:7:"content";s:3750:"[films_info_00]
+type = file
+label = DVDジャケット(日本)
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+relation = true
+
+[films_info_23]
+type = file
+label = DVDジャケット(英語)
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+
+[films_info_24]
+type = file
+label = 映画ポスター
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+
+[films_info_19]
+type = file
+label = 映画チラシ(表)
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+
+[films_info_18]
+type = file
+label = 映画チラシ(裏)
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+relation = true
+
+[films_info_21]
+label = キャッチ
+type =  textarea
+rows = 4
+cols = 40
+blank = true
+
+[films_info_01]
+type = text
+size = 35
+label = ジャンル
+blank = true
+
+[films_info_02]
+type = text
+size = 35
+label = 制作国
+blank = true
+
+[films_info_03]
+type = text
+size = 35
+label = 制作年
+blank = true
+
+[films_info_04]
+type = text
+size = 35
+label = 上映時間
+blank = true
+
+[film_details]
+type = fieldset_open
+legend = 映画詳細情報
+multiple = true
+multipleButton = true
+ 
+[films_info_05]
+type = text
+size = 35
+label = 項目名
+blank = true
+
+[films_info_06]
+type = text
+size = 70
+label = 項目内容
+blank = true
+
+[film_details]
+type = fieldset_close 
+
+[films_info_07]
+label = 受賞
+type = text
+size = 70
+multiple = true
+multipleButton = true
+
+[film_recommend]
+type = fieldset_open
+legend = 推薦文
+multiple = true
+multipleButton = true
+ 
+[films_info_12]
+type = text
+size = 35
+label = 推薦者
+blank = true
+
+[films_info_13]
+label = 推薦文
+type = textarea
+rows = 4
+cols = 40
+blank = true
+
+[film_recommend]
+type = fieldset_close 
+
+[films_info_08]
+label = 予告編video
+type = text
+size = 70
+
+[films_info_17]
+label = 本編video
+type = text
+size = 70
+
+[films_info_09]
+label = フォト・ギャラリー
+type = file
+multiple = true
+multipleButton = true
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+relation = true
+
+[film_credits]
+type = fieldset_open
+legend = 映画クレジット
+multiple = true
+multipleButton = true
+ 
+[films_info_10]
+type = text
+size = 35
+label = 項目名
+blank = true
+
+[films_info_11]
+label = 項目内容
+type = textarea
+rows = 4
+cols = 40
+blank = true
+
+[film_credits]
+type = fieldset_close 
+
+[films_info_14]
+label = 国内映画祭上映歴
+type = text
+size = 70
+multiple = true
+multipleButton = true
+
+[films_info_15]
+label = 国外映画祭上映歴
+type = text
+size = 70
+multiple = true
+multipleButton = true
+
+[films_info_27]
+label = 放映・劇場公開履歴
+type = text
+size = 70
+multiple = true
+multipleButton = true
+
+[films_info_16]
+label = 関連情報
+type =  textarea
+rows = 4
+cols = 40
+class = grid_item
+multiple = true
+multipleButton = true
+
+[films_info_20]
+type =  checkbox
+value = 1
+valueLabel = DVD無し
+
+[films_info_22]
+label = DVD販売注釈
+type = text
+size = 70
+
+[film_dvd_price]
+type = fieldset_open
+legend = DVDに関する情報
+multiple = true
+multipleButton = true
+ 
+[films_info_25]
+label = 項目名
+type = text
+size = 35
+
+[films_info_26]
+label = 科学
+type = text
+size = 10
+
+[film_dvd_price]
+type = fieldset_close 
+
+[films_info_30]
+label = DVD紹介
+type =  textarea
+rows = 4
+cols = 40
+class = m1_t
+
+[film_dvd_info]
+type = fieldset_open
+legend = DVDに関する情報
+multiple = true
+multipleButton = true
+ 
+[films_info_28]
+type = text
+size = 35
+label = 項目名
+blank = true
+
+[films_info_29]
+label = 項目内容
+type = textarea
+rows = 4
+cols = 40
+blank = true
+
+[film_dvd_info]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:0:"";s:16:"custom_post_type";s:5:"films";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:2;a:9:{s:5:"title";s:24:"自主上映について";s:7:"content";s:190:"[four-walling_info_00]
+label = フォト・ギャラリー
+type = file
+multiple = true
+multipleButton = true
+mediaPicker = true
+mediaLibrary = true
+mediaRemove = true
+relation = true";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:4:"3957";s:9:"post_type";s:4:"page";s:16:"custom_post_type";s:0:"";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:3;a:8:{s:5:"title";s:9:"DVD注文";s:7:"content";s:2744:"[order_info_01]
+type = text
+size = 10
+label = 注文者名前
+
+[order_info_03]
+type = text
+size = 10
+label = 郵便番号
+
+[order_info_17]
+type = text
+size = 10
+label = 国
+
+[order_info_04]
+type = text
+size = 35
+label = 住所1
+
+[order_info_05]
+type = text
+size = 35
+label = 住所2
+
+[order_info_06]
+type = text
+size = 35
+label = メールアドレス
+
+[order_info_18]
+type = text
+size = 35
+label = 電話番号
+
+[order_info_07]
+type = select
+value = 1 # 2 # 3 # 4 # 5 # 6 # 7 # 8 # 9 # 10
+label = 踊る善福寺/ホームレスごっこ(Dancing Zempukuji/The Apprentice Homeless)
+
+[order_info_21]
+type = select
+value = 1 # 2
+valueLabel= 個人 # 団体・ライブラリー
+label = 踊る善福寺/ホームレスごっこ種別
+
+[order_info_08]
+type = select
+value = 1 # 2 # 3 # 4 # 5 # 6 # 7 # 8 # 9 # 10
+label = 木田さんと原発、そして日本(日本語)(A Woman From Fukushima)
+
+[order_info_22]
+type = select
+value = 1 # 2
+valueLabel= 個人 # 団体・ライブラリー
+label = 木田さんと原発、そして日本(日本語)種別
+
+[order_info_09]
+type = select
+value = 1 # 2 # 3 # 4 # 5 # 6 # 7 # 8 # 9 # 10
+label = 木田さんと原発、そして日本(英語)
+
+[order_info_23]
+type = select
+value = 1 # 2
+valueLabel= 個人 # 団体・ライブラリー
+label = 木田さんと原発、そして日本(英語)種別
+
+[order_info_10]
+type = select
+value = 1 # 2 # 3 # 4 # 5 # 6 # 7 # 8 # 9 # 10
+label = 乙女ハウス(Otome House)
+
+[order_info_24]
+type = select
+value = 1 # 2
+valueLabel= 個人 # 団体・ライブラリー
+label = 乙女ハウス種別
+
+[order_info_11]
+type = select
+value = 1 # 2 # 3 # 4 # 5 # 6 # 7 # 8 # 9 # 10
+label = さようならUR(Goodbye UR)
+
+[order_info_25]
+type = select
+value = 1 # 2
+valueLabel = 個人 # 団体・ライブラリー
+label = さようならUR種別
+
+[order_info_12]
+type = select
+value = 1 # 2 # 3 # 4 # 5 # 6 # 7 # 8 # 9 # 10
+label = ブライアンと仲間たち(Brian & Co. Parliament Square SW1)
+
+[order_info_26]
+type = select
+value = 1 # 2
+valueLabel = 個人 # 団体・ライブラリー
+label = ブライアンと仲間たち種別
+
+[order_info_13]
+type = radio
+value = 1 # 2
+valueLabel = 銀行振り込み # クレジットカード
+label = お支払方法
+
+[order_info_19]
+type = radio
+value = 1 # 2
+valueLabel = Registered # Registered Express
+label = Shipping
+
+[order_info_14]
+type = checkbox
+value = 1
+valueLabel = 必要
+label = 領収書
+
+[order_info_15]
+type = text
+size = 35
+label = 宛名
+
+[order_info_16]
+type = text
+size = 35
+label = 但し書き
+
+[order_info_20]
+type = textarea
+rows = 4
+cols = 40
+label = Comments";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:8:"dvdorder";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:4;a:8:{s:5:"title";s:18:"お問い合わせ";s:7:"content";s:331:"[contact_info_01]
+type = text
+size = 10
+label = 名前
+
+[contact_info_02]
+type = text
+size = 35
+label = メールアドレス
+
+[contact_info_03]
+type = select
+value = 1 # 2 # 3 # 4
+valueLabel = 映画について # イベントについて # 監督について # 自主上映について
+label = 問い合わせ種類";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:16:"custom_post_type";s:11:"contactform";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}i:5;a:9:{s:5:"title";s:15:"コンテンツ";s:7:"content";s:409:"[pattern]
+type = fieldset_open
+legend = コンテンツセット
+multiple = true
+multipleButton = true
+
+[contents_info_01]
+type = text
+size = 35
+label = タイトル
+blank = true
+ 
+[contents_info_02]
+type = textarea
+rows = 4
+cols = 40
+htmlEditor = true
+label = コンテンツ
+blank = true
+
+[contents_info_03]
+type = file
+label = 画像
+blank = true
+
+[pattern]
+type = fieldset_close ";s:11:"instruction";s:0:"";s:8:"category";s:0:"";s:4:"post";s:0:"";s:9:"post_type";s:4:"page";s:16:"custom_post_type";s:0:"";s:14:"template_files";s:0:"";s:6:"format";s:0:"";}}}
