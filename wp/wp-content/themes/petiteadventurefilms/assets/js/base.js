@@ -146,21 +146,4 @@ $(function(){
 		target.removeClass("icon-menu").addClass("icon-close");
 	};
 
-	$(".show_contents > li").on("click", function(){
-		$(".show_contents > li").removeClass("active");
-		$(this).addClass("active");
-	});
-	$(".open_contents").on("click", function(){
-		var contents = $(this).parent().find(".show_contents");
-		var display = contents.css("display");
-		if(display == "block"){
-			contents.fadeOut();
-			$(this).removeClass("close_contents");
-		}
-		if(display == "none"){
-			contents.fadeIn().slideDown();
-			$(this).addClass("close_contents");
-		}
-	});
-
 });

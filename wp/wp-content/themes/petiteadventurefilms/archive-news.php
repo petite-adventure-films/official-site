@@ -1,6 +1,6 @@
 <?php
 if(is_post_type_archive()){
-	$post_type = get_post_type_object( get_query_var( 'post_type' ));
+	$post_type = get_post_type_object( get_query_var( "post_type" ));
 	$termLink = get_post_type_archive_link($post_type->name);
 	$termName = $post_type->label;
 }elseif(is_category() || is_tag() || is_tax()){
@@ -29,13 +29,13 @@ get_header(); ?>
 		</nav>
 		<h1>
 			<?php if(is_day()){
-				printf( __('日別アーカイブ: %s'), get_the_date());
+				printf( __("日別アーカイブ: %s"), get_the_date());
 			}elseif(is_month()){
-				printf( __('月別アーカイブ: %s'), get_the_date('Y年n月'));
+				printf( __("月別アーカイブ: %s"), get_the_date("Y年n月"));
 			}elseif(is_year()){
-				printf( __('年別アーカイブ: %s'), get_the_date('Y年'));
+				printf( __("年別アーカイブ: %s"), get_the_date("Y年"));
 			}elseif(is_post_type_archive()){
-				$post_type = get_post_type_object( get_query_var( 'post_type' ));
+				$post_type = get_post_type_object( get_query_var( "post_type" ));
 				echo $post_type->label;
 			}elseif(is_category() || is_tag() || is_tax()){
 				single_term_title("", true);
@@ -46,8 +46,11 @@ get_header(); ?>
 	<!--.header_page--></header>
 
 	<?php
+	$paged = (get_query_var("paged")) ? get_query_var("paged") : 1;
 	$args = array(
-		"post_type" => "news"
+		"post_type" => "news",
+		"posts_per_page" => 10,
+		"paged"=>$paged
 	);
 	$posts = query_posts($args);
 	if($posts): ?>
@@ -58,53 +61,9 @@ get_header(); ?>
 		</ul>
 	<?php endif; ?>
 
-	<?php wp_pagenavi(); ?>
-
-
-		<div class="m7_t btn priority2 more">
-			<a href="#" id="">LOAD MORE</a>
-		</div>
-
+	<?php if(function_exists("wp_pagenavi")) { wp_pagenavi(); } ?>
 
 </div>
 </div>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-
-	var getNum = 10;
-	var nowNum = 10;
-
-	function getNews(){
-
-		$.ajax({
-			type: 'post',
-			url: '<?php echo bloginfo("template_url"); ?>/_show_news.php',
-			data: {
-				getNum: getNum,
-				nowNum: nowNum
-			},
-			success: function(data) {
-				data = JSON.parse(data);
-				nowNum = nowNum + getNum;
-				$(data['html']).hide().appendTo(".list_posts").fadeIn();
-				if(data["flg"] == 1){
-					$(".more").hide();
-				}
-			}
-		});
-
-	}
-
-	$(".more").each(function(){
-		$(this).on("click","a", function(){
-			getNews();
-			return false;
-		});
-	});
-
-});
-</script>
 
 <?php get_footer(); ?>

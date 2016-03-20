@@ -10,36 +10,30 @@ if(is_post_type_archive()){
 	$termName = $cat->name;
 }
 
+$now = date("Ym");
 $args = array(
 	"orderby" => "slug",
-	"order" => "DESC"
+	"order" => "DESC",
 );
 $eventsdates = get_terms("eventsdate", $args);
 $eventsdates = (array)$eventsdates;
-
 foreach($eventsdates as $k => $v){
-	if($v->parent == 0){
-		$dates[] = (array)$v;
+	if($v->slug == substr($now, 0, 4)){
+		$thisyear = $v;
+	}
+}
+foreach($eventsdates as $k => $v){
+	$v = (array)$v;
+	if($thisyear->term_id == $v["parent"]){
+		$months[$k] = $v;
 	}
 }
 
-foreach($dates as $k => $v){
-	$years[$k]["year"] = $v["name"];
-	foreach($eventsdates as $sk => $sv){
-		$sv = (array)$sv;
-		if($v["term_id"] == $sv["parent"]){
-			$years[$k]["months"][$sk] = $sv;
-		}
-	}
-}
-
-
-$now = date("Ym");
 get_header(); ?>
 
 <div class="single">
 
-	<div class="col col_8">
+	<div class="col col_9 last">
 
 		<header class="page_header">
 			<nav class="crumbs">
@@ -72,55 +66,79 @@ get_header(); ?>
 			</h1>
 		<!--.header_page--></header>
 
-		<ul class="list_posts" id="contents_events">
+	</div>
+
+	<div class="m4_t">
+		<div class="col col_5">
+			<ul class="list_archives">
+				<li><?php echo substr($now, 0, 4); ?>年</li>
+				<li class="show_contents tab" data-tab="tab_latest">最新</li>
+				<?php
+					if($months){
+						foreach ($months as $key => $value){
+							$key_id[$key] = $value['slug'];
+						}
+						array_multisort($key_id , SORT_ASC , $months);
+						foreach($months as $month){
+							echo '<li class="show_contents tab" data-tab="tab_'.$month["slug"].'">'.$month["name"]."</li>";
+						}
+					}
+					$key_id = array();
+				?>
+			</ul>
+		</div>
+		<div class="col col_4 last al_r show_wider">
+			<ul class="list_archives_past">
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015年</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014年</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013年</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012年</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="col col_9 last">
+		<section class="tab_contents" id="tab_latest">
 			<?php echo get_events($now, TRUE); ?>
-		</ul>
-
+		</section>
+		<?php foreach($months as $month): ?>
+			<section class="tab_contents" id="tab_<?php echo $month["slug"]; ?>">
+			<?php echo get_events($month["slug"]); ?>
+			</section>
+		<?php endforeach; ?>
 	</div>
 
-	<div class="col col_1 last al_r">
-		<ul class="list_archives">
-			<?php
-			foreach($years as $term){
-				echo '<li>';
-				echo '<span class="inline_block open_contents">'.$term["year"].'</span>';
-				$months = $term["months"];
-				if($months){
-					echo '<ul class="show_contents">';
-					foreach ($months as $key => $value){
-						$key_id[$key] = $value['slug'];
-					}
-					array_multisort($key_id , SORT_ASC , $months);
-					foreach($months as $month){
-						echo '<li class="archive" data-tab="'.$month["slug"].'">'.$month["name"]."</li>";
-					}
-					echo "</ul>";
-				}
-				echo "</li>";
-				$key_id = array();
-			}?>
-		</ul>
-	</div>
+	<aside class="contents m4_t show_smaller list_archives_past_smaller">
+		<h3>過去のイベントはこちらから</h3>
+	</aside>
 
 </div>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".archive").on("click", function(){
-		var term = $(this).attr("data-tab");
-		$.ajax({
-			type: 'post',
-			url: '<?php echo bloginfo("template_url"); ?>/_show_events.php',
-			data: {
-				date: term
-			},
-			success: function(data){
-				data = JSON.parse(data);
-				$("#contents_events").hide().html(data["html"]).fadeIn();
+<?php get_footer(); ?>
+
+<script>
+
+	$(function(){
+
+		$(".tab_contents").hide();
+		$(".tab_contents:nth-of-type(1)").show();
+		$(".tab:first").addClass("is_active");
+		$(".show_contents").on("click", function(){
+			var tabId = $(this).attr("data-tab");
+			var contents = $("#" + tabId);
+			var display = contents.css("display");
+			if(display == "none"){
+				$(".tab_contents").fadeOut();
+				contents.fadeIn().slideDown();
+				$(".show_contents").removeClass("is_active");
+				$(this).addClass("is_active");
 			}
 		});
-	});
-});
-</script>
 
-<?php get_footer(); ?>
+		var past_list = $(".list_archives_past").clone();
+		past_list.addClass("border_on m2_t");
+		past_list.appendTo($(".list_archives_past_smaller"));
+
+	});
+
+</script>

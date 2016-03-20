@@ -188,8 +188,21 @@ function get_news($post){
 	</div>
 	{$time}
 EOF;
+	wp_reset_query();
 	return $html;
 
+}
+
+function get_post_number($post) {
+	global $wpdb;
+	$number = $wpdb->get_var("
+		SELECT COUNT( * )
+		FROM $wpdb->posts
+		WHERE post_date <= '{$post->post_date}'
+		AND post_status = 'publish'
+		AND post_type = ('{$post->post_type}')
+	");
+	return $number;
 }
 
 function set_body_class(){
@@ -220,6 +233,55 @@ function future_events($term){
 
 }
 
+function get_event_info($post){
+	$eventtags = get_the_terms($post->ID, "eventtags");
+	if($eventtags){
+		$eventtags_count = count($eventtags);
+		$count = 0;
+		$event_info = '<span class="inline_block index label">';
+		foreach($eventtags as $event){
+			$count++;
+			$event_info .= $event->name;
+			if($count != $eventtags_count) $event_info .= ",";
+		}
+		$event_info .= '</span>';
+	}else{
+		$event_info = NULL;
+	}
+	if($event_info){
+		$list_post_info =  ($event_info) ? '<li>'.$event_info.'</li>' : "";
+	}else{
+		$list_post_info = NULL;
+	}
+	return $list_post_info;
+}
+
+function get_place_info($post){
+	$place = get_post_meta($post->ID, "events_info_01", TRUE);
+	if($place){
+		$place_list = '<li class="index place">';
+		if($map){
+			$place_list .= $place;
+			$place_list .= '<span class="block">'.$address.'  <a href="'.$map.'" target="_blank">Map</a></span>';
+		}else{
+			$place_list .= $place;
+			$place_list .= '<span class="block">'.$address.'</span>';
+		}
+		$place_list .= '</li>';
+	}else{
+		$place_list = NULL;
+	}
+	return $place_list;
+}
+
+function get_date_info($post){
+	$dates_details = get_post_meta($post->ID, "events_info_09", TRUE);
+	$dates_details = explode("<br />", $dates_details);
+	if($dates_details) $dates = '<li class="index date">'.$dates_details[0].'</li>';
+	else $dates = NULL;
+	return $dates;
+}
+
 function get_events($month, $init=FALSE){
 
 	if($init){
@@ -240,100 +302,29 @@ function get_events($month, $init=FALSE){
 		"posts_per_type" => -1,
 	);
 	$posts = query_posts(array_merge($args, $init_args));
-
 	if($posts){
+	$html = '<ul class="list_posts list_events">';
 		foreach($posts as $post){
-			$filmtags = get_the_terms($post->ID, "filmtags");
-			$film_label = get_film($filmtags, "label");
-			$film_link = get_film($filmtags, "link");
-			if($film_label){
-				$film_info = '<span class="inline_block index film">';
-				if($film_link){
-					$film_info .= '<a href="'.$film_link.'">'.$film_label.'</a>';
-				}else{
-					$film_info .= $film_label;
-				}
-				$film_info .= '</span>';
-			}else{
-				$film_info = NULL;
-			}
-
-			$eventtags = get_the_terms($post->ID, "eventtags");
-			if($eventtags){
-				foreach($eventtags as $event){
-					$event_info = '<span class="inline_block index label">';
-					$event_info .= $event->name;
-					$event_info .= '</span>';
-				}
-			}else{
-				$event_info = NULL;
-			}
-
-			$list_post_info = NULL;
-			if($film_info || $event_info){
-				$list_post_info .= '<ul class="list_post_info">';
-				$list_post_info .=  ($film_info) ? '<li>'.$film_info.'</li>' : "";
-				$list_post_info .=  ($event_info) ? '<li>'.$event_info.'</li>' : "";
-				$list_post_info .= '</ul>';
-			}else{
-				$list_post_info = NULL;
-			}
-
-			$place = get_post_meta($post->ID, "events_info_01", TRUE);
-			$address = get_post_meta($post->ID, "events_info_02", TRUE);
-			$map = get_post_meta($post->ID, "events_info_03", TRUE);
-			//$address_code = urlencode(get_post_meta($post->ID, "events_info_02", TRUE));
-			//$gmap = "http://maps.google.co.jp/maps?q=".$address_code;
-			if($place){
-				$place_list = '<li class="index place">';
-				if($map){
-					$place_list .= $place;
-					$place_list .= '<span class="block">'.$address.'  <a href="'.$map.'" target="_blank">Map</a></span>';
-				}else{
-					$place_list .= $place;
-					$place_list .= '<span class="block">'.$address.'</span>';
-				}
-				$place_list .= '</li>';
-			}else{
-				$place_list = NULL;
-			}
-
-			$access_details = get_post_meta($post->ID, "events_info_04", TRUE);
-			if($access_details) $access = '<li class="index flag">'.$access_details.'</li>';
-			else $access = NULL;
-
-			$dates_details = get_post_meta($post->ID, "events_info_09", TRUE);
-			if($dates_details) $dates = '<li class="index date">'.$dates_details.'</li>';
-			else $dates = NULL;
-
-			$fee_details = get_post_meta($post->ID, "events_info_13", TRUE);
-			if($fee_details) $fee = '<li class="index fee">'.$fee_details.'</li>';
-			else $fee = NULL;
-
-			$appendix_contents = get_post_meta($post->ID, "events_info_06", TRUE);
-			$appendix = ($appendix_contents) ? '<li class="index appendix">'.$appendix_contents.'</li>' : "";
-
-			$post_title = $post->post_title;
-			$post_date = get_the_date("", $post->ID);
-			$post_date_time = get_the_date("Y-m-d h:i:s A");
-
+			$post_number = get_post_number($post);
+			$post_title = get_the_title($post->ID);
+			$event_info = get_event_info($post);
+			$place_info = get_place_info($post);
+			$date_info = get_date_info($post);
+			$permalink = get_permalink($post->ID);
 			$html .= <<<EOF
 	<li>
-		<h2 class="title">{$post_title}</h2>
-		{$list_post_info}
-		<ul class="list_events_info">
-			{$place_list}
-			{$access}
-			{$dates}
-			{$time}
-			{$fee}
-			{$appendix}
-		</ul>
-		<time datetime="{$post_date_time}" class="list_post_time">{$post_date}</time>
+		<a href="{$permalink}">
+			<h2 class="title"><span class="block caption2">No.{$post_number}</span>{$post_title}</h2>
+			<ul class="list_post_info">
+				{$place_info}
+				{$date_info}
+				{$event_info}
+			</ul>
+		</a>
 	</li>
 EOF;
-
 		}
+	$html .= "</ul>";
 
 	}else{
 		$html = <<<EOF
@@ -343,6 +334,7 @@ EOF;
 EOF;
 	}
 
+	wp_reset_query();
 	return $html;
 
 }
