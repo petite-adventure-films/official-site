@@ -229,12 +229,12 @@ $(function(){
 			jVal.text("#contact_tel");
 			jVal.emailConfirm("#contact_email_confirm");
 			jVal.radio("input[name='contact_pay_way']");
-			//jVal.cstmOrderCheck();
-			jVal.cstmOrder(".contact_film_kind");
-			jVal.cstmOrder(".contact_film_unit");
-
-	//$(".contact_film_kind").blur();
-	//$(".contact_film_unit").blur(jVal.cstmOrder);
+			$(".contact_film_kind").each(function(){
+				jVal.cstmOrder($(this));
+			});
+			$(".contact_film_unit").each(function(){
+				jVal.cstmOrder($(this));
+			});
 			jVal.sendIt();
 		});
 
