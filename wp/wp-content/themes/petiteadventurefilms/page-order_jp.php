@@ -34,7 +34,7 @@ get_header(); ?>
 		</h1>
 	<!--.header_page--></header>
 
-	<p class="m7_t">DVDのご購入は、以下の注文書に記入・送信してください。<br />折り返しご連絡いたします。</p>
+	<p class="m7_t">DVDのご購入は、注文書に記入・送信してください。<br />折り返しご連絡いたします。</p>
 	<dl class="m2_t list_definition">
 		<dt>DVDの規格</dt><dd>NTSC、DVD-Rディスク（DVD-R対応機器にて再生可能）</dd>
 		<dt>お支払い</dt><dd>先払い（但し、図書館や学校などは後払いも可能。ご相談ください）</dd>
@@ -83,7 +83,7 @@ get_header(); ?>
 						</div>
 						<dl class="list_definition dvd_price">
 							<?php for($i=0; $i<count($dvd_price); $i++): ?>
-								<dt class="bold"><?php echo $dvd_price_title[$i]; ?>価額</dt>
+								<dt class="bold"><?php echo $dvd_price_title[$i]; ?></dt>
 								<dd>¥<?php echo number_format($dvd_price[$i]); ?></dd>
 							<?php endfor; ?>
 						</dl>
