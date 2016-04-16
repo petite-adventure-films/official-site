@@ -1,5 +1,5 @@
 <?php
-include (TEMPLATEPATH . '/_order_post.php');
+include (TEMPLATEPATH . "/_order_post.php");
 get_header(); ?>
 
 <div class="single">
@@ -20,13 +20,13 @@ get_header(); ?>
 		</nav>
 		<h1>
 			<?php if(is_day()){
-				printf( __('日別アーカイブ: %s'), get_the_date());
+				printf( __("日別アーカイブ: %s"), get_the_date());
 			}elseif(is_month()){
-				printf( __('月別アーカイブ: %s'), get_the_date('Y年n月'));
+				printf( __("月別アーカイブ: %s"), get_the_date("Y年n月"));
 			}elseif(is_year()){
-				printf( __('年別アーカイブ: %s'), get_the_date('Y年'));
+				printf( __("年別アーカイブ: %s"), get_the_date("Y年"));
 			}elseif(is_post_type_archive()){
-				$post_type = get_post_type_object( get_query_var( 'post_type' ));
+				$post_type = get_post_type_object( get_query_var( "post_type" ));
 				echo $post_type->label;
 			}elseif(is_category() || is_tag() || is_tax()){
 				single_term_title("", true);
@@ -70,5 +70,229 @@ get_header(); ?>
 </div>
 </div>
 
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/form_order.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+	//validation
+	var jVal = {
+
+		"text" : function(d){
+			var ele;
+			if(typeof(d) == "object") ele = $(this);
+			else ele = $(d);
+			var eleId = ele.attr("id");
+			var msgId = eleId+"Msg";
+			var msg = $("#"+msgId);
+			//var errorMsg = ele.attr("data-error");
+			if(ele.val()){
+				msg.remove();
+				ele.removeClass("error");
+				ele.closest(".form_contents").addClass("correct");
+			}else{
+				jVal.errors = true;
+				msg.remove();
+				ele.addClass("error");
+				ele.closest(".form_contents").removeClass("correct");
+			}
+		},
+
+		"radio" : function(d){
+			var ele;
+			if(typeof(d) == "object") ele = $(this);
+			else ele = $(d);
+			var eleId = ele.attr("name");
+			var msgId = eleId+"Msg";
+			var msg = $("#"+msgId);
+
+			if($("input[name='"+eleId+"']:checked").length != 0){
+				msg.remove();
+				ele.removeClass("error");
+				ele.closest(".form_contents").addClass("correct");
+			}else{
+				jVal.errors = true;
+				msg.remove();
+				ele.addClass("error");
+				ele.closest(".form_contents").removeClass("correct");
+			}
+		},
+
+		"select" : function(d){
+
+			var ele;
+			if(typeof(d) == "object") ele = $(this);
+			else ele = $(d);
+			var eleId = ele.attr("name");
+			var msgId = eleId+"Msg";
+			var msg = $("#"+msgId);
+
+			if(ele.val()){
+				msg.remove();
+				ele.removeClass("error");
+				ele.closest(".form_contents").addClass("correct");
+			}else{
+				jVal.errors = true;
+				msg.remove();
+				ele.addClass("error");
+				ele.closest(".form_contents").removeClass("correct");
+			}
+
+		},
+
+		"email" : function(d){
+			var ele;
+			if(typeof(d) == "object") ele = $(this);
+			else ele = $(d);
+			var eleId = ele.attr("id");
+			var msgId = eleId+"Msg";
+			var msg = $("#"+msgId);
+			var errorTypeMsg = "A pattern is not right. ex) abc@example.com";
+			var errorMsg = "メールアドレスを入力してください";
+			var patt = /^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)*.([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/;
+			if(ele.val()){
+				if(ele.val().match(patt)){
+					msg.remove();
+					ele.removeClass("error");
+					ele.closest(".form_contents").addClass("correct");
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+					ele.closest(".form_contents").find(".form_elements").after('<div id="'+msgId+'" class="form_err_msg">'+errorTypeMsg+'</div>');
+				}
+			}else{
+				jVal.errors = true;
+				msg.remove();
+				ele.addClass("error");
+				ele.closest(".form_contents").removeClass("correct");
+			}
+		},
+
+		"emailConfirm" : function(d){
+			var ele;
+			if(typeof(d) == "object") ele = $(this);
+			else ele = $(d);
+			var eleId = ele.attr("id");
+			var msgId = eleId+"Msg";
+			var msg = $("#"+msgId);
+			var errorMsg = "Entered-mail addresses do not match.";
+			if(ele.val()){
+				if(ele.val() == $("#contact_email").val()){
+					msg.remove();
+					ele.removeClass("error");
+					ele.closest(".form_contents").addClass("correct");
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+					ele.closest(".form_contents").find(".form_elements").after('<div id="'+msgId+'" class="form_err_msg">'+errorMsg+'</div>');
+				}
+			}else{
+				jVal.errors = true;
+				msg.remove();
+				ele.addClass("error");
+				ele.closest(".form_contents").removeClass("correct");
+			}
+		},
+
+		"cstmOrderCheck" : function(d){
+
+			var count = 0;
+			$(".contact_film_kind").each(function(){
+				var strRare = $(this).attr("Id").slice(-4);
+				var strFront = $(this).attr("Id").slice(0, -4);
+				if (strRare == "kind"){
+					var target = $("#" + strFront + "unit");
+				}else{
+					var target = $("#" + strFront + "kind");
+				}
+				if($(this).val() && target.val()){
+					count++;
+				}
+			});
+
+			if(count > 0){
+			}else{
+				jVal.errors = true
+				$(".contact_film_kind").addClass("error");
+				$(".contact_film_unit").addClass("error");
+				$("#pick_dvd").removeClass("correct");
+			}
+
+		},
+
+		"cstmOrder" : function(d){
+
+			var ele;
+			if(typeof(d) == "object") ele = $(this);
+			else ele = $(d);
+			var eleId = ele.attr("id");
+
+			var strRare = eleId.slice(-4);
+			var strFront = eleId.slice(0, -4);
+			if (strRare == "kind"){
+				var target = $("#" + strFront + "unit");
+			}else{
+				var target = $("#" + strFront + "kind");
+			}
+
+			if(ele.val() && target.val()){
+				$(".contact_film_kind").removeClass("error");
+				$(".contact_film_unit").removeClass("error");
+				$("#pick_dvd").addClass("correct");
+			}else{
+				jVal.errors = true
+				$(ele).addClass("error");
+				$(target).addClass("error");
+				$("#pick_dvd").removeClass("correct");
+			}
+
+		},
+
+		"sendIt" : function (){
+			if(!jVal.errors){
+				$('form')[0].submit();
+			}
+		}
+	};
+
+	$('#send').click(function(){
+
+		$("html, body").animate({ scrollTop: $('form').offset().top }, 200, function (){
+			jVal.errors = false;
+			jVal.text("#contact_name");
+			jVal.text("#contact_address1");
+			jVal.text("#contact_zipcode");
+			jVal.text("#contact_country");
+			jVal.text("#contact_tel");
+			jVal.email("#contact_email");
+			jVal.emailConfirm("#contact_email_confirm");
+			jVal.select("#contact_shipping");
+			jVal.cstmOrderCheck(".contact_film_kind");
+			jVal.cstmOrderCheck(".contact_film_unit");
+			jVal.sendIt();
+		});
+
+		return false;
+
+	});
+
+	$("#contact_name").blur(jVal.text);
+	$("#contact_address1").blur(jVal.text);
+	$("#contact_zipcode").blur(jVal.text);
+	$("#contact_country").blur(jVal.text);
+	$("#contact_tel").blur(jVal.text);
+	$("#contact_email").blur(jVal.email);
+	$("#contact_email_confirm").blur(jVal.emailConfirm);
+	$(".contact_film_kind").blur(jVal.cstmOrder);
+	$(".contact_film_unit").blur(jVal.cstmOrder);
+	$("#contact_shipping").blur(jVal.select);
+
+});
+
+</script>
+
 <?php get_footer(); ?>
