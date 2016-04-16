@@ -59,7 +59,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 <div class="form_contents required" id="pick_dvd">
 	<div class="form_title">
 		<label>ご希望の商品</label>
-		<p>お求めになるDVDの種別と枚数をお選びください</p>
+		<p>お求めになるDVDの種別と枚数をお選びください。</p>
 	</div>
 	<ul class="form_elements">
 		<li>
