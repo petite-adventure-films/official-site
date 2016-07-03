@@ -58,6 +58,17 @@ a{
 	}
 }
 
+.wp-pagenavi{
+
+	margin-top: 64px;
+
+	.pages,
+	.nextpostslink,
+	.previouspostslink{
+		border: none;
+	}
+}
+
 .crumbs{
 
 	&:before{
@@ -396,7 +407,6 @@ a{
 
 }
 
-
 .open_contents{
 	position: relative;
 	color: $green;
@@ -612,9 +622,34 @@ blockquote, q{
 			background: rgba($green6, .6);
 			@include border-radius(50%);
 			text-align: center;
+			&:hover{
+				background: rgba($green6, 1);
+			}
 
 			a{
 				color: $white;
+				&:hover{
+					color: $white !important;
+				}
+			}
+
+		}
+
+		&#contact{
+
+			background: rgba($pink6, .6);
+			@include border-radius(50%);
+			text-align: center;
+			font-size: 24px;
+			&:hover{
+				background: rgba($pink6, 1);
+			}
+
+			a{
+				color: $white;
+				&:hover{
+					color: $white !important;
+				}
 			}
 
 		}
@@ -659,6 +694,10 @@ blockquote, q{
 
 			&#en_btn{
 				top: 32px;
+			}
+
+			&#contact{
+				top: 176px;
 			}
 
 			&#go_top{

@@ -36,16 +36,33 @@
 		"post_type" => "news",
 		"posts_per_page" => 1
 	);
-	$posts = query_posts($args);
-	if($posts): ?>
+	$news_posts = query_posts($args);
+	if($news_posts): ?>
 		<section class="contents" id="latest">
 			<div class="col col_9 last list_posts">
-			<?php foreach($posts as $post): ?>
-				<?php echo get_news($post); ?>
-			<?php endforeach; ?>
+				<span class="block caption1">NEWS</span>
+				<?php foreach($news_posts as $news): ?>
+					<?php echo get_news($news); ?>
+				<?php endforeach; ?>
 			</div>
 		</section>
-	<?php endif; ?>
+	<?php endif;?>
+
+	<?php
+	$args = array(
+		"posts_per_page" => 1
+	);
+	$blogs = query_posts($args);
+	if($blogs): ?>
+		<section class="contents" id="latest">
+			<div class="col col_9 last list_posts">
+				<span class="block caption1">BLOG</span>
+				<?php foreach($blogs as $blog): ?>
+					<?php echo get_blogs($blog); ?>
+				<?php endforeach; ?>
+			</div>
+		</section>
+	<?php endif;?>
 
 	<?php
 	$i = 1;
@@ -53,28 +70,28 @@
 		"post_type" => "films",
 		"posts_per_page" => -1
 	);
-	$posts = query_posts($args);
-	if($posts): ?>
+	$films = query_posts($args);
+	if($films): ?>
 		<div class="contents">
 			<div class="col col_9 last">
 			<ul class="owl-carousel list_films">
-			<?php foreach($posts as $post): ?>
+			<?php foreach($films as $film): ?>
 				<li>
-					<a href="<?php echo get_permalink($post->ID); ?>">
+					<a href="<?php echo get_permalink($film->ID); ?>">
 						<div class="film_poster">
 						<?php
-						$poster_img = get_post_meta($post->ID, "films_info_00", TRUE);
+						$poster_img = get_post_meta($film->ID, "films_info_00", TRUE);
 						echo get_post_meta_img($poster_img, "medium", "owl-lazy", TRUE);
 						?>
 						</div>
-						<p class="film_title"><?php echo $post->post_title; ?></p>
+						<p class="film_title"><?php echo $film->post_title; ?></p>
 					</a>
 				</li>
 			<?php $i++; endforeach; ?>
 			</ul>
 			</div>
 		</div>
-	<?php endif; ?>
+	<?php endif;?>
 
 	<section class="contents">
 		<div class="col_9 col last">
@@ -114,7 +131,5 @@
 	});
 
 </script>
-
-
 
 <?php get_footer(); ?>

@@ -31,7 +31,7 @@
 				<li><a href="<?php echo get_permalink(get_page_by_path("director")); ?>">監督</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("four-walling")); ?>">自主上映</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("order_jp")); ?>">DVD購入</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("blog")); ?>">BLOG</a></li>
 			</ul>
 		</div>
 		<div class="show_smaller">

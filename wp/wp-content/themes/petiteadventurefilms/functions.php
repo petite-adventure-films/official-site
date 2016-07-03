@@ -11,6 +11,11 @@ remove_action( 'wp_head', 'start_post_rel_link', 10);
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10);
 remove_action( 'wp_head', 'wp_generator');*/
 
+//sidebar activate
+if(function_exists("register_sidebar")){
+	register_sidebar();
+}
+
 //スマートフォンキャリア判別
 function is_smartphone(){
 	$useragents_s = array(
@@ -153,26 +158,30 @@ function get_news($post){
 	$contents = apply_filters("the_content", $post->post_content);
 
 	$filmtags = get_the_terms($post->ID, "filmtags");
-	$film_label = get_film($filmtags, "label");
-	$film_link = get_film($filmtags, "link");
+	if (!empty($eventtfilmtagsags)){
+		$film_label = get_film($filmtags, "label");
+		$film_link = get_film($filmtags, "link");
+		if($film_label){
+			$film_info = '<li class="index film">';
+			if($film_link){
+				$film_info .= '<a href="'.$film_link.'">'.$film_label.'</a>';
+			}else{
+				$film_info .= $film_label;
+			}
+			$film_info .= '</li>';
+		}
+	}
+
 	$eventtags = get_the_terms($post->ID, "eventtags");
-	if($film_label){
-		$film_info = '<li class="index film">';
-		if($film_link){
-			$film_info .= '<a href="'.$film_link.'">'.$film_label.'</a>';
-		}else{
-			$film_info .= $film_label;
-		}
-		$film_info .= '</li>';
-	}
-	if($eventtags){
+	if (!empty($eventtags)){
+		$event_info = '<li class="index label">';
 		foreach($eventtags as $event){
-			$event_info = '<li class="index label">';
 			$event_info .= $event->name;
-			$event_info .= '</li>';
 		}
+		$event_info .= '</li>';
 	}
-	if($film_info || $event_info){
+
+	if(!empty($film_info) || !empty($event_info)){
 		$list_post_info = '<ul class="list_post_info">';
 		$list_post_info .= $film_info.$event_info;
 		$list_post_info .= '</ul>';
@@ -192,6 +201,29 @@ EOF;
 	return $html;
 
 }
+
+function get_blogs($post){
+
+	$title = $post->post_title;
+	$link = get_permalink($post->ID);
+	$contents = strip_tags($post->post_content);
+	$count = mb_strlen($contents);
+	$edited_contents = ($count > 100) ? mb_substr($contents, 0, 100) : $contents;
+	$abbr = $count > 100 ? "..." : "";
+	$time = '<time  datetime="'.get_the_date("Y-m-d h:i:s A", $post->ID).'" class="list_post_time">'.get_the_date("", $post->ID).'</time>';
+
+	$html .= <<<EOF
+		<h2 class="title">{$title}</h2>
+		<div class="list_post_contents">
+			{$edited_contents}{$abbr}<a href="{$link}" class="more_details">もっと見る</a>
+		</div>
+		{$time}
+EOF;
+	wp_reset_query();
+	return $html;
+
+}
+
 
 function get_post_number($post) {
 	global $wpdb;

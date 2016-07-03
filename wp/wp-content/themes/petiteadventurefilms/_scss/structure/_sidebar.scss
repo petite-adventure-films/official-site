@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+#sidebar{
+
+	@media all and (max-width: $max_width){
+		margin-top: 56px;
+	}
+
+	.widget{
+
+		&:not(:first-of-type){
+			margin-top: 56px;
+		}
+
+		.widgettitle{
+
+			font-size: 20px;
+			line-height: 34px;
+
+			&:before{
+				margin-right: 8px;
+				font-family: meterial_design;
+				content: "\e640";
+				color: $black3;
+			}
+
+		}
+
+		>ul{
+
+			> li{
+				
+				margin-top: 8px;
+				padding-top: 8px;
+				border-top: 1px solid rgba($black5, .5);
+
+				&:last-of-type{
+					padding-bottom: 8px;
+					border-bottom: 1px solid rgba($black5, .5);
+				}
+
+				a{
+					color: $black;
+				}
+
+			}
+
+		}
+
+	}
+
+}
