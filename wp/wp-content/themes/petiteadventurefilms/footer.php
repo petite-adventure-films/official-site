@@ -1,7 +1,4 @@
 	<!--article--></article>
-<?php if(!is_home()): ?>
-<!--.container--></div>
-<?php endif;?>
 
 <footer id="site_footer">
 	<div class="container">

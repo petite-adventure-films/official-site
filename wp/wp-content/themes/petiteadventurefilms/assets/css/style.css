@@ -4883,7 +4883,7 @@ option {
       color: #868686 !important; }
 /* line 47, ../../_scss/pages/_home.scss */
 .home #video_background_mask {
-  position: fixed;
+  position: absolute;
   z-index: 1;
   top: 0;
   bottom: 0;

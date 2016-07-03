@@ -51,6 +51,10 @@ get_header(); ?>
 				<li><?php echo get_blogs($post); ?></li>
 			<?php endwhile; ?>
 		</ul>
+	<?php else:?>
+		<div class="m4_t">
+			<p>準備中です。更新まで今しばらくお待ち下さい。</p>
+		</div>
 	<?php endif;?>
 	<?php if(function_exists("wp_pagenavi")){wp_pagenavi(array('query'=>$the_query));} wp_reset_postdata();?>
 

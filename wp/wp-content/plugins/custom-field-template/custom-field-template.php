@@ -5,7 +5,7 @@ Plugin URI: http://wpgogo.com/development/custom-field-template.html
 Description: This plugin adds the default custom fields on the Write Post/Page.
 Author: Hiroaki Miyashita
 Author URI: http://wpgogo.com/
-Version: 2.3.5
+Version: 2.3.7
 Text Domain: custom-field-template
 Domain Path: /
 */
@@ -15,7 +15,7 @@ This program is based on the rc:custom_field_gui plugin written by Joshua Sigar.
 I appreciate your efforts, Joshua.
 */
 
-/*  Copyright 2008 -2015 Hiroaki Miyashita
+/*  Copyright 2008 -2016 Hiroaki Miyashita
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,9 +33,10 @@ I appreciate your efforts, Joshua.
 */
 
 class custom_field_template {
-	var $is_excerpt;
+	var $is_excerpt, $format_post_id;
 
-	function custom_field_template() {
+	function __construct() {
+		add_action( 'plugins_loaded', array(&$this, 'custom_field_template_plugins_loaded') );
 		add_action( 'init', array(&$this, 'custom_field_template_init'), 100 );
 		add_action( 'admin_menu', array(&$this, 'custom_field_template_admin_menu') );
 		add_action( 'admin_print_scripts', array(&$this, 'custom_field_template_admin_scripts') );
@@ -75,18 +76,14 @@ class custom_field_template {
 		
 		add_filter( 'get_post_metadata', array(&$this, 'get_preview_postmeta'), 10, 4 );
 	}
+	
+	function custom_field_template_plugins_loaded() {
+		load_plugin_textdomain('custom-field-template', false, plugin_basename( dirname( __FILE__ ) ) );
+	}
 		
 	function custom_field_template_init() {
 		global $wp_version;
 		$options = $this->get_custom_field_template_data();
-
-		if ( function_exists('load_plugin_textdomain') ) {
-			if ( !defined('WP_PLUGIN_DIR') ) {
-				//load_plugin_textdomain('custom-field-template', str_replace( ABSPATH, '', dirname(__FILE__) ) );
-			} else {
-				load_plugin_textdomain('custom-field-template', false, dirname( plugin_basename(__FILE__) ) );
-			}
-		}
 		
 		if ( is_user_logged_in() && isset($_REQUEST['post']) && isset($_REQUEST['page']) && $_REQUEST['page'] == 'custom-field-template/custom-field-template.php' && $_REQUEST['cft_mode'] == 'selectbox' ) {
 			echo $this->custom_field_template_selectbox();
@@ -2132,7 +2129,7 @@ jQuery(this).addClass("closed");
 	
 	function make_textarea( $name, $sid, $data, $post_id ) {
 		$cftnum = $rows = $cols = $tinyMCE = $htmlEditor = $mediaButton = $default = $hideKey = $label = $code = $class = $style = $wrap = $before = $after = $multipleButton = $mediaOffMedia = $mediaOffImage = $mediaOffVideo = $mediaOffAudio = $onclick = $ondblclick = $onkeydown = $onkeypress = $onkeyup = $onmousedown = $onmouseup = $onmouseover = $onmouseout = $onmousemove = $onfocus = $onblur = $onchange = $onselect = '';
-		$hide = $addfield = $out = $out_key = $out_value = $media = $editorcontainer_class = '';
+		$hide = $addfield = $out = $out_key = $out_value = $media = $editorcontainer_class = $quicktags_hide = '';
 		extract($data);
 		$options = $this->get_custom_field_template_data();
 
@@ -2465,7 +2462,7 @@ jQuery(this).addClass("closed");
 				return;
 			endif;
 		else :
-			if ( !empty($options['custom_fields'][$id]['category']) && ($_REQUEST['post_type']=='page' || $post->post_type=='page') && empty($options['custom_fields'][$id]['template_files']) ) :
+			if ( !empty($options['custom_fields'][$id]['category']) && ((isset($_REQUEST['post_type']) && $_REQUEST['post_type']=='page') || $post->post_type=='page') && empty($options['custom_fields'][$id]['template_files']) ) :
 				return;
 			endif;
 			if ( !empty($options['custom_fields'][$id]['template_files']) && ($_REQUEST['post_type']!='page' && $post->post_type!='page') && empty($options['custom_fields'][$id]['category']) ) :
@@ -2476,10 +2473,10 @@ jQuery(this).addClass("closed");
 		if ( (!isset($post_id) || $post_id<0) && !empty($options['custom_fields'][$id]['category']) && $_REQUEST['cft_mode'] != 'ajaxload' )
 			return;
 	
-		if ( isset($post_id) && !empty($options['custom_fields'][$id]['category']) && !isset($options['posts'][$post_id]) && $options['posts'][$post_id] !== $id && $_REQUEST['cft_mode'] != 'ajaxload' )
+		if ( isset($post_id) && !empty($options['custom_fields'][$id]['category']) && (!isset($options['posts'][$post_id]) || (isset($options['posts'][$post_id]) && $options['posts'][$post_id] !== $id)) && $_REQUEST['cft_mode'] != 'ajaxload' )
 			return;
 	
-		if ( !isset($_REQUEST['id']) && !empty($options['custom_fields'][$id]['category']) && $_REQUEST['cft_mode'] == 'ajaxload' ) :
+		if ( !isset($_REQUEST['id']) && !empty($options['custom_fields'][$id]['category']) && isset($_REQUEST['cft_mode']) && $_REQUEST['cft_mode'] == 'ajaxload' ) :
 			$category = explode(',', $options['custom_fields'][$id]['category']);
 			$category = array_filter( $category );
 			$category = array_unique(array_filter(array_map('trim', $category)));
@@ -2975,8 +2972,11 @@ jQuery("#edButtonPreview").trigger("click"); }' . "\n";*/
 		endforeach;
 		$out .= '</select> ';
 		
+		$post_type = '';
+		if ( !empty($_REQUEST['post_type']) ) $post_type = '+\'&post_type='.esc_attr($_REQUEST['post_type']).'\'';
+		
 		$out .= '<input type="button" class="button" value="' . __('Load', 'custom-field-template') . '" onclick="if(tinyMCEID.length) { for(i=0;i<tinyMCEID.length;i++) {tinyMCE.execCommand(\'mceRemoveControl\', false, tinyMCEID[i]);} tinyMCEID.length=0;};';
-		$out .= ' var cftloading_select = function() {jQuery.ajax({type: \'GET\', url: \'?page=custom-field-template/custom-field-template.php&cft_mode=ajaxload&id=\'+jQuery(\'#custom_field_template_select\').val()+\'&post=\'+jQuery(\'#post_ID\').val(), success: function(html) {';
+		$out .= ' var cftloading_select = function() {jQuery.ajax({type: \'GET\', url: \'?page=custom-field-template/custom-field-template.php&cft_mode=ajaxload&id=\'+jQuery(\'#custom_field_template_select\').val()+\'&post=\'+jQuery(\'#post_ID\').val()'.$post_type.'+\'&page_template=\'+jQuery(\'#page_template\').val(), success: function(html) {';
 		if ( !empty($options['custom_field_template_replace_the_title']) ) :
 			$out .= 'jQuery(\'#cftdiv h3 span\').text(jQuery(\'#custom_field_template_select :selected\').text());';
 		endif;
@@ -3425,6 +3425,9 @@ jQuery("#edButtonPreview").trigger("click"); }' . "\n";*/
 		if ( !isset($options['custom_field_template_before_value']) ) $options['custom_field_template_before_value'] = '<li>';
 		if ( !isset($options['custom_field_template_after_value']) ) $options['custom_field_template_after_value'] = '</li>';
 
+		if ( !empty($attr['post_id']) ) $this->format_post_id = $attr['post_id'];
+		if ( empty($attr['post_id']) && $this->format_post_id ) $post_id = $this->format_post_id;
+
 		extract(shortcode_atts(array(
 			'post_id'   => $post_id,
 			'template'  => 0,
@@ -3442,7 +3445,7 @@ jQuery("#edButtonPreview").trigger("click"); }' . "\n";*/
 			'value_count' => false,
 			'value' => ''
 		), $attr));
-
+		
 		$metakey = $key;
 		$output = '';
 		if ( $metakey ) :

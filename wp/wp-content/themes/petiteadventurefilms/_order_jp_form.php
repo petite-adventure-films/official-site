@@ -63,6 +63,30 @@ $disabled = is_page("confirm") ? " disabled" : "";
 	</div>
 	<ul class="form_elements">
 		<li>
+			<p class="bold">インド日記～インドで出会った女性たち～</p>
+			<label for="contact_film7_kind">種別</label>
+			<select name="contact_film7_kind" class="contact_film_kind" id="contact_film7_kind"<?php echo $disabled; ?>>
+				<option value=""<?php echo (!$contact_film7_kind) ? " selected" : ""; ?>>-</option>
+				<option value="3"<?php echo ($contact_film7_kind == 3) ? " selected" : ""; ?>>新作制作応援</option>
+				<option value="1"<?php echo ($contact_film7_kind == 1) ? " selected" : "";?>>学生・ワーキングプア</option>
+				<option value="2"<?php echo ($contact_film7_kind == 2) ? " selected" : "";?>>団体・ライブラリー</option>
+			</select>
+			<label for="contact_film7_unit">枚数</label>
+			<select name="contact_film7_unit" class="contact_film_unit" id="contact_film7_unit"<?php echo $disabled; ?>>
+				<option value=""<?php echo (!$contact_film7_unit) ? " selected" : ""; ?>>-</option>
+				<option value="1"<?php echo ($contact_film7_unit == 1) ? " selected" : "";?>>1</option>
+				<option value="2"<?php echo ($contact_film7_unit == 2) ? " selected" : "";?>>2</option>
+				<option value="3"<?php echo ($contact_film7_unit == 3) ? " selected" : "";?>>3</option>
+				<option value="4"<?php echo ($contact_film7_unit == 4) ? " selected" : "";?>>4</option>
+				<option value="5"<?php echo ($contact_film7_unit == 5) ? " selected" : "";?>>5</option>
+				<option value="6"<?php echo ($contact_film7_unit == 6) ? " selected" : "";?>>6</option>
+				<option value="7"<?php echo ($contact_film7_unit == 7) ? " selected" : "";?>>7</option>
+				<option value="8"<?php echo ($contact_film7_unit == 8) ? " selected" : "";?>>8</option>
+				<option value="9"<?php echo ($contact_film7_unit == 9) ? " selected" : "";?>>9</option>
+				<option value="10"<?php echo ($contact_film7_unit == 10) ? " selected" : "";?>>10</option>
+			</select>
+		</li>
+		<li>
 			<p class="bold">踊る善福寺/ホームレスごっこ</p>
 			<label for="contact_film1_kind">種別</label>
 			<select name="contact_film1_kind" class="contact_film_kind" id="contact_film1_kind"<?php echo $disabled; ?>>
