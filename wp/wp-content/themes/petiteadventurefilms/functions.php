@@ -445,6 +445,11 @@ $message .= '
 
 DVD 注文内容
 
+●インド日記 〜ガジュマルの木の女たち
+My Indian Diary
+種別 : '.$values['contact_film7_kind'].'
+個数 : '.$values['contact_film7_unit'].'
+
 ●踊る善福寺/ホームレスごっこ
 Dancing Zempukuji/The Apprentice Homeless
 種別 : '.$values['contact_film1_kind'].'

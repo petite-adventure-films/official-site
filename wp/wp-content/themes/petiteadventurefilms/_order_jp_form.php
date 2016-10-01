@@ -67,8 +67,8 @@ $disabled = is_page("confirm") ? " disabled" : "";
 			<label for="contact_film7_kind">種別</label>
 			<select name="contact_film7_kind" class="contact_film_kind" id="contact_film7_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film7_kind) ? " selected" : ""; ?>>-</option>
-				<option value="3"<?php echo ($contact_film7_kind == 4) ? " selected" : ""; ?>>新作制作応援(DVD)</option>
-				<option value="3"<?php echo ($contact_film7_kind == 5) ? " selected" : ""; ?>>新作制作応援(ブルーレイ)</option>
+				<option value="4"<?php echo ($contact_film7_kind == 4) ? " selected" : ""; ?>>新作制作応援(DVD)</option>
+				<option value="5"<?php echo ($contact_film7_kind == 5) ? " selected" : ""; ?>>新作制作応援(ブルーレイ)</option>
 				<option value="1"<?php echo ($contact_film7_kind == 1) ? " selected" : "";?>>学生･ワーキングプア(DVDのみ)</option>
 				<option value="2"<?php echo ($contact_film7_kind == 2) ? " selected" : "";?>>団体･ライブラリー(DVD)</option>
 				<option value="3"<?php echo ($contact_film7_kind == 3) ? " selected" : "";?>>団体･ライブラリー(ブルーレイ)</option>

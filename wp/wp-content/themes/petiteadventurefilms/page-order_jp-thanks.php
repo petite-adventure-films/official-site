@@ -51,13 +51,20 @@ if($_POST){
 		add_post_meta($insert_id, "order_info_16", $contact_receipt_proviso);
 
 		$contact_kinds = array("", "個人", "団体・ライブラリー", "新作製作応援");
+		$contact_kinds2 = array(""
+			, "学生･ワーキングプア(DVDのみ)"
+			, "団体･ライブラリー(DVD)"
+			, "団体･ライブラリー(ブルーレイ)"
+			, "新作制作応援(ブルーレイ)"
+			, "新作制作応援(ブルーレイ)"
+		);
 		$contact_film1_kind = ($contact_film1_kind) ? $contact_kinds[$contact_film1_kind] : "-";
 		$contact_film2_kind = ($contact_film2_kind) ? $contact_kinds[$contact_film2_kind] : "-";
 		$contact_film3_kind = ($contact_film3_kind) ? $contact_kinds[$contact_film3_kind] : "-";
 		$contact_film4_kind = ($contact_film4_kind) ? $contact_kinds[$contact_film4_kind] : "-";
 		$contact_film5_kind = ($contact_film5_kind) ? $contact_kinds[$contact_film5_kind] : "-";
 		$contact_film6_kind = ($contact_film6_kind) ? $contact_kinds[$contact_film6_kind] : "-";
-		$contact_film7_kind = ($contact_film7_kind) ? $contact_kinds[$contact_film7_kind] : "-";
+		$contact_film7_kind = ($contact_film7_kind) ? $contact_kinds2[$contact_film7_kind] : "-";
 
 		$contact_film1_unit = ($contact_film1_unit) ? $contact_film1_unit : "-";
 		$contact_film2_unit = ($contact_film2_unit) ? $contact_film2_unit : "-";
