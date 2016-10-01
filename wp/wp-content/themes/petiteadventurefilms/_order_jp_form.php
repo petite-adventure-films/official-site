@@ -62,14 +62,16 @@ $disabled = is_page("confirm") ? " disabled" : "";
 		<p>お求めになるDVDの種別と枚数をお選びください。</p>
 	</div>
 	<ul class="form_elements">
-		<li>
-			<p class="bold">インド日記～インドで出会った女性たち～</p>
+		<li id="movie_my_indian_diary_details_jp">
+			<p class="bold">インド日記 〜ガジュマルの木の女たち</p>
 			<label for="contact_film7_kind">種別</label>
 			<select name="contact_film7_kind" class="contact_film_kind" id="contact_film7_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film7_kind) ? " selected" : ""; ?>>-</option>
-				<option value="3"<?php echo ($contact_film7_kind == 3) ? " selected" : ""; ?>>新作制作応援</option>
-				<option value="1"<?php echo ($contact_film7_kind == 1) ? " selected" : "";?>>学生・ワーキングプア</option>
-				<option value="2"<?php echo ($contact_film7_kind == 2) ? " selected" : "";?>>団体・ライブラリー</option>
+				<option value="3"<?php echo ($contact_film7_kind == 4) ? " selected" : ""; ?>>新作制作応援(DVD)</option>
+				<option value="3"<?php echo ($contact_film7_kind == 5) ? " selected" : ""; ?>>新作制作応援(ブルーレイ)</option>
+				<option value="1"<?php echo ($contact_film7_kind == 1) ? " selected" : "";?>>学生･ワーキングプア(DVDのみ)</option>
+				<option value="2"<?php echo ($contact_film7_kind == 2) ? " selected" : "";?>>団体･ライブラリー(DVD)</option>
+				<option value="3"<?php echo ($contact_film7_kind == 3) ? " selected" : "";?>>団体･ライブラリー(ブルーレイ)</option>
 			</select>
 			<label for="contact_film7_unit">枚数</label>
 			<select name="contact_film7_unit" class="contact_film_unit" id="contact_film7_unit"<?php echo $disabled; ?>>
