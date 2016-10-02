@@ -58,6 +58,7 @@ if($_POST){
 		$contact_film4_kind = ($contact_film4_kind) ? $contact_kinds[$contact_film4_kind] : "-";
 		$contact_film5_kind = ($contact_film5_kind) ? $contact_kinds[$contact_film5_kind] : "-";
 		$contact_film6_kind = ($contact_film6_kind) ? $contact_kinds[$contact_film6_kind] : "-";
+		$contact_film7_kind = ($contact_film7_kind) ? $contact_kinds[$contact_film7_kind] : "-";
 
 		$contact_film1_unit = ($contact_film1_unit) ? $contact_film1_unit : "-";
 		$contact_film2_unit = ($contact_film2_unit) ? $contact_film2_unit : "-";
@@ -65,6 +66,7 @@ if($_POST){
 		$contact_film4_unit = ($contact_film4_unit) ? $contact_film4_unit : "-";
 		$contact_film5_unit = ($contact_film5_unit) ? $contact_film5_unit : "-";
 		$contact_film6_unit = ($contact_film6_unit) ? $contact_film6_unit : "-";
+		$contact_film7_unit = ($contact_film7_unit) ? $contact_film7_unit : "-";
 
 		$contact_receipt = ($contact_receipt) ? "必要" : "不要";
 		$contact_pay_way = ($contact_pay_way) ? "銀行振込" : "クレジットカード";

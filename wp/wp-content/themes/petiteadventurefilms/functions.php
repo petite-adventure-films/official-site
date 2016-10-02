@@ -445,8 +445,8 @@ $message .= '
 
 DVD 注文内容
 
-●インド日記 〜ガジュマルの木の女たち
-My Indian Diary
+●インド日記 〜ガジュマルの木の女たち〜
+My Indian Diary - The Women of the Banyan Tree
 種別 : '.$values['contact_film7_kind'].'
 個数 : '.$values['contact_film7_unit'].'
 

@@ -11,6 +11,7 @@ $movie_goodbye_ur = 16;
 $movie_fukushima = 2171;
 $movie_homeless = 2183;
 $movie_dancing = 2173;
+$movie_my_indian_diary = 4455;
 
 get_header(); ?>
 
@@ -78,35 +79,101 @@ get_header(); ?>
 	<section class="contents">
 
 		<div class="col col_9 last">
-
 			<h2 class="contents_title">Films</h2>
+		</div>
 
-			<section class="m7_t">
-				<h2 class="contents_title">FOUR YEARS ON</h2>
-				<p class="m2_t">Documentary/2015/HD Video/Colour/21 minutes/Japan</p>
+		<section class="m7_t">
+			<div class="col col_6">
+				<h2 class="contents_title">My Indian Diary - The Women of the Banyan Tree</h2>
+				<p class="m2_t">Documentary/2016/HD Video/Colour/206 minutes/India, Japan</p>
 				<dl class="list_definition">
 					<dt>Language</dt>
-					<dd>Japanese</dd>
+					<dd>English/Gujarati/Japanese</dd>
 					<dt>Subtitles</dt>
-					<dd>English / French</dd>
+					<dd>English</dd>
 					<dt>Director</dt>
 					<dd>Yumiko Hayakawa</dd>
 				</dl>
-				<h4 class="m2_t bold">Story</h4>
-				<p>The Japan's most "radical" graffiti artist, 281 Anti nuke's documentary film. Full version of the film (with English/French subtitles) is now on YouTube!</p>
-				<div class="m1_t video">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/1udWacAJJx4" frameborder="0" allowfullscreen></iframe>
+				<div class="inline_block m2_t btn priority2">
+					<a href="<?php echo get_permalink(get_page_by_path("order_en")); ?>">BUY DVD</a>
 				</div>
-
+			</div>
+			<div class="col col_3 last">
+				<?php
+				$poster_img = get_post_meta($movie_my_indian_diary, "films_info_23", TRUE);
+				$poster_img = ($poster_img) ? $poster_img : get_post_meta($movie_my_indian_diary, "films_info_00", TRUE);
+				echo get_post_meta_img($poster_img, "large"); ?>
+			</div>
+			<div class="col col_9 last">
+				<div class="m2_t video">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/xd9lxr2i5CM" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<h4 class="m2_t bold">Story</h4>
+				<p>This is a two week video diary of my first trip to India in 2015. I travelled to India to attend the IAWRT Asian Women's Film Festival. Although I bought a travel guidebook, I happened to visit the least tourist populated sites such as the farmers' protest, the workers' hunger strike and the homeless shelter. I captured some aspects of real life in Delhi. </p>
+				<p>During my trip, I flew to Ahmedabad, Gujarat, and visited SEWA (Self Employed Women's Association). It's a trade union of poor, self-employed female workers. Having two million members in India, they organise more than 100 cooperative businesses including banks, insurance companies, child care centres and they even own a video production and radio station. The film introduces the SEWA's philosophy and their practices through interviews with the SEWA Academy director and the Video SEWA members.</p>
+				<p>After coming back from Ahmedabad, I attended the IAWRT film festival. During the three day festival, films made by female directors of Asian origin were shown. I got along particularly well with directors from India, Iran, and Myanmar. Filming them in casual conversations and in interviews,  the film tells us how these female directors keep producing films under the most extremely difficult conditions.</p>
+				<p>You will be inspired by these powerful and imaginative women!</p>
+				<h4 class="m2_t bold">Credits</h4>
+				<dl class="list_definition">
+					<dt>Director/filming/editing/narration</dt>
+					<dd>Yumiko Hayakawa</dd>
+					<dt>Additional filming</dt>
+					<dd>Aruna Haribhai Parmar, Sahar Salahshoor</dd>
+				</dl>
+				<h5 class="m1_t">Films</h5>
+				<dl class="list_definition">
+					<dt>"Manek Chowk", "Invisible Workers", "My Work My Life"</dt>
+					<dd>Video SEWA</dd>
+					<dt>"Profession: Documentarist"</dt>
+					<dd>Shirin Barghnavard, Firouzeh Khosrovani, Farahnaz Sharifi, Mina Keshavarz, Sepideh Abtahi, Sahar Salahshoor, Nahid Rezaei</dd>
+					<dt>"FalakNaz"</dt>
+					<dd>Sahar Salahshoor</dd>
+					<dt>"KELI"</dt>
+					<dd>Ranjitha Rajeevan</dd>
+					<dt>"My Stealthy Freedom"</dt>
+					<dd>Masih Alinejad</dd>
+					<dt>"Charlie & the CocaCola Company: Quit India"</dt>
+					<dd>Jharana Jhaveri, Anurag Singh</dd>
+				</dl>
+				<h5 class="m1_t">Music</h5>
+				<dl class="list_definition">
+					<dt>"Hun Amdavad No Riksha Valo", "Ek Lal Darvaje"</dt>
+					<dd>Rudi no Radio</dd>
+				</dl>
 				<h4 class="m2_t bold">Festivals</h4>
 				<h5 class="m1_t">Domestic</h5>
 				<ul>
-					<li>Mitaka Peace Film Festival (2015)</li>
-					<li>Fukuoka Asian Film Festival (2015)</li>
+					<li>Mitaka Peace Film Festival (2016)</li>
 				</ul>
-			</section>
+			</div>
+		</section>
 
-		</div>
+		<section class="m7_t">
+			<div class="col col_9 last">
+			<h2 class="contents_title">FOUR YEARS ON</h2>
+			<p class="m2_t">Documentary/2015/HD Video/Colour/21 minutes/Japan</p>
+			<dl class="list_definition">
+				<dt>Language</dt>
+				<dd>Japanese</dd>
+				<dt>Subtitles</dt>
+				<dd>English / French</dd>
+				<dt>Director</dt>
+				<dd>Yumiko Hayakawa</dd>
+			</dl>
+			<h4 class="m2_t bold">Story</h4>
+			<p>The Japan's most "radical" graffiti artist, 281 Anti nuke's documentary film. Full version of the film (with English/French subtitles) is now on YouTube!</p>
+			<div class="m1_t video">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/1udWacAJJx4" frameborder="0" allowfullscreen></iframe>
+			</div>
+
+			<h4 class="m2_t bold">Festivals</h4>
+			<h5 class="m1_t">Domestic</h5>
+			<ul>
+				<li>Mitaka Peace Film Festival (2015)</li>
+				<li>Fukuoka Asian Film Festival (2015)</li>
+			</ul>
+			</div>
+		</section>
 
 		<section class="m7_t">
 			<div class="col col_6">
