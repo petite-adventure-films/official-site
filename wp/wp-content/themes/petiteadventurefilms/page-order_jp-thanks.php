@@ -55,7 +55,7 @@ if($_POST){
 			, "学生･ワーキングプア(DVDのみ)"
 			, "団体･ライブラリー(DVD)"
 			, "団体･ライブラリー(ブルーレイ)"
-			, "新作制作応援(ブルーレイ)"
+			, "新作制作応援(DVD)"
 			, "新作制作応援(ブルーレイ)"
 		);
 		$contact_film1_kind = ($contact_film1_kind) ? $contact_kinds[$contact_film1_kind] : "-";
