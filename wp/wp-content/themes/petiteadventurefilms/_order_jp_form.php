@@ -63,7 +63,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 	</div>
 	<ul class="form_elements">
 		<li id="movie_my_indian_diary_details_jp">
-			<p class="bold">インド日記 〜ガジュマルの木の女たち</p>
+			<p class="bold">インド日記 〜ガジュマルの木の女たち〜</p>
 			<label for="contact_film7_kind">種別</label>
 			<select name="contact_film7_kind" class="contact_film_kind" id="contact_film7_kind"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film7_kind) ? " selected" : ""; ?>>-</option>
@@ -72,7 +72,7 @@ $disabled = is_page("confirm") ? " disabled" : "";
 				<option value="1"<?php echo ($contact_film7_kind == 1) ? " selected" : "";?>>学生･ワーキングプア(DVDのみ)</option>
 				<option value="2"<?php echo ($contact_film7_kind == 2) ? " selected" : "";?>>団体･ライブラリー(DVD)</option>
 				<option value="3"<?php echo ($contact_film7_kind == 3) ? " selected" : "";?>>団体･ライブラリー(ブルーレイ)</option>
-			</select>
+			</select><br />
 			<label for="contact_film7_unit">枚数</label>
 			<select name="contact_film7_unit" class="contact_film_unit" id="contact_film7_unit"<?php echo $disabled; ?>>
 				<option value=""<?php echo (!$contact_film7_unit) ? " selected" : ""; ?>>-</option>
