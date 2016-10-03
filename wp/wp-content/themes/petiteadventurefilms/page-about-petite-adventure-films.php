@@ -88,7 +88,7 @@ get_header(); ?>
 				<p class="m2_t">Documentary/2016/HD Video/Colour/206 minutes/India, Japan</p>
 				<dl class="list_definition">
 					<dt>Language</dt>
-					<dd>English/Gujarati/Japanese</dd>
+					<dd>English/Hindi/Gujarati/Japanese</dd>
 					<dt>Subtitles</dt>
 					<dd>English</dd>
 					<dt>Director</dt>
