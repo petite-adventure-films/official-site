@@ -62,8 +62,8 @@ $disabled = is_page("confirm") ? " disabled" : "";
 	<div class="form_elements">
 		<select name="contact_shipping" class="contact_shipping" id="contact_shipping"<?php echo $disabled; ?>>
 			<option value=""<?php echo (!$contact_shipping) ? " selected" : ""; ?>>-</option>
-			<option value="1"<?php echo ($contact_shipping == 1) ? " selected" : ""; ?>>Registered</option>
-			<option value="2"<?php echo ($contact_shipping == 2) ? " selected" : "";?>>Registered Express</option>
+			<option value="0"<?php echo ($contact_shipping == 0) ? " selected" : ""; ?>>Registered</option>
+			<option value="1"<?php echo ($contact_shipping == 1) ? " selected" : "";?>>Registered Express</option>
 		</select>
 	</div>
 </div>
