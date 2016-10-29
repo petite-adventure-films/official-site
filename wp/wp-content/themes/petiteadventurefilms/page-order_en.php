@@ -59,6 +59,8 @@ get_header(); ?>
 			<dd>Registered JP ¥890 / Registered Express JP ¥1,700 </dd>
 		</dl>
 
+		<p class="m2_t caption1"><small>※This Web site is best viewed using the latest version of Google chrome or Firefox.。</small></p>
+
 		<p class="m4_t pink">* Required</p>
 		<form method="post" name="form" enctype="multipart/form-data" action="<?php echo get_permalink(get_page_by_path("order_en/confirm")); ?>" id="order" class="m1_t">
 			<?php include (TEMPLATEPATH . "/_order_en_form.php"); ?>

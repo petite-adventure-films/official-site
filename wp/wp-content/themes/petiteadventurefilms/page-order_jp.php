@@ -51,6 +51,8 @@ get_header(); ?>
 	180 円（1回のお申込につき、同一住所宛なら何枚でも180円）
 	<br /><span class="pink">3,000円以上のお買い上げで送料無料!</span></p>
 
+	<p class="m2_t caption1"><small>※安定してご利用いただくためには、Google chrome または Firefoxの最新版のご利用を推奨します。</small></p>
+
 	<?php
 	$i = 1;
 	$args = array(
