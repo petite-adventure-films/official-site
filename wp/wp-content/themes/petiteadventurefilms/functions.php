@@ -99,9 +99,7 @@ function get_post_meta_img_arr($post, $meta, $size){
 	$cf = $wpdb->get_results($query, ARRAY_A);
 	foreach($cf as $row){
 		if($row['meta_key'] == $meta){
-			var_dump($row);
 			$html[] = get_post_meta_img($post, $meta, $size);
-			var_dump($html);
 		}
 	}
 	if($html){

@@ -277,21 +277,24 @@ get_header(); ?>
 
 			"cstmOrderCheck" : function(d){
 
-				var count = 0;
+				var kindCount = 0;
 				$(".contact_film_kind").each(function(){
-					var strRare = $(this).attr("Id").slice(-4);
-					var strFront = $(this).attr("Id").slice(0, -4);
-					if (strRare == "kind"){
-						var target = $("#" + strFront + "unit");
-					}else{
-						var target = $("#" + strFront + "kind");
-					}
-					if($(this).val() && target.val()){
-						count++;
+					if($(this).val()){
+						kindCount++;
 					}
 				});
 
-				if(count > 0){
+				var unitCount = 0;
+				$(".contact_film_unit").each(function(){
+					if($(this).val()){
+						unitCount++;
+					}
+				});
+
+				if(kindCount == unitCount){
+					$(".contact_film_kind").removeClass("error");
+					$(".contact_film_unit").removeClass("error");
+					$("#pick_dvd").addClass("correct");
 				}else{
 					jVal.errors = true
 					$(".contact_film_kind").addClass("error");
