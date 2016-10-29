@@ -8,7 +8,7 @@
 			<li><a href="<?php echo get_permalink(get_page_by_path("specified-commercial-transaction-law")); ?>">特定商取引法に基づく表記</a></li>
 			<li><a href="<?php echo get_permalink(get_page_by_path("privacy-policy")); ?>">プライバシーポリシー</a></li>
 			<li><a href="<?php echo get_permalink(get_page_by_path("gathering-the-personal-information")); ?>">個人情報の扱いについて</a></li>
-			<li><a href="<?php echo get_permalink(get_page_by_path("system-equirements")); ?>">推奨環境</a></li>
+			<li><a href="<?php echo get_permalink(get_page_by_path("system-requirements")); ?>">推奨環境</a></li>
 		</ul>
 		<p>Copyright © <?php echo date("Y"); ?> <?php echo get_bloginfo("site_name"); ?>. All rights reserved.</p>
 	</div>
