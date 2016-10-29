@@ -70,7 +70,7 @@ if($_POST){
 
 		$contact_receipt = ($contact_receipt) ? "必要" : "不要";
 		$contact_pay_way = ($contact_pay_way) ? "銀行振込" : "クレジットカード";
-		$contact_shipping = ($contact_shipping) ? "Registered" : "Registered express";
+		$contact_shipping = ($contact_shipping == 1) ? "Registered" : "Registered express";
 
 		$order_values = array(
 			"contact_name" => $contact_name,
