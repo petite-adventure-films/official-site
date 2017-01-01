@@ -8,6 +8,7 @@ $contents_appendixs = get_post_meta_arr($post->ID, "contents_info_03");
 
 $gallery_imgs = get_post_meta($post->ID, "four-walling_info_00", FALSE);
 
+$movie_india_diary = 4455;
 $movie_brian_co = 2161;
 $movie_goodbye_ur = 16;
 
@@ -81,7 +82,7 @@ get_header(); ?>
 	<div class="col col_9 last">
 		<h2 class="contents_title">宣伝資材</h2>
 		<p class="m2_t">上映作品のスチール写真やテキストは、無償でご提供します。
-		『ブライアンと仲間たち』、『さようならUR』は、チラシとポスターもご用意しています。</p>
+		『ブライアンと仲間たち』、『さようならUR』、『インド日記』は、チラシとポスターもご用意しています。</p>
 	</div>
 
 	<div class="m4_t">
@@ -93,10 +94,16 @@ get_header(); ?>
 		<div class="m2_t lightbox">
 			<div class="col col_2">
 				<?php
-				$poster_img = get_post_meta($movie_goodbye_ur, "films_info_19", TRUE);
+				$poster_img = get_post_meta($movie_india_diary, "films_info_19", TRUE);
+				echo get_post_meta_img($poster_img, "large"); ?>
+				<?php
+				$poster_img = get_post_meta($movie_india_diary, "films_info_18", TRUE);
 				echo get_post_meta_img($poster_img, "large"); ?>
 			</div>
 			<div class="col col_2">
+				<?php
+				$poster_img = get_post_meta($movie_goodbye_ur, "films_info_19", TRUE);
+				echo get_post_meta_img($poster_img, "large"); ?>
 				<?php
 				$poster_img = get_post_meta($movie_goodbye_ur, "films_info_18", TRUE);
 				echo get_post_meta_img($poster_img, "large"); ?>
@@ -104,10 +111,7 @@ get_header(); ?>
 			<div class="col col_2">
 				<?php
 				$poster_img = get_post_meta($movie_brian_co, "films_info_19", TRUE);
-				echo get_post_meta_img($poster_img, "large"); ?>
-			</div>
-			<div class="col col_2">
-				<?php
+				echo get_post_meta_img($poster_img, "large");
 				$poster_img = get_post_meta($movie_brian_co, "films_info_18", TRUE);
 				echo get_post_meta_img($poster_img, "large"); ?>
 			</div>
@@ -121,8 +125,14 @@ get_header(); ?>
 			<p class="m2_t">1枚300円（1枚単位）＋送料実費</p>
 			<p>『さようならUR』= B2片面、フルカラー</p>
 			<p>『ブライアンと仲間たち』= A1片面、フルカラー</p>
+			<p>『インド日記』=B2片面、フルカラー</p>
 		</div>
 		<div class="m2_t lightbox">
+			<div class="col col_2">
+				<?php
+				$poster_img = get_post_meta($movie_india_diary, "films_info_24", TRUE);
+				echo get_post_meta_img($poster_img, "large"); ?>
+			</div>
 			<div class="col col_2">
 				<?php
 				$poster_img = get_post_meta($movie_goodbye_ur, "films_info_24", TRUE);
