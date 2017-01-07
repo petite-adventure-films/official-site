@@ -57,19 +57,9 @@ get_header(); ?>
 
 	<section class="contents">
 		<h2 class="contents_title">News</h2>
-		<h4 class="m2_t bold">Free screening at SOAS University & Director's talk!</h4>
-		<p>"Brian & Co. Parliament Square SW1" will be shown in London, UK! On Tuesday 18th October from 19:00 at the SOAS University, Room 116 in Main Building (Thornhaugh St, Russell Square, WC1H 0XG). For more info, please see <a href="http://us7.campaign-archive1.com/?u=e28b8b827432dac3061651556&id=bb5217d823" target="_BLANK">here</a>.</p>
 		<h4 class="m2_t bold">Latest film "My Indian Diary - The Women of the Banyan Tree" is OUT!</h4>
 		<p>The new documantary introducing India's social movements and female documentary filmmakers. DVD is available from <a href="https://www.petiteadventurefilms.com/order_en/">the online shop</a>.</p>
-		<h4 class="m2_t bold">Screening at Pori Art Museum, Finland!</h4>
-		<p>"The Apprentice Homeless" will be shown at the exhibition "EAST ASIAN VIDEO FRAMES: SHADES OF URBANIZATION" at Pori Art Museum, Finland, from 12 February to 28th August 2016. For more info, please visit: <a href="http://www.poriartmuseum.fi/eng/exhibitions/" target="_BLANK" />Pori Art Museum</a></p>
 	</section>
-
-
-
-
-
-
 
 </div>
 
