@@ -247,20 +247,47 @@ function set_body_class(){
 	//return ($args[0] != "wp") ? $args[1] : "home";
 }
 
-function future_events($term){
+function get_available_events($id){
+	//配列宣言
+	$available_posts = array();
+	//現在時刻取得
+	$now = new DateTime();
+	$current_timestamp = $now->getTimestamp();
+	//期間内のポスト取得
+	$filmtag = get_the_terms($id, "filmtags");
+	$args = array(
+		"post_type" => "events",
+		"posts_per_type" => -1,
+		"filmtags" => $filmtag[0]->slug
+	);
+	$events = query_posts($args);
+	if($events){
+		foreach($events as $event){
+			$eventsdate = get_the_terms($event, "eventsdate");
+			$event_date_timestamp = get_event_timestamp($eventsdate);
+			if($current_timestamp < $event_date_timestamp){
+				$available_posts[] = $event;
+			}
+		}
+	}
+	return $available_posts;
+}
 
+function future_events($term){
+	//var_dump($term);
+	$term_date = strtotime($term);
 	$args = array(
 		"orderby" => "name",
 		"order" => "DESC"
 	);
 	$eventsdates = get_terms("eventsdate", $args);
 	foreach($eventsdates as $date){
-		if($date->slug >= $term){
+		$post_date = strtotime($date->slug);
+		if($post_date >= $term_date){
 			$future[] = $date->slug;
 		}
 	}
 	return $future;
-
 }
 
 function get_event_info($post){
@@ -304,6 +331,28 @@ function get_place_info($post){
 	return $place_list;
 }
 
+function get_event_timestamp($terms){
+	//year
+	foreach ($terms as $v){
+		if ($v -> parent === 0){
+			$year_id = $v->term_id;
+			$date = $v->slug;
+		}
+	}
+	foreach ($terms as $v){
+		if($year_id === $v-> parent){
+			$month_id = $v->term_id;
+			$date = $v->slug;
+		}
+	}
+	foreach ($terms as $v){
+		if($month_id === $v -> parent){
+			$date = $v->slug;
+		}
+	}
+	return strtotime($date);
+}
+
 function get_date_info($post){
 	$dates_details = get_post_meta($post->ID, "events_info_09", TRUE);
 	$dates_details = explode("<br />", $dates_details);
@@ -331,9 +380,25 @@ function get_events($date, $init=FALSE){
 		"posts_per_page" => -1,
 	);
 	$posts = query_posts(array_merge($args, $init_args));
-	if($posts){
-	$html = '<ul class="list_posts list_events">';
+	$timestamps = array();
+	foreach($posts as $post){
+		$eventsdate = get_the_terms($post, "eventsdate");
+		$event_date_timestamp = get_event_timestamp($eventsdate);
+		$timestamps[$event_date_timestamp] = $post->ID;
+	}
+	ksort($timestamps);
+	$timestamps = array_reverse($timestamps);
+
+	foreach($timestamps as $timestamp){
 		foreach($posts as $post){
+			if($timestamp == $post->ID) $sort_posts[] = $post;
+		}
+	}
+
+
+	if($sort_posts){
+	$html = '<ul class="list_posts list_events">';
+		foreach($sort_posts as $post){
 			$post_number = get_post_number($post);
 			$post_title = get_the_title($post->ID);
 			$event_info = get_event_info($post);
@@ -367,7 +432,6 @@ EOF;
 	return $html;
 
 }
-
 
 function cms_title($post_type, $submitdate, $lng){
 

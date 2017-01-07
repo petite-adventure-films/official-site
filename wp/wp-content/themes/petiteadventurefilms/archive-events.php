@@ -80,7 +80,7 @@ get_header(); ?>
 						}
 						array_multisort($key_id , SORT_ASC , $months);
 						foreach($months as $month){
-							echo '<li class="show_contents tab" data-tab="tab_'.$month["slug"].'">'.$month["name"]."</li>";
+							echo '<li class="show_contents tab" data-tab="tab_'.$month["slug"].'">'.mb_substr($month["name"], 5)."</li>";
 						}
 					}
 					$key_id = array();
@@ -89,6 +89,7 @@ get_header(); ?>
 		</div>
 		<div class="col col_4 last al_r show_wider">
 			<ul class="list_archives_past">
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2016 ")); ?>">2016 年</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015年</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014年</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013年</a></li>

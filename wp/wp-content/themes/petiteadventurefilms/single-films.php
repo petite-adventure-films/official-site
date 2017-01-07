@@ -140,19 +140,12 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 		<?php endif; ?>
 
 		<?php
-		$term = get_the_terms($post->ID, "filmtags");
-		$args = array(
-			"post_type" => "events",
-			"posts_per_type" => -1,
-			"filmtags" => $term[0]->slug
-		);
-		$events = query_posts($args);
+		$events = get_available_events($post->ID);
 		if($events): ?>
 			<section class="contents">
 				<h2 class="contents_title">関連イベント</h2>
 				<ul class="list_posts">
-				<?php
-				foreach($events as $event):
+				<?php foreach($events as $event):
 					$place = get_post_meta($event->ID, "events_info_01", TRUE);
 					$date = get_post_meta($event->ID, "events_info_09", TRUE); ?>
 					<li>
@@ -166,7 +159,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 				</ul>
 			<p class="m2_t"><a href="<?php echo get_post_type_archive_link("events"); ?>">もっと詳しく</a></p>
 			</section>
-		<?php endif; ?>
+		<?php endif;?>
 
 		<?php if($teaser): ?>
 			<div class="contents">
