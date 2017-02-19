@@ -85,7 +85,7 @@ get_header(); ?>
 		<section class="m7_t">
 			<div class="col col_6">
 				<h2 class="contents_title">My Indian Diary - The Women of the Banyan Tree</h2>
-				<p class="m2_t">Documentary/2016/HD Video/Colour/206 minutes/India, Japan</p>
+				<p class="m2_t">Documentary/2016/HD Video/Colour/206 minutes (Screening version: 100 minutes)/India, Japan</p>
 				<dl class="list_definition">
 					<dt>Languages</dt>
 					<dd>English/Hindi/Gujarati/Japanese</dd>
@@ -113,6 +113,7 @@ get_header(); ?>
 				<p>During my trip, I flew to Ahmedabad, Gujarat, and visited SEWA (Self Employed Women's Association). It's a trade union of poor, self-employed female workers. Having two million members in India, they organise more than 100 cooperative businesses including banks, insurance companies, child care centres and they even own a video production and radio station. The film introduces the SEWA's philosophy and their practices through interviews with the SEWA Academy director and the Video SEWA members.</p>
 				<p>After coming back from Ahmedabad, I attended the IAWRT film festival. During the three day festival, films made by female directors of Asian origin were shown. I got along particularly well with directors from India, Iran, and Myanmar. Filming them in casual conversations and in interviews,  the film tells us how these female directors keep producing films under the most extremely difficult conditions.</p>
 				<p>You will be inspired by these powerful and imaginative women!</p>
+				<p>The original version of this film is 206 minutes, but the screening version (100 minutes) is also available upon request.</p>
 				<h4 class="m2_t bold">Credits</h4>
 				<dl class="list_definition">
 					<dt>Director/filming/editing/narration</dt>
