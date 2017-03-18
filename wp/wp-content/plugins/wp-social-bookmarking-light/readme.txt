@@ -3,8 +3,8 @@ Contributors: utahvich
 Donate link: https://github.com/utahta/WP-Social-Bookmarking-Light/wiki/Donate
 Tags: links, social, bookmarks, bookmarking, Hatena, Livedoor Clip, @nifty clip, Twitter, Tumblr, FC2 Bookmark, newsing, Choix, Yahoo!JAPAN Bookmark, Yahoo!Buzz, Google Bookmark, Delicious, Digg, FriendFeed, Google Buzz, Facebook, reddit, LinkedIn, Evernote, Instapaper, StumbleUpon, mixi, gree, atode, toread, line, pocket, Pinterest
 Requires at least: 2.9.0
-Tested up to: 4.3
-Stable tag: 1.8.7
+Tested up to: 4.7
+Stable tag: 1.9.1
 
 This plugin inserts social share links at the top or bottom of each post.
 
@@ -60,6 +60,16 @@ This is the list of used social sites:
 3. This is how the plugin looks in manually inside your template.
 
 == Changelog ==
+
+= 1.9.1 =
+* Fixed: deprecated in php7. [#44](https://github.com/utahta/WP-Social-Bookmarking-Light/pull/44)
+
+= 1.9.0 =
+* Fixed: mixi button. [#41](https://github.com/utahta/WP-Social-Bookmarking-Light/pull/41)
+* Fixed: replaced WP_PLUGIN_URL with plugins_url [#42](https://github.com/utahta/WP-Social-Bookmarking-Light/pull/42)
+
+= 1.8.8 =
+* Fixed: WP_SOCIAL_BOOKMARKING_LIGHT_DIR for docker based PaaS. [#38](https://github.com/utahta/WP-Social-Bookmarking-Light/pull/38)
 
 = 1.8.7 =
 * Fixed: Hatena button deleted protocol to work on https site. [#37](https://github.com/utahta/WP-Social-Bookmarking-Light/pull/37)

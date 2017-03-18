@@ -619,7 +619,7 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 			$options[ $this->prefix . 'link' ] = sprintf( __( 'Click here to %s.', 'all-in-one-seo-pack' ), '<a href="' . esc_url( $url ) . '" target="_blank">' . __( 'view your sitemap', 'all-in-one-seo-pack' ) . '</a>' );
 			$options[ $this->prefix . 'link' ] .= __( ' Your sitemap has been created', 'all-in-one-seo-pack' );
 			if ( '0' !== get_option( 'blog_public' ) ){
-				$options[ $this->prefix . 'link' ] .= __( ' and changes are automatically submitted to search engines' );
+				$options[ $this->prefix . 'link' ] .= __( ' and changes are automatically submitted to search engines', 'all-in-one-seo-pack' );
 			}
 			$options[ $this->prefix . 'link' ] .= '.';
 
@@ -2909,6 +2909,16 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 			if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
 				$defaults['suppress_filters'] = false;
 			}
+
+			/*
+			 * Filter to exclude password protected posts.
+			 * TODO: move to its own function and call it from here, returning whatever is appropriate.
+			 * @since 2.3.12
+			 */
+			if ( apply_filters( 'aioseop_sitemap_include_password_posts', true ) === false ) {
+				$defaults['has_password'] = false;
+			}
+
 			$args = wp_parse_args( $args, $defaults );
 			if ( empty( $args['post_type'] ) ) {
 				return apply_filters( $this->prefix . 'post_filter', array(), $args );

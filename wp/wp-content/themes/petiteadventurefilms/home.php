@@ -74,7 +74,7 @@
 	if($films): ?>
 		<div class="contents">
 			<div class="col col_9 last">
-			<ul class="owl-carousel list_films">
+			<ul class="owl-carousel-film list_films">
 			<?php foreach($films as $film): ?>
 				<li>
 					<a href="<?php echo get_permalink($film->ID); ?>">
@@ -93,6 +93,36 @@
 		</div>
 	<?php endif;?>
 
+	<?php
+	$i = 1;
+	$args = array(
+		"post_type" => "channel",
+		"posts_per_page" => -1
+	);
+	$videos = query_posts($args);
+	if($videos): ?>
+		<div class="contents">
+			<div class="col col_9 last">
+			<ul class="owl-carousel-channel list_channel">
+			<?php foreach($videos as $video): ?>
+				<li>
+					<a href="<?php echo get_permalink($video->ID); ?>">
+						<?php $thumbnail = get_post_meta($video->ID, "video_info_00", TRUE); ?>
+						<?php $running_time = get_post_meta($video->ID, "video_info_04", TRUE); ?>
+						<div class="video_thumbnail">
+							<img src="http://i.ytimg.com/vi/<? echo $thumbnail; ?>/mqdefault.jpg" alt="" />
+							<p class="running_time"><? echo $running_time; ?></p>
+						</div>
+						<p class="m1_t video_title"><?php echo get_the_title($video->ID); ?></p>
+					</a>
+				</li>
+			<?php $i++; endforeach; ?>
+			</ul>
+			</div>
+		</div>
+	<?php endif;?>
+
+
 	<section class="contents">
 		<div class="col_9 col last">
 			<h2>プチ・アドベンチャー・フィルムズとは</h2>
@@ -107,7 +137,7 @@
 <script type="text/javascript">
 	$(function(){
 
-		$(".owl-carousel").owlCarousel({
+		$(".owl-carousel-film").owlCarousel({
 			autoplay: true,
 			lazyLoad : true,
 			loop: true,
@@ -122,6 +152,23 @@
 				}
 			}
 
+		});
+
+
+		$(".owl-carousel-channel").owlCarousel({
+			autoplay: true,
+			lazyLoad : true,
+			loop: true,
+			dots: true,
+			margin: 16,
+			responsive: {
+				0:{
+					items: 2
+				},
+				960:{
+					items: 4
+				}
+			}
 		});
 
 		var playButton = $("#play_video");

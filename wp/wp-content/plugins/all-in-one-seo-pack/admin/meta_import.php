@@ -486,6 +486,7 @@ function aiosp_seometa_import() {
 			'Custom Doctitle'  => '_aioseop_title',
 			'META Description' => '_aioseop_description',
 			'META Keywords'    => '_aioseop_keywords',
+			'Canonical URI'    => '_aioseop_custom_link',
 		),
 		'Greg\'s High Performance SEO' => array(
 			'Custom Doctitle'  => '_ghpseo_secondary_title',
@@ -507,6 +508,9 @@ function aiosp_seometa_import() {
 			'Canonical URI'    => '_wds_canonical',
 			'Redirect URI'     => '_wds_redirect',
 		),
+		'Jetpack'                => array(
+			'META Description' => 'advanced_seo_description',
+		),
 		'Meta SEO Pack'                => array(
 			'META Description' => '_msp_description',
 			'META Keywords'    => '_msp_keywords',
@@ -515,6 +519,10 @@ function aiosp_seometa_import() {
 			'Custom Doctitle'  => 'title',
 			'META Description' => 'description',
 			'META Keywords'    => 'keywords',
+		),
+		'SEOpressor'                 => array(
+			'Custom Doctitle'  => '_seopressor_meta_title',
+			'META Description' => '_seopressor_meta_description',
 		),
 		'SEO Title Tag'                => array(
 			'Custom Doctitle'  => 'title_tag',

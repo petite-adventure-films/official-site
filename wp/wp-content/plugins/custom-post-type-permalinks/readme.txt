@@ -1,10 +1,10 @@
 === Custom Post Type Permalinks ===
 Contributors:      Toro_Unit,inc2734,ixkaito,keita_kobayashi
-Donate link:       http://www.amazon.co.jp/registry/wishlist/COKSXS25MVQV
+Donate link:       https://blockchain.info/ja/address/3HwkojX2pd9wc5kPFdXnDXMTNbgBmPRygX
 Tags:              permalink,permalinks,custom post type,custom taxonomy,cms
 Requires at least: 4.3
-Tested up to:      4.6
-Stable tag:        2.2.0
+Tested up to:      4.7
+Stable tag:        3.1.1
 License: GPLv2 or Later
 
 Edit the permalink of custom post type.
@@ -19,7 +19,7 @@ And support wp_get_archives( "post_type=foo" ).
 
 [This Plugin published on GitHub.](https://github.com/torounit/custom-post-type-permalinks)
 
-Donation: Please send [bitcoin](https://blockchain.info/ja/address/3HwkojX2pd9wc5kPFdXnDXMTNbgBmPRygX) or amazon.co.jp Gift to donate[at]torounit.com.
+Donation: Please send [bitcoin](https://blockchain.info/ja/address/3HwkojX2pd9wc5kPFdXnDXMTNbgBmPRygX) or [My Wishlist](http://www.amazon.co.jp/registry/wishlist/COKSXS25MVQV)
 
 
 = Translators =
@@ -66,6 +66,23 @@ That's it. You can access the permalinks setting by going to *Settings -> Permal
 
 
 == Changelog ==
+
+= 3.1.1 =
+* Bug fix in CPTP_Module_Setting::upgrader_process_complete.
+
+= 3.1.0 =
+* Add filter 'CPTP_date_front'.
+* Fix sort term by `wp_list_sort` .
+
+= 3.0.0 =
+* Admin notice on update plugin.
+* Large bug fix.
+* no_taxonomy_structure bug fix.
+* Add default value for options.
+
+= 2.2.0 =
+
+* add `CPTP_Util::get_no_taxonomy_structure`.
 
 = 2.1.3 =
 

@@ -13,6 +13,7 @@ class CPTP_Module_Admin extends CPTP_Module {
 	public function add_hook() {
 		add_action( 'admin_init', array( $this, 'settings_api_init' ), 30 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_css_js' ) );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 	}
 
 
@@ -69,12 +70,19 @@ class CPTP_Module_Admin extends CPTP_Module {
 	}
 
 	public function setting_section_callback_function() {
+		$sptp_link     = admin_url( 'plugin-install.php?s=simple-post-type-permalinks&tab=search&type=term' );
+		$sptp_template = __( 'If you need post type permalink only, you should use <a href="%s">Simple Post Type Permalinks</a>.', 'custom-post-type-permalinks' );
 		?>
+		<p>
+			<strong><?php echo wp_kses( sprintf( $sptp_template, esc_url( $sptp_link ) ), array( 'a' => array( 'href' => true ) ) ); ?></strong>
+		</p>
+
 		<p><?php echo wp_kses( __( 'The tags you can use are WordPress Structure Tags and <code>%"custom_taxonomy_slug"%</code> (e.g. <code>%actors%</code> or <code>%movie_actors%</code>).', 'custom-post-type-permalinks' ), array( 'code' => array() ) ); ?>
 			<?php echo wp_kses( __( '<code>%"custom_taxonomy_slug"%</code> is replaced by the term of taxonomy.', 'custom-post-type-permalinks' ), array( 'code' => array() ) ); ?></p>
 
 		<p><?php esc_html_e( "Presence of the trailing '/' is unified into a standard permalink structure setting.", 'custom-post-type-permalinks' ); ?>
 		<p><?php echo wp_kses( __( 'If <code>has_archive</code> is true, add permalinks for custom post type archive.', 'custom-post-type-permalinks' ), array( 'code' => array() ) ); ?></p>
+
 		<?php
 	}
 
@@ -156,5 +164,19 @@ class CPTP_Module_Admin extends CPTP_Module {
 			}
 		}
 	}
+
+
+	/**
+	 * Admin notice for update permalink settings!
+	 */
+	public function admin_notices() {
+		if ( version_compare( get_option( 'cptp_permalink_checked' ), '3.0.0', '<' ) ) {
+			$format  = __( '[Custom Post Type Permalinks] <a href="%s"><strong>Please check your permalink settings!</strong></a>', 'custom-post-type-permalinks' );
+			$message = sprintf( $format, admin_url( 'options-permalink.php' ) );
+			echo sprintf( '<div class="notice notice-warning"><p>%s</p></div>', wp_kses( $message, wp_kses_allowed_html( 'post' ) ) );
+		}
+
+	}
+
 }
 

@@ -127,7 +127,8 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		if ( false !== strpos( $permalink, '%category%' ) ) {
 			$categories = get_the_category( $post->ID );
 			if ( $categories ) {
-				usort( $categories, '_usort_terms_by_ID' ); // order by ID
+				$categories = CPTP_Util::sort_terms( $categories );
+
 				$category_object = apply_filters( 'post_link_category', $categories[0], $categories, $post );
 				$category_object = get_term( $category_object, 'category' );
 				$category        = $category_object->slug;
