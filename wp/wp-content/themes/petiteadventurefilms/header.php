@@ -24,11 +24,12 @@
 		</div>
 		<div class="col col_8 last show_wider">
 			<ul class="site_menu">
-				<li><a href="<?php echo get_bloginfo("siteurl"); ?>">HOME</a></li>
+				<!-- <li><a href="<?php echo get_bloginfo("siteurl"); ?>">HOME</a></li> -->
 				<li><a href="<?php echo get_post_type_archive_link("news"); ?>">新着情報</a></li>
 				<li><a href="<?php echo get_post_type_archive_link("events"); ?>">上映会･イベント</a></li>
 				<li><a href="<?php echo get_post_type_archive_link("films"); ?>">映画</a></li>
 				<li><a href="<?php echo get_post_type_archive_link("channel"); ?>">チャンネル</a></li>
+				<li><a href="<?php echo get_post_type_archive_link("media"); ?>">メディア</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("director")); ?>">監督</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("four-walling")); ?>">自主上映</a></li>
 				<li><a href="<?php echo get_permalink(get_page_by_path("order_jp")); ?>">DVD購入</a></li>

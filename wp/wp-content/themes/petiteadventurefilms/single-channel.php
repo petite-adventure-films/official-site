@@ -17,7 +17,7 @@ $video = get_post_meta($post->ID, "video_info_01", TRUE);
 
 <div class="single">
 
-	<header class="col col_9 last header_page">
+	<div class="col col_9 last header_page">
 		<nav class="crumbs">
 			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
 				<a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">
@@ -35,8 +35,7 @@ $video = get_post_meta($post->ID, "video_info_01", TRUE);
 				</a>
 			</div>
 		</nav>
-
-	<!--.header_page--></header>
+	<!--.header_page--></div>
 
 	<div class="col col_9 last">
 

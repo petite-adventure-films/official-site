@@ -425,6 +425,7 @@ a{
 	&.label{ &:before{ content: "\e63c"; }}
 	&.appendix{ &:before{ content: "\e639"; }}
 	&.flag{ &:before{ content: "\e70b"; }}
+	&.edit{ &:before{ content: "\e809"; }}
 }
 
 
