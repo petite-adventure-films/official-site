@@ -45,7 +45,7 @@ $video = get_post_meta($post->ID, "video_info_01", TRUE);
 			</div>
 		<?php endif; ?>
 
-		<h1 class="m2_t">
+		<h1 class="m2_t body1">
 			<?php if(is_day()){
 				printf( __('日別アーカイブ: %s'), get_the_date());
 			}elseif(is_month()){
@@ -66,7 +66,9 @@ $video = get_post_meta($post->ID, "video_info_01", TRUE);
 			<p><?php echo implode(" / ", $basic_info); ?></p>
 		<?php endif; ?>
 
-		<?php echo apply_filters('the_content', $post->post_content); ?>
+		<div class="m2_t">
+			<?php echo apply_filters('the_content', $post->post_content); ?>
+		</div>
 
 		<?php
 		$filmtags = get_the_terms($post->ID, "filmtags");

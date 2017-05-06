@@ -56,13 +56,51 @@ $article_contents = get_post_meta($post->ID, "media_info_08", true);
 		<?php endif; ?>
 
 		<h1 class="media_info m1_t">
-			<span class="inline-block index label"><? echo $media_name; ?></span>
+			<span class="inline-block index bookmark"><? echo $media_name; ?></span>
 			<span class="inline-block index date"><? echo $media_volume; ?></span>
 			<span class="inline-block index edit"><? echo $media_contents; ?></span>
 		</h1>
 		<div class="m1_t">
 			<?php echo apply_filters('the_content', $post->post_content); ?>
 		</div>
+
+		<?php
+		$filmtags = get_the_terms($post->ID, "filmtags");
+		$film_label = get_film($filmtags, "label");
+		$film_link = get_film($filmtags, "link");
+		if($film_label){
+			$film_info = '<span class="inline_block">';
+			if($film_link){
+				$film_info .= '<a href="'.$film_link.'">'.$film_label.'</a>';
+			}else{
+				$film_info .= $film_label;
+			}
+			$film_info .= '</span>';
+		}else{
+			$film_info = NULL;
+		}?>
+		<?php if($film_info): ?>
+			<p class="index film"><?php echo $film_info; ?></p>
+		<?php endif; ?>
+
+		<?php
+		$i = 1;
+		$tags = get_the_tags();
+		if($tags){
+			foreach($tags as $tag){
+				if($i > 1) $tag_info .= ", ";
+				$tag_info .= '<span class="inline_block">';
+				$tag_info .= $tag->name;
+				$tag_info .= '</span>';
+				$i++;
+			}
+		}else{
+			$tag_info = NULL;
+		}?>
+		<?php if($tag_info): ?>
+			<p class="index label"><?php echo $tag_info; ?></p>
+		<?php endif; ?>
+
 
 		<?php if($article_contents): ?>
 		<div class="contents">

@@ -84,14 +84,6 @@ $table_prefix  = 'paf_';
 define('WP_DEBUG', false);
 define(‘DISABLE_WP_CRON’, true);
 
-define('WP_ALLOW_MULTISITE', true);
-define('MULTISITE', true);
-define('SUBDOMAIN_INSTALL', true);
-define('DOMAIN_CURRENT_SITE', 'local.petiteadventurefilms.com');
-define('PATH_CURRENT_SITE', '/');
-define('SITE_ID_CURRENT_SITE', 1);
-define('BLOG_ID_CURRENT_SITE', 1);
-
 /* 編集が必要なのはここまでです ! WordPress でブログをお楽しみください。 */
 
 /** Absolute path to the WordPress directory. */
