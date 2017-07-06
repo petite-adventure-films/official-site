@@ -36,6 +36,11 @@ article{
 			}
 		}
 
+		.site_menu{
+			border-top-color: rgba($white, .23);
+			border-bottom-color: rgba($white, .23);
+		}
+
 	}
 }
 
@@ -117,8 +122,6 @@ article{
 
 #main_visual{
 
-	padding-top: 88px;
-	padding-bottom: 112px;
 	color: $white;
 
 	//h1
@@ -140,6 +143,26 @@ article{
 		&:hover{
 			color: $black2;
 		}
+	}
+
+	@media all and (min-width: $min_width){
+
+		padding-top: 112px;
+		padding-bottom: 144px;
+		text-align: center;
+
+		//.btn
+		.btn{
+			text-align: left;
+		}
+
+	}
+
+	@media all and (max-width: $max_width){
+
+		padding-top: 56px;
+		padding-bottom: 112px;
+
 	}
 
 }

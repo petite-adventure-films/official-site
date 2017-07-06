@@ -3446,20 +3446,26 @@ a {
   #site_header a {
     color: #2c2c2c; }
   @media all and (min-width: 961px) {
-    /* line 18, ../../_scss/structure/_header.scss */
-    #site_header #site_name #eng {
-      font-size: 32px;
-      line-height: 32px; } }
+    /* line 14, ../../_scss/structure/_header.scss */
+    #site_header #site_name {
+      text-align: center; }
+      /* line 19, ../../_scss/structure/_header.scss */
+      #site_header #site_name #eng {
+        font-size: 32px;
+        line-height: 32px; } }
   @media all and (max-width: 960px) {
-    /* line 26, ../../_scss/structure/_header.scss */
+    /* line 27, ../../_scss/structure/_header.scss */
     #site_header #site_name #eng {
       font-size: 24px;
       line-height: 24px; } }
   @media all and (min-width: 961px) {
-    /* line 39, ../../_scss/structure/_header.scss */
+    /* line 40, ../../_scss/structure/_header.scss */
     #site_header .site_menu {
-      text-align: right; }
-      /* line 48, ../../_scss/structure/_header.scss */
+      text-align: center;
+      margin-top: 16px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+      /* line 53, ../../_scss/structure/_header.scss */
       #site_header .site_menu li {
         display: inline-block;
         line-height: 52px;
@@ -3467,27 +3473,27 @@ a {
         padding-right: 4px;
         text-align: center; } }
   @media all and (max-width: 960px) {
-    /* line 39, ../../_scss/structure/_header.scss */
+    /* line 40, ../../_scss/structure/_header.scss */
     #site_header .site_menu {
       width: 100%;
       margin-top: 16px; }
-      /* line 64, ../../_scss/structure/_header.scss */
+      /* line 69, ../../_scss/structure/_header.scss */
       #site_header .site_menu#site_menu_smaller {
         display: none; }
-      /* line 68, ../../_scss/structure/_header.scss */
+      /* line 73, ../../_scss/structure/_header.scss */
       #site_header .site_menu li {
         margin-top: 8px;
         padding-top: 8px;
         border-top: 1px solid #f0f0f0; }
-        /* line 72, ../../_scss/structure/_header.scss */
+        /* line 77, ../../_scss/structure/_header.scss */
         #site_header .site_menu li a {
           display: block; } }
-  /* line 82, ../../_scss/structure/_header.scss */
+  /* line 87, ../../_scss/structure/_header.scss */
   #site_header #icon_site_menu {
     display: block;
     position: absolute;
     right: 8px; }
-    /* line 88, ../../_scss/structure/_header.scss */
+    /* line 93, ../../_scss/structure/_header.scss */
     #site_header #icon_site_menu:before {
       display: block;
       width: 44px;
@@ -3499,21 +3505,21 @@ a {
       background: #53dbff;
       color: #ffffff;
       text-align: center; }
-    /* line 100, ../../_scss/structure/_header.scss */
+    /* line 105, ../../_scss/structure/_header.scss */
     #site_header #icon_site_menu.close_site_menu:before {
       background: #868686; }
-  /* line 107, ../../_scss/structure/_header.scss */
+  /* line 112, ../../_scss/structure/_header.scss */
   #site_header.relative {
     position: relative; }
     @media all and (max-width: 960px) {
-      /* line 114, ../../_scss/structure/_header.scss */
+      /* line 119, ../../_scss/structure/_header.scss */
       #site_header.relative .site_menu {
         padding-bottom: 8px;
         border-bottom: 1px solid #f0f0f0; } }
-    /* line 121, ../../_scss/structure/_header.scss */
+    /* line 126, ../../_scss/structure/_header.scss */
     #site_header.relative #icon_site_menu {
       top: 32px; }
-  /* line 127, ../../_scss/structure/_header.scss */
+  /* line 132, ../../_scss/structure/_header.scss */
   #site_header.fixed {
     position: fixed;
     z-index: 999;
@@ -3523,7 +3529,7 @@ a {
     padding-bottom: 16px;
     background: #ffffff;
     border-bottom: 1px solid #f0f0f0; }
-    /* line 138, ../../_scss/structure/_header.scss */
+    /* line 143, ../../_scss/structure/_header.scss */
     #site_header.fixed #icon_site_menu {
       top: 16px; }
 
@@ -3612,7 +3618,7 @@ article, footer {
 
 /* line 37, ../../_scss/structure/_structure.scss */
 article {
-  padding: 72px 0; }
+  padding: 32px 0 72px 0; }
 
 /* line 3, ../../_scss/components/_components.scss */
 .al_r {
@@ -33068,7 +33074,11 @@ option {
     .home #site_header.relative #site_name #eng:hover,
     .home #site_header.relative #site_name #jpn:hover {
       color: #868686 !important; }
-/* line 47, ../../_scss/pages/_home.scss */
+  /* line 39, ../../_scss/pages/_home.scss */
+  .home #site_header.relative .site_menu {
+    border-top-color: rgba(255, 255, 255, 0.23);
+    border-bottom-color: rgba(255, 255, 255, 0.23); }
+/* line 52, ../../_scss/pages/_home.scss */
 .home #video_background_mask {
   position: absolute;
   z-index: 1;
@@ -33079,7 +33089,7 @@ option {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.54); }
-/* line 59, ../../_scss/pages/_home.scss */
+/* line 64, ../../_scss/pages/_home.scss */
 .home #video_background {
   position: fixed;
   z-index: 0;
@@ -33090,7 +33100,7 @@ option {
   width: auto;
   height: auto; }
 @media screen and (max-device-width: 960px) {
-  /* line 72, ../../_scss/pages/_home.scss */
+  /* line 77, ../../_scss/pages/_home.scss */
   html .home {
     background-image: url(assets/img/home/bg.jpg);
     -moz-background-size: auto, 100%;
@@ -33098,11 +33108,11 @@ option {
     -webkit-background-size: auto, 100%;
     background-size: auto, 100%;
     background-position: center center; }
-  /* line 79, ../../_scss/pages/_home.scss */
+  /* line 84, ../../_scss/pages/_home.scss */
   .home #video_background {
     display: none; } }
 @media all and (min-width: 961px) {
-  /* line 90, ../../_scss/pages/_home.scss */
+  /* line 95, ../../_scss/pages/_home.scss */
   .home .video_container#home_video {
     z-index: 1000;
     top: 50%;
@@ -33112,44 +33122,56 @@ option {
     margin-top: -240px;
     margin-left: -426.5px; } }
 @media all and (max-width: 960px) {
-  /* line 104, ../../_scss/pages/_home.scss */
+  /* line 109, ../../_scss/pages/_home.scss */
   .home .video_container#home_video {
     z-index: 1000;
     top: 10%;
     height: 100px; } }
-/* line 118, ../../_scss/pages/_home.scss */
+/* line 123, ../../_scss/pages/_home.scss */
 .home #main_visual {
-  padding-top: 88px;
-  padding-bottom: 112px;
   color: #ffffff; }
-  /* line 125, ../../_scss/pages/_home.scss */
+  /* line 128, ../../_scss/pages/_home.scss */
   .home #main_visual h1 {
     color: #ffffff; }
-  /* line 130, ../../_scss/pages/_home.scss */
+  /* line 133, ../../_scss/pages/_home.scss */
   .home #main_visual #play_video {
     margin-top: 16px;
     margin-bottom: 16px;
     color: #84cc1e; }
-    /* line 135, ../../_scss/pages/_home.scss */
+    /* line 138, ../../_scss/pages/_home.scss */
     .home #main_visual #play_video:before {
       margin-right: 8px;
       font-family: meterial_design;
       content: "\e6bd"; }
-    /* line 140, ../../_scss/pages/_home.scss */
+    /* line 143, ../../_scss/pages/_home.scss */
     .home #main_visual #play_video:hover {
       color: #868686; }
-/* line 151, ../../_scss/pages/_home.scss */
+  @media all and (min-width: 961px) {
+    /* line 123, ../../_scss/pages/_home.scss */
+    .home #main_visual {
+      padding-top: 112px;
+      padding-bottom: 144px;
+      text-align: center; }
+      /* line 155, ../../_scss/pages/_home.scss */
+      .home #main_visual .btn {
+        text-align: left; } }
+  @media all and (max-width: 960px) {
+    /* line 123, ../../_scss/pages/_home.scss */
+    .home #main_visual {
+      padding-top: 56px;
+      padding-bottom: 112px; } }
+/* line 174, ../../_scss/pages/_home.scss */
 .home #sections {
   padding-bottom: 72px; }
-/* line 159, ../../_scss/pages/_home.scss */
+/* line 182, ../../_scss/pages/_home.scss */
 .home #latest {
   margin-top: 56px; }
-/* line 167, ../../_scss/pages/_home.scss */
+/* line 190, ../../_scss/pages/_home.scss */
 .home .owl-item,
 .home .owl-stage-outer {
   position: relative;
   z-index: 2; }
-/* line 173, ../../_scss/pages/_home.scss */
+/* line 196, ../../_scss/pages/_home.scss */
 .home .owl-controls {
   z-index: 1; }
 

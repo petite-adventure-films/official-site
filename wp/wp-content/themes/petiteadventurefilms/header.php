@@ -18,29 +18,34 @@
 
 <nav class="relative" id="site_header">
 	<div class="container">
-		<div class="col col_4" id="site_name">
-			<a href="<?php echo get_bloginfo("url"); ?>">
-				<p id="eng">Petite Adventure Films</p>
-				<p id="jpn">プチ･アドベンチャー･フィルムズ </p>
-			</a>
-		</div>
-		<div class="col col_8 last show_wider">
-			<ul class="site_menu">
-				<!-- <li><a href="<?php echo get_bloginfo("siteurl"); ?>">HOME</a></li> -->
-				<li><a href="<?php echo get_post_type_archive_link("news"); ?>">新着情報</a></li>
-				<li><a href="<?php echo get_post_type_archive_link("events"); ?>">上映会･イベント</a></li>
-				<li><a href="<?php echo get_post_type_archive_link("films"); ?>">映画</a></li>
-				<li><a href="<?php echo get_post_type_archive_link("channel"); ?>">チャンネル</a></li>
-				<li><a href="<?php echo get_post_type_archive_link("media"); ?>">メディア</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("director")); ?>">監督</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("four-walling")); ?>">自主上映</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("order_jp")); ?>">DVD購入</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("blog")); ?>">BLOG</a></li>
-			</ul>
-		</div>
-		<div class="show_smaller">
-			<span class="icon-menu" id="icon_site_menu"></span>
-		</div>
+		<div class="single">
+		<div class="col col_9 last">
+			<div id="site_name" class="al_c">
+				<a href="<?php echo get_bloginfo("url"); ?>">
+					<p id="eng">Petite Adventure Films</p>
+					<p id="jpn">プチ･アドベンチャー･フィルムズ </p>
+				</a>
+			</div>
+			<div class="show_wider">
+				<ul class="site_menu">
+					<!-- <li><a href="<?php echo get_bloginfo("siteurl"); ?>">HOME</a></li> -->
+					<li><a href="<?php echo get_post_type_archive_link("news"); ?>">新着情報</a></li>
+					<li><a href="<?php echo get_post_type_archive_link("events"); ?>">上映会･イベント</a></li>
+					<li><a href="<?php echo get_post_type_archive_link("films"); ?>">映画</a></li>
+					<li><a href="<?php echo get_post_type_archive_link("channel"); ?>">チャンネル</a></li>
+					<li><a href="<?php echo get_post_type_archive_link("media"); ?>">メディア</a></li>
+					<li><a href="<?php echo get_permalink(get_page_by_path("director")); ?>">監督</a></li>
+					<li><a href="<?php echo get_permalink(get_page_by_path("four-walling")); ?>">自主上映</a></li>
+					<li><a href="<?php echo get_permalink(get_page_by_path("workshop")); ?>">ワークショップ</a></li>
+					<li><a href="<?php echo get_permalink(get_page_by_path("order_jp")); ?>">DVD購入</a></li>
+					<li><a href="<?php echo get_permalink(get_page_by_path("blog")); ?>">BLOG</a></li>
+				</ul>
+			</div>
+			<div class="show_smaller">
+				<span class="icon-menu" id="icon_site_menu"></span>
+			</div>
+		</div><!-- col col_9 last -->
+		</div><!-- single -->
 	</div>
 </nav>
 
