@@ -6,7 +6,7 @@
 	<div class="col col_9 last">
 		<ul>
 			<li><a href="<?php echo get_permalink(get_page_by_path("specified-commercial-transaction-law")); ?>">特定商取引法に基づく表記</a></li>
-			<li><a href="<?php echo get_permalink(get_page_by_path("terms-of-service")); ?>">サイトのご利用について</a></li>
+			<li><a href="<?php echo get_permalink(get_page_by_path("copyrights-disclaimers")); ?>">サイトのご利用について</a></li>
 			<li><a href="<?php echo get_permalink(get_page_by_path("gathering-the-personal-information")); ?>">個人情報の扱いについて</a></li>
 			<li><a href="<?php echo get_permalink(get_page_by_path("privacy-policy")); ?>">プライバシーポリシー</a></li>
 			<li><a href="<?php echo get_permalink(get_page_by_path("system-requirements")); ?>">推奨環境</a></li>
