@@ -46,7 +46,7 @@ get_header(); ?>
 
 	<div class="col col_9 last">
 	<p class="m7_t">これまでにYouTubeで公開した映像の中から、厳選した動画をご紹介します。</p>
-	プチ・アドベンチャー・フィルムズの<span class="icon icon-youtube"></span>全動画は<a href="https://www.youtube.com/user/petiteadventurefilms" rel="nofollow" target="_blank">こちら</a>から
+	プチ・アドベンチャー・フィルムズの<span class="icon icon-youtube"><span class="display-none">YouTube</span></span>全動画は<a href="https://www.youtube.com/user/petiteadventurefilms" rel="nofollow" target="_blank">こちら</a>から
 	</div>
 
 	<?php
