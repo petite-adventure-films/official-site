@@ -265,6 +265,7 @@ function set_body_class(){
 
 function add_alternate_link() {
 
+	$show_off = false;
 	$alternate_jp = null;
 	$alternate_en = null;
 
@@ -275,15 +276,30 @@ function add_alternate_link() {
 	}else if(is_post_type_archive()){
 		$post_type = get_post_type_object( get_query_var( "post_type" ));
 		$alternate_jp = get_post_type_archive_link($post_type->name);
-	} elseif ( is_page() || is_single() ) {
-		$alternate_jp = get_permalink();
+	} elseif ( is_page() || is_single()){
+		$show_off = true;
+		//監督プロフィールとブログアーカイブは表示
+		$page_name = get_query_var('pagename');
+		if($page_name == "director" || $page_name == "blog"){
+			$show_off = false;
+			$alternate_jp = get_permalink($post);
+		}
+		// 各映画ページは表示
+		$post_type = get_post_type_object( get_query_var( "post_type" ));
+		if($post_type->name == "films"){
+			$show_off = false;
+			$alternate_jp = get_permalink($post);
+		}
 	} else{
 		$alternate_jp = home_url();
 	}
-	$alternate_en = str_replace("www","en",$alternate_jp);
+	$alternate_en = str_replace("//www","//en",$alternate_jp);
 
-	echo '<link rel="alternate" href="'.$alternate_jp.'" hreflang="ja" />'."\n";
-	echo '<link rel="alternate" href="'.$alternate_en.'" hreflang="en" />'."\n";
+	if(!$show_off){
+		echo '<link rel="alternate" href="'.$alternate_jp.'" hreflang="ja" />'."\n";
+		echo '<link rel="alternate" href="'.$alternate_en.'" hreflang="en" />'."\n";
+	}
+
 }
 
 function get_available_events($id){
