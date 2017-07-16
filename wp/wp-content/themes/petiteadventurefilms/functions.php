@@ -280,7 +280,7 @@ function add_alternate_link() {
 	} else{
 		$alternate_jp = home_url();
 	}
-	$alternate_en = str_replace("local","en",$alternate_jp);
+	$alternate_en = str_replace("www","en",$alternate_jp);
 
 	echo '<link rel="alternate" href="'.$alternate_jp.'" hreflang="ja" />'."\n";
 	echo '<link rel="alternate" href="'.$alternate_en.'" hreflang="en" />'."\n";
