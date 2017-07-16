@@ -200,6 +200,22 @@ EOF;
 
 }
 
+function get_post_link($post){
+
+	$title = $post->post_title;
+	$link = get_permalink($post->ID);
+
+	$html .= <<<EOF
+		<h2>{$title}</h2>
+		<div class="list_post_contents">
+		</div>
+		{$time}
+EOF;
+	wp_reset_query();
+	return $html;
+
+}
+
 function get_blogs($post){
 
 	$title = $post->post_title;
@@ -245,6 +261,29 @@ function set_body_class(){
 	$args = array_values($args);
 	return ($args[0]) ? $args[0] : "home";
 	//return ($args[0] != "wp") ? $args[1] : "home";
+}
+
+function add_alternate_link() {
+
+	$alternate_jp = null;
+	$alternate_en = null;
+
+	if( is_home() || is_front_page() ) {
+		$alternate_jp = home_url();
+	} elseif ( is_category() ) {
+		$alternate_jp = get_category_link( get_query_var('cat') );
+	}else if(is_post_type_archive()){
+		$post_type = get_post_type_object( get_query_var( "post_type" ));
+		$alternate_jp = get_post_type_archive_link($post_type->name);
+	} elseif ( is_page() || is_single() ) {
+		$alternate_jp = get_permalink();
+	} else{
+		$alternate_jp = home_url();
+	}
+	$alternate_en = str_replace("local","en",$alternate_jp);
+
+	echo '<link rel="alternate" href="'.$alternate_jp.'" hreflang="ja" />'."\n";
+	echo '<link rel="alternate" href="'.$alternate_en.'" hreflang="en" />'."\n";
 }
 
 function get_available_events($id){
