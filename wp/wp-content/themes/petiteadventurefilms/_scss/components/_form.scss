@@ -218,6 +218,29 @@ option{
 		line-height: 20px;
 	}
 
+	.contents_law{
+		display: block!important;
+		overflow: scroll;
+		overflow-x: hidden;
+		overflow-y: visible;
+		height: 160px;
+		padding: 8px;
+		box-sizing: border-box;
+		border: 1px solid $black5;
+		font-size: 14px;
+		line-height: 20px;
+		h2, h3, p{
+			font-size: 14px;
+			line-height: 20px;
+		}
+		.contents{
+			display: none;
+		}
+		.p2_t{
+			padding-top: 0;
+		}
+	}
+
 }
 
 #confirm{

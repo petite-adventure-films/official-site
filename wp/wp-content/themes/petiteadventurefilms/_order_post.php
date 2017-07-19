@@ -27,4 +27,5 @@ $contact_receipt = $_POST["contact_receipt"];
 $contact_receipt_name = $_POST["contact_receipt_name"];
 $contact_receipt_proviso = $_POST["contact_receipt_proviso"];
 $contact_contents = $_POST["contact_contents"];
+$contact_agree = $_POST["contact_agree"];
 ?>

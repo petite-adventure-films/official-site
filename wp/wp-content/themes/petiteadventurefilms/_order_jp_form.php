@@ -254,3 +254,22 @@ $disabled = is_page("confirm") ? " disabled" : "";
 </div>
 </div>
 
+<?php
+if(!is_page("confirm")): ?>
+<div class="p2_t">
+<div class="form_contents required">
+	<div class="form_title">個人情報の取扱について</div>
+	<div class="contents_law">
+		<?php
+		$contents_law = get_post(4058);
+		$_contents_law = $contents_law->post_content;
+		echo $_contents_law;
+		?>
+	</div>
+	<ul class="form_elements m1_t">
+		<li><input type="checkbox" name="contact_agree" id="contact_agree" value="1"<?php echo ($contact_agree) ? " checked" : ""; ?><?php echo $disabled; ?> /><label for="contact_agree"><span class="pink">上記個人情報の取扱について同意しました</span></label></li>
+	</ul>
+</div>
+</div>
+<?php endif; ?>
+

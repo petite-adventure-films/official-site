@@ -293,7 +293,7 @@ get_header(); ?>
 					}
 				});
 
-				if(kindCount == unitCount){
+				if(kindCount == unitCount && unitCount > 0){
 					$(".contact_film_kind").removeClass("error");
 					$(".contact_film_unit").removeClass("error");
 					$("#pick_dvd").addClass("correct");
@@ -383,6 +383,7 @@ get_header(); ?>
 				jVal.text("#contact_tel");
 				jVal.emailConfirm("#contact_email_confirm");
 				jVal.radio("input[name='contact_pay_way']");
+				jVal.radio("input[name='contact_agree']");
 				jVal.cstmOrderCheck(".contact_film_kind");
 				jVal.cstmOrderCheck(".contact_film_unit");
 				jVal.sendIt();
@@ -402,6 +403,7 @@ get_header(); ?>
 		$(".contact_film_kind").blur(jVal.cstmOrder);
 		$(".contact_film_unit").blur(jVal.cstmOrder);
 		$("input[name='contact_pay_way']").blur(jVal.radio);
+		$("input[name='contact_agree']").blur(jVal.radio);
 
 	});
 
