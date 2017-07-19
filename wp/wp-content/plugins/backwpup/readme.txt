@@ -1,13 +1,17 @@
 === BackWPup - WordPress Backup Plugin ===
-Contributors: inpsyde, danielhuesken, Bueltge, nullbyte
+Contributors: inpsyde, cocreation, danielhuesken, Bueltge, nullbyte, duongcuong96
 Tags: Amazon, Amazon S3, back up, backup, chinese, cloud, cloud files, database, db backup, dropbox, dump, file, french, ftp, ftps, german, migrate, multisite, russian, schedule, sftp, storage, S3, time, upload, xml
 Requires at least: 3.9
-Tested up to: 4.7.3
-Stable tag: 3.3.7
+Tested up to: 4.8
+Stable tag: 3.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Schedule complete automatic backups of your WordPress installation. Decide which content will be stored (Dropbox, S3…). This is the free version
+
+== Independence Day Sale ==
+
+Get your 30% Independence Day discount for BackWPup Pro! Only available until July 5th, 2017. [Save Now](https://backwpup.com/)
 
 == Description ==
 
@@ -35,7 +39,7 @@ The **backup plugin** **[BackWPup](http://backwpup.com/)** can be used to save y
 * Pro version and support available - [BackWPup Pro](http://backwpup.com)
 
 = Requirements =
-* WordPress 3.9 and PHP 5.2.7 required!
+* WordPress 3.9 and PHP 5.3 required!
 * To use the Plugin with full functionality PHP 5.3.3 with mysqli, FTP,gz, bz2, ZipArchive and curl is needed.
 * Plugin functions that don't work because of your server settings, will not be displayed in admin area.
 
@@ -157,6 +161,34 @@ Yes. You need to have writing access to the wp-config.php file (usually residing
 [You can find a detailed tutorial in the BackWPup documentation.](http://docs.backwpup.com/article/118-install-backwpup)
 
 == Changelog ==
+= Version 3.4.1 =
+* Check if file is dot to prevent open_basedir warning.
+* Only display Dropbox upload progress in debug mode.
+* Fix PHP notice when running job via WP CLI.
+* Fix the way Dropbox API wrapper handles errors.
+* Only encode DB values to hex when binary flag is set.
+* Fix handling of storing backups in root Dropbox dir.
+* Allow symbolic links to be excluded.
+* If archive name is not valid format, will still recognize and delete old files.
+* Allow user to copy debug info for support.
+* Do not display notices for pro users.
+* Add support form for pro users.
+* Add Rate Us admin notice.
+* Support empty folder name when syncing to Dropbox.
+* Allow folders under wp-content to be excluded.
+
+= Version 3.4.0 =
+* Changed: Dropped support for PHP 5.2.
+* Improved: Migrated to Dropbox API V2.
+* Changed: Removed Adminer link from backend.
+* Added: Backup file tracking so backups from other jobs aren't accidentally deleted.
+* Fixed: Call to get_users was previously incorrect.
+* Added: Ability to have backup file sent to multiple email addresses.
+* Added: Web.config is now included in list of special files to back up.
+* Fixed: error for some users when generating XML export.
+* Fixed: opendir permission denied warning on some versions of IIS.
+* Improved: accuracy of binary column export.
+
 = Version 3.3.7 =
 * Fixed: Services credentials lost after 3.3.6 update
 * Fixed: Removed all instances of PHP short echo tags and other minor PHP 5.2 compatibility issues
