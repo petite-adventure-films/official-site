@@ -56,55 +56,6 @@ $(function(){
 
 	});
 
-	var player;
-	var videoID="b4Q1CVO_VVE";
-
-	function fGetScript(){
-		$.ajax({
-			url:"http://www.youtube.com/player_api/",
-			dataType:"script",
-			success:function(data){
-			},
-			error:function(xhr, status, thrown) {
-				fGetScript();
-			}
-		});
-	};
-	fGetScript();
-
-	function loadPlayer(videoID){
-		player = new YT.Player(
-			"player",{
-				videoId: videoID,
-				playerVars: {
-					"rel": 0,
-					"showinfo": 0,
-					"controls": 1
-				}
-			}
-		);
-	};
-	function playPlayer(){
-		player.playVideo();
-	};
-	function stopPlayer(){
-		player.stopVideo();
-	};
-
-	var playButton = $("#play_video");
-	playButton.bind("click", function(){
-		$(".overlay").fadeIn('fast');
-		$("#home_video").fadeIn('fast');
-	});
-	$(".overlay").bind("click", function(){
-		$("#home_video").fadeOut('fast');
-		stopPlayer();
-	});
-
-	window.onYouTubeIframeAPIReady = function(){
-		loadPlayer(videoID);
-	};
-
 	// fixed header
 	if(windowWidth < 961){
 		$(window).on("load scroll", function(){
