@@ -75,7 +75,7 @@ get_header(); ?>
 	<div class="m4_t">
 		<div class="col col_5">
 			<ul class="list_archives">
-				<li><?php echo substr($now, 0, 4); ?>年</li>
+				<li><?php echo substr($now, 0, 4); ?></li>
 				<li class="show_contents tab" data-tab="tab_latest">最新</li>
 				<?php
 					if($months){
@@ -107,11 +107,12 @@ get_header(); ?>
 		<section class="tab_contents" id="tab_latest">
 			<?php echo get_events($now, TRUE); ?>
 		</section>
-		<?php foreach($months as $month): ?>
+		<?php if(!empty($months)):
+		foreach($months as $month): ?>
 			<section class="tab_contents" id="tab_<?php echo $month["slug"]; ?>">
 			<?php echo get_events($month["slug"]); ?>
 			</section>
-		<?php endforeach; ?>
+		<?php endforeach; endif; ?>
 	</div>
 
 	<aside class="contents m4_t show_smaller list_archives_past_smaller">
