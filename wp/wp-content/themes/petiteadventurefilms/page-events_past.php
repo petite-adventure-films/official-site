@@ -49,12 +49,13 @@ get_header(); ?>
 	<div class="m7_t">
 		<div class="col col_5">
 			<ul class="list_archives_past border_on">
-				<li><a href="<?php echo get_post_type_archive_link("events"); ?>">2017年</a></li>
-				<li<?php echo ($year[0]->slug == 2016) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2016")); ?>">2016年</a></li>
-				<li<?php echo ($year[0]->slug == 2015) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015年</a></li>
-				<li<?php echo ($year[0]->slug == 2014) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014年</a></li>
-				<li<?php echo ($year[0]->slug == 2013) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013年</a></li>
-				<li<?php echo ($year[0]->slug == 2012) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012年</a></li>
+				<li><a href="<?php echo get_post_type_archive_link("events"); ?>">2018</a></li>
+				<li<?php echo ($year[0]->slug == 2016) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2017")); ?>">2017</a></li>
+				<li<?php echo ($year[0]->slug == 2016) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2016")); ?>">2016</a></li>
+				<li<?php echo ($year[0]->slug == 2015) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015</a></li>
+				<li<?php echo ($year[0]->slug == 2014) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014</a></li>
+				<li<?php echo ($year[0]->slug == 2013) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013</a></li>
+				<li<?php echo ($year[0]->slug == 2012) ? ' class="is_active"' : "";?>><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012</a></li>
 			</ul>
 		</div>
 	</div>

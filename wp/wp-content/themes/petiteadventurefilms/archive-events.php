@@ -11,9 +11,10 @@ if(is_post_type_archive()){
 }
 
 $now = date("Ym");
+$thisyear = array();
 $args = array(
 	"orderby" => "slug",
-	"order" => "DESC",
+	"order" => "DESC"
 );
 $eventsdates = get_terms("eventsdate", $args);
 $eventsdates = (array)$eventsdates;
@@ -22,12 +23,15 @@ foreach($eventsdates as $k => $v){
 		$thisyear = $v;
 	}
 }
-foreach($eventsdates as $k => $v){
-	$v = (array)$v;
-	if($thisyear->term_id == $v["parent"]){
-		$months[$k] = $v;
+if(!empty($thisyear)){
+	foreach($eventsdates as $k => $v){
+		$v = (array)$v;
+		if($thisyear->term_id == $v["parent"]){
+			$months[$k] = $v;
+		}
 	}
 }
+
 
 get_header(); ?>
 
@@ -89,11 +93,12 @@ get_header(); ?>
 		</div>
 		<div class="col col_4 last al_r show_wider">
 			<ul class="list_archives_past">
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2016 ")); ?>">2016 年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012年</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2017 ")); ?>">2017</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2016 ")); ?>">2016</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012</a></li>
 			</ul>
 		</div>
 	</div>
