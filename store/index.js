@@ -1,5 +1,5 @@
 import { createClient } from '@/plugins/contentful'
-// import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 const client = createClient();
 
@@ -21,9 +21,9 @@ export const getters = {
 		return year + '-' + ('00' + month).slice(-2) + '-' + ('00' + day).slice(-2);
 	}
 
-	// , renderRichText: () => (contents) => {
-	// 	return documentToHtmlString(contents);
-	// }
+	, renderRichText: () => (contents) => {
+		return documentToHtmlString(contents);
+	}
 }
 
 export const mutations = {

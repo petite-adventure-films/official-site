@@ -36,7 +36,8 @@ export default {
 	** https://nuxtjs.org/guide/plugins
 	*/
 	plugins: [
-		'@/plugins/contentful'
+		  '@/plugins/contentful'
+		, '@/plugins/vue-youtube'
 	],
 	/*
 	** Auto import components

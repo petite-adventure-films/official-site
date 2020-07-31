@@ -1,12 +1,19 @@
 <template>
 	<div>
-		test中
+		<nuxt-link :to = "{name:'news'}">News</nuxt-link><br>
+		<nuxt-link :to = "{name:'event'}">Events</nuxt-link>
+
+
 	</div>
 </template>
 
 <script>
-export default {}
-</script>
+import { mapState, mapGetters } from 'vuex'
 
-<style>
-</style>
+export default {
+	computed: {
+		  ...mapState(['posts', 'categories'])
+		, ...mapGetters(['linkTo'])
+	}
+}
+</script>
