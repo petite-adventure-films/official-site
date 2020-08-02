@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<nuxt-link :to = "{name:'news'}">News</nuxt-link><br>
-		<nuxt-link :to = "{name:'event'}">Events</nuxt-link>
+		<nuxt-link :to = "{name:'news'}">お知らせ</nuxt-link><br>
+		<nuxt-link :to = "{name:'event'}">上映会・イベント</nuxt-link>
 
 
 	</div>
@@ -12,7 +12,7 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
 	computed: {
-		  ...mapState(['posts', 'categories'])
+		  ...mapState()
 		, ...mapGetters(['linkTo'])
 	}
 }
