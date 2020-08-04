@@ -4,8 +4,9 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 const client = createClient();
 
 export const state = () => ({
-	  news: []
+	  news:  []
 	, event: []
+	, film:  []
 })
 
 export const getters = {

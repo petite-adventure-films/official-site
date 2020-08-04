@@ -120,7 +120,6 @@ export default {
 		} else {
 			return error({ statusCode: 400 })
 		}
-
 	}
 
 }
