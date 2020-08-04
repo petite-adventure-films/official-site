@@ -1,23 +1,38 @@
 <template>
 	<div>
-		<h1>Events</h1>
+		<h1>上映会・イベント</h1>
+
 		<br><br>
-		<v-btn outlined @click="show()">Latest</v-btn>
-		<div v-for="">
+		<v-btn outlined @click="genDisplayedPosts()">Latest</v-btn>
+
+		<br>
+		<div v-for="(arr, key) in dateIndexs">
+			<div v-if="key >= thisYear">
+				<span>{{key}}</span>
+				<v-btn
+				v-for="val in arr"
+					outlined
+					@click="genDisplayedPosts(key, val)"
+					>{{convertMonth(val)}}
+				</v-btn>
+			</div>
 		</div>
 
-		<v-btn outlined @click="show(2020,9)">2020/9</v-btn>
-		<v-btn outlined @click="show(2019)">2019</v-btn>
 		<br><br>
 		<div
-		v-for="post in sortedPosts || posts"
-		><v-chip>{{post.data.fields.eventType.fields.name}}</v-chip><br>
-			<nuxt-link :to="linkTo('event', post.data)">
-				{{post.data.fields.place}}<br>
-				{{dateFormat(post.data.fields.startDate)}}
-				<span v-if="post.data.fields.endDate"> ~ {{dateFormat(post.data.fields.endDate)}}</span>
-			</nuxt-link>
+		v-for="post in sortedPosts"
+			><cardEvent :post="post.data"></cardEvent>
 		</div>
+
+		<br><br>
+		Archives
+		<v-btn
+		v-for="(val, key) in archiveIndexs"
+			outlined
+			:to = "{name:'event-archive', params:{archive:val}}"
+			>{{val}}
+		</v-btn>
+
 		<br><br>
 		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
 	</div>
@@ -25,118 +40,265 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import { createClient } from '@/plugins/contentful'
+import cardEvent from '@/components/card_event'
 
-export default {
+const client = createClient();
 
-	data: function()
+export default{
+
+	components:{
+		cardEvent
+	}
+
+	, data: function()
 	{
 		return{
-			  rawPosts      : []
+			  thisYear : new Date().getFullYear()
+			, rawPosts      : []
 			, sortedPosts   : []
-			, thisYearIndex : []
-			, archiveIndex  : []
+			, sortedPostsbyYear: {}
+			, dateIndexs: {}
 		}
 	}
 
 	, computed: {
-		  ...mapState(['event'])
+		  ...mapState()
 		, ...mapGetters(['linkTo', 'dateFormat'])
 
-		// , posts(){
-
-		// 	// return [arr.find(a => new Date(a.startDate) > new Date())];
-		// }
-
+		, archiveIndexs: function()
+		{
+			let indexs = [];
+			for(let i=(this.thisYear - 1); i > 2010; i--)
+			{
+				indexs.push(i);
+			}
+			return indexs;
+		}
 	}
 
 	, methods: {
 
-		show: function(year, month)
+		convertMonth: function(val)
 		{
-			console.log('year', year);
-			console.log('month', month);
-			if(month !== undefined)
+			return val.toString().slice(-2);
+		}
+
+		, genDisplayedPosts: function(year, month)
+		{
+
+			let self = this;
+			let _pushed = [];
+			this.sortedPosts = [];
+
+			function checkHasData(y)
 			{
-				this.sortedPosts = [this.rawPosts.find(a => a.year == year && a.month == month)];
-			}
-			else if(year !== undefined)
-			{
-				this.sortedPosts = [this.rawPosts.find(a => a.year == year)];
-			}
-			else
-			{
-				this.sortedPosts = [this.rawPosts.find(a => new Date(a.startDate) > new Date())];
+				if(self.sortedPostsbyYear[y] !== undefined)
+				{
+					return self.sortedPostsbyYear[y];
+				}
+				else
+				{
+					throw 'error';
+				}
 			}
 
+			try
+			{
+
+				if(year !==undefined && month !== undefined)
+				{
+					let data = checkHasData(year);
+					this.sortedPostsbyYear[year].forEach((a) => {
+						if(a.months.some(m => m === month)
+						&& !_pushed.some(v => v === a.key))
+						{
+							this.sortedPosts.push(a);
+							_pushed.push(a.key);
+						}
+					})
+				}
+
+				else if(year !==undefined && month === undefined)
+				{
+					let data = checkHasData(year);
+					this.sortedPosts = this.sortedPostsbyYear[year];
+				}
+
+				else
+				{
+
+					for(let i=this.thisYear; i < this.thisYear + 10; i++)
+					{
+						let data = checkHasData(i);
+						this.sortedPostsbyYear[i].forEach((a) => {
+							if(Math.max(...a.months) >= this.genDateData(new Date())
+							&& !_pushed.some(v => v === a.key))
+							{
+								this.sortedPosts.push(a);
+								_pushed.push(a.key);
+							}
+						})
+					}
+
+				}
+
+			}
+			catch(err)
+			{
+			}
+
+		}
+
+		, genDateData: function(data, type)
+		{
+			let year  = new Date(data).getFullYear().toString();
+			let month = (new Date(data).getMonth() + 1).toString();
+			return (type == 'year')
+				? parseInt(year)
+				: parseInt(year + ('00' + month).slice( -2 ));
+		}
+
+		, getYears: function(data)
+		{
+
+			let years = [];
+			let startDateYear = this.genDateData(data.fields.startDate, 'year');
+
+			if(data.fields.endDate)
+			{
+				let endDateYear = this.genDateData(data.fields.endDate, 'year');
+				for(let i=startDateYear; i<=endDateYear; i++)
+				{
+					years.push(i);
+				}
+			}
+
+			else
+			{
+				years.push(startDateYear);
+			}
+
+			return years;
+
+		}
+
+		, getMonths: function(data)
+		{
+
+			let months = [];
+			let startDateMonth = this.genDateData(data.fields.startDate, 'month');
+
+			if(data.fields.endDate)
+			{
+				let endDateMonth = this.genDateData(data.fields.endDate, 'month');
+				for(let i=startDateMonth; i<=endDateMonth; i++)
+				{
+					let val = parseInt(i.toString().slice(-2));
+					if(val > 0 && val < 13){
+						months.push(i);
+					}
+				}
+			}
+
+			else
+			{
+				let year = parseInt(startDateMonth.toString().slice(0, 4));
+				if(months === undefined)
+				{
+					months = [];
+				}
+				months.push(startDateMonth);
+			}
+
+			return months;
+
+		}
+
+
+		, sort: function(data)
+		{
+			let arr = Object.keys(data).map((e) => {
+				let months = this.getMonths(data[e]);
+				let years = this.getYears(data[e]);
+				return {
+					  key: e
+					, startDate : data[e].fields.startDate
+					, endDate   : data[e].fields.endDate || false
+					, years     : years
+					, months    : months
+					, data      : data[e]
+				}
+			});
+			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
 		}
 
 	}
 
 	, created: function()
 	{
-		let storePosts = this.$store.state.event;
 
-		let arr = Object.keys(storePosts).map((e) => ({
-				  key: e
-				, startDate : storePosts[e].fields.startDate
-				, endDate   : storePosts[e].fields.endDate
-				, year      : new Date(storePosts[e].fields.startDate).getFullYear()
-				, month     : new Date(storePosts[e].fields.startDate).getMonth() + 1
-				, data      : storePosts[e]
-			}));
-		this.rawPosts    = arr.sort((a, b) => a.startDate < b.startDate ? 1 : -1);
-		this.sortedPosts = [arr.find(a => new Date(a.startDate) > new Date())];
+		this.rawPosts = this.sort(this.fetchedPosts);
 
-		let _index = [];
-		Object.keys(this.rawPosts).forEach((e) => {
-			let year  = new Date(storePosts[e].fields.startDate).getFullYear();
-			let month = new Date(storePosts[e].fields.startDate).getMonth() + 1;
-			if(_index[year] === undefined)
-			{
-				_index[year] = {};
-				_index[year]['key'] = year;
-				_index[year]['months'] = [];
-			}
-			_index[year]['months'].push(month);
+		this.rawPosts.forEach((a) => {
+
+			a.years.forEach((y) => {
+				if(this.sortedPostsbyYear[y] === undefined)
+				{
+					this.sortedPostsbyYear[y] = [];
+				}
+				this.sortedPostsbyYear[y].push(a);
+
+				if(this.dateIndexs[y] === undefined)
+				{
+					this.dateIndexs[y] = [];
+				}
+				a.months.forEach((m) => {
+					if(m.toString().slice(0, 4) == y
+					&& !this.dateIndexs[y].some(v => v === m))
+					{
+						this.dateIndexs[y].push(m);
+					}
+				});
+				this.dateIndexs[y].sort();
+			})
+
 		});
-		_index = _index.filter(e => e);
 
-		// con
-		this.thisYearIndex = _index.find(e => e.key == new Date().getFullYear()).months;
-		this.archiveIndex  = _index.find(e => e.key != new Date().getFullYear());
-		// console.log('ind', _ar);
-
-		//  = _index
-		// 						.filter(v => v)
-		// 						.sort((a, b) => a.key < b.key ? 1 : -1);
-		// this.archiveYears =
-
-
-		// let _index = [];
-		// let arr2 = Object.keys(storePosts).map((e) =>
-		// 	new Date(storePosts[e].fields.startDate).getFullYear()
-		// );
-		// arr2.sort((a, b) => a < b ? 1 : -1);
-
-		// Object.keys(this.rawPosts).forEach((e) => {
-		// 	let year  = new Date(storePosts[e].fields.startDate).getFullYear();
-		// 	let month = new Date(storePosts[e].fields.startDate).getMonth() + 1;
-		// 	// console.log('arr2[year]', typeof arr2[year])
-		// 	// if(arr2[year] === undefined)
-		// 	// {
-		// 	// 	arr2[year] = [];
-		// 	// }
-		// // 	// arr.indexOf("a") >= 0
-		// 	// if(arr2[year].indexOf(month) == -1)
-		// 	// {
-		// 	// 	arr2[year].push(month);
-		// 	// }
-		// });
-
-		// this.thisYearIndexs = arr2;
+		this.genDisplayedPosts();
 	}
 
-	, mounted: function(){
+	// 記事取得
+	, async asyncData({ payload, store, params, error }){
+
+		const result = payload
+			|| store.state.event.length ? store.state.event : false
+			|| await client.getEntries({
+				content_type: 'event'
+			});
+
+		if (result) {
+
+			let fetchedPosts;
+
+			if(result.items)
+			{
+				let skipped = 100;
+				fetchedPosts = result.items;
+				fetchedPosts.forEach(a => store.commit('setPosts', a));
+				return { fetchedPosts, skipped }
+			}
+
+			else
+			{
+				fetchedPosts = result;
+				return { fetchedPosts }
+			}
+
+
+		} else {
+			return error({ statusCode: 400 })
+		}
 	}
 }
 </script>

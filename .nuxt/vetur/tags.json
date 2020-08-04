@@ -4,5 +4,11 @@
   },
   "LazyLogo": {
     "description": "Auto imported from components/Logo.vue"
+  },
+  "CardEvent": {
+    "description": "Auto imported from components/card_event.vue"
+  },
+  "LazyCardEvent": {
+    "description": "Auto imported from components/card_event.vue"
   }
 }

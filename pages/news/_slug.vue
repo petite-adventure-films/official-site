@@ -59,8 +59,8 @@ import { mapState, mapGetters } from 'vuex'
 export default {
 
 	async asyncData({ payload, store, params, error }) {
-		const post = payload || await store.state.news.find(post => post.fields.slug === params.slug);
-console.log('post', post)
+		const post = payload
+			|| await store.state.news.find(post => post.fields.slug === params.slug);
 		if (post) {
 			return { post }
 		} else {

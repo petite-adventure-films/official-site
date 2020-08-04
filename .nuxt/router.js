@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _c1a3ba7c = () => interopDefault(import('../pages/event/index.vue' /* webpackChunkName: "pages/event/index" */))
 const _9f1fbf1c = () => interopDefault(import('../pages/film/index.vue' /* webpackChunkName: "pages/film/index" */))
 const _515ec1fe = () => interopDefault(import('../pages/news/index.vue' /* webpackChunkName: "pages/news/index" */))
+const _02d0c143 = () => interopDefault(import('../pages/event/_archive.vue' /* webpackChunkName: "pages/event/_archive" */))
 const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webpackChunkName: "pages/event/_slug" */))
 const _a28d01ac = () => interopDefault(import('../pages/film/_slug.vue' /* webpackChunkName: "pages/film/_slug" */))
 const _54cc048e = () => interopDefault(import('../pages/news/_slug.vue' /* webpackChunkName: "pages/news/_slug" */))
@@ -39,6 +40,10 @@ export const routerOptions = {
     path: "/news",
     component: _515ec1fe,
     name: "news"
+  }, {
+    path: "/event/:archive",
+    component: _02d0c143,
+    name: "event-archive"
   }, {
     path: "/event/:slug",
     component: _c510fd0c,

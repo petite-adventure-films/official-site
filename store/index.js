@@ -3,13 +3,13 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 const client = createClient();
 
-const contentTypes = ['news', 'post', 'event'];
-
 export const state = () => ({
-	post: []
+	  news: []
+	, event: []
 })
 
 export const getters = {
+
 	linkTo: () => (name, obj) => {
 		return { name: `${name}-slug`, params: { slug: obj.fields.slug } }
 	}
@@ -38,14 +38,15 @@ export const mutations = {
 }
 
 export const actions = {
-	async getAllPosts({commit})
-	{
-		await client.getEntries()
-			.then(res => {
-				res.items.forEach((post) => {
-					commit('setPosts', post);
-				})
-			})
-			.catch(console.error)
-	}
+	// async getAllPosts({commit}, payload)
+	// {
+	// 	console.log('paylod')
+	// 	await client.getEntries()
+	// 		.then(res => {
+	// 			res.items.forEach((post) => {
+	// 				commit('setPosts', post);
+	// 			})
+	// 		})
+	// 		.catch(console.error)
+	// }
 }

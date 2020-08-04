@@ -3,49 +3,48 @@
     "name": "event",
     "path": "/event",
     "component": "/Users/restard/Documents/paf/jp/pages/event/index.vue",
-    "chunkName": "pages/event/index",
-    "_name": "_c1a3ba7c"
+    "chunkName": "pages/event/index"
   },
   {
     "name": "film",
     "path": "/film",
     "component": "/Users/restard/Documents/paf/jp/pages/film/index.vue",
-    "chunkName": "pages/film/index",
-    "_name": "_9f1fbf1c"
+    "chunkName": "pages/film/index"
   },
   {
     "name": "news",
     "path": "/news",
     "component": "/Users/restard/Documents/paf/jp/pages/news/index.vue",
-    "chunkName": "pages/news/index",
-    "_name": "_515ec1fe"
+    "chunkName": "pages/news/index"
+  },
+  {
+    "name": "event-archive",
+    "path": "/event/:archive",
+    "component": "/Users/restard/Documents/paf/jp/pages/event/_archive.vue",
+    "chunkName": "pages/event/_archive"
   },
   {
     "name": "event-slug",
     "path": "/event/:slug",
     "component": "/Users/restard/Documents/paf/jp/pages/event/_slug.vue",
-    "chunkName": "pages/event/_slug",
-    "_name": "_c510fd0c"
+    "chunkName": "pages/event/_slug"
   },
   {
     "name": "film-slug",
     "path": "/film/:slug",
     "component": "/Users/restard/Documents/paf/jp/pages/film/_slug.vue",
-    "chunkName": "pages/film/_slug",
-    "_name": "_a28d01ac"
+    "chunkName": "pages/film/_slug"
   },
   {
     "name": "news-slug",
     "path": "/news/:slug",
     "component": "/Users/restard/Documents/paf/jp/pages/news/_slug.vue",
-    "chunkName": "pages/news/_slug",
-    "_name": "_54cc048e"
+    "chunkName": "pages/news/_slug"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/restard/Documents/paf/jp/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_0e435c92"
+    "chunkName": "pages/index"
   }
 ]
