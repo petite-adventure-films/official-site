@@ -10,5 +10,11 @@
   },
   "LazyCardEvent": {
     "description": "Auto imported from components/card_event.vue"
+  },
+  "CardVideo": {
+    "description": "Auto imported from components/card_video.vue"
+  },
+  "LazyCardVideo": {
+    "description": "Auto imported from components/card_video.vue"
   }
 }

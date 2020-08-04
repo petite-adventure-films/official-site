@@ -1,5 +1,11 @@
 [
   {
+    "name": "channel",
+    "path": "/channel",
+    "component": "/Users/restard/Documents/paf/jp/pages/channel/index.vue",
+    "chunkName": "pages/channel/index"
+  },
+  {
     "name": "event",
     "path": "/event",
     "component": "/Users/restard/Documents/paf/jp/pages/event/index.vue",
@@ -16,6 +22,12 @@
     "path": "/news",
     "component": "/Users/restard/Documents/paf/jp/pages/news/index.vue",
     "chunkName": "pages/news/index"
+  },
+  {
+    "name": "channel-slug",
+    "path": "/channel/:slug",
+    "component": "/Users/restard/Documents/paf/jp/pages/channel/_slug.vue",
+    "chunkName": "pages/channel/_slug"
   },
   {
     "name": "event-archive",

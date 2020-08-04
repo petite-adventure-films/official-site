@@ -7,6 +7,7 @@ export const state = () => ({
 	  news:  []
 	, event: []
 	, film:  []
+	, video: []
 })
 
 export const getters = {

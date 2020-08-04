@@ -3,9 +3,11 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _c2dc62aa = () => interopDefault(import('../pages/channel/index.vue' /* webpackChunkName: "pages/channel/index" */))
 const _c1a3ba7c = () => interopDefault(import('../pages/event/index.vue' /* webpackChunkName: "pages/event/index" */))
 const _9f1fbf1c = () => interopDefault(import('../pages/film/index.vue' /* webpackChunkName: "pages/film/index" */))
 const _515ec1fe = () => interopDefault(import('../pages/news/index.vue' /* webpackChunkName: "pages/news/index" */))
+const _c649a53a = () => interopDefault(import('../pages/channel/_slug.vue' /* webpackChunkName: "pages/channel/_slug" */))
 const _02d0c143 = () => interopDefault(import('../pages/event/_archive.vue' /* webpackChunkName: "pages/event/_archive" */))
 const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webpackChunkName: "pages/event/_slug" */))
 const _a28d01ac = () => interopDefault(import('../pages/film/_slug.vue' /* webpackChunkName: "pages/film/_slug" */))
@@ -29,6 +31,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/channel",
+    component: _c2dc62aa,
+    name: "channel"
+  }, {
     path: "/event",
     component: _c1a3ba7c,
     name: "event"
@@ -40,6 +46,10 @@ export const routerOptions = {
     path: "/news",
     component: _515ec1fe,
     name: "news"
+  }, {
+    path: "/channel/:slug",
+    component: _c649a53a,
+    name: "channel-slug"
   }, {
     path: "/event/:archive",
     component: _02d0c143,
