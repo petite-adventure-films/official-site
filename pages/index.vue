@@ -3,7 +3,8 @@
 		<nuxt-link :to = "{name:'news'}">お知らせ</nuxt-link><br>
 		<nuxt-link :to = "{name:'event'}">上映会・イベント</nuxt-link><br>
 		<nuxt-link :to = "{name:'film'}">映画</nuxt-link><br>
-		<nuxt-link :to = "{name:'channel'}">チャンネル</nuxt-link>
+		<nuxt-link :to = "{name:'channel'}">チャンネル</nuxt-link><br>
+		<nuxt-link :to = "{name:'media'}">メディア紹介</nuxt-link>
 
 
 	</div>

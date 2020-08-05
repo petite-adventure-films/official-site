@@ -6,11 +6,13 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _c2dc62aa = () => interopDefault(import('../pages/channel/index.vue' /* webpackChunkName: "pages/channel/index" */))
 const _c1a3ba7c = () => interopDefault(import('../pages/event/index.vue' /* webpackChunkName: "pages/event/index" */))
 const _9f1fbf1c = () => interopDefault(import('../pages/film/index.vue' /* webpackChunkName: "pages/film/index" */))
+const _4c5a8b8c = () => interopDefault(import('../pages/media/index.vue' /* webpackChunkName: "pages/media/index" */))
 const _515ec1fe = () => interopDefault(import('../pages/news/index.vue' /* webpackChunkName: "pages/news/index" */))
 const _c649a53a = () => interopDefault(import('../pages/channel/_slug.vue' /* webpackChunkName: "pages/channel/_slug" */))
 const _02d0c143 = () => interopDefault(import('../pages/event/_archive.vue' /* webpackChunkName: "pages/event/_archive" */))
 const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webpackChunkName: "pages/event/_slug" */))
 const _a28d01ac = () => interopDefault(import('../pages/film/_slug.vue' /* webpackChunkName: "pages/film/_slug" */))
+const _4aa3ea44 = () => interopDefault(import('../pages/media/_slug.vue' /* webpackChunkName: "pages/media/_slug" */))
 const _54cc048e = () => interopDefault(import('../pages/news/_slug.vue' /* webpackChunkName: "pages/news/_slug" */))
 const _0e435c92 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -43,6 +45,10 @@ export const routerOptions = {
     component: _9f1fbf1c,
     name: "film"
   }, {
+    path: "/media",
+    component: _4c5a8b8c,
+    name: "media"
+  }, {
     path: "/news",
     component: _515ec1fe,
     name: "news"
@@ -62,6 +68,10 @@ export const routerOptions = {
     path: "/film/:slug",
     component: _a28d01ac,
     name: "film-slug"
+  }, {
+    path: "/media/:slug",
+    component: _4aa3ea44,
+    name: "media-slug"
   }, {
     path: "/news/:slug",
     component: _54cc048e,

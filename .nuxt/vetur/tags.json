@@ -11,6 +11,12 @@
   "LazyCardEvent": {
     "description": "Auto imported from components/card_event.vue"
   },
+  "CardMedia": {
+    "description": "Auto imported from components/card_media.vue"
+  },
+  "LazyCardMedia": {
+    "description": "Auto imported from components/card_media.vue"
+  },
   "CardVideo": {
     "description": "Auto imported from components/card_video.vue"
   },

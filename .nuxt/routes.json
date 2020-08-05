@@ -18,6 +18,12 @@
     "chunkName": "pages/film/index"
   },
   {
+    "name": "media",
+    "path": "/media",
+    "component": "/Users/restard/Documents/paf/jp/pages/media/index.vue",
+    "chunkName": "pages/media/index"
+  },
+  {
     "name": "news",
     "path": "/news",
     "component": "/Users/restard/Documents/paf/jp/pages/news/index.vue",
@@ -46,6 +52,12 @@
     "path": "/film/:slug",
     "component": "/Users/restard/Documents/paf/jp/pages/film/_slug.vue",
     "chunkName": "pages/film/_slug"
+  },
+  {
+    "name": "media-slug",
+    "path": "/media/:slug",
+    "component": "/Users/restard/Documents/paf/jp/pages/media/_slug.vue",
+    "chunkName": "pages/media/_slug"
   },
   {
     "name": "news-slug",

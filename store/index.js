@@ -1,13 +1,21 @@
 import { createClient } from '@/plugins/contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 
 const client = createClient();
+const options = {
+	renderNode: {
+		[BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+			`<img src="${fields.file.url}?h=320&q=50">`,
+	}
+};
 
 export const state = () => ({
 	  news:  []
 	, event: []
 	, film:  []
 	, video: []
+	, media: []
 })
 
 export const getters = {
@@ -24,7 +32,7 @@ export const getters = {
 	}
 
 	, renderRichText: () => (contents) => {
-		return documentToHtmlString(contents);
+		return documentToHtmlString(contents, options);
 	}
 }
 

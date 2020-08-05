@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<h1>映画</h1>
+		<h1>メディア紹介</h1>
 		<br><br>
 		<div
 		v-for = "post in sortedPosts"
 		:key  = "post.key"
-			><cardVideo :post="post.data"></cardVideo>
+			><cardMedia :post="post.data"></cardMedia>
 		</div>
 		<br><br>
 		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
@@ -16,14 +16,21 @@
 import { mapState, mapGetters } from 'vuex'
 import { createClient } from '@/plugins/contentful'
 
-import cardVideo from '@/components/card_video'
+import cardMedia from '@/components/card_media'
 
 const client = createClient();
 
 export default {
 
 	components:{
-		cardVideo
+		cardMedia
+	}
+
+	, head()
+	{
+		return {
+			script: [ { src: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js', body: true } ]
+		}
 	}
 
 	, computed: {
@@ -53,9 +60,9 @@ export default {
 	, async asyncData({ payload, store, params, error }){
 
 		const result = payload
-			|| store.state.video.length ? store.state.video : false
+			|| store.state.media.length ? store.state.media : false
 			|| await client.getEntries({
-				content_type: 'video'
+				content_type: 'media'
 			});
 
 		if (result) {
