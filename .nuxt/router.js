@@ -10,6 +10,8 @@ const _9f1fbf1c = () => interopDefault(import('../pages/film/index.vue' /* webpa
 const _58cc7c26 = () => interopDefault(import('../pages/four_walling/index.vue' /* webpackChunkName: "pages/four_walling/index" */))
 const _4c5a8b8c = () => interopDefault(import('../pages/media/index.vue' /* webpackChunkName: "pages/media/index" */))
 const _515ec1fe = () => interopDefault(import('../pages/news/index.vue' /* webpackChunkName: "pages/news/index" */))
+const _11669928 = () => interopDefault(import('../pages/pages/index.vue' /* webpackChunkName: "pages/pages/index" */))
+const _4b236982 = () => interopDefault(import('../pages/privacy-policy.vue' /* webpackChunkName: "pages/privacy-policy" */))
 const _4a465335 = () => interopDefault(import('../pages/workshop/index.vue' /* webpackChunkName: "pages/workshop/index" */))
 const _c649a53a = () => interopDefault(import('../pages/channel/_slug.vue' /* webpackChunkName: "pages/channel/_slug" */))
 const _02d0c143 = () => interopDefault(import('../pages/event/_archive.vue' /* webpackChunkName: "pages/event/_archive" */))
@@ -17,6 +19,7 @@ const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webp
 const _a28d01ac = () => interopDefault(import('../pages/film/_slug.vue' /* webpackChunkName: "pages/film/_slug" */))
 const _4aa3ea44 = () => interopDefault(import('../pages/media/_slug.vue' /* webpackChunkName: "pages/media/_slug" */))
 const _54cc048e = () => interopDefault(import('../pages/news/_slug.vue' /* webpackChunkName: "pages/news/_slug" */))
+const _14d3dbb8 = () => interopDefault(import('../pages/pages/_slug.vue' /* webpackChunkName: "pages/pages/_slug" */))
 const _0e435c92 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -64,6 +67,14 @@ export const routerOptions = {
     component: _515ec1fe,
     name: "news"
   }, {
+    path: "/pages",
+    component: _11669928,
+    name: "pages"
+  }, {
+    path: "/privacy-policy",
+    component: _4b236982,
+    name: "privacy-policy"
+  }, {
     path: "/workshop",
     component: _4a465335,
     name: "workshop"
@@ -91,6 +102,10 @@ export const routerOptions = {
     path: "/news/:slug",
     component: _54cc048e,
     name: "news-slug"
+  }, {
+    path: "/pages/:slug",
+    component: _14d3dbb8,
+    name: "pages-slug"
   }, {
     path: "/",
     component: _0e435c92,
