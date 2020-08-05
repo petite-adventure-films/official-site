@@ -4,10 +4,13 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _c2dc62aa = () => interopDefault(import('../pages/channel/index.vue' /* webpackChunkName: "pages/channel/index" */))
+const _23381a0c = () => interopDefault(import('../pages/director/index.vue' /* webpackChunkName: "pages/director/index" */))
 const _c1a3ba7c = () => interopDefault(import('../pages/event/index.vue' /* webpackChunkName: "pages/event/index" */))
 const _9f1fbf1c = () => interopDefault(import('../pages/film/index.vue' /* webpackChunkName: "pages/film/index" */))
+const _58cc7c26 = () => interopDefault(import('../pages/four_walling/index.vue' /* webpackChunkName: "pages/four_walling/index" */))
 const _4c5a8b8c = () => interopDefault(import('../pages/media/index.vue' /* webpackChunkName: "pages/media/index" */))
 const _515ec1fe = () => interopDefault(import('../pages/news/index.vue' /* webpackChunkName: "pages/news/index" */))
+const _4a465335 = () => interopDefault(import('../pages/workshop/index.vue' /* webpackChunkName: "pages/workshop/index" */))
 const _c649a53a = () => interopDefault(import('../pages/channel/_slug.vue' /* webpackChunkName: "pages/channel/_slug" */))
 const _02d0c143 = () => interopDefault(import('../pages/event/_archive.vue' /* webpackChunkName: "pages/event/_archive" */))
 const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webpackChunkName: "pages/event/_slug" */))
@@ -37,6 +40,10 @@ export const routerOptions = {
     component: _c2dc62aa,
     name: "channel"
   }, {
+    path: "/director",
+    component: _23381a0c,
+    name: "director"
+  }, {
     path: "/event",
     component: _c1a3ba7c,
     name: "event"
@@ -45,6 +52,10 @@ export const routerOptions = {
     component: _9f1fbf1c,
     name: "film"
   }, {
+    path: "/four_walling",
+    component: _58cc7c26,
+    name: "four_walling"
+  }, {
     path: "/media",
     component: _4c5a8b8c,
     name: "media"
@@ -52,6 +63,10 @@ export const routerOptions = {
     path: "/news",
     component: _515ec1fe,
     name: "news"
+  }, {
+    path: "/workshop",
+    component: _4a465335,
+    name: "workshop"
   }, {
     path: "/channel/:slug",
     component: _c649a53a,

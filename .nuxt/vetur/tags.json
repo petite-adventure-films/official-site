@@ -11,6 +11,12 @@
   "LazyCardEvent": {
     "description": "Auto imported from components/card_event.vue"
   },
+  "CardFilm": {
+    "description": "Auto imported from components/card_film.vue"
+  },
+  "LazyCardFilm": {
+    "description": "Auto imported from components/card_film.vue"
+  },
   "CardMedia": {
     "description": "Auto imported from components/card_media.vue"
   },
@@ -22,5 +28,11 @@
   },
   "LazyCardVideo": {
     "description": "Auto imported from components/card_video.vue"
+  },
+  "ContactUs": {
+    "description": "Auto imported from components/contact_us.vue"
+  },
+  "LazyContactUs": {
+    "description": "Auto imported from components/contact_us.vue"
   }
 }

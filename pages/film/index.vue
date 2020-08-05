@@ -16,15 +16,19 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-
 import { createClient } from '@/plugins/contentful'
+
+import cardFilm from '@/components/card_film'
 
 const client = createClient();
 
 export default {
-	transition: 'slide-left',
 
-	computed: {
+	components:{
+		cardFilm
+	}
+
+	, computed: {
 		...mapGetters(['linkTo', 'dateFormat'])
 	}
 
