@@ -8,6 +8,7 @@
 		<nuxt-link :to = "{name:'director'}">監督</nuxt-link><br>
 		<nuxt-link :to = "{name:'four_walling'}">自主上映</nuxt-link><br>
 		<nuxt-link :to = "{name:'workshop'}">ワークショップ</nuxt-link><br>
+		<nuxt-link :to = "{name:'blog'}">かわら版</nuxt-link><br>
 
 
 	</div>

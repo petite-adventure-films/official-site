@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+
 export default {
 	/*
 	** Nuxt rendering mode
@@ -39,6 +40,7 @@ export default {
 	*/
 	plugins: [
 		  '@/plugins/contentful'
+		, '@/plugins/render-richtext'
 		, '@/plugins/vue-youtube'
 	],
 	/*
@@ -79,12 +81,14 @@ export default {
 		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
 		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
 		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
+		, BASE_URL                 : process.env.BASE_URL || 'http://localhost:3000'
 	}
 	/*
 	** router configuration
 	*/
 	, router: {
-		middleware: [
+		  base: process.env.BASE_DIR || '/'
+		, middleware: [
 			'getContentful'
 		]
 	}

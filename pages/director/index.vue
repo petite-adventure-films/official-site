@@ -95,7 +95,7 @@ export default {
 
 		const result = payload
 			|| await Promise.all([
-					client.getAssets({ 'fields.title' : '監督' })
+				  client.getAssets({ 'fields.title' : '監督' })
 				, client.getEntries({ content_type: 'film' })
 			]);
 

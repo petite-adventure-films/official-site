@@ -16,6 +16,7 @@ import nuxt_plugin_plugin_8cb2db1e from 'nuxt_plugin_plugin_8cb2db1e' // Source:
 import nuxt_plugin_plugin_4fcba1c6 from 'nuxt_plugin_plugin_4fcba1c6' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_axios_39c41f07 from 'nuxt_plugin_axios_39c41f07' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_contentful_fe22a150 from 'nuxt_plugin_contentful_fe22a150' // Source: ../plugins/contentful (mode: 'all')
+import nuxt_plugin_renderrichtext_1caaadec from 'nuxt_plugin_renderrichtext_1caaadec' // Source: ../plugins/render-richtext (mode: 'all')
 import nuxt_plugin_vueyoutube_fcf88930 from 'nuxt_plugin_vueyoutube_fcf88930' // Source: ../plugins/vue-youtube (mode: 'all')
 
 // Component: <ClientOnly>
@@ -206,6 +207,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_contentful_fe22a150 === 'function') {
     await nuxt_plugin_contentful_fe22a150(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_renderrichtext_1caaadec === 'function') {
+    await nuxt_plugin_renderrichtext_1caaadec(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vueyoutube_fcf88930 === 'function') {

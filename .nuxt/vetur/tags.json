@@ -1,10 +1,4 @@
 {
-  "Logo": {
-    "description": "Auto imported from components/Logo.vue"
-  },
-  "LazyLogo": {
-    "description": "Auto imported from components/Logo.vue"
-  },
   "CardEvent": {
     "description": "Auto imported from components/card_event.vue"
   },
@@ -22,6 +16,12 @@
   },
   "LazyCardMedia": {
     "description": "Auto imported from components/card_media.vue"
+  },
+  "CardPost": {
+    "description": "Auto imported from components/card_post.vue"
+  },
+  "LazyCardPost": {
+    "description": "Auto imported from components/card_post.vue"
   },
   "CardVideo": {
     "description": "Auto imported from components/card_video.vue"
