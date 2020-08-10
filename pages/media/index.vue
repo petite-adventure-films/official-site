@@ -25,14 +25,7 @@ const client = createClient();
 
 export default {
 
-	head()
-	{
-		return {
-			script: [ { src: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js', body: true } ]
-		}
-	}
-
-	, components:{
+	components:{
 		cardMedia
 	}
 

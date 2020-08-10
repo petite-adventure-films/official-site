@@ -72,6 +72,13 @@ export default {
 	** See https://nuxtjs.org/api/configuration-build/
 	*/
 	build: {
+		extend: ({ module, output }) => {
+			module.rules.unshift({
+				test: /\.worker\.js$/,
+				loader: 'worker-loader'
+			})
+			output.globalObject = 'this'
+		}
 	}
 	/*
 	** env configuration

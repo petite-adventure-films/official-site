@@ -29,21 +29,16 @@ import { mapState, mapGetters } from 'vuex'
 import { createClient } from '@/plugins/contentful'
 import PDFJS from 'pdfjs-dist/build/pdf'
 
-// console.log(PDFJSWorker)
-
-
 const client = createClient();
 
 export default {
 
 	async asyncData({ payload, store, params, error }) {
-		const post = payload
-			|| await store.state.media.find(post => post.fields.slug === params.slug)
+		const post = await store.state.media.find(post => post.fields.slug === params.slug)
 			|| await client.getEntries({
-					content_type: 'media'
+				  content_type: 'media'
 				, 'fields.slug' : params.slug
 			});
-
 
 		if (post) {
 			return { post: post.items ? post.items[0] : post }
@@ -54,12 +49,11 @@ export default {
 
 	, components: {
 	}
+
 	, data: function()
 	{
 		return{
 			hasPdf: false
-			// , pdfJS: {}
-			, pdfFile: {}
 		}
 	}
 
@@ -69,7 +63,7 @@ export default {
 		, addBreads: function(){
 			return [
 				{
-						icon: 'mdi-folder-outline'
+					  icon: 'mdi-folder-outline'
 					, text: 'メディア紹介'
 					, to: { name: 'media'}
 				}
@@ -79,8 +73,6 @@ export default {
 				}
 			]
 		}
-
-
 	}
 
 	, methods: {
@@ -90,84 +82,43 @@ export default {
 			if(!data) return false;
 			return (data.content[0].content[0].value) ? true : false;
 		}
-
-		, viewPdf: function(data)
-		{
-
-
-getPDFJSWorker();
- async function getPDFJSWorker(){
-	let res = await import('pdfjs-dist/build/pdf.worker');
-	if(res)
-	{
-		PDFJS.GlobalWorkerOptions.workerSrc = 'http://mozilla.github.io/pdf.js/build/pdf.worker.js';
-		// PDFJS.workerSrc = res;
-
-
-
-
-			var loadingTask = PDFJS.getDocument({
-				  url: data
-				, cMapUrl: '/cmaps/'
-				, cMapPacked: true,
-			});
-	}
-}
-			// loadingTask.promise.then(function(doc) {
-			// console.log('laodin', doc)
-
-			// 		let canvas = self.$refs.pdfCanvas;
-			// 		let context = canvas.getContext('2d');
-
-			// 		doc.getPage(1).then(page => {
-			// 			let viewport = page.getViewport({scale: 1});
-			// 			canvas.width = viewport.width;
-			// 			canvas.height = viewport.height;
-
-			// 			page.render({
-			// 				  canvasContext: context
-			// 				, viewport: viewport
-			// 			})
-
-			// 		})
-			// 	});
-		}
-
 	}
 
 	, created()
 	{
-
 		let self = this;
 
-			// const PDFJSWorker = ;
-		if(this.post.fields.media
-		&& this.post.fields.media.fields.file.contentType === 'application/pdf')
+		if(this.post.fields.media && this.post.fields.media.fields.file.contentType == 'application/pdf')
 		{
 			this.hasPdf = true;
-
-			let pdf = this.post.fields.media.fields.file.url;
-			let getFileBlob = new Promise((resolve, reject) =>
-			{
-				let request = new XMLHttpRequest();
-				request.open('GET', pdf, true);
-				request.responseType = 'blob';
-				request.onload = function(){
-					resolve(request.response);
-				}
-				request.send();
+			PDFJS.GlobalWorkerOptions.workerSrc = './pdfjs-dist/build/pdf.worker.js';
+			let loadingTask = PDFJS.getDocument({
+				url: this.post.fields.media.fields.file.url
+				, cMapUrl: './pdfjs-dist/cmaps/'
+				, cMapPacked: true,
 			});
 
-			getFileBlob.then((r) => {
-				let reader = new FileReader()
-				reader.readAsArrayBuffer(r)
-				reader.onload = () => {
-					self.pdfFile = reader.result;
-					this.viewPdf(reader.result);
-				}
+			loadingTask.promise.then(function(doc) {
+
+				let canvas = self.$refs.pdfCanvas;
+				let context = canvas.getContext('2d');
+
+				doc.getPage(1).then(page => {
+					let viewport = page.getViewport({scale: 1});
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+
+					page.render({
+						  canvasContext: context
+						, viewport: viewport
+					})
+
+				})
 			});
 
 		}
+
+
 	}
 
 }
