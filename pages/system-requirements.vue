@@ -41,7 +41,6 @@ export default {
 	, async asyncData({ payload, store, params, error }){
 
 		const result = payload
-			|| store.state.news.length ? store.state.news : false
 			|| await client.getEntries({
 				  content_type: 'page'
 				, 'fields.slug' : 'system-requirements'

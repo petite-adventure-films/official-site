@@ -1,29 +1,31 @@
 <template>
-	<div>
-		<h1>かわら版</h1>
-		<br><br>
+	<article>
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>かわら版 - {{pageTitle}}</h1>
+		</header>
+
+		<br>
 		<div
-		v-for = "category in fetchedCategory"
-		:key = "category.sys.id"
-			><v-btn text clatt="mt-1" :to = "linkTo('category', category)">{{category.fields.title}}</v-btn>
+		v-for = "item in category"
+		:key = "item.sys.id"
+			><v-btn outlined class="mt-1" :to = "linkTo('category', item)">{{item.fields.title}}</v-btn>
 		</div>
 		<br>
 		<div
-		v-for = "series in fetchedSeries"
-		:key = "series.sys.id"
-			><v-btn text clatt="mt-1" :to = "linkTo('series', series)">{{series.fields.title}}</span></v-btn>
+		v-for = "item in series"
+		:key = "item.sys.id"
+			><v-btn outlined class="mt-1" :to = "linkTo('series', item)">{{item.fields.title}}</v-btn>
 		</div>
 		<br>
 		<div
-		v-for = "(post, key) in sortedPosts"
-		:key = "key"
-			><cardPost :post="post.data"></cardPost>
+		v-for = "item in post"
+		:key = "item.sys.id"
+			><cardPost :post="item"></cardPost>
 		</div>
-		<br>
-		<v-btn v-if="skipped > -1" @click="viewMore">もっと見る</v-btn>
 		<br><br>
 		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
-	</div>
+	</article>
 </template>
 
 <script>
@@ -36,92 +38,58 @@ const client = createClient();
 
 export default {
 
-	components:{
+	async asyncData({ payload, store, params, error }) {
+		const post = await client.getEntries({
+				  content_type: 'post'
+				, limit: 20
+				, order: '-fields.publishedDate,-fields.order,-sys.createdAt'
+				, 'fields.relatedSeries.sys.contentType.sys.id': 'series'
+				, 'fields.relatedSeries.fields.title[match]': params.slug
+			});
+
+		if (post) {
+			return {
+				post: post.items ? post.items : post
+			}
+
+		} else {
+			return error({ statusCode: 400 })
+		}
+	}
+
+	, components:{
 		cardPost
 	}
 
 	, data: function()
 	{
 		return{
-			sortedPosts   : []
-			, skipped: 0
+			pageTitle : this.$route.params.slug
 		}
 	}
 
 	, computed:
 	{
-		...mapGetters(['linkTo', 'dateFormat'])
+		...mapState(['category', 'series'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: 'かわら版'
+					, to: {name: 'blog'}
+				}
+				, {
+					icon: 'mdi-folder-outline'
+					, text: this.$route.params.slug
+					, to: {name: 'serise', params: { slug: this.$route.params.slug } }
+				}
+			]
+		}
 	}
 
 	, methods:
 	{
-
-		async viewMore()
-		{
-
-			let result = await client.getEntries({
-				content_type: 'post'
-				, skip: this.skipped
-			});
-
-			if (result){
-				let fetchedPosts = this.sort(result.items);
-				fetchedPosts.forEach((arr, key) => {
-					this.sortedPosts.push(arr);
-					this.$store.commit('setPosts', arr.data);
-				})
-
-				this.skipped = (result.items.length === 100) ? this.skipped + 100 : -1;
-
-				return true
-			}
-			// console.log('result', result)
-		}
-
-		, sort: function(data)
-		{
-			let arr = Object.keys(data).map((e) => ({
-				  key: e
-				, sorted : data[e].fields.order || data[e].sys.createdAt
-				, data   : data[e]
-			}));
-			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
-		}
-
-	}
-
-
-	, created: function()
-	{
-		this.sortedPosts = this.sort(this.fetchedPosts);
-	}
-
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| await Promise.all([
-				client.getEntries({
-					  content_type: 'post'
-					, 'fields.relatedSeries.sys.contentType.sys.id': 'series'
-					, 'fields.relatedSeries.fields.title[match]': params.slug
-				})
-				, client.getEntries({ content_type: 'category' })
-				, client.getEntries({ content_type: 'series' })
-			]);
-
-		if (result) {
-
-			let skipped = 100;
-			let fetchedPosts = result[0].items;
-			let fetchedCategory = result[1].items;
-			let fetchedSeries = result[2].items;
-			fetchedPosts.forEach(a => store.commit('setPosts', a));
-			return { fetchedPosts, skipped, fetchedCategory, fetchedSeries }
-
-		} else {
-			return error({ statusCode: 400 })
-		}
 	}
 
 }

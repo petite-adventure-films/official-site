@@ -5,12 +5,40 @@ import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 const client = createClient();
 const options = {
 	renderNode: {
-		  [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+		["paragraph"]: (node, next) => `<p>${next(node.content).replace(/\n/g, `<br>`)}</p>`
+		, [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
 			`<img src="${fields.file.url}?h=320&q=50">`
 		, [INLINES.EMBEDDED_ENTRY]: (node) =>
 			`<a href="${process.env.BASE_URL}/kawaraban/${node.data.target.fields.slug}">${node.data.target.fields.title}</a>`
 	}
 };
+
+const postTypes = [
+	  'post'
+	, 'category'
+	, 'series'
+	, 'news'
+	, 'event'
+	, 'media'
+	, 'video'
+	, 'film'
+];
+
+const entriesParams = {
+	event:
+	{
+		  order: '-fields.publishedDate,sys.createdAt'
+		, 'fields.startDate[gte]' : new Date().getFullYear() + '-01-01'
+	}
+	, news:  {
+		  order: '-sys.createdAt'
+		, limit: 20
+	}
+	, film  : { order: '-sys.createdAt'}
+	, post  : { order: '-fields.publishedDate,-fields.order,-sys.createdAt' }
+	, media : { order: '-fields.publishedDate,-fields.order,-sys.createdAt' }
+	, video : { order: '-fields.order,sys.createdAt' }
+}
 
 export const state = () => ({
 	  news:  []
@@ -19,12 +47,22 @@ export const state = () => ({
 	, video: []
 	, media: []
 	, post:  []
+	, pageInfo: {}
+	, categoryInfo: {}
 })
 
 export const getters = {
 
 	linkTo: () => (name, obj) => {
-		return { name: `${name}-slug`, params: { slug: obj.fields.slug } }
+		if(obj)
+		{
+			return { name: `${name}-slug`, params: { slug: obj.fields.slug } }
+		}
+
+		else
+		{
+			return { name: name }
+		}
 	}
 
 	, dateFormat: () => (date) => {
@@ -46,20 +84,45 @@ export const mutations = {
 		{
 			state[type] = new Array();
 		}
-		state[type].push(payload);
+
+		if(!state[type].find((e) => e.sys.id ===  payload.sys.id))
+		{
+			state[type].push(payload);
+		}
+	}
+
+	, setPageInfo: (state, payload) => {
+		if(payload.items.length > 0)
+		{
+			let type = payload.items[0].sys.contentType.sys.id;
+			if(state.pageInfo[type] === undefined)
+			{
+				state.pageInfo[type] = {};
+			}
+			state.pageInfo[type]['total'] = payload.total;
+			state.pageInfo[type]['skip'] = payload.skip;
+			state.pageInfo[type]['limit'] = payload.limit;
+		}
 	}
 }
 
 export const actions = {
-	// async getAllPosts({commit}, payload)
-	// {
-	// 	console.log('paylod')
-	// 	await client.getEntries()
-	// 		.then(res => {
-	// 			res.items.forEach((post) => {
-	// 				commit('setPosts', post);
-	// 			})
-	// 		})
-	// 		.catch(console.error)
-	// }
+	async getAllPosts({commit}, payload)
+	{
+		let resolvedPromisesArray = [];
+		postTypes.forEach((e) => {
+			let params = entriesParams[e] || {};
+			params.content_type = e;
+			resolvedPromisesArray.push(client.getEntries(params));
+		})
+		await Promise.all(resolvedPromisesArray).then((res) => {
+			res.forEach((contents) => {
+				commit('setPageInfo', contents);
+				contents.items.forEach((post) => {
+					commit('setPosts', post);
+				})
+			})
+		})
+	}
+
 }

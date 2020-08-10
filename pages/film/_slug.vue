@@ -6,7 +6,7 @@
 			<hr>
 			<div v-for = "arr in post.fields.awards">
 				{{arr.key}}<br>
-				<span v-for = "val in arr.data">{{val}}</span>
+				<span v-for = "val in arr.data" :key=val >{{val}}</span>
 			</div>
 		</div>
 
@@ -24,7 +24,7 @@
 		<hr>
 		{{post.fields.genre}} / {{post.fields.country}} / {{post.fields.releaseYear}} / {{post.fields.runningTime}}
 		<div v-for = "arr in post.fields.details">
-			{{arr.key}}: <span v-for = "val in arr.data">{{val}}</span>
+			{{arr.key}}: <span v-for = "val in arr.data" :key=val>{{val}}</span>
 		</div>
 
 		<div v-if="post.fields.recommends">
@@ -45,7 +45,8 @@
 				show-arrows-on-hover
 				height="auto"
 				><v-carousel-item
-					v-for="arr in post.fields.gallery"
+					v-for="(arr, key) in post.fields.gallery"
+					:key = key
 					><v-img :src="generateImageUrl(arr.fields.file.url)"></v-img>
 				</v-carousel-item>
 			</v-carousel>
@@ -164,7 +165,8 @@ export default {
 	}
 
 	, async asyncData({ payload, store, params, error }) {
-		const post = payload || await store.state.film.find(post => post.fields.slug === params.slug);
+		const post = payload
+			|| await store.state.film.find(post => post.fields.slug === params.slug);
 		if (post) {
 			return { post }
 		} else {

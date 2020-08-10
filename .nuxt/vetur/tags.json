@@ -1,4 +1,10 @@
 {
+  "Breadcrumbs": {
+    "description": "Auto imported from components/breadcrumbs.vue"
+  },
+  "LazyBreadcrumbs": {
+    "description": "Auto imported from components/breadcrumbs.vue"
+  },
   "CardEvent": {
     "description": "Auto imported from components/card_event.vue"
   },
@@ -17,6 +23,12 @@
   "LazyCardMedia": {
     "description": "Auto imported from components/card_media.vue"
   },
+  "CardNews": {
+    "description": "Auto imported from components/card_news.vue"
+  },
+  "LazyCardNews": {
+    "description": "Auto imported from components/card_news.vue"
+  },
   "CardPost": {
     "description": "Auto imported from components/card_post.vue"
   },
@@ -34,5 +46,23 @@
   },
   "LazyContactUs": {
     "description": "Auto imported from components/contact_us.vue"
+  },
+  "Footer": {
+    "description": "Auto imported from components/footer.vue"
+  },
+  "LazyFooter": {
+    "description": "Auto imported from components/footer.vue"
+  },
+  "Header": {
+    "description": "Auto imported from components/header.vue"
+  },
+  "LazyHeader": {
+    "description": "Auto imported from components/header.vue"
+  },
+  "Navi": {
+    "description": "Auto imported from components/navi.vue"
+  },
+  "LazyNavi": {
+    "description": "Auto imported from components/navi.vue"
   }
 }

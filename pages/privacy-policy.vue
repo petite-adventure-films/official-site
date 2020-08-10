@@ -40,10 +40,7 @@ export default {
 	// 記事取得
 	, async asyncData({ payload, store, params, error }){
 
-		console.log('params', payload)
-
 		const result = payload
-			|| store.state.news.length ? store.state.news : false
 			|| await client.getEntries({
 				  content_type: 'page'
 				, 'fields.slug' : 'privacy-policy'

@@ -150,7 +150,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"CTF_SPACE_ID":"3svnc7zhubpd","CTF_CDA_ACCESS_TOKEN":"ZDV9CC5V8JkB8UXYmdxzpJewRqv0Jr4E_oxS_FypOFQ","CTF_PREVIEW_ACCESS_TOKEN":"tBr06MH7ZCQr9nnV1_sFKjxJraxpQmY1kWqB7Ky3ozE","BASE_URL":"http://localhost:3000"}
+      env: {"CTF_SPACE_ID":"3svnc7zhubpd","CTF_CDA_ACCESS_TOKEN":"ZDV9CC5V8JkB8UXYmdxzpJewRqv0Jr4E_oxS_FypOFQ","CTF_PREVIEW_ACCESS_TOKEN":"tBr06MH7ZCQr9nnV1_sFKjxJraxpQmY1kWqB7Ky3ozE","BASE_URL":"http://localhost:3000","SITE_NAME":"Petite Adventure Films","SITE_NAME_JP":"プチ・アドベンチャー・フィルムズ","SITE_DESCRIPTION":"インディペンデントのドキュメンタリー監督、早川由美子の作品と上映情報を紹介するサイト。これまでに、反戦・平和運動、住宅・貧困問題、震災・原発問題など、マスメディアでは取り上げられにくいテーマを、独自の視点で表現。これまでの主な作品『ブライアンと仲間たち』、『さようならUR』、『木田さんと原発、そして日本』など。"}
     }
     // Only set once
     if (!process.static && context.req) {

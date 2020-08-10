@@ -1,16 +1,20 @@
 <template>
-	<div>
-		<h1>上映会・イベント</h1>
+	<article>
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>上映会・イベント</h1>
+		</header>
 
-		<br><br>
+		<br>
 		<v-btn outlined @click="genDisplayedPosts()">Latest</v-btn>
 
 		<br>
-		<div v-for="(arr, key) in dateIndexs">
+		<div v-for="(arr, key) in dateIndexs" :key="key">
 			<div v-if="key >= thisYear">
 				<span>{{key}}</span>
 				<v-btn
 				v-for="val in arr"
+					:key = val
 					outlined
 					@click="genDisplayedPosts(key, val)"
 					>{{convertMonth(val)}}
@@ -28,14 +32,13 @@
 		Archives
 		<v-btn
 		v-for="(val, key) in archiveIndexs"
+			:key = key
 			outlined
-			:to = "{name:'event-archive', params:{archive:val}}"
+			:to = "{name:'event-archive-year' , params:{ year: val }}"
 			>{{val}}
 		</v-btn>
 
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
-	</div>
+	</article>
 </template>
 
 <script>
@@ -63,8 +66,18 @@ export default{
 	}
 
 	, computed: {
-		  ...mapState()
+		...mapState(['event'])
 		, ...mapGetters(['linkTo', 'dateFormat'])
+
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: '上映会・イベント'
+					, to: {name: 'event'}
+				}
+			]
+		}
 
 		, archiveIndexs: function()
 		{
@@ -219,8 +232,8 @@ export default{
 		, sort: function(data)
 		{
 			let arr = Object.keys(data).map((e) => {
-				let months = this.getMonths(data[e]);
 				let years = this.getYears(data[e]);
+				let months = this.getMonths(data[e]);
 				return {
 					  key: e
 					, startDate : data[e].fields.startDate
@@ -238,7 +251,7 @@ export default{
 	, created: function()
 	{
 
-		this.rawPosts = this.sort(this.fetchedPosts);
+		this.rawPosts = this.sort(this.event);
 
 		this.rawPosts.forEach((a) => {
 
@@ -268,37 +281,5 @@ export default{
 		this.genDisplayedPosts();
 	}
 
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| store.state.event.length ? store.state.event : false
-			|| await client.getEntries({
-				content_type: 'event'
-			});
-
-		if (result) {
-
-			let fetchedPosts;
-
-			if(result.items)
-			{
-				let skipped = 100;
-				fetchedPosts = result.items;
-				fetchedPosts.forEach(a => store.commit('setPosts', a));
-				return { fetchedPosts, skipped }
-			}
-
-			else
-			{
-				fetchedPosts = result;
-				return { fetchedPosts }
-			}
-
-
-		} else {
-			return error({ statusCode: 400 })
-		}
-	}
 }
 </script>

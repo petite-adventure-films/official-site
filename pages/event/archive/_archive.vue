@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>{{archiveTitle}}年度<br>
+		<h1>{{archiveTitle}}年<br>
 		上映会・イベントアーカイブ</h1>
 
 		<br>
@@ -10,6 +10,7 @@
 		<div
 		v-if="rawPosts"
 			v-for="item in rawPosts"
+				:key="item.key"
 				><cardEvent :post="item.data"></cardEvent>
 		</div>
 
@@ -35,8 +36,9 @@ export default {
 	async asyncData({ payload, store, params, error }) {
 		const results = payload || await client.getEntries({
 			content_type: 'event'
-			, 'fields.startDate[lte]' : params.archive + '-12-31'
-			, 'fields.startDate[gte]' : params.archive + '-01-01'
+			, order: 'fields.publishedDate,sys.createdAt'
+			, 'fields.startDate[lte]' : params.year + '-12-31'
+			, 'fields.startDate[gte]' : params.year + '-01-01'
 		});
 
 		if (results)
@@ -67,11 +69,10 @@ export default {
 		cardEvent
 	}
 
-
 	, data: function()
 	{
 		return {
-			archiveTitle: this.$route.params.archive
+			archiveTitle: this.$route.params.year
 		}
 	}
 

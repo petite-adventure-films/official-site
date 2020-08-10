@@ -1,14 +1,17 @@
 <template>
 	<div>
-		<h1>メディア紹介</h1>
-		<br><br>
+
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>メディア紹介</h1>
+		</header>
+
 		<div
-		v-for = "post in sortedPosts"
+		v-for = "post in media"
 		:key  = "post.key"
-			><cardMedia :post="post.data"></cardMedia>
+			><cardMedia :post="post"></cardMedia>
 		</div>
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
+
 	</div>
 </template>
 
@@ -22,70 +25,38 @@ const client = createClient();
 
 export default {
 
-	components:{
-		cardMedia
-	}
-
-	, head()
+	head()
 	{
 		return {
 			script: [ { src: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js', body: true } ]
 		}
 	}
 
+	, components:{
+		cardMedia
+	}
+
 	, computed: {
-		...mapGetters(['linkTo', 'dateFormat'])
+		...mapState(['media'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
+
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: 'メディア紹介'
+					, to: {name: 'media'}
+				}
+			]
+		}
+
 	}
 
 	, methods: {
-
-		sort: function(data)
-		{
-			let arr = Object.keys(data).map((e) => ({
-				  key: e
-				, sorted : data[e].fields.order || data[e].sys.createdAt
-				, data   : data[e]
-			}));
-			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
-		}
-
 	}
 
 	, created: function()
 	{
-		this.sortedPosts = this.sort(this.fetchedPosts);
-	}
-
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| store.state.media.length ? store.state.media : false
-			|| await client.getEntries({
-				content_type: 'media'
-			});
-
-		if (result) {
-
-			let fetchedPosts;
-
-			if(result.items)
-			{
-				fetchedPosts = result.items;
-				fetchedPosts.forEach(a => store.commit('setPosts', a));
-				return { fetchedPosts }
-			}
-
-			else
-			{
-				fetchedPosts = result;
-				return { fetchedPosts }
-			}
-
-
-		} else {
-			return error({ statusCode: 400 })
-		}
 	}
 
 }

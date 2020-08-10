@@ -1,49 +1,62 @@
 <template>
-	<div>
-		<h1>お知らせ</h1>
-		<br><br>
+	<article>
+
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>お知らせ</h1>
+		</header>
+
 		<div
-		v-for = "(post, key) in sortedPosts"
+		v-for = "(post, key) in news"
 		:key = "key"
-			><div>
-				<nuxt-link :to="linkTo('news', post.data)">
-					<v-chip v-if="post.data.fields.eventType">
-						{{post.data.fields.eventType.fields.title}}
-					</v-chip>
-					<v-chip v-if="post.data.fields.relatedFilm">
-						{{post.data.fields.relatedFilm.fields.titleAbbr}}
-					</v-chip>
-					{{post.data.fields.title}}
-				</nuxt-link>
-			</div>
+			><cardNews :post="post"></cardNews>
 		</div>
 		<br>
-		<v-btn v-if="skipped > -1" @click="viewMore">もっと見る</v-btn>
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
-	</div>
+
+		<v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>
+	</article>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-
 import { createClient } from '@/plugins/contentful'
+
+import cardNews from '@/components/card_news'
 
 const client = createClient();
 
 export default {
 
-	data: function()
+	components: {
+		cardNews
+	}
+
+	, data: function()
 	{
 		return{
-			sortedPosts   : []
-			, skipped: 0
 		}
 	}
 
 	, computed:
 	{
-		...mapGetters(['linkTo', 'dateFormat'])
+		  ...mapState(['news', 'pageInfo', 'pageInfo'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
+		, postPageInfo: function(){
+			return this.pageInfo['news']
+		}
+		, loadMore: function(){
+			let loaded = this.postPageInfo;
+			return loaded.skip + loaded.limit < loaded.total;
+		}
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: 'お知らせ'
+					, to: {name: 'news'}
+				}
+			]
+		}
 	}
 
 	, methods:
@@ -52,74 +65,28 @@ export default {
 		async viewMore()
 		{
 
+			let loaded = this.postPageInfo.skip + 20;
+
 			let result = await client.getEntries({
 				content_type: 'news'
-				, skip: this.skipped
+				, skip: loaded
+				, limit: this.postPageInfo.limit
+				, order: '-fields.publishedDate,-sys.createdAt'
 			});
 
 			if (result){
-				let fetchedPosts = this.sort(result.items);
-				fetchedPosts.forEach((arr, key) => {
-					this.sortedPosts.push(arr);
-					this.$store.commit('setPosts', arr.data);
+				this.$store.commit('setPageInfo', result);
+				result.items.forEach((arr, key) => {
+					this.$store.commit('setPosts', arr);
 				})
-
-				this.skipped = (result.items.length === 100) ? this.skipped + 100 : -1;
-
-				return true
+				return true;
 			}
-			// console.log('result', result)
-		}
-
-		, sort: function(data)
-		{
-			let arr = Object.keys(data).map((e) => ({
-				  key: e
-				, sorted : data[e].fields.publishedDate || data[e].sys.createdAt
-				, data   : data[e]
-			}));
-			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
 		}
 
 	}
-
 
 	, created: function()
 	{
-		this.sortedPosts = this.sort(this.fetchedPosts);
-	}
-
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| store.state.news.length ? store.state.news : false
-			|| await client.getEntries({
-				content_type: 'news'
-			});
-
-		if (result) {
-
-			let fetchedPosts;
-
-			if(result.items)
-			{
-				let skipped = 100;
-				fetchedPosts = result.items;
-				fetchedPosts.forEach(a => store.commit('setPosts', a));
-				return { fetchedPosts, skipped }
-			}
-
-			else
-			{
-				fetchedPosts = result;
-				return { fetchedPosts }
-			}
-
-
-		} else {
-			return error({ statusCode: 400 })
-		}
 	}
 
 }

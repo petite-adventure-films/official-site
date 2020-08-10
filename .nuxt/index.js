@@ -15,8 +15,8 @@ import { createStore } from './store.js'
 import nuxt_plugin_plugin_8cb2db1e from 'nuxt_plugin_plugin_8cb2db1e' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_plugin_4fcba1c6 from 'nuxt_plugin_plugin_4fcba1c6' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_axios_39c41f07 from 'nuxt_plugin_axios_39c41f07' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_components_567e580a from 'nuxt_plugin_components_567e580a' // Source: ../plugins/components (mode: 'all')
 import nuxt_plugin_contentful_fe22a150 from 'nuxt_plugin_contentful_fe22a150' // Source: ../plugins/contentful (mode: 'all')
-import nuxt_plugin_renderrichtext_1caaadec from 'nuxt_plugin_renderrichtext_1caaadec' // Source: ../plugins/render-richtext (mode: 'all')
 import nuxt_plugin_vueyoutube_fcf88930 from 'nuxt_plugin_vueyoutube_fcf88930' // Source: ../plugins/vue-youtube (mode: 'all')
 
 // Component: <ClientOnly>
@@ -64,7 +64,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"petite_adventure_films_jp","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"## Build Setup"}],"script":[],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[]},
+    head: {"title":"Petite Adventure Films","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"インディペンデントのドキュメンタリー監督、早川由美子の作品と上映情報を紹介するサイト。これまでに、反戦・平和運動、住宅・貧困問題、震災・原発問題など、マスメディアでは取り上げられにくいテーマを、独自の視点で表現。これまでの主な作品『ブライアンと仲間たち』、『さようならUR』、『木田さんと原発、そして日本』など。"}],"script":[],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[]},
 
     store,
     router,
@@ -205,12 +205,12 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_axios_39c41f07(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_contentful_fe22a150 === 'function') {
-    await nuxt_plugin_contentful_fe22a150(app.context, inject)
+  if (typeof nuxt_plugin_components_567e580a === 'function') {
+    await nuxt_plugin_components_567e580a(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_renderrichtext_1caaadec === 'function') {
-    await nuxt_plugin_renderrichtext_1caaadec(app.context, inject)
+  if (typeof nuxt_plugin_contentful_fe22a150 === 'function') {
+    await nuxt_plugin_contentful_fe22a150(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vueyoutube_fcf88930 === 'function') {

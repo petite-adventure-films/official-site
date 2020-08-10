@@ -1,14 +1,17 @@
 <template>
 	<div>
-		<h1>映画</h1>
-		<br><br>
+
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>チャンネル</h1>
+		</header>
+
 		<div
-		v-for = "post in sortedPosts"
+		v-for = "post in video"
 		:key  = "post.key"
-			><cardVideo :post="post.data"></cardVideo>
+			><cardVideo :post="post"></cardVideo>
 		</div>
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
+
 	</div>
 </template>
 
@@ -27,58 +30,26 @@ export default {
 	}
 
 	, computed: {
-		...mapGetters(['linkTo', 'dateFormat'])
+		...mapState(['video'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
+
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: 'チャンネル'
+					, to: {name: 'channel'}
+				}
+			]
+		}
+
 	}
 
 	, methods: {
-
-		sort: function(data)
-		{
-			let arr = Object.keys(data).map((e) => ({
-				  key: e
-				, sorted : data[e].fields.order || data[e].sys.createdAt
-				, data   : data[e]
-			}));
-			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
-		}
-
 	}
 
 	, created: function()
 	{
-		this.sortedPosts = this.sort(this.fetchedPosts);
-	}
-
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| store.state.video.length ? store.state.video : false
-			|| await client.getEntries({
-				content_type: 'video'
-			});
-
-		if (result) {
-
-			let fetchedPosts;
-
-			if(result.items)
-			{
-				fetchedPosts = result.items;
-				fetchedPosts.forEach(a => store.commit('setPosts', a));
-				return { fetchedPosts }
-			}
-
-			else
-			{
-				fetchedPosts = result;
-				return { fetchedPosts }
-			}
-
-
-		} else {
-			return error({ statusCode: 400 })
-		}
 	}
 
 }

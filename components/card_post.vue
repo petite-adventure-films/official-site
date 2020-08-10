@@ -1,9 +1,8 @@
 <template>
 	<v-card
-		:to = "linkTo('blog', post)"
+		:to = "linkTo(this.thisType, post)"
 		outlined
 		class="mt-4"
-		width="304px"
 		>
 		<v-img
 		v-if="post.fields.thumbnail"
@@ -19,7 +18,7 @@
 		</v-img>
 
 		<v-card-title v-else>
-			<v-chip v-if="post.fields.category">{{post.fields.category.fields.titleAbbr}}</v-chip>
+			<v-chip v-if="post.fields.category">{{this.categoryAbbrName}}</v-chip>
 			<v-chip v-if="post.fields.relatedFilm">{{post.fields.relatedFilm.fields.titleAbbr}}</v-chip>
 			<v-chip v-if="post.fields.relatedSeries">#{{post.fields.relatedSeries.fields.titleAbbr}}</v-chip>
 			<div>{{post.fields.title}}</div>
@@ -45,6 +44,18 @@ export default{
 
 	, computed: {
 		...mapGetters(['linkTo', 'dateFormat'])
+		, thisType: function()
+		{
+			let type = this.post.sys.contentType.sys.id;
+			if(type == 'post')  type = 'blog';
+			if(type == 'video') type = 'channel';
+			return type;
+		}
+		, categoryAbbrName: function()
+		{
+			let category = this.$store.state.category.find((e) => e.sys.id === this.post.fields.category.sys.id);
+			return category.fields.titleAbbr
+		}
 	}
 
 	, methods: {

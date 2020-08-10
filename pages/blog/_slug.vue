@@ -1,17 +1,23 @@
 <template>
 	<div>
 
-		<v-chip v-if="post.fields.category">
-			{{post.fields.category.fields.title}}
-		</v-chip>
-		<v-chip v-if="post.fields.relatedFilm">
-			{{post.fields.relatedFilm.fields.titleAbbr}}
-		</v-chip>
-		<v-chip v-if="post.fields.relatedSeries">
-			{{post.fields.relatedSeries.fields.title}}
-		</v-chip>
 
-		<h3>{{ post.fields.title }}</h3>
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+				<h3>{{ post.fields.title }}</h3>
+			<v-chip v-if="post.fields.category">
+				{{post.fields.category.fields.title}}
+			</v-chip>
+			<v-chip v-if="post.fields.relatedFilm">
+				{{post.fields.relatedFilm.fields.titleAbbr}}
+			</v-chip>
+			<v-chip v-if="post.fields.relatedSeries">
+				{{post.fields.relatedSeries.fields.title}}
+			</v-chip>
+		</header>
+
+
+
 		<div v-html="renderRichText(post.fields.body)"></div>
 
 		<div>作成 {{dateFormat(post.fields.publishedDate || post.sys.createdAt)}}</div>
@@ -72,17 +78,15 @@ const client = createClient();
 export default {
 
 	async asyncData({ payload, store, params, error }) {
-		const fetchedPosts = payload
+		const post = payload
 			|| await store.state.post.find(post => post.fields.slug === params.slug)
 			|| await client.getEntries({
 				  content_type: 'post'
 				, 'fields.slug' : params.slug
 			});
 
-		if (fetchedPosts) {
-			let post = fetchedPosts.items ? fetchedPosts.items[0] : fetchedPosts;
-			return { post: post }
-
+		if (post) {
+			return { post: post.items ? post.items[0] : post }
 		} else {
 			return error({ statusCode: 400 })
 		}
@@ -99,7 +103,23 @@ export default {
 		}
 	}
 
-	, computed:{
+	, computed: {
+		...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
+
+		,addBreads: function(){
+			return [
+				{
+					  icon: 'mdi-folder-outline'
+					, text: 'かわら版'
+					, to: { name: 'post'}
+				}
+				, {
+					text: this.post.fields.title
+					, to: this.linkTo('post', this.post)
+				}
+			]
+		}
+
 	}
 
 	, async created()
@@ -114,8 +134,5 @@ export default {
 		}
 	}
 
-	, computed: {
-		...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
-	}
 }
 </script>

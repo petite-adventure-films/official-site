@@ -105,6 +105,13 @@
     "_name": "_4a465335"
   },
   {
+    "name": "event-archive-archive",
+    "path": "/event/archive/:archive?",
+    "component": "/Users/restard/Documents/paf/jp/pages/event/archive/_archive.vue",
+    "chunkName": "pages/event/archive/_archive",
+    "_name": "_32ddb570"
+  },
+  {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "/Users/restard/Documents/paf/jp/pages/blog/_slug.vue",
@@ -124,13 +131,6 @@
     "component": "/Users/restard/Documents/paf/jp/pages/channel/_slug.vue",
     "chunkName": "pages/channel/_slug",
     "_name": "_c649a53a"
-  },
-  {
-    "name": "event-archive",
-    "path": "/event/:archive",
-    "component": "/Users/restard/Documents/paf/jp/pages/event/_archive.vue",
-    "chunkName": "pages/event/_archive",
-    "_name": "_02d0c143"
   },
   {
     "name": "event-slug",

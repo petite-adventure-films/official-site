@@ -18,10 +18,10 @@ const _0d7aece5 = () => interopDefault(import('../pages/series/index.vue' /* web
 const _ef6a19d0 = () => interopDefault(import('../pages/specified-commercial-transaction-law.vue' /* webpackChunkName: "pages/specified-commercial-transaction-law" */))
 const _68ccd393 = () => interopDefault(import('../pages/system-requirements.vue' /* webpackChunkName: "pages/system-requirements" */))
 const _4a465335 = () => interopDefault(import('../pages/workshop/index.vue' /* webpackChunkName: "pages/workshop/index" */))
+const _32ddb570 = () => interopDefault(import('../pages/event/archive/_archive.vue' /* webpackChunkName: "pages/event/archive/_archive" */))
 const _e6f7a870 = () => interopDefault(import('../pages/blog/_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
 const _6e2e14a4 = () => interopDefault(import('../pages/category/_slug.vue' /* webpackChunkName: "pages/category/_slug" */))
 const _c649a53a = () => interopDefault(import('../pages/channel/_slug.vue' /* webpackChunkName: "pages/channel/_slug" */))
-const _02d0c143 = () => interopDefault(import('../pages/event/_archive.vue' /* webpackChunkName: "pages/event/_archive" */))
 const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webpackChunkName: "pages/event/_slug" */))
 const _a28d01ac = () => interopDefault(import('../pages/film/_slug.vue' /* webpackChunkName: "pages/film/_slug" */))
 const _4aa3ea44 = () => interopDefault(import('../pages/media/_slug.vue' /* webpackChunkName: "pages/media/_slug" */))
@@ -106,6 +106,10 @@ export const routerOptions = {
     component: _4a465335,
     name: "workshop"
   }, {
+    path: "/event/archive/:archive?",
+    component: _32ddb570,
+    name: "event-archive-archive"
+  }, {
     path: "/blog/:slug",
     component: _e6f7a870,
     name: "blog-slug"
@@ -117,10 +121,6 @@ export const routerOptions = {
     path: "/channel/:slug",
     component: _c649a53a,
     name: "channel-slug"
-  }, {
-    path: "/event/:archive",
-    component: _02d0c143,
-    name: "event-archive"
   }, {
     path: "/event/:slug",
     component: _c510fd0c,

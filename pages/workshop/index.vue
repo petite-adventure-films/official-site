@@ -15,6 +15,7 @@
 			height="auto"
 			><v-carousel-item
 				v-for="arr in gallery"
+				:key= arr.key
 				><v-img :src="generateImageUrl(arr.data.fields.file.url)"></v-img>
 			</v-carousel-item>
 		</v-carousel>

@@ -1,26 +1,29 @@
 <template>
 	<div>
-		<h1>かわら版</h1>
-		<br><br>
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>かわら版</h1>
+		</header>
+
 		<div
-		v-for = "(category, key) in fetchedCategory"
-		:key = "key"
-			><v-btn outline clatt="mt-1" :to = "linkTo('category', category)">{{category.fields.title}}</v-btn>
+		v-for = "(item, key) in category"
+		:key = "item.sys.id"
+			><v-btn outlined class="mt-1" :to = "linkTo('category', item)">{{item.fields.title}}</v-btn>
 		</div>
 		<br>
 		<div
-		v-for = "(series, key) in fetchedSeries"
-		:key = "key"
-			><span>{{series.fields.title}}</span> /
+		v-for = "(item, key) in series"
+		:key = "item.sys.id"
+			><v-btn outlined class="mt-1" :to = "linkTo('category', item)">{{item.fields.title}}</v-btn>
 		</div>
 		<br>
 		<div
-		v-for = "(post, key) in sortedPosts"
-		:key = "key"
-			><cardPost :post="post.data"></cardPost>
+		v-for = "(item, key) in post"
+		:key = "item.sys.id"
+			><cardPost :post="item"></cardPost>
 		</div>
 		<br>
-		<v-btn v-if="skipped > -1" @click="viewMore">もっと見る</v-btn>
+		<v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>
 		<br><br>
 		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
 	</div>
@@ -43,14 +46,29 @@ export default {
 	, data: function()
 	{
 		return{
-			sortedPosts   : []
-			, skipped: 0
 		}
 	}
 
 	, computed:
 	{
-		...mapGetters(['linkTo', 'dateFormat'])
+		...mapState(['category', 'series', 'post', 'pageInfo'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
+		, postPageInfo: function(){
+			return this.pageInfo['post']
+		}
+		, loadMore: function(){
+			let loaded = this.postPageInfo;
+			return loaded.skip + loaded.limit < loaded.total;
+		}
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: 'かわら版'
+					, to: {name: 'blog'}
+				}
+			]
+		}
 	}
 
 	, methods:
@@ -59,67 +77,26 @@ export default {
 		async viewMore()
 		{
 
+			let loaded = this.postPageInfo.skip + 100;
+
 			let result = await client.getEntries({
 				content_type: 'post'
-				, skip: this.skipped
+				, skip: loaded
+				, limit: this.postPageInfo.limit
+				, order: '-fields.publishedDate,-fields.order,-sys.createdAt'
 			});
 
 			if (result){
-				let fetchedPosts = this.sort(result.items);
-				fetchedPosts.forEach((arr, key) => {
-					this.sortedPosts.push(arr);
-					this.$store.commit('setPosts', arr.data);
+				this.$store.commit('setPageInfo', result);
+				result.items.forEach((arr, key) => {
+					this.$store.commit('setPosts', arr);
 				})
-
-				this.skipped = (result.items.length === 100) ? this.skipped + 100 : -1;
-
-				return true
+				return true;
 			}
-			// console.log('result', result)
-		}
-
-		, sort: function(data)
-		{
-			let arr = Object.keys(data).map((e) => ({
-				  key: e
-				, sorted : data[e].fields.order || data[e].sys.createdAt
-				, data   : data[e]
-			}));
-			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
 		}
 
 	}
 
-
-	, created: function()
-	{
-		this.sortedPosts = this.sort(this.fetchedPosts);
-	}
-
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| await Promise.all([
-				  client.getEntries({ content_type: 'post' })
-				, client.getEntries({ content_type: 'category' })
-				, client.getEntries({ content_type: 'series' })
-			]);
-
-		if (result) {
-
-console.log('reslt', result)
-			let skipped = 100;
-			let fetchedPosts = result[0].items;
-			let fetchedCategory = result[1].items;
-			let fetchedSeries = result[2].items;
-			fetchedPosts.forEach(a => store.commit('setPosts', a));
-			return { fetchedPosts, skipped, fetchedCategory, fetchedSeries }
-
-		} else {
-			return error({ statusCode: 400 })
-		}
-	}
 
 }
 </script>
