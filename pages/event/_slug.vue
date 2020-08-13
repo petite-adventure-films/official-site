@@ -6,7 +6,7 @@
 			<v-chip v-if="post.fields.eventType">{{post.fields.eventType.fields.title}}</v-chip><br>
 		</header>
 
-
+		{{post.fields.title}}<br>
 		{{post.fields.place}}<br>
 		{{post.fields.access}}<br>
 		{{post.fields.address}}<a :href="post.fields.mapLink" target="_blank" rel="nofollow">MAP</a><br>
@@ -18,6 +18,15 @@
 		{{post.fields.fee}}<br>
 		<br>
 
+
+		<div v-if="post.fields.relatedReports">
+			イベントレポート
+			<cardPost
+			v-for="post in post.fields.relatedReports"
+			:key ="post.sys.id"
+				:post="post"></cardPost>
+		</div>
+
 		<nuxt-link :to="{name:'event'}">←最新イベント</nuxt-link><br>
 		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
 	</article>
@@ -28,6 +37,8 @@
 import { mapState, mapGetters } from 'vuex'
 import { createClient } from '@/plugins/contentful'
 const client = createClient();
+
+import cardPost from '@/components/card_post'
 
 export default {
 
@@ -48,6 +59,10 @@ export default {
 		} else {
 			return error({ statusCode: 400 })
 		}
+	}
+
+	, components: {
+		cardPost
 	}
 
 	,data: function(){

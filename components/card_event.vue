@@ -4,6 +4,9 @@
 		outlined
 		class="mt-4"
 		><v-card-text v-if="post.fields.eventType || post.fields.relatedFilm">
+			<v-chip color="red" v-if="post.fields.status">
+				{{post.fields.status}}
+			</v-chip>
 			<v-chip v-if="post.fields.eventType">
 				{{post.fields.eventType.fields.title}}
 			</v-chip>
@@ -11,9 +14,9 @@
 				{{post.fields.relatedFilm.fields.titleAbbr}}
 			</v-chip>
 		</v-card-text>
-		<v-card-title>
+		<!-- <v-card-title>
 			<div>{{post.fields.title}}</div>
-		</v-card-title>
+		</v-card-title> -->
 		<v-card-text class="text--primary">
 			<div>
 				{{post.fields.startDate}}

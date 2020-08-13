@@ -92,15 +92,13 @@ export default {
 	// 記事取得
 	, async asyncData({ payload, store, params, error }){
 
-		const result = payload
-			|| await Promise.all([
+		const result = await Promise.all([
 				  client.getAssets({ 'fields.title[match]' : '自主上映について' })
 				, client.getAssets({ 'fields.title[match]' : 'チラシ' })
 				, client.getAssets({ 'fields.title[match]' : 'インド日記 DVDジャケット' })
 			]);
 
 		if (result) {
-			console.log('resul', result)
 			return {
 				  gallery: result[0].items
 				, flyer:   result[1].items

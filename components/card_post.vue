@@ -1,6 +1,6 @@
 <template>
 	<v-card
-		:to = "linkTo(this.thisType, post)"
+		:to = "{ name: 'slug', params: { slug: post.fields.slug } }"
 		outlined
 		class="mt-4"
 		>
@@ -31,7 +31,7 @@ import { mapState, mapGetters } from 'vuex'
 
 export default{
 
-	props: ['post']
+	props: ['post', 'seriesNum']
 
 	, components: {
 	}
@@ -56,6 +56,7 @@ export default{
 			let category = this.$store.state.category.find((e) => e.sys.id === this.post.fields.category.sys.id);
 			return category.fields.titleAbbr
 		}
+
 	}
 
 	, methods: {

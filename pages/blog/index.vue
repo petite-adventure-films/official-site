@@ -21,6 +21,7 @@
 		v-for = "(item, key) in post"
 		:key = "item.sys.id"
 			><cardPost :post="item"></cardPost>
+			<!---->
 		</div>
 		<br>
 		<v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>
@@ -46,6 +47,7 @@ export default {
 	, data: function()
 	{
 		return{
+			// relatedSeries: {}
 		}
 	}
 
@@ -69,6 +71,9 @@ export default {
 				}
 			]
 		}
+
+
+
 	}
 
 	, methods:
@@ -91,12 +96,15 @@ export default {
 				result.items.forEach((arr, key) => {
 					this.$store.commit('setPosts', arr);
 				})
-				return true;
 			}
 		}
 
+
 	}
 
+	, async created()
+	{
+	}
 
 }
 </script>

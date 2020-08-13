@@ -81,8 +81,7 @@ export default {
 	// 記事取得
 	, async asyncData({ payload, store, params, error }){
 
-		const result = payload
-			|| await Promise.all([
+		const result = await Promise.all([
 				  client.getAssets({ 'fields.title[match]' : 'ワークショップについて' })
 			]);
 

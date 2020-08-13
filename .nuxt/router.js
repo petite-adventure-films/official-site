@@ -18,8 +18,7 @@ const _0d7aece5 = () => interopDefault(import('../pages/series/index.vue' /* web
 const _ef6a19d0 = () => interopDefault(import('../pages/specified-commercial-transaction-law.vue' /* webpackChunkName: "pages/specified-commercial-transaction-law" */))
 const _68ccd393 = () => interopDefault(import('../pages/system-requirements.vue' /* webpackChunkName: "pages/system-requirements" */))
 const _4a465335 = () => interopDefault(import('../pages/workshop/index.vue' /* webpackChunkName: "pages/workshop/index" */))
-const _32ddb570 = () => interopDefault(import('../pages/event/archive/_archive.vue' /* webpackChunkName: "pages/event/archive/_archive" */))
-const _e6f7a870 = () => interopDefault(import('../pages/blog/_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
+const _07e16e02 = () => interopDefault(import('../pages/event/archive/_year.vue' /* webpackChunkName: "pages/event/archive/_year" */))
 const _6e2e14a4 = () => interopDefault(import('../pages/category/_slug.vue' /* webpackChunkName: "pages/category/_slug" */))
 const _c649a53a = () => interopDefault(import('../pages/channel/_slug.vue' /* webpackChunkName: "pages/channel/_slug" */))
 const _c510fd0c = () => interopDefault(import('../pages/event/_slug.vue' /* webpackChunkName: "pages/event/_slug" */))
@@ -28,6 +27,7 @@ const _4aa3ea44 = () => interopDefault(import('../pages/media/_slug.vue' /* webp
 const _54cc048e = () => interopDefault(import('../pages/news/_slug.vue' /* webpackChunkName: "pages/news/_slug" */))
 const _0bc44b9d = () => interopDefault(import('../pages/series/_slug.vue' /* webpackChunkName: "pages/series/_slug" */))
 const _0e435c92 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _11b09f22 = () => interopDefault(import('../pages/_slug.vue' /* webpackChunkName: "pages/_slug" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -106,13 +106,9 @@ export const routerOptions = {
     component: _4a465335,
     name: "workshop"
   }, {
-    path: "/event/archive/:archive?",
-    component: _32ddb570,
-    name: "event-archive-archive"
-  }, {
-    path: "/blog/:slug",
-    component: _e6f7a870,
-    name: "blog-slug"
+    path: "/event/archive/:year?",
+    component: _07e16e02,
+    name: "event-archive-year"
   }, {
     path: "/category/:slug?",
     component: _6e2e14a4,
@@ -145,6 +141,10 @@ export const routerOptions = {
     path: "/",
     component: _0e435c92,
     name: "index"
+  }, {
+    path: "/:slug",
+    component: _11b09f22,
+    name: "slug"
   }],
 
   fallback: false
