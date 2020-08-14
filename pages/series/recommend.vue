@@ -4,6 +4,7 @@
 			<breadcrumbs :addItems="addBreads"></breadcrumbs>
 			<h1>かわら版 - {{pageTitle}}</h1>
 		</header>
+
 		<div
 		v-for = "item in post"
 		:key = "item.sys.id"
@@ -27,8 +28,7 @@ export default {
 				  content_type: 'post'
 				, limit: 20
 				, order: '-fields.publishedDate,-fields.order,-sys.createdAt'
-				, 'fields.relatedSeries.sys.contentType.sys.id': 'series'
-				, 'fields.relatedSeries.fields.title[match]': params.slug
+				, 'fields.recommendation': true
 			});
 
 		if (post) {
@@ -48,7 +48,7 @@ export default {
 	, data: function()
 	{
 		return{
-			pageTitle : this.$route.params.slug
+			pageTitle : 'おすすめ'
 		}
 	}
 
@@ -65,8 +65,8 @@ export default {
 				}
 				, {
 					icon: 'mdi-folder-outline'
-					, text: this.$route.params.slug
-					, to: {name: 'serise', params: { slug: this.$route.params.slug } }
+					, text: 'おすすめ'
+					, to: {name: 'serise-recommend'}
 				}
 			]
 		}

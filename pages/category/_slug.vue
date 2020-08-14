@@ -5,19 +5,6 @@
 			<h1>かわら版 - {{pageTitle}}</h1>
 		</header>
 
-		<br>
-		<div
-		v-for = "item in category"
-		:key = "item.sys.id"
-			><v-btn outlined class="mt-1" :to = "linkTo('category', item)">{{item.fields.title}}</v-btn>
-		</div>
-		<br>
-		<div
-		v-for = "item in series"
-		:key = "item.sys.id"
-			><v-btn outlined class="mt-1" :to = "linkTo('series', item)">{{item.fields.title}}</v-btn>
-		</div>
-		<br>
 		<div
 		v-for = "item in post"
 		:key = "item.sys.id"
@@ -25,8 +12,7 @@
 		</div>
 		<br>
 		<v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
+
 	</article>
 </template>
 

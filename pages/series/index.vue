@@ -1,19 +1,17 @@
 <template>
 	<div>
-		<h1>連載記事</h1>
-		<br><br>
+		<header>
+			<breadcrumbs :addItems="addBreads"></breadcrumbs>
+			<h1>かわら版 - {{pageTitle}}</h1>
+		</header>
+
+		<v-btn outlined :to="{name: 'series-recommend'}">おすすめ</v-btn>
 		<div
-		v-for = "category in fetchedCategory"
-		:key = "category.sys.id"
-			><v-btn text clatt="mt-1" :to = "linkTo('category', category)">{{category.fields.title}}</v-btn>
+		v-for = "item in series"
+		:key = "item.sys.id"
+			><v-btn outlined class="mt-1" :to = "linkTo('series', item)">{{item.fields.title}}</v-btn>
 		</div>
-		<br>
-		<div
-		v-for = "series in fetchedSeries"
-		:key = "series.sys.id"
-			><v-btn text clatt="mt-1" :to = "linkTo('series', series)">{{series.fields.title}}</span></v-btn>
-		</div>
-		<br>
+
 		<!-- <div
 		v-for = "(post, key) in sortedPosts"
 		:key = "key"
@@ -43,14 +41,28 @@ export default {
 	, data: function()
 	{
 		return{
-			sortedPosts   : []
-			, skipped: 0
+			pageTitle: '連載記事'
 		}
 	}
 
 	, computed:
 	{
-		...mapGetters(['linkTo', 'dateFormat'])
+		...mapState(['series'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
+		, addBreads: function(){
+			return [
+				{
+					icon: 'mdi-folder-outline'
+					, text: 'かわら版'
+					, to: {name: 'blog'}
+				}
+				, {
+					icon: 'mdi-folder-outline'
+					, text: '連載記事'
+					, to: {name: 'series'}
+				}
+			]
+		}
 	}
 
 	, methods:

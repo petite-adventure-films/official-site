@@ -63,7 +63,7 @@ const entriesParams = {
 	, post  : { order: '-fields.publishedDate,-fields.order,-sys.createdAt' }
 	, media : { order: '-fields.publishedDate,-fields.order,-sys.createdAt' }
 	, video : { order: '-fields.order,sys.createdAt' }
-	, series : { order: 'sys.createdAt' }
+	, series : { order: 'fields.order,sys.createdAt' }
 }
 
 export const state = () => ({

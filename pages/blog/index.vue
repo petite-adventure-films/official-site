@@ -6,22 +6,9 @@
 		</header>
 
 		<div
-		v-for = "(item, key) in category"
-		:key = "item.sys.id"
-			><v-btn outlined class="mt-1" :to = "linkTo('category', item)">{{item.fields.title}}</v-btn>
-		</div>
-		<br>
-		<div
-		v-for = "(item, key) in series"
-		:key = "item.sys.id"
-			><v-btn outlined class="mt-1" :to = "linkTo('category', item)">{{item.fields.title}}</v-btn>
-		</div>
-		<br>
-		<div
 		v-for = "(item, key) in post"
 		:key = "item.sys.id"
 			><cardPost :post="item"></cardPost>
-			<!---->
 		</div>
 		<br>
 		<v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>

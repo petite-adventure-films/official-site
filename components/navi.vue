@@ -1,6 +1,6 @@
 <template>
 	<div class="navi">
-		<v-btn text :to = "{name:'news'}">お知らせ</v-btn>
+		<v-btn text :to = "{name:'news'}">新着情報</v-btn>
 		<v-btn text :to = "{name:'event'}">上映会・イベント</v-btn>
 		<v-btn text :to = "{name:'film'}">映画</v-btn>
 		<v-btn text :to = "{name:'channel'}">チャンネル</v-btn>
@@ -9,12 +9,30 @@
 		<v-btn text :to = "{name:'four_walling'}">自主上映</v-btn>
 		<v-btn text :to = "{name:'workshop'}">ワークショップ</v-btn>
 		<v-btn text :to = "{name:'blog'}">かわら版</v-btn>
+
+		<div class="kawaraban_navi">
+			<v-btn
+			v-for = "(item, key) in category"
+			:key = "item.sys.id"
+				text class="mt-1" :to = "linkTo('category', item)">{{item.fields.titleAbbr}}</v-btn>
+			</v-btn>
+			<div>
+				<v-btn text :to="{name: 'series-recommend'}">おすすめ</v-btn>
+				<v-btn
+				v-for = "(item, key) in series"
+				:key = "item.sys.id"
+					v-if="item.fields.frontLine"
+						:to = "linkTo('category', item)"
+						text
+						class="mt-1">{{item.fields.titleAbbr}}</v-btn>
+				<v-btn text :to="{name: 'series'}">連載記事一覧</v-btn>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex'
 
 export default{
 
@@ -35,6 +53,8 @@ export default{
 
 	, computed:
 	{
+		...mapState(['category', 'series'])
+		, ...mapGetters(['linkTo', 'dateFormat'])
 	}
 
 	, methods: {
@@ -66,5 +86,8 @@ export default{
 		border-top: 1px solid #dddddd;
 		border-bottom: 1px solid #dddddd;
 		background: #eeeeee;
+	}
+	.kawaraban_navi{
+		border-top: 1px solid #dddddd;
 	}
 </style>
