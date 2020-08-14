@@ -146,6 +146,7 @@ export default{
 						let data = checkHasData(i);
 						this.sortedPostsbyYear[i].forEach((a) => {
 							if(Math.max(...a.months) >= this.genDateData(new Date())
+							&& !a.data.fields.status
 							&& !_pushed.some(v => v === a.key))
 							{
 								this.sortedPosts.push(a);
