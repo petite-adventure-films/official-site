@@ -55,6 +55,7 @@
 			</v-dialog>
 
 			<v-form data-netlify="true">
+				<v-btn @click="submit">POST</v-btn>
 			</v-form>
 
 			<v-btn block color="purple" class="mt-2" @click="completeOrder">注文確定</v-btn>
@@ -191,6 +192,21 @@ export default {
 		, purchase: function()
 		{
 			this.$router.push({name: 'shop-thanks'});
+		}
+
+		, submit: function()
+		{
+			let params = new URLSearchParams();
+			console.log('params', params)
+			params.append('form-name', 'contact');
+			params.append('username', this.user.name);
+			params.append('useremail', this.user.email);
+			params.append('bot-field', true);
+			 this.$axios
+				.$post('/', params)
+				.then(() => {
+					console.log('done')
+				})
 		}
 
 	}
