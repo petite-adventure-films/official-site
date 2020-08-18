@@ -39,9 +39,10 @@ export default {
 	** https://nuxtjs.org/guide/plugins
 	*/
 	plugins: [
-		  '@/plugins/components'
+			'@/plugins/components'
 		, '@/plugins/contentful'
 		, '@/plugins/vue-youtube'
+		, { src: "@/plugins/persistedstate.js", ssr: false }
 	],
 	/*
 	** Auto import components
@@ -59,19 +60,27 @@ export default {
 	*/
 	modules: [
 		// Doc: https://axios.nuxtjs.org/usage
-		'@nuxtjs/axios',
-		'@nuxtjs/dotenv'
+		'@nuxtjs/axios'
+		, '@nuxtjs/proxy'
+		, '@nuxtjs/dotenv'
 	],
 	/*
 	** Axios module configuration
 	** See https://axios.nuxtjs.org/options
 	*/
-	axios: {},
+	axios: {}
+
+	, proxy: {
+		'/zipApi/': {
+			  target: 'https://zipcloud.ibsnet.co.jp'
+			, pathRewrite: {'^/zipApi/': ''}
+		}
+	}
 	/*
 	** Build configuration
 	** See https://nuxtjs.org/api/configuration-build/
 	*/
-	build: {
+	, build: {
 		extend: ({ module, output }) => {
 			module.rules.unshift({
 				test: /\.worker\.js$/,
@@ -88,13 +97,15 @@ export default {
 		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
 		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
 		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
-		, BASE_URL                 : process.env.BASE_URL || 'http://localhost:3000'
+		, BASE_URL                 : process.env.URL || 'http://localhost:3000'
+		, FUNCTION_URL             : process.env.URL || 'http://localhost:9000'
+		, STRIPE_PUBLIC_KEY : process.env.STRIPE_PUBLIC_KEY
 	}
 	/*
 	** router configuration
 	*/
 	, router: {
-		  base: process.env.BASE_DIR || '/'
+			base: process.env.BASE_DIR || '/'
 		, middleware: [
 			'getContentful'
 		]

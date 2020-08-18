@@ -3,28 +3,34 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "netlify-lambda serve functions/api --config webpack.functions.js & nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
+
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.1",
     "@nuxtjs/axios": "^5.12.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/proxy": "^2.0.1",
+    "dotenv-webpack": "^2.0.0",
     "fs": "0.0.1-security",
     "module": "^1.2.5",
+    "netlify-lambda": "^2.0.1",
     "nuxt": "^2.14.0",
     "pdfjs-dist": "^2.4.456",
-    "worker-loader": "^3.0.1"
+    "stripe": "^8.86.0",
+    "vue-stripe-elements-plus": "^0.3.2",
+    "vuex-persistedstate": "^3.1.0",
+    "worker-loader": "^3.0.1",
+    "vue-youtube": "^1.4.0"
   },
   "devDependencies": {
     "@contentful/rich-text-types": "^14.1.1",
     "@nuxtjs/vuetify": "^1.11.2",
     "contentful": "^7.14.6",
     "core-js": "^3.6.5",
-    "vue-cli-plugin-vuetify": "^2.0.7",
-    "vue-youtube": "^1.4.0"
+    "vue-cli-plugin-vuetify": "^2.0.7"
   }
 }

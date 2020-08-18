@@ -32,12 +32,6 @@ const options = {
 	}
 };
 
-// return `<a href="${node.data.uri}"${
-//          node.data.uri.startsWith('https://yourdomain.com')
-//            ? ''
-//            : ' target="_blank"'
-//        }>${next(node.content)}</a>`
-
 const postTypes = [
 	  'post'
 	, 'category'
@@ -47,6 +41,7 @@ const postTypes = [
 	, 'media'
 	, 'video'
 	, 'film'
+	, 'shop'
 ];
 
 const entriesParams = {
@@ -60,6 +55,7 @@ const entriesParams = {
 		, limit: 20
 	}
 	, film  : { order: '-sys.createdAt'}
+	, shop  : { order: '-sys.createdAt'}
 	, post  : { order: '-fields.publishedDate,-fields.order,-sys.createdAt' }
 	, media : { order: '-fields.publishedDate,-fields.order,-sys.createdAt' }
 	, video : { order: '-fields.order,sys.createdAt' }
@@ -70,6 +66,7 @@ export const state = () => ({
 	  news:  []
 	, event: []
 	, film:  []
+	, shop:  []
 	, video: []
 	, media: []
 	, post:  []
@@ -77,6 +74,13 @@ export const state = () => ({
 	, category: []
 	, pageInfo: {}
 	, contentsInfo: {}
+
+	////////////////////////////////////
+	// shop
+	////////////////////////////////////
+
+	, pafCart: {}
+	, pafCartCount: 0
 })
 
 export const getters = {
@@ -138,6 +142,32 @@ export const mutations = {
 			state.contentsInfo[type] = payload
 
 		}
+	}
+
+	, setCart: (state, payload) => {
+		state.pafCart[payload.id] = payload.purchase
+	}
+
+	, updateCart: (state, payload) => {
+		// console.log('payload', payload)
+		state.pafCart[payload.id][payload.key] = payload.value
+	}
+
+	, setCartCount: (state, payload) => {
+		// this.$store.commit('myMutation', window.localStorage.getItem("cart")
+		let count = 0
+		if(payload)
+		{
+			count = payload
+		}
+
+		else
+		{
+			Object.keys(state.pafCart).forEach((p) => {
+				state.pafCart[p].forEach((n) => count = count + n)
+			})
+		}
+		state.pafCartCount = count
 	}
 
 }
