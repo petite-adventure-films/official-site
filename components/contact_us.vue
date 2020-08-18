@@ -1,6 +1,6 @@
 <template>
 	<div>
-		お問い合わせはこちら
+		{{text}}
 		<v-btn>お問い合わせ</v-btn>
 	</div>
 </template>
@@ -10,7 +10,7 @@ import { mapState, mapGetters } from 'vuex'
 
 export default{
 
-	props: []
+	props: ['message']
 
 	, components: {
 	}
@@ -23,6 +23,9 @@ export default{
 
 	, computed: {
 		...mapGetters(['linkTo'])
+		, text: function(){
+			return (this.message) ? this.message : 'お問い合わせはこちら'
+		}
 	}
 
 	, methods: {

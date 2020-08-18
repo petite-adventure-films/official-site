@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<Header></Header>
-		<Navi></Navi>
+		<Navi v-if="showNavi()"></Navi>
 		<v-container>
 			<Nuxt></Nuxt>
 		</v-container>
@@ -17,8 +17,21 @@
 	export default
 	{
 
-		components: {
+		data: function()
+		{
+			return{
+			}
+		}
+
+		, components: {
 			Header, Footer, Navi
+		}
+
+		, methods: {
+			showNavi: function()
+			{
+				return (this.$route.name.match(/shop/)) ? false : true
+			}
 		}
 
 	}

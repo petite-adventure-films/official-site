@@ -31,7 +31,7 @@ import { mapState, mapGetters } from 'vuex'
 
 export default{
 
-	props: ['post', 'seriesNum']
+	props: ['post']
 
 	, components: {
 	}

@@ -1,7 +1,26 @@
 <template>
-	<div @click="goHome()">
-		{{siteName}}<br>
-		{{siteNameJP}}
+	<div>
+
+		<div @click="goHome()">
+			{{siteName}}<br>
+			{{siteNameJP}}
+		</div>
+
+		<div v-if="isShop">
+			<v-btn outlined color="purple" :to="{name:'shop-cart'}">
+				<v-icon>mdi-shop</v-icon>
+				CART
+				{{pafCartCount}}
+			</v-btn>
+		</div>
+
+		<div v-else>
+			<v-btn outlined color="purple" :to="{name:'shop'}">
+				<v-icon>mdi-shop</v-icon>
+				SHOP
+			</v-btn>
+		</div>
+
 	</div>
 </template>
 
@@ -28,6 +47,11 @@ export default{
 
 	, computed:
 	{
+		...mapState(['pafCartCount', 'pafCart'])
+		, isShop: function()
+		{
+			return (this.$route.name.match(/shop/)) ? true : false
+		}
 	}
 
 	, methods: {
