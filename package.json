@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "netlify-lambda serve functions/api --config webpack.functions.js & nuxt",
-    "build": "nuxt build",
+    "build": "netlify-lambda build functions/api && nuxt generate",
     "start": "nuxt start",
     "generate": "nuxt generate"
 
