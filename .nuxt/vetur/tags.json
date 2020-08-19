@@ -1,1 +1,14 @@
-{}
+{
+  "CardFilm": {
+    "description": "Auto imported from components/card_film.vue"
+  },
+  "LazyCardFilm": {
+    "description": "Auto imported from components/card_film.vue"
+  },
+  "CardNews": {
+    "description": "Auto imported from components/card_news.vue"
+  },
+  "LazyCardNews": {
+    "description": "Auto imported from components/card_news.vue"
+  }
+}

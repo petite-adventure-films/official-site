@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
@@ -13,8 +14,7 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_8cb2db1e from 'nuxt_plugin_plugin_8cb2db1e' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_4fcba1c6 from 'nuxt_plugin_plugin_4fcba1c6' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_axios_39c41f07 from 'nuxt_plugin_axios_39c41f07' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_contentful_fe22a150 from 'nuxt_plugin_contentful_fe22a150' // Source: ../plugins/contentful (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -45,6 +45,13 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
+const originalRegisterModule = Vuex.Store.prototype.registerModule
+const baseStoreOptions = { preserveState: process.client }
+
+function registerModule (path, rawModule, options = {}) {
+  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+}
+
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext)
 
@@ -53,15 +60,14 @@ async function createApp(ssrContext, config = {}) {
   store.$router = router
 
   // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
-  const registerModule = store.registerModule
-  store.registerModule = (path, rawModule, options) => registerModule.call(store, path, rawModule, Object.assign({ preserveState: process.client }, options))
+  store.registerModule = registerModule
 
   // Create Root instance
 
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"Petite Adventure Films","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"インディペンデントのドキュメンタリー監督、早川由美子の作品と上映情報を紹介するサイト。これまでに、反戦・平和運動、住宅・貧困問題、震災・原発問題など、マスメディアでは取り上げられにくいテーマを、独自の視点で表現。これまでの主な作品『ブライアンと仲間たち』、『さようならUR』、『木田さんと原発、そして日本』など。"}],"script":[],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[]},
+    head: {"title":"Petite Adventure Films","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"インディペンデントのドキュメンタリー監督、早川由美子の作品と上映情報を紹介するサイト。これまでに、反戦・平和運動、住宅・貧困問題、震災・原発問題など、マスメディアでは取り上げられにくいテーマを、独自の視点で表現。これまでの主な作品『ブライアンと仲間たち』、『さようならUR』、『木田さんと原発、そして日本』など。"}],"script":[],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[]},
 
     store,
     router,
@@ -194,12 +200,8 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_8cb2db1e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_4fcba1c6 === 'function') {
-    await nuxt_plugin_plugin_4fcba1c6(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_axios_39c41f07 === 'function') {
-    await nuxt_plugin_axios_39c41f07(app.context, inject)
+  if (typeof nuxt_plugin_contentful_fe22a150 === 'function') {
+    await nuxt_plugin_contentful_fe22a150(app.context, inject)
   }
 
   // Lock enablePreview in context
@@ -212,9 +214,13 @@ async function createApp(ssrContext, config = {}) {
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {
     await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, () => {
+      router.push(ssrContext.url, resolve, (err) => {
+        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+        if (!err._isRouter) return reject(err)
+        if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
+
         // navigated to a different route in router guard
-        const unregister = router.afterEach(async (to, from, next) => {
+        const unregister = router.afterEach(async (to, from) => {
           ssrContext.url = to.fullPath
           app.context.route = await getRouteData(to)
           app.context.params = to.params || {}

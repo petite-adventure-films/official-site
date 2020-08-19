@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 export default {
 	/*
 	** Nuxt rendering mode
@@ -39,6 +38,7 @@ export default {
 	** https://nuxtjs.org/guide/plugins
 	*/
 	plugins: [
+		  '@/plugins/contentful'
 	],
 	/*
 	** Auto import components
@@ -49,15 +49,15 @@ export default {
 	** Nuxt.js dev-modules
 	*/
 	buildModules: [
-		'@nuxtjs/vuetify',
+		'@nuxtjs/vuetify'
 	],
 	/*
 	** Nuxt.js modules
 	*/
 	modules: [
 		// Doc: https://axios.nuxtjs.org/usage
-		'@nuxtjs/axios',
-		'@nuxtjs/dotenv'
+		// '@nuxtjs/axios',
+		// '@nuxtjs/dotenv'
 	],
 	/*
 	** Axios module configuration
@@ -75,13 +75,17 @@ export default {
 	** env configuration
 	*/
 	, env: {
-
+		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
+		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
+		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
 	}
 	/*
 	** router configuration
 	*/
 	, router: {
-
+		middleware: [
+			'getContentful'
+		]
 	}
 
 }
