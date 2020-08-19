@@ -19,7 +19,7 @@ export default {
 		const baseUrl =
 			process.env.NODE_ENV !== 'production'
 				? 'http://localhost:9000'
-				: process.env.URL
+				: 'https://old-state--dreamy-goldberg-f608e5.netlify.app'
 		return $axios.get(baseUrl + '/.netlify/functions/hello').then((response) => {
 			return {
 				message: response.data
