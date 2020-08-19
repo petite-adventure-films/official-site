@@ -1,6 +1,7 @@
 <template>
 	<div>
 
+		dev test
 		<div
 		v-for = "(post, key) in sortedNews"
 		:key = "key"
