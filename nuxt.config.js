@@ -39,6 +39,7 @@ export default {
 	*/
 	plugins: [
 		  '@/plugins/contentful'
+		, '@/plugins/components'
 	],
 	/*
 	** Auto import components

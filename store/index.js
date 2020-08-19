@@ -1,6 +1,9 @@
 import { createClient } from '@/plugins/contentful'
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 const client = createClient();
+const options = {
+	}
 
 const postTypes = [
 	  'post'
@@ -47,6 +50,21 @@ export const state = () => ({
 })
 
 export const getters = {
+	linkTo: () => (name, obj) => {
+		return { name: `${name}-slug`, params: { slug: obj.fields.slug } }
+	}
+
+	, dateFormat: () => (date) => {
+		let year  = new Date(date).getFullYear();
+		let month = new Date(date).getMonth() + 1;
+		let day   = new Date(date).getDate();
+		return year + '-' + ('00' + month).slice(-2) + '-' + ('00' + day).slice(-2);
+	}
+
+	, renderRichText: () => (contents) => {
+		return documentToHtmlString(contents, options);
+	}
+
 }
 
 export const mutations = {
