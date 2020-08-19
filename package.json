@@ -3,11 +3,10 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "netlify-lambda serve functions/api --config webpack.functions.js & nuxt",
-    "build": "netlify-lambda build functions/api && nuxt generate",
+    "dev": "nuxt",
+    "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
-
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.1",

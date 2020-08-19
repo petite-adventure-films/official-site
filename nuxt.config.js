@@ -97,8 +97,8 @@ export default {
 		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
 		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
 		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
-		, BASE_URL                 : process.env.URL || 'http://localhost:3000'
-		, FUNCTION_URL             : process.env.URL || 'http://localhost:9000'
+		, BASE_URL          : process.env.URL || 'http://localhost:3000'
+		, FUNCTION_URL      : process.env.URL || 'http://localhost:9000'
 		, STRIPE_PUBLIC_KEY : process.env.STRIPE_PUBLIC_KEY
 	}
 	/*
