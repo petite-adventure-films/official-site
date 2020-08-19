@@ -3,14 +3,16 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
+    "dev": "netlify-lambda serve functions/api & nuxt",
+    "build": "netlify-lambda build functions/api && nuxt generate",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.1",
+    "@nuxtjs/axios": "^5.12.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "netlify-lambda": "^2.0.1",
     "nuxt": "^2.14.3"
   },
   "devDependencies": {
