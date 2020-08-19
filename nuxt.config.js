@@ -39,9 +39,6 @@ export default {
 	** https://nuxtjs.org/guide/plugins
 	*/
 	plugins: [
-		  '@/plugins/components'
-		, '@/plugins/contentful'
-		, '@/plugins/vue-youtube'
 	],
 	/*
 	** Auto import components
@@ -72,32 +69,19 @@ export default {
 	** See https://nuxtjs.org/api/configuration-build/
 	*/
 	build: {
-		extend: ({ module, output }) => {
-			module.rules.unshift({
-				test: /\.worker\.js$/,
-				loader: 'worker-loader'
-			})
-			output.globalObject = 'this'
-		}
+
 	}
 	/*
 	** env configuration
 	*/
 	, env: {
-		// contentful
-		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
-		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
-		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
-		, BASE_URL                 : process.env.BASE_URL || 'http://localhost:3000'
+
 	}
 	/*
 	** router configuration
 	*/
 	, router: {
-		  base: process.env.BASE_DIR || '/'
-		, middleware: [
-			'getContentful'
-		]
+
 	}
 
 }
