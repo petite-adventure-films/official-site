@@ -2,6 +2,7 @@
  <div class="container">
 	<h2 v-text="'Netlify Functions × Nuxt.js サンプル'" />
 	<p v-text="message" />
+	{{strings}}
  </div>
 </template>
 
@@ -13,12 +14,16 @@ export default {
 	{
 		return {
 			message: ''
+			, strings: ''
 		}
 	}
 	, async asyncData({ $axios }){
 
-		console.log('prod', process.env.NODE_ENV)
-		console.log('prod', process.env)
+		let env = process.env
+
+		return {
+			strings : JSON.stringify(env)
+		}
 		// const baseUrl =
 		// 	process.env.NODE_ENV !== 'production'
 		// 		? 'http://localhost:9000'
