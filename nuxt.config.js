@@ -66,8 +66,8 @@ export default {
 	** See https://axios.nuxtjs.org/options
 	*/
 	, axios: {
-		  baseURL: process.env.URL || "http://localhost:3000"
-		, browserBaseURL: process.env.URL || "http://localhost:3000"
+		  baseURL: 'https://old-state--dreamy-goldberg-f608e5.netlify.app' || "http://localhost:3000"
+		, browserBaseURL: 'https://old-state--dreamy-goldberg-f608e5.netlify.app' || "http://localhost:3000"
 	}
 	/*
 	** Proxy module configuration
