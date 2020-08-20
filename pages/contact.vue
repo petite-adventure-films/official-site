@@ -22,7 +22,7 @@ export default {
 				, email: 'email'
 				, 'form-name': 'contact'
 			}
-			this.$axios.$post('/', params)
+			this.$axios.$post('https://old-state--dreamy-goldberg-f608e5.netlify.app', params)
 				.then((res) => {
 					console.log('done')
 				})
