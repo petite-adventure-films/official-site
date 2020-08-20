@@ -19,18 +19,6 @@
 </template>
 
 <script>
-
 export default {
-
-	components: {
-		cardNews, cardFilm, cardPost
-	}
-
-	, computed: {
-		...mapState(['news', 'film', 'post'])
-		, sortedNews: function(){
-			return this.news.slice(0, 3)
-		}
-	}
 }
 </script>
