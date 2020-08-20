@@ -1,10 +1,11 @@
 <template>
 	<div>
-		<div
+		DEV TEST
+		<!-- <div
 		v-for = "(item, key) in post"
 		:key = "item.sys.id"
 			><cardPost :post="item"></cardPost>
-		</div>
+		</div> -->
 	</div>
 </template>
 
