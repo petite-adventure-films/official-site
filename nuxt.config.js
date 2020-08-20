@@ -68,6 +68,8 @@ export default {
 	, axios: {
 		  baseURL: 'https://old-state--dreamy-goldberg-f608e5.netlify.app' || "http://localhost:3000"
 		, browserBaseURL: 'https://old-state--dreamy-goldberg-f608e5.netlify.app' || "http://localhost:3000"
+		  // baseURL: "http://localhost:3000"
+		// , browserBaseURL: "http://localhost:3000"
 	}
 	/*
 	** Proxy module configuration
