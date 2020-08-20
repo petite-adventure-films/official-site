@@ -54,7 +54,12 @@
 				</v-card>
 			</v-dialog>
 
-			<v-btn block color="purple" class="mt-2" @click="completeOrder">注文確定</v-btn>
+			<form name="order" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+				<input type="hidden" name="form-name" value="contact">
+				<input type="hidden" name="bot-field">
+				<v-btn block color="purple" class="mt-2" @click="completeOrder">注文確定</v-btn>
+			</form>
+
 		</v-stepper-content>
 
 	</v-stepper>
