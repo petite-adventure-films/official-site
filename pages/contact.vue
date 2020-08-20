@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form ref="form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thankyou">
+		<form ref="form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
 			<input type="hidden" name="form-name" value="contact">
 			<input type="hidden" name="bot-field">
 			<label>Your Name: <input type="text" name="name" /></label><br>
@@ -14,15 +14,22 @@
 <script>
 export default {
 
+	data: function()
+	{
+		return {
+
+		}
+	}
+
 	methods: {
 		submit: function()
 		{
-			let params = {
-				name: 'restard'
-				, email: 'email'
-				, 'form-name': 'contact'
-			}
-			this.$axios.$post('https://old-state--dreamy-goldberg-f608e5.netlify.app', params)
+			const params = new URLSearchParams();
+			params.append('form-name', 'contact');
+			params.append('username', 'ress');
+			params.append('message', 'msg');
+
+			this.$axios.$post('/', params)
 				.then((res) => {
 					console.log('done')
 				})
