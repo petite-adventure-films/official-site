@@ -47,6 +47,13 @@ export const state = () => ({
 	, category: []
 	, pageInfo: {}
 	, contentsInfo: {}
+
+	////////////////////////////////////
+	// shop
+	////////////////////////////////////
+
+	, pafCart: {}
+	, pafCartCount: 0
 })
 
 export const getters = {
@@ -93,14 +100,33 @@ export const mutations = {
 			state.pageInfo[type]['total'] = payload.total;
 			state.pageInfo[type]['skip'] = payload.skip;
 			state.pageInfo[type]['limit'] = payload.limit;
-
-			if(state.contentsInfo[type] === undefined)
-			{
-				state.contentsInfo[type] = {};
-			}
-			state.contentsInfo[type] = payload
-
 		}
+	}
+
+	, setCart: (state, payload) => {
+		state.pafCart[payload.id] = payload.purchase
+	}
+
+	, setCartCount: (state, payload) => {
+		// this.$store.commit('myMutation', window.localStorage.getItem("cart")
+		let count = 0
+		if(payload)
+		{
+			count = payload
+		}
+
+		else
+		{
+			Object.keys(state.pafCart).forEach((p) => {
+				state.pafCart[p].forEach((n) => count = count + n)
+			})
+		}
+		state.pafCartCount = count
+	}
+
+	, updateCart: (state, payload) => {
+		// console.log('payload', payload)
+		state.pafCart[payload.id][payload.key] = payload.value
 	}
 
 }
