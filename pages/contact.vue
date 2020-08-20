@@ -14,13 +14,6 @@
 <script>
 export default {
 
-	data: function()
-	{
-		return {
-
-		}
-	}
-
 	methods: {
 		submit: function()
 		{
