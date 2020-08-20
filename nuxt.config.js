@@ -70,14 +70,14 @@ export default {
 	** Proxy module configuration
 	*/
 	, proxy: {
-		'/functions/': {
-			  target: (process.env.URL || 'http://localhost:9000') + '/.netlify/functions/hello'
-			// , pathRewrite: {'^/.netlify': ''}
-		}
-		, '/zipApi/': {
-			  target: 'https://zipcloud.ibsnet.co.jp'
-			, pathRewrite: {'^/zipApi/': ''}
-		}
+		// '/functions/': {
+		// 	  target: (process.env.URL || 'http://localhost:9000') + '/.netlify/functions/hello'
+		// 	// , pathRewrite: {'^/.netlify': ''}
+		// }
+		// , '/zipApi/': {
+		// 	  target: 'https://zipcloud.ibsnet.co.jp'
+		// 	, pathRewrite: {'^/zipApi/': ''}
+		// }
 	}
 	/*
 	** Build configuration

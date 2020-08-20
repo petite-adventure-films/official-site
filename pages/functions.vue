@@ -13,7 +13,6 @@ export default {
 	{
 		return {
 			message: ''
-			, strings: ''
 		}
 	}
 
@@ -22,16 +21,18 @@ export default {
 
 	, async asyncData({ $axios }){
 
-
-		// let BaseURl = '/.netlify/hello'
+		// return {
+		// 	strings: JSON.stringify(process.env)
+		// }
 		let baseUrl = process.env.NODE_ENV !== 'production'
 				? 'http://localhost:3000'
 				: process.env.URL
-		let url = baseUrl + '/functions/hello'
+		let url = baseUrl + '/.netlify/functions/hello'
 
 		return $axios.get(url)
 			.then((response) => {
 				return {
+					  // env: process.env
 					message: response.data
 				}
 			})
