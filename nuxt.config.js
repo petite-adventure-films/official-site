@@ -71,7 +71,7 @@ export default {
 	*/
 	, proxy: {
 		'/functions/': {
-			  target: 'http://localhost:9000/.netlify/functions/hello'
+			  target: (process.env.URL || 'http://localhost:9000') + '/.netlify/functions/hello'
 			// , pathRewrite: {'^/.netlify': ''}
 		}
 		, '/zipApi/': {

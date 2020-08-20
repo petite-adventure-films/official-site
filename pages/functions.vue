@@ -28,16 +28,7 @@ export default {
 				? 'http://localhost:3000'
 				: process.env.URL
 		let url = baseUrl + '/functions/hello'
-		let req = $axios.get(url)
-		if(req){
 
-		console.log('d', req)
-		}
-
-		// '//localhost:3000/hello'
-
-		// 		// let req = $axios.get(url)
-		// 		// console.log('$', req)
 		return $axios.get(url)
 			.then((response) => {
 				return {
