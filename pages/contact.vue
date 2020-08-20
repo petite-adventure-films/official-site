@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thankyou">
+		<form ref="form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thankyou">
 			<input type="hidden" name="form-name" value="contact">
 			<input type="hidden" name="bot-field">
 			<label>Your Name: <input type="text" name="name" /></label><br>
@@ -17,12 +17,11 @@ export default {
 	methods: {
 		submit: function()
 		{
-			const params = new URLSearchParams();
-			params.append('form-name', 'contact');
-			params.append('name', 'restard');
-			params.append('useremail', 'drestard@gmail.com');
-			params.append('message', 'testtesttest');
-			console.log('params', params)
+			let params = {
+				name: 'restard'
+				, email: 'email'
+				, 'form-name': 'contact'
+			}
 			this.$axios.$post('/thankyou', params)
 				.then((res) => {
 					console.log('done')
