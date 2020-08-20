@@ -22,7 +22,7 @@ export default {
 				, email: 'email'
 				, 'form-name': 'contact'
 			}
-			this.$axios.$post('/thankyou', params)
+			this.$axios.$post('/thankyou/', params)
 				.then((res) => {
 					console.log('done')
 				})
