@@ -2,7 +2,6 @@
  <div class="container">
 	<h2 v-text="'Netlify Functions × Nuxt.js サンプル'" />
 	<p v-text="message" />
-	{{strings}}
  </div>
 </template>
 
@@ -17,23 +16,34 @@ export default {
 			, strings: ''
 		}
 	}
+
+	, methods: {
+	}
+
 	, async asyncData({ $axios }){
 
-		let env = process.env
 
-		return {
-			strings : JSON.stringify(env)
+		// let BaseURl = '/.netlify/hello'
+		let baseUrl = process.env.NODE_ENV !== 'production'
+				? 'http://localhost:3000'
+				: process.env.URL
+		let url = baseUrl + '/functions/hello'
+		let req = $axios.get(url)
+		if(req){
+
+		console.log('d', req)
 		}
-		// const baseUrl =
-		// 	process.env.NODE_ENV !== 'production'
-		// 		? 'http://localhost:9000'
-		// 		: 'https://old-state--dreamy-goldberg-f608e5.netlify.app'
 
-		// return $axios.get(baseUrl + '/.netlify/functions/hello').then((response) => {
-		// 	return {
-		// 		message: response.data
-		// 	}
-		// })
+		// '//localhost:3000/hello'
+
+		// 		// let req = $axios.get(url)
+		// 		// console.log('$', req)
+		return $axios.get(url)
+			.then((response) => {
+				return {
+					message: response.data
+				}
+			})
 	}
 }
 </script>

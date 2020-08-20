@@ -58,18 +58,32 @@ export default {
 	modules: [
 		// Doc: https://axios.nuxtjs.org/usage
 		'@nuxtjs/axios'
-		// '@nuxtjs/dotenv'
-	],
+		, '@nuxtjs/proxy'
+		, '@nuxtjs/dotenv'
+	]
 	/*
 	** Axios module configuration
 	** See https://axios.nuxtjs.org/options
 	*/
-	axios: {},
+	, axios: {}
+	/*
+	** Proxy module configuration
+	*/
+	, proxy: {
+		'/functions/': {
+			  target: 'http://localhost:9000/.netlify/functions/hello'
+			// , pathRewrite: {'^/.netlify': ''}
+		}
+		, '/zipApi/': {
+			  target: 'https://zipcloud.ibsnet.co.jp'
+			, pathRewrite: {'^/zipApi/': ''}
+		}
+	}
 	/*
 	** Build configuration
 	** See https://nuxtjs.org/api/configuration-build/
 	*/
-	build: {
+	, build: {
 
 	}
 	/*
