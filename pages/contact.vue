@@ -1,30 +1,34 @@
 <template>
 	<div>
-		<form name="contact" method="POST" data-netlify="true" action="/thankyou">
+		<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thankyou">
 			<input type="hidden" name="form-name" value="contact">
-			<p>
-				<label>Your Name: <input type="text" name="name" /></label>
-			</p>
-			<p>
-				<label>Your Email: <input type="email" name="email" /></label>
-			</p>
-			<p>
-				<label>Your Role: <select name="role[]" multiple>
-					<option value="leader">Leader</option>
-					<option value="follower">Follower</option>
-				</select></label>
-			</p>
-			<p>
-				<label>Message: <textarea name="message"></textarea></label>
-			</p>
-			<p>
-				<button type="submit">Send</button>
-			</p>
+			<input type="hidden" name="bot-field">
+			<label>Your Name: <input type="text" name="name" /></label><br>
+			<label>Your Email: <input type="email" name="email" /></label><br>
+			<label>Message: <textarea name="message"></textarea></label><br>
+			<v-btn @click="submit">SEND</v-btn>
 		</form>
 	</div>
 </template>
 
 <script>
 export default {
+
+	methods: {
+		submit: function()
+		{
+			const params = new URLSearchParams();
+			params.append('form-name', 'contact');
+			params.append('name', 'restard');
+			params.append('useremail', 'drestard@gmail.com');
+			params.append('message', 'testtesttest');
+			console.log('params', params)
+			this.$axios.$post('/thankyou', params)
+				.then((res) => {
+					console.log('done')
+				})
+		}
+	}
+
 }
 </script>
