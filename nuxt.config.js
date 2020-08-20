@@ -65,7 +65,10 @@ export default {
 	** Axios module configuration
 	** See https://axios.nuxtjs.org/options
 	*/
-	, axios: {}
+	, axios: {
+		  baseURL: process.env.URL || "http://localhost:3000"
+		, browserBaseURL: process.env.URL || "http://localhost:3000"
+	}
 	/*
 	** Proxy module configuration
 	*/
