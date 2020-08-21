@@ -32,18 +32,16 @@
 		<v-stepper-step :complete="stepper > 3" step="3" editable>決済情報</v-stepper-step>
 		<v-stepper-content step="3">
 
-			<v-form ref="paymentMethodForm">
-				<v-radio-group v-model="paymentMethod" :mandatory="false" :rules="[required]">
-					<v-radio label="銀行振込" value="1"></v-radio>
-					<div v-if="paymentMethod == 1">
-						振込先情報は購入完了メールに記載されております。<br>振込手数料はご負担下さい。
-					</div>
-					<v-radio label="クレジットカード" value="2"></v-radio>
-					<div v-if="paymentMethod == 2">
-						注文確定後、決済画面に遷移します。
-					</div>
-				</v-radio-group>
-			</v-form>
+			<v-radio-group v-model="paymentMethod" :mandatory="false" :rules="[required]">
+				<v-radio label="銀行振込" value="1"></v-radio>
+				<div v-if="paymentMethod == 1">
+					振込先情報は購入完了メールに記載されております。<br>振込手数料はご負担下さい。
+				</div>
+				<v-radio label="クレジットカード" value="2"></v-radio>
+				<div v-if="paymentMethod == 2">
+					注文確定後、決済画面に遷移します。
+				</div>
+			</v-radio-group>
 
 			<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 				<v-card>
@@ -187,8 +185,11 @@ export default {
 
 				let address = this.user.zipcode + this.user.prefecture + this.user.city + this.user.address1 + this.user.address2
 
+				let orderID = 'PAFO' + parseInt((+new Date) + Math.random()* 100).toString().slice(-6)
+
 				const params = new URLSearchParams();
 				params.append('form-name', 'order');
+				params.append('orderID', orderID)
 				params.append('name', this.user.name);
 				params.append('address', address);
 				params.append('tel', this.user.tel);
@@ -196,7 +197,7 @@ export default {
 
 				this.$axios.$post('/', params)
 					.then((res) => {
-						this.$router.push({ name: 'shop-thanks', params: this.user })
+						this.$router.push({ name: 'shop-thanks', params: { id: orderID} })
 					})
 			}
 			else
