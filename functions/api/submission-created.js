@@ -4,7 +4,9 @@ const nodemailer = require('nodemailer');
 
 exports.handler = function(event, context, callback) {
 
-	const { email } = JSON.parse(event.body).payload.data;
+	// const { email } = JSON.parse(event.body).payload.data;
+
+	const email = 'drestard@gmail.com'
 
 	// OAuth認証情報
 	const auth = {
@@ -40,4 +42,4 @@ exports.handler = function(event, context, callback) {
 			});
 		}
 	});
-};
+}
