@@ -95,8 +95,8 @@ export default {
 				, address1: '123'
 				, address2: '456'
 				, tel: '12345678912'
-				, email: 'test@mail.com'
-				, emailConfirm: 'test@mail.com'
+				, email: 'drestard@mail.com'
+				, emailConfirm: 'drestard@mail.com'
 			}
 
 			, paymentMethod : 0
@@ -197,7 +197,7 @@ export default {
 
 				this.$axios.$post('/', params)
 					.then((res) => {
-						this.$router.push({ name: 'shop-thanks', params: { id: orderID} })
+						this.$router.push({ name: 'shop-thanks', params: { orderID: orderID } })
 					})
 			}
 			else
@@ -210,21 +210,6 @@ export default {
 		, purchase: function()
 		{
 			this.$router.push({name: 'shop-thanks'});
-		}
-
-		, submit: function()
-		{
-			let params = new URLSearchParams();
-			console.log('params', params)
-			params.append('form-name', 'contact');
-			params.append('username', this.user.name);
-			params.append('useremail', this.user.email);
-			params.append('bot-field', true);
-			 this.$axios
-				.$post('/', params)
-				.then(() => {
-					console.log('done')
-				})
 		}
 
 	}

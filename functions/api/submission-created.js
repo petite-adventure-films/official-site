@@ -25,7 +25,7 @@ exports.handler = function(event, context, callback) {
 
 	let mailOptions = {
 		from    : `test`,
-		to      : `${useremail}`,
+		to      : `${email}`,
 		subject : 'testありがとうございます',
 		text    : `ありがとうございます`,
 	};
