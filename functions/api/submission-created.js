@@ -4,9 +4,7 @@ const nodemailer = require('nodemailer');
 
 exports.handler = function(event, context, callback) {
 
-	// const { email } = JSON.parse(event.body).payload.data;
-
-	const email = 'drestard@gmail.com'
+	const { orderID, name, address, tel, email } = JSON.parse(event.body).payload.data;
 
 	// OAuth認証情報
 	const auth = {
@@ -26,10 +24,10 @@ exports.handler = function(event, context, callback) {
 	let transporter = nodemailer.createTransport(transport);
 
 	let mailOptions = {
-		from    : `test`,
+		from    : `petite adventure films <info@petiteadventurefilms.com>`,
 		to      : `${email}`,
 		subject : 'testありがとうございます',
-		text    : `ありがとうございます`,
+		text    : `${orderID} ${name} ${address} ${tel} ありがとうございます`
 	};
 
 	transporter.sendMail(mailOptions, function(error, info) {
