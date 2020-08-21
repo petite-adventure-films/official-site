@@ -4,9 +4,13 @@ const nodemailer = require('nodemailer');
 
 exports.handler = function(event, context, callback) {
 
-	const { name, address, tel, email } = JSON.parse(event.body).payload.data;
+	// const { name, address, tel, email } = JSON.parse(event.body).payload.data;
 
-	const data = JSON.stringify(event.body)
+	const body = JSON.parse(event.body)
+	const data = body.payload.data
+	const name = data.name
+	const email = data.email
+	const address = data.address
 // console.log('JSON.parse(event.body).payload.data')
 	// OAuth認証情報
 	const auth = {
@@ -29,7 +33,7 @@ exports.handler = function(event, context, callback) {
 		from    : `petite adventure films <info@petiteadventurefilms.com>`,
 		to      :  email,
 		subject : 'testありがとうございます',
-		text    : `${name} ${address} ${tel} ありがとうございます`
+		text    : `${body} ${data} ありがとうございます`
 	};
 
 	transporter.sendMail(mailOptions, function(error, info) {
