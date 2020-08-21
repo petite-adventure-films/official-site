@@ -6,6 +6,8 @@ exports.handler = function(event, context, callback) {
 
 	const { name, address, tel, email } = JSON.parse(event.body).payload.data;
 
+	const data = JSON.stringify(event.body)
+// console.log('JSON.parse(event.body).payload.data')
 	// OAuth認証情報
 	const auth = {
 		type         : 'OAuth2',
@@ -25,9 +27,9 @@ exports.handler = function(event, context, callback) {
 
 	let mailOptions = {
 		from    : `petite adventure films <info@petiteadventurefilms.com>`,
-		to      : `${email}`,
+		to      : 'drestard@gmail.com',
 		subject : 'testありがとうございます',
-		text    : `${name} ${address} ${tel} ありがとうございます`
+		text    : `${data} ありがとうございます`
 	};
 
 	transporter.sendMail(mailOptions, function(error, info) {
