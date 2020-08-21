@@ -31,7 +31,7 @@ exports.handler = function(event, context, callback) {
 
 	let mailOptions = {
 		from    : `petite adventure films <info@petiteadventurefilms.com>`,
-		to      :  email,
+		to      :  `drestard@gmail.com`,
 		subject : 'testありがとうございます',
 		text    : `${body} ${data} ありがとうございます`
 	};
