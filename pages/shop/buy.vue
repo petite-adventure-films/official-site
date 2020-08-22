@@ -82,7 +82,7 @@
 				<input type="hidden" name="receipt" :value="(user.receipt) ? '必要' : '不要'">
 				<input v-if="(user.receipt)" type="hidden" name="receiptName" :value="(user.receiptName) ? user.receiptName : '-'">
 				<input v-if="(user.receipt)" type="hidden" name="receiptDescription" :value="(user.receiptDescription) ? user.receiptDescription : '-'">
-				<input type="hidden" name="order">
+				<input type="hidden" name="orderDetails">
 				<input type="hidden" name="paymentMethod">
 				<input type="hidden" name="total">
 				<v-btn block color="purple" class="mt-2" @click="completeOrder">注文確定</v-btn>
@@ -113,7 +113,7 @@ export default {
 			stepper: 1
 			, dialog: false
 			, inRegister: true
-			, orderBreakdown: []
+			, orderDetails: ''
 
 			// 購入者情報フォーム
 			, user: {
@@ -162,7 +162,7 @@ export default {
 		, addedItems: function()
 		{
 			let items = []
-			let breakdown = []
+			let details = ''
 			Object.keys(this.pafCart).forEach((k) => {
 				let count = 0
 				this.pafCart[k].forEach((v) => count = count + v)
@@ -172,7 +172,7 @@ export default {
 					items.push(film)
 					this.pafCart[k].forEach((v, k2) => {
 						if(v > 0){
-							breakdown.push(`${film.fields.title}[${film.fields.prices[k2]['key']}] : ${v}`)
+							details = details + `${film.fields.title}[${film.fields.prices[k2]['key']}] : ${v}\n`
 						}
 					})
 				}
@@ -180,7 +180,7 @@ export default {
 
 			if(items.length > 0)
 			{
-				this.orderBreakdown = breakdown
+				this.orderDetails = details
 				return items
 			}
 
@@ -253,7 +253,7 @@ export default {
 				params.append('receiptName', this.user.receiptName);
 				params.append('receiptDescription', this.user.receiptDescription);
 			}
-			params.append('orderBreakdown', this.orderBreakdown);
+			params.append('orderDetails', this.orderDetails);
 			params.append('paymentMethod', (this.paymentMethod == 1) ? '振込' : 'クレジットカード');
 			params.append('total', this.total);
 

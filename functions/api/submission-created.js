@@ -12,10 +12,10 @@ exports.handler = function(event, context, callback) {
 		, receiptName
 		, receiptDescription
 		, orderID
-		, orderBreakdown
+		, orderDetails
 		, paymentMethod
 		, total
-	// } = {orderBreakdown: ["ブライアンと仲間たち パーラメント･スクエアSW1[一般] : 1","さようならUR[団体・ライブラリー] : 1"]}
+	// } = {orderDetails: ["ブライアンと仲間たち パーラメント･スクエアSW1[一般] : 1","さようならUR[団体・ライブラリー] : 1"]}
 	} = JSON.parse(event.body).payload.data;
 
 	// OAuth認証情報
@@ -39,8 +39,7 @@ exports.handler = function(event, context, callback) {
 ご注文いただきました内容は下記の通りです。ご確認ください。
 
 ------ 注文内容 ------
-${orderBreakdown.map((item, i) => `${item}
-`).join('')}
+${orderDetails}
 
 ------ 決済情報 ------
 ${(paymentMethod == 1) ? '振込' : 'クレジットカード'}
