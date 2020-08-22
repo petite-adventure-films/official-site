@@ -253,9 +253,9 @@ export default {
 				params.append('receiptName', this.user.receiptName);
 				params.append('receiptDescription', this.user.receiptDescription);
 			}
-			params.append('order', this.orderBreakdown);
-			params.append('paymentMethod', this.paymentMethod);
-			params.append('total', this.toal);
+			params.append('orderBreakdown', this.orderBreakdown);
+			params.append('paymentMethod', (this.paymentMethod == 1) ? '振込' : 'クレジットカード');
+			params.append('total', this.total);
 
 			this.$axios.$post('/', params)
 				.then((res) => {
@@ -289,6 +289,8 @@ export default {
 						, orderID: this.user.orderID
 					}
 				)
+
+				// console.log('re', chargeResult)
 
 				if (!chargeResult || chargeResult.data !== 'NORMAL') {
 					throw new Error('決済エラー')

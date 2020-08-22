@@ -12,9 +12,10 @@ exports.handler = function(event, context, callback) {
 		, receiptName
 		, receiptDescription
 		, orderID
-		, order
+		, orderBreakdown
 		, paymentMethod
 		, total
+	// } = {orderBreakdown: ["ブライアンと仲間たち パーラメント･スクエアSW1[一般] : 1","さようならUR[団体・ライブラリー] : 1"]}
 	} = JSON.parse(event.body).payload.data;
 
 	// OAuth認証情報
@@ -38,7 +39,7 @@ exports.handler = function(event, context, callback) {
 ご注文いただきました内容は下記の通りです。ご確認ください。
 
 ------ 注文内容 ------
-${order.map((item, i) => `${item}
+${orderBreakdown.map((item, i) => `${item}
 `).join('')}
 
 ------ 決済情報 ------
@@ -76,13 +77,22 @@ URL http://petiteadventurefilms.com
 		subject : '[petite adventure films]ご注文完了のお知らせ',
 		text    : mailForm};
 
+	const headers = {
+		'Content-Type': 'text/html; charset=utf-8'
+	}
+
 	transporter.sendMail(mailOptions, function(error, info) {
+		// callback(null, {
+		// 	statusCode: 200,
+		// 	headers,
+		// 	body: `${JSON.stringify(mailForm)}`,
+		// });
 		if (error) {
 			callback(error);
 		} else {
 			callback(null, {
 				statusCode: 200,
-				body: 'ok',
+				body: '',
 			});
 		}
 	});
