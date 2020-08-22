@@ -125,8 +125,11 @@ export const mutations = {
 	}
 
 	, updateCart: (state, payload) => {
-		// console.log('payload', payload)
 		state.pafCart[payload.id][payload.key] = payload.value
+	}
+
+	, emptyCart: (state, payload) => {
+		state.pafCart = {}
 	}
 
 }

@@ -117,18 +117,18 @@ export default {
 
 			// 購入者情報フォーム
 			, user: {
-				  name: 'なまえ'
-				, zipcode: '1500000'
-				, prefecture: '東京都'
-				, city: '東京区'
-				, address1: '123'
-				, address2: '456'
-				, tel: '12345678912'
-				, email: 'drestard@gmail.com'
-				, emailConfirm: 'drestard@gmail.com'
-				, receipt : true
-				, receiptName : '領収書お宛名'
-				, receiptDescription : '領収書但し書き'
+				  name: ''
+				, zipcode: ''
+				, prefecture: ''
+				, city: ''
+				, address1: ''
+				, address2: ''
+				, tel: ''
+				, email: ''
+				, emailConfirm: ''
+				, receipt : false
+				, receiptName : ''
+				, receiptDescription : ''
 				, orderID: 'PAFO' + parseInt((+new Date) + Math.random()* 100).toString().slice(-6)
 			}
 
@@ -228,6 +228,7 @@ export default {
 			if(this.paymentMethod == 1)
 			{
 				this.sendOrderForm()
+				this.emptyCart()
 			}
 			else
 			{
@@ -255,7 +256,7 @@ export default {
 			}
 			params.append('orderDetails', this.orderDetails);
 			params.append('paymentMethod', (this.paymentMethod == 1) ? '振込' : 'クレジットカード');
-			params.append('total', this.total);
+			params.append('total', new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(this.total));
 
 			this.$axios.$post('/', params)
 				.then((res) => {
@@ -290,17 +291,22 @@ export default {
 					}
 				)
 
-				// console.log('re', chargeResult)
-
 				if (!chargeResult || chargeResult.data !== 'NORMAL') {
 					throw new Error('決済エラー')
 				}
 
 				this.sendOrderForm();
+				this.emptyCart()
 
 			} catch (error) {
 				this.payErrorMessage = error.message + 'が発生しました。'
 			}
+		}
+
+		, emptyCart: function()
+		{
+			this.$store.commit('emptyCart')
+			this.$store.commit('setCartCount', 0)
 		}
 
 	}

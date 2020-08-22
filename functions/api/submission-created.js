@@ -15,7 +15,6 @@ exports.handler = function(event, context, callback) {
 		, orderDetails
 		, paymentMethod
 		, total
-	// } = {orderDetails: ["ブライアンと仲間たち パーラメント･スクエアSW1[一般] : 1","さようならUR[団体・ライブラリー] : 1"]}
 	} = JSON.parse(event.body).payload.data;
 
 	// OAuth認証情報
@@ -40,9 +39,8 @@ exports.handler = function(event, context, callback) {
 
 ------ 注文内容 ------
 ${orderDetails}
-
 ------ 決済情報 ------
-${(paymentMethod == 1) ? '振込' : 'クレジットカード'}
+${paymentMethod}
 合計: ${total}
 
 ------ お届け先 ------
@@ -56,7 +54,6 @@ ${receipt ? `必要
 お宛名 : ${receiptName ? receiptName : '-' }
 但し書き : ${receiptDescription ? receiptDescription : '-' }
 `: '不要'}
-
 ---------------------
 
 注文番号: ${orderID}
@@ -73,6 +70,7 @@ URL http://petiteadventurefilms.com
 	let mailOptions = {
 		from    : `petite adventure films <webmaster@petiteadventurefilms.com>`,
 		to      : `${email}`,
+		bcc     : 'restard653@gmail.com'
 		subject : '[petite adventure films]ご注文完了のお知らせ',
 		text    : mailForm};
 
