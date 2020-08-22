@@ -7,4 +7,4 @@
 	from = "/zipApi"
 	to = "https://zipcloud.ibsnet.co.jp"
 	status = 200
-	force = false
+	force = true
