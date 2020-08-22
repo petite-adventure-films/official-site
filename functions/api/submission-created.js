@@ -68,11 +68,12 @@ URL http://petiteadventurefilms.com
 
 	let transporter = nodemailer.createTransport(transport);
 	let mailOptions = {
-		from    : `petite adventure films <webmaster@petiteadventurefilms.com>`,
-		to      : `${email}`,
-		bcc     : 'restard653@gmail.com'
-		subject : '[petite adventure films]ご注文完了のお知らせ',
-		text    : mailForm};
+		from    : `petite adventure films <webmaster@petiteadventurefilms.com>`
+		, to      : `${email}`
+		, bcc     : 'restard653@gmail.com'
+		, subject : '[petite adventure films]ご注文完了のお知らせ'
+		, text    : mailForm
+	};
 
 	const headers = {
 		'Content-Type': 'text/html; charset=utf-8'
