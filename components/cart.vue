@@ -23,7 +23,13 @@
 		<div class="total">
 			合計 : {{convertYen(total())}}
 		</div>
-		<cartCancel v-if="inRegister" :dialog="dialog" :data="cancelData" @close="closeCancelModal" @excu="cancel"></cartCancel>
+
+		<cartCancel
+		v-if = "!inRegister"
+			:dialog = "dialog"
+			:data   = "cancelData"
+			@close  = "closeCancelModal"
+			@excu   = "cancel"></cartCancel>
 	</div>
 </template>
 
@@ -50,8 +56,6 @@ export default {
 
 	, computed: {
 		...mapState(['shop', 'pafCart', 'pafCartCount'])
-
-
 	}
 
 	, methods: {

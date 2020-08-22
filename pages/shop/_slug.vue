@@ -16,7 +16,11 @@
 			</div>
 			※価額はすべて税込です
 		</div>
-		<v-btn color="purple" @click="addCart()" @click.stop="dialog = true">カートに追加する</v-btn><br>
+		<v-btn
+			color="purple"
+			:disabled   = "purchase.length == 0"
+			@click      = "addCart()"
+			@click.stop = "dialog=true">カートに追加する</v-btn><br>
 
 		 <v-dialog
 			v-model="dialog"
@@ -129,8 +133,11 @@ export default {
 
 		, addCart: function()
 		{
-			this.$store.commit('setCart', {id: this.post.sys.id, purchase: this.purchase})
-			this.$store.commit('setCartCount')
+			if(this.purchase.length > 0)
+			{
+				this.$store.commit('setCart', {id: this.post.sys.id, purchase: this.purchase})
+				this.$store.commit('setCartCount')
+			}
 		}
 
 	}

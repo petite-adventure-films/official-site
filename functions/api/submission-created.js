@@ -4,7 +4,17 @@ const nodemailer = require('nodemailer');
 
 exports.handler = function(event, context, callback) {
 
-	const { name, email, tel, address, receipt, receiptName, receiptDescription, orderID } = JSON.parse(event.body).payload.data;
+	const { name
+		, email
+		, tel
+		, address
+		, receipt
+		, receiptName
+		, receiptDescription
+		, orderID
+		, order
+		, paymentMethod
+	} = JSON.parse(event.body).payload.data;
 
 	// OAuth認証情報
 	const auth = {
@@ -25,10 +35,17 @@ exports.handler = function(event, context, callback) {
 
 ご注文をいただき誠にありがとうございます。
 ご注文いただきました内容は下記の通りです。ご確認ください。
------- 注文内容 ------
-注文内容
 
------ お届け先内容 ----
+------ 注文内容 ------
+${order.fill().map((item, i) => `
+${item}
+`).join('')}
+
+------ 決済情報 ------
+${(paymentMethod == 1) ? '振込' : 'クレジットカード'}
+合計: ${total}
+
+------ お届け先 ------
 お名前: ${name}
 住所: ${address}
 電話番号: ${tel}

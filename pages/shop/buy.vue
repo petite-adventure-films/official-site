@@ -81,7 +81,10 @@
 				<input type="hidden" name="email">
 				<input type="hidden" name="receipt" :value="(user.receipt) ? '必要' : '不要'">
 				<input v-if="(user.receipt)" type="hidden" name="receiptName" :value="(user.receiptName) ? user.receiptName : '-'">
-				<input v-if="(user.receipt)" type="hidden" name="receipt" :value="(user.receiptDescription) ? user.receiptDescription : '-'">
+				<input v-if="(user.receipt)" type="hidden" name="receiptDescription" :value="(user.receiptDescription) ? user.receiptDescription : '-'">
+				<input type="hidden" name="order">
+				<input type="hidden" name="paymentMethod">
+				<input type="hidden" name="total">
 				<v-btn block color="purple" class="mt-2" @click="completeOrder">注文確定</v-btn>
 			</v-form>
 
@@ -110,6 +113,7 @@ export default {
 			stepper: 1
 			, dialog: false
 			, inRegister: true
+			, orderBreakdown: {}
 
 			// 購入者情報フォーム
 			, user: {
@@ -158,7 +162,7 @@ export default {
 		, addedItems: function()
 		{
 			let items = []
-			let order = {}
+			let breakdown = {}
 			Object.keys(this.pafCart).forEach((k) => {
 				let count = 0
 				this.pafCart[k].forEach((v) => count = count + v)
@@ -166,15 +170,27 @@ export default {
 				{
 					let film = this.shop.find((a) => a.sys.id === k)
 					items.push(film)
-					// order['order_' + '1']
-					this.pafCart[k].forEach((v, k) => {
-						order['order_' + (k + 1)] =
-							film.fields.title + '_' + film.fields.prices[k]['key'] + ' : ' + v
+					let index = 1;
+					this.pafCart[k].forEach((v, k2) => {
+						if(v > 0){
+							breakdown['order_' + index] =
+								`${film.fields.title}[${film.fields.prices[k2]['key']}] : ${v}`
+						}
+						index++;
 					})
 				}
 			})
-			this.order = order
-			return items
+
+			if(items.length > 0)
+			{
+				this.orderBreakdown = breakdown
+				return items
+			}
+
+			else
+			{
+				this.$router.push({ name: 'shop' })
+			}
 		}
 
 		, total: function()
@@ -192,7 +208,6 @@ export default {
 					total = total + subtotal
 				})
 			}
-			this.totalAmount = total
 			return total
 		}
 
@@ -241,6 +256,9 @@ export default {
 				params.append('receiptName', this.user.receiptName);
 				params.append('receiptDescription', this.user.receiptDescription);
 			}
+			params.append('order', this.orderBreakdown);
+			params.append('paymentMethod', this.paymentMethod);
+			params.append('total', this.toal);
 
 			this.$axios.$post('/', params)
 				.then((res) => {
@@ -249,6 +267,8 @@ export default {
 		}
 
 		, async pay() {
+
+			let self = this
 
 			try {
 
@@ -267,8 +287,9 @@ export default {
 				const chargeResult = await this.$axios.post(
 					`${process.env.FUNCTION_URL}/.netlify/functions/charge`,
 					{
-						amount: 12345
+						  amount: this.total
 						, token: tokenResult.token.id
+						, orderID: this.user.orderID
 					}
 				)
 
@@ -289,8 +310,6 @@ export default {
 	{
 	}
 
-
-
 	, async asyncData({ payload, store, params, error }){
 
 		const result = await createClient().getEntries({
@@ -298,7 +317,6 @@ export default {
 				, 'fields.slug' : 'gathering-the-personal-information'
 			});
 
-		console.log('comes?')
 		if(result)
 		{
 			return { agreementPost: result.items[0] }

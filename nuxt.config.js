@@ -40,6 +40,7 @@ export default {
 	plugins: [
 		  '@/plugins/contentful'
 		, '@/plugins/components'
+		, { src: '@/plugins/persistedstate.js', ssr: false }
 	],
 	/*
 	** Auto import components

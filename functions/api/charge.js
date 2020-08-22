@@ -5,9 +5,12 @@ exports.handler = async function(event) {
 	try {
 		const data = JSON.parse(event.body)
 		const res = await stripe.charges.create({
-			amount: parseInt(data.amount),
-			currency: 'jpy',
-			source: data.token
+			  amount: parseInt(data.amount)
+			, currency: 'jpy'
+			, source: data.token
+			, metadata: {
+				orderID: data.orderID
+			}
 		})
 		if (res && res.status === 'succeeded') {
 			result = true
