@@ -113,7 +113,7 @@ export default {
 			stepper: 1
 			, dialog: false
 			, inRegister: true
-			, orderBreakdown: {}
+			, orderBreakdown: []
 
 			// 購入者情報フォーム
 			, user: {
@@ -162,7 +162,7 @@ export default {
 		, addedItems: function()
 		{
 			let items = []
-			let breakdown = {}
+			let breakdown = []
 			Object.keys(this.pafCart).forEach((k) => {
 				let count = 0
 				this.pafCart[k].forEach((v) => count = count + v)
@@ -170,13 +170,10 @@ export default {
 				{
 					let film = this.shop.find((a) => a.sys.id === k)
 					items.push(film)
-					let index = 1;
 					this.pafCart[k].forEach((v, k2) => {
 						if(v > 0){
-							breakdown['order_' + index] =
-								`${film.fields.title}[${film.fields.prices[k2]['key']}] : ${v}`
+							breakdown.push(`${film.fields.title}[${film.fields.prices[k2]['key']}] : ${v}`)
 						}
-						index++;
 					})
 				}
 			})

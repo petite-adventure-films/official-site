@@ -14,6 +14,7 @@ exports.handler = function(event, context, callback) {
 		, orderID
 		, order
 		, paymentMethod
+		, total
 	} = JSON.parse(event.body).payload.data;
 
 	// OAuth認証情報
@@ -37,8 +38,7 @@ exports.handler = function(event, context, callback) {
 ご注文いただきました内容は下記の通りです。ご確認ください。
 
 ------ 注文内容 ------
-${order.fill().map((item, i) => `
-${item}
+${order.map((item, i) => `${item}
 `).join('')}
 
 ------ 決済情報 ------
