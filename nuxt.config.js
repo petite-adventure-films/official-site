@@ -66,10 +66,8 @@ export default {
 	** See https://axios.nuxtjs.org/options
 	*/
 	, axios: {
-		  baseURL: 'https://old-state--dreamy-goldberg-f608e5.netlify.app'
-		, browserBaseURL: 'https://old-state--dreamy-goldberg-f608e5.netlify.app'
-		  // baseURL: "http://localhost:3000"
-		// , browserBaseURL: "http://localhost:3000"
+		  baseURL: process.env.DEPLOY_PRIME_URL || 'http://localhost:3000'
+		, browserBaseURL: process.env.DEPLOY_PRIME_URL || 'http://localhost:3000'
 	}
 	/*
 	** Proxy module configuration
@@ -98,7 +96,7 @@ export default {
 		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
 		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
 		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
-		, FUNCTION_URL : process.env.URL || 'http://localhost:9000'
+		, FUNCTION_URL : process.env.DEPLOY_PRIME_URL || 'http://localhost:9000'
 		, OAUTH_USER : process.env.OAUTH_USER
 		, OAUTH_CLIENT_ID : process.env.OAUTH_CLIENT_ID
 		, OAUTH_CLIENT_SECRET : process.env.OAUTH_CLIENT_SECRET

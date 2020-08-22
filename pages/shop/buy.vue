@@ -48,13 +48,24 @@
 					<v-btn icon @click="dialog = false">
 						<v-icon>mdi-close</v-icon>
 					</v-btn>
-					<v-btn block color="purple" class="mt-2" @click="purchase">決済</v-btn>
+
+					<card
+						:options="stripeOptions"
+						:stripe="stripePK"
+						class="stripe"
+						@change="isEntered = $event.complete"
+					></card>
+					<v-btn block color="purple" class="mt-2" @click="pay">決済</v-btn>
+					{{message}}
+					<span v-if="isComplete">成功しました</span>
+
 				</v-card>
 			</v-dialog>
 
 			<v-form name="order" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
 				<input type="hidden" name="form-name" value="contact">
 				<input type="hidden" name="bot-field">
+				<input type="hidden" name="orderID">
 				<input type="hidden" name="name">
 				<input type="hidden" name="address">
 				<input type="hidden" name="tel">
@@ -88,7 +99,7 @@ export default {
 
 			// 購入者情報フォーム
 			, user: {
-				  name: 'なまえ'
+					name: 'なまえ'
 				, zipcode: '1500000'
 				, prefecture: '東京都'
 				, city: '東京区'
@@ -97,19 +108,23 @@ export default {
 				, tel: '12345678912'
 				, email: 'drestard@gmail.com'
 				, emailConfirm: 'drestard@gmail.com'
+				, orderID: 'PAFO' + parseInt((+new Date) + Math.random()* 100).toString().slice(-6)
 			}
 
 			, paymentMethod : 0
 			, required: val => !!val || '必ず入力してください'
 
-
+			, stripeOptions: { hidePostalCode: true }
+			, stripePK: process.env.STRIPE_PUBLIC_KEY
+			, isEntered: false
+			, isComplete: false
+			, message: ''
 
 		}
 	}
 
 	, computed: {
 		...mapState(['shop', 'pafCart', 'pafCartCount'])
-
 
 		, currentCart: function()
 		{
@@ -182,23 +197,7 @@ export default {
 
 			if(this.paymentMethod == 1)
 			{
-
-				let address = this.user.zipcode + this.user.prefecture + this.user.city + this.user.address1 + this.user.address2
-
-				let orderID = 'PAFO' + parseInt((+new Date) + Math.random()* 100).toString().slice(-6)
-
-				const params = new URLSearchParams();
-				params.append('form-name', 'order');
-				params.append('orderID', orderID)
-				params.append('name', this.user.name);
-				params.append('address', address);
-				params.append('tel', this.user.tel);
-				params.append('email', this.user.email);
-
-				this.$axios.$post('/', params)
-					.then((res) => {
-						this.$router.push({ name: 'shop-thanks', params: { orderID: orderID } })
-					})
+				this.sendOrderForm()
 			}
 			else
 			{
@@ -207,9 +206,58 @@ export default {
 
 		}
 
-		, purchase: function()
+		, sendOrderForm: function()
 		{
-			this.$router.push({name: 'shop-thanks'});
+			let address = this.user.zipcode + this.user.prefecture + this.user.city + this.user.address1 + this.user.address2
+
+			const params = new URLSearchParams();
+			params.append('form-name', 'order');
+			params.append('orderID', this.user.orderID);
+			params.append('name', this.user.name);
+			params.append('address', address);
+			params.append('tel', this.user.tel);
+			params.append('email', this.user.email);
+
+			this.$axios.$post('/', params)
+				.then((res) => {
+					this.$router.push({ name: 'shop-thanks', params: { orderID: this.user.orderID } })
+				})
+		}
+
+		, async pay() {
+
+			try {
+
+				// 決済用トークン発行
+				const tokenResult = await createToken()
+				if (
+					!tokenResult ||
+					!tokenResult.token ||
+					!tokenResult.token.id ||
+					tokenResult.token.id === ''
+				) {
+					throw new Error('トークン発行エラー')
+				}
+
+				// 決済処理
+				const chargeResult = await this.$axios.post(
+					`${process.env.FUNCTION_URL}/.netlify/functions/charge`,
+					{
+						amount: 12345
+						, token: tokenResult.token.id
+					}
+				)
+
+				if (!chargeResult || chargeResult.data !== 'NORMAL') {
+					throw new Error('決済エラー')
+				}
+
+				this.sendOrderForm();
+
+
+			} catch (error) {
+				this.message = error.message + 'が発生しました。'
+			}
 		}
 
 	}
@@ -220,7 +268,6 @@ export default {
 
 	, head() {
 		return {
-			title: this.title,
 			script: [{ src: '//js.stripe.com/v3/' }]
 		}
 	}
