@@ -1,6 +1,8 @@
 <template>
 	<v-stepper v-model="stepper" vertical non-linear>
 
+		<!-- //////////////////////////////////////////////////////////////・ -->
+		<!-- 注文内容確認 -->
 		<v-stepper-step :complete="stepper > 1" step="1">注文内容</v-stepper-step>
 		<v-stepper-content step="1">
 			<cart
@@ -16,9 +18,11 @@
 				:currentCart = "currentCart"></cart>
 		</div>
 
+		<!-- //////////////////////////////////////////////////////////////・ -->
+		<!-- 購入者情報 -->
 		<v-stepper-step :complete="stepper > 2" step="2" editable>購入者情報</v-stepper-step>
 		<v-stepper-content step="2">
-			<cartUser :user="user" ref="userForm"></cartUser>
+			<cartUser ref="userForm" :user="user" :agreement="agreementPost"></cartUser>
 			<v-btn block color="purple" class="mt-2" @click="completeConsumerInfo">次へ進む</v-btn>
 		</v-stepper-content>
 		<div class="ml-15" v-if="stepper > 2">
@@ -26,9 +30,15 @@
 			{{user.zipcode}} {{user.prefecture}}{{user.city}}{{user.address1}}<br>
 			{{user.address2}}<br>
 			{{user.tel}}<br>
-			{{user.email}}
+			{{user.email}}<br>
+			<div v-if="user.receipt">
+				領収書必要<br>
+				お宛名 {{user.receiptName}} 但し書き {{user.receiptDescription}}
+			</div>
 		</div>
 
+		<!-- //////////////////////////////////////////////////////////////・ -->
+		<!-- 購入者情報 -->
 		<v-stepper-step :complete="stepper > 3" step="3" editable>決済情報</v-stepper-step>
 		<v-stepper-content step="3">
 
@@ -39,7 +49,7 @@
 				</div>
 				<v-radio label="クレジットカード" value="2"></v-radio>
 				<div v-if="paymentMethod == 2">
-					注文確定後、決済画面に遷移します。
+					注文確定後、クレジットカード決済画面に移動します。
 				</div>
 			</v-radio-group>
 
@@ -56,8 +66,7 @@
 						@change="isEntered = $event.complete"
 					></card>
 					<v-btn block color="purple" class="mt-2" @click="pay">決済</v-btn>
-					{{message}}
-					<span v-if="isComplete">成功しました</span>
+					{{payErrorMessage}}
 
 				</v-card>
 			</v-dialog>
@@ -70,8 +79,12 @@
 				<input type="hidden" name="address">
 				<input type="hidden" name="tel">
 				<input type="hidden" name="email">
+				<input type="hidden" name="receipt" :value="(user.receipt) ? '必要' : '不要'">
+				<input v-if="(user.receipt)" type="hidden" name="receiptName" :value="(user.receiptName) ? user.receiptName : '-'">
+				<input v-if="(user.receipt)" type="hidden" name="receipt" :value="(user.receiptDescription) ? user.receiptDescription : '-'">
 				<v-btn block color="purple" class="mt-2" @click="completeOrder">注文確定</v-btn>
 			</v-form>
+
 		</v-stepper-content>
 
 	</v-stepper>
@@ -82,6 +95,7 @@ import { mapState, mapGetters } from 'vuex'
 import cart from '@/components/cart'
 import cartUser from '@/components/cart_user'
 
+import { createClient } from '@/plugins/contentful'
 import { Card, createToken } from 'vue-stripe-elements-plus'
 
 export default {
@@ -93,13 +107,13 @@ export default {
 	, data: function()
 	{
 		return{
-			stepper: 3
+			stepper: 1
 			, dialog: false
 			, inRegister: true
 
 			// 購入者情報フォーム
 			, user: {
-					name: 'なまえ'
+				  name: 'なまえ'
 				, zipcode: '1500000'
 				, prefecture: '東京都'
 				, city: '東京区'
@@ -108,17 +122,21 @@ export default {
 				, tel: '12345678912'
 				, email: 'drestard@gmail.com'
 				, emailConfirm: 'drestard@gmail.com'
+				, receipt : true
+				, receiptName : '領収書お宛名'
+				, receiptDescription : '領収書但し書き'
 				, orderID: 'PAFO' + parseInt((+new Date) + Math.random()* 100).toString().slice(-6)
 			}
 
+			// 決済手段
 			, paymentMethod : 0
 			, required: val => !!val || '必ず入力してください'
 
+			// カード番号入力
 			, stripeOptions: { hidePostalCode: true }
 			, stripePK: process.env.STRIPE_PUBLIC_KEY
 			, isEntered: false
-			, isComplete: false
-			, message: ''
+			, payErrorMessage: ''
 
 		}
 	}
@@ -217,6 +235,12 @@ export default {
 			params.append('address', address);
 			params.append('tel', this.user.tel);
 			params.append('email', this.user.email);
+			params.append('receipt', (this.user.receipt) ? '必要' : '不要');
+			if(this.user.receipt)
+			{
+				params.append('receiptName', this.user.receiptName);
+				params.append('receiptDescription', this.user.receiptDescription);
+			}
 
 			this.$axios.$post('/', params)
 				.then((res) => {
@@ -254,9 +278,8 @@ export default {
 
 				this.sendOrderForm();
 
-
 			} catch (error) {
-				this.message = error.message + 'が発生しました。'
+				this.payErrorMessage = error.message + 'が発生しました。'
 			}
 		}
 
@@ -264,6 +287,22 @@ export default {
 
 	, created()
 	{
+	}
+
+
+
+	, async asyncData({ payload, store, params, error }){
+
+		const result = await createClient().getEntries({
+				  content_type: 'page'
+				, 'fields.slug' : 'gathering-the-personal-information'
+			});
+
+		console.log('comes?')
+		if(result)
+		{
+			return { agreementPost: result.items[0] }
+		}
 	}
 
 	, head() {
