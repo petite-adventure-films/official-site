@@ -4,7 +4,7 @@
 	publish = "dist"
 
 [[redirects]]
-	from = "/zipApi"
+	from = "/zipApi/*"
 	to = "https://zipcloud.ibsnet.co.jp"
 	status = 200
 	force = true
