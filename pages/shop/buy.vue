@@ -79,7 +79,7 @@
 				<input type="hidden" name="address">
 				<input type="hidden" name="tel">
 				<input type="hidden" name="email">
-				<input type="hidden" name="receipt" :value="(user.receipt) ? '必要' : '不要'">
+				<input type="hidden" name="receipt">
 				<input v-if="(user.receipt)" type="hidden" name="receiptName" :value="(user.receiptName) ? user.receiptName : '-'">
 				<input v-if="(user.receipt)" type="hidden" name="receiptDescription" :value="(user.receiptDescription) ? user.receiptDescription : '-'">
 				<input type="hidden" name="orderDetails">

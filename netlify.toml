@@ -2,3 +2,9 @@
 	Command = "npm run generate"
 	functions = "functions/dist"
 	publish = "dist"
+
+[[redirects]]
+	from = "/zipApi"
+	to = "https://zipcloud.ibsnet.co.jp"
+	status = 200
+	force = false

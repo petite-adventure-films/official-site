@@ -50,7 +50,7 @@ ${paymentMethod}
 メールアドレス: ${email}
 
 ------- 領収書 -------
-${receipt ? `必要
+${receipt == '必要' ? `必要
 お宛名 : ${receiptName ? receiptName : '-' }
 但し書き : ${receiptDescription ? receiptDescription : '-' }
 `: '不要'}
