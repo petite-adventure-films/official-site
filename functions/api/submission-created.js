@@ -31,9 +31,9 @@ exports.handler = function(event, context, callback) {
 
 	let mailOptions = {
 		from    : `petite adventure films <info@petiteadventurefilms.com>`,
-		to      : 'drestard@gmail.com',
+		to      : `${email}`,
 		subject : 'testありがとうございます',
-		text    : `${email}/n${name}/n${address}/n/n${JSON.stringify(body)}/n${JSON.stringify(data)}/nありがとうございます`
+		text    : `ありがとうございます\n\n${email}\n${name}\n${address}\n\n${JSON.stringify(body)}\n${JSON.stringify(data)}`
 	};
 
 	transporter.sendMail(mailOptions, function(error, info) {
