@@ -95,8 +95,8 @@ export default {
 				, address1: '123'
 				, address2: '456'
 				, tel: '12345678912'
-				, email: 'drestard@mail.com'
-				, emailConfirm: 'drestard@mail.com'
+				, email: 'drestard@gmail.com'
+				, emailConfirm: 'drestard@gmail.com'
 			}
 
 			, paymentMethod : 0
