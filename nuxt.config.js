@@ -96,6 +96,8 @@ export default {
 		  CTF_SPACE_ID             : process.env.CTF_SPACE_ID
 		, CTF_CDA_ACCESS_TOKEN     : process.env.CTF_CDA_ACCESS_TOKEN
 		, CTF_PREVIEW_ACCESS_TOKEN : process.env.CTF_PREVIEW_ACCESS_TOKEN
+		, STRIPE_PUBLIC_KEY : process.env.STRIPE_PUBLIC_KEY
+		, STRIPE_SECRET_KEY : process.env.STRIPE_SECRET_KEY
 		, FUNCTION_URL : process.env.DEPLOY_PRIME_URL || 'http://localhost:9000'
 		, OAUTH_USER : process.env.OAUTH_USER
 		, OAUTH_CLIENT_ID : process.env.OAUTH_CLIENT_ID
