@@ -5,6 +5,6 @@
 
 [[redirects]]
 	from = "/zipApi/*"
-	to = "https://zipcloud.ibsnet.co.jp"
+	to = "https://zipcloud.ibsnet.co.jp:splat"
 	status = 200
 	force = true
