@@ -32,7 +32,7 @@
 		v-for="(val, key) in archiveIndexs"
 			:key = "'archiveIndex' + key"
 			outlined
-			:to = "{name:'event-archive-year' , params:{ year: val }}"
+			:to = "{name:'events-archive-year' , params:{ year: val }}"
 			>{{val}}
 		</v-btn>
 

@@ -1,6 +1,6 @@
 <template>
 	<v-card
-		:to  = "linkTo('film', post)"
+		:to  = "linkTo('films', post)"
 		outlined
 		class="mt-4"
 			><v-img

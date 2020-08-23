@@ -40,6 +40,7 @@ export default {
 	plugins: [
 		  '@/plugins/contentful'
 		, '@/plugins/components'
+		, '@/plugins/vue-youtube'
 		, { src: '@/plugins/persistedstate.js', ssr: false }
 	],
 	/*

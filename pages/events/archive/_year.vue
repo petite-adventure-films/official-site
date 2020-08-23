@@ -2,7 +2,7 @@
 	<article>
 
 		{{archiveTitle}}年 上映会・イベントアーカイブ<br>
-		<nuxt-link :to="{name:'event'}">←最新イベント</nuxt-link>
+		<nuxt-link :to="{name:'events'}">←最新イベント</nuxt-link>
 
 		<div
 		v-for="item in post"

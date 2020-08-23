@@ -13,7 +13,6 @@
 		{{fields.fee}}<br>
 		<br>
 
-
 		<div v-if="fields.relatedReports">
 			イベントレポート
 			<cardPost
@@ -61,17 +60,17 @@ export default {
 			if(this.isArchivePost)
 			{
 				prevPage.text = this.postedYear + '年 アーカイブ'
-				prevPage.to   = { name: 'event-archive-year', params: { year: this.postedYear } }
+				prevPage.to   = { name: 'events-archive-year', params: { year: this.postedYear } }
 			}
 			else
 			{
 				prevPage.text = '上映会・イベント'
-				prevPage.to = { name: 'event' }
+				prevPage.to = { name: 'events' }
 			}
 
 			let thisPage = {
 				  text: this.post.fields.title
-				, to: this.linkTo('event', this.post)
+				, to: this.linkTo('events', this.post)
 			}
 
 			return [ prevPage, thisPage ]
