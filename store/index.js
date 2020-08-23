@@ -1,9 +1,36 @@
 import { createClient } from '@/plugins/contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 
 const client = createClient();
 const options = {
+	renderNode: {
+		["paragraph"]: (node, next) => `<p>${next(node.content).replace(/\n/g, `<br>`)}</p>`
+		, [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+			`<img src="${fields.file.url}?q=80">`
+		, [BLOCKS.EMBEDDED_ENTRY]: (node) =>
+			`<div class="card-post">
+				${(node.data.target.fields.category) ? node.data.target.fields.category.fields.title : ''}
+				${(node.data.target.fields.relatedSeries) ? node.data.target.fields.relatedSeries.fields.title : ''}<br>
+				<a href="${process.env.BASE_URL}/blog/${node.data.target.fields.slug}">${node.data.target.fields.title}</a>
+			</div>`
+		, [INLINES.EMBEDDED_ENTRY]: (node) =>
+			`<a href="${process.env.BASE_URL}/blog/${node.data.target.fields.slug}">${node.data.target.fields.title}</a>`
+		, [INLINES.HYPERLINK]: (node) => {
+			if((node.data.uri).includes('youtube.com/embed')){
+				return `<iframe src=${node.data.uri} allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" frameBorder="0" allowFullScreen></iframe></IframeContainer>`
+			}
+			else if (!(node.data.uri).startsWith(process.env.SITE_URL))
+			{
+					return (node.content[0].value) ? `<a href="${node.data.uri}" target="_blank">${node.content[0].value}</a>` : ''
+			}
+			else
+			{
+				return (node.content[0].value) ? `<a href="${node.data.uri}">${node.content[0].value}</a>` : ''
+			}
+		}
 	}
+};
 
 const postTypes = [
 	  'post'

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.1",
+    "@contentful/rich-text-types": "^14.1.1",
     "@nuxtjs/axios": "^5.12.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/proxy": "^2.0.1",
