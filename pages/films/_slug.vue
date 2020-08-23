@@ -50,8 +50,8 @@
 				show-arrows-on-hover
 				height="auto"
 				><v-carousel-item
-					v-for="(arr, key) in post.fields.gallery"
-					:key = key
+					v-for="arr in post.fields.gallery"
+					:key = "'gallery' + arr.sys.id"
 					><v-img
 						:src="generateImageUrl(arr.fields.file.url)"
 						:lazy-src="generateImageUrl(arr.fields.file.url)"></v-img>
