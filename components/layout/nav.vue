@@ -6,10 +6,10 @@
 		<v-btn text :to = "{name:'films'}">映画</v-btn>
 		<v-btn text :to = "{name:'channel'}">チャンネル</v-btn>
 		<v-btn text :to = "{name:'media'}">メディア紹介</v-btn>
-		<!-- <v-btn text :to = "{name:'director'}">監督</v-btn>
+		<v-btn text :to = "{name:'director'}">監督</v-btn>
 		<v-btn text :to = "{name:'four_walling'}">自主上映</v-btn>
 		<v-btn text :to = "{name:'workshop'}">ワークショップ</v-btn>
-		<v-btn text :to = "{name:'kawaraban'}">かわら版</v-btn> -->
+		<!-- <v-btn text :to = "{name:'kawaraban'}">かわら版</v-btn> -->
 	</nav>
 </template>
 
