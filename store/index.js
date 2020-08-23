@@ -46,12 +46,10 @@ export const state = () => ({
 	, series: []
 	, category: []
 	, pageInfo: {}
-	, contentsInfo: {}
 
 	////////////////////////////////////
 	// shop
 	////////////////////////////////////
-
 	, pafCart: {}
 	, pafCartCount: 0
 })
