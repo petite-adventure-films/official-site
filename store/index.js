@@ -20,7 +20,7 @@ const postTypes = [
 const entriesParams = {
 	event:
 	{
-		  order: '-fields.publishedDate,sys.createdAt'
+		  order: '-fields.startDate,sys.createdAt'
 		, 'fields.startDate[gte]' : new Date().getFullYear() + '-01-01'
 	}
 	, news:  {
