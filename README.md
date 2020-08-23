@@ -1,17 +1,20 @@
-# petiteadventurefilms
+# petite_adventure_films_jp
 
-## 仕様書
-https://docs.google.com/spreadsheets/d/1jqDZmbzAnFDz693wl6cNxRPkfam5HyPFvMHLVcFplLE/edit?usp=sharing
+## Build Setup
 
-## ページ別
-### 全体
-- 仕様書 https://docs.google.com/spreadsheets/d/1q1xs3FdxScxynYFtAnLKTdvtrmswbBaS2Ovn6mGbBc4/edit?usp=sharing
-- 画面遷移 https://xd.adobe.com/view/af255d76-2ffb-42df-aacc-7fa53b7885cd-fa76/
+```bash
+# install dependencies
+$ npm install
 
-### かわら版
-- 仕様書 https://docs.google.com/spreadsheets/d/1YMcZodmMk1C_yeryMYHbIPLM_QW65saa4-bkr8mrR4o/edit?usp=sharing
-- 画面遷移 https://xd.adobe.com/view/3c303cb8-d3fa-4d5a-8bee-f3ffb38529c2-6963/
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-### ショップ
-- 仕様書 https://docs.google.com/spreadsheets/d/1qsx1vYDb-93oFXLXu6XPWbt4pgdCJjam9BaKoDoU4xw/edit?usp=sharing
-- 画面遷移 https://xd.adobe.com/view/7d94cd49-fbf0-4a2f-ac34-a41206804f8b-28c7/
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
+
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
