@@ -11,7 +11,7 @@ const options = {
         , [BLOCKS.EMBEDDED_ENTRY]: (node) =>
             `<div class="card-post">
                 ${(node.data.target.fields.category) ? node.data.target.fields.category.fields.title : ''}
-                ${(node.data.target.fields.relatedSeries) ? node.data.target.fields.relatedSeries.fields.title : ''}<br>
+                ${(node.data.target.fields.relatedSeries && node.data.target.fields.relatedSeries.fields) ? node.data.target.fields.relatedSeries.fields.title : ''}<br>
                 <a href="${process.env.BASE_URL}/blog/${node.data.target.fields.slug}">${node.data.target.fields.title}</a>
             </div>`
         , [INLINES.EMBEDDED_ENTRY]: (node) =>
@@ -22,7 +22,7 @@ const options = {
             }
             else if (!(node.data.uri).startsWith(process.env.SITE_URL))
             {
-                    return (node.content[0].value) ? `<a href="${node.data.uri}" target="_blank">${node.content[0].value}</a>` : ''
+                return (node.content[0].value) ? `<a href="${node.data.uri}" target="_blank">${node.content[0].value}</a>` : ''
             }
             else
             {

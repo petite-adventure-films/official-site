@@ -59,8 +59,8 @@ export default {
 
     , computed: {
         ...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
-        , fields: function(){ return this.post.fields || {} }
-        , sys: function(){ return this.post.sys || {} }
+        , fields: function(){ return (this.post) ? this.post.fields : {} }
+        , sys: function(){ return (this.post) ? this.post.sys : {} }
         , addBreads: function(){
             return [
                 {
@@ -84,13 +84,16 @@ export default {
     , async created()
     {
         if(this.post.fields.relatedSeries){
-            let result = await client.getEntries({
+            let result = await cttfClient.getEntries({
                   content_type: 'post'
                 , order: 'fields.publishedDate,fields.order,sys.createdAt'
                 , 'fields.relatedSeries.sys.contentType.sys.id': 'series'
                 , 'fields.relatedSeries.fields.title[match]': this.post.fields.relatedSeries.fields.title,
             });
-            this.relatedSeriesPosts = result.items;
+            if(result)
+            {
+                this.relatedSeriesPosts = result.items || {};
+            }
         }
     }
 
