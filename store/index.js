@@ -61,7 +61,13 @@ export const state = () => ({
     , media: []
     , post:  []
     , series: []
-    , category: []
+    , category: [
+          { fields: {title: 'お知らせ', slug: 'お知らせ', titleAbbr: 'お知らせ'}, sys: { id: '5FAp3e8RKwjaEIfHP42Td9' } }
+        , { fields: {title: '上映会・イベントレポート', slug: '上映会・イベントレポート', titleAbbr: 'レポート'}, sys: { id: '5pSHDdKB1goUInTYm7kI4A' } }
+        , { fields: {title: '雑木林コラム', slug: '雑木林コラム', titleAbbr: '雑木林コラム'}, sys: { id: '3k7zbt4vJ2DE8vyzSXkkjY' } }
+        , { fields: {title: '制作日誌', slug: '制作日誌', titleAbbr: '制作日誌'}, sys: { id: '52UAIoSd3RdquK1NxW0KIH' } }
+        , { fields: {title: '映画監督、日々の暮らし', slug: '映画監督、日々の暮らし', titleAbbr: '日々の暮らし'}, sys: { id: '3JCGW4YJNRAT6lHEUvFEXv' } }
+    ]
     , pageInfo: {}
 
     // shop

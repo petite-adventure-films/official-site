@@ -7,7 +7,7 @@
         <v-btn text :to = "{name:'media'}">メディア紹介</v-btn>
         <v-btn text :to = "{name:'director'}">監督</v-btn>
         <v-btn text :to = "{name:'four_walling'}">自主上映</v-btn>
-        <v-btn text :to = "{name:'workshop'}">ワークショップ</v-btn>
+        <v-btn text :to = "{name:'workshop'}">ワークショップ</v-btn> -->
         <v-btn text :to = "{name:'kawaraban'}">かわら版</v-btn>
 
         <div v-if="isKawaraban" class="kawaraban_navi">
@@ -16,18 +16,9 @@
             :key = "'category' + item.sys.id"
                 text class="mt-1" :to = "{name: 'category', params: { category: item.fields.slug }}">
                 {{item.fields.titleAbbr}}</v-btn>
-            <div>
-                <v-btn text :to="{name: 'series-recommend'}">おすすめ</v-btn>
-                <v-btn
-                v-for = "item in series"
-                :key = "'series' + item.sys.id"
-                    v-if="item.fields.frontLine"
-                        :to = "{name: 'series-slug', params: { slug: item.fields.slug }}"
-                        text
-                        class="mt-1">{{item.fields.titleAbbr}}</v-btn>
-                <v-btn text :to="{name: 'series'}">連載記事一覧</v-btn>
-            </div>
-        </div> -->
+            <!-- <v-btn text :to="{name: 'series-recommend'}">おすすめ</v-btn> -->
+            <v-btn text :to="{name: 'series'}">連載記事</v-btn>
+        </div>
 
     </nav>
 </template>
@@ -36,6 +27,7 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
+
     computed: {
         ...mapState(['category', 'series'])
         , ...mapGetters(['linkTo'])
@@ -48,6 +40,10 @@ export default {
             ) ? true : false
         }
     }
+
+    
+
+    
 }
 </script>
 
