@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav v-if="!isShop">
         <v-btn text :to = "{name:'news'}">新着情報</v-btn>
         <v-btn text :to = "{name:'events'}">上映会・イベント</v-btn>
         <v-btn text :to = "{name:'films'}">映画</v-btn>
@@ -38,6 +38,10 @@ export default {
                 || this.$route.name.match(/category/)
                 || this.$route.name === 'slug'
             ) ? true : false
+        }
+        , isShop: function()
+        {
+             return this.$route.name.match(/shop/) ? true : false
         }
     }
 

@@ -1,9 +1,9 @@
 <template>
-	<div>
-		<h1>{{post.fields.title}}</h1>
-		<div v-html="renderRichText(post.fields.body)"></div>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
-	</div>
+    <div>
+        <h1>{{post.fields.title}}</h1>
+        <div v-html="renderRichText(post.fields.body)"></div>
+        <nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
+    </div>
 </template>
 
 <script>
@@ -12,27 +12,27 @@ import cttfClient from '@/plugins/contentful'
 
 export default {
 
-	data: function()
-	{
-		return{
-			sortedPosts   : []
-			, skipped: 0
-		}
-	}
+    data: function()
+    {
+        return{
+            sortedPosts   : []
+            , skipped: 0
+        }
+    }
 
-	, computed:
-	{
-		...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
-	}
+    , computed:
+    {
+        ...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
+    }
 
-	, methods:
-	{
-	}
+    , methods:
+    {
+    }
 
 
-	, created: function()
-	{
-	}
+    , created: function()
+    {
+    }
 
     , async asyncData({ payload, store, params, error }){
 
