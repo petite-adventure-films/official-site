@@ -54,7 +54,7 @@ export default {
         async viewMore()
         {
 
-            let loaded = this.postPageInfo.skip + 100;
+            let loaded = this.postPageInfo.skip + 20;
 
             let result = await cttfClient.getEntries({
                 content_type: 'post'

@@ -5,6 +5,7 @@
 			<Header></Header>
 			<Nav></Nav>
 			<Nuxt></Nuxt>
+			<Footer></Footer>
 		</v-app>
 	</v-container>
 
@@ -13,12 +14,13 @@
 <script>
 	import Header from '@/components/layout/header'
 	import Nav from '@/components/layout/nav'
+	import Footer from '@/components/layout/footer'
 
 	export default
 	{
 
 		components: {
-			Header, Nav
+			Header, Nav, Footer
 		}
 
 		, data: function()
