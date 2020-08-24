@@ -1,7 +1,6 @@
 <template>
     <v-stepper v-model="stepper" vertical non-linear>
 
-        <!-- //////////////////////////////////////////////////////////////・ -->
         <!-- 注文内容確認 -->
         <v-stepper-step :complete="stepper > 1" step="1">注文内容</v-stepper-step>
         <v-stepper-content step="1">
@@ -18,7 +17,6 @@
                 :currentCart = "currentCart"></cart>
         </div>
 
-        <!-- //////////////////////////////////////////////////////////////・ -->
         <!-- 購入者情報 -->
         <v-stepper-step :complete="stepper > 2" step="2" editable>購入者情報</v-stepper-step>
         <v-stepper-content step="2">
@@ -37,7 +35,6 @@
             </div>
         </div>
 
-        <!-- //////////////////////////////////////////////////////////////・ -->
         <!-- 購入者情報 -->
         <v-stepper-step :complete="stepper > 3" step="3" editable>決済情報</v-stepper-step>
         <v-stepper-content step="3">
@@ -290,9 +287,6 @@ export default {
             return { agreementPost: result.items[0] }
         }
     }
-
-
-
 
 
     , head() {
