@@ -28,13 +28,13 @@ export default {
     , data: function()
     {
         return{
-            pageTitle : this.$route.params.category
+            pageTitle : this.$route.params.slug
         }
     }
 
     , computed:
     {
-        ...mapState(['category', 'series', 'pageInfo'])
+        ...mapState(['category', 'pageInfo'])
         , ...mapGetters(['linkTo', 'dateFormat'])
         , loadMore: function(){
             let loaded = this.postPageInfo;
@@ -86,11 +86,11 @@ export default {
 
 
     , async asyncData({ payload, store, params, error }) {
-        const post = payload || await cttfClient.getEntries({
+        const post = await cttfClient.getEntries({
                   content_type: 'post'
                 , order: '-fields.publishedDate,-fields.order,-sys.createdAt'
                 , 'fields.category.sys.contentType.sys.id': 'category'
-                , 'fields.category.fields.title[match]': params.category
+                , 'fields.category.fields.title[match]': params.slug
             });
 
         if (post) {

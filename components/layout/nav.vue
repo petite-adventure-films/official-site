@@ -14,7 +14,7 @@
             <v-btn
             v-for = "item in category"
             :key = "'category' + item.sys.id"
-                text class="mt-1" :to = "{name: 'category', params: { category: item.fields.slug }}">
+                text class="mt-1" :to = "{name: 'category-slug', params: { slug: item.fields.slug }}">
                 {{item.fields.titleAbbr}}</v-btn>
             <!-- <v-btn text :to="{name: 'series-recommend'}">おすすめ</v-btn> -->
             <v-btn text :to="{name: 'series'}">連載記事</v-btn>
@@ -35,8 +35,8 @@ export default {
 		{
             return (this.$route.name.match(/kawaraban/)
                 || this.$route.name.match(/series/)
+                || this.$route.name.match(/category/)
                 || this.$route.name === 'slug'
-                || this.$route.name === 'category'
             ) ? true : false
         }
     }

@@ -64,8 +64,9 @@ export default {
 
     , async asyncData({ payload, store, params, error }) {
 
-        const result = payload
-            || (store.state.news.length > 0) ? store.state.news
+        const result = payload 
+            || (store.state.news.length > 0)
+                ? store.state.news
                 : await cttfClient.getEntries({
                     content_type: 'news'
                     , order: '-fields.publishedDate,-sys.createdAt'

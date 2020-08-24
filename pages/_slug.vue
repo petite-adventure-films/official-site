@@ -96,8 +96,7 @@ export default {
 
     , async asyncData({ payload, store, params, error }) {
 
-        const post = payload
-            || await store.state.post.find(post => post.fields.slug === params.slug)
+        const post = await store.state.post.find(post => post.fields.slug === params.slug)
             || await cttfClient.getEntries({
                   content_type: 'post'
                 , 'fields.slug' : params.slug
