@@ -32,18 +32,6 @@ const options = {
     }
 };
 
-const postTypes = [
-      'post'
-    , 'category'
-    , 'series'
-    , 'news'
-    , 'event'
-    , 'media'
-    , 'video'
-    , 'film'
-    , 'shop'
-];
-
 const entriesParams = {
     event:
     {
@@ -63,6 +51,8 @@ const entriesParams = {
 }
 
 export const state = () => ({
+
+    // 記事
       news:  []
     , event: []
     , film:  []
@@ -74,9 +64,7 @@ export const state = () => ({
     , category: []
     , pageInfo: {}
 
-    ////////////////////////////////////
     // shop
-    ////////////////////////////////////
     , pafCart: {}
     , pafCartCount: 0
 })
@@ -138,7 +126,6 @@ export const mutations = {
     }
 
     , setCartCount: (state, payload) => {
-        // this.$store.commit('myMutation', window.localStorage.getItem("cart")
         let count = 0
         if(payload)
         {

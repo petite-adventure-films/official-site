@@ -22,8 +22,8 @@ export default {
 
 	computed: {
 		...mapGetters(['dateFormat', 'renderRichText'])
-		, fields: function(){ return this.post.fields }
-		, sys: function(){ return this.post.sys }
+		, fields: function(){ return this.post.fields || {} }
+		, sys: function(){ return this.post.sys || {} }
 	}
 
 	, async asyncData({ payload, store, params, error }) {
