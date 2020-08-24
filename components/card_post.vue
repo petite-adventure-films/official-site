@@ -53,8 +53,7 @@ export default{
 		}
 		, categoryAbbrName: function()
 		{
-			let category = this.$store.state.category.find((e) => e.sys.id === this.post.fields.category.sys.id);
-			return category.fields.titleAbbr
+			return this.post.fields.category.titleAbbr
 		}
 
 	}

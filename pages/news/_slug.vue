@@ -16,7 +16,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { createClient } from '@/plugins/contentful'
+import cttfClient from '@/plugins/contentful'
 
 export default {
 
@@ -27,8 +27,9 @@ export default {
 	}
 
 	, async asyncData({ payload, store, params, error }) {
-		const post = await store.state.news.find(post => post.fields.slug === params.slug)
-			|| await client.getEntries({
+		const post = payload
+			|| await store.state.news.find(post => post.fields.slug === params.slug)
+			|| await cttfClient.getEntries({
 				  content_type: 'news'
 				, 'fields.slug' : params.slug
 			});

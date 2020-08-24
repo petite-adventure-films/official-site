@@ -1,8 +1,7 @@
 <template>
     <nav>
-        <v-btn text :to = "{name:'index'}">HOME</v-btn>
         <v-btn text :to = "{name:'news'}">新着情報</v-btn>
-        <v-btn text :to = "{name:'events'}">上映会・イベント</v-btn>
+        <!-- <v-btn text :to = "{name:'events'}">上映会・イベント</v-btn>
         <v-btn text :to = "{name:'films'}">映画</v-btn>
         <v-btn text :to = "{name:'channel'}">チャンネル</v-btn>
         <v-btn text :to = "{name:'media'}">メディア紹介</v-btn>
@@ -28,7 +27,7 @@
                         class="mt-1">{{item.fields.titleAbbr}}</v-btn>
                 <v-btn text :to="{name: 'series'}">連載記事一覧</v-btn>
             </div>
-        </div>
+        </div> -->
 
     </nav>
 </template>
