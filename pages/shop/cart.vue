@@ -6,7 +6,7 @@
 		<cart
 			:addedItems  = "addedItems"
 			:currentCart = "currentCart"></cart>
-		<v-btn block color="purple" class="mt-4" :to="{name: 'shop-buy'}">レジに進む</v-btn>
+		<v-btn block :disabled="pafCartCount == 0" color="purple" class="mt-4" :to="{name: 'shop-buy'}">レジに進む</v-btn>
 
 	</div>
 </template>
@@ -14,6 +14,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import cart from '@/components/cart'
+import cttfClient from '@/plugins/contentful'
 
 export default {
 
@@ -68,10 +69,29 @@ export default {
 	{
 	}
 
-	, asyncData({ payload, store, params, error })
-	{
+    , async asyncData({ payload, store, params, error }) {
 
-	}
+        const result = payload 
+            || (store.state.shop.length > 0)
+                ? store.state.shop
+                : await cttfClient.getEntries({
+                    content_type: 'shop'
+                    , order: '-sys.createdAt'
+                });
+
+        if (result) {
+
+            if(result.items)
+            {
+                store.commit('setPosts', result)
+                store.commit('setPageInfo', result)
+
+            }
+            
+        } else {
+            return error({ statusCode: 400 })
+        }
+    }
 
 }
 </script>
@@ -79,7 +99,6 @@ export default {
 <style>
 .unit{
 	display: inline;
-	width: 30px;
 }
 
 .item{

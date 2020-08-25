@@ -1,4 +1,10 @@
 [build]
-Command = "nuxt generate"
-functions = "functions/dist"
-publish = "dist"
+	Command = "npm run build"
+	functions = "functions/dist"
+	publish = "dist"
+
+[[redirects]]
+	from = "/zipApi/*"
+	to = "https://zipcloud.ibsnet.co.jp/:splat"
+	status = 200
+	force = true

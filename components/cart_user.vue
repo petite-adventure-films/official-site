@@ -49,6 +49,31 @@
 			:rules    = "[required, isEmailCorrect]"
 			type      = "email"
 		></v-text-field>
+
+		<v-checkbox
+			v-model="user.receipt"
+			label="領収書必要"
+		></v-checkbox>
+		<v-text-field
+			v-model = "user.receiptName"
+			v-if="user.receipt == true"
+			label   = "お宛名"
+		></v-text-field>
+		<v-text-field
+			v-model   = "user.receiptDescription"
+			v-if="user.receipt == true"
+			label     = "但し書き"
+		></v-text-field>
+
+		個人情報の取扱について<br>
+		<div v-html="renderRichText(agreement.fields.body)" class="agreement_area">
+		</div>
+		<v-checkbox
+			v-model="user.agree"
+			label="上記個人情報の取扱について同意しました"
+			:rules    = "[required]"
+		></v-checkbox>
+
 	</v-form>
 </template>
 
@@ -57,7 +82,7 @@ import { mapState, mapGetters } from 'vuex'
 
 export default{
 
-	props: ['user']
+	props: ['user', 'agreement']
 
 	, components: {
 	}
@@ -75,6 +100,7 @@ export default{
 	}
 
 	, computed: {
+		...mapGetters(['renderRichText'])
 	}
 
 	, methods: {
@@ -109,3 +135,11 @@ export default{
 
 }
 </script>
+
+<style>
+.agreement_area{
+	height: 100px;
+	overflow-y: scroll;
+	border: 1px solid #eeeeee;
+}
+</style>

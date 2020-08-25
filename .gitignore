@@ -66,6 +66,7 @@ typings/
 .next
 
 # nuxt.js build output
+.nuxt/
 .nuxt
 .nuxt/
 
@@ -91,5 +92,8 @@ sw.*
 *.swp
 
 # Sublime project
-.sublime-project
-.sublime-workspace
+*.sublime-project
+*.sublime-workspace
+
+# Local Netlify folder
+.netlify

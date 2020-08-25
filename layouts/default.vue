@@ -1,30 +1,32 @@
 <template>
-	<v-app>
-		<Header></Header>
-		<Navi v-if="showNavi()"></Navi>
-		<v-container>
+
+	<v-container>
+		<v-app>
+			<Header></Header>
+			<Nav></Nav>
 			<Nuxt></Nuxt>
-		</v-container>
-		<Footer></Footer>
-	</v-app>
+			<Footer></Footer>
+		</v-app>
+	</v-container>
+
 </template>
 
 <script>
-	import Header from '@/components/header'
-	import Footer from '@/components/footer'
-	import Navi   from '@/components/navi'
+	import Header from '@/components/layout/header'
+	import Nav from '@/components/layout/nav'
+	import Footer from '@/components/layout/footer'
 
 	export default
 	{
 
-		data: function()
+		components: {
+			Header, Nav, Footer
+		}
+
+		, data: function()
 		{
 			return{
 			}
-		}
-
-		, components: {
-			Header, Footer, Navi
 		}
 
 		, methods: {
@@ -36,6 +38,3 @@
 
 	}
 </script>
-
-<style>
-</style>

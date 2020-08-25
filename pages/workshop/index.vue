@@ -1,10 +1,7 @@
 <template>
-	<div>
+    <article>
 
-
-
-
-		<h1>映像制作を学びませんか？</h1>
+		映像制作を学びませんか？
 		<br><br>
 		<p>ビデオカメラが小型化し、値段も手ごろとなり、スマホでも簡単に動画が撮影できる時代になりました。それに伴い、「映像制作に興味がある」、「自分たちの活動を映像で紹介したい」、「スマホで撮った映像を編集したい」等々、映像制作を学びたい方が増えています。プチ・アドベンチャー・フィルムズでは、初心者～中級者を対象に、ニーズに合わせた映像ワークショップを承っております。ご興味のある方は、お問い合わせよりご連絡ください。</p>
 
@@ -15,36 +12,27 @@
 			height="auto"
 			><v-carousel-item
 				v-for="arr in gallery"
-				:key= arr.key
+				:key="'gallery' + arr.data.sys.id"
 				><v-img :src="generateImageUrl(arr.data.fields.file.url)"></v-img>
 			</v-carousel-item>
 		</v-carousel>
 
-		<br>
 		<contactUs></contactUs>
 
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link>
-	</div>
+    </article>
 </template>
+
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { createClient } from '@/plugins/contentful'
+import cttfClient from '@/plugins/contentful'
 
-import cardFilm from '@/components/card_film'
 import contactUs from '@/components/contact_us'
-
-const client = createClient();
 
 export default {
 
 	components:{
-		cardFilm, contactUs
-	}
-
-	, head()
-	{
+		contactUs
 	}
 
 	, computed: {
@@ -78,12 +66,12 @@ export default {
 		this.gallery = this.sort(this.gallery);
 	}
 
-	// 記事取得
+	
 	, async asyncData({ payload, store, params, error }){
 
 		const result = await Promise.all([
-				  client.getAssets({ 'fields.title[match]' : 'ワークショップについて' })
-			]);
+			cttfClient.getAssets({ 'fields.title[match]' : 'ワークショップについて' })
+		]);
 
 		if (result) {
 			return { gallery: result[0].items }

@@ -1,6 +1,6 @@
 <template>
 	<v-card
-		:to  = "linkTo('event', post)"
+		:to  = "linkTo('events', post)"
 		outlined
 		class="mt-4"
 		><v-card-text v-if="post.fields.eventType || post.fields.relatedFilm">

@@ -1,93 +1,91 @@
 <template>
-	<article>
+    <article>
 
-		<header>
-			<breadcrumbs :addItems="addBreads"></breadcrumbs>
-			<h1>お知らせ</h1>
-		</header>
+        <cardNews
+        v-for = "post in news"
+        :key  = "post.sys.id"
+            :post="post"></cardNews>
+        <v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>
 
-		<div
-		v-for = "(post, key) in news"
-		:key = "key"
-			><cardNews :post="post"></cardNews>
-		</div>
-		<br>
-
-		<v-btn v-if="loadMore" @click="viewMore">もっと見る</v-btn>
-	</article>
+    </article>
 </template>
 
-<script>
-import { mapState, mapGetters } from 'vuex'
-import { createClient } from '@/plugins/contentful'
 
+<script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import cardNews from '@/components/card_news'
 
-const client = createClient();
+import cttfClient from '@/plugins/contentful'
+
 
 export default {
 
-	components: {
-		cardNews
-	}
+    components: {
+        cardNews
+    }
 
-	, data: function()
-	{
-		return{
-		}
-	}
+    , data: function()
+    {
+        return{
+        }
+    }
 
-	, computed:
-	{
-		  ...mapState(['news', 'pageInfo', 'pageInfo'])
-		, ...mapGetters(['linkTo', 'dateFormat'])
-		, postPageInfo: function(){
-			return this.pageInfo['news']
-		}
-		, loadMore: function(){
-			let loaded = this.postPageInfo;
-			return loaded.skip + loaded.limit < loaded.total;
-		}
-		, addBreads: function(){
-			return [
-				{
-					icon: 'mdi-folder-outline'
-					, text: 'お知らせ'
-					, to: {name: 'news'}
-				}
-			]
-		}
-	}
 
-	, methods:
-	{
+    , computed: {
+        ...mapState(['news', 'pageInfo'])
+        , thisPageInfo: function(){ return this.pageInfo['news'] }
+        , loadMore: function(){
+            return this.thisPageInfo.skip + this.thisPageInfo.limit < this.thisPageInfo.total;
+        }
+    }
 
-		async viewMore()
-		{
+    , methods: {
 
-			let loaded = this.postPageInfo.skip + 20;
+        ...mapMutations(['setPosts', 'setPageInfo'])
+        , async viewMore()
+        {
 
-			let result = await client.getEntries({
-				content_type: 'news'
-				, skip: loaded
-				, limit: this.postPageInfo.limit
-				, order: '-fields.publishedDate,-sys.createdAt'
-			});
+            let loaded = this.thisPageInfo.skip + 20;
 
-			if (result){
-				this.$store.commit('setPageInfo', result);
-				result.items.forEach((arr, key) => {
-					this.$store.commit('setPosts', arr);
-				})
-				return true;
-			}
-		}
+            let result = await cttfClient.getEntries({
+                content_type: 'news'
+                , skip: loaded
+                , limit: this.thisPageInfo.limit
+                , order: '-fields.publishedDate,-sys.createdAt'
+            });
 
-	}
+            if (result){
+                this.setPosts(result);
+                this.setPageInfo(result);
+            }
+        }
 
-	, created: function()
-	{
-	}
+    }
+
+    , async asyncData({ payload, store, params, error }) {
+
+        const result = payload 
+            || (store.state.news.length > 0)
+                ? store.state.news
+                : await cttfClient.getEntries({
+                    content_type: 'news'
+                    , order: '-fields.publishedDate,-sys.createdAt'
+                    , limit: 20
+                });
+
+        if (result) {
+
+            if(result.items)
+            {
+                store.commit('setPosts', result)
+                store.commit('setPageInfo', result)
+
+            }
+            
+        } else {
+            return error({ statusCode: 400 })
+        }
+    }
 
 }
 </script>

@@ -1,68 +1,74 @@
 <template>
-	<article>
+    <article>
 
-		<header>
-			<breadcrumbs :addItems="addBreads"></breadcrumbs>
-			<h1>{{ post.fields.title }}</h1>
-			<v-chip v-if="post.fields.eventType">
-				{{post.fields.eventType.fields.title}}
-			</v-chip>
-			<v-chip v-if="post.fields.relatedFilm">
-				{{post.fields.relatedFilm.fields.titleAbbr}}
-			</v-chip>
-		</header>
+        {{fields.title}}
+        <v-chip v-if="fields.eventType">
+            {{fields.eventType.fields.title}}
+        </v-chip>
+        <v-chip v-if="fields.relatedFilm">
+            {{fields.relatedFilm.fields.titleAbbr}}
+        </v-chip>
 
-		<youtube :video-id="post.fields.youtubeVideoId"></youtube>
-		<div>{{post.fields.country}} / {{post.fields.releaseYear}} / {{post.fields.runningTime}}</div>
+        <youtube :video-id="fields.youtubeVideoId"></youtube>
+        <div>{{fields.country}} / {{fields.releaseYear}} / {{fields.runningTime}}</div>
 
-		<br>
-		<div v-html="renderRichText(post.fields.body)"></div>
+        <br>
+        <div v-html="renderRichText(fields.body)"></div>
 
-		<div v-if="post.fields.relatedBlogPost">
-			<h2>関連記事</h2>
-			<cardPost :post="post.fields.relatedBlogPost"></cardPost>
-		</div>
+        <div v-if="fields.relatedBlogPost">
+            関連記事
+            <cardPost :post="fields.relatedBlogPost"></cardPost>
+        </div>
 
-	</article>
+    </article>
 </template>
+
 
 <script>
 
 import { mapState, mapGetters } from 'vuex'
+import cttfClient from '@/plugins/contentful'
 import cardPost from '@/components/card_post'
 
 export default {
 
-	async asyncData({ payload, store, params, error }) {
-		const post = await store.state.video.find(post => post.fields.slug === params.slug);
+    components:{
+        cardPost
+    }
 
-		if (post) {
-			return { post }
-		} else {
-			return error({ statusCode: 400 })
-		}
-	}
+    , computed: {
+        ...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
+        , fields: function(){ return this.post.fields || {} }
+        , sys: function(){ return this.post.sys || {} }
+        , addBreads: function(){
+            return [
+                {
+                      icon: 'mdi-folder-outline'
+                    , text: 'チャンネル'
+                    , to: { name: 'channel'}
+                }
+                , {
+                    text: this.post.fields.title
+                    , to: this.linkTo('channel', this.post)
+                }
+            ]
+        }
+    }
 
-	, components:{
-		cardPost
-	}
+    
+    , async asyncData({ payload, store, params, error }) {
+        const post = await store.state.video.find(post => post.fields.slug === params.slug)
+            || await cttfClient.getEntries({
+                  content_type: 'video'
+                , 'fields.slug' : params.slug
+            });
 
-	, computed: {
-		...mapGetters(['linkTo', 'dateFormat', 'renderRichText'])
-		, addBreads: function(){
-			return [
-				{
-					  icon: 'mdi-folder-outline'
-					, text: 'チャンネル'
-					, to: { name: 'channel'}
-				}
-				, {
-					text: this.post.fields.title
-					, to: this.linkTo('channel', this.post)
-				}
-			]
-		}
-	}
+        if (post) {
+            return { post: post.items ? post.items[0] : post }
+        } else {
+            return error({ statusCode: 400 })
+        }
+    }
 
 }
 </script>

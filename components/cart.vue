@@ -23,7 +23,13 @@
 		<div class="total">
 			合計 : {{convertYen(total())}}
 		</div>
-		<cartCancel :dialog="dialog" :data="cancelData" @close="closeCancelModal" @excu="cancel"></cartCancel>
+
+		<cartCancel
+		v-if = "!inRegister"
+			:dialog = "dialog"
+			:data   = "cancelData"
+			@close  = "closeCancelModal"
+			@excu   = "cancel"></cartCancel>
 	</div>
 </template>
 
@@ -50,8 +56,6 @@ export default {
 
 	, computed: {
 		...mapState(['shop', 'pafCart', 'pafCartCount'])
-
-
 	}
 
 	, methods: {
@@ -69,6 +73,22 @@ export default {
 				unitTotal = unitTotal + sum
 			})
 			return this.convertYen(unitTotal)
+		}
+
+		, update: function(id, key)
+		{
+			this.$store.commit('updateCart', {id: id, key: key, value: this.currentCart[id][key]})
+			this.$store.commit('setCartCount')
+			this.$forceUpdate();
+		}
+
+		, cancel: function()
+		{
+			let data = this.cancelData
+			this.dialog = false
+			this.$store.commit('updateCart', {id: data.item.sys.id, key: data.key, value: 0})
+			this.$store.commit('setCartCount')
+			this.$forceUpdate();
 		}
 
 		, closeCancelModal: function()

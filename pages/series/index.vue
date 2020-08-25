@@ -1,36 +1,22 @@
 <template>
-	<div>
-		<header>
-			<breadcrumbs :addItems="addBreads"></breadcrumbs>
-			<h1>かわら版 - {{pageTitle}}</h1>
-		</header>
+    <article>
+        かわら版 - {{pageTitle}}<br>
 
-		<v-btn outlined :to="{name: 'series-recommend'}">おすすめ</v-btn>
-		<div
-		v-for = "item in series"
-		:key = "item.sys.id"
-			><v-btn outlined class="mt-1" :to = "linkTo('series', item)">{{item.fields.title}}</v-btn>
-		</div>
-
-		<!-- <div
-		v-for = "(post, key) in sortedPosts"
-		:key = "key"
-			><cardPost :post="post.data"></cardPost>
-		</div>
-		<br>
-		<v-btn v-if="skipped > -1" @click="viewMore">もっと見る</v-btn>
-		<br><br>
-		<nuxt-link :to="{name:'index'}">←HOME</nuxt-link> -->
-	</div>
+        <v-btn outlined :to="{name: 'series-recommend'}">おすすめ</v-btn>
+	    <v-btn
+        v-for = "item in series"
+		:key = "'series' + item.sys.id"
+            outlined class="mt-1"
+            :to = "linkTo('series', item)">{{item.fields.title}}</v-btn>
+        
+    </article>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { createClient } from '@/plugins/contentful'
+import cttfClient from '@/plugins/contentful'
 
 import cardPost from '@/components/card_post'
-
-const client = createClient();
 
 export default {
 
@@ -67,64 +53,30 @@ export default {
 
 	, methods:
 	{
+    }
 
-		async viewMore()
-		{
+    , async asyncData({ payload, store, params, error }) {
 
-			let result = await client.getEntries({
-				content_type: 'post'
-				, skip: this.skipped
-			});
+        const result = payload
+            || (store.state.series.length > 0) ? store.state.series
+                : await cttfClient.getEntries({
+                    content_type: 'series'
+                    , order: 'fields.order,sys.createdAt'
+                });
 
-			if (result){
-				let fetchedPosts = this.sort(result.items);
-				fetchedPosts.forEach((arr, key) => {
-					this.sortedPosts.push(arr);
-					this.$store.commit('setPosts', arr.data);
-				})
+        if (result) {
 
-				this.skipped = (result.items.length === 100) ? this.skipped + 100 : -1;
+            if(result.items)
+            {
+                store.commit('setPosts', result)
+                store.commit('setPageInfo', result)
 
-				return true
-			}
-			// console.log('result', result)
-		}
-
-		, sort: function(data)
-		{
-			let arr = Object.keys(data).map((e) => ({
-				  key: e
-				, sorted : data[e].fields.order || data[e].sys.createdAt
-				, data   : data[e]
-			}));
-			return arr.sort((a, b) => a.sorted < b.sorted ? 1 : -1);
-		}
-
-	}
-
-
-	, created: function()
-	{
-	}
-
-	// 記事取得
-	, async asyncData({ payload, store, params, error }){
-
-		const result = payload
-			|| await Promise.all([
-				  client.getEntries({ content_type: 'category' })
-				, client.getEntries({ content_type: 'series' })
-			]);
-
-		if (result) {
-			let fetchedCategory = result[0].items;
-			let fetchedSeries = result[1].items;
-			return { fetchedCategory, fetchedSeries }
-
-		} else {
-			return error({ statusCode: 400 })
-		}
-	}
+            }
+            
+        } else {
+            return error({ statusCode: 400 })
+        }
+    }
 
 }
 </script>

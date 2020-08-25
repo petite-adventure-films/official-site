@@ -1,55 +1,40 @@
 <template>
     <article>
-        <cardMedia
-        v-for = "post in media"
-        :key  = "'media' + post.sys.id"
-            :post="post"></cardMedia>
+        <cardFilm
+        v-for = "post in film"
+        :key  = "'film' + post.sys.id"
+            :post="post"></cardFilm>
     </article>
 </template>
-
-
 <script>
 import { mapState, mapGetters } from 'vuex'
-import cardMedia from '@/components/card_media'
 import cttfClient from '@/plugins/contentful'
+import cardFilm from '@/components/card_film'
+
 
 export default {
 
     components:{
-        cardMedia
+        cardFilm
     }
 
     , computed: {
-        ...mapState(['media'])
+        ...mapState(['film'])
         , ...mapGetters(['linkTo', 'dateFormat'])
-
-        , addBreads: function(){
-            return [
-                {
-                    icon: 'mdi-folder-outline'
-                    , text: 'メディア紹介'
-                    , to: {name: 'media'}
-                }
-            ]
-        }
-
-    }
-
-    , methods: {
     }
 
     , created: function()
     {
     }
-    
+
     , async asyncData({ payload, store, params, error }) {
 
         const result = payload 
-            || (store.state.media.length > 0)
-                ? store.state.media
+            || (store.state.film.length > 0)
+                ? store.state.film
                 : await cttfClient.getEntries({
-                    content_type: 'media'
-                    , order: '-fields.publishedDate,-sys.createdAt'
+                    content_type: 'film'
+                    , order: '-sys.createdAt'
                     , limit: 20
                 });
 
