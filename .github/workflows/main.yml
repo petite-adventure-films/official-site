@@ -17,9 +17,9 @@ jobs:
       with:
         fetch-depth: 2
     - name: test
-      run: pwd
+      run: echo ${{ secrets.FTP_SERVER }}
     - name: test2
-      run: ls -l
+      run: echo ${{ secrets.FTP_USERNAME }}
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
