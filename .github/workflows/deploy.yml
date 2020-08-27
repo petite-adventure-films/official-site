@@ -8,10 +8,14 @@ jobs:
     - uses: actions/checkout@v2.1.0
       with:
         fetch-depth: 2
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
-      with:
-        ftp-server: ${{ secrets.FTP_SERVER }}
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
-        git-ftp-args: --remote-root "./dev.petiteadventurefilms.com"
+    - name: test
+      run: pwd
+    - name: test2
+      run: ls -l
+#    - name: FTP-Deploy-Action
+#      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+#      with:
+#        ftp-server: ${{ secrets.FTP_SERVER }}
+#        ftp-username: ${{ secrets.FTP_USERNAME }}
+#        ftp-password: ${{ secrets.FTP_PASSWORD }}
+#        git-ftp-args: --remote-root "./dev.petiteadventurefilms.com"
