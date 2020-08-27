@@ -29,6 +29,6 @@ jobs:
             FTP_SERVER: ${{ secrets.FTP_SERVER }}
             FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
             FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-            LOCAL_DIR: /
-            REMOTE_DIR: /dev.petiteadventurefilms.com  
+            LOCAL_DIR: wp-content
+            REMOTE_DIR: dev.petiteadventurefilms.com  
             ARGS: --delete
