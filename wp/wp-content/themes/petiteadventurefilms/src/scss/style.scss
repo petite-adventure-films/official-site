@@ -1,0 +1,28 @@
+// Compass library
+@import "compass";
+@import "compass/reset";
+@import "compass/css3";
+
+//Breakpoints
+$min_width: 961px;
+$max_width: 960px;
+
+//Basic settings
+@import "base/color";
+@import "base/grid";
+@import "base/icon";
+@import "base/imaginary";
+@import "base/typography";
+
+@import "structure/header";
+@import "structure/footer";
+@import "structure/structure";
+
+@import "components/components";
+@import "components/form";
+
+@import "pages/home";
+@import "pages/films";
+@import "pages/director";
+@import "pages/events";
+@import "pages/order";
