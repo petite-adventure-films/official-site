@@ -1,4 +1,4 @@
-<form v-if="step == 1">
+
     <div>
         <input type="text" v-model="user.name" placeholder="名前 例）山田花子"><br>
         <span v-if="errors.name !== false">{{errors.name}}</span>
@@ -56,9 +56,6 @@
 
 
     <div @click="completeUserInfo()">次へすすむ</div>
-
-</form>
-
 
 
 

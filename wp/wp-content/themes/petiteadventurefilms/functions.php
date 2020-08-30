@@ -13,7 +13,7 @@ remove_action( 'wp_head', 'wp_generator');*/
 
 //sidebar activate
 if(function_exists("register_sidebar")){
-	register_sidebar();
+    register_sidebar();
 }
 //特定カテゴリを除外
 function exclude_widget_categories( $args){
@@ -25,527 +25,527 @@ add_filter( 'widget_categories_args', 'exclude_widget_categories');
 
 //スマートフォンキャリア判別
 function is_smartphone(){
-	$useragents_s = array(
-		'iPhone',		 // Apple iPhone
-		'iPod',			 // Apple iPod touch
-		'Android',		// 1.5+ Android
-		'dream',			// Pre 1.5 Android
-		'CUPCAKE',		// 1.5+ Android
-		'blackberry9500', // Storm
-		'blackberry9530', // Storm
-		'blackberry9520', // Storm v2
-		'blackberry9550', // Storm v2
-		'blackberry9800', // Torch
-		'webOS',			// Palm Pre Experimental
-		'incognito',		// Other iPhone browser
-		'webmate'		 // Other iPhone browser
-	);
-	$pattern_s = '/'.implode('|', $useragents_s).'/i';
-	$ua_mobile = preg_match( '/Mobile/', $_SERVER['HTTP_USER_AGENT'] );
-	if($ua_mobile == 1){
-		return preg_match($pattern_s, $_SERVER['HTTP_USER_AGENT']);
-	}
+    $useragents_s = array(
+        'iPhone',		 // Apple iPhone
+        'iPod',			 // Apple iPod touch
+        'Android',		// 1.5+ Android
+        'dream',			// Pre 1.5 Android
+        'CUPCAKE',		// 1.5+ Android
+        'blackberry9500', // Storm
+        'blackberry9530', // Storm
+        'blackberry9520', // Storm v2
+        'blackberry9550', // Storm v2
+        'blackberry9800', // Torch
+        'webOS',			// Palm Pre Experimental
+        'incognito',		// Other iPhone browser
+        'webmate'		 // Other iPhone browser
+    );
+    $pattern_s = '/'.implode('|', $useragents_s).'/i';
+    $ua_mobile = preg_match( '/Mobile/', $_SERVER['HTTP_USER_AGENT'] );
+    if($ua_mobile == 1){
+        return preg_match($pattern_s, $_SERVER['HTTP_USER_AGENT']);
+    }
 }
 
 function IEbrowserVer(){
-	$ver = "";
-	$agent = getenv( "HTTP_USER_AGENT" );
+    $ver = "";
+    $agent = getenv( "HTTP_USER_AGENT" );
 
-	if(strstr($agent,"MSIE")){
-		$ver .= "msie ";
-		if(strstr($agent, "MSIE 6.0")) $ver .= "ie6";
-		if(strstr($agent, "MSIE 7.0")) $ver .= "ie7";
-		if(strstr($agent, "MSIE 8.0")) $ver .= "ie8";
-		if(strstr($agent, "MSIE 9.0")) $ver .= "ie9";
-	}
-	return $ver;
+    if(strstr($agent,"MSIE")){
+        $ver .= "msie ";
+        if(strstr($agent, "MSIE 6.0")) $ver .= "ie6";
+        if(strstr($agent, "MSIE 7.0")) $ver .= "ie7";
+        if(strstr($agent, "MSIE 8.0")) $ver .= "ie8";
+        if(strstr($agent, "MSIE 9.0")) $ver .= "ie9";
+    }
+    return $ver;
 }
 
 function get_post_meta_arr($post, $meta){
 
-	global $wpdb;
-	$query = "SELECT meta_id, post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post ORDER BY meta_id ASC";
-	$cf = $wpdb->get_results($query, ARRAY_A);
-	foreach( $cf as $row ){
-		if($row['meta_key'] == $meta){
-			if(!empty($row['meta_value'])) $vars[] = $row['meta_value'];
-		}
-	}
-	return $vars;
+    global $wpdb;
+    $query = "SELECT meta_id, post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post ORDER BY meta_id ASC";
+    $cf = $wpdb->get_results($query, ARRAY_A);
+    foreach( $cf as $row ){
+        if($row['meta_key'] == $meta){
+            if(!empty($row['meta_value'])) $vars[] = $row['meta_value'];
+        }
+    }
+    return $vars;
 
 }
 
 function get_post_meta_img($attached, $size="medium", $class=NULL, $data_src=NULL){
 
-	$image = wp_get_attachment_image_src($attached, $size);
-	list($src, $width, $height) = $image;
-	$attrs = array(
-		"src" => $src,
-		"width" => $width,
-		"height" => $height,
-		"id" => $id,
-		"class" => $class,
-		"alt" => $alt
-	);
-	if($data_src) $attrs["data-src"] = $src;
-	if($src){
-		$html = "<img";
-		foreach($attrs as $key=>$value){
-			if($value) $html .= ' '.$key.'="'.$value.'"';
-		}
-		$html .= " />";
-	}
-	return ($html) ? $html : FALSE;
+    $image = wp_get_attachment_image_src($attached, $size);
+    list($src, $width, $height) = $image;
+    $attrs = array(
+        "src" => $src,
+        "width" => $width,
+        "height" => $height,
+        "id" => $id,
+        "class" => $class,
+        "alt" => $alt
+    );
+    if($data_src) $attrs["data-src"] = $src;
+    if($src){
+        $html = "<img";
+        foreach($attrs as $key=>$value){
+            if($value) $html .= ' '.$key.'="'.$value.'"';
+        }
+        $html .= " />";
+    }
+    return ($html) ? $html : FALSE;
 
 }
 
 function get_post_meta_img_arr($post, $meta, $size){
 
-	global $wpdb;
-	$query = "SELECT meta_id, post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post ORDER BY meta_id ASC";
-	$cf = $wpdb->get_results($query, ARRAY_A);
-	foreach($cf as $row){
-		if($row['meta_key'] == $meta){
-			$html[] = get_post_meta_img($post, $meta, $size);
-		}
-	}
-	if($html){
-		$html = array_filter($html, "strlen");
-		$html = array_values($html);
-	}
-	return ($html) ? $html : FALSE;
+    global $wpdb;
+    $query = "SELECT meta_id, post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post ORDER BY meta_id ASC";
+    $cf = $wpdb->get_results($query, ARRAY_A);
+    foreach($cf as $row){
+        if($row['meta_key'] == $meta){
+            $html[] = get_post_meta_img($post, $meta, $size);
+        }
+    }
+    if($html){
+        $html = array_filter($html, "strlen");
+        $html = array_values($html);
+    }
+    return ($html) ? $html : FALSE;
 
 }
 
 function get_film($term, $index=NULL){
 
-	if($term){
-		$args = array(
-			"post_type" => "films",
-			"filmtags" => $term[0]->slug
-		);
-		$films = query_posts($args);
-		if($films){
-			foreach($films as $film){
-				switch ($index) {
-					case "label":
-						$value = get_the_title($film->ID);
-						break;
-					case "link":
-						$value = get_permalink($film->ID);
-						break;
-					default:
-						break;
-				}
-			}
-		}else{
-			switch ($index){
-				case "label":
-					$value = $term[0]->name;
-					break;
-				case "link":
-					$value = NULL;
-					break;
-				default:
-					break;
-			}
-		}
-		return $value;
-	}else{
-		return false;
-	}
+    if($term){
+        $args = array(
+            "post_type" => "films",
+            "filmtags" => $term[0]->slug
+        );
+        $films = query_posts($args);
+        if($films){
+            foreach($films as $film){
+                switch ($index) {
+                    case "label":
+                        $value = get_the_title($film->ID);
+                        break;
+                    case "link":
+                        $value = get_permalink($film->ID);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }else{
+            switch ($index){
+                case "label":
+                    $value = $term[0]->name;
+                    break;
+                case "link":
+                    $value = NULL;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $value;
+    }else{
+        return false;
+    }
 
 }
 
 function get_news($post){
 
-	$title = $post->post_title;
-	$contents = apply_filters("the_content", $post->post_content);
+    $title = $post->post_title;
+    $contents = apply_filters("the_content", $post->post_content);
 
-	$filmtags = get_the_terms($post->ID, "filmtags");
-	if (!empty($eventtfilmtagsags)){
-		$film_label = get_film($filmtags, "label");
-		$film_link = get_film($filmtags, "link");
-		if($film_label){
-			$film_info = '<li class="index film">';
-			if($film_link){
-				$film_info .= '<a href="'.$film_link.'">'.$film_label.'</a>';
-			}else{
-				$film_info .= $film_label;
-			}
-			$film_info .= '</li>';
-		}
-	}
+    $filmtags = get_the_terms($post->ID, "filmtags");
+    if (!empty($eventtfilmtagsags)){
+        $film_label = get_film($filmtags, "label");
+        $film_link = get_film($filmtags, "link");
+        if($film_label){
+            $film_info = '<li class="index film">';
+            if($film_link){
+                $film_info .= '<a href="'.$film_link.'">'.$film_label.'</a>';
+            }else{
+                $film_info .= $film_label;
+            }
+            $film_info .= '</li>';
+        }
+    }
 
-	$eventtags = get_the_terms($post->ID, "eventtags");
-	if (!empty($eventtags)){
-		$event_info = '<li class="index label">';
-		foreach($eventtags as $event){
-			$event_info .= $event->name;
-		}
-		$event_info .= '</li>';
-	}
+    $eventtags = get_the_terms($post->ID, "eventtags");
+    if (!empty($eventtags)){
+        $event_info = '<li class="index label">';
+        foreach($eventtags as $event){
+            $event_info .= $event->name;
+        }
+        $event_info .= '</li>';
+    }
 
-	if(!empty($film_info) || !empty($event_info)){
-		$list_post_info = '<ul class="list_post_info">';
-		$list_post_info .= $film_info.$event_info;
-		$list_post_info .= '</ul>';
-	}
+    if(!empty($film_info) || !empty($event_info)){
+        $list_post_info = '<ul class="list_post_info">';
+        $list_post_info .= $film_info.$event_info;
+        $list_post_info .= '</ul>';
+    }
 
-	$time = '<time  datetime="'.get_the_date("Y-m-d h:i:s A", $post->ID).'" class="list_post_time">'.get_the_date("", $post->ID).'</time>';
+    $time = '<time  datetime="'.get_the_date("Y-m-d h:i:s A", $post->ID).'" class="list_post_time">'.get_the_date("", $post->ID).'</time>';
 
-	$html .= <<<EOF
-	<h2 class="title">{$title}</h2>
-	{$list_post_info}
-	<div class="list_post_contents">
-	{$contents}
-	</div>
-	{$time}
+    $html .= <<<EOF
+    <h2 class="title">{$title}</h2>
+    {$list_post_info}
+    <div class="list_post_contents">
+    {$contents}
+    </div>
+    {$time}
 EOF;
-	wp_reset_query();
-	return $html;
+    wp_reset_query();
+    return $html;
 
 }
 
 function get_post_link($post){
 
-	$title = $post->post_title;
-	$link = get_permalink($post->ID);
+    $title = $post->post_title;
+    $link = get_permalink($post->ID);
 
-	$html .= <<<EOF
-		<h2>{$title}</h2>
-		<div class="list_post_contents">
-		</div>
-		{$time}
+    $html .= <<<EOF
+        <h2>{$title}</h2>
+        <div class="list_post_contents">
+        </div>
+        {$time}
 EOF;
-	wp_reset_query();
-	return $html;
+    wp_reset_query();
+    return $html;
 
 }
 
 function get_blogs($post){
 
-	$title = $post->post_title;
-	$link = get_permalink($post->ID);
-	$contents = strip_tags($post->post_content);
-	$count = mb_strlen($contents);
-	$edited_contents = ($count > 100) ? mb_substr($contents, 0, 100) : $contents;
-	$abbr = $count > 100 ? "..." : "";
-	$time = '<time  datetime="'.get_the_date("Y-m-d h:i:s A", $post->ID).'" class="list_post_time">'.get_the_date("", $post->ID).'</time>';
+    $title = $post->post_title;
+    $link = get_permalink($post->ID);
+    $contents = strip_tags($post->post_content);
+    $count = mb_strlen($contents);
+    $edited_contents = ($count > 100) ? mb_substr($contents, 0, 100) : $contents;
+    $abbr = $count > 100 ? "..." : "";
+    $time = '<time  datetime="'.get_the_date("Y-m-d h:i:s A", $post->ID).'" class="list_post_time">'.get_the_date("", $post->ID).'</time>';
 
-	$html .= <<<EOF
-		<h2 class="title">{$title}</h2>
-		<div class="list_post_contents">
-			{$edited_contents}{$abbr}<a href="{$link}" class="more_details">もっと見る</a>
-		</div>
-		{$time}
+    $html .= <<<EOF
+        <h2 class="title">{$title}</h2>
+        <div class="list_post_contents">
+            {$edited_contents}{$abbr}<a href="{$link}" class="more_details">もっと見る</a>
+        </div>
+        {$time}
 EOF;
-	wp_reset_query();
-	return $html;
+    wp_reset_query();
+    return $html;
 
 }
 
 
 function get_post_number($post) {
-	global $wpdb;
-	$number = $wpdb->get_var("
-		SELECT COUNT( * )
-		FROM $wpdb->posts
-		WHERE post_date <= '{$post->post_date}'
-		AND post_status = 'publish'
-		AND post_type = ('{$post->post_type}')
-	");
-	return $number;
+    global $wpdb;
+    $number = $wpdb->get_var("
+        SELECT COUNT( * )
+        FROM $wpdb->posts
+        WHERE post_date <= '{$post->post_date}'
+        AND post_status = 'publish'
+        AND post_type = ('{$post->post_type}')
+    ");
+    return $number;
 }
 
 function set_body_class(){
-	$uri = $_SERVER["REQUEST_URI"];
-	$args = explode("/", $uri);
-	$args = array_filter($args, "strlen");
-	if(($key = array_search("wp", $args)) !== false){
-		unset($args[$key]);
-	}
-	$args = array_values($args);
-	return ($args[0]) ? $args[0] : "home";
-	//return ($args[0] != "wp") ? $args[1] : "home";
+    $uri = $_SERVER["REQUEST_URI"];
+    $args = explode("/", $uri);
+    $args = array_filter($args, "strlen");
+    if(($key = array_search("wp", $args)) !== false){
+        unset($args[$key]);
+    }
+    $args = array_values($args);
+    return ($args[0]) ? $args[0] : "home";
+    //return ($args[0] != "wp") ? $args[1] : "home";
 }
 
 function add_alternate_link() {
 
-	$show_off = false;
-	$alternate_jp = null;
-	$alternate_en = null;
+    $show_off = false;
+    $alternate_jp = null;
+    $alternate_en = null;
 
-	if( is_home() || is_front_page() ) {
-		$alternate_jp = home_url();
-	} elseif ( is_category() ) {
-		$alternate_jp = get_category_link( get_query_var('cat') );
-	}else if(is_post_type_archive()){
-		$post_type = get_post_type_object( get_query_var( "post_type" ));
-		$alternate_jp = get_post_type_archive_link($post_type->name);
-	} elseif ( is_page() || is_single()){
-		$show_off = true;
-		//監督プロフィールとブログアーカイブは表示
-		$page_name = get_query_var('pagename');
-		if($page_name == "director" || $page_name == "blog"){
-			$show_off = false;
-			$alternate_jp = get_permalink($post);
-		}
-		// 各映画ページは表示
-		$post_type = get_post_type_object( get_query_var( "post_type" ));
-		if($post_type->name == "films"){
-			$show_off = false;
-			$alternate_jp = get_permalink($post);
-		}
-	} else{
-		$alternate_jp = home_url();
-	}
-	$alternate_en = str_replace("//www","//en",$alternate_jp);
+    if( is_home() || is_front_page() ) {
+        $alternate_jp = home_url();
+    } elseif ( is_category() ) {
+        $alternate_jp = get_category_link( get_query_var('cat') );
+    }else if(is_post_type_archive()){
+        $post_type = get_post_type_object( get_query_var( "post_type" ));
+        $alternate_jp = get_post_type_archive_link($post_type->name);
+    } elseif ( is_page() || is_single()){
+        $show_off = true;
+        //監督プロフィールとブログアーカイブは表示
+        $page_name = get_query_var('pagename');
+        if($page_name == "director" || $page_name == "blog"){
+            $show_off = false;
+            $alternate_jp = get_permalink($post);
+        }
+        // 各映画ページは表示
+        $post_type = get_post_type_object( get_query_var( "post_type" ));
+        if($post_type->name == "films"){
+            $show_off = false;
+            $alternate_jp = get_permalink($post);
+        }
+    } else{
+        $alternate_jp = home_url();
+    }
+    $alternate_en = str_replace("//www","//en",$alternate_jp);
 
-	if(!$show_off){
-		echo '<link rel="alternate" href="'.$alternate_jp.'" hreflang="ja" />'."\n";
-		echo '<link rel="alternate" href="'.$alternate_en.'" hreflang="en" />'."\n";
-	}
+    if(!$show_off){
+        echo '<link rel="alternate" href="'.$alternate_jp.'" hreflang="ja" />'."\n";
+        echo '<link rel="alternate" href="'.$alternate_en.'" hreflang="en" />'."\n";
+    }
 
 }
 
 function get_available_events($id){
-	//配列宣言
-	$available_posts = array();
-	//現在時刻取得
-	$now = new DateTime();
-	$current_timestamp = $now->getTimestamp();
-	//期間内のポスト取得
-	$filmtag = get_the_terms($id, "filmtags");
-	$args = array(
-		"post_type" => "events",
-		"posts_per_type" => -1,
-		"filmtags" => $filmtag[0]->slug
-	);
-	$events = query_posts($args);
-	if($events){
-		foreach($events as $event){
-			$eventsdate = get_the_terms($event, "eventsdate");
-			$event_date_timestamp = get_event_timestamp($eventsdate);
-			if($current_timestamp < $event_date_timestamp){
-				$available_posts[] = $event;
-			}
-		}
-	}
-	return $available_posts;
+    //配列宣言
+    $available_posts = array();
+    //現在時刻取得
+    $now = new DateTime();
+    $current_timestamp = $now->getTimestamp();
+    //期間内のポスト取得
+    $filmtag = get_the_terms($id, "filmtags");
+    $args = array(
+        "post_type" => "events",
+        "posts_per_type" => -1,
+        "filmtags" => $filmtag[0]->slug
+    );
+    $events = query_posts($args);
+    if($events){
+        foreach($events as $event){
+            $eventsdate = get_the_terms($event, "eventsdate");
+            $event_date_timestamp = get_event_timestamp($eventsdate);
+            if($current_timestamp < $event_date_timestamp){
+                $available_posts[] = $event;
+            }
+        }
+    }
+    return $available_posts;
 }
 
 function future_events($term){
-	//var_dump($term);
-	$term_date = strtotime($term);
-	$args = array(
-		"orderby" => "name",
-		"order" => "DESC"
-	);
-	$eventsdates = get_terms("eventsdate", $args);
-	foreach($eventsdates as $date){
-		$post_date = strtotime($date->slug);
-		if($post_date >= $term_date){
-			$future[] = $date->slug;
-		}
-	}
-	return $future;
+    //var_dump($term);
+    $term_date = strtotime($term);
+    $args = array(
+        "orderby" => "name",
+        "order" => "DESC"
+    );
+    $eventsdates = get_terms("eventsdate", $args);
+    foreach($eventsdates as $date){
+        $post_date = strtotime($date->slug);
+        if($post_date >= $term_date){
+            $future[] = $date->slug;
+        }
+    }
+    return $future;
 }
 
 function get_event_info($post){
-	$eventtags = get_the_terms($post->ID, "eventtags");
-	if($eventtags){
-		$eventtags_count = count($eventtags);
-		$count = 0;
-		$event_info = '<span class="inline_block index label">';
-		foreach($eventtags as $event){
-			$count++;
-			$event_info .= $event->name;
-			if($count != $eventtags_count) $event_info .= ",";
-		}
-		$event_info .= '</span>';
-	}else{
-		$event_info = NULL;
-	}
-	if($event_info){
-		$list_post_info =  ($event_info) ? '<li>'.$event_info.'</li>' : "";
-	}else{
-		$list_post_info = NULL;
-	}
-	return $list_post_info;
+    $eventtags = get_the_terms($post->ID, "eventtags");
+    if($eventtags){
+        $eventtags_count = count($eventtags);
+        $count = 0;
+        $event_info = '<span class="inline_block index label">';
+        foreach($eventtags as $event){
+            $count++;
+            $event_info .= $event->name;
+            if($count != $eventtags_count) $event_info .= ",";
+        }
+        $event_info .= '</span>';
+    }else{
+        $event_info = NULL;
+    }
+    if($event_info){
+        $list_post_info =  ($event_info) ? '<li>'.$event_info.'</li>' : "";
+    }else{
+        $list_post_info = NULL;
+    }
+    return $list_post_info;
 }
 
 function get_place_info($post){
-	$place = get_post_meta($post->ID, "events_info_01", TRUE);
-	if($place){
-		$place_list = '<li class="index place">';
-		if($map){
-			$place_list .= $place;
-			$place_list .= '<span class="block">'.$address.'  <a href="'.$map.'" target="_blank">Map</a></span>';
-		}else{
-			$place_list .= $place;
-			$place_list .= '<span class="block">'.$address.'</span>';
-		}
-		$place_list .= '</li>';
-	}else{
-		$place_list = NULL;
-	}
-	return $place_list;
+    $place = get_post_meta($post->ID, "events_info_01", TRUE);
+    if($place){
+        $place_list = '<li class="index place">';
+        if($map){
+            $place_list .= $place;
+            $place_list .= '<span class="block">'.$address.'  <a href="'.$map.'" target="_blank">Map</a></span>';
+        }else{
+            $place_list .= $place;
+            $place_list .= '<span class="block">'.$address.'</span>';
+        }
+        $place_list .= '</li>';
+    }else{
+        $place_list = NULL;
+    }
+    return $place_list;
 }
 
 function get_event_timestamp($terms){
-	//year
-	foreach ($terms as $v){
-		if ($v -> parent === 0){
-			$year_id = $v->term_id;
-			$date = $v->slug;
-		}
-	}
-	foreach ($terms as $v){
-		if($year_id === $v-> parent){
-			$month_id = $v->term_id;
-			$date = $v->slug;
-		}
-	}
-	foreach ($terms as $v){
-		if($month_id === $v -> parent){
-			$date = $v->slug;
-		}
-	}
-	return strtotime($date);
+    //year
+    foreach ($terms as $v){
+        if ($v -> parent === 0){
+            $year_id = $v->term_id;
+            $date = $v->slug;
+        }
+    }
+    foreach ($terms as $v){
+        if($year_id === $v-> parent){
+            $month_id = $v->term_id;
+            $date = $v->slug;
+        }
+    }
+    foreach ($terms as $v){
+        if($month_id === $v -> parent){
+            $date = $v->slug;
+        }
+    }
+    return strtotime($date);
 }
 
 function get_date_info($post){
-	$dates_details = get_post_meta($post->ID, "events_info_09", TRUE);
-	$dates_details = explode("<br />", $dates_details);
-	if($dates_details) $dates = '<li class="index date">'.$dates_details[0].'</li>';
-	else $dates = NULL;
-	return $dates;
+    $dates_details = get_post_meta($post->ID, "events_info_09", TRUE);
+    $dates_details = explode("<br />", $dates_details);
+    if($dates_details) $dates = '<li class="index date">'.$dates_details[0].'</li>';
+    else $dates = NULL;
+    return $dates;
 }
 
 function get_events($date, $init=FALSE){
-	if($init){
-		$init_args = array(
-			"tax_query" => array(
-				array(
-					"taxonomy" => "eventsdate",
-					"field" => "slug",
-					"terms" => future_events($date)
-				)
-			)
-		);
-	}else{
-		$init_args = array("eventsdate" => $date);
-	}
-	$args = array(
-		"post_type" => "events",
-		"posts_per_page" => -1,
-	);
-	$posts = query_posts(array_merge($args, $init_args));
-	$timestamps = array();
-	foreach($posts as $post){
-		$eventsdate = get_the_terms($post, "eventsdate");
-		$event_date_timestamp = get_event_timestamp($eventsdate);
-		$timestamps[$event_date_timestamp] = $post->ID;
-	}
-	ksort($timestamps);
-	$timestamps = array_reverse($timestamps);
+    if($init){
+        $init_args = array(
+            "tax_query" => array(
+                array(
+                    "taxonomy" => "eventsdate",
+                    "field" => "slug",
+                    "terms" => future_events($date)
+                )
+            )
+        );
+    }else{
+        $init_args = array("eventsdate" => $date);
+    }
+    $args = array(
+        "post_type" => "events",
+        "posts_per_page" => -1,
+    );
+    $posts = query_posts(array_merge($args, $init_args));
+    $timestamps = array();
+    foreach($posts as $post){
+        $eventsdate = get_the_terms($post, "eventsdate");
+        $event_date_timestamp = get_event_timestamp($eventsdate);
+        $timestamps[$event_date_timestamp] = $post->ID;
+    }
+    ksort($timestamps);
+    $timestamps = array_reverse($timestamps);
 
-	foreach($timestamps as $timestamp){
-		foreach($posts as $post){
-			if($timestamp == $post->ID) $sort_posts[] = $post;
-		}
-	}
+    foreach($timestamps as $timestamp){
+        foreach($posts as $post){
+            if($timestamp == $post->ID) $sort_posts[] = $post;
+        }
+    }
 
 
-	if($sort_posts){
-	$html = '<ul class="list_posts list_events">';
-		foreach($sort_posts as $post){
-			$post_number = get_post_number($post);
-			$post_title = get_the_title($post->ID);
-			$event_info = get_event_info($post);
-			$place_info = get_place_info($post);
-			$date_info = get_date_info($post);
-			$permalink = get_permalink($post->ID);
-			$html .= <<<EOF
-	<li>
-		<a href="{$permalink}">
-			<h2 class="title"><span class="block caption2">No.{$post_number}</span>{$post_title}</h2>
-			<ul class="list_post_info">
-				{$place_info}
-				{$date_info}
-				{$event_info}
-			</ul>
-		</a>
-	</li>
+    if($sort_posts){
+    $html = '<ul class="list_posts list_events">';
+        foreach($sort_posts as $post){
+            $post_number = get_post_number($post);
+            $post_title = get_the_title($post->ID);
+            $event_info = get_event_info($post);
+            $place_info = get_place_info($post);
+            $date_info = get_date_info($post);
+            $permalink = get_permalink($post->ID);
+            $html .= <<<EOF
+    <li>
+        <a href="{$permalink}">
+            <h2 class="title"><span class="block caption2">No.{$post_number}</span>{$post_title}</h2>
+            <ul class="list_post_info">
+                {$place_info}
+                {$date_info}
+                {$event_info}
+            </ul>
+        </a>
+    </li>
 EOF;
-		}
-	$html .= "</ul>";
+        }
+    $html .= "</ul>";
 
-	}else{
-		$html = <<<EOF
-		<div class="m4_t">
-			<p> ただ今、予定の上映会・イベントがありません。</p>
-		</div>
+    }else{
+        $html = <<<EOF
+        <div class="m4_t">
+            <p> ただ今、予定の上映会・イベントがありません。</p>
+        </div>
 EOF;
-	}
+    }
 
-	wp_reset_query();
-	return $html;
+    wp_reset_query();
+    return $html;
 
 }
 
 function cms_title($post_type, $submitdate, $lng){
 
-	date_default_timezone_set('Asia/Tokyo');
-	$today = getdate();
-	$todayposts = query_posts(
-		array(
-			"posts_per_page" => -1,
-			"post_type" => $post_type,
-			"post_status" => array("pending", "publish", "draft"),
-			"year" => $today["year"],
-			"monthnum" => $today["mon"],
-			"day" => $today["mday"]
-		)
-	);
+    date_default_timezone_set('Asia/Tokyo');
+    $today = getdate();
+    $todayposts = query_posts(
+        array(
+            "posts_per_page" => -1,
+            "post_type" => $post_type,
+            "post_status" => array("pending", "publish", "draft"),
+            "year" => $today["year"],
+            "monthnum" => $today["mon"],
+            "day" => $today["mday"]
+        )
+    );
 
-	//post_type判別
-	if($post_type == "contactform"){
-		$typeid = "C";
-	}elseif($post_type == "dvdorder"){
-		$typeid = "O";
-	}
+    //post_type判別
+    if($post_type == "contactform"){
+        $typeid = "C";
+    }elseif($post_type == "dvdorder"){
+        $typeid = "O";
+    }
 
-	//ユーザーエージェント
-	$agent = getenv("HTTP_USER_AGENT");
-	if(is_smartphone()){
-		$ua = "-SP";
-	}else{
-		$brow = IEbrowserVer();
-		if($brow == "msie ie6" || $brow == "msie ie7" || $brow == "msie ie8") $ua = "-LE";
-		else $ua = "-PC";
-	}
+    //ユーザーエージェント
+    $agent = getenv("HTTP_USER_AGENT");
+    if(is_smartphone()){
+        $ua = "-SP";
+    }else{
+        $brow = IEbrowserVer();
+        if($brow == "msie ie6" || $brow == "msie ie7" || $brow == "msie ie8") $ua = "-LE";
+        else $ua = "-PC";
+    }
 
-	$postcount = count($todayposts) + 1;
-	$postcount = sprintf("%03d", $postcount);
-	$cmstitle = $typeid.$today["year"].$ua."-".$lng."-".$submitdate.$postcount;
-	return $cmstitle;
+    $postcount = count($todayposts) + 1;
+    $postcount = sprintf("%03d", $postcount);
+    $cmstitle = $typeid.$today["year"].$ua."-".$lng."-".$submitdate.$postcount;
+    return $cmstitle;
 
 }
 
 function mail_header($from = NULL){
-	$headers .= "X-Mailer: myphpMail".phpversion()."\n";
-	if($from){
-		$headers .= "From: ".$from."\r\n";
-		$headers .= "Reply-To: ".$from."\r\n";
-		$headers .= "Return-Path: ".$from."\r\n";
-	}
-	return $headers;
+    $headers .= "X-Mailer: myphpMail".phpversion()."\n";
+    if($from){
+        $headers .= "From: ".$from."\r\n";
+        $headers .= "Reply-To: ".$from."\r\n";
+        $headers .= "Return-Path: ".$from."\r\n";
+    }
+    return $headers;
 }
 
 function mail_footer(){
-	$mail_footer = '
+    $mail_footer = '
 
 Copyright (C) Petite Adventure Films. All Rights Reserved.
 
@@ -558,8 +558,8 @@ return $mail_footer;
 *****************************************************************************************/
 
 function order_ntfct($email, $values){
-	$subject = "【PAF DVD注文 : ".$values['contact_lang']."】".$values['contact_name']."様";
-	$message = $values['contact_name'].'様
+    $subject = "【PAF DVD注文 : ".$values['contact_lang']."】".$values['contact_name']."様";
+    $message = $values['contact_name'].'様
 
 ご注文をいただき誠にありがとうございます。
 ご注文いただきました内容は下記の通りです。ご確認ください。';
@@ -656,15 +656,87 @@ $message .= '
 '.
 mail_footer();
 
-	//mail($email, $subject, $message, mail_header());
-	wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header($email));
-	wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
+    //mail($email, $subject, $message, mail_header());
+    wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header($email));
+    wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
 
 }
 
+
+/* 
+ * 注文内容
+*/
+
+
+function order_ntfct2($data){
+    $subject = "【PAF DVD注文】".$data['name']."様";
+
+    $message .= <<<EOF
+{$data['name']}様
+ご注文をいただき誠にありがとうございます。
+ご注文いただきました内容は下記の通りです。ご確認ください。
+
+●注文内容
+
+EOF;
+    foreach($data['order'] as $order)
+    {
+        $message .= $order;
+    }
+
+    $message .= <<<EOF
+
+合計: {$data['total']}
+
+
+●領収書
+
+EOF;
+
+    if($data['receipt'])
+    {
+        $message .= <<<EOF
+必要
+{$data['receiptName']}
+{$data['receiptDescription']}
+EOF;
+    }
+    else
+    {
+        $message .= '不要';
+    }
+
+    $message .= <<<EOF
+
+
+●お届け先
+{$data['zipcode']}
+{$data['prefecture']}{$data['city']}{$data['address1']}
+{$data['address2']}
+
+受付番号: {$data['id']}
+
+担当者より後ほどご連絡をさせていただきます。
+この度はご注文誠にありがとうございました。
+
+EOF;
+    
+    $message .= mail_footer();
+
+    //mail($email, $subject, $message, mail_header());
+    wp_mail($data['email'], $subject, $message, mail_header());
+    wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header());
+    // wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
+
+}
+
+
+
+
+
 function contact_ntfct($email, $values){
-	$subject = "【PAF お問い合わせ : ".$values['contact_lang']."】".$values['contact_name']."様";
-	$message = $values['contact_name'].'様
+    $subject = "【PAF お問い合わせ : ".$values['contact_lang']."】".$values['contact_name']."様";
+    $message = $values['contact_name'].'様
 
 お問合せをいただき誠にありがとうございます。
 お問合せいただきました内容は下記の通りです。ご確認ください。';
@@ -689,8 +761,8 @@ $message .= '
 '.
 mail_footer();
 
-	//mail($email, $subject, $message, mail_header());
-	wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header($email));
-	wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
+    //mail($email, $subject, $message, mail_header());
+    wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header($email));
+    wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
 
 }?>

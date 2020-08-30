@@ -79,8 +79,10 @@ get_header(); ?>
 
 
             <br>
-            <h2>購入者情報</h2>
-            <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
+            <h2>購入者情報</h2><div @click="step = 1">編集する</div>
+            <div v-if="step == 1">
+                <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
+            </div>
             <div v-if="step > 1">
                 {{user.name}}<br>
                 {{user.zipcode}}<br>
@@ -88,17 +90,30 @@ get_header(); ?>
                 {{user.address2}}<br>
                 {{user.tel}}<br>
                 {{user.email}}<br>
-                {{(user.receipt == true) ? '必要' : '不要'}}
+                領収書{{(user.receipt == true) ? '必要' : '不要'}}
                 <div v-if="user.receipt == true">
                 {{(user.receiptName) ? user.receiptName : '-'}}<br>
                 {{user.receiptDescription ? user.receiptDescription : '-'}}
-                </div>
-                
+                </div>               
             </div>
 
+            <br>
+            <h2>決済</h2>
+            <div v-if="step == 2">
+                <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label>
+                <div v-if="paymentMethod == 1">
+                    銀行振込はこうです
+                </div>
+                <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
+                <div v-show="paymentMethod == 2">
+                    <div ref="cardElement"></div>
+                    <div @click="pay()">決済する</div>
+                    {{paymenErrorMessage}}
+                </div>
+                    
 
-
-            
+                <div @click="completePayment()">決済終了</div>
+            </div>
 
         </div>
 
@@ -116,24 +131,38 @@ get_header(); ?>
 
     var products = <? echo json_encode($products); ?>;
 
-    
+
     var app = new Vue({
         el: '#app'
         , data: {
               products: products
             , pafCart : strgPafCart
-            , step : 1
+            , step : 2
             , user:{
-                  name: ''
-                , zipcode: ''
-                , prefecture: ''
-                , city: ''
-                , address1: ''
-                , tel: ''
-                , email: ''
-                , emailConfirm: ''
-                , receipt: ''
-                , agree: false
+                //   name: ''
+                // , zipcode: ''
+                // , prefecture: ''
+                // , city: ''
+                // , address1: ''
+                // , tel: ''
+                // , email: ''
+                // , emailConfirm: ''
+                // , receipt: ''
+                // , agree: false
+
+                name: 'restard'
+                , zipcode: '1500034'
+                , prefecture: '東京都'
+                , city: '渋谷区神山町'
+                , address1: '41-7'
+                , address2: 'エクティ神山町209'
+                , tel: '08039118917'
+                , email: 'drestard@gmail.com'
+                , emailConfirm: 'drestard@gmail.com'
+                , receipt: true
+                , receiptName: 'お宛名'
+                , receiptDescription: '但し書き'
+                , agree: true
             }
             , errors:{
                   agree: '必ずチェックしてください'
@@ -146,6 +175,11 @@ get_header(); ?>
                 , email: false
                 , emailConfirm: false
             }
+            , paymentMethod: 0
+            , stripePK: 'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR'
+            , paymenErrorMessage: ''
+            , stripe: false
+            , cardElement: false
         }
         , computed:
         {
@@ -163,6 +197,19 @@ get_header(); ?>
                     }
                 })
                 return arg;
+            }
+
+            , order: function()
+            {
+                var arg = []
+                this.addedItems.forEach(a => {
+                    a.cart.forEach((v, k) => {
+                        if(v > 0){
+                            arg.push(`${a.basic_info.post_title }[${a.price_info[k].index}] : ${v}`)
+                        }
+                    })
+                })
+                return arg
             }
         }
 
@@ -208,6 +255,57 @@ get_header(); ?>
                 })
 
                 return sum1;
+
+            }
+
+            , async completePayment()
+            {
+                if(this.paymentMethod == 1)
+                {
+
+                    var params = this.user;
+                    params.order = this.order;
+                    params.total = this.convertYen(this.getTotal());
+
+                    var url = '<? echo get_permalink(get_page_by_path('cashier/complete')); ?>'
+                    var res = await axios.post(url, params)
+                    if(res){
+                        if(res.status === 200)
+                        {
+                            // window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
+                        }
+                    }
+                }
+            }
+
+            , async pay()
+            {
+                try {
+                    // 決済用トークン発行
+                    var tokenResult = await this.stripe.createToken(this.card)
+                    if (
+                        !tokenResult ||
+                        !tokenResult.token ||
+                        !tokenResult.token.id ||
+                        tokenResult.token.id === ''
+                    ) {
+                        throw new Error('トークン発行エラー')
+                    }
+                    console.log('ne', tokenResult)
+
+                    var charge = await this.stripe.charges.create({
+                        amount: 2000,
+                        currency: 'jpy',
+                        source: tokenResult.token.id
+                    });
+                    if (charge) {
+                        console.log('charge', charge)
+                    }
+                }
+                catch(error)
+                {
+                    this.paymenErrorMessage = error.message
+                }
 
             }
 
@@ -334,14 +432,13 @@ get_header(); ?>
                     Object.keys(this.errors).forEach(k => {
                         if(this.errors[k] !== false)
                         {
-                            throw 'not completed'
+                            throw 'フォームの内容を確認してください'
                         }
                     })
 
                     this.step = 2;
 
                 } catch (error) {
-                    console.log(error)
                 }
 
             }
@@ -361,6 +458,15 @@ get_header(); ?>
         , created: function()
         {
             $('.pafCartCount').text(strgPafCartCount);
+
+        }
+
+        , mounted: function()
+        {
+
+            this.stripe = Stripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
+            this.card = this.stripe.elements().create('card', { hidePostalCode: true })
+            this.card.mount(this.$refs.cardElement);
         }
     })
 </script>

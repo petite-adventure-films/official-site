@@ -14,7 +14,10 @@
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/script.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
-<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue-stripe-elements-plus@0.3.2/dist/index.min.js"></script> -->
+<!-- <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script> -->
 <?php wp_head(); ?>
 </head>
 <body class="<?php echo set_body_class(); ?>">
