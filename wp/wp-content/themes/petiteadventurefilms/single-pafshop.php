@@ -151,23 +151,24 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
             }
           , addCart: function()
             {
-                var obj = strgPafCart;
-                if(obj[this.film] === undefined)
+                var strg = JSON.parse(localStorage.getItem('pafCart'))
+                if(strg[this.film] === undefined)
                 {
-                    obj[this.filmID] = [];
+                    strg[this.filmID] = [];
                 }
                 this.pafCart.forEach(v => {
-                    obj[this.filmID].push(v || 0)
+                    strg[this.filmID].push(v || 0)
                 })
 
-                localStorage.setItem('pafCart', JSON.stringify(obj))
+                localStorage.setItem('pafCart', JSON.stringify(strg))
                 this.setPafCartCount();
             }
           , setPafCartCount: function()
             {
                 var count = 0;
-                Object.keys(strgPafCart).forEach(k => {
-                    strgPafCart[k].forEach(v => {
+                var strg = JSON.parse(localStorage.getItem('pafCart'))
+                Object.keys(strg).forEach(k => {
+                    strg[k].forEach(v => {
                         count = count + v
                     })
                 })

@@ -11,16 +11,11 @@ global $wpdb, $user_ID;
 
 if($data){
 
-    date_default_timezone_set('Asia/Tokyo');
-
     $post_type =  'dvdorder';
-
-    $submit_date = date('mdH', time()); //送信タイム
-    $post_title = cms_title($post_type, $submit_date, 'J');
 
     $insert_arg = array(
           'post_status' => 'pending'
-        , 'post_title' => $post_title
+        , 'post_title' => $data['orderID']
         , 'comment_status' => 'closed'
         , 'post_type' => $post_type
     );
@@ -37,8 +32,6 @@ if($data){
         add_post_meta($insert_id, 'order_info_14', $data['receipt']);
         add_post_meta($insert_id, 'order_info_15', $data['receiptName']);
         add_post_meta($insert_id, 'order_info_16', $data['receiptDescription']);
-
-        $data['id'] = $post_title;
         
 		order_ntfct2($data);
         

@@ -8,6 +8,11 @@ $shop_query = new WP_Query(['post_type' => 'pafshop', 'orderby'=>'ID','order'=>'
 $products = [];
 $terms = get_terms('filmtags', ['orderby'=>'term_id','order'=>'ASC']);
 
+
+date_default_timezone_set('Asia/Tokyo');
+$submit_date = date('mdH', time()); //送信タイム
+$orderID = cms_title('dvdorder', $submit_date, 'J');
+
 foreach($terms as $key => $term)
 {
 
@@ -105,14 +110,16 @@ get_header(); ?>
                     銀行振込はこうです
                 </div>
                 <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
-                <div v-show="paymentMethod == 2">
-                    <div ref="cardElement"></div>
-                    <div @click="pay()">決済する</div>
-                    {{paymenErrorMessage}}
+                <div v-if="paymentMethod == 2">
+                    決済画面に移動します
                 </div>
-                    
-
-                <div @click="completePayment()">決済終了</div>
+                <modal
+                v-if="modalPayment === true"
+                    :total="getTotal()" 
+                    :orderid="orderID"
+                    @complete="completePayment()"
+                    @close="closeModalPayment()"></modal>
+                <div @click="execPayment()">決済終了</div>
             </div>
 
         </div>
@@ -122,6 +129,51 @@ get_header(); ?>
 </div>
 
 
+<style>
+.modal-mask {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 304px;
+    height: 200px;
+    margin-left: -152px;
+    margin-top: -100px; 
+    box-sizing: border-box;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    border: 1px solid #eeeeee;
+}
+
+</style>
+
+<script type="text/x-template" id="modal-template">
+    <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-container">
+                <div ref="cardElement"></div>
+                <div @click="pay()">決済する</div>
+                {{paymentMessage}}
+                <div v-if="paymentCompleted === true" @click="complete()">終了する</div>
+                <div @click="close()">閉じる</div>
+            </div>
+        </div>
+    </transition>
+</script>
+
 <script type="text/javascript">
 
     Vue.config.devtools = true;
@@ -130,39 +182,104 @@ get_header(); ?>
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
 
     var products = <? echo json_encode($products); ?>;
+    var orderID = '<? echo $orderID; ?>'
 
+
+    Vue.component('modal', {
+        template: '#modal-template'
+        , props: ['orderid', 'total']
+        , data: function(){
+            return {
+                  paymentMessage: ''
+                , paymentCompleted: false
+            }
+        }
+        , computed: {
+            
+        }
+        , methods: {
+            async pay()
+            {
+
+                try {
+                    var tokenResult = await this.stripe.createToken(this.card)
+                    if (
+                        !tokenResult ||
+                        !tokenResult.token ||
+                        !tokenResult.token.id ||
+                        tokenResult.token.id === ''
+                    ) {
+                        throw new Error('トークン発行エラー')
+                    }
+
+                    var url = '/charge.php'
+                    var params = {
+                          token: tokenResult.token.id
+                        , amount: this.total
+                        , orderID: this.orderid
+                    }
+                    var chargeResult = await axios.post(url, params)
+                    
+                    if (!chargeResult || chargeResult.data !== 'success') {
+                        throw new Error('決済エラー')
+                    }
+
+                    this.paymentMessage = '決済に成功しました'
+                    this.paymentCompleted = true
+
+                }
+                catch(error)
+                {
+                    this.paymentMessage = error.message
+                }
+
+            }
+
+            , complete: function(){ this.$emit('complete') }
+            , close: function(){ this.$emit('close') }
+            
+        }
+
+        , mounted: function(){
+            this.stripe = Stripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
+            this.card = this.stripe.elements().create('card', { hidePostalCode: true })
+            this.card.mount(this.$refs.cardElement);
+        }
+    });
 
     var app = new Vue({
         el: '#app'
         , data: {
               products: products
             , pafCart : strgPafCart
-            , step : 2
+            , step : 1
             , user:{
-                //   name: ''
-                // , zipcode: ''
-                // , prefecture: ''
-                // , city: ''
-                // , address1: ''
-                // , tel: ''
-                // , email: ''
-                // , emailConfirm: ''
-                // , receipt: ''
-                // , agree: false
+                  name: ''
+                , zipcode: ''
+                , prefecture: ''
+                , city: ''
+                , address1: ''
+                , tel: ''
+                , email: ''
+                , emailConfirm: ''
+                , receipt: false
+                , receiptName: ''
+                , receiptDescription: ''
+                , agree: false
 
-                name: 'restard'
-                , zipcode: '1500034'
-                , prefecture: '東京都'
-                , city: '渋谷区神山町'
-                , address1: '41-7'
-                , address2: 'エクティ神山町209'
-                , tel: '08039118917'
-                , email: 'drestard@gmail.com'
-                , emailConfirm: 'drestard@gmail.com'
-                , receipt: true
-                , receiptName: 'お宛名'
-                , receiptDescription: '但し書き'
-                , agree: true
+                // name: 'restard'
+                // , zipcode: '1500034'
+                // , prefecture: '東京都'
+                // , city: '渋谷区神山町'
+                // , address1: '41-7'
+                // , address2: 'エクティ神山町209'
+                // , tel: '08039118917'
+                // , email: 'drestard@gmail.com'
+                // , emailConfirm: 'drestard@gmail.com'
+                // , receipt: true
+                // , receiptName: 'お宛名'
+                // , receiptDescription: '但し書き'
+                // , agree: true
             }
             , errors:{
                   agree: '必ずチェックしてください'
@@ -175,11 +292,14 @@ get_header(); ?>
                 , email: false
                 , emailConfirm: false
             }
+
+            , modalPayment: false
             , paymentMethod: 0
             , stripePK: 'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR'
             , paymenErrorMessage: ''
             , stripe: false
             , cardElement: false
+            , orderID: orderID
         }
         , computed:
         {
@@ -258,57 +378,57 @@ get_header(); ?>
 
             }
 
+
             , async completePayment()
+            {
+
+                var params = this.user;
+                params.order = this.order;
+                params.orderID = this.orderID;
+                params.total = this.convertYen(this.getTotal());
+                params.paymentMethod = (this.paymentMethod == 1) ? '銀行振込' : 'クレジットカード';
+
+                if(this.user.receipt == true)
+                {
+                    params.receiptName = this.user.receiptName ? this.user.receiptName : '-'
+                    params.receiptDescription = this.user.receiptDescription ? this.user.receiptDescription : '-'
+                }
+                else
+                {
+                    delete params.receiptName
+                    delete params.receiptDescription
+                }
+
+                var url = '<? echo get_permalink(get_page_by_path('cashier/complete')); ?>'
+                var res = await axios.post(url, params)
+                if(res){
+                    if(res.status === 200)
+                    {
+                        this.modalPayment = false;
+                        localStorage.removeItem('pafCart');
+                        localStorage.removeItem('pafCartCount');
+                        window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
+                    }
+                }
+            }
+
+            , execPayment: function()
             {
                 if(this.paymentMethod == 1)
                 {
-
-                    var params = this.user;
-                    params.order = this.order;
-                    params.total = this.convertYen(this.getTotal());
-
-                    var url = '<? echo get_permalink(get_page_by_path('cashier/complete')); ?>'
-                    var res = await axios.post(url, params)
-                    if(res){
-                        if(res.status === 200)
-                        {
-                            // window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
-                        }
-                    }
+                    this.completePayment();
                 }
-            }
 
-            , async pay()
-            {
-                try {
-                    // 決済用トークン発行
-                    var tokenResult = await this.stripe.createToken(this.card)
-                    if (
-                        !tokenResult ||
-                        !tokenResult.token ||
-                        !tokenResult.token.id ||
-                        tokenResult.token.id === ''
-                    ) {
-                        throw new Error('トークン発行エラー')
-                    }
-                    console.log('ne', tokenResult)
-
-                    var charge = await this.stripe.charges.create({
-                        amount: 2000,
-                        currency: 'jpy',
-                        source: tokenResult.token.id
-                    });
-                    if (charge) {
-                        console.log('charge', charge)
-                    }
-                }
-                catch(error)
+                else if(this.paymentMethod == 2)
                 {
-                    this.paymenErrorMessage = error.message
+                    this.modalPayment = true;
                 }
-
             }
 
+            , closeModalPayment: function()
+            {
+                this.modalPayment = false;
+            }
 
             , async searchAddress()
             {
@@ -463,10 +583,6 @@ get_header(); ?>
 
         , mounted: function()
         {
-
-            this.stripe = Stripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
-            this.card = this.stripe.elements().create('card', { hidePostalCode: true })
-            this.card.mount(this.$refs.cardElement);
         }
     })
 </script>

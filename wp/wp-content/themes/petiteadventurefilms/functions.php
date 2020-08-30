@@ -547,7 +547,11 @@ function mail_header($from = NULL){
 function mail_footer(){
     $mail_footer = '
 
-Copyright (C) Petite Adventure Films. All Rights Reserved.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+Petite Adventure Films
+info@petiteadventurefilms.com
+www.petiteadventurefilms.com
 
 ';
 
@@ -669,27 +673,52 @@ mail_footer();
 
 
 function order_ntfct2($data){
-    $subject = "【PAF DVD注文】".$data['name']."様";
+    $subject = '【Petite Adventure Films】ご注文内容の確認';
 
     $message .= <<<EOF
 {$data['name']}様
-ご注文をいただき誠にありがとうございます。
-ご注文いただきました内容は下記の通りです。ご確認ください。
 
-●注文内容
+このたびはご注文をいただき誠にありがとうございます。
+下記のとおりご注文を承りましたので、内容に間違いがないかご確認ください。
+
+--------------------------------------
+
+【ご注文内容】
 
 EOF;
     foreach($data['order'] as $order)
     {
-        $message .= $order;
+        $message .= <<<EOF
+{$order}
+
+EOF;
     }
 
     $message .= <<<EOF
 
-合計: {$data['total']}
 
+【お買上金額】
+商品金額合計: {$data['total']}(税込)
+送料: 
+注文金額合計: {$data['total']}(税込)
 
-●領収書
+【お支払い方法】
+{$data['paymentMethod']}
+
+EOF;
+
+    if($data['paymentMethod'] == '銀行振込')
+    {
+        $message .= <<<EOF
+
+【お振込先情報】
+銀行sdふぁsdlfかjsdf
+
+EOF;
+    }
+    $message .= <<<EOF
+
+【領収書】
 
 EOF;
 
@@ -697,8 +726,8 @@ EOF;
     {
         $message .= <<<EOF
 必要
-{$data['receiptName']}
-{$data['receiptDescription']}
+お宛名: {$data['receiptName']}
+但し書き: {$data['receiptDescription']}
 EOF;
     }
     else
@@ -709,21 +738,21 @@ EOF;
     $message .= <<<EOF
 
 
-●お届け先
-{$data['zipcode']}
+【お届け先】
+〒{$data['zipcode']}
 {$data['prefecture']}{$data['city']}{$data['address1']}
 {$data['address2']}
 
-受付番号: {$data['id']}
+受付番号: {$data['orderID']}
 
-担当者より後ほどご連絡をさせていただきます。
-この度はご注文誠にありがとうございました。
+------------------------------------
 
+商品は原則として、お支払い確認後、3～5日以内に発送します。
+季節・天候等による道路事情のためお届けが遅れる場合があります。
 EOF;
     
     $message .= mail_footer();
 
-    //mail($email, $subject, $message, mail_header());
     wp_mail($data['email'], $subject, $message, mail_header());
     wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header());
     // wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));

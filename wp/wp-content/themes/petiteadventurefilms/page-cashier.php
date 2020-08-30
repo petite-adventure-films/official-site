@@ -29,8 +29,8 @@ foreach($terms as $key => $term)
         {
 
 
-            $price_indexs = get_post_meta_arr($shop->ID, "product_info_01");
-            $price_contents = get_post_meta_arr($shop->ID, "product_info_02");
+            $price_indexs = get_post_meta_arr($shop->ID, 'product_info_01');
+            $price_contents = get_post_meta_arr($shop->ID, 'product_info_02');
             foreach($price_indexs as $key2 => $index)
             {
                 $products[$key]['price_info'][$key2]['index'] = $index;
@@ -152,9 +152,8 @@ get_header(); ?>
 
     var products = <? echo json_encode($products); ?>;
 
-
-    Vue.component("modal", {
-        template: "#modal-template"
+    Vue.component('modal', {
+        template: '#modal-template'
         , props: ['data', 'products']
         , computed: {
             item: function()
