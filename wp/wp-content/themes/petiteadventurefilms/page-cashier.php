@@ -7,38 +7,63 @@ get_header(); ?>
 
 
         <div id="app">
+
+            <h2>注文内容</h2>
         
             <div
             v-for = "item in addedItems"
-            :key  = "'film_' + item.prod_key">
-                {{item.basic_info.post_title}}
+            :key  = "'film_' + item.prod_key"
+                class="invoice">
+                <div class="product_name">{{item.basic_info.post_title}}</div>
                 <div
                 v-for = "(unit, key) in item.cart"
                 :key = "'film_' + item.ID + 'price' + key">
-                    <div v-if="unit > 0">
-                        {{item.price_info[key].index}}
-                        {{convertYen(item.price_info[key].amount)}}
-                        <select
-                            v-model = "pafCart['film_' + item.prod_key][key]"
-                            @change = "updateCart(item.prod_key)">
-                            <option
-                            v-for="(val2, key2) in purchaseLimit"
-                            :key="'film_' + item.ID + 'price' + key + '_' + key2"
-                                :value="val2"
-                                >{{val2}}</option>
-                        </select>
-                        <span
-                        @click="showModalDelete(item.prod_key, key)"
-                            >削除</span>
-                        {{convertYen(item.price_info[key].amount * unit)}}
+                    <div v-if="unit > 0" class="record">
+                        <div class="cell index">
+                            {{item.price_info[key].index}}
+                        </div>
+                        <div class="cell amount">
+                            {{convertYen(item.price_info[key].amount)}}
+                        </div>
+                        <div class="cell unit">
+                            <select
+                                v-model = "pafCart['film_' + item.prod_key][key]"
+                                @change = "updateCart(item.prod_key)">
+                                <option
+                                v-for="(val2, key2) in purchaseLimit"
+                                :key="'film_' + item.ID + 'price' + key + '_' + key2"
+                                    :value="val2"
+                                    >{{val2}}</option>
+                            </select>
+                        </div>
+                        <div class="cell delete">
+                            <a
+                            @click="showModalDelete(item.prod_key, key)"
+                                >削除</a>
+                        </div>
+                        <div class="cell sum">
+                            {{convertYen(item.price_info[key].amount * unit)}}
+                        </div>
                     </div>
                 </div>
-                小計 {{convertYen(getSubtotal(item.prod_key))}}
-
+                <div class="subtotal">
+                    小計 {{convertYen(getSubtotal(item.prod_key))}}<br>
+                </div>
+                
             </div>
-            合計　{{convertYen(getTotal())}}
 
-            <div>
+            <div class="fee">
+                商品小計　{{convertYen(getTotal())}}
+            </div>
+
+            <div class="fee">
+                配送料　{{convertYen('500')}}
+            </div>
+
+            <div class="total">合計 {{convertYen(getTotal(true))}}</div>
+
+            
+            <div class="btn shop">
                 <a href="<?php echo get_permalink(get_page_by_path("cashier/purchase")); ?>">購入手続</a>
             </div>
 
@@ -83,6 +108,56 @@ get_header(); ?>
     transition: all 0.3s ease;
     border: 1px solid #eeeeee;
 }
+
+.fee{
+    margin-top: 8px;
+    padding: 4px 8px;
+    border: 1px solid #eeeeee;
+    text-align: right;
+}
+
+.product{
+    padding: 8px;
+    border: 1px solid #eeeeee;
+}
+
+.total{
+    margin-top: 8px;
+    padding: 8px;
+    background: #ffcce4;
+    text-align: right;
+}
+
+.invoice{
+    border: 1px solid #eeeeee;
+}
+.invoice:not(:nth-of-type(1)){
+    margin-top: 8px;
+}
+.invoice .product_name{
+    padding: 8px;
+    border-bottom: 1px solid #eeeeee;
+}
+.invoice .subtotal{
+    border-top: 1px solid #eeeeee;
+    text-align: right;
+    padding: 4px 8px;
+    background: #efefef;
+}
+.invoice .record{
+    display: table;
+    padding: 4px 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.invoice .record .cell{
+    display: table-cell;
+}
+.invoice .record .index{ width: 156px; }
+.invoice .record .amount{ width: 64px; text-align: right; }
+.invoice .record .unit{ width: 56px; text-align: center; }
+.invoice .record .delete{ width: 40px; text-align: center; }
+.invoice .record .sum{ text-align: right; }
 
 </style>
 
@@ -207,7 +282,8 @@ get_header(); ?>
                 return sum;
 
             }
-            , getTotal: function()
+
+            , getTotal: function(deliveryFee)
             {
 
 
@@ -225,6 +301,8 @@ get_header(); ?>
                     sum1 = sum1 + sum2;
 
                 })
+
+                if(deliveryFee) sum1 = sum1 + 500;
 
                 return sum1;
 
