@@ -1,49 +1,4 @@
 <?php
-
-$film_query = new WP_Query(['post_type' => 'films', 'orderby'=>'ID','order'=>'ASC']);
-$shop_query = new WP_Query(['post_type' => 'pafshop', 'orderby'=>'ID','order'=>'ASC']);
-
-$products = [];
-$terms = get_terms('filmtags', ['orderby'=>'term_id','order'=>'ASC']);
-
-foreach($terms as $key => $term)
-{
-
-    $products[$key]['prod_key'] = $term->term_id;
-
-    foreach($film_query->posts as $film)
-    {
-        $tags = get_the_terms($film, 'filmtags');
-        $tag_id = $tags[0]->term_id;
-        if($term->term_id == $tag_id)
-        {
-            $products[$key]['basic_info'] = $film;
-        }
-    }
-    
-    foreach($shop_query->posts as $shop)
-    {
-        $tags = get_the_terms($shop, 'filmtags');
-        $tag_id = $tags[0]->term_id;
-        if($term->term_id == $tag_id)
-        {
-
-
-            $price_indexs = get_post_meta_arr($shop->ID, 'product_info_01');
-            $price_contents = get_post_meta_arr($shop->ID, 'product_info_02');
-            foreach($price_indexs as $key2 => $index)
-            {
-                $products[$key]['price_info'][$key2]['index'] = $index;
-                $products[$key]['price_info'][$key2]['amount'] = $price_contents[$key2];
-            }
-
-
-        }
-    }
-    
-}
-
-
 get_header(); ?>
 
 <div class="single">
@@ -150,7 +105,7 @@ get_header(); ?>
     var strgPafCart = JSON.parse(localStorage.getItem('pafCart')) || localStorage.setItem('pafCart', JSON.stringify({}));
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
 
-    var products = <? echo json_encode($products); ?>;
+    var products = <? echo json_encode(get_products()); ?>;
 
     Vue.component('modal', {
         template: '#modal-template'

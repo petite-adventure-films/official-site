@@ -12,3 +12,6 @@ wp/wp-content/plugins/hello.php
 
 # ignore specific themes
 wp/wp-content/themes/twenty*/
+
+# ignore specific themes
+*.sass-cache/
