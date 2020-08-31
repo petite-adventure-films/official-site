@@ -245,6 +245,52 @@ EOF;
 
 }
 
+function get_products(){
+
+    $film_query = new WP_Query(['post_type' => 'films', 'orderby'=>'ID','order'=>'ASC']);
+    $shop_query = new WP_Query(['post_type' => 'pafshop', 'orderby'=>'ID','order'=>'ASC']);
+    
+    $products = [];
+    $terms = get_terms('filmtags', ['orderby'=>'term_id','order'=>'ASC']);
+    
+    foreach($terms as $key => $term)
+    {
+    
+        $products[$key]['prod_key'] = $term->term_id;
+    
+        foreach($film_query->posts as $film)
+        {
+            $tags = get_the_terms($film, 'filmtags');
+            $tag_id = $tags[0]->term_id;
+            if($term->term_id == $tag_id)
+            {
+                $products[$key]['basic_info'] = $film;
+            }
+        }
+        
+        foreach($shop_query->posts as $shop)
+        {
+            $tags = get_the_terms($shop, 'filmtags');
+            $tag_id = $tags[0]->term_id;
+            if($term->term_id == $tag_id)
+            {
+    
+                $price_indexs = get_post_meta_arr($shop->ID, 'product_info_01');
+                $price_contents = get_post_meta_arr($shop->ID, 'product_info_02');
+                foreach($price_indexs as $key2 => $index)
+                {
+                    $products[$key]['price_info'][$key2]['index'] = $index;
+                    $products[$key]['price_info'][$key2]['amount'] = $price_contents[$key2];
+                }
+    
+    
+            }
+        }
+        
+    }
+
+    return $products;
+}
 
 function get_post_number($post) {
     global $wpdb;
@@ -257,6 +303,7 @@ function get_post_number($post) {
     ");
     return $number;
 }
+
 
 function set_body_class(){
     $uri = $_SERVER["REQUEST_URI"];

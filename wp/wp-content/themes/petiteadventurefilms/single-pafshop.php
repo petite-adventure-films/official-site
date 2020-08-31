@@ -93,7 +93,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
             :key="'price' + key">
                 {{val}} {{convertYen(priceContents[key])}}
                 <select v-model="pafCart[key]">
-                    <option value="0" selected>個数</option>
+                    <option value=0 selected>個数</option>
                     <option
                     v-for="(val2, key2) in purchaseLimit"
                     :key="'price' + key + key2"
@@ -101,9 +101,12 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
                 </select>
             </div>
 
-            <div class="btn priority1">
-                <span @click="addCart">カートに追加</span>
+            <div
+            class="btn"
+            :class="addCartActive">
+                <span class="ele" @click="addCart">カートに追加</span>
             </div>
+            {{errorMessage}}
 
         </div>
 
@@ -123,62 +126,86 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
     var price_contents = <? echo json_encode($price_contents) ?>;
     var film_id = 'film_<? echo $film_id ?>';
 
-    var strgPafCart = JSON.parse(localStorage.getItem('pafCart')) || localStorage.setItem('pafCart', JSON.stringify({}));
+    if(!JSON.parse(localStorage.getItem('pafCart'))){
+        localStorage.setItem('pafCart', JSON.stringify({}));
+    }
+
+    var strgPafCart = JSON.parse(localStorage.getItem('pafCart'));
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
 
     var app = new Vue({
         el: '#app'
-      , data: {
-            filmID : film_id
-          , priceIndexs   : price_indexs
-          , priceContents : price_contents
-          , purchaseLimit : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        , data: {
+              filmID : film_id
+            , priceIndexs   : price_indexs
+            , priceContents : price_contents
+            , purchaseLimit : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            , strgPafCart : strgPafCart
+            , pafCart : (strgPafCart && strgPafCart[film_id]) ? strgPafCart[film_id] : [0, 0]
+            , pafCartCount : strgPafCartCount || 0
+            , errorMessage: ''
         }
-      , computed: {
-            pafCart: function()
+        , computed: {
+            addCartActive : function()
             {
-                return (strgPafCart && strgPafCart[this.filmID]) ? strgPafCart[this.filmID] : [0, 0]
-            }
-          , pafCartCount: function()
-            {
-                return strgPafCartCount || 0
+                var count = 0
+                this.pafCart.forEach(v => { count = count + parseInt(v) })
+                //this.errorMessage = ''
+                return count > 0 ? 'shop' : 'disabled'
             }
         }
-      , methods: {      
+        , methods: {      
             convertYen: function(number)
             {
                 return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(number);
             }
-          , addCart: function()
+            , addCart: function()
             {
-                var strg = JSON.parse(localStorage.getItem('pafCart'))
-                if(strg[this.film] === undefined)
+                this.errorMessage = ''
+                if(this.addCartActive == 'shop')
                 {
-                    strg[this.filmID] = [];
-                }
-                this.pafCart.forEach(v => {
-                    strg[this.filmID].push(v || 0)
-                })
 
-                localStorage.setItem('pafCart', JSON.stringify(strg))
-                this.setPafCartCount();
+                    if(this.strgPafCart[this.film] === undefined)
+                    {
+                        this.strgPafCart[this.filmID] = [];
+                    }
+                    this.pafCart.forEach(v => {
+                        this.strgPafCart[this.filmID].push(v || 0)
+                    })
+
+                    localStorage.setItem('pafCart', JSON.stringify(this.strgPafCart))
+                    this.setPafCartCount();
+                    
+                }
+                else
+                {
+                    this.errorMessage = '個数を入力してください'
+                }
             }
-          , setPafCartCount: function()
+            , setPafCartCount: function()
             {
                 var count = 0;
-                var strg = JSON.parse(localStorage.getItem('pafCart'))
-                Object.keys(strg).forEach(k => {
-                    strg[k].forEach(v => {
-                        count = count + v
+                Object.keys(this.strgPafCart).forEach(k => {
+                    this.strgPafCart[k].forEach(v => {
+                        count = count + parseInt(v)
                     })
                 })
                 localStorage.setItem('pafCartCount', parseInt(count))
                 $('.pafCartCount').text(count)
             }
         }
-      , created: function()
+        , created: function()
         {
             $('.pafCartCount').text(strgPafCartCount);
+
+            var count = 0;
+            this.pafCart.forEach(v => {
+                count = count + parseInt(v)
+            })
+            if(count > 0){
+                console.log('dd', count)
+                this.errorMessage = 'すでに追加されています'
+            }
         }
     })
 
