@@ -107,6 +107,8 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
                 <span class="ele" @click="addCart">カートに追加</span>
             </div>
             {{errorMessage}}
+            ※こちらの価格には消費税が含まれています。<br>
+            ※1回のご注文毎に送料500円が掛かります。
 
         </div>
 
