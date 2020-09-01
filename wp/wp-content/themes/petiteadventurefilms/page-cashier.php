@@ -6,73 +6,87 @@ get_header(); ?>
     <div class="col col_9 last">
 
 
+        <div class="btn">
+            <a href="<?php echo get_post_type_archive_link('pafshop'); ?>">買い物を続ける</a>   
+        </div>
+
+        <br>
+
         <div id="app">
 
-            <h2>注文内容</h2>
-        
             <div
-            v-for = "item in addedItems"
-            :key  = "'film_' + item.prod_key"
-                class="invoice">
-                <div class="product_name">{{item.basic_info.post_title}}</div>
+            v-if="addedItems">
+
+                <h2>注文内容</h2>
+            
                 <div
-                v-for = "(unit, key) in item.cart"
-                :key = "'film_' + item.ID + 'price' + key">
-                    <div v-if="unit > 0" class="record">
-                        <div class="cell index">
-                            {{item.price_info[key].index}}
-                        </div>
-                        <div class="cell amount">
-                            {{convertYen(item.price_info[key].amount)}}
-                        </div>
-                        <div class="cell unit">
-                            <select
-                                v-model = "pafCart['film_' + item.prod_key][key]"
-                                @change = "updateCart(item.prod_key)">
-                                <option
-                                v-for="(val2, key2) in purchaseLimit"
-                                :key="'film_' + item.ID + 'price' + key + '_' + key2"
-                                    :value="val2"
-                                    >{{val2}}</option>
-                            </select>
-                        </div>
-                        <div class="cell delete">
-                            <a
-                            @click="showModalDelete(item.prod_key, key)"
-                                >削除</a>
-                        </div>
-                        <div class="cell sum">
-                            {{convertYen(item.price_info[key].amount * unit)}}
+                v-for = "item in addedItems"
+                :key  = "'film_' + item.prod_key"
+                    class="invoice">
+                    <div class="product_name">{{item.basic_info.post_title}}</div>
+                    <div
+                    v-for = "(unit, key) in item.cart"
+                    :key = "'film_' + item.ID + 'price' + key">
+                        <div v-if="unit > 0" class="record">
+                            <div class="cell index">
+                                {{item.price_info[key].index}}
+                            </div>
+                            <div class="cell amount">
+                                {{convertYen(item.price_info[key].amount)}}
+                            </div>
+                            <div class="cell unit">
+                                <select
+                                    v-model = "pafCart['film_' + item.prod_key][key]"
+                                    @change = "updateCart(item.prod_key)">
+                                    <option
+                                    v-for="(val2, key2) in purchaseLimit"
+                                    :key="'film_' + item.ID + 'price' + key + '_' + key2"
+                                        :value="val2"
+                                        >{{val2}}</option>
+                                </select>
+                            </div>
+                            <div class="cell delete">
+                                <a
+                                @click="showModalDelete(item.prod_key, key)"
+                                    >削除</a>
+                            </div>
+                            <div class="cell sum">
+                                {{convertYen(item.price_info[key].amount * unit)}}
+                            </div>
                         </div>
                     </div>
+                    <div class="subtotal">
+                        小計 {{convertYen(getSubtotal(item.prod_key))}}<br>
+                    </div>            
                 </div>
-                <div class="subtotal">
-                    小計 {{convertYen(getSubtotal(item.prod_key))}}<br>
+
+                <div class="fee">
+                    商品小計　{{convertYen(getTotal())}}
                 </div>
+
+                <div class="fee">
+                    配送料　{{convertYen('500')}}
+                </div>
+
+                <div class="total">合計 {{convertYen(getTotal(true))}}</div>
+
                 
+                <div class="btn shop">
+                    <a href="<?php echo get_permalink(get_page_by_path("cashier/purchase")); ?>">注文する</a>
+                </div>
+
+                <modal
+                v-show="showModal == true"
+                    :data="deleteData"
+                    :products="products"
+                    @exec="deleteFromCart"
+                    @close="closeModalDelete"></modal>
+
             </div>
 
-            <div class="fee">
-                商品小計　{{convertYen(getTotal())}}
+            <div v-else>
+                カートに商品はまだありません
             </div>
-
-            <div class="fee">
-                配送料　{{convertYen('500')}}
-            </div>
-
-            <div class="total">合計 {{convertYen(getTotal(true))}}</div>
-
-            
-            <div class="btn shop">
-                <a href="<?php echo get_permalink(get_page_by_path("cashier/purchase")); ?>">購入手続</a>
-            </div>
-
-            <modal
-            v-show="showModal == true"
-                :data="deleteData"
-                :products="products"
-                @exec="deleteFromCart"
-                @close="closeModalDelete"></modal>
 
         </div>
 
@@ -98,9 +112,8 @@ get_header(); ?>
     top: 50%;
     left: 50%;
     width: 304px;
-    height: 200px;
     margin-left: -152px;
-    margin-top: -100px; 
+    margin-top: -140px; 
     box-sizing: border-box;
     padding: 20px 30px;
     background-color: #fff;
@@ -166,8 +179,12 @@ get_header(); ?>
         <div class="modal-mask">
             <div class="modal-container">
                 {{item.name}} - {{item.index}}を削除してもよろしいでしょうか
-                <div @click="close()">[キャンセル]</div>
-                <div @click="update()">[削除]</div>
+                <div class="btn" @click="close()">
+                    <span class="ele">キャンセル</span>
+                </div>
+                <div class="btn" @click="update()">
+                    <span class="ele">削除</span>
+                </div>
             </div>
         </div>
     </transition>
@@ -224,15 +241,17 @@ get_header(); ?>
             addedItems: function()
             {
                 var arg = [];
-                Object.keys(this.pafCart).forEach(k => {
-                    var filmID = k.replace('film_', '')
-                    var film = this.products.find(a => a.prod_key == filmID);
-                    if(film)
-                    {
-                        film.cart = this.pafCart[k]
-                        arg.push(film)
-                    }
-                })
+                if(Object.keys(this.pafCart).length > 0){
+                    Object.keys(this.pafCart).forEach(k => {
+                        var filmID = k.replace('film_', '')
+                        var film = this.products.find(a => a.prod_key == filmID);
+                        if(film)
+                        {
+                            film.cart = this.pafCart[k]
+                            arg.push(film)
+                        }
+                    })
+                }
                 return arg;
             }
         }
@@ -261,7 +280,7 @@ get_header(); ?>
                 var count = 0;
                 Object.keys(this.pafCart).forEach(k => {
                     this.pafCart[k].forEach(v => {
-                        count = count + v
+                        count = count + parseInt(v)
                     })
                 })
                 localStorage.setItem('pafCartCount', parseInt(count))

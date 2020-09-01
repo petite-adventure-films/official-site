@@ -61,34 +61,54 @@ get_header(); ?>
         <div id="app">
 
 
-            <h2>購入内容</h2>
+            <h2>step1. 注文内容の確認</h2>
         
             <div
             v-for = "item in addedItems"
-            :key  = "'film_' + item.prod_key">
-                {{item.basic_info.post_title}}
+            :key  = "'film_' + item.prod_key"
+                class="invoice">
+                <div class="product_name">{{item.basic_info.post_title}}</div>
                 <div
                 v-for = "(unit, key) in item.cart"
                 :key = "'film_' + item.ID + 'price' + key">
-                    <div v-if="unit > 0">
-                        {{item.price_info[key].index}}
-                        {{convertYen(item.price_info[key].amount)}}
-                        {{unit}}
-                        {{convertYen(item.price_info[key].amount * unit)}}
+                    <div v-if="unit > 0" class="record">
+                        <div class="cell index">{{item.price_info[key].index}}</div>
+                        <div class="cell amount">{{convertYen(item.price_info[key].amount)}}</div>
+                        <div class="cell unit">{{unit}}</div>
+                        <div class="cell sum">{{convertYen(item.price_info[key].amount * unit)}}</div>
                     </div>
                 </div>
-                小計 {{convertYen(getSubtotal(item.prod_key))}}
+                <div class="subtotal">
+                    小計 {{convertYen(getSubtotal(item.prod_key))}}
+                </div>
 
             </div>
-            合計　{{convertYen(getTotal())}}
+            
+            <div class="fee">
+                商品小計　{{convertYen(getTotal())}}
+            </div>
+
+            <div class="fee">
+                配送料　{{convertYen('500')}}
+            </div>
+
+            <div class="total">合計 {{convertYen(getTotal(true))}}</div>
+
+            <div v-if="step == 1">
+                <div class="mt-2">注文内容に問題なければ、次へお進みください。</div>
+                <div class="btn shop" @click="completeCheckOrder">
+                    <span class="ele">次へすすむ</span>
+                </div>
+            </div>
 
 
             <br>
-            <h2>購入者情報</h2><div @click="step = 1">編集する</div>
-            <div v-if="step == 1">
+            <h2>step2. 注文者情報の入力</h2>
+            <div v-if="step == 2">
                 <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
             </div>
-            <div v-if="step > 1">
+            <div v-if="step > 2">
+                <div @click="step = 2" class="btn"><span class="ele">編集する</span></div>
                 {{user.name}}<br>
                 {{user.zipcode}}<br>
                 {{user.prefecture}}{{user.city}}{{user.address1}}<br>
@@ -103,30 +123,40 @@ get_header(); ?>
             </div>
 
             <br>
-            <h2>決済</h2>
-            <div v-if="step == 2">
+            <h2>step3. 決済</h2>
+            <div v-if="step == 3">
+                お支払い方法を選択してください<br>
                 <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label>
-                <div v-if="paymentMethod == 1">
-                    銀行振込はこうです
-                </div>
                 <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
-                <div v-if="paymentMethod == 2">
-                    決済画面に移動します
+                <div v-if="paymentMethod == 1">
+                    [銀行ロゴ]<br>
+                    振込先情報は注文完了後の確認メールに記載されております。<br>振込手数料はご負担下さい。
                 </div>
-                <modal
+                <div v-if="paymentMethod == 2">
+                    [クレジットカードロゴ]<br>
+                    注文完了後、決済画面へ移動します。
+                </div>
+                <modal-payment
                 v-if="modalPayment === true"
                     :total="getTotal()" 
                     :orderid="orderID"
                     @complete="completePayment()"
-                    @close="closeModalPayment()"></modal>
-                <div @click="execPayment()">決済終了</div>
+                    @close="closeModalPayment()"></modal-payment>
+                <div
+                :class="(paymentMethod > 0) ? 'shop' : 'disabled'"
+                @click="execPayment()" class="btn"><span class="ele">注文を完了する</span></div>
             </div>
+
+
+            <modal-execution
+                v-if="modalExecution === true"></modal-execution>
 
         </div>
 
     </div>
 
 </div>
+
 
 
 <style>
@@ -158,21 +188,83 @@ get_header(); ?>
     border: 1px solid #eeeeee;
 }
 
+.fee{
+    margin-top: 8px;
+    padding: 4px 8px;
+    border: 1px solid #eeeeee;
+    text-align: right;
+}
+
+.product{
+    padding: 8px;
+    border: 1px solid #eeeeee;
+}
+
+.total{
+    margin-top: 8px;
+    padding: 8px;
+    background: #ffcce4;
+    text-align: right;
+}
+
+.invoice{
+    border: 1px solid #eeeeee;
+}
+.invoice:not(:nth-of-type(1)){
+    margin-top: 8px;
+}
+.invoice .product_name{
+    padding: 8px;
+    border-bottom: 1px solid #eeeeee;
+}
+.invoice .subtotal{
+    border-top: 1px solid #eeeeee;
+    text-align: right;
+    padding: 4px 8px;
+    background: #efefef;
+}
+.invoice .record{
+    display: table;
+    padding: 4px 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.invoice .record .cell{
+    display: table-cell;
+}
+.invoice .record .index{ width: 156px; }
+.invoice .record .amount{ width: 64px; text-align: right; }
+.invoice .record .unit{ width: 56px; text-align: center; }
+.invoice .record .delete{ width: 40px; text-align: center; }
+.invoice .record .sum{ text-align: right; }
+
 </style>
 
-<script type="text/x-template" id="modal-template">
-    <transition name="modal">
-        <div class="modal-mask">
-            <div class="modal-container">
-                <div ref="cardElement"></div>
-                <div @click="pay()">決済する</div>
+<script type="text/x-template" id="template-modal-payment">
+    <div class="modal-mask">
+        <div class="modal-container">
+            <div ref="cardElement"></div>
+            <div
+            v-if="paymentCompleted === false"
+            @click="pay()" 
+            :class="(isEntered == true && isExecuting == false) ? 'shop' : 'disabled'"
+            class="btn"
+                ><span class="ele">決済する</span></div>
                 {{paymentMessage}}
-                <div v-if="paymentCompleted === true" @click="complete()">終了する</div>
-                <div @click="close()">閉じる</div>
-            </div>
+            <div v-if="paymentCompleted === false && isExecuting == false" @click="close()">閉じる</div>
         </div>
-    </transition>
+    </div>
 </script>
+
+
+<script type="text/x-template" id="template-modal-execution">
+    <div class="modal-mask">
+        <div class="modal-container">
+            処理中です。しばらくお待ちください。
+        </div>
+    </div>
+</script>
+
 
 <script type="text/javascript">
 
@@ -185,13 +277,15 @@ get_header(); ?>
     var orderID = '<? echo $orderID; ?>'
 
 
-    Vue.component('modal', {
-        template: '#modal-template'
+    Vue.component('modal-payment', {
+        template: '#template-modal-payment'
         , props: ['orderid', 'total']
         , data: function(){
             return {
                   paymentMessage: ''
                 , paymentCompleted: false
+                , isEntered: false
+                , isExecuting: false
             }
         }
         , computed: {
@@ -200,6 +294,9 @@ get_header(); ?>
         , methods: {
             async pay()
             {
+
+                this.isExecuting = true
+                this.paymentMessage = '決済中です'
 
                 try {
                     var tokenResult = await this.stripe.createToken(this.card)
@@ -226,6 +323,11 @@ get_header(); ?>
 
                     this.paymentMessage = '決済に成功しました'
                     this.paymentCompleted = true
+                    this.isExecuting = false
+
+                    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+
+                    this.$emit('complete')
 
                 }
                 catch(error)
@@ -235,17 +337,49 @@ get_header(); ?>
 
             }
 
-            , complete: function(){ this.$emit('complete') }
+
+            , input: function(e)
+            {
+                this.isEntered = false;
+            }
+            , change: function(e)
+            {
+                if(e.complete){
+                    this.isEntered = true;
+                    this.paymentMessage = ''
+                }
+                else{
+                    this.isEntered = false;
+                    if(e.error)
+                    {
+                        this.paymentMessage = e.error.message
+                    }
+                }
+            }
             , close: function(){ this.$emit('close') }
             
         }
 
         , mounted: function(){
             this.stripe = Stripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
-            this.card = this.stripe.elements().create('card', { hidePostalCode: true })
+            this.card = this.stripe.elements().create('card', {
+                hidePostalCode: true
+                , style: {
+                    base: {
+                        lineHeight: '44px'
+                    }
+                }
+            })
             this.card.mount(this.$refs.cardElement);
+            this.card.addEventListener('input', this.input);
+            this.card.addEventListener('change', this.change);
         }
     });
+
+
+    Vue.component('modal-execution', {
+        template: '#template-modal-execution'
+    })
 
     var app = new Vue({
         el: '#app'
@@ -293,6 +427,7 @@ get_header(); ?>
                 , emailConfirm: false
             }
 
+            , modalExecution: false
             , modalPayment: false
             , paymentMethod: 0
             , stripePK: 'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR'
@@ -300,12 +435,14 @@ get_header(); ?>
             , stripe: false
             , cardElement: false
             , orderID: orderID
+
         }
         , computed:
         {
             //カートに追加されている商品情報
             addedItems: function()
             {
+
                 var arg = [];
                 Object.keys(this.pafCart).forEach(k => {
                     var filmID = k.replace('film_', '')
@@ -355,7 +492,7 @@ get_header(); ?>
                 return sum;
 
             }
-            , getTotal: function()
+            , getTotal: function(deliveryFee)
             {
 
 
@@ -374,6 +511,8 @@ get_header(); ?>
 
                 })
 
+                if(deliveryFee) sum1 = sum1 + 500
+
                 return sum1;
 
             }
@@ -382,10 +521,14 @@ get_header(); ?>
             , async completePayment()
             {
 
+                this.modalPayment = false;
+                this.modalExecution = true;
+
                 var params = this.user;
                 params.order = this.order;
                 params.orderID = this.orderID;
-                params.total = this.convertYen(this.getTotal());
+                params.subtotal = this.convertYen(this.getTotal());
+                params.total = this.convertYen(this.getTotal(true));
                 params.paymentMethod = (this.paymentMethod == 1) ? '銀行振込' : 'クレジットカード';
 
                 if(this.user.receipt == true)
@@ -556,11 +699,16 @@ get_header(); ?>
                         }
                     })
 
-                    this.step = 2;
+                    this.step = 3;
 
                 } catch (error) {
                 }
 
+            }
+
+            , completeCheckOrder: function()
+            {
+                this.step = 2;
             }
         }
 

@@ -70,4 +70,10 @@ get_header(); ?>
 
 </div>
 
+<script>
+    var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
+    $('.pafCartCount').text(strgPafCartCount || 0);
+</script>
+
+
 <?php get_footer(); ?>
