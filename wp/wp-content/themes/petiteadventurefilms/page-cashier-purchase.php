@@ -125,23 +125,31 @@ get_header(); ?>
             <br>
             <h2>step3. 決済</h2>
             <div v-if="step == 3">
+                お支払い方法を選択してください<br>
                 <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label>
                 <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
                 <div v-if="paymentMethod == 1">
                     [銀行ロゴ]<br>
-                    振込先情報は注文完了メールに記載されております。振込手数料はご負担下さい。
+                    振込先情報は注文完了後の確認メールに記載されております。<br>振込手数料はご負担下さい。
                 </div>
                 <div v-if="paymentMethod == 2">
+                    [クレジットカードロゴ]<br>
                     注文完了後、決済画面へ移動します。
                 </div>
-                <modal
+                <modal-payment
                 v-if="modalPayment === true"
                     :total="getTotal()" 
                     :orderid="orderID"
                     @complete="completePayment()"
-                    @close="closeModalPayment()"></modal>
-                <div @click="execPayment()" class="btn shop"><span class="ele">注文を完了する</span></div>
+                    @close="closeModalPayment()"></modal-payment>
+                <div
+                :class="(paymentMethod > 0) ? 'shop' : 'disabled'"
+                @click="execPayment()" class="btn"><span class="ele">注文を完了する</span></div>
             </div>
+
+
+            <modal-execution
+                v-if="modalExecution === true"></modal-execution>
 
         </div>
 
@@ -232,18 +240,31 @@ get_header(); ?>
 
 </style>
 
-<script type="text/x-template" id="modal-template">
-    <transition name="modal">
-        <div class="modal-mask">
-            <div class="modal-container">
-                <div ref="cardElement"></div>
-                <div v-if="paymentCompleted === false" @click="pay()" class="btn shop"><span class="ele">決済する</span></div>
+<script type="text/x-template" id="template-modal-payment">
+    <div class="modal-mask">
+        <div class="modal-container">
+            <div ref="cardElement"></div>
+            <div
+            v-if="paymentCompleted === false"
+            @click="pay()" 
+            :class="(isEntered == true && isExecuting == false) ? 'shop' : 'disabled'"
+            class="btn"
+                ><span class="ele">決済する</span></div>
                 {{paymentMessage}}
-                <div @click="close()">閉じる</div>
-            </div>
+            <div v-if="paymentCompleted === false && isExecuting == false" @click="close()">閉じる</div>
         </div>
-    </transition>
+    </div>
 </script>
+
+
+<script type="text/x-template" id="template-modal-execution">
+    <div class="modal-mask">
+        <div class="modal-container">
+            処理中です。しばらくお待ちください。
+        </div>
+    </div>
+</script>
+
 
 <script type="text/javascript">
 
@@ -256,13 +277,15 @@ get_header(); ?>
     var orderID = '<? echo $orderID; ?>'
 
 
-    Vue.component('modal', {
-        template: '#modal-template'
+    Vue.component('modal-payment', {
+        template: '#template-modal-payment'
         , props: ['orderid', 'total']
         , data: function(){
             return {
                   paymentMessage: ''
                 , paymentCompleted: false
+                , isEntered: false
+                , isExecuting: false
             }
         }
         , computed: {
@@ -271,6 +294,9 @@ get_header(); ?>
         , methods: {
             async pay()
             {
+
+                this.isExecuting = true
+                this.paymentMessage = '決済中です'
 
                 try {
                     var tokenResult = await this.stripe.createToken(this.card)
@@ -297,6 +323,10 @@ get_header(); ?>
 
                     this.paymentMessage = '決済に成功しました'
                     this.paymentCompleted = true
+                    this.isExecuting = false
+
+                    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+
                     this.$emit('complete')
 
                 }
@@ -307,17 +337,49 @@ get_header(); ?>
 
             }
 
-            , complete: function(){  }
+
+            , input: function(e)
+            {
+                this.isEntered = false;
+            }
+            , change: function(e)
+            {
+                if(e.complete){
+                    this.isEntered = true;
+                    this.paymentMessage = ''
+                }
+                else{
+                    this.isEntered = false;
+                    if(e.error)
+                    {
+                        this.paymentMessage = e.error.message
+                    }
+                }
+            }
             , close: function(){ this.$emit('close') }
             
         }
 
         , mounted: function(){
             this.stripe = Stripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
-            this.card = this.stripe.elements().create('card', { hidePostalCode: true })
+            this.card = this.stripe.elements().create('card', {
+                hidePostalCode: true
+                , style: {
+                    base: {
+                        lineHeight: '44px'
+                    }
+                }
+            })
             this.card.mount(this.$refs.cardElement);
+            this.card.addEventListener('input', this.input);
+            this.card.addEventListener('change', this.change);
         }
     });
+
+
+    Vue.component('modal-execution', {
+        template: '#template-modal-execution'
+    })
 
     var app = new Vue({
         el: '#app'
@@ -326,32 +388,32 @@ get_header(); ?>
             , pafCart : strgPafCart
             , step : 1
             , user:{
-                //   name: ''
-                // , zipcode: ''
-                // , prefecture: ''
-                // , city: ''
-                // , address1: ''
-                // , tel: ''
-                // , email: ''
-                // , emailConfirm: ''
-                // , receipt: false
-                // , receiptName: ''
-                // , receiptDescription: ''
-                // , agree: false
+                  name: ''
+                , zipcode: ''
+                , prefecture: ''
+                , city: ''
+                , address1: ''
+                , tel: ''
+                , email: ''
+                , emailConfirm: ''
+                , receipt: false
+                , receiptName: ''
+                , receiptDescription: ''
+                , agree: false
 
-                name: 'restard'
-                , zipcode: '1500034'
-                , prefecture: '東京都'
-                , city: '渋谷区神山町'
-                , address1: '41-7'
-                , address2: 'エクティ神山町209'
-                , tel: '08039118917'
-                , email: 'drestard@gmail.com'
-                , emailConfirm: 'drestard@gmail.com'
-                , receipt: true
-                , receiptName: 'お宛名'
-                , receiptDescription: '但し書き'
-                , agree: true
+                // name: 'restard'
+                // , zipcode: '1500034'
+                // , prefecture: '東京都'
+                // , city: '渋谷区神山町'
+                // , address1: '41-7'
+                // , address2: 'エクティ神山町209'
+                // , tel: '08039118917'
+                // , email: 'drestard@gmail.com'
+                // , emailConfirm: 'drestard@gmail.com'
+                // , receipt: true
+                // , receiptName: 'お宛名'
+                // , receiptDescription: '但し書き'
+                // , agree: true
             }
             , errors:{
                   agree: '必ずチェックしてください'
@@ -365,6 +427,7 @@ get_header(); ?>
                 , emailConfirm: false
             }
 
+            , modalExecution: false
             , modalPayment: false
             , paymentMethod: 0
             , stripePK: 'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR'
@@ -372,12 +435,14 @@ get_header(); ?>
             , stripe: false
             , cardElement: false
             , orderID: orderID
+
         }
         , computed:
         {
             //カートに追加されている商品情報
             addedItems: function()
             {
+
                 var arg = [];
                 Object.keys(this.pafCart).forEach(k => {
                     var filmID = k.replace('film_', '')
@@ -456,10 +521,14 @@ get_header(); ?>
             , async completePayment()
             {
 
+                this.modalPayment = false;
+                this.modalExecution = true;
+
                 var params = this.user;
                 params.order = this.order;
                 params.orderID = this.orderID;
-                params.total = this.convertYen(this.getTotal());
+                params.subtotal = this.convertYen(this.getTotal());
+                params.total = this.convertYen(this.getTotal(true));
                 params.paymentMethod = (this.paymentMethod == 1) ? '銀行振込' : 'クレジットカード';
 
                 if(this.user.receipt == true)
@@ -481,7 +550,7 @@ get_header(); ?>
                         this.modalPayment = false;
                         localStorage.removeItem('pafCart');
                         localStorage.removeItem('pafCartCount');
-                        // window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
+                        window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
                     }
                 }
             }

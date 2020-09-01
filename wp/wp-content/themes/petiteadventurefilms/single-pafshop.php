@@ -160,7 +160,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
             <div class="modal-container">
                 <div class="btn" @click="close()">
                     <span class="ele">買い物を続ける</span>
-                </div>
+                </div><br>
                 <div class="btn shop">
                     <a href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">カートを見る</span>
                 </div>
