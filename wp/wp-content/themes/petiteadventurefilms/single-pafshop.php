@@ -106,10 +106,14 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
             :class="addCartActive">
                 <span class="ele" @click="addCart">カートに追加</span>
             </div>
-            {{errorMessage}}
+            <span class="red">{{errorMessage}}</span><br>
             ※こちらの価格には消費税が含まれています。<br>
             ※1回のご注文毎に送料500円が掛かります。
 
+            <modal
+            v-if="showModal == true"
+            @close="closeModaltoCashier"></modal>
+            
         </div>
 
     </div>
@@ -119,6 +123,51 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 
 
 </div>
+
+
+<style>
+.modal-mask {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 304px;
+    margin-left: -152px;
+    margin-top: -140px; 
+    box-sizing: border-box;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    border: 1px solid #eeeeee;
+}
+</style>
+
+<script type="text/x-template" id="modal-template">
+    <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-container">
+                <div class="btn" @click="close()">
+                    <span class="ele">買い物を続ける</span>
+                </div>
+                <div class="btn shop">
+                    <a href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">カートを見る</span>
+                </div>
+            </div>
+        </div>
+    </transition>
+</script>
 
 <script type="text/javascript">
 
@@ -135,6 +184,14 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
     var strgPafCart = JSON.parse(localStorage.getItem('pafCart'));
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
 
+
+    Vue.component('modal', {
+        template: '#modal-template'
+        , methods: {
+            close: function(){ this.$emit('close') }
+        }
+    });
+
     var app = new Vue({
         el: '#app'
         , data: {
@@ -146,6 +203,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
             , pafCart : (strgPafCart && strgPafCart[film_id]) ? strgPafCart[film_id] : [0, 0]
             , pafCartCount : strgPafCartCount || 0
             , errorMessage: ''
+            , showModal: false
         }
         , computed: {
             addCartActive : function()
@@ -177,6 +235,8 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 
                     localStorage.setItem('pafCart', JSON.stringify(this.strgPafCart))
                     this.setPafCartCount();
+
+                    this.showModal = true;
                     
                 }
                 else
@@ -195,6 +255,11 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
                 localStorage.setItem('pafCartCount', parseInt(count))
                 $('.pafCartCount').text(count)
             }
+
+            , closeModaltoCashier: function()
+            {
+                this.showModal = false
+            }
         }
         , created: function()
         {
@@ -205,8 +270,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
                 count = count + parseInt(v)
             })
             if(count > 0){
-                console.log('dd', count)
-                this.errorMessage = 'すでに追加されています'
+                this.errorMessage = 'この商品はカートに追加されています'
             }
         }
     })

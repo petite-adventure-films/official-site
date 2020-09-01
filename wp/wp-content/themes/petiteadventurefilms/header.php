@@ -31,7 +31,9 @@
 					<p id="eng">Petite Adventure Films</p>
 					<p id="jpn">プチ･アドベンチャー･フィルムズ </p>
 				</a>
-				<a href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">Cart<span class="pafCartCount">0</span></a>
+				<div class="btn">
+					<a href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">Cart <span class="pafCartCount pink">0</span></a>
+				</div>
 			</div>
 			<div class="show_wider">
 				<ul class="site_menu">

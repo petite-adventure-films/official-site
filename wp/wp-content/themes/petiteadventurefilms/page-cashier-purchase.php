@@ -61,34 +61,54 @@ get_header(); ?>
         <div id="app">
 
 
-            <h2>購入内容</h2>
+            <h2>step1. 注文内容の確認</h2>
         
             <div
             v-for = "item in addedItems"
-            :key  = "'film_' + item.prod_key">
-                {{item.basic_info.post_title}}
+            :key  = "'film_' + item.prod_key"
+                class="invoice">
+                <div class="product_name">{{item.basic_info.post_title}}</div>
                 <div
                 v-for = "(unit, key) in item.cart"
                 :key = "'film_' + item.ID + 'price' + key">
-                    <div v-if="unit > 0">
-                        {{item.price_info[key].index}}
-                        {{convertYen(item.price_info[key].amount)}}
-                        {{unit}}
-                        {{convertYen(item.price_info[key].amount * unit)}}
+                    <div v-if="unit > 0" class="record">
+                        <div class="cell index">{{item.price_info[key].index}}</div>
+                        <div class="cell amount">{{convertYen(item.price_info[key].amount)}}</div>
+                        <div class="cell unit">{{unit}}</div>
+                        <div class="cell sum">{{convertYen(item.price_info[key].amount * unit)}}</div>
                     </div>
                 </div>
-                小計 {{convertYen(getSubtotal(item.prod_key))}}
+                <div class="subtotal">
+                    小計 {{convertYen(getSubtotal(item.prod_key))}}
+                </div>
 
             </div>
-            合計　{{convertYen(getTotal())}}
+            
+            <div class="fee">
+                商品小計　{{convertYen(getTotal())}}
+            </div>
+
+            <div class="fee">
+                配送料　{{convertYen('500')}}
+            </div>
+
+            <div class="total">合計 {{convertYen(getTotal(true))}}</div>
+
+            <div v-if="step == 1">
+                <div class="mt-2">注文内容に問題なければ、次へお進みください。</div>
+                <div class="btn shop" @click="completeCheckOrder">
+                    <span class="ele">次へすすむ</span>
+                </div>
+            </div>
 
 
             <br>
-            <h2>購入者情報</h2><div @click="step = 1">編集する</div>
-            <div v-if="step == 1">
+            <h2>step2. 注文者情報の入力</h2>
+            <div v-if="step == 2">
                 <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
             </div>
-            <div v-if="step > 1">
+            <div v-if="step > 2">
+                <div @click="step = 2" class="btn"><span class="ele">編集する</span></div>
                 {{user.name}}<br>
                 {{user.zipcode}}<br>
                 {{user.prefecture}}{{user.city}}{{user.address1}}<br>
@@ -103,15 +123,16 @@ get_header(); ?>
             </div>
 
             <br>
-            <h2>決済</h2>
-            <div v-if="step == 2">
+            <h2>step3. 決済</h2>
+            <div v-if="step == 3">
                 <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label>
-                <div v-if="paymentMethod == 1">
-                    銀行振込はこうです
-                </div>
                 <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
+                <div v-if="paymentMethod == 1">
+                    [銀行ロゴ]<br>
+                    振込先情報は注文完了メールに記載されております。振込手数料はご負担下さい。
+                </div>
                 <div v-if="paymentMethod == 2">
-                    決済画面に移動します
+                    注文完了後、決済画面へ移動します。
                 </div>
                 <modal
                 v-if="modalPayment === true"
@@ -119,7 +140,7 @@ get_header(); ?>
                     :orderid="orderID"
                     @complete="completePayment()"
                     @close="closeModalPayment()"></modal>
-                <div @click="execPayment()">決済終了</div>
+                <div @click="execPayment()" class="btn shop"><span class="ele">注文を完了する</span></div>
             </div>
 
         </div>
@@ -127,6 +148,7 @@ get_header(); ?>
     </div>
 
 </div>
+
 
 
 <style>
@@ -158,6 +180,56 @@ get_header(); ?>
     border: 1px solid #eeeeee;
 }
 
+.fee{
+    margin-top: 8px;
+    padding: 4px 8px;
+    border: 1px solid #eeeeee;
+    text-align: right;
+}
+
+.product{
+    padding: 8px;
+    border: 1px solid #eeeeee;
+}
+
+.total{
+    margin-top: 8px;
+    padding: 8px;
+    background: #ffcce4;
+    text-align: right;
+}
+
+.invoice{
+    border: 1px solid #eeeeee;
+}
+.invoice:not(:nth-of-type(1)){
+    margin-top: 8px;
+}
+.invoice .product_name{
+    padding: 8px;
+    border-bottom: 1px solid #eeeeee;
+}
+.invoice .subtotal{
+    border-top: 1px solid #eeeeee;
+    text-align: right;
+    padding: 4px 8px;
+    background: #efefef;
+}
+.invoice .record{
+    display: table;
+    padding: 4px 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.invoice .record .cell{
+    display: table-cell;
+}
+.invoice .record .index{ width: 156px; }
+.invoice .record .amount{ width: 64px; text-align: right; }
+.invoice .record .unit{ width: 56px; text-align: center; }
+.invoice .record .delete{ width: 40px; text-align: center; }
+.invoice .record .sum{ text-align: right; }
+
 </style>
 
 <script type="text/x-template" id="modal-template">
@@ -165,9 +237,8 @@ get_header(); ?>
         <div class="modal-mask">
             <div class="modal-container">
                 <div ref="cardElement"></div>
-                <div @click="pay()">決済する</div>
+                <div v-if="paymentCompleted === false" @click="pay()" class="btn shop"><span class="ele">決済する</span></div>
                 {{paymentMessage}}
-                <div v-if="paymentCompleted === true" @click="complete()">終了する</div>
                 <div @click="close()">閉じる</div>
             </div>
         </div>
@@ -226,6 +297,7 @@ get_header(); ?>
 
                     this.paymentMessage = '決済に成功しました'
                     this.paymentCompleted = true
+                    this.$emit('complete')
 
                 }
                 catch(error)
@@ -235,7 +307,7 @@ get_header(); ?>
 
             }
 
-            , complete: function(){ this.$emit('complete') }
+            , complete: function(){  }
             , close: function(){ this.$emit('close') }
             
         }
@@ -254,32 +326,32 @@ get_header(); ?>
             , pafCart : strgPafCart
             , step : 1
             , user:{
-                  name: ''
-                , zipcode: ''
-                , prefecture: ''
-                , city: ''
-                , address1: ''
-                , tel: ''
-                , email: ''
-                , emailConfirm: ''
-                , receipt: false
-                , receiptName: ''
-                , receiptDescription: ''
-                , agree: false
+                //   name: ''
+                // , zipcode: ''
+                // , prefecture: ''
+                // , city: ''
+                // , address1: ''
+                // , tel: ''
+                // , email: ''
+                // , emailConfirm: ''
+                // , receipt: false
+                // , receiptName: ''
+                // , receiptDescription: ''
+                // , agree: false
 
-                // name: 'restard'
-                // , zipcode: '1500034'
-                // , prefecture: '東京都'
-                // , city: '渋谷区神山町'
-                // , address1: '41-7'
-                // , address2: 'エクティ神山町209'
-                // , tel: '08039118917'
-                // , email: 'drestard@gmail.com'
-                // , emailConfirm: 'drestard@gmail.com'
-                // , receipt: true
-                // , receiptName: 'お宛名'
-                // , receiptDescription: '但し書き'
-                // , agree: true
+                name: 'restard'
+                , zipcode: '1500034'
+                , prefecture: '東京都'
+                , city: '渋谷区神山町'
+                , address1: '41-7'
+                , address2: 'エクティ神山町209'
+                , tel: '08039118917'
+                , email: 'drestard@gmail.com'
+                , emailConfirm: 'drestard@gmail.com'
+                , receipt: true
+                , receiptName: 'お宛名'
+                , receiptDescription: '但し書き'
+                , agree: true
             }
             , errors:{
                   agree: '必ずチェックしてください'
@@ -355,7 +427,7 @@ get_header(); ?>
                 return sum;
 
             }
-            , getTotal: function()
+            , getTotal: function(deliveryFee)
             {
 
 
@@ -373,6 +445,8 @@ get_header(); ?>
                     sum1 = sum1 + sum2;
 
                 })
+
+                if(deliveryFee) sum1 = sum1 + 500
 
                 return sum1;
 
@@ -407,7 +481,7 @@ get_header(); ?>
                         this.modalPayment = false;
                         localStorage.removeItem('pafCart');
                         localStorage.removeItem('pafCartCount');
-                        window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
+                        // window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
                     }
                 }
             }
@@ -556,11 +630,16 @@ get_header(); ?>
                         }
                     })
 
-                    this.step = 2;
+                    this.step = 3;
 
                 } catch (error) {
                 }
 
+            }
+
+            , completeCheckOrder: function()
+            {
+                this.step = 2;
             }
         }
 

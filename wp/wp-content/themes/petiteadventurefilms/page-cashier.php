@@ -6,6 +6,10 @@ get_header(); ?>
     <div class="col col_9 last">
 
 
+        <div class="btn">
+            <a href="<?php echo get_post_type_archive_link('pafshop'); ?>">買い物を続ける</a>   
+        </div>
+
         <div id="app">
 
             <h2>注文内容</h2>
@@ -64,7 +68,7 @@ get_header(); ?>
 
             
             <div class="btn shop">
-                <a href="<?php echo get_permalink(get_page_by_path("cashier/purchase")); ?>">購入手続</a>
+                <a href="<?php echo get_permalink(get_page_by_path("cashier/purchase")); ?>">購入へすすむ</a>
             </div>
 
             <modal
@@ -98,9 +102,8 @@ get_header(); ?>
     top: 50%;
     left: 50%;
     width: 304px;
-    height: 200px;
     margin-left: -152px;
-    margin-top: -100px; 
+    margin-top: -140px; 
     box-sizing: border-box;
     padding: 20px 30px;
     background-color: #fff;
@@ -166,8 +169,12 @@ get_header(); ?>
         <div class="modal-mask">
             <div class="modal-container">
                 {{item.name}} - {{item.index}}を削除してもよろしいでしょうか
-                <div @click="close()">[キャンセル]</div>
-                <div @click="update()">[削除]</div>
+                <div class="btn" @click="close()">
+                    <span class="ele">キャンセル</span>
+                </div>
+                <div class="btn" @click="update()">
+                    <span class="ele">削除</span>
+                </div>
             </div>
         </div>
     </transition>
@@ -261,7 +268,7 @@ get_header(); ?>
                 var count = 0;
                 Object.keys(this.pafCart).forEach(k => {
                     this.pafCart[k].forEach(v => {
-                        count = count + v
+                        count = count + parseInt(v)
                     })
                 })
                 localStorage.setItem('pafCartCount', parseInt(count))

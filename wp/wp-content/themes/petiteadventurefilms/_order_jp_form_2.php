@@ -54,8 +54,12 @@
         </div>
     </div>
 
+    <div v-if="step == 2">
+        <div class="btn shop" @click="completeUserInfo">
+            <span class="ele">次へすすむ</span>
+        </div>
+    </div>
 
-    <div @click="completeUserInfo()">次へすすむ</div>
 
 
 
