@@ -61,7 +61,7 @@ get_header(); ?>
         <div id="app">
 
 
-            <h2>step1. 注文内容の確認</h2>
+            <h2>step1. {{(step == 1) ? '注文内容を確認してください' : '注文内容'}}</h2>
         
             <div
             v-for = "item in addedItems"
@@ -103,7 +103,7 @@ get_header(); ?>
 
 
             <br>
-            <h2>step2. 注文者情報の入力</h2>
+            <h2>step2. {{(step == 2) ? '注文者情報を入力してください' : '注文者情報の入力'}}</h2>
             <div v-if="step == 2">
                 <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
             </div>
@@ -123,28 +123,37 @@ get_header(); ?>
             </div>
 
             <br>
-            <h2>step3. 決済</h2>
+            <h2>step3. {{(step == 3) ? 'お支払い情報を選択してください' : 'お支払い方法の選択'}}</h2>
             <div v-if="step == 3">
-                お支払い方法を選択してください<br>
-                <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label>
-                <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
-                <div v-if="paymentMethod == 1">
+
+                <div v-if="paymentMethod != 2">
+                    <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label><br>
                     [銀行ロゴ]<br>
                     振込先情報は注文完了後の確認メールに記載されております。<br>振込手数料はご負担下さい。
                 </div>
-                <div v-if="paymentMethod == 2">
+
+                <div v-if="paymentMethod != 1">
+                    <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
                     [クレジットカードロゴ]<br>
-                    注文完了後、決済画面へ移動します。
+                    注文完了後、お支払い画面へ移動します。
                 </div>
+                
+                <div
+                v-if="paymentMethod != 0"
+                    :class="(paymentMethod > 0) ? 'shop' : 'disabled'"
+                    @click="execPayment()" class="btn">
+                    <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
+                </div>
+                
+                <div v-if="paymentMethod != 0" @click="paymentMethod = 0">選びなおす</div>
+
+
                 <modal-payment
                 v-if="modalPayment === true"
                     :total="getTotal()" 
                     :orderid="orderID"
                     @complete="completePayment()"
                     @close="closeModalPayment()"></modal-payment>
-                <div
-                :class="(paymentMethod > 0) ? 'shop' : 'disabled'"
-                @click="execPayment()" class="btn"><span class="ele">注文を完了する</span></div>
             </div>
 
 
@@ -244,18 +253,22 @@ get_header(); ?>
     <div class="modal-mask">
         <div class="modal-container">
             <div ref="cardElement"></div>
+            {{paymentMessage}}
             <div
-            v-if="paymentCompleted === false"
+            v-if="paymentCompleted === false && isExecuting == false"
             @click="pay()" 
-            :class="(isEntered == true && isExecuting == false) ? 'shop' : 'disabled'"
+            :class="(isEntered == true) ? 'shop' : 'disabled'"
             class="btn"
-                ><span class="ele">決済する</span></div>
-                {{paymentMessage}}
-            <div v-if="paymentCompleted === false && isExecuting == false" @click="close()">閉じる</div>
+                ><span class="ele">お支払いする</span></div>
+            <div
+            v-if="paymentCompleted === true && isExecuting == false"
+            @click="complete()" 
+            class="btn shop"
+                ><span class="ele">注文を完了する</span></div>
+            <div v-if="paymentCompleted === false && isExecuting == false" @click="close()">お支払い方法選択に戻る</div>
         </div>
     </div>
 </script>
-
 
 <script type="text/x-template" id="template-modal-execution">
     <div class="modal-mask">
@@ -296,7 +309,7 @@ get_header(); ?>
             {
 
                 this.isExecuting = true
-                this.paymentMessage = '決済中です'
+                this.paymentMessage = 'お支払い中です'
 
                 try {
                     var tokenResult = await this.stripe.createToken(this.card)
@@ -318,16 +331,12 @@ get_header(); ?>
                     var chargeResult = await axios.post(url, params)
                     
                     if (!chargeResult || chargeResult.data !== 'success') {
-                        throw new Error('決済エラー')
+                        throw new Error('お支払いエラー')
                     }
 
-                    this.paymentMessage = '決済に成功しました'
+                    this.paymentMessage = 'お支払いに成功しました'
                     this.paymentCompleted = true
                     this.isExecuting = false
-
-                    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-
-                    this.$emit('complete')
 
                 }
                 catch(error)
@@ -356,6 +365,7 @@ get_header(); ?>
                     }
                 }
             }
+            , complete: function(){ this.$emit('complete') }
             , close: function(){ this.$emit('close') }
             
         }
