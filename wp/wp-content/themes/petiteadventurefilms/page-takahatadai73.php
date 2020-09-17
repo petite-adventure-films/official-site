@@ -33,12 +33,10 @@ get_header(); ?>
 
         <header class="main_visual">
             <h1>
-                <div class="_flag"><span class="tkhtd_green">キイロイ</span>ハタニ</div>
-                <div class="_flag"><span class="tkhtd_green">ネガイヲ</span>コメテ</div>
+                <div class="_flag"><span class="tkhtd_green block">キイロイ</span>ハタニ</div>
+                <div class="_flag"><span class="tkhtd_green block">ネガイヲ</span>コメテ</div>
                 <div class="_subtitle">
-                    高畑台団地73号棟に<br>
-                    住み続けたい住民の会<br>
-                    の記録
+                    <span class="block">高畑台団地73号棟に</span><span class="block">住み続けたい住民の会</span><span class="block">の記録</span>
                 </div>
             </h1>
         </header>
@@ -55,7 +53,7 @@ get_header(); ?>
 
         <section class="contents">
             <h2 class="contents_title"><span class="_text">住民からのご挨拶</span></h2>
-            <p><small>※2013の挨拶です</small></p>
+            <div class="al_c"><small>※2013の挨拶です</small></div>
             <p>私たちのホームページにおいでいただきありがとうございます。</p>
             <p>2008年5月1日、読売新聞がスクープして社会問題となった、URの耐震不足住棟の取り壊し問題。この報道で名前が公表された団地は、関東地方では、私たち高幡台団地73号棟のほか、千葉・幸町団地と埼玉・武里団地でした。すでにこの2団地の該当住棟は取り壊されて、更地となってしまいましたが、私たちの73号棟はしっかりと建っています。</p>
             <p>あれから4年半。私たちは悩み、苦しみ、そして多くの皆様の協力を得ながらいろいろなことを学び、行動してきました。早川由美子監督のドキュメンタリー映画「さようならUR」が詳しく伝えています。</p>
@@ -157,7 +155,10 @@ get_header(); ?>
                 @click="ctrlDisplayTimeline">詳細を<br>全部<br>{{(timelineDisplay) ? '閉じる' : '開く'}}</div>
                 
                 
-                <div v-for="(val, id) in timelineCategories" :key="`timelineCategory_{$id}`">
+                <div
+                v-for="(val, id) in timelineCategories"
+                :key="`timelineCategory_${id}`"
+                :class="`_contents_category _${id}`">
                     <h3 class="_label_category al_c">{{timelineCategories[id]}}</h3>
                     <div
                     v-for="(data, key) in getTimelineByCategories(id)"
@@ -267,13 +268,34 @@ get_header(); ?>
         
         <div class="m2_t">
             <div class="col col_3">
-                <div v-for="(val, key) in goodbyeGalleryIndexs" :key="`gallery_${key}`">
-                    <div class="text_shadow_white">{{key}}</div>
+                
+                <div
+                v-if="screenSize == 2"
+                    class="_calendar_tab">
+                    <div
+                    v-for="(val, key) in goodbyeGalleryIndexs"
+                    :key="`gallery_tab_${key}`"
+                    @click="ctrlSelectGoodbyeGalleryTab(key)"
+                    :class="[
+                          '__year cursor_pointer'
+                        , (selectedGoodbyeGalleryTab == key) ? '_selected' : ''
+                    ]">
+                        {{key}}
+                    </div>
+                </div>
+                
+                <div
+                v-for="(val, key) in goodbyeGalleryIndexs"
+                :key="`gallery_${key}`"
+                    v-if="selectedGoodbyeGalleryTab == key || computedGoodbyeGalleryTab == 0">
+                    <div v-if="screenSize == 1">
+                        <div class="text_shadow_white">{{key}}</div>
+                    </div>
                     <div class="_calendar">
                         <div
                         v-for="index in 12"
                         :key="`gallery_${key}_${index}`"
-                        @click="displayGoodbyeGallery(key, index)"
+                        @click="displayGoodbyeGalleryByMonth(key, index)"
                         :class="[
                             '_item'
                             , checkHasGoodbyeGallery(key, index)
@@ -288,28 +310,72 @@ get_header(); ?>
             </div>
             
             <div class="col col_6 last _gallery">
-                <div class="_title text_shadow_white">{{currentGoodbyeGalleryYear}}年{{currentGoodbyeGalleryMonth}}月</div>
-                <div class="_wrapper"  v-masonry item-selector="._contents">
+            
+                <div class="__day_indexs m2_t">
                     <div
                     v-for="val in goodbyeGallery"
                     :key="`gallery${val.date}`"
-                    v-masonry-tile
-                    class="_contents">
-                        <div class="__label_date text_shadow_white">{{getgoodbyeGalleryDate(val.date)}}</div>
-                        <div class="__imgs">
-                            <div
-                            v-for="index in val.count"
-                            :key="`gallery${val.date}_${index}`"
-                            class="___img cursor_pointer">
-                                <img
-                                v-lazy="getGoodbyeGalleryImgPath(val.date, index)"
-                                @click="showImage(val.date, index)">
-                            </div>
-                            
-                        </div>
+                    @click="displayGoodbyeGalleryByDay(getGoodbyeGalleryDate(val.date))"
+                    :class="[
+                          '___index'
+                        , `_${getGoodbyeGalleryDate(val.date)}`
+                        , (currentGoodbyeGalleryDay == getGoodbyeGalleryDate(val.date)) ? '_selected' : '']">
+                        <span class="___text">{{getGoodbyeGalleryDate(val.date)}}</span>
                     </div>
                 </div>
+                
+                <div
+                v-for="val in goodbyeGalleryByDay"
+                :key="`gallery${val.date}`"
+                class="__contents m1_t">
+                    <div
+                    v-for="index in val.count"
+                    :key="`gallery${val.date}_${index}`"
+                    :class="[
+                        '___img cursor_pointer'
+                        , (displayedGoodbyeGalleryNumber == index) ? '_displayed' : ''
+                    ]">
+                        <img :src="getGoodbyeGalleryImgPath(val.date, index)">
+                    </div>
+                    
+                    <div
+                    v-if="val.count > 1"
+                    class="__navi">
+                        <div
+                        :class="[
+                              '___btn_navi _prev'
+                            , (displayedGoodbyeGalleryNumber == 1) ? '_disabled' : ''
+                        ]"
+                        @click="ctrlGoodbyeGalleryPrev()">
+                            <span class="icon icon-keyboard-arrow-left"></span></div>
+                        <div
+                        :class="[
+                            '___btn_navi _next'
+                            , (displayedGoodbyeGalleryNumber == val.count) ? '_disabled' : ''
+                        ]"
+                        @click="ctrlGoodbyeGalleryNext()">
+                            <span class="icon icon-keyboard-arrow-right"></span></div>
+                    </div>
+                    
+                    <div class="__thumbs m1_t">
+                        <div
+                        v-if="val.count > 1"
+                            v-for="index in val.count"
+                            :key="`gallery${val.date}_navi_${index}`"
+                            @click="displayedGoodbyeGalleryNumber = index"
+                            class="___thumb"
+                            :class="[
+                                '___thumb'
+                                , (displayedGoodbyeGalleryNumber == index) ? '_selected' : ''
+                            ]"
+                        ><img v-lazy="getGoodbyeGalleryImgPath(val.date, index)"></div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                
+                
             </div>
+            
         </div>
         
     </section>
@@ -665,6 +731,8 @@ var app = new Vue({
         , goodbyeGalleryData: <? echo $goodbye_gallery; ?>
         , movements: <? echo $movement_now; ?>
         
+        , screenSize: 0
+        
         , timelineData: <? echo $timeline; ?>
         , timelineCategories: {
               1: '高幡台団地73号棟取り壊しが決まるまで'
@@ -674,8 +742,13 @@ var app = new Vue({
         , timelineDisplay: false
         
         , goodbyeGallery: []
+        , goodbyeGalleryByDay: null
         , currentGoodbyeGalleryYear: 0
         , currentGoodbyeGalleryMonth: 0
+        , currentGoodbyeGalleryDay: 0
+        , displayedGoodbyeGalleryNumber: 1
+        , selectedGoodbyeGalleryTab: 0
+        
         , displayModalImage: false
         , modalImageUrl: ''
 
@@ -710,6 +783,11 @@ var app = new Vue({
             })
             
             return arr;
+        }
+        
+        , computedGoodbyeGalleryTab()
+        {
+            return (this.screenSize == 1) ? 0 : this.selectedGoodbyeGalleryTab
         }
 
     }
@@ -759,22 +837,71 @@ var app = new Vue({
             return `<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/goodbye_${date}_${index}.jpg`;
         }
         
-        , getgoodbyeGalleryDate(date, index)
+        , getGoodbyeGalleryDate(date, index)
         {
             // var year = new Date(date).get;
             var month = new Date(date).getMonth() + 1;
             var day = new Date(date).getDate();
-            return (index == 'month') ?  `${month}` : `${day}日`;
+            return (index == 'month') ?  `${month}` : day;
         }
         
-        , displayGoodbyeGallery(year, month)
+        , displayGoodbyeGalleryByMonth(year, month)
         {
+            
             if(this.goodbyeGalleryIndexs[year].some(a => a == month)){
+                
                 this.currentGoodbyeGalleryYear = year;
                 this.currentGoodbyeGalleryMonth = month;
+                
                 this.goodbyeGallery = this.goodbyeGalleryData.filter(a =>
-                new Date(a.date).getFullYear() == year && (new Date(a.date).getMonth() + 1) == month);
+                    new Date(a.date).getFullYear() == year && (new Date(a.date).getMonth() + 1) == month);
+                    
+                this.displayGoodbyeGalleryByDay();
             }
+        }
+        
+        , displayGoodbyeGalleryByDay(day)
+        {
+        
+            this.displayedGoodbyeGalleryNumber = 1;
+            
+            var monthData = this.goodbyeGallery[0];
+            var _day = day || new Date(monthData.date).getDate();
+            
+            this.currentGoodbyeGalleryDay = _day;
+            
+            this.goodbyeGalleryByDay = this.goodbyeGallery.filter(a => new Date(a.date).getDate() == _day);
+            
+        }
+        
+        , ctrlSelectGoodbyeGalleryTab(year)
+        {
+            this.selectedGoodbyeGalleryTab = year;
+            
+            var data = this.goodbyeGalleryData.filter(a => new Date(a.date).getFullYear() == year);
+            var month = new Date(data[0].date).getMonth() + 1;
+            this.displayGoodbyeGalleryByMonth(year, month);
+            
+        }
+        
+        , ctrlGoodbyeGalleryNext()
+        {
+            var max = this.goodbyeGalleryByDay[0].count;
+            console.log('d', max, this.displayedGoodbyeGalleryNumber)
+            if(this.displayedGoodbyeGalleryNumber < max)
+            {
+                this.displayedGoodbyeGalleryNumber = this.displayedGoodbyeGalleryNumber + 1;
+                console.log('d', max, this.displayedGoodbyeGalleryNumber)
+            }
+            
+        }
+        , ctrlGoodbyeGalleryPrev()
+        {
+            if(this.displayedGoodbyeGalleryNumber > 1)
+            {
+                this.displayedGoodbyeGalleryNumber = this.displayedGoodbyeGalleryNumber - 1;
+            }
+            
         }
         
         , checkHasGoodbyeGallery(year, month)
@@ -839,7 +966,7 @@ var app = new Vue({
 
             })
 
-            console.log('arr', arr);
+            console.log('arr2', arr);
 
             return arr;
         }
@@ -920,12 +1047,30 @@ var app = new Vue({
         {
             return typeof day === 'string' ? `${month}月${day}` : `${day}日`;
         }
+        
+        , handleResize(){
+            if(window.innerWidth >= 960)
+            {
+                this.screenSize = 1; // PC
+            }
+            else if(window.innerWidth < 960)
+            {
+                this.screenSize = 2; // mobile
+            }
+        }
 
     }
     
     , mounted(){
-        this.displayGoodbyeGallery(2013, 11);
+        this.displayGoodbyeGalleryByMonth(2013, 11);
+        this.selectedGoodbyeGalleryTab = 2013;
     }
+    
+    , created(){
+        window.addEventListener('resize', this.handleResize);
+        this.handleResize();
+    }
+    
 })
 
 </script>
