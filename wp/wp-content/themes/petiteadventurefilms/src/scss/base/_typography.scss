@@ -51,21 +51,15 @@ sup{
 
 h1{
 	color: #2c2c2c;
-	font-size: 48px;
-	line-height: 56px;
+	font-size: 32px;
+	line-height: 48px;
 }
 
 
 h2{
 	color: #2c2c2c;
-	@media all and (min-width: $min_width){
-		font-size: 32px;
-		line-height: 48px;
-	}
-	@media all and (max-width: $max_width){
-		font-size: 24px;
-		line-height: 40px;
-	}
+	font-size: 24px;
+	line-height: 40px;
 }
 
 h3{

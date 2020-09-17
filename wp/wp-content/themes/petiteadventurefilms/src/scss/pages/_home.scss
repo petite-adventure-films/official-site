@@ -22,20 +22,26 @@ article{
 	&.relative{
 
 		color: $white;
-		a{
-			color: $white;
-		}
 
-		#site_name{
-			#eng,
-			#jpn{
-				color: $white;
-				&:hover{
-					color: $black2 !important;
-				}
+	}
+	
+	a{
+		color: $white;
+	}
+	
+	#site_name{
+		#eng,
+		#jpn{
+			color: $white;
+			&:hover{
+				color: $black2 !important;
 			}
 		}
-
+	}
+	
+	.site_menu{
+		border-top-color: rgba($black5, .23);
+		border-bottom-color: rgba($black5, .23);
 	}
 }
 
@@ -124,6 +130,11 @@ article{
 	//h1
 	h1{
 		color: $white;
+	}
+	@media all and (min-width: $min_width){
+		h1{
+			text-align: center;
+		}
 	}
 
 	//#play_video

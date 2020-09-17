@@ -5,7 +5,7 @@
 
 	<div id="main_visual">
 		<div class="col col_9 last">
-			<h1>
+			<h1 class="headline">
 				一人ひとりの小さな“冒険”が<br />やがて世界を変えていく･･･
 			</h1>
 			<p class="m2_t">メインストリームのメディアでは取り上げられにくい課題を、
@@ -19,8 +19,8 @@
 		<div class="col col_3 btn priority2">
 			<a href="<?php echo get_post_type_archive_link("films"); ?>">映画</a>
 		</div>
-		<div class="col col_3 last btn priority1">
-			<a href="<?php echo get_permalink(get_page_by_path("order_jp")); ?>">DVD購入</a>
+		<div class="col col_3 last btn shop">
+			<a href="<?php echo get_post_type_archive_link("pafshop"); ?>">SHOP</a>
 		</div>
 	<!--#main_visual--></div>
 
