@@ -5292,10 +5292,10 @@ html .takahatadai73 {
   flex-direction: column;
   height: 100vh;
   text-align: center; }
-  /* line 215, src/scss/pages/_takahatadai73.scss */
+  /* line 216, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .main_visual ._flag {
     display: block;
-    width: 392px;
+    width: 304px;
     margin-left: auto;
     margin-right: auto;
     padding: 8px 16px;
@@ -5314,33 +5314,44 @@ html .takahatadai73 {
     font-size: 56px;
     line-height: 68px;
     text-shadow: 2px 2px 0 #ced81c, 2px -2px 0 #ced81c, -2px 2px 0 #ced81c, -2px -2px 0 #ced81c, 2px 0px 0 #ced81c, 0px 2px 0 #ced81c, -2px 0px 0 #ced81c, 0px -2px 0 #ced81c; }
-    /* line 240, src/scss/pages/_takahatadai73.scss */
+    /* line 241, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .main_visual ._flag:nth-of-type(2) {
       margin-top: 16px; }
-  /* line 246, src/scss/pages/_takahatadai73.scss */
+  @media all and (min-width: 961px) {
+    /* line 249, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .main_visual ._flag {
+      width: 400px; }
+      /* line 251, src/scss/pages/_takahatadai73.scss */
+      .takahatadai73 .main_visual ._flag .block {
+        display: inline; } }
+  /* line 257, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .main_visual ._subtitle {
     margin-top: 112px;
     line-height: 42px;
     font-family: 'Sawarabi Mincho';
     text-shadow: 1px 1px 0 rgba(244, 246, 236, 0.12), 1px -1px 0 rgba(244, 246, 236, 0.12), -1px 1px 0 rgba(244, 246, 236, 0.12), -1px -1px 0 rgba(244, 246, 236, 0.12), 1px 0px 0 rgba(244, 246, 236, 0.12), 0px 1px 0 rgba(244, 246, 236, 0.12), -1px 0px 0 rgba(244, 246, 236, 0.12), 0px -1px 0 rgba(244, 246, 236, 0.12); }
-/* line 268, src/scss/pages/_takahatadai73.scss */
+    @media all and (max-width: 960px) {
+      /* line 274, src/scss/pages/_takahatadai73.scss */
+      .takahatadai73 .main_visual ._subtitle .block {
+        display: inline; } }
+/* line 287, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .key_messages {
   display: flex;
   align-items: center;
   flex-direction: column;
   height: 100vh; }
-  /* line 275, src/scss/pages/_takahatadai73.scss */
+  /* line 293, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .key_messages ._message {
     position: relative;
-    margin-top: 112px; }
-  /* line 280, src/scss/pages/_takahatadai73.scss */
+    margin-top: 32px; }
+  /* line 298, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .key_messages .__ur {
     position: relative;
     display: inline-block;
     padding: 8px 16px;
     border: 3px solid #73184b;
     color: #73184b; }
-    /* line 286, src/scss/pages/_takahatadai73.scss */
+    /* line 304, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .key_messages .__ur:before {
       position: absolute;
       top: -24px;
@@ -5348,17 +5359,11 @@ html .takahatadai73 {
       color: #73184b;
       text-shadow: 1px 1px 0 rgba(244, 246, 236, 0.12), 1px -1px 0 rgba(244, 246, 236, 0.12), -1px 1px 0 rgba(244, 246, 236, 0.12), -1px -1px 0 rgba(244, 246, 236, 0.12), 1px 0px 0 rgba(244, 246, 236, 0.12), 0px 1px 0 rgba(244, 246, 236, 0.12), -1px 0px 0 rgba(244, 246, 236, 0.12), 0px -1px 0 rgba(244, 246, 236, 0.12);
       content: 'URは言います'; }
-  /* line 311, src/scss/pages/_takahatadai73.scss */
+  /* line 323, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .key_messages .__rsdt {
-    position: absolute;
-    -moz-transform: skewY(-2deg);
-    -ms-transform: skewY(-2deg);
-    -webkit-transform: skewY(-2deg);
-    transform: skewY(-2deg);
+    position: relative;
     width: 304px;
     height: 96px;
-    top: 16px;
-    right: -280px;
     margin-top: 32px;
     font-size: 32px;
     line-height: 40px;
@@ -5366,7 +5371,7 @@ html .takahatadai73 {
     color: #009177;
     letter-spacing: -2px;
     text-shadow: 2px 2px 0 #a1e9d6, 2px -2px 0 #a1e9d6, -2px 2px 0 #a1e9d6, -2px -2px 0 #a1e9d6, 2px 0px 0 #a1e9d6, 0px 2px 0 #a1e9d6, -2px 0px 0 #a1e9d6, 0px -2px 0 #a1e9d6; }
-    /* line 334, src/scss/pages/_takahatadai73.scss */
+    /* line 344, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .key_messages .__rsdt:before {
       position: absolute;
       top: -16px;
@@ -5375,7 +5380,7 @@ html .takahatadai73 {
       width: 160px;
       height: 12px;
       content: ''; }
-    /* line 343, src/scss/pages/_takahatadai73.scss */
+    /* line 353, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .key_messages .__rsdt:after {
       position: absolute;
       top: -36px;
@@ -5385,17 +5390,65 @@ html .takahatadai73 {
       letter-spacing: 0;
       content: '住民はURに言います';
       text-shadow: 2px 2px 0 rgba(161, 233, 214, 0.24), 2px -2px 0 rgba(161, 233, 214, 0.24), -2px 2px 0 rgba(161, 233, 214, 0.24), -2px -2px 0 rgba(161, 233, 214, 0.24), 2px 0px 0 rgba(161, 233, 214, 0.24), 0px 2px 0 rgba(161, 233, 214, 0.24), -2px 0px 0 rgba(161, 233, 214, 0.24), 0px -2px 0 rgba(161, 233, 214, 0.24); }
-/* line 377, src/scss/pages/_takahatadai73.scss */
+/* line 395, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .about_ur ._title {
   margin-bottom: -9px;
   font-size: 32px;
   color: #73184b;
   text-shadow: 1px 1px 0 rgba(244, 246, 236, 0.56), 1px -1px 0 rgba(244, 246, 236, 0.56), -1px 1px 0 rgba(244, 246, 236, 0.56), -1px -1px 0 rgba(244, 246, 236, 0.56), 1px 0px 0 rgba(244, 246, 236, 0.56), 0px 1px 0 rgba(244, 246, 236, 0.56), -1px 0px 0 rgba(244, 246, 236, 0.56), 0px -1px 0 rgba(244, 246, 236, 0.56); }
-/* line 392, src/scss/pages/_takahatadai73.scss */
+/* line 411, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .about_ur ._wrapper {
   position: relative; }
-  /* line 397, src/scss/pages/_takahatadai73.scss */
-  .takahatadai73 .about_ur ._wrapper ._contents {
+/* line 418, src/scss/pages/_takahatadai73.scss */
+.takahatadai73 .about_ur ._timeline {
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  padding-left: 8px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px; }
+  /* line 427, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._timeline large {
+    font-size: 16px; }
+  /* line 432, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._timeline .__contents:not(:first-of-type) {
+    margin-top: 16px; }
+  /* line 438, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._timeline .__logo {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 0 rgba(244, 246, 236, 0.56), 1px -1px 0 rgba(244, 246, 236, 0.56), -1px 1px 0 rgba(244, 246, 236, 0.56), -1px -1px 0 rgba(244, 246, 236, 0.56), 1px 0px 0 rgba(244, 246, 236, 0.56), 0px 1px 0 rgba(244, 246, 236, 0.56), -1px 0px 0 rgba(244, 246, 236, 0.56), 0px -1px 0 rgba(244, 246, 236, 0.56); }
+    /* line 439, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .about_ur ._timeline .__logo img, .takahatadai73 .about_ur ._timeline .__logo span {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 24px; }
+    /* line 444, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .about_ur ._timeline .__logo img {
+      height: 22px; }
+  /* line 459, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._timeline .__year {
+    position: relative;
+    color: #73184b; }
+    /* line 462, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .about_ur ._timeline .__year:before {
+      position: absolute;
+      display: block;
+      left: -10_label_categorypx;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background: #73184b;
+      content: ''; }
+@media all and (min-width: 961px) {
+  /* line 479, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._contents {
     float: left;
     width: 480px;
     -moz-box-sizing: border-box;
@@ -5403,67 +5456,32 @@ html .takahatadai73 {
     box-sizing: border-box;
     padding: 16px;
     border: 3px solid #73184b; }
-  /* line 404, src/scss/pages/_takahatadai73.scss */
-  .takahatadai73 .about_ur ._wrapper ._timeline {
+  /* line 487, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._timeline {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     width: 224px;
-    height: 100%;
-    padding-top: 16px;
-    padding-right: 16px;
-    padding-bottom: 16px;
-    padding-left: 8px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-left: 1px solid #73184b;
-    font-size: 14px;
-    line-height: 20px; }
-    /* line 420, src/scss/pages/_takahatadai73.scss */
-    .takahatadai73 .about_ur ._wrapper ._timeline large {
-      font-size: 16px; }
-    /* line 425, src/scss/pages/_takahatadai73.scss */
-    .takahatadai73 .about_ur ._wrapper ._timeline .__contents:not(:first-of-type) {
-      margin-top: 48px; }
-    /* line 431, src/scss/pages/_takahatadai73.scss */
-    .takahatadai73 .about_ur ._wrapper ._timeline .__logo {
-      margin-top: 8px;
-      margin-bottom: 8px;
-      text-shadow: 1px 1px 0 rgba(244, 246, 236, 0.56), 1px -1px 0 rgba(244, 246, 236, 0.56), -1px 1px 0 rgba(244, 246, 236, 0.56), -1px -1px 0 rgba(244, 246, 236, 0.56), 1px 0px 0 rgba(244, 246, 236, 0.56), 0px 1px 0 rgba(244, 246, 236, 0.56), -1px 0px 0 rgba(244, 246, 236, 0.56), 0px -1px 0 rgba(244, 246, 236, 0.56); }
-      /* line 432, src/scss/pages/_takahatadai73.scss */
-      .takahatadai73 .about_ur ._wrapper ._timeline .__logo img, .takahatadai73 .about_ur ._wrapper ._timeline .__logo span {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 24px; }
-      /* line 437, src/scss/pages/_takahatadai73.scss */
-      .takahatadai73 .about_ur ._wrapper ._timeline .__logo img {
-        height: 22px; }
-    /* line 452, src/scss/pages/_takahatadai73.scss */
-    .takahatadai73 .about_ur ._wrapper ._timeline .__year {
-      position: relative;
-      color: #73184b; }
-      /* line 455, src/scss/pages/_takahatadai73.scss */
-      .takahatadai73 .about_ur ._wrapper ._timeline .__year:before {
-        position: absolute;
-        display: block;
-        left: -12px;
-        top: 5px;
-        width: 8px;
-        height: 8px;
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        background: #73184b;
-        content: ''; }
-/* line 476, src/scss/pages/_takahatadai73.scss */
+    height: 100%; }
+    /* line 495, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .about_ur ._timeline .__contents:not(:first-of-type) {
+      margin-top: 48px; } }
+@media all and (max-width: 960px) {
+  /* line 506, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._contents {
+    margin-top: 32px; }
+  /* line 510, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .about_ur ._timeline {
+    border: 1px solid #73184b;
+    margin-top: 16px; } }
+/* line 523, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .timeline {
   position: relative; }
-  /* line 480, src/scss/pages/_takahatadai73.scss */
+  /* line 527, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline .contents_title {
     margin-bottom: 0; }
-  /* line 484, src/scss/pages/_takahatadai73.scss */
+  /* line 531, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._wrapper {
     position: relative;
     margin-top: 32px;
@@ -5471,7 +5489,7 @@ html .takahatadai73 {
     padding-bottom: 32px;
     border-top: 1px solid #f4f6ec;
     border-bottom: 1px solid #f4f6ec; }
-    /* line 491, src/scss/pages/_takahatadai73.scss */
+    /* line 538, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._wrapper:before {
       position: absolute;
       top: 0;
@@ -5480,10 +5498,10 @@ html .takahatadai73 {
       width: 1px;
       background: #f4f6ec;
       content: ''; }
-    /* line 500, src/scss/pages/_takahatadai73.scss */
+    /* line 547, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._wrapper > * {
       position: relative; }
-  /* line 505, src/scss/pages/_takahatadai73.scss */
+  /* line 552, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._display_all_timeline {
     position: absolute;
     top: 16px;
@@ -5505,21 +5523,20 @@ html .takahatadai73 {
     line-height: 14px;
     cursor: pointer;
     text-align: center; }
-    /* line 524, src/scss/pages/_takahatadai73.scss */
+    /* line 571, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._display_all_timeline._displayed {
       background: #f4f6ec; }
-  /* line 529, src/scss/pages/_takahatadai73.scss */
+  /* line 576, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._label_title {
     display: inline-block;
     width: 49%;
     text-align: center; }
-  /* line 535, src/scss/pages/_takahatadai73.scss */
+  /* line 582, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._label_category {
-    margin-top: 32px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    background: rgba(244, 246, 236, 0.56); }
-  /* line 542, src/scss/pages/_takahatadai73.scss */
+    padding: 4px;
+    background: rgba(244, 246, 236, 0.8);
+    line-height: 24px; }
+  /* line 588, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._label_year {
     display: inline-block;
     width: 32px;
@@ -5532,11 +5549,11 @@ html .takahatadai73 {
     color: #f4f6ec;
     font-size: 12px;
     line-height: 32px; }
-  /* line 554, src/scss/pages/_takahatadai73.scss */
+  /* line 600, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._label_month {
     clear: both;
     position: relative; }
-    /* line 559, src/scss/pages/_takahatadai73.scss */
+    /* line 605, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._label_month ._text {
       display: block;
       position: relative;
@@ -5553,7 +5570,7 @@ html .takahatadai73 {
       color: #009177;
       font-size: 12px;
       cursor: pointer; }
-    /* line 578, src/scss/pages/_takahatadai73.scss */
+    /* line 624, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._label_month._hasUrData ._text:before {
       position: absolute;
       left: -16px;
@@ -5564,53 +5581,57 @@ html .takahatadai73 {
       -ms-transform: scale(-1, 1);
       -webkit-transform: scale(-1, 1);
       transform: scale(-1, 1); }
-    /* line 591, src/scss/pages/_takahatadai73.scss */
+    /* line 637, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._label_month._hasRsdtData ._text:after {
       position: absolute;
       right: -16px;
       color: #009177;
       font-family: meterial_design;
       content: '\e6bb'; }
-    /* line 602, src/scss/pages/_takahatadai73.scss */
+    /* line 648, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._label_month._displayed_all ._text {
       background: #f4f6ec;
       cursor: pointer; }
-    /* line 610, src/scss/pages/_takahatadai73.scss */
+    /* line 656, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._label_month._displayed_all_ur._hasUrData ._text:before {
       color: #f4f6ec; }
-    /* line 616, src/scss/pages/_takahatadai73.scss */
+    /* line 662, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline ._label_month._displayed_all_rsdt._hasRsdtData ._text:after {
       color: #f4f6ec; }
-  /* line 622, src/scss/pages/_takahatadai73.scss */
+  /* line 668, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .timeline ._contents_category {
+    padding-top: 32px; }
+  /* line 672, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._contents_year {
     margin-top: 32px;
     text-align: center; }
-  /* line 627, src/scss/pages/_takahatadai73.scss */
+  /* line 677, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._contents_month {
     margin-top: 8px; }
-  /* line 631, src/scss/pages/_takahatadai73.scss */
+  /* line 681, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._data_ur {
     width: 304px;
-    float: left;
     text-align: left; }
-  /* line 637, src/scss/pages/_takahatadai73.scss */
+  /* line 686, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline ._data_residents {
     width: 304px;
-    float: right;
     text-align: left; }
-  /* line 644, src/scss/pages/_takahatadai73.scss */
+  /* line 692, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline .__data:not(:first-of-type) {
     margin-top: 8px; }
-  /* line 649, src/scss/pages/_takahatadai73.scss */
+  /* line 695, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .timeline .__data p + p {
+    margin-top: 0; }
+  /* line 700, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .timeline .__material {
     margin-top: 4px;
     font-size: 14px;
     line-height: 24px; }
-    /* line 653, src/scss/pages/_takahatadai73.scss */
+    /* line 704, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline .__material:before {
       font-family: meterial_design;
       content: "\e775"; }
-    /* line 658, src/scss/pages/_takahatadai73.scss */
+    /* line 709, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .timeline .__material .icon {
       cursor: pointer;
       margin-left: 4px;
@@ -5621,50 +5642,256 @@ html .takahatadai73 {
       background: rgba(132, 204, 30, 0.88);
       font-size: 16px;
       color: #f4f6ec; }
-      /* line 666, src/scss/pages/_takahatadai73.scss */
+      /* line 717, src/scss/pages/_takahatadai73.scss */
       .takahatadai73 .timeline .__material .icon:hover {
         background: #e6e6e6;
         color: #868686; }
-/* line 681, src/scss/pages/_takahatadai73.scss */
-.takahatadai73 .goodbye ._gallery {
-  width: 480px;
-  margin-left: 0;
-  margin-right: 0; }
-  /* line 687, src/scss/pages/_takahatadai73.scss */
-  .takahatadai73 .goodbye ._gallery ._title {
-    margin-left: 8px; }
-  /* line 691, src/scss/pages/_takahatadai73.scss */
-  .takahatadai73 .goodbye ._gallery ._wrapper {
-    margin-top: -16px; }
-  /* line 695, src/scss/pages/_takahatadai73.scss */
-  .takahatadai73 .goodbye ._gallery ._contents {
-    width: 144px;
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-top: 16px; }
-    /* line 701, src/scss/pages/_takahatadai73.scss */
-    .takahatadai73 .goodbye ._gallery ._contents .___img {
-      width: 144px;
-      min-height: 100px;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      padding: 2px;
-      border: 1px solid #f4f6ec;
-      background: rgba(244, 246, 236, 0.56); }
-      /* line 708, src/scss/pages/_takahatadai73.scss */
-      .takahatadai73 .goodbye ._gallery ._contents .___img:not(:first-of-type) {
-        margin-top: 8px; }
-/* line 715, src/scss/pages/_takahatadai73.scss */
+  @media all and (min-width: 961px) {
+    /* line 726, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .timeline ._data_ur {
+      float: left; }
+    /* line 730, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .timeline ._data_residents {
+      float: right; } }
+  @media all and (max-width: 960px) {
+    /* line 738, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .timeline ._label_title {
+      display: none; }
+    /* line 742, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .timeline ._contents_category._1 {
+      padding-top: 64px; }
+    /* line 746, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .timeline ._data_ur {
+      margin-top: 8px; }
+      /* line 750, src/scss/pages/_takahatadai73.scss */
+      .takahatadai73 .timeline ._data_ur .__data:nth-of-type(1):before {
+        display: inline-block;
+        padding: 2px 4px;
+        background: rgba(115, 24, 75, 0.8);
+        color: #f4f6ec;
+        content: 'UR';
+        font-size: 12px;
+        line-height: 12px; }
+    /* line 764, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .timeline ._data_residents {
+      margin-top: 8px; }
+      /* line 768, src/scss/pages/_takahatadai73.scss */
+      .takahatadai73 .timeline ._data_residents .__data:nth-of-type(1):before {
+        display: inline-block;
+        padding: 2px 4px;
+        background: rgba(230, 225, 0, 0.8);
+        content: '住民の会';
+        font-size: 12px;
+        line-height: 12px; } }
+/* line 795, src/scss/pages/_takahatadai73.scss */
+.takahatadai73 .goodbye ._gallery .__day_indexs {
+  position: relative;
+  overflow-x: scroll;
+  display: grid;
+  grid-template-columns: repeat(31, 1fr); }
+  /* line 800, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .__day_indexs:before {
+    display: block;
+    position: absolute;
+    top: 11px;
+    width: 100%;
+    height: 1px;
+    background: #f4f6ec;
+    content: ''; }
+  /* line 809, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .__day_indexs .___index {
+    padding-left: 4px;
+    padding-right: 4px; }
+    /* line 814, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index .___text {
+      display: block;
+      position: relative;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      margin-left: auto;
+      margin-right: auto;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background: #a1e9d6;
+      border: 2px solid #f4f6ec;
+      color: #009177;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: center; }
+    /* line 832, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._selected .___text {
+      background: #f4f6ec; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._1 {
+      grid-column: 1; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._2 {
+      grid-column: 2; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._3 {
+      grid-column: 3; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._4 {
+      grid-column: 4; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._5 {
+      grid-column: 5; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._6 {
+      grid-column: 6; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._7 {
+      grid-column: 7; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._8 {
+      grid-column: 8; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._9 {
+      grid-column: 9; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._10 {
+      grid-column: 10; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._11 {
+      grid-column: 11; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._12 {
+      grid-column: 12; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._13 {
+      grid-column: 13; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._14 {
+      grid-column: 14; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._15 {
+      grid-column: 15; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._16 {
+      grid-column: 16; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._17 {
+      grid-column: 17; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._18 {
+      grid-column: 18; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._19 {
+      grid-column: 19; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._20 {
+      grid-column: 20; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._21 {
+      grid-column: 21; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._22 {
+      grid-column: 22; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._23 {
+      grid-column: 23; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._24 {
+      grid-column: 24; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._25 {
+      grid-column: 25; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._26 {
+      grid-column: 26; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._27 {
+      grid-column: 27; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._28 {
+      grid-column: 28; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._29 {
+      grid-column: 29; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._30 {
+      grid-column: 30; }
+    /* line 838, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__day_indexs .___index._31 {
+      grid-column: 31; }
+/* line 845, src/scss/pages/_takahatadai73.scss */
+.takahatadai73 .goodbye ._gallery .__contents {
+  position: relative; }
+  /* line 847, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .__contents .___img {
+    display: none;
+    padding: 4px;
+    border: #f4f6ec;
+    background: rgba(244, 246, 236, 0.56); }
+    /* line 852, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__contents .___img._displayed {
+      display: block; }
+/* line 858, src/scss/pages/_takahatadai73.scss */
+.takahatadai73 .goodbye ._gallery .___btn_navi {
+  position: absolute;
+  display: block;
+  top: 40%;
+  background: rgba(132, 204, 30, 0.87);
+  color: #f4f6ec;
+  width: 24px;
+  height: 24px;
+  text-align: center; }
+  /* line 868, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .___btn_navi._disabled {
+    background: rgba(81, 81, 81, 0.24);
+    color: #515151; }
+  /* line 873, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .___btn_navi._next {
+    right: 0; }
+  /* line 874, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .___btn_navi._prev {
+    left: 0; }
+/* line 877, src/scss/pages/_takahatadai73.scss */
+.takahatadai73 .goodbye ._gallery .__thumbs {
+  overflow-x: scroll;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr); }
+  /* line 881, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._gallery .__thumbs .___thumb {
+    float: left;
+    width: 64px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: rgba(244, 246, 236, 0.56);
+    border: 1px solid #f4f6ec;
+    padding: 2px; }
+    /* line 889, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__thumbs .___thumb:not(:first-of-type) {
+      margin-left: 8px; }
+    /* line 893, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._gallery .__thumbs .___thumb._selected img {
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=56);
+      opacity: 0.56; }
+/* line 900, src/scss/pages/_takahatadai73.scss */
+.takahatadai73 .goodbye ._calendar_tab {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center; }
+  /* line 904, src/scss/pages/_takahatadai73.scss */
+  .takahatadai73 .goodbye ._calendar_tab .__year {
+    padding-top: 4px;
+    padding-bottom: 4px; }
+    /* line 907, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .goodbye ._calendar_tab .__year._selected {
+      background: #f4f6ec; }
+/* line 913, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .goodbye ._calendar {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: minmax(51px, auto);
+  grid-auto-rows: 56px;
   grid-gap: 1px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
-  /* line 722, src/scss/pages/_takahatadai73.scss */
+  /* line 920, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .goodbye ._calendar ._item {
     text-align: center;
     font-size: 12px;
@@ -5672,9 +5899,8 @@ html .takahatadai73 {
     padding-bottom: 4px;
     -moz-box-shadow: 0 0 0 1px #f4f6ec;
     -webkit-box-shadow: 0 0 0 1px #f4f6ec;
-    box-shadow: 0 0 0 1px #f4f6ec;
-    background: rgba(244, 246, 236, 0.24); }
-    /* line 730, src/scss/pages/_takahatadai73.scss */
+    box-shadow: 0 0 0 1px #f4f6ec; }
+    /* line 928, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .goodbye ._calendar ._item .icon {
       display: block;
       position: relative;
@@ -5691,34 +5917,34 @@ html .takahatadai73 {
       color: #009177;
       font-size: 16px;
       cursor: pointer; }
-    /* line 745, src/scss/pages/_takahatadai73.scss */
+    /* line 943, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .goodbye ._calendar ._item._active {
       cursor: pointer; }
-      /* line 747, src/scss/pages/_takahatadai73.scss */
+      /* line 945, src/scss/pages/_takahatadai73.scss */
       .takahatadai73 .goodbye ._calendar ._item._active:hover {
-        background: rgba(161, 233, 214, 0.88); }
-        /* line 749, src/scss/pages/_takahatadai73.scss */
+        background: rgba(244, 246, 236, 0.88); }
+        /* line 947, src/scss/pages/_takahatadai73.scss */
         .takahatadai73 .goodbye ._calendar ._item._active:hover .icon {
           background: #f4f6ec; }
-    /* line 754, src/scss/pages/_takahatadai73.scss */
+    /* line 952, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .goodbye ._calendar ._item._selected {
       background: rgba(244, 246, 236, 0.56); }
-      /* line 756, src/scss/pages/_takahatadai73.scss */
+      /* line 954, src/scss/pages/_takahatadai73.scss */
       .takahatadai73 .goodbye ._calendar ._item._selected .icon {
         background: #f4f6ec; }
-/* line 771, src/scss/pages/_takahatadai73.scss */
+/* line 969, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .movements .__label {
   line-height: 16px; }
-/* line 774, src/scss/pages/_takahatadai73.scss */
+/* line 972, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .movements .__material {
   margin-top: 4px;
   font-size: 14px;
   line-height: 24px; }
-  /* line 778, src/scss/pages/_takahatadai73.scss */
+  /* line 976, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .movements .__material:before {
     font-family: meterial_design;
     content: "\e775"; }
-  /* line 783, src/scss/pages/_takahatadai73.scss */
+  /* line 981, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .movements .__material .icon {
     cursor: pointer;
     margin-left: 4px;
@@ -5729,17 +5955,17 @@ html .takahatadai73 {
     background: rgba(132, 204, 30, 0.88);
     font-size: 16px;
     color: #f4f6ec; }
-    /* line 791, src/scss/pages/_takahatadai73.scss */
+    /* line 989, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .movements .__material .icon:hover {
       background: #e6e6e6;
       color: #868686; }
-/* line 805, src/scss/pages/_takahatadai73.scss */
+/* line 1003, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .about_residents ._resident {
   margin-top: 16px; }
-  /* line 809, src/scss/pages/_takahatadai73.scss */
+  /* line 1007, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .about_residents ._resident h3, .takahatadai73 .about_residents ._resident .btn_action {
     vertical-align: middle; }
-  /* line 813, src/scss/pages/_takahatadai73.scss */
+  /* line 1011, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .about_residents ._resident .__img {
     position: relative;
     width: 224px;
@@ -5747,10 +5973,10 @@ html .takahatadai73 {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box; }
-    /* line 819, src/scss/pages/_takahatadai73.scss */
+    /* line 1017, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .about_residents ._resident .__img img {
       clip-path: polygon(0 3.3%, 100% 0%, 100% 96.7%, 0% 100%); }
-    /* line 823, src/scss/pages/_takahatadai73.scss */
+    /* line 1021, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .about_residents ._resident .__img:before {
       position: absolute;
       top: 0;
@@ -5763,21 +5989,21 @@ html .takahatadai73 {
       transform: skewY(-2deg);
       background: #a1e9d6;
       content: ''; }
-  /* line 836, src/scss/pages/_takahatadai73.scss */
+  /* line 1034, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .about_residents ._resident .__contents {
     margin-top: 16px;
     line-height: 24px; }
-    /* line 839, src/scss/pages/_takahatadai73.scss */
+    /* line 1037, src/scss/pages/_takahatadai73.scss */
     .takahatadai73 .about_residents ._resident .__contents dt {
       position: relative;
       margin-top: 8px; }
-      /* line 842, src/scss/pages/_takahatadai73.scss */
+      /* line 1040, src/scss/pages/_takahatadai73.scss */
       .takahatadai73 .about_residents ._resident .__contents dt:before {
         color: #f4f6ec;
         text-shadow: none;
         font-family: meterial_design;
         content: "\e7c3"; }
-/* line 870, src/scss/pages/_takahatadai73.scss */
+/* line 1068, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 ._contents_modal .__contents {
   display: flex;
   min-height: 80vh;
@@ -5785,11 +6011,11 @@ html .takahatadai73 {
   justify-content: center;
   align-items: center;
   text-align: center; }
-/* line 879, src/scss/pages/_takahatadai73.scss */
+/* line 1077, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 ._contents_modal .input_page_num {
   width: 56px;
   min-width: 56px; }
-/* line 884, src/scss/pages/_takahatadai73.scss */
+/* line 1082, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 ._contents_modal .btn_icon {
   display: inline-block;
   cursor: pointer;
@@ -5802,10 +6028,10 @@ html .takahatadai73 {
   background: rgba(132, 204, 30, 0.56);
   color: #f4f6ec;
   line-height: 40px; }
-  /* line 894, src/scss/pages/_takahatadai73.scss */
+  /* line 1092, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 ._contents_modal .btn_icon._disabled {
     background: rgba(244, 246, 236, 0.24);
     pointer-events: none; }
-  /* line 898, src/scss/pages/_takahatadai73.scss */
+  /* line 1096, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 ._contents_modal .btn_icon:hover {
     background: #e6e6e6; }
