@@ -371,6 +371,7 @@ get_header(); ?>
                         ><img v-lazy="getGoodbyeGalleryImgPath(val.date, index)"></div>
                         <div class="clear"></div>
                     </div>
+                    
                 </div>
                 
                 
@@ -404,21 +405,29 @@ get_header(); ?>
         v-for="(val, key) in movements"
         :key="`movements${val.date}`">
             
-            <div class="col col_1 __label">
-                <span class="text_shadow_white">
-                    {{key + 1}}号<br>
-                    <small>{{getMovementsDate(val.date)}}</small>
-                </span>
-            </div>
             <div
-            v-for="index in val.count"
-            :key="`movements${val.date}_${index}`"
-            class="col col_2 cursor_pointer">
-                <img
-                v-lazy="getMovementsImgPath(val.date, index)"
-                @click="showMovementsImage(val.date, index)">
+            :class="[
+                  'col col_9 last __label text_shadow_white cursor_pointer'
+                , (selectedMovementsTab == (key + 1)) ? '_opened' : ''
+            ]"
+            @click="selectedMovementsTab = (key + 1)">
+                <span>{{(key + 1)}}号</span> {{getMovementsDate(val.date)}}
             </div>
-            <div class="clear"></div>
+            
+            <div class="__imgs">
+                <div
+                v-for="index in val.count"
+                :key="`movements${val.date}_${index}`"
+                :class="[
+                      'col col_2 cursor_pointer ___img m1_t'
+                    , (selectedMovementsTab == (key + 1)) ? '_opened' : ''
+                ]">
+                    <img
+                    v-lazy="getMovementsImgPath(val.date, index)"
+                    @click="showMovementsImage(val.date, index)">
+                </div>
+                <div class="clear"></div>
+            </div>
             
         </div>
         
@@ -749,9 +758,11 @@ var app = new Vue({
         , displayedGoodbyeGalleryNumber: 1
         , selectedGoodbyeGalleryTab: 0
         
+        , selectedMovementsTab: 1
+        
         , displayModalImage: false
         , modalImageUrl: ''
-
+        
         , displayModalPdf: false
         , modalPdfUrl: ''
         

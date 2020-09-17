@@ -411,7 +411,6 @@ small{
     ._wrapper{
         
         position: relative;
-        // @include box-sizing(border-box);
     }
         
         
@@ -462,7 +461,7 @@ small{
                 &:before{
                     position: absolute;
                     display: block;
-                    left: -10_label_categorypx;
+                    left: -10px;
                     top: 5px;
                     width: 8px;
                     height: 8px;
@@ -967,7 +966,22 @@ small{
 
 .movements{
     .__label{
+        position: relative;
+        padding-top: 16px;
+        border-top: 1px solid $white;
         line-height: 16px;
+        &:after{
+            position: absolute;
+            right: 0;
+            font-family: meterial_design;
+            content: "\e8a1";
+            color: $tkhtd_green;
+        }
+        &._opened{
+            &:after{
+                content: '';
+            }
+        }
     }
     .__material{
         margin-top: 4px;
@@ -992,6 +1006,20 @@ small{
             }
         }
     }
+    
+    .__imgs{
+        
+        .___img{
+            display: none;
+            min-height: 200px;
+            max-width: 304px;
+            &._opened{
+                display: block;
+            }
+        }
+        
+    }
+    
 }
 
 //**************************************************************
