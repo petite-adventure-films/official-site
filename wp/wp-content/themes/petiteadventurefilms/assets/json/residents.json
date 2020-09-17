@@ -1,0 +1,92 @@
+[
+    {
+          "key": 1
+        , "name": "中川京子"
+        , "message": "住宅に惚れてます。麻布十番の生まれです。"
+        , "hobby": "小唄､義太夫､謡曲"
+        , "favouriteIndex": "言葉"
+        , "favouriteContents": "人に触れ合う"
+        , "karaoke": "｢隅田川｣(市丸)､｢夜のプラットフォーム｣(渡辺はま子)"
+        , "statement": true
+    }
+    , {
+          "key": 2
+        , "name": "村田英法"
+        , "message": "定年になったら晴耕雨読を夢見ていたのに…。<br>でもこれも人生！楽しまなきゃね！！"
+        , "hobby": "山歩き､旅行､外に出るのが大好き"
+        , "favouriteIndex": "本"
+        , "favouriteContents": "人に触れ合う"
+        , "karaoke": "フォークから北島三郎まで"
+        , "statement": false
+    }
+    , {
+          "key": 3
+        , "name": "栗原明･(桂城)清子夫妻"
+        , "message": "夫婦共に九州出身。上京して東京に家を買う夢がありました。それが叶わず賃貸に。<br>大きな問題に関わり､裁判をして､勉強にはなったが､でも悔しい。<br>国の人は国民の気持ちを考えてほしい。いつになったら”我が家”が持てるのでしょうか？"
+        , "hobby": "映画鑑賞"
+        , "favouriteIndex": "歌手"
+        , "favouriteContents": "吉幾三"
+        , "karaoke": "小指の想い出"
+        , "statement": true
+    }
+    , {
+        "key": 4
+        , "name": "村井和子"
+        , "message": "高幡台団地73号棟､なんとしても守りたい。"
+        , "hobby": "民謡､和裁"
+        , "favouriteIndex": "言葉"
+        , "favouriteContents": "挨拶､ありがとう"
+        , "karaoke": "奥飛騨慕情"
+        , "statement": true
+    }
+    , {
+          "key": 5
+        , "name": "村田公子"
+        , "message": "戦争のない世界､格差のない社会､憲法を守って戦争で生命を脅かされることのないように。"
+        , "hobby": "山野草を眺めるのが大好き。植物や野菜を育てること。山歩き。"
+        , "favouriteIndex": "言葉"
+        , "favouriteContents": "すこやかに生まれ､すこやかに育ち､すこやかに老いる＝岩手･旧沢内村村長･深沢晟雄の言葉。"
+        , "karaoke": "特になし､けれど歌うのは好き。"
+        , "statement": true
+    }
+    , {
+          "key": 6
+        , "name": "K.T"
+        , "message": "常に前を向いて進むように､心がけています。"
+        , "hobby": "草花"
+        , "favouriteIndex": "芸能人"
+        , "favouriteContents": "吉永小百合"
+        , "karaoke": "岬めぐり､他"
+        , "statement": true
+    }
+    , {
+          "key": 7
+        , "name": "畦地笙子"
+        , "message": "やっぱり､ずっと73号棟に住みたいなー！"
+        , "hobby": "読書(高村薫､桐野夏生など)"
+        , "favouriteIndex": "言葉"
+        , "favouriteContents": "晴耕雨読"
+        , "karaoke": "？(何でも出来るよ！←ウソ！)"
+        , "statement": false
+    }
+    , {
+          "key": 8
+        , "name": "M.K"
+        , "message": "挨拶代わりの｢バカヤロー！｣。実は照れ屋です。"
+        , "hobby": "ウォーキング"
+        , "favouriteIndex": "言葉"
+        , "favouriteContents": "成せば成る"
+        , "karaoke": "北島三郎"
+        , "statement": true
+    }
+    , {
+          "key": 9
+        , "name": "畦地豊彦さん"
+        , "message": "畦地豊彦さんは2012年1月27日に亡くなられました。享年68歳。心よりご冥福をお祈りします。"
+        , "hobby": ""
+        , "favouriteIndex": ""
+        , "favouriteContents": ""
+        , "karaoke": ""
+        , "statement": true
+    }
+]
