@@ -387,6 +387,17 @@ small{
 }
 
 //**************************************************************
+// .greeting_residents
+//**************************************************************
+
+.greeting_residents{
+
+    .contents_title{
+        margin-bottom: 0;
+    }
+}
+
+//**************************************************************
 // .about_ur
 //**************************************************************
 
@@ -678,6 +689,9 @@ small{
     }
 
     ._data_ur{
+        display: grid;
+        grid-template-rows: repeat(31, min(1px));
+        grid-auto-rows: 1px;
         width: 304px;
         text-align: left;
     }
@@ -965,10 +979,35 @@ small{
 //**************************************************************
 
 .movements{
-    .__label{
+
+    ._contents{
         position: relative;
         padding-top: 16px;
-        border-top: 1px solid $white;
+        padding-bottom: 16px;
+        &:last-of-type{
+            &:after{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: $white;
+                content: '';
+            }
+        }
+        &:before{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: $white;
+            content: '';
+        }
+    }
+    
+    .__label{
+        position: relative;
         line-height: 16px;
         &:after{
             position: absolute;
@@ -1013,12 +1052,29 @@ small{
             display: none;
             min-height: 200px;
             max-width: 304px;
+            border: 1px solid $white;
             &._opened{
                 display: block;
             }
         }
         
     }
+    
+    @media all and (min-width: $min_width){
+        ._contents{
+            &:last-of-type{
+                &:after{
+                    left: 8px;
+                    right: 8px;
+                }
+            }
+            &:before{
+                left: 8px;
+                right: 8px;
+            }
+        }
+    }
+
     
 }
 
@@ -1040,23 +1096,10 @@ small{
             position: relative;
             width: 224px;
             height: 224px;
+            padding: 4px;
+            border: 1px solid $white;
+            background: rgba($white, .56);
             @include box-sizing(border-box);
-
-            img{
-                clip-path: polygon(0 3.3%, 100% 0%, 100% 96.7%, 0% 100%);
-            }
-
-            &:before{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 224px;
-                height: 224px;
-                @include skewY(-2deg);
-                background: $tkhtd_green_shadow;
-                content: '';
-            }
-
         }
 
         .__contents{
@@ -1075,7 +1118,7 @@ small{
         }
 
     }
-
+    
 }
 
 //**************************************************************
