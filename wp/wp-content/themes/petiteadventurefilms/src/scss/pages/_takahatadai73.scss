@@ -11,6 +11,7 @@ $black: #2e2e2e;
 $gray: #515151;
 $ur: #73184b;
 $white: #f4f6ec;
+$beige: #f5f5dc;
 
 .tkhtd_green{ color: $tkhtd_green; }
 .tkhtd_ur{ color: $ur; }
@@ -196,6 +197,7 @@ small{
 //**************************************************************
 
 .greeting_director{
+    position: relative;
     padding: 16px;
     background: rgba($white, .24);
 }
@@ -210,7 +212,7 @@ small{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    height: 200vh;
     text-align: center;
 
     ._flag{
@@ -255,6 +257,7 @@ small{
     }
 
     ._subtitle{
+        position: relative;
         margin-top: 112px;
         line-height: 42px;
         font-family: 'Sawarabi Mincho';
@@ -285,14 +288,18 @@ small{
 //**************************************************************
 
 .key_messages{
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
     height: 100vh;
 
     ._message{
-        position: relative;
+        position: absolute;
         margin-top: 32px;
+        &:nth-of-type(1){ top: 0; }
+        &:nth-of-type(2){ top: 30%; }
+        &:nth-of-type(3){ top: 60%; }
     }
 
     .__ur{
@@ -321,11 +328,13 @@ small{
     }
 
     .__rsdt{
-        // @include skewY(-2deg);
-        position: relative;
+        
+        position: absolute;
         width: 304px;
         height: 96px;
         margin-top: 32px;
+        top: 24px;
+        @include skewY(-2deg);
         font-size: 32px;
         line-height: 40px;
         text-align: left;
@@ -387,6 +396,17 @@ small{
 }
 
 //**************************************************************
+// .greeting_residents
+//**************************************************************
+
+.greeting_residents{
+
+    .contents_title{
+        margin-bottom: 0;
+    }
+}
+
+//**************************************************************
 // .about_ur
 //**************************************************************
 
@@ -411,7 +431,6 @@ small{
     ._wrapper{
         
         position: relative;
-        // @include box-sizing(border-box);
     }
         
         
@@ -462,7 +481,7 @@ small{
                 &:before{
                     position: absolute;
                     display: block;
-                    left: -10_label_categorypx;
+                    left: -10px;
                     top: 5px;
                     width: 8px;
                     height: 8px;
@@ -966,8 +985,48 @@ small{
 //**************************************************************
 
 .movements{
+
+    ._contents{
+        position: relative;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        &:last-of-type{
+            &:after{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: $white;
+                content: '';
+            }
+        }
+        &:before{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: $white;
+            content: '';
+        }
+    }
+    
     .__label{
+        position: relative;
         line-height: 16px;
+        &:after{
+            position: absolute;
+            right: 0;
+            font-family: meterial_design;
+            content: "\e8a1";
+            color: $tkhtd_green;
+        }
+        &._opened{
+            &:after{
+                content: '';
+            }
+        }
     }
     .__material{
         margin-top: 4px;
@@ -992,6 +1051,37 @@ small{
             }
         }
     }
+    
+    .__imgs{
+        
+        .___img{
+            display: none;
+            min-height: 200px;
+            max-width: 304px;
+            border: 1px solid $white;
+            &._opened{
+                display: block;
+            }
+        }
+        
+    }
+    
+    @media all and (min-width: $min_width){
+        ._contents{
+            &:last-of-type{
+                &:after{
+                    left: 8px;
+                    right: 8px;
+                }
+            }
+            &:before{
+                left: 8px;
+                right: 8px;
+            }
+        }
+    }
+
+    
 }
 
 //**************************************************************
@@ -1012,27 +1102,14 @@ small{
             position: relative;
             width: 224px;
             height: 224px;
-            @include box-sizing(border-box);
-
-            img{
-                clip-path: polygon(0 3.3%, 100% 0%, 100% 96.7%, 0% 100%);
-            }
-
-            &:before{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 224px;
-                height: 224px;
-                @include skewY(-2deg);
-                background: $tkhtd_green_shadow;
-                content: '';
-            }
-
         }
 
         .__contents{
-            margin-top: 16px;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-bottom: 8px;
+            border: 1px solid $white;
+            @include box-sizing(border-box);
             line-height: 24px;
             dt{
                 position: relative;
@@ -1047,7 +1124,7 @@ small{
         }
 
     }
-
+    
 }
 
 //**************************************************************
@@ -1098,6 +1175,110 @@ small{
         }
     }
 
+}
+
+
+
+    .key_messages-enter-active, .key_messages-leave-active{
+        // @include skewY(-2deg);
+        transition: opacity 3s, transform 3s, transform 1s;
+    }
+    .key_messages-enter, .key_messages-leave-to{
+        opacity: 0;
+        @include transform(translateX(100px) skewY(-2deg))
+    }
+
+.outward{
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 960px;
+    margin-left: -460px;
+    border-bottom: 1px solid $white;
+    
+    
+
+    .cloud{
+        position: absolute;
+        @include border-radius(50% 50% 0 0/100% 100% 0 0);
+        bottom: 0;
+        &._1{
+            left: 8px;
+            width: 200px;
+            height: 100px;
+            background: rgba($tkhtd_green, .30);
+        }
+        &._2{
+            left: 50px;
+            width: 240px;
+            height: 120px;
+            background: rgba($white, .50);
+        }
+        &._3{
+            left: 200px;
+            width: 320px;
+            height: 160px;
+            background: rgba($beige, .40);
+        }
+        &._4{
+            left: 400px;
+            width: 160px;
+            height: 80px;
+            background: rgba($yellow_shadow, .20);
+        }
+        &._5{
+            left: 536px;
+            width: 200px;
+            height: 100px;
+            background: rgba($white, .80);
+        }
+        &._6{
+            left: 640px;
+            width: 160px;
+            height: 80px;
+            background: rgba($beige, .80);
+        }
+        &._7{
+            right: 80px;
+            width: 280px;
+            height: 130px;
+            background: rgba($tkhtd_green, .30);
+        }
+        &._8{
+            right: 8px;
+            width: 200px;
+            height: 100px;
+            background: rgba($tkhtd_green_shadow, .40);
+        }
+        
+    }
+
+
+}
+
+.outward-enter-active, .outward-leave-active{
+    // @include skewY(-2deg);
+    transition: opacity 3s;
+}
+.outward-enter, .outward-leave-to{
+    opacity: 0;
+}
+
+.outward_area{
+    position: relative;
+}
+
+.bubble{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba($white, .5);
+    @include border-radius(50%);
+    &._yellow{ background: rgba($yellow, .3); }
+    &._green{ background: rgba($tkhtd_green_shadow, .3); }
+    &._light_green{ background: rgba($tkhtd_green_shadow, .3); }
+    &._white{ background: rgba($white, .3); }
+    &._beige{ background: rgba($beige, .3); }
 }
 
 }
