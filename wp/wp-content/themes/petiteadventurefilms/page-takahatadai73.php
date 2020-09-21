@@ -14,10 +14,28 @@ $movement_now = file_get_contents($movement_now_path);
 get_header(); ?>
 
 <div class="single">
+    
 
     <div class="col col_9 last">
-
-        <div class="greeting_director">
+    
+        <div class="outward_area" ref="outward_area">
+        
+        <transition name="outward" appear>
+            <div v-show="displayTkhtd73 == true" class="outward" ref="outward">
+                <div class="img">
+                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/takahatadai73.png">
+                </div>
+                <div class="cloud _1"></div>
+                <div class="cloud _2"></div>
+                <div class="cloud _3"></div>
+                <div class="cloud _4"></div>
+                <div class="cloud _5"></div>
+                <div class="cloud _6"></div>
+                <div class="cloud _8"></div>
+            </div>
+        </transition>
+        
+        <div class="greeting_director" ref="greeting_director">
             <p class="subhead1 al_c">復刻版公開に寄せて</p>
             <p>
                 映画『さようならUR』の主人公でもある、「高幡台団地73号棟に住み続けたい住民の会」。<br>
@@ -31,30 +49,42 @@ get_header(); ?>
             </p>
         </div>
 
-        <header class="main_visual">
+        <header class="main_visual" ref="main_visual">
             <h1>
-                <div class="_flag"><span class="tkhtd_green block">きいろい</span>はたに</div>
-                <div class="_flag"><span class="tkhtd_green block">ねがいを</span>こめて</div>
+                <div ref="flags">
+                    <div class="_flag"><span class="tkhtd_green block">きいろい</span>はたに</div>
+                    <div class="_flag"><span class="tkhtd_green block">ねがいを</span>こめて</div>
+                </div>
                 <div class="_subtitle">
-                    <span class="block">高畑台団地73号棟に</span><span class="block">住み続けたい住民の会</span><span class="block">の記録</span>
+                    <span class="block">高幡台団地73号棟に</span><span class="block">住み続けたい住民の会</span><span class="block">の記録</span>
                 </div>
             </h1>
         </header>
 
-        <div class="key_messages">
+        <div class="key_messages" ref="key_messages">
             <div
             v-for="arr in key_messages"
             :key="'catch' + arr.key"
                 class="_message">
-                <div class="__ur" v-html="arr.ur"></div>
-                <div class="__rsdt" v-html="arr.residents"></div>
+                <div
+                :ref="`ur_msg_${arr.key}`"
+                class="__ur" v-html="arr.ur"></div>
+                <transition appear name="key_messages">
+                    <div
+                    v-show="displayRsdtMsg[(arr.key - 1)]"
+                    class="__rsdt"
+                    v-html="arr.residents"></div>
+                </transition>
             </div>
         </div>
+        
+    
+        </div>
 
-        <section class="contents greeting_residents">
+        <section class="contents greeting_residents" ref="greeting_residents">
             <h2 class="contents_title"><span class="_text">住民からのご挨拶</span></h2>
             <div class="al_c">
-                <p><small>※2013の挨拶です</small></p>
+                <p><small>※2013の挨拶</small></p>
             </div>
             <div class="m4_t">
                 <p>私たちのホームページにおいでいただきありがとうございます。</p>
@@ -72,7 +102,7 @@ get_header(); ?>
             </div>
         </section>
 
-        <section class="contents about_ur">
+        <section class="contents about_ur" ref="about_ur">
             <h2 class="_title">URって何？</h2>
             <div class="_wrapper">
                 <div class="_contents">
@@ -142,7 +172,7 @@ get_header(); ?>
             </div>
         </section>
 
-        <section class="contents timeline">
+        <section class="contents timeline" ref="timeline">
             <h2 class="contents_title"><span class="_text">UR vs 住民の会､その記録</span></h2>
             <div class="al_c">
                 <p><small>※2020年10月現在</small></p>
@@ -260,13 +290,13 @@ get_header(); ?>
 
     </div>
     
-    <section class="contents goodbye">
+    <section class="contents goodbye" ref="goodbye">
     
         <h2 class="contents_title"><span class="_text">ドキュメント･73号棟解体</span></h2>
         
         <div class="col col_9 last">
             <p>裁判が和解で終了した後、住民たちは転居を余儀なくされ、やがて建物の解体作業が始まりました。元73号棟住民のM.Kさんが、取り壊し直前～解体までの様子を克明に記録し、提供してくださいましたので、ここにご紹介します。</p>
-            <p>カレンダーの月を選択して、写真を見てください。写真をタップしたら拡大できます。</p>
+            <p>カレンダーの月を選択して、写真を見てください。</p>
             <p><small>撮影・提供：元73号棟住民 M.Kさん</small></p>
         </div>
         
@@ -336,10 +366,10 @@ get_header(); ?>
                     v-for="index in val.count"
                     :key="`gallery${val.date}_${index}`"
                     :class="[
-                        '___img cursor_pointer'
+                        '___img'
                         , (displayedGoodbyeGalleryNumber == index) ? '_displayed' : ''
                     ]">
-                        <img :src="getGoodbyeGalleryImgPath(val.date, index)">
+                        <img v-lazy="getGoodbyeGalleryImgPath(val.date, index)">
                     </div>
                     
                     <div
@@ -385,7 +415,7 @@ get_header(); ?>
         
     </section>
     
-    <section class="contents movements">
+    <section class="contents movements" ref="movements">
         <h2 class="contents_title">
             <span class="_text">高幡台団地の今</span>
             <span class="_sub_text">高幡台団地地区・地区まちづくり計画について</span>
@@ -445,7 +475,7 @@ get_header(); ?>
                 v-masonry-tile
                 class="col col_3 _resident">
                 <div class="__img">
-                    <img :src="`<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/resident_${arr.key}.jpg`" :title="arr.name">
+                    <img v-lazy="`<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/resident_${arr.key}.png`" :title="arr.name">
                 </div>
                 <div class="__contents">
                     <h3 class="inline_block m1_r">{{arr.name}}</h3>
@@ -743,6 +773,11 @@ var app = new Vue({
         , residents:       <? echo $residents; ?>
         , goodbyeGalleryData: <? echo $goodbye_gallery; ?>
         , movements: <? echo $movement_now; ?>
+        
+        , displayTkhtd73: false
+        , displayRsdtMsg: [false, false, false]
+        
+        , displayBubbles: {}
         
         , screenSize: 0
         
@@ -1073,17 +1108,205 @@ var app = new Vue({
                 this.screenSize = 2; // mobile
             }
         }
+        
+        , genBubble(min, max)
+        {
+        
+        console.log(min, max)
+            for(var i=0; i < (Math.floor(Math.random() * 5) + 1); i++)
+            {
+            
+                var bubble = document.createElement('div'); 
+                var colors = ['yellow', 'white', 'green'];
+                bubble.classList.add('bubble');
+                bubble.classList.add(`_${colors[Math.floor(Math.random() * 3)]}`);
+                bubble.animate([{opacity: '0'}, {opacity: '1'}], 3000)
+                
+                var size = Math.floor(Math.random() * 200) + 10;
+                var pos = Math.floor(Math.random() * (window.innerWidth - size)) + size;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                
+                if(pos + size > window.innerWidth)
+                {
+                    bubble.style.right = `${pos + size - window.innerWidth}px`;
+                }
+                else
+                {
+                    bubble.style.left = `${pos}px`;
+                }
+                
+                bubble.style.top = `${Math.floor(Math.random() * max) + min}px`;
+                
+                document.body.prepend(bubble);
+                
+                var speed = Math.floor(Math.random() * 200) + 1;
+            
+                StartInterval(bubble, size, speed)
+            }
+            
+            
+        
+            function StartInterval(el, size, speed) {
+            
+                var diff = 0;
+                var direction = -1;
+            
+                var timer = setInterval(function(a){
+                    
+                    diff += 1 * direction;
+                    el.style.transform = `translateY(${diff}px)`;
+                
+                    if(el.getBoundingClientRect().top == (size * -1))
+                    {
+                        clearInterval(timer);
+                    }
+                    
+                }, speed);
+                
+            }
+    
+   
+   
+        }
+        
+        , handleScroll()
+        {
+        
+            console.log(window.scrollY)
+
+            
+            var $el_main_visual  = this.$refs.main_visual.getBoundingClientRect();
+            var $el_outward      = this.$refs.outward;
+            var $el_outward_area = this.$refs.outward_area;
+            var $el_outward_area_rect = $el_outward_area.getBoundingClientRect();
+            
+            
+            // var is_outward_bubble_created = false;
+            
+            var outwardPos = ($el_outward_area_rect.top + window.scrollY + $el_outward_area_rect.height) - (window.scrollY + window.innerHeight);
+
+            if(outwardPos < 0)
+            {
+                $el_outward.style.bottom =  0;
+            }
+            else if(window.scrollY > ($el_main_visual.top + window.scrollY))
+            {
+                this.displayTkhtd73 = true;
+                $el_outward.style.bottom =  `${outwardPos}px`;
+            }
+            
+            
+            
+            var bubbles = ['greeting_director', 'main_visual', 'key_messages', 'greeting_residents', 'about_ur', 'timeline', 'goodbye', 'movements'];
+            
+            for(var section of bubbles)
+            {
+                var $el_section = this.$refs[section];
+                var $el_section_rec = $el_section.getBoundingClientRect();
+                
+                if(window.scrollY > $el_section_rec.top)
+                {
+                    
+                    if(this.displayBubbles[section] == undefined)
+                    {
+                        this.displayBubbles[section] = false;
+                    }
+                    
+                    if(this.displayBubbles[section] == false)
+                    {
+                        this.genBubble(window.scrollY, window.scrollY + $el_section_rec.height);
+                        this.displayBubbles[section] = true;
+                    }
+                }
+            }
+            
+            
+            
+            //  urメッセージ表示アニメーション
+            if(this.displayRsdtMsg.some(v => v == false)){
+                for(var i=0; i<3; i++)
+                {
+                    var $el_ur_msg = this.$refs[`ur_msg_${i + 1}`][0].getBoundingClientRect();
+                    if(window.scrollY > ($el_ur_msg.top + window.scrollY) - (window.innerHeight * 4 / 5))
+                    {
+                        this.$set(this.displayRsdtMsg, i, true);
+                    }
+                }
+            }
+            
+        }
 
     }
     
     , mounted(){
         this.displayGoodbyeGalleryByMonth(2013, 11);
         this.selectedGoodbyeGalleryTab = 2013;
+        
+        
+        
+        // var $el_greeting_director = this.$refs.greeting_director;
+        //     var $el_greeting_director_rect = $el_greeting_director.getBoundingClientRect();
+        // var testTimer = []
+        
+        // for(var i=0; i<1; i++){
+        //     var bubble = document.createElement('div'); 
+        //     bubble.classList.add('bubble');
+            
+        //     var size = Math.floor(Math.random() * 200) + 10;
+        //     var pos = Math.floor(Math.random() * (window.innerWidth - size)) + size;
+            
+        //     bubble.style.width = `${size}px`;
+        //     bubble.style.height = `${size}px`;
+            
+        //     bubble.style.left = `${pos}px`;
+        //     bubble.style.top = '200px';
+            
+        //     document.body.prepend(bubble);
+            
+        //     var k = 0;
+        //     var diff = 0;
+        //     var direction = -1;
+            
+        //     var timer = setInterval(() => {
+            
+        //         diff += 1 * direction;
+        //         bubble.style.transform = `translateY(${diff}px)`;
+                
+        //         k++;
+                
+        //         console.log(bubble.getBoundingClientRect().top)
+        //         if(bubble.getBoundingClientRect().top == (size * -1))
+        //         {
+        //             clearInterval(testTimer[timer]);
+        //         }
+                
+        //     }, 100);
+        //     // testTimer.push(timer);
+            
+        //     function abc()
+        //     {
+        //     }
+        // console.log(timer);
+            
+        // }
+        
+        
+        // console.log(testTimer);
+            
+            
+            
     }
     
     , created(){
         window.addEventListener('resize', this.handleResize);
         this.handleResize();
+        
+        window.addEventListener('scroll', this.handleScroll);
+        // this.handleScroll();
+        
     }
     
 })

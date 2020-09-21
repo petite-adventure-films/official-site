@@ -6,6 +6,7 @@
 wp/wp-content/*
 !wp/wp-content/plugins/
 !wp/wp-content/themes/
+wp/wp-config-sample.php
 
 # ignore these plugins
 wp/wp-content/plugins/hello.php
