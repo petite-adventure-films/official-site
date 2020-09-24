@@ -7,7 +7,7 @@ define('API_KEY', 'sk_test_51H8OJOKluK1zP0j9wWm49GVBmqnK8hC3jV5t7FTrvYPSaFrle6Lo
 
 $data=json_decode(file_get_contents('php://input'),1);
 
-file_put_contents('abc.txt', print_r($_POST, true), FILE_APPEND);
+// file_put_contents('abc.txt', print_r($_POST, true), FILE_APPEND);
 
 try {
     $charge = \Stripe\Charge::create([

@@ -353,6 +353,9 @@ a{
         color: $black1;
         font-size: 20px;
         line-height: 20px;
+        &:hover{
+            color: $black2 !important;
+        }
     }
 
     //.priority1
@@ -397,6 +400,7 @@ a{
     &.disabled{
         a, .ele{
             border: none;
+            pointer-events: none;
             background: $black5;
             color: $black1;
             -webkit-font-smoothing: antialiased;
@@ -621,7 +625,7 @@ blockquote, q{
     .icon_btn{
 
         width: 40px;
-        height: 40px;
+        // height: 40px;
         line-height: 40px;
 
         &#twitter{
@@ -634,6 +638,28 @@ blockquote, q{
 
         &#en_btn{
             background: rgba($green6, .6);
+            @include border-radius(50%);
+            text-align: center;
+
+            a{
+                color: $white;
+            }
+
+        }
+
+        &#contact{
+            background: rgba($blue6, .6);
+            @include border-radius(50%);
+            text-align: center;
+
+            a{
+                color: $white;
+            }
+
+        }
+        
+        &#home{
+            background: rgba($blue6, .6);
             @include border-radius(50%);
             text-align: center;
 
@@ -665,28 +691,33 @@ blockquote, q{
 
 
     @media all and (min-width: $min_width){
-
+        
+        display: block;
+        position: fixed;
+        z-index: 9999;
+        right: 8px;
+        top: 32px;
+        bottom: 32px;
+        
         .icon_btn{
 
-            display: block;
-            position: fixed;
-            z-index: 9999;
-            right: 8px;
 
             &#twitter{
-                top: 80px;
+                // top: 80px;
             }
 
             &#facebook{
-                top: 128px;
+                // top: 128px;
             }
 
+
             &#en_btn{
-                top: 32px;
+                // top: 32px;
             }
 
             &#go_top{
-                bottom: 32px;
+                position: absolute;
+                bottom: 0;
             }
 
         }
@@ -718,4 +749,76 @@ blockquote, q{
 
     }
 
+}
+
+.modal-mask {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($white, 0.96);
+    transition: opacity 0.3s ease;
+}
+
+.modal-container{
+
+    overflow: scroll;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    @include box-sizing(border-box);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 8px 48px;
+    text-align: center;
+    
+    .icon-close{
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: $black3 !important;
+        font-size: 48px;
+        &:hover{
+            color: $black2 !important;
+        }
+    }
+
+}
+
+.loading_ring {
+    display: inline-block;
+
+    &:after {
+        content: '';
+        display: block;
+        width: 48px;
+        height: 48px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid $black3;
+        border-color: $black3 transparent $black3 transparent;
+        animation: loading_ring 1.2s linear infinite;
+    }
+}
+@keyframes loading_ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.cursor_pointer{
+    cursor: pointer;
+    &:hover{
+        color: $black3;
+        img{
+            @include opacity(.56);
+        }
+    }
 }

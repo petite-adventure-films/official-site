@@ -8,9 +8,9 @@ $shop_query = new WP_Query(['post_type' => 'pafshop', 'orderby'=>'ID','order'=>'
 $products = [];
 $terms = get_terms('filmtags', ['orderby'=>'term_id','order'=>'ASC']);
 
-
 date_default_timezone_set('Asia/Tokyo');
 $submit_date = date('mdH', time()); //送信タイム
+
 $orderID = cms_title('dvdorder', $submit_date, 'J');
 
 foreach($terms as $key => $term)
@@ -27,14 +27,13 @@ foreach($terms as $key => $term)
             $products[$key]['basic_info'] = $film;
         }
     }
-    
+
     foreach($shop_query->posts as $shop)
     {
         $tags = get_the_terms($shop, 'filmtags');
         $tag_id = $tags[0]->term_id;
         if($term->term_id == $tag_id)
         {
-
 
             $price_indexs = get_post_meta_arr($shop->ID, "product_info_01");
             $price_contents = get_post_meta_arr($shop->ID, "product_info_02");
@@ -47,225 +46,241 @@ foreach($terms as $key => $term)
 
         }
     }
-    
+
 }
 
+get_header('pafshop'); ?>
 
-get_header(); ?>
+<div class="single_pafshop">
 
-<div class="single">
+    <div class="col col_6 last">
 
-    <div class="col col_9 last">
+        <div class="purchase_details">
 
+            <div class="grid _1_1 subhead1 al_c">
+                <span :class="[
+                      'step_icon icon-check'
+                    , (step == 1) ? '_processing' : ''
+                    , (step > 1) ? '_completed' : ''
+                ]"></span>
+            </div>
+            <div class="grid _1_2 subhead1">
+                {{(step == 1) ? '注文内容を確認してください' : '注文内容'}}
+            </div>
 
-        <div id="app">
+            <div class="order_details grid _2_2 m1_t">
 
-
-            <h2>step1. {{(step == 1) ? '注文内容を確認してください' : '注文内容'}}</h2>
-        
-            <div
-            v-for = "item in addedItems"
-            :key  = "'film_' + item.prod_key"
-                class="invoice">
-                <div class="product_name">{{item.basic_info.post_title}}</div>
                 <div
-                v-for = "(unit, key) in item.cart"
-                :key = "'film_' + item.ID + 'price' + key">
-                    <div v-if="unit > 0" class="record">
-                        <div class="cell index">{{item.price_info[key].index}}</div>
-                        <div class="cell amount">{{convertYen(item.price_info[key].amount)}}</div>
-                        <div class="cell unit">{{unit}}</div>
-                        <div class="cell sum">{{convertYen(item.price_info[key].amount * unit)}}</div>
+                v-for = "item in addedItems"
+                :key  = "'film_' + item.prod_key"
+                    class="_item">
+                    <div class="_name subhead2">{{item.basic_info.post_title}}</div>
+                    <div
+                    v-for = "(unit, key) in item.cart"
+                    :key = "'film_' + item.ID + 'price' + key"
+                        v-if="unit > 0"
+                        class="_details">
+                            <div class="cell __index">{{item.price_info[key].index}}</div>
+                            <div class="__detail_unit_amount_sum">
+                                <div class="cell __amount al_r">{{convertYen(item.price_info[key].amount)}}</div>
+                                <div class="cell __unit al_c">{{unit}}</div>
+                                <div class="cell __sum al_r">{{convertYen(item.price_info[key].amount * unit)}}</div>
+                            </div>
+                    </div>
+                    <div class="_subtotal">
+                        <span class="_fee_index">小計</span>
+                        <span class="_fee_amount">{{convertYen(getSubtotal(item.prod_key))}}</span>
+                    </div>
+
+                </div>
+
+                <div class="fee">
+                    <span class="_fee_index">商品小計</span>
+                    <span class="_fee_amount">{{convertYen(getTotal())}}</span>
+                </div>
+
+                <div class="fee">
+                    <span class="_fee_index">配送料</span>
+                    <span class="_fee_amount">{{convertYen(deliveryFee)}}</span>
+                </div>
+
+                <div class="total subhead2">
+                    <span class="_fee_index">合計</span>
+                    <span class="_fee_amount">{{convertYen(getTotal(true))}}</span>
+                </div>
+
+                <div v-if="step == 1">
+                    <div class="m2_t">注文内容に問題なければ、次へお進みください。</div>
+                    <div class="btn shop cursor_pointer" @click="completeCheckOrder">
+                        <span class="ele">次へすすむ</span>
                     </div>
                 </div>
-                <div class="subtotal">
-                    小計 {{convertYen(getSubtotal(item.prod_key))}}
-                </div>
 
             </div>
-            
-            <div class="fee">
-                商品小計　{{convertYen(getTotal())}}
+
+            <div class="grid _3_1 subhead1 al_c m4_t">
+                <span :class="[
+                      'step_icon'
+                    , (step == 2) ? '_processing icon-edit' : 'icon-edit'
+                    , (step > 2) ? '_completed icon-check' : ''
+                ]"></span>
             </div>
-
-            <div class="fee">
-                配送料　{{convertYen('500')}}
-            </div>
-
-            <div class="total">合計 {{convertYen(getTotal(true))}}</div>
-
-            <div v-if="step == 1">
-                <div class="mt-2">注文内容に問題なければ、次へお進みください。</div>
-                <div class="btn shop" @click="completeCheckOrder">
-                    <span class="ele">次へすすむ</span>
-                </div>
-            </div>
-
-
-            <br>
-            <h2>step2. {{(step == 2) ? '注文者情報を入力してください' : '注文者情報の入力'}}</h2>
-            <div v-if="step == 2">
-                <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
-            </div>
-            <div v-if="step > 2">
-                <div @click="step = 2" class="btn"><span class="ele">編集する</span></div>
-                {{user.name}}<br>
-                {{user.zipcode}}<br>
-                {{user.prefecture}}{{user.city}}{{user.address1}}<br>
-                {{user.address2}}<br>
-                {{user.tel}}<br>
-                {{user.email}}<br>
-                領収書{{(user.receipt == true) ? '必要' : '不要'}}
-                <div v-if="user.receipt == true">
-                {{(user.receiptName) ? user.receiptName : '-'}}<br>
-                {{user.receiptDescription ? user.receiptDescription : '-'}}
-                </div>               
-            </div>
-
-            <br>
-            <h2>step3. {{(step == 3) ? 'お支払い情報を選択してください' : 'お支払い方法の選択'}}</h2>
-            <div v-if="step == 3">
-
-                <div v-if="paymentMethod != 2">
-                    <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1"><label for="paymentMethod1">銀行振込</label><br>
-                    [銀行ロゴ]<br>
-                    振込先情報は注文完了後の確認メールに記載されております。<br>振込手数料はご負担下さい。
-                </div>
-
-                <div v-if="paymentMethod != 1">
-                    <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2"><label for="paymentMethod2">クレジットカード</label><br>
-                    [クレジットカードロゴ]<br>
-                    注文完了後、お支払い画面へ移動します。
-                </div>
-                
+            <div class="grid _3_2 subhead1 m4_t">
+                <span class="inline_block">{{(step == 2) ? '注文者情報を入力してください' : '注文者情報'}}</span>
                 <div
-                v-if="paymentMethod != 0"
-                    :class="(paymentMethod > 0) ? 'shop' : 'disabled'"
-                    @click="execPayment()" class="btn">
-                    <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
-                </div>
-                
-                <div v-if="paymentMethod != 0" @click="paymentMethod = 0">選びなおす</div>
-
-
-                <modal-payment
-                v-if="modalPayment === true"
-                    :total="getTotal()" 
-                    :orderid="orderID"
-                    @complete="completePayment()"
-                    @close="closeModalPayment()"></modal-payment>
+                v-if="step > 2"
+                    @click="step = 2"
+                    class="btn_edit_user_info cursor_pointer"><span class="ele">編集する</span></div>
             </div>
 
+            <div class="grid _4_2 m1_t">
+                <div v-if="step == 2">
+                    <?php include (TEMPLATEPATH . "/_order_jp_form_2.php"); ?>
+                </div>
+                <div v-if="step > 2">
+                    <dl class="list_definition">
+                        <dt>名前</dt><dd>{{user.name}}</dd>
+                        <dt>住所</dt><dd>{{user.zipcode}} {{user.prefecture}}{{user.city}}{{user.address1}}{{user.address2}}</dd>
+                        <dt>電話番号</dt><dd>{{user.tel}}</dd>
+                        <dt>メールアドレス</dt><dd>{{user.email}}</dd>
+                        <dt>領収書</dt><dd>{{(user.receipt == true) ? '必要' : '不要'}}</dd>
+                        <div v-if="user.receipt == true">
+                        <dt>領収書宛名</dt><dd>{{(user.receiptName) ? user.receiptName : '-'}}</dd>
+                        <dt>領収書但し書き</dt><dd>{{user.receiptDescription ? user.receiptDescription : '-'}}</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
 
-            <modal-execution
-                v-if="modalExecution === true"></modal-execution>
+            <div class="grid _5_1 subhead1 al_c m4_t">
+                <span :class="[
+                      'step_icon'
+                    , (step == 3) ? '_processing icon-edit' : 'icon-edit'
+                ]"></span>
+            </div>
+            <div class="grid _5_2 subhead1 m4_t">
+                {{(step == 3) ? 'お支払い方法を選択してください' : 'お支払い方法の選択'}}
+            </div>
 
-        </div>
+            <div class="grid _6_2 m1_t">
+                <div v-if="step == 3">
+
+                        <div class="_method" v-if="paymentMethod != 2">
+                            <div class="">
+                                <input type="radio" v-model="paymentMethod" value="1" id="paymentMethod1">
+                            </div>
+                            <div class="">
+                                <label for="paymentMethod1">銀行振込</label>
+                                <div class="">
+                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_yucho.png" class="block __logo m1_t">
+                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_mufg.png" class="block __logo m1_t">
+                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_japannet.png" class="block __logo m1_t">
+                                    <p class="m1_t">振込先情報は注文完了後の確認メールに記載されております。振込手数料はご負担下さい。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="_method m2_t" v-if="paymentMethod != 1">
+                            <div class="">
+                                <input type="radio" v-model="paymentMethod" value="2" id="paymentMethod2">
+                            </div>
+                            <div class="">
+                                <label for="paymentMethod2">クレジットカード</label>
+                                <div class="">
+                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_visa.gif" class="inline_block __logo m1_t">
+                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_mastercard.gif" class="inline_block __logo m1_t">
+                                    <p class="m1_t">注文完了後、お支払い画面へ移動します。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div
+                    v-if="paymentMethod != 0"
+                        :class="['m2_t cursor_pointer', (paymentMethod > 0) ? 'shop' : 'disabled']"
+                        @click="execPayment()" class="btn">
+                        <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
+                    </div>
+
+                    <div v-if="paymentMethod != 0" @click="paymentMethod = 0" class="m1_t btn cursor_pointer">
+                        <span class="ele">選びなおす</span>
+                    </div>
+
+                </div>
+            </div>
 
     </div>
 
-</div>
+</div><!--.single-->
 
+<?php get_footer('scripts'); ?>
 
+<modal-payment
+v-if="modalPayment === true"
+    :subtotal="convertYen(getTotal())"
+    :total="convertYen(getTotal(true))"
+    :fee="convertYen(deliveryFee)"
+    :orderid="orderID"
+    :amount="getTotal(true)"
+    @complete="completePayment()"
+    @close="closeModalPayment()"></modal-payment>
 
-<style>
-.modal-mask {
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  display: table;
-  transition: opacity 0.3s ease;
-}
-
-.modal-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 304px;
-    height: 200px;
-    margin-left: -152px;
-    margin-top: -100px; 
-    box-sizing: border-box;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    border: 1px solid #eeeeee;
-}
-
-.fee{
-    margin-top: 8px;
-    padding: 4px 8px;
-    border: 1px solid #eeeeee;
-    text-align: right;
-}
-
-.product{
-    padding: 8px;
-    border: 1px solid #eeeeee;
-}
-
-.total{
-    margin-top: 8px;
-    padding: 8px;
-    background: #ffcce4;
-    text-align: right;
-}
-
-.invoice{
-    border: 1px solid #eeeeee;
-}
-.invoice:not(:nth-of-type(1)){
-    margin-top: 8px;
-}
-.invoice .product_name{
-    padding: 8px;
-    border-bottom: 1px solid #eeeeee;
-}
-.invoice .subtotal{
-    border-top: 1px solid #eeeeee;
-    text-align: right;
-    padding: 4px 8px;
-    background: #efefef;
-}
-.invoice .record{
-    display: table;
-    padding: 4px 8px;
-    width: 100%;
-    box-sizing: border-box;
-}
-.invoice .record .cell{
-    display: table-cell;
-}
-.invoice .record .index{ width: 156px; }
-.invoice .record .amount{ width: 64px; text-align: right; }
-.invoice .record .unit{ width: 56px; text-align: center; }
-.invoice .record .delete{ width: 40px; text-align: center; }
-.invoice .record .sum{ text-align: right; }
-
-</style>
+<modal-execution
+v-if="modalExecution === true"></modal-execution>
 
 <script type="text/x-template" id="template-modal-payment">
     <div class="modal-mask">
         <div class="modal-container">
-            <div ref="cardElement"></div>
-            {{paymentMessage}}
+
             <div
             v-if="paymentCompleted === false && isExecuting == false"
-            @click="pay()" 
-            :class="(isEntered == true) ? 'shop' : 'disabled'"
-            class="btn"
-                ><span class="ele">お支払いする</span></div>
-            <div
-            v-if="paymentCompleted === true && isExecuting == false"
-            @click="complete()" 
-            class="btn shop"
-                ><span class="ele">注文を完了する</span></div>
-            <div v-if="paymentCompleted === false && isExecuting == false" @click="close()">お支払い方法選択に戻る</div>
+                class="icon icon-close" @click="close()"></div>
+            <div class="confirm_btns">
+
+                <div v-if="paymentCompleted == false">
+                    <div class="order_details _in_modal">
+                        <div class="fee">
+                            <span class="_fee_index">商品小計</span>
+                            <span class="_fee_amount" v-html="subtotal"></span>
+                        </div>
+
+                        <div class="fee">
+                            <span class="_fee_index">配送料</span>
+                            <span class="_fee_amount" v-html="fee"></span>
+                        </div>
+
+                        <div class="total subhead2">
+                            <span class="_fee_index">合計</span>
+                            <span class="_fee_amount" v-html="total"></span>
+                        </div>
+                    </div>
+                    <div
+                    :class="[
+                          'card_element m2_t'
+                        , (isExecuting == true) ? 'disabled' : '']"
+                    ref="cardElement"></div>
+                </div>
+
+                <div
+                v-if="paymentCompleted === false && isExecuting == false"
+                    @click="pay()"
+                    :class="[
+                          'btn priority1 al_c m1_t cursor_pointer'
+                        , (isEntered == true) ? 'pay' : 'disabled'
+                    ]"><span class="ele">お支払いする</span></div>
+                <div
+                v-if="paymentCompleted === true && isExecuting == false"
+                    @click="complete()"
+                    class="btn shop m1_t al_c cursor_pointer"
+                        ><span class="ele">注文を完了する</span></div>
+                <p
+                :class="['al_c', (paymentCompleted === true && isExecuting == false) ? '' : 'red' ]"
+                v-html="paymentMessage"></p>
+                <div
+                v-if="paymentCompleted === false && isExecuting == false"
+                    @click="close()"
+                    class="m1_t al_c cursor_pointer">お支払い方法選択に戻る</div>
+                </div>
+            </div>
         </div>
     </div>
 </script>
@@ -273,26 +288,41 @@ get_header(); ?>
 <script type="text/x-template" id="template-modal-execution">
     <div class="modal-mask">
         <div class="modal-container">
-            処理中です。しばらくお待ちください。
+            <p>処理中です...</p>
+            <div class="loading_ring"></div>
         </div>
     </div>
 </script>
-
 
 <script type="text/javascript">
 
     Vue.config.devtools = true;
 
-    var strgPafCart = JSON.parse(localStorage.getItem('pafCart')) || localStorage.setItem('pafCart', JSON.stringify({}));
-    var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
+    // var strgPafCart = JSON.parse(localStorage.getItem('pafCart')) || localStorage.setItem('pafCart', JSON.stringify({}));
+    // var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
+
+
+    var strgPafOrderID = localStorage.getItem('pafOrderID') || localStorage.setItem('pafOrderID', '<? echo $orderID; ?>');
+    var strgPafCart = JSON.parse(localStorage.getItem('pafCart'));
+    var strgPafCartCount = localStorage.getItem('pafCartCount');
+
+    if(!strgPafOrderID && strgPafCartCount < 1)
+    {
+        window.location.href = `<? echo get_permalink(get_page_by_path('cashier/error')); ?>?_error=001`;
+    }
+    
+    if(strgPafOrderID && strgPafCartCount < 1)
+    {
+        window.location.href = `<? echo get_permalink(get_page_by_path('cashier/error')); ?>?_error=002&_order=${strgPafOrderID}`;
+    }
+    
 
     var products = <? echo json_encode($products); ?>;
-    var orderID = '<? echo $orderID; ?>'
-
+    var orderID = localStorage.getItem('pafOrderID');
 
     Vue.component('modal-payment', {
         template: '#template-modal-payment'
-        , props: ['orderid', 'total']
+        , props: ['orderid', 'total', 'subtotal', 'fee', 'amount']
         , data: function(){
             return {
                   paymentMessage: ''
@@ -302,13 +332,13 @@ get_header(); ?>
             }
         }
         , computed: {
-            
+
         }
         , methods: {
             async pay()
             {
 
-                this.isExecuting = true
+                this.isExecuting = true;
                 this.paymentMessage = 'お支払い中です'
 
                 try {
@@ -319,22 +349,29 @@ get_header(); ?>
                         !tokenResult.token.id ||
                         tokenResult.token.id === ''
                     ) {
-                        throw new Error('トークン発行エラー')
+                        this.isExecuting = false;
+                        throw new Error('トークン発行エラー');
                     }
 
                     var url = '/charge.php'
                     var params = {
                           token: tokenResult.token.id
-                        , amount: this.total
+                        , amount: this.amount
                         , orderID: this.orderid
                     }
-                    var chargeResult = await axios.post(url, params)
-                    
+
+                    var chargeResult = await axios.post(url, params);
+
                     if (!chargeResult || chargeResult.data !== 'success') {
+                        this.isExecuting = false;
                         throw new Error('お支払いエラー')
                     }
 
-                    this.paymentMessage = 'お支払いに成功しました'
+
+                    localStorage.removeItem('pafCart');
+                    localStorage.removeItem('pafCartCount');
+
+                    this.paymentMessage = 'お支払いに成功しました。<br>注文を完了してください。'
                     this.paymentCompleted = true
                     this.isExecuting = false
 
@@ -367,7 +404,7 @@ get_header(); ?>
             }
             , complete: function(){ this.$emit('complete') }
             , close: function(){ this.$emit('close') }
-            
+
         }
 
         , mounted: function(){
@@ -396,6 +433,8 @@ get_header(); ?>
         , data: {
               products: products
             , pafCart : strgPafCart
+            , pafCartCount: strgPafCartCount || 0
+            , deliveryFee: 0
             , step : 1
             , user:{
                   name: ''
@@ -437,6 +476,18 @@ get_header(); ?>
                 , emailConfirm: false
             }
 
+            , helpers:{
+                  agree: '必ずチェックしてください'
+                , name: false
+                , zipcode: false
+                , prefecture: false
+                , city: false
+                , address1: false
+                , tel: false
+                , email: false
+                , emailConfirm: false
+            }
+
             , modalExecution: false
             , modalPayment: false
             , paymentMethod: 0
@@ -454,15 +505,17 @@ get_header(); ?>
             {
 
                 var arg = [];
-                Object.keys(this.pafCart).forEach(k => {
-                    var filmID = k.replace('film_', '')
-                    var film = this.products.find(a => a.prod_key == filmID);
-                    if(film)
-                    {
-                        film.cart = this.pafCart[k]
-                        arg.push(film)
-                    }
-                })
+                if(this.pafCartCount > 0){
+                    Object.keys(this.pafCart).forEach(k => {
+                        var filmID = k.replace('film_', '')
+                        var film = this.products.find(a => a.prod_key == filmID);
+                        if(film)
+                        {
+                            film.cart = this.pafCart[k]
+                            arg.push(film)
+                        }
+                    })
+                }
                 return arg;
             }
 
@@ -490,7 +543,7 @@ get_header(); ?>
 
             , getSubtotal: function(prodKey)
             {
-                
+
                 var prod = this.products.find(v => v.prod_key == prodKey)
                 var prices = prod.price_info;
 
@@ -502,26 +555,30 @@ get_header(); ?>
                 return sum;
 
             }
-            , getTotal: function(deliveryFee)
+            , getTotal: function(includeDeliveryFee)
             {
 
-
                 var sum1 = 0;
-                Object.keys(this.pafCart).forEach(k => {
-
-                    var prod = this.products.find(v => v.prod_key == k.replace('film_', ''))
-                    var prices = prod.price_info;
-
-                    var sum2 = 0;
-                    this.pafCart[k].forEach((v, k) => {
-                        sum2 = sum2 + v * prices[k]['amount']
+                if(this.pafCartCount > 0)
+                {
+                    Object.keys(this.pafCart).forEach(k => {
+    
+                        var prod = this.products.find(v => v.prod_key == k.replace('film_', ''))
+                        var prices = prod.price_info;
+    
+                        var sum2 = 0;
+                        this.pafCart[k].forEach((v, k) => {
+                            sum2 = sum2 + v * prices[k]['amount']
+                        })
+    
+                        sum1 = sum1 + sum2;
+    
                     })
-
-                    sum1 = sum1 + sum2;
-
-                })
-
-                if(deliveryFee) sum1 = sum1 + 500
+    
+                    this.deliveryFee = (sum1 >= 3000) ? 0 : 300;
+    
+                    if(includeDeliveryFee) sum1 = sum1 + this.deliveryFee;
+                }
 
                 return sum1;
 
@@ -560,7 +617,7 @@ get_header(); ?>
                         this.modalPayment = false;
                         localStorage.removeItem('pafCart');
                         localStorage.removeItem('pafCartCount');
-                        window.location.href = '<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>'
+                        window.location.href = `<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>?method=${this.paymentMethod}&orderID=${this.orderID}`;
                     }
                 }
             }
@@ -615,7 +672,7 @@ get_header(); ?>
                 }
                 else if(!/^\d{7}$/.test(this.user.zipcode))
                 {
-                    this.errors['zipcode'] = '正しい郵便番号を入力ください'
+                    this.errors['zipcode'] = '正しい郵便番号を入力ください 半角数字のみ 例)1000005'
                 }
             }
             , checkPrefecture: function()
@@ -651,20 +708,21 @@ get_header(); ?>
                 }
                 else if(!/^\d{10,11}$/.test(this.user.tel))
                 {
-                    this.errors['tel'] = '正しい郵便番号を入力ください'
+                    this.errors['tel'] = '正しい郵便番号を入力ください 半角数字のみ 例)01234567910'
                 }
 
             }
             , checkEmail: function()
             {
-                this.errors['email'] = false
+                this.errors['email'] = false;
+                // this.helpers['email'] = 'ex'
                 if(this.user.email === '')
                 {
-                    this.errors['email'] = 'メールを入力してください'
+                    this.errors['email'] = 'メールアドレスを入力してください'
                 }
                 else if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.email))
                 {
-                    this.errors['email'] = '正しいメールアドレスを入力ください'
+                    this.errors['email'] = '正しいメールアドレスを入力ください 例)test@mail.com'
                 }
             }
             , checkEmailConfirm: function()
@@ -672,7 +730,7 @@ get_header(); ?>
                 this.errors['emailConfirm'] = false
                 if(this.user.emailConfirm === '')
                 {
-                    this.errors['emailConfirm'] = 'メールを入力してください'
+                    this.errors['emailConfirm'] = 'メールアドレスを入力してください'
                 }
                 else if(this.user.email != this.user.emailConfirm)
                 {
@@ -691,7 +749,7 @@ get_header(); ?>
             , completeUserInfo: function()
             {
                 try {
-                    
+
                     this.checkName();
                     this.checkZipcode();
                     this.checkPrefecture();
@@ -745,6 +803,5 @@ get_header(); ?>
     })
 </script>
 
-
-
-<? get_footer(); ?>
+</body>
+</html>

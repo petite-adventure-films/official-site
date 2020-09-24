@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Cashier thanks
+Template Name: Cashier error
 */
 get_header('pafshop'); ?>
 
@@ -44,19 +44,28 @@ get_header('pafshop'); ?>
     <!--.header_page--></header>
 
     <div class="m7_t" id="confirm">
-        <p>ご注文、誠にありがとうございます。</p>
-        <p>
-            <? if($_GET['method'] == 1): ?>
-                ご注文内容の確認と、代金のお支払いについてご連絡を差し上げます。
-            <? else: ?>
-                ご注文内容の確認についてご連絡を差し上げます。
-            <? endif; ?>
-            <br />しばらくお待ちください。</p>
+    
+        <? if($_GET['_error'] == '001'): ?>
+        
+            <p>不正なアクセスです。<br>
+            お手数ですが、最初からご注文を行ってください。</p>
             
-        <p class="m2_t">
-            <a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">サイトHOME</a><br>
-            <a href="<?php echo get_post_type_archive_link("pafshop"); ?>" itemprop="url">ショップ TOP</a>
-        </p>
+            <p class="m2_t">エラー番号 : <? echo $_GET['_error']; ?></p>
+        
+        <? else: ?>
+        
+            <p>注文手続中にエラーが発生しています。<br>
+            お手数ですが、下記のエラー番号と注文番号でお問い合わせください。</p>
+            
+            <p class="m2_t">エラー番号 : <? echo $_GET['_error']; ?></p>
+            <p>注文番号 : <? echo $_GET['_order']; ?></p>
+            
+        <? endif; ?>
+           
+        <div class="inline_block m2_t btn priority1">
+            <a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
+        </div>
+        
     </div>
 
 </div><!--.single-->

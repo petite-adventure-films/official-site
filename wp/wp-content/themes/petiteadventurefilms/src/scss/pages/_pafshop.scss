@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.pafshop{
+
+.tabs{
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid $black3;
+    border-right: 1px solid $black3;
+    @include box-sizing(border-box);
+    
+    ._tab{
+        padding-top: 8px;
+        padding-bottom: 8px;
+        @include box-sizing(border-box);
+        background: $black4;
+        border-left: 1px solid $black3;
+        border-bottom: 1px solid $black3;
+        &._selected{
+            background: $white;
+            border-bottom: 1px solid $white;
+        }
+    }
+    
+    @media all and (max-width: $max_width){
+        ._tab{
+            font-size: 14px;
+        }
+    }
+    
+}
+
+._credit{
+    min-width: 224px;
+}
+
+.confirm_btns{
+    width: 304px;
+    text-align: left;
+}
+
+}

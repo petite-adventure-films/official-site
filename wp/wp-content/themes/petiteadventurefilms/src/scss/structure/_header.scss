@@ -16,20 +16,100 @@
 
         #jpn{
             @extend .caption1;
+            letter-spacing: -1px;
         }
-
+        
+        .cart_btn{
+        
+            position: absolute;
+            width: 32px;
+            text-align: center;
+            
+            a{
+                    
+                position: absolute;
+                color: $black2;
+                
+                
+                &._added{
+                    color: $pink;
+                }
+                
+                ._number{
+                    position: absolute;
+                    top: -6px;
+                    right: -6px;
+                    width: 16px;
+                    height: 16px;
+                    // border: 2px solid $pink;
+                    line-height: 16px;
+                    text-align: center;
+                    font-size: 12px;
+                    background: rgba($red, .80);
+                    color: $white;
+                    @include border-radius(50%);
+                }
+                
+            }
+            
+            ._icon{
+                display: block;
+                font-size: 32px;
+            }
+            ._text{
+                display: block;
+                font-size: 12px;
+                line-height: 12px;
+                margin-top: -2px;
+            }
+            
+        }
+        
+        .qna_btn{
+        
+            position: absolute;
+            width: 32px;
+            text-align: center;
+            
+            a{
+                color: $black2;
+                &:hover{
+                    color: $black3;
+                }
+            }
+            
+            ._icon{
+                display: block;
+                font-size: 32px;
+            }
+            ._text{
+                display: block;
+                font-size: 12px;
+                line-height: 12px;
+                margin-top: -2px;
+            }
+            ._text{
+                display: block;
+                font-size: 12px;
+                line-height: 12px;
+                margin-top: -2px;
+            }
+        
+        }
+        
         .shop_btn{
+        
             position: absolute;
             width: 32px;
             text-align: center;
             a{
                 color: $pink;
             }
-            .icon-store{
+            ._icon{
                 display: block;
                 font-size: 32px;
             }
-            .text-store{
+            ._text{
                 display: block;
                 font-size: 12px;
                 line-height: 12px;
@@ -41,12 +121,23 @@
 
         //PC
         @media all and (min-width: $min_width){
+        
             #eng{
                 font-size: 32px;
                 line-height: 32px;
             }
 
             .shop_btn{
+                top: 4px;
+                right: 0;
+            }
+            
+            .qna_btn{
+                top: 4px;
+                right: 24px;
+            }
+            
+            .cart_btn{
                 top: 4px;
                 right: 0;
             }
@@ -64,6 +155,11 @@
             .shop_btn{
                 top: 0;
                 right: 48px;
+            }
+            
+            .cart_btn{
+                top: 4px;
+                right: 16px;
             }
 
         }
