@@ -53,6 +53,10 @@ get_header('pafshop'); ?>
             <? endif; ?>
             <br />しばらくお待ちください。</p>
             
+        <p class="m1_t">
+            注文番号: <? echo $_GET['method']; ?>
+        </p>
+            
         <p class="m2_t">
             <a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">サイトHOME</a><br>
             <a href="<?php echo get_post_type_archive_link("pafshop"); ?>" itemprop="url">ショップ TOP</a>

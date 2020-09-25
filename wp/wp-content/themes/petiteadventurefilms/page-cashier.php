@@ -39,6 +39,11 @@
                         class="_details">
                             <div class="cell __index">
                                 {{item.price_info[key].index}}
+                                <span v-if="
+                                   pafCartTypes[`film_${item.prod_key}`]
+                                && pafCartTypes[`film_${item.prod_key}`][key] > 0">
+                                    ({{discTypes[(pafCartTypes[`film_${item.prod_key}`][key])]}})
+                                </span>
                             </div>
                             <div class="__detail_unit_amount_sum">
                                 <div class="cell __unit al_r">
@@ -61,10 +66,6 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="_subtotal">
-                        <span class="_fee_index">小計</span>
-                        <span class="_fee_amount">{{convertYen(getSubtotal(item.prod_key))}}</span>
-                    </div>
                 </div>
             </div>
     
@@ -83,8 +84,9 @@
                 <span class="_fee_amount">{{convertYen(getTotal(true))}}</span>
             </div>
             <p class="m1_t footnotes caption1">
+                <small>※DISC規格の記載がない場合はDVDです</small><br>
                 <small>※価格には消費税が含まれています</small><br>
-                <small>※1回のご注文ごとに送料300円が掛かります<br>
+                <small>※1回のご注文ごとに送料300円が掛かります</small><br>
                 <span class="pink">3,000円以上のお買い上げで送料無料！</span></small>
             </p>
     
@@ -136,6 +138,7 @@ v-if="showModal == true"
     Vue.config.devtools = true;
 
     var strgPafCart = JSON.parse(localStorage.getItem('pafCart')) || localStorage.setItem('pafCart', JSON.stringify({}));
+    var strgPafCartTypes = JSON.parse(localStorage.getItem('pafCartTypes')) || localStorage.setItem('pafCartTypes', JSON.stringify({}));
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
 
     var products = <? echo json_encode(get_products()); ?>;
@@ -171,7 +174,9 @@ v-if="showModal == true"
         el: '#app'
         , data: {
               products: products
+            , discTypes: ['DVD', 'ブルーレイ']
             , pafCart : strgPafCart || {}
+            , pafCartTypes : strgPafCartTypes || {}
             , pafCartCount: strgPafCartCount || 0
             , purchaseLimit : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             , showModal: false

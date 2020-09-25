@@ -1,4 +1,4 @@
-<?php
+<?
 // phpinfo();
 get_header('pafshop');
 
@@ -8,62 +8,58 @@ $term_name = $post_type->label;
 
 $price_indexs = get_post_meta_arr($post->ID, "product_info_01");
 $price_contents = get_post_meta_arr($post->ID, "product_info_02");
-$dvd_specials = get_post_meta($post->ID, "product_info_04", TRUE);
-// $poster_img = get_post_meta($post->ID, "product_info_03", TRUE);
+
+$type_indexs = get_post_meta_arr($post->ID, "product_info_07");
+$type_contents = get_post_meta_arr($post->ID, "product_info_08");
+
+$dvd_catch = get_post_meta($post->ID, 'product_info_05', TRUE);
+$dvd_intro = get_post_meta($post->ID, "product_info_03", TRUE);
+$dvd＿configuration = get_post_meta($post->ID, "product_info_04", TRUE);
+
+$dvd＿no_specials = get_post_meta($post->ID, "product_info_06", TRUE);
 
 $film_terms = get_the_terms($post, 'filmtags');
-$film_id = $film_terms[0]->term_id;
+$film_posts = [];
 
-$film_query = new WP_Query([
-      'post_type' => 'films'
-    , 'tax_query' => array(
-        array(
-              'taxonomy' => 'filmtags'
-            , 'field'    => 'term_id'
-            , 'terms'    => $film_id
+foreach(array_reverse($film_terms) as $key => $term)
+{
+    $film_id = $term->term_id;
+
+    $film_query = new WP_Query([
+          'post_type' => 'films'
+        , 'tax_query' => array(
+            array(
+                  'taxonomy' => 'filmtags'
+                , 'field'    => 'term_id'
+                , 'terms'    => $film_id
+            )
         )
-    )
-]);
+    ]);
+    
+    $_posts = $film_query->posts;
+    $_post = $_posts[0];
+    $_post_id = $_post->ID;
+    
+    $film_posts[$key]['title'] = $_post->post_title;
 
-$film_posts = $film_query->posts;
-$film_post = $film_posts[0];
-$film_post_id = $film_posts[0]->ID;
+    $film_posts[$key]['poster_img'] = get_post_meta($_post_id, "films_info_00", TRUE);
+    $film_posts[$key]['prizes'] = get_post_meta($_post_id, "films_info_07", FALSE);
+    
+    $genre = get_post_meta($_post_id, "films_info_01", TRUE);
+    $country = get_post_meta($_post_id, "films_info_02", TRUE);
+    $year = get_post_meta($_post_id, "films_info_03", TRUE);
+    $running_time = get_post_meta($_post_id, "films_info_04", TRUE);
+    $basic_info = array($genre, $country, $year, $running_time);
+    $film_posts[$key]['basic_info'] = array_filter($basic_info, "strlen");
+    
+    $film_posts[$key]['detail_indexs'] = get_post_meta_arr($_post_id, "films_info_05");
+    $film_posts[$key]['detail_contents'] = get_post_meta_arr($_post_id, "films_info_06");
+    
+    $film_posts[$key]['credits_indexs'] = get_post_meta_arr($_post_id, "films_info_10");
+    $film_posts[$key]['credits_contents'] = get_post_meta_arr($_post_id, "films_info_11");
+    
+}
 
-$poster_img = get_post_meta($film_post_id, "films_info_00", TRUE);
-$gallery_imgs = get_post_meta($film_post_id, "films_info_09", FALSE);
-
-$catch = get_post_meta($film_post_id, "films_info_21", TRUE);
-$prizes = get_post_meta($film_post_id, "films_info_07", FALSE);
-
-$genre = get_post_meta($film_post_id, "films_info_01", TRUE);
-$country = get_post_meta($film_post_id, "films_info_02", TRUE);
-$year = get_post_meta($film_post_id, "films_info_03", TRUE);
-$running_time = get_post_meta($film_post_id, "films_info_04", TRUE);
-$basic_info = array($genre, $country, $year, $running_time);
-$basic_info = array_filter($basic_info, "strlen");
-
-$recommend_by = get_post_meta_arr($film_post_id, "films_info_12");
-$recommends = get_post_meta_arr($film_post_id, "films_info_13");
-
-$detail_indexs = get_post_meta_arr($film_post_id, "films_info_05");
-$detail_contents = get_post_meta_arr($film_post_id, "films_info_06");
-
-$teaser = get_post_meta($film_post_id, "films_info_08", TRUE);
-$movie = get_post_meta($film_post_id, "films_info_17", TRUE);
-
-$excerpt = apply_filters('the_content', $film_post->post_excerpt);
-
-$national_screenings = get_post_meta($film_post_id, "films_info_14");
-$global_screenings = get_post_meta($film_post_id, "films_info_15");
-$media_screenings = get_post_meta($film_post_id, "films_info_27");
-
-$related_infomation = get_post_meta($film_post_id, "films_info_16");
-
-$credits_indexs = get_post_meta_arr($film_post_id, "films_info_10");
-$credits_contents = get_post_meta_arr($film_post_id, "films_info_11");
-
-$sell_dvd = get_post_meta($film_post_id, "films_info_20");
-$sell_dvd_appendix = get_post_meta($film_post_id, "films_info_22", TRUE);
 ?>
 
 <div class="single">
@@ -71,23 +67,23 @@ $sell_dvd_appendix = get_post_meta($film_post_id, "films_info_22", TRUE);
     <header class="col col_9 last header_page">
         <nav class="crumbs">
             <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
-                <a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">
+                <a href="<? echo get_bloginfo("url"); ?>" itemprop="url">
                     <span itemprop="title">HOME</span>
                 </a>
             </div>
             <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
-                <a href="<?php echo $term_link; ?>" itemprop="url">
-                    <span itemprop="title"><?php echo $term_name; ?></span>
+                <a href="<? echo $term_link; ?>" itemprop="url">
+                    <span itemprop="title"><? echo $term_name; ?></span>
                 </a>
             </div>
             <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
-                <a href="<?php echo get_permalink($post->ID); ?>" itemprop="url">
-                    <span itemprop="title"><?php echo $post->post_title; ?></span>
+                <a href="<? echo get_permalink($post->ID); ?>" itemprop="url">
+                    <span itemprop="title"><? echo $post->post_title; ?></span>
                 </a>
             </div>
         </nav>
         <h1 class="m5_b">
-            <?php if(is_day()){
+            <? if(is_day()){
                 printf( __('日別アーカイブ: %s'), get_the_date());
             }elseif(is_month()){
                 printf( __('月別アーカイブ: %s'), get_the_date('Y年n月'));
@@ -104,24 +100,48 @@ $sell_dvd_appendix = get_post_meta($film_post_id, "films_info_22", TRUE);
         </h1>
     <!--.header_page--></header>
 
-    <div class="col col_5">
+    <div class="col col_4">
         <? echo get_post_meta_img($poster_img, "large"); ?>
     </div>
 
-    <div class="col col_4 last">
+    <div class="col col_5 last">
         
-        <?php if($prizes): ?>
+        <? if($film_posts[0]['prizes']): ?>
             <div class="subhead1 m2_b">
-            <?php foreach($prizes as $prize): ?>
-                <p><?php echo $prize; ?></p>
-            <?php endforeach; ?>
+            <? foreach($film_posts[0]['prizes'] as $prize): ?>
+                <p><? echo $prize; ?></p>
+            <? endforeach; ?>
             </div>
-        <?php endif; ?>
+        <? endif; ?>
+        
+        <? if($dvd_catch): ?>
+            <div class="subhead1 m2_b">
+                <p><? echo $dvd_catch; ?></p>
+            </div>
+        <? endif; ?>
     
         <div
         v-for = "(val, key) in priceIndexs"
-        :key="'price' + key">
-            {{val}} {{convertYen(priceContents[key])}}
+        :key="'price' + key"
+            class="m1_t">
+            
+            {{val}}
+            
+            <span v-if="typeContents">
+                <select
+                v-if="typeContents[key].length > 1"
+                    v-model="pafCartTypes[key]">
+                    <option
+                    v-for="(val3, key3) in typeContents[key]"
+                    :key="'type' + key + key3"
+                        :value="key3">{{val3}}</option>
+                </select>
+                <span v-else>
+                    {{typeContents[key][0]}}
+                </span>
+            </span>
+            
+            {{convertYen(priceContents[key])}}
             
             <select v-model="pafCart[key]">
                 <option value=0 selected>個数</option>
@@ -149,7 +169,8 @@ $sell_dvd_appendix = get_post_meta($film_post_id, "films_info_22", TRUE);
     <div class="col col_9 last">
         <div class="tabs m4_t al_c">
             <div @click="displayTab = 1" :class="['_tab cursor_pointer', (displayTab == 1) ? '_selected' : '']">DVDの構成</div>
-            <div @click="displayTab = 2" :class="['_tab cursor_pointer', (displayTab == 2) ? '_selected' : '']">特典の詳細</div>
+            <div @click="displayTab = 2" :class="['_tab cursor_pointer', (displayTab == 2) ? '_selected' : '']">
+                <? echo ($dvd＿no_specials) ? '本編の詳細' : '特典の詳細'; ?></div>
             <div @click="displayTab = 3" :class="['_tab cursor_pointer', (displayTab == 3) ? '_selected' : '']">制作クレジット</div>
         </div>
     </div>
@@ -158,29 +179,43 @@ $sell_dvd_appendix = get_post_meta($film_post_id, "films_info_22", TRUE);
         
         <div class="col col_9 last">
         
-            <?php if($detail_indexs): ?>
-                <dl class="list_definition">
-                <?php for($i=0; $i<count($detail_indexs); $i++): ?>
-                    <?php echo $detail_indexs[$i] ? "<dt>".$detail_indexs[$i]."</dt>" : ""; ?>
-                    <?php echo $detail_contents[$i] ? "<dd>".$detail_contents[$i]."</dd>" : ""; ?>
-                <?php endfor; ?>
-                </dl>
-                <div class="clear"></div>
-            <?php endif;?>
+            <? foreach($film_posts as $key => $_post): ?>
             
-            <?php if($excerpt): ?>
+                <? if($_post['detail_indexs']):?>
+                    <? if(count($film_posts) > 1): ?>
+                        <div class="<? echo ($key > 0) ? 'm1_t' : ''; ?>"><? echo $_post['title']; ?></div>
+                    <? endif; ?>
+                    <dl class="list_definition">
+                    <? for($i=0; $i<count($_post['detail_indexs']); $i++): ?>
+                        <? if(mb_strpos($_post['detail_indexs'][$i],'監督') !== false): ?>
+                            <? echo $_post['detail_indexs'][$i] ? "<dt>".$_post['detail_indexs'][$i]."</dt>" : ""; ?>
+                            <? echo $_post['detail_contents'][$i] ? "<dd>".$_post['detail_contents'][$i]."</dd>" : ""; ?>
+                        <? endif; ?>
+                    <? endfor; ?>
+                    </dl>
+                    <div class="clear"></div>
+                <? endif;?>
+                <? if($_post['basic_info']): ?>
+                    <p><? echo implode(" / ", $_post['basic_info']); ?></p>
+                <? endif; ?>
+            <? endforeach; ?>
+            
+            
+            <? if($dvd＿configuration): ?>
                 <div class="m1_t">
-                    <?php echo $excerpt; ?>
+                    <? echo $dvd＿configuration; ?>
                 </div>
-            <?php endif; ?>
+            <? endif; ?>
             
-            <div class="m1_t">
-                <?php echo apply_filters('the_content', $post->post_content); ?>
-            </div>
+            <? if($dvd_intro): ?>
+                <div class="m1_t">
+                    <? echo $dvd_intro; ?>
+                </div>
+            <? endif; ?>
             
             <p class="m2_t">DVD購入や上映についてのお問い合わせはこちらから</p>
             <div class="inline_block btn priority1">
-                <a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
+                <a href="<? echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
             </div>
             
         </div>
@@ -189,39 +224,39 @@ $sell_dvd_appendix = get_post_meta($film_post_id, "films_info_22", TRUE);
     
     <div v-if="displayTab == 2" class="m2_t">
         
-        <div class="col col_9 last">
-    
-            <p>特典映像</p>
-            <?php if($dvd_specials): ?>
-                <?php echo $dvd_specials; ?>
-            <?php endif; ?>
-            
-            <p class="m2_t">フォトギャラリー</p>
-            <p class="m2_t">予告編</p>
-        
+        <div class="col col_9 last _specials">
+            <? echo apply_filters('the_content', $post->post_content); ?>
         </div>
         
     </div>
     
     <div v-if="displayTab == 3">
         
-        <?php if($credits_indexs): ?>
-            <div v-masonry item-selector="._credit">
-            <?php for($i=0; $i<count($credits_indexs); $i++): ?>
-                <div class="col col_3 _credit m2_t" v-masonry-tile>
-                    <p><?php echo $credits_indexs[$i]; ?></p>
-                    <?php echo $credits_contents[$i]; ?>
+        <div class="m2_t">
+            <? foreach($film_posts as $key => $_post): ?>
+                <? if($_post['credits_indexs']): ?>
+                    <? if(count($film_posts) > 1): ?>
+                        <div class="col col_9 last<? echo ($key > 0) ? ' m2_t': ''; ?>"><? echo $_post['title']; ?></div>
+                    <? endif; ?>
+                    <div v-masonry item-selector="._credit_<? echo $i; ?>">
+                        <? for($i=0; $i<count($_post['credits_indexs']); $i++): ?>
+                            <div class="col col_3 _credit _credit__<? echo $i; ?> m1_t" v-masonry-tile>
+                                <p><? echo $_post['credits_indexs'][$i]; ?></p>
+                                <? echo $_post['credits_contents'][$i]; ?>
+                            </div>
+                        <? endfor; ?>
+                    </div>
                 </div>
-            <?php endfor; ?>
-            </div>
-        <?php endif;?>
+                <? endif;?>
+            <? endforeach; ?>
+        </div>
     
     </div>
     <div class="clear"></div>
 
 </div><!--.single-->
 
-<?php get_footer('scripts'); ?>
+<? get_footer('scripts'); ?>
 
 <modal
 v-if="showModal == true"
@@ -236,7 +271,7 @@ v-if="showModal == true"
                     <span class="ele">買い物を続ける</span>
                 </div>
                 <div class="btn shop m1_t">
-                    <a href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">買い物かごを見る</span>
+                    <a href="<? echo get_permalink(get_page_by_path("cashier")); ?>">買い物かごを見る</span>
                 </div>
             </div>
         </div>
@@ -253,14 +288,37 @@ v-if="showModal == true"
 
     var price_indexs = <? echo json_encode($price_indexs) ?>;
     var price_contents = <? echo json_encode($price_contents) ?>;
+    
+    var has_types = <? echo json_encode($type_contents) ?> || false;
+    var type_indexs = <? echo json_encode($type_indexs) ?>;
+    var type_contents = <? echo json_encode($type_contents) ?>;
+    if(type_contents){
+        type_contents.forEach((v, k) => {
+            type_contents[k] = v.split(',');
+        })
+    }
+    
     var film_id = 'film_<? echo $film_id ?>';
+    
+    var emptyPafCart = [];
+    var emptyPafCartTypes = [];
+    for(var i of price_indexs){
+        emptyPafCart.push(0);
+        emptyPafCartTypes.push(0);
+    }
 
     if(!JSON.parse(localStorage.getItem('pafCart'))){
         localStorage.setItem('pafCart', JSON.stringify({}));
     }
+    
+    if(!JSON.parse(localStorage.getItem('pafCartTypes'))){
+        localStorage.setItem('pafCartTypes', JSON.stringify({}));
+    }
 
     var strgPafCart = JSON.parse(localStorage.getItem('pafCart'));
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
+    var strgPafCartTypes = (has_types) ? JSON.parse(localStorage.getItem('pafCartTypes')) : false;
+    
 
     Vue.component('modal', {
         template: '#modal-template'
@@ -275,11 +333,18 @@ v-if="showModal == true"
               filmID : film_id
             , priceIndexs   : price_indexs
             , priceContents : price_contents
+            
+            , typeIndexs : type_indexs || false
+            , typeContents : type_contents || false
+            
             , purchaseLimit : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             , strgPafCart : strgPafCart
-            , pafCart : (strgPafCart && strgPafCart[film_id]) ? strgPafCart[film_id] : [0, 0]
+            , strgPafCartTypes: strgPafCartTypes
+            , pafCart : (strgPafCart && strgPafCart[film_id]) ? strgPafCart[film_id] : emptyPafCart
+            , pafCartTypes : (strgPafCartTypes && strgPafCartTypes[film_id]) ? strgPafCartTypes[film_id] : emptyPafCartTypes
             , pafCartCount : strgPafCartCount || 0
             , errorMessage: ''
+            
             
             , showModal: false
             , displayTab: 1
@@ -311,8 +376,22 @@ v-if="showModal == true"
                     this.pafCart.forEach(v => {
                         this.strgPafCart[this.filmID].push(v || 0)
                     })
-
+                    
                     localStorage.setItem('pafCart', JSON.stringify(this.strgPafCart))
+                    
+                    if(strgPafCartTypes)
+                    {
+                        if(this.strgPafCartTypes[this.film] === undefined)
+                        {
+                            this.strgPafCartTypes[this.filmID] = [];
+                        }
+                        this.pafCartTypes.forEach(v => {
+                            this.strgPafCartTypes[this.filmID].push(v || 0)
+                        })
+                        localStorage.setItem('pafCartTypes', JSON.stringify(this.strgPafCartTypes))
+                    
+                    }
+
                     this.setPafCartCount();
 
                     this.showModal = true;
@@ -343,6 +422,8 @@ v-if="showModal == true"
         }
         , created: function()
         {
+        console.log('pafCart', this.pafCart);
+        console.log('pafCartTypes', this.pafCartTypes)
             var count = 0;
             this.pafCart.forEach(v => {
                 count = count + parseInt(v)

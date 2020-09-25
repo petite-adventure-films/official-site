@@ -26,7 +26,24 @@ get_header('pafshop');?>
             <li class="col col_3<?php ($i % 3) ? "" : " last"; ?>">
                 <a href="<?php echo get_permalink($post->ID); ?>">
                 <?php
-                $poster_img = get_post_meta($post->ID, "product_info_03", TRUE);
+                $film_terms = get_the_terms($post, 'filmtags');
+                $film_id = $film_terms[0]->term_id;
+                
+                $film_query = new WP_Query([
+                      'post_type' => 'films'
+                    , 'tax_query' => array(
+                        array(
+                              'taxonomy' => 'filmtags'
+                            , 'field'    => 'term_id'
+                            , 'terms'    => $film_id
+                        )
+                    )
+                ]);
+                
+                $film_posts = $film_query->posts;
+                $film_post_id = $film_posts[0]->ID;
+                
+                $poster_img = get_post_meta($film_post_id, "films_info_00", TRUE);
                 echo get_post_meta_img($poster_img, "large");
                 ?>
                 <p class="film_title"><?php echo $post->post_title; ?></p>

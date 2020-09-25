@@ -80,18 +80,20 @@ get_header('pafshop'); ?>
                     :key = "'film_' + item.ID + 'price' + key"
                         v-if="unit > 0"
                         class="_details">
-                            <div class="cell __index">{{item.price_info[key].index}}</div>
+                            <div class="cell __index">
+                                {{item.price_info[key].index}}
+                                <span v-if="
+                                   pafCartTypes[`film_${item.prod_key}`]
+                                && pafCartTypes[`film_${item.prod_key}`][key] > 0">
+                                    ({{discTypes[(pafCartTypes[`film_${item.prod_key}`][key])]}})
+                                </span>
+                            </div>
                             <div class="__detail_unit_amount_sum">
                                 <div class="cell __amount al_r">{{convertYen(item.price_info[key].amount)}}</div>
                                 <div class="cell __unit al_c">{{unit}}</div>
                                 <div class="cell __sum al_r">{{convertYen(item.price_info[key].amount * unit)}}</div>
                             </div>
                     </div>
-                    <div class="_subtotal">
-                        <span class="_fee_index">小計</span>
-                        <span class="_fee_amount">{{convertYen(getSubtotal(item.prod_key))}}</span>
-                    </div>
-
                 </div>
 
                 <div class="fee">
@@ -304,6 +306,7 @@ v-if="modalExecution === true"></modal-execution>
 
     var strgPafOrderID = localStorage.getItem('pafOrderID') || localStorage.setItem('pafOrderID', '<? echo $orderID; ?>');
     var strgPafCart = JSON.parse(localStorage.getItem('pafCart'));
+    var strgPafCartTypes = JSON.parse(localStorage.getItem('pafCartTypes')) || localStorage.setItem('pafCartTypes', JSON.stringify({}));
     var strgPafCartCount = localStorage.getItem('pafCartCount');
 
     if(!strgPafOrderID && strgPafCartCount < 1)
@@ -369,6 +372,7 @@ v-if="modalExecution === true"></modal-execution>
 
 
                     localStorage.removeItem('pafCart');
+                    localStorage.removeItem('pafCartTypes')
                     localStorage.removeItem('pafCartCount');
 
                     this.paymentMessage = 'お支払いに成功しました。<br>注文を完了してください。'
@@ -432,8 +436,10 @@ v-if="modalExecution === true"></modal-execution>
         el: '#app'
         , data: {
               products: products
+            , discTypes: ['DVD', 'ブルーレイ']
             , pafCart : strgPafCart
-            , pafCartCount: strgPafCartCount || 0
+            , pafCartTypes : strgPafCartTypes || {}
+            , pafCartCount : strgPafCartCount || 0
             , deliveryFee: 0
             , step : 1
             , user:{
@@ -511,7 +517,8 @@ v-if="modalExecution === true"></modal-execution>
                         var film = this.products.find(a => a.prod_key == filmID);
                         if(film)
                         {
-                            film.cart = this.pafCart[k]
+                            film.cart = this.pafCart[k];
+                            film.types = this.pafCartTypes[k];
                             arg.push(film)
                         }
                     })
@@ -521,11 +528,17 @@ v-if="modalExecution === true"></modal-execution>
 
             , order: function()
             {
+                var self = this;
                 var arg = []
                 this.addedItems.forEach(a => {
                     a.cart.forEach((v, k) => {
                         if(v > 0){
-                            arg.push(`${a.basic_info.post_title }[${a.price_info[k].index}] : ${v}`)
+                            var type = '';
+                            if(a.types)
+                            {
+                                type = (a.types[k] > 0) ? `【${self.discTypes[v]}】` : type;
+                            }
+                            arg.push(`${a.basic_info.post_title}${type}【${a.price_info[k].index}】 : ${v}`)
                         }
                     })
                 })
@@ -616,6 +629,7 @@ v-if="modalExecution === true"></modal-execution>
                     {
                         this.modalPayment = false;
                         localStorage.removeItem('pafCart');
+                        localStorage.removeItem('pafCartTypes')
                         localStorage.removeItem('pafCartCount');
                         window.location.href = `<? echo get_permalink(get_page_by_path('cashier/thanks')); ?>?method=${this.paymentMethod}&orderID=${this.orderID}`;
                     }
