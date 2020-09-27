@@ -28,6 +28,8 @@ if($data){
             add_post_meta($insert_id, 'order_info_17', $order);
         }
         add_post_meta($insert_id, 'order_info_18', $data['subtotal']);
+        add_post_meta($insert_id, 'order_info_19', $data['deliveryFee']);
+        add_post_meta($insert_id, 'order_info_20', $data['total']);
         add_post_meta($insert_id, 'order_info_13', $data['paymentMethod']);
         add_post_meta($insert_id, 'order_info_14', $data['receipt']);
         add_post_meta($insert_id, 'order_info_15', $data['receiptName']);

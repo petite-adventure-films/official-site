@@ -16,11 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
 <script src="https://unpkg.com/vue-masonry@0.11.3/dist/vue-masonry-plugin-window.js"></script>
-<script src="https://unpkg.com/vue-lazyload/vue-lazyload.js"></script>
-
-
 <script src="https://js.stripe.com/v3/"></script>
-<!-- <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
 <?php wp_head(); ?>
 </head>
 <body class="<?php echo set_body_class(); ?>">
@@ -35,22 +31,25 @@
                     <p id="eng">Petite Adventure Films Shop</p>
                     <p class="inline_block" id="jpn">プチ･アドベンチャー･フィルムズ ショップ</p>
                 </a>
-                <div class="qna_btn">
-                    <a href="<?php echo get_permalink(get_page_by_path("cashier/faq")); ?>">
-                        <span class="_icon icon-question-answer"></span>
-                        <span class="_text">FAQ</span>
-                    </a>
-                </div>
-                <div class="cart_btn">
-                    <a
-                    :class="(pafCartCount > 0) ? '_added' : ''"
-                    href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">
-                        <span class="_icon icon-shopping-basket"></span>
-                        <span
-                        v-if="pafCartCount > 0"
-                        class="_number pafCartCount">{{pafCartCount}}</span>
-                        <span class="_text">BASKET</span>
-                    </a>       
+                
+                <div class="_btns">
+                    <div class="__btn qna_btn inline_block">
+                        <a href="<?php echo get_permalink(get_page_by_path("cashier/faq")); ?>">
+                            <span class="___icon icon-question-answer"></span>
+                            <span class="___text">FAQ</span>
+                        </a>
+                    </div>
+                    <div class="__btn basket_btn inline_block">
+                        <a
+                        :class="(pafCartCount > 0) ? '_added' : ''"
+                        href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">
+                            <span class="___icon icon-shopping-basket"></span>
+                            <span
+                            v-if="pafCartCount > 0"
+                            class="___number pafCartCount">{{pafCartCount}}</span>
+                            <span class="___text">BASKET</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div><!-- col col_9 last -->
@@ -58,16 +57,5 @@
     </div>
 </nav>
 
-<?php if(is_home()): ?>
-    <div id="video_background_mask"></div>
-    <video autoplay loop muted preload="auto" id="video_background">
-        <source src="<?php echo get_bloginfo("template_url"); ?>/assets/video/home.mp4" type="video/mp4">
-        <source src="<?php echo get_bloginfo("template_url"); ?>/assets/video/home.webm" type="video/webm">
-    </video>
-    <div id="home_video" class="hidden video_container">
-        <div class="video" id="video"><div id="player"></div></div>
-    </div>
-<?php else: ?>
-    <div class="container">
-<?php endif; ?>
+<div class="container">
 <article>

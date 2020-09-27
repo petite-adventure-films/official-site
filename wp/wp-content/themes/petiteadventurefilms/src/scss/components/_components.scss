@@ -234,11 +234,9 @@ a{
     }
     dt{
         clear: both;
-        margin-right: 8px;
     }
     dd{
         &:before{
-            margin-right: 8px;
             font-family: meterial_design;
             color: $black3;
             content: "\e7c3";

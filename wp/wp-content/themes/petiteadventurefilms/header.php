@@ -39,18 +39,14 @@
                     <p id="eng">Petite Adventure Films</p>
                     <p id="jpn">プチ･アドベンチャー･フィルムズ </p>
                 </a>
-                <div class="shop_btn">
-                    <?php
-                    $current_uri = $_SERVER['REQUEST_URI'];
-                    if(preg_match('/^\/cashier\//', $current_uri)):
-                    elseif(preg_match('/^\/pafshop\//', $current_uri)):?>
-                        <a href="<?php echo get_permalink(get_page_by_path("cashier")); ?>">Cart <span class="pafCartCount pink">0</span></a>
-                    <? else: ?>
-                        <a href="<?php echo get_post_type_archive_link("pafshop"); ?>">
-                            <span class="icon-store"></span>
-                            <span class="text-store">SHOP</span>
+                
+                <div class="_btns">
+                    <div class="__btn shop_btn inline_block">
+                        <a href="<?php echo get_permalink(get_page_by_path("cashier/faq")); ?>">
+                            <span class="___icon icon-store"></span>
+                            <span class="___text">SHOP</span>
                         </a>
-                    <? endif;?>           
+                    </div>
                 </div>
             </div>
             <div class="show_wider">

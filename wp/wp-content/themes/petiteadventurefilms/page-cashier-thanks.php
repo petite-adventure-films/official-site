@@ -54,7 +54,7 @@ get_header('pafshop'); ?>
             <br />しばらくお待ちください。</p>
             
         <p class="m1_t">
-            注文番号: <? echo $_GET['method']; ?>
+            注文番号: <? echo $_GET['orderID']; ?>
         </p>
             
         <p class="m2_t">

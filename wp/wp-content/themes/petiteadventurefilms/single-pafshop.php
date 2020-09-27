@@ -12,6 +12,11 @@ $price_contents = get_post_meta_arr($post->ID, "product_info_02");
 $type_indexs = get_post_meta_arr($post->ID, "product_info_07");
 $type_contents = get_post_meta_arr($post->ID, "product_info_08");
 
+$disc_indexs  = get_post_meta_arr($post->ID, "product_info_09");
+$disc_numbers = get_post_meta_arr($post->ID, "product_info_10");
+$disc_types    = get_post_meta_arr($post->ID, "product_info_11");
+$disc_contents = get_post_meta($post->ID, "product_info_12", TRUE);
+
 $dvd_catch = get_post_meta($post->ID, 'product_info_05', TRUE);
 $dvd_intro = get_post_meta($post->ID, "product_info_03", TRUE);
 $dvd＿configuration = get_post_meta($post->ID, "product_info_04", TRUE);
@@ -101,55 +106,73 @@ foreach(array_reverse($film_terms) as $key => $term)
     <!--.header_page--></header>
 
     <div class="col col_4">
-        <? echo get_post_meta_img($poster_img, "large"); ?>
+        <? echo get_post_meta_img($film_posts[0]['poster_img'], 'large'); ?>
     </div>
 
     <div class="col col_5 last">
         
         <? if($film_posts[0]['prizes']): ?>
-            <div class="subhead1 m2_b">
+            <div class="subhead2 m1_b">
             <? foreach($film_posts[0]['prizes'] as $prize): ?>
-                <p><? echo $prize; ?></p>
+                <? echo $prize; ?></p>
             <? endforeach; ?>
             </div>
         <? endif; ?>
         
         <? if($dvd_catch): ?>
-            <div class="subhead1 m2_b">
-                <p><? echo $dvd_catch; ?></p>
+            <div class="subhead2 m1_b">
+                <? echo $dvd_catch; ?>
             </div>
         <? endif; ?>
-    
-        <div
-        v-for = "(val, key) in priceIndexs"
-        :key="'price' + key"
-            class="m1_t">
-            
-            {{val}}
-            
-            <span v-if="typeContents">
-                <select
-                v-if="typeContents[key].length > 1"
-                    v-model="pafCartTypes[key]">
-                    <option
-                    v-for="(val3, key3) in typeContents[key]"
-                    :key="'type' + key + key3"
-                        :value="key3">{{val3}}</option>
-                </select>
-                <span v-else>
-                    {{typeContents[key][0]}}
+        
+        <dl class="_disc_details">
+            <dt class="grid _1_1">構成</dt>
+            <dd class="grid _1_2">
+                <? foreach($disc_indexs as $key => $disc): ?><? if($key > 0): ?>､または<? endif;?><? echo $disc_indexs[$key]; ?><? echo $disc_numbers[$key]; ?>枚組<? endforeach; ?>
+            </dd>
+            <dt class="grid _2_1">ディスク種類</dt>
+            <dd class="grid _2_2">
+                <? foreach($disc_indexs as $key => $disc): ?>
+                    <span class="block"><? if(count($disc_indexs) > 1): ?><? echo $disc_indexs[$key]; ?>: <? endif; ?><? echo $disc_types[$key]; ?></span>
+                <? endforeach; ?>
+            </dd>
+            <dt class="grid _3_1">収録内容</dt>
+            <dd class="grid _3_2"><? echo $disc_contents; ?></dd>
+        </dl>
+
+        <div class="price_systems m1_t">    
+            <div
+            v-for = "(val, key) in priceIndexs"
+            :key="'price' + key"
+                class="m1_t _system">
+                
+                <span class="__index">
+                    {{val}}
+                    <span v-if="typeContents.length > 0">
+                        <select
+                        v-if="typeContents[key].length > 1"
+                            v-model="pafCartTypes[key]">
+                            <option
+                            v-for="(val3, key3) in typeContents[key]"
+                            :key="'type' + key + key3"
+                                :value="key3">{{val3}}</option>
+                        </select>
+                        <span v-else>
+                            {{typeContents[key][0]}}
+                        </span>
+                    </span>
                 </span>
-            </span>
-            
-            {{convertYen(priceContents[key])}}
-            
-            <select v-model="pafCart[key]">
-                <option value=0 selected>個数</option>
-                <option
-                v-for="(val2, key2) in purchaseLimit"
-                :key="'price' + key + key2"
-                    :value="val2">{{val2}}</option>
-            </select>
+                
+                <span class="__price al_r">{{convertYen(priceContents[key])}}</span>
+                
+                <select class="__unit" v-model="pafCart[key]">
+                    <option value=0 selected>個数</option>
+                    <option
+                    v-for="(val2, key2) in purchaseLimit"
+                    :key="'price' + key + key2"
+                        :value="val2">{{val2}}</option>
+                </select>
+            </div>
         </div>
 
         <div
@@ -168,9 +191,9 @@ foreach(array_reverse($film_terms) as $key => $term)
     
     <div class="col col_9 last">
         <div class="tabs m4_t al_c">
-            <div @click="displayTab = 1" :class="['_tab cursor_pointer', (displayTab == 1) ? '_selected' : '']">DVDの構成</div>
+            <div @click="displayTab = 1" :class="['_tab cursor_pointer', (displayTab == 1) ? '_selected' : '']">概要</div>
             <div @click="displayTab = 2" :class="['_tab cursor_pointer', (displayTab == 2) ? '_selected' : '']">
-                <? echo ($dvd＿no_specials) ? '本編の詳細' : '特典の詳細'; ?></div>
+                <? echo ($dvd＿no_specials) ? '本編' : '特典'; ?></div>
             <div @click="displayTab = 3" :class="['_tab cursor_pointer', (displayTab == 3) ? '_selected' : '']">制作クレジット</div>
         </div>
     </div>
@@ -180,43 +203,20 @@ foreach(array_reverse($film_terms) as $key => $term)
         <div class="col col_9 last">
         
             <? foreach($film_posts as $key => $_post): ?>
-            
-                <? if($_post['detail_indexs']):?>
-                    <? if(count($film_posts) > 1): ?>
-                        <div class="<? echo ($key > 0) ? 'm1_t' : ''; ?>"><? echo $_post['title']; ?></div>
-                    <? endif; ?>
-                    <dl class="list_definition">
-                    <? for($i=0; $i<count($_post['detail_indexs']); $i++): ?>
-                        <? if(mb_strpos($_post['detail_indexs'][$i],'監督') !== false): ?>
-                            <? echo $_post['detail_indexs'][$i] ? "<dt>".$_post['detail_indexs'][$i]."</dt>" : ""; ?>
-                            <? echo $_post['detail_contents'][$i] ? "<dd>".$_post['detail_contents'][$i]."</dd>" : ""; ?>
-                        <? endif; ?>
-                    <? endfor; ?>
-                    </dl>
-                    <div class="clear"></div>
-                <? endif;?>
+                <dl class="list_definition">
+                    <dt>監督</dt><dd>早川由美子</dd>
+                </dl>
+                <div class="clear"></div>
                 <? if($_post['basic_info']): ?>
                     <p><? echo implode(" / ", $_post['basic_info']); ?></p>
                 <? endif; ?>
             <? endforeach; ?>
-            
-            
-            <? if($dvd＿configuration): ?>
-                <div class="m1_t">
-                    <? echo $dvd＿configuration; ?>
-                </div>
-            <? endif; ?>
-            
+        
             <? if($dvd_intro): ?>
                 <div class="m1_t">
                     <? echo $dvd_intro; ?>
                 </div>
             <? endif; ?>
-            
-            <p class="m2_t">DVD購入や上映についてのお問い合わせはこちらから</p>
-            <div class="inline_block btn priority1">
-                <a href="<? echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
-            </div>
             
         </div>
         
@@ -238,9 +238,9 @@ foreach(array_reverse($film_terms) as $key => $term)
                     <? if(count($film_posts) > 1): ?>
                         <div class="col col_9 last<? echo ($key > 0) ? ' m2_t': ''; ?>"><? echo $_post['title']; ?></div>
                     <? endif; ?>
-                    <div v-masonry item-selector="._credit_<? echo $i; ?>">
+                    <div v-masonry item-selector="._credit_<? echo $key; ?>">
                         <? for($i=0; $i<count($_post['credits_indexs']); $i++): ?>
-                            <div class="col col_3 _credit _credit__<? echo $i; ?> m1_t" v-masonry-tile>
+                            <div class="col col_3 _credit _credit_<? echo $key; ?> m1_t" v-masonry-tile>
                                 <p><? echo $_post['credits_indexs'][$i]; ?></p>
                                 <? echo $_post['credits_contents'][$i]; ?>
                             </div>
@@ -250,9 +250,17 @@ foreach(array_reverse($film_terms) as $key => $term)
                 <? endif;?>
             <? endforeach; ?>
         </div>
-    
+            
+        <div class="col col_9 last">
+            <p class="m4_t">DVD購入や上映についてのお問い合わせはこちらから</p>
+            <div class="inline_block btn priority1">
+                <a href="<? echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
+            </div>
+        </div>
+        
     </div>
     <div class="clear"></div>
+    
 
 </div><!--.single-->
 
@@ -292,9 +300,20 @@ v-if="showModal == true"
     var has_types = <? echo json_encode($type_contents) ?> || false;
     var type_indexs = <? echo json_encode($type_indexs) ?>;
     var type_contents = <? echo json_encode($type_contents) ?>;
-    if(type_contents){
-        type_contents.forEach((v, k) => {
-            type_contents[k] = v.split(',');
+    var _type_contents = [];
+    if(type_contents)
+    {
+        price_indexs.forEach((v, k) => {
+            var key = type_indexs.findIndex((v2, k2) => v2 == v);
+            console.log('key', key);
+            if(key > -1)
+            {
+                _type_contents[k] = type_contents[key].split(',');
+            }
+            else
+            {
+                _type_contents[k] = ['DVD'];
+            }
         })
     }
     
@@ -335,7 +354,7 @@ v-if="showModal == true"
             , priceContents : price_contents
             
             , typeIndexs : type_indexs || false
-            , typeContents : type_contents || false
+            , typeContents : _type_contents || false
             
             , purchaseLimit : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             , strgPafCart : strgPafCart

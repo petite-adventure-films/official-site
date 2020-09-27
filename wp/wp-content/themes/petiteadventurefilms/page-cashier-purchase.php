@@ -608,6 +608,7 @@ v-if="modalExecution === true"></modal-execution>
                 params.order = this.order;
                 params.orderID = this.orderID;
                 params.subtotal = this.convertYen(this.getTotal());
+                params.deliveryFee = this.deliveryFee;
                 params.total = this.convertYen(this.getTotal(true));
                 params.paymentMethod = (this.paymentMethod == 1) ? '銀行振込' : 'クレジットカード';
 

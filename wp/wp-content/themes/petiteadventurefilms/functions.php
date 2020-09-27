@@ -746,7 +746,7 @@ EOF;
 
 【お買上金額】
 商品金額合計: {$data['subtotal']}
-送料: ¥500 
+送料: {$data['deliveryFee']}
 注文金額合計: {$data['total']}
 ※すべて税込
 
