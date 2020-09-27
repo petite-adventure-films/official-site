@@ -118,7 +118,7 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 			<?php echo get_post_meta_img($poster_img, "large"); ?>
 			<?php if(!$sell_dvd): ?>
 				<div class="m2_t m2_b btn priority1">
-					<a href="<?php echo get_permalink(get_page_by_path("order_jp")); ?>">SHOP</a>
+					<a href="<?php echo get_post_type_archive_link("pafshop"); ?>">SHOP</a>
 					<?php if($sell_dvd_appendix): ?>
 						<p class="m1_t caption1"><?php echo $sell_dvd_appendix; ?></p>
 					<?php endif; ?>

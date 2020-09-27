@@ -42,7 +42,7 @@
                 
                 <div class="_btns">
                     <div class="__btn shop_btn inline_block">
-                        <a href="<?php echo get_permalink(get_page_by_path("pafshop")); ?>">
+                        <a href="<?php echo get_post_type_archive_link("pafshop"); ?>">
                             <span class="___icon icon-store"></span>
                             <span class="___text">SHOP</span>
                         </a>
