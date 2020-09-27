@@ -698,19 +698,9 @@ blockquote, q{
         bottom: 32px;
         
         .icon_btn{
-
-
-            &#twitter{
-                // top: 80px;
-            }
-
-            &#facebook{
-                // top: 128px;
-            }
-
-
-            &#en_btn{
-                // top: 32px;
+        
+            &:not(:first-of-type){
+                margin-top: 8px;
             }
 
             &#go_top{

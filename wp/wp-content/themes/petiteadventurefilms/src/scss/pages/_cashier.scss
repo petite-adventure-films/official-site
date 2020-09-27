@@ -36,6 +36,10 @@
                 color: $blue;
             }
         }
+        
+        .__sum{
+            padding-right: 4px;
+        }
     
     }
     
@@ -54,9 +58,6 @@
             grid-template-columns: 200px 1fr;
             align-items: center;
             
-            .__sum{
-                padding-right: 4px;
-            }
         }
     
     }
@@ -68,13 +69,6 @@
         // align-items: center;
     
     }
-   
-   &._in_modal{
-        padding: 8px;
-        @include box-sizing(border-box);
-        border: 1px solid $black5;
-        text-align: right;
-   }
    
 }
 

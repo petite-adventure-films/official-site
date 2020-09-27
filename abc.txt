@@ -1,0 +1,25 @@
+Array
+(
+    [name] => いうんじゅ
+    [zipcode] => 1500047
+    [prefecture] => 東京都
+    [city] => 渋谷区神山町
+    [address1] => １
+    [tel] => 08039118917
+    [email] => restard653@gmail.com
+    [emailConfirm] => restard653@gmail.com
+    [receipt] => 
+    [agree] => 1
+    [order] => Array
+        (
+            [0] => 木田さんと原発、そして日本【一般 日本語版】 : 1
+            [1] => 木田さんと原発、そして日本【団体•イブラリー】 : 3
+        )
+
+    [orderID] => O2020-PC-J-092716001
+    [subtotal] => ￥31,000
+    [deliveryFee] => 0
+    [total] => ￥31,000
+    [paymentMethod] => クレジットカード
+)
+12688

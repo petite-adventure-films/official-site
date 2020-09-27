@@ -19,9 +19,9 @@
 
 <div id="additional">
     <div class="icon_btn" id="en_btn"><a href="http://en.petiteadventurefilms.com/">EN</a></div>
-    <div class="icon_btn m1_t" id="twitter"><a href="https://twitter.com/brianandco?lang=ja" target="_blank"><span class="icon-twitter twitter"></span></a></div>
-    <div class="icon_btn m1_t" id="facebook"><a href="https://www.facebook.com/Petite-Adventure-Films-156815051365447/" target="_blank"><span class="icon-facebook facebook"></span></a></div>
-    <div class="icon_btn m1_t" id="contact"><a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>"><span class="icon-mail mail"></span></a></div>
+    <div class="icon_btn" id="twitter"><a href="https://twitter.com/brianandco?lang=ja" target="_blank"><span class="icon-twitter twitter"></span></a></div>
+    <div class="icon_btn" id="facebook"><a href="https://www.facebook.com/Petite-Adventure-Films-156815051365447/" target="_blank"><span class="icon-facebook facebook"></span></a></div>
+    <div class="icon_btn" id="contact"><a href="<?php echo get_permalink(get_page_by_path("contact_jp")); ?>"><span class="icon-mail mail"></span></a></div>
     <div class="icon_btn" id="go_top"><a href="#site_header"><span class="inline_block icon-keyboard-arrow-up"></span></a></div>
 </div>
 

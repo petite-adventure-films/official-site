@@ -4671,7 +4671,10 @@ blockquote, q {
       right: 8px;
       top: 32px;
       bottom: 32px; }
-      /* line 716, src/scss/components/_components.scss */
+      /* line 702, src/scss/components/_components.scss */
+      #additional .icon_btn:not(:first-of-type) {
+        margin-top: 8px; }
+      /* line 706, src/scss/components/_components.scss */
       #additional .icon_btn#go_top {
         position: absolute;
         bottom: 0; } }
@@ -4686,17 +4689,17 @@ blockquote, q {
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
       box-sizing: border-box; }
-      /* line 735, src/scss/components/_components.scss */
+      /* line 725, src/scss/components/_components.scss */
       #additional .icon_btn {
         display: inline-block;
         vertical-align: top; }
-        /* line 740, src/scss/components/_components.scss */
+        /* line 730, src/scss/components/_components.scss */
         #additional .icon_btn#go_top {
           position: absolute;
           top: 0;
           right: 8px; } }
 
-/* line 752, src/scss/components/_components.scss */
+/* line 742, src/scss/components/_components.scss */
 .modal-mask {
   position: fixed;
   z-index: 10000;
@@ -4707,7 +4710,7 @@ blockquote, q {
   background-color: rgba(255, 255, 255, 0.96);
   transition: opacity 0.3s ease; }
 
-/* line 763, src/scss/components/_components.scss */
+/* line 753, src/scss/components/_components.scss */
 .modal-container {
   overflow: scroll;
   display: flex;
@@ -4721,7 +4724,7 @@ blockquote, q {
   flex-direction: column;
   padding: 8px 48px;
   text-align: center; }
-  /* line 776, src/scss/components/_components.scss */
+  /* line 766, src/scss/components/_components.scss */
   .modal-container .icon-close {
     cursor: pointer;
     position: absolute;
@@ -4729,14 +4732,14 @@ blockquote, q {
     right: 0;
     color: #c8c8c8 !important;
     font-size: 48px; }
-    /* line 783, src/scss/components/_components.scss */
+    /* line 773, src/scss/components/_components.scss */
     .modal-container .icon-close:hover {
       color: #868686 !important; }
 
-/* line 790, src/scss/components/_components.scss */
+/* line 780, src/scss/components/_components.scss */
 .loading_ring {
   display: inline-block; }
-  /* line 793, src/scss/components/_components.scss */
+  /* line 783, src/scss/components/_components.scss */
   .loading_ring:after {
     content: '';
     display: block;
@@ -4753,13 +4756,13 @@ blockquote, q {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
-/* line 814, src/scss/components/_components.scss */
+/* line 804, src/scss/components/_components.scss */
 .cursor_pointer {
   cursor: pointer; }
-  /* line 816, src/scss/components/_components.scss */
+  /* line 806, src/scss/components/_components.scss */
   .cursor_pointer:hover {
     color: #c8c8c8; }
-    /* line 818, src/scss/components/_components.scss */
+    /* line 808, src/scss/components/_components.scss */
     .cursor_pointer:hover img {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=56);
       opacity: 0.56; }
@@ -6308,13 +6311,16 @@ html .takahatadai73 {
   border-top: 1px solid #f0f0f0; }
   /* line 53, src/scss/pages/_pafshop.scss */
   .pafshop .price_systems ._system {
-    display: grid;
-    grid-template-columns: 256px 72px 1fr;
     align-items: center; }
-    /* line 57, src/scss/pages/_pafshop.scss */
+    /* line 55, src/scss/pages/_pafshop.scss */
     .pafshop .price_systems ._system .__price {
       padding-right: 8px; }
-/* line 63, src/scss/pages/_pafshop.scss */
+  @media all and (961px: 961px) {
+    /* line 62, src/scss/pages/_pafshop.scss */
+    .pafshop .price_systems ._system {
+      display: grid;
+      grid-template-columns: 256px 72px 1fr; } }
+/* line 70, src/scss/pages/_pafshop.scss */
 .pafshop ._disc_details {
   display: grid;
   grid-template-columns: 96px 1fr;
@@ -6323,61 +6329,61 @@ html .takahatadai73 {
   padding-top: 8px;
   align-items: top;
   line-height: 24px; }
-  /* line 72, src/scss/pages/_pafshop.scss */
+  /* line 79, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details dd {
     position: relative;
     padding-left: 16px; }
-    /* line 75, src/scss/pages/_pafshop.scss */
+    /* line 82, src/scss/pages/_pafshop.scss */
     .pafshop ._disc_details dd:before {
       position: absolute;
       left: 0;
       font-family: meterial_design;
       color: #c8c8c8;
       content: "\e7c3"; }
-  /* line 86, src/scss/pages/_pafshop.scss */
+  /* line 93, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details ._1_1 {
     grid-row: 1;
     grid-column: 1; }
-  /* line 86, src/scss/pages/_pafshop.scss */
+  /* line 93, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details ._1_2 {
     grid-row: 1;
     grid-column: 2; }
-  /* line 86, src/scss/pages/_pafshop.scss */
+  /* line 93, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details ._2_1 {
     grid-row: 2;
     grid-column: 1; }
-  /* line 86, src/scss/pages/_pafshop.scss */
+  /* line 93, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details ._2_2 {
     grid-row: 2;
     grid-column: 2; }
-  /* line 86, src/scss/pages/_pafshop.scss */
+  /* line 93, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details ._3_1 {
     grid-row: 3;
     grid-column: 1; }
-  /* line 86, src/scss/pages/_pafshop.scss */
+  /* line 93, src/scss/pages/_pafshop.scss */
   .pafshop ._disc_details ._3_2 {
     grid-row: 3;
     grid-column: 2; }
-/* line 95, src/scss/pages/_pafshop.scss */
+/* line 102, src/scss/pages/_pafshop.scss */
 .pafshop ._credit {
   min-width: 224px; }
-/* line 100, src/scss/pages/_pafshop.scss */
+/* line 107, src/scss/pages/_pafshop.scss */
 .pafshop ._specials p + p {
   margin-top: 8px; }
-/* line 104, src/scss/pages/_pafshop.scss */
+/* line 111, src/scss/pages/_pafshop.scss */
 .pafshop ._specials figure {
   margin-top: 8px; }
-/* line 108, src/scss/pages/_pafshop.scss */
+/* line 115, src/scss/pages/_pafshop.scss */
 .pafshop ._specials figcaption {
   text-align: right; }
-/* line 114, src/scss/pages/_pafshop.scss */
+/* line 121, src/scss/pages/_pafshop.scss */
 .pafshop ._specials .wp-block-embed-youtube .wp-block-embed__wrapper {
   position: relative;
   z-index: 1;
   padding-bottom: 56.25%;
   width: 100%;
   height: 0 !important; }
-  /* line 121, src/scss/pages/_pafshop.scss */
+  /* line 128, src/scss/pages/_pafshop.scss */
   .pafshop ._specials .wp-block-embed-youtube .wp-block-embed__wrapper iframe {
     position: absolute;
     top: 0 !important;
@@ -6385,7 +6391,7 @@ html .takahatadai73 {
     width: 100%;
     height: 100%;
     max-height: 810px; }
-/* line 133, src/scss/pages/_pafshop.scss */
+/* line 140, src/scss/pages/_pafshop.scss */
 .pafshop .confirm_btns {
   width: 304px;
   text-align: left; }
@@ -6415,7 +6421,10 @@ html .takahatadai73 {
     /* line 35, src/scss/pages/_cashier.scss */
     .cashier .order_details ._details .___btn_delete:hover {
       color: #53dbff; }
-/* line 42, src/scss/pages/_cashier.scss */
+  /* line 40, src/scss/pages/_cashier.scss */
+  .cashier .order_details ._details .__sum {
+    padding-right: 4px; }
+/* line 46, src/scss/pages/_cashier.scss */
 .cashier .order_details ._subtotal {
   margin-top: 4px;
   padding: 4px;
@@ -6425,30 +6434,19 @@ html .takahatadai73 {
   box-sizing: border-box;
   text-align: right; }
 @media all and (min-width: 961px) {
-  /* line 52, src/scss/pages/_cashier.scss */
+  /* line 56, src/scss/pages/_cashier.scss */
   .cashier .order_details ._details {
     display: grid;
     grid-template-columns: 200px 1fr;
-    align-items: center; }
-    /* line 57, src/scss/pages/_cashier.scss */
-    .cashier .order_details ._details .__sum {
-      padding-right: 4px; } }
-/* line 72, src/scss/pages/_cashier.scss */
-.cashier .order_details._in_modal {
-  padding: 8px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid #f0f0f0;
-  text-align: right; }
-/* line 81, src/scss/pages/_cashier.scss */
+    align-items: center; } }
+/* line 75, src/scss/pages/_cashier.scss */
 .cashier .fee {
   border-top: 1px solid #e6e6e6;
   text-align: right;
   margin-top: 8px;
   padding-top: 8px;
   padding-right: 4px; }
-/* line 89, src/scss/pages/_cashier.scss */
+/* line 83, src/scss/pages/_cashier.scss */
 .cashier .total {
   margin-top: 4px;
   padding: 4px;
@@ -6458,26 +6456,26 @@ html .takahatadai73 {
   box-sizing: border-box;
   text-align: right;
   font-weight: bold; }
-/* line 98, src/scss/pages/_cashier.scss */
+/* line 92, src/scss/pages/_cashier.scss */
 .cashier ._fee_index {
   display: inline-block;
   width: 64px;
   text-align: rigth; }
-/* line 103, src/scss/pages/_cashier.scss */
+/* line 97, src/scss/pages/_cashier.scss */
 .cashier ._fee_amount {
   display: inline-block;
   width: 80px; }
-/* line 108, src/scss/pages/_cashier.scss */
+/* line 102, src/scss/pages/_cashier.scss */
 .cashier .confirm_btns {
   width: 304px;
   text-align: left; }
-/* line 113, src/scss/pages/_cashier.scss */
+/* line 107, src/scss/pages/_cashier.scss */
 .cashier .purchase_details {
   position: relative;
   display: grid;
   grid-template-columns: 40px 1fr;
   align-items: center; }
-  /* line 119, src/scss/pages/_cashier.scss */
+  /* line 113, src/scss/pages/_cashier.scss */
   .cashier .purchase_details:before {
     position: absolute;
     top: 4px;
@@ -6486,58 +6484,58 @@ html .takahatadai73 {
     width: 1px;
     background: #f0f0f0;
     content: ''; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 123, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .grid {
     position: relative; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._1_1 {
     grid-row: 1;
     grid-column: 1; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._1_2 {
     grid-row: 1;
     grid-column: 2; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._2_1 {
     grid-row: 2;
     grid-column: 1; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._2_2 {
     grid-row: 2;
     grid-column: 2; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._3_1 {
     grid-row: 3;
     grid-column: 1; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._3_2 {
     grid-row: 3;
     grid-column: 2; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._4_1 {
     grid-row: 4;
     grid-column: 1; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._4_2 {
     grid-row: 4;
     grid-column: 2; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._5_1 {
     grid-row: 5;
     grid-column: 1; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._5_2 {
     grid-row: 5;
     grid-column: 2; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._6_1 {
     grid-row: 6;
     grid-column: 1; }
-  /* line 135, src/scss/pages/_cashier.scss */
+  /* line 129, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._6_2 {
     grid-row: 6;
     grid-column: 2; }
-  /* line 142, src/scss/pages/_cashier.scss */
+  /* line 136, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .step_icon {
     display: block;
     width: 32px;
@@ -6548,33 +6546,33 @@ html .takahatadai73 {
     line-height: 32px;
     background: #f0f0f0;
     color: #ff3f80; }
-    /* line 150, src/scss/pages/_cashier.scss */
+    /* line 144, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .step_icon._processing {
       background: #ff3f80;
       color: #ffffff; }
-    /* line 154, src/scss/pages/_cashier.scss */
+    /* line 148, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .step_icon._completed {
       background: #f0f0f0;
       color: #868686; }
-  /* line 160, src/scss/pages/_cashier.scss */
+  /* line 154, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .form_ele {
     padding-left: 12px; }
-    /* line 163, src/scss/pages/_cashier.scss */
+    /* line 157, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .form_ele._required {
       position: relative; }
-      /* line 165, src/scss/pages/_cashier.scss */
+      /* line 159, src/scss/pages/_cashier.scss */
       .cashier .purchase_details .form_ele._required:before {
         position: absolute;
         left: 0;
         color: #ff0000;
         content: '*'; }
-  /* line 175, src/scss/pages/_cashier.scss */
+  /* line 169, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .error_message {
     display: block;
     color: #ff0000;
     font-size: 14px;
     line-height: 20px; }
-  /* line 182, src/scss/pages/_cashier.scss */
+  /* line 176, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .contents_law {
     display: block !important;
     overflow: scroll;
@@ -6586,20 +6584,20 @@ html .takahatadai73 {
     border: 1px solid #f0f0f0;
     line-height: 20px;
     font-size: 14px; }
-    /* line 193, src/scss/pages/_cashier.scss */
+    /* line 187, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .contents_law h2, .cashier .purchase_details .contents_law h3, .cashier .purchase_details .contents_law p {
       line-height: 20px;
       font-size: 14px; }
-    /* line 197, src/scss/pages/_cashier.scss */
+    /* line 191, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .contents_law .p2_t {
       padding-top: 0 !important; }
-    /* line 200, src/scss/pages/_cashier.scss */
+    /* line 194, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .contents_law .contents {
       display: none; }
-  /* line 204, src/scss/pages/_cashier.scss */
+  /* line 198, src/scss/pages/_cashier.scss */
   .cashier .purchase_details strong {
     font-weight: bold; }
-  /* line 208, src/scss/pages/_cashier.scss */
+  /* line 202, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .btn_edit_user_info {
     display: inline-block;
     margin-left: 4px;
@@ -6610,26 +6608,26 @@ html .takahatadai73 {
     border-radius: 2px;
     font-size: 16px;
     line-height: 24px; }
-    /* line 216, src/scss/pages/_cashier.scss */
+    /* line 210, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .btn_edit_user_info:hover {
       border-color: #84cc1e;
       color: #84cc1e; }
-  /* line 222, src/scss/pages/_cashier.scss */
+  /* line 216, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._method {
     display: grid;
     grid-template-columns: 24px 1fr;
     align-items: top; }
-    /* line 228, src/scss/pages/_cashier.scss */
+    /* line 222, src/scss/pages/_cashier.scss */
     .cashier .purchase_details ._method .__logo {
       height: 24px; }
-  /* line 235, src/scss/pages/_cashier.scss */
+  /* line 229, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .reset_payment {
     color: #53dbff; }
-    /* line 237, src/scss/pages/_cashier.scss */
+    /* line 231, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .reset_payment:hover {
       color: #868686; }
   @media all and (max-width: 960px) {
-    /* line 245, src/scss/pages/_cashier.scss */
+    /* line 239, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .form_ele input[type="text"],
     .cashier .purchase_details .form_ele input[type="email"],
     .cashier .purchase_details .form_ele input[type="number"],
@@ -6637,40 +6635,40 @@ html .takahatadai73 {
     .cashier .purchase_details .form_ele input[type="password"] {
       width: 100%;
       min-width: 100%; } }
-/* line 258, src/scss/pages/_cashier.scss */
+/* line 252, src/scss/pages/_cashier.scss */
 .cashier .card_element {
   padding: 8px;
   border: 3px solid #ff0000;
   background: #ffffff; }
-  /* line 262, src/scss/pages/_cashier.scss */
+  /* line 256, src/scss/pages/_cashier.scss */
   .cashier .card_element.disabled {
     border-color: #f0f0f0;
     pointer-events: none; }
-/* line 272, src/scss/pages/_cashier.scss */
+/* line 266, src/scss/pages/_cashier.scss */
 .cashier .btn.pay a, .cashier .btn.pay .ele {
   border: none;
   background: rgba(255, 0, 0, 0.87);
   color: #ffff00;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
-  /* line 278, src/scss/pages/_cashier.scss */
+  /* line 272, src/scss/pages/_cashier.scss */
   .cashier .btn.pay a:hover, .cashier .btn.pay .ele:hover {
     background: red; }
-/* line 287, src/scss/pages/_cashier.scss */
+/* line 281, src/scss/pages/_cashier.scss */
 .cashier .list_qna dt {
   position: relative;
   padding-left: 24px; }
-  /* line 290, src/scss/pages/_cashier.scss */
+  /* line 284, src/scss/pages/_cashier.scss */
   .cashier .list_qna dt:before {
     display: block;
     position: absolute;
     left: 0;
     content: "Q"; }
-/* line 297, src/scss/pages/_cashier.scss */
+/* line 291, src/scss/pages/_cashier.scss */
 .cashier .list_qna dd {
   position: relative;
   padding-left: 24px; }
-  /* line 300, src/scss/pages/_cashier.scss */
+  /* line 294, src/scss/pages/_cashier.scss */
   .cashier .list_qna dd:before {
     display: block;
     position: absolute;

@@ -62,7 +62,7 @@ get_header('pafshop'); ?>
             <dd>学校・団体や図書館など、不特定多数の方への無料貸出を目的としたご購入の場合は、「団体・ライブラリー価格」でお買い求め下さい。有料貸出の場合は、別途ご相談下さい。</dd>
             
             <dt class="m1_t">購入したDVDで、上映会を開催することはできますか？</dt>
-            <dd>DVD・ブルーレイには上映権はついていません。上映をご希望の場合は、こちら（リンク：自主上映ページ）をご覧ください。</dd>
+            <dd>DVD・ブルーレイには上映権はついていません。上映をご希望の場合は、<a href="<?php echo get_permalink(get_page_by_path("four-walling")); ?>">こちら</a>をご覧ください。</dd>
             
             <dt class="m1_t">ディスクの規格は？</dt>
             <dd>DVDの規格は、NTSC、DVD-Rディスク（DVD-R対応機器にて再生可能）です。ブルーレイの規格は、NTSC、BD-Rディスク（BD-R対応機器にて再生可能）です。</dd>
@@ -87,8 +87,6 @@ get_header('pafshop'); ?>
 <?php get_footer('scripts'); ?>
 
 <script type="text/javascript">
-
-    localStorage.removeItem('pafOrderID');
 
     var app = new Vue({
         el: '#app'

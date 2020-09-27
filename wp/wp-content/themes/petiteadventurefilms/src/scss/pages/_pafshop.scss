@@ -50,12 +50,19 @@
 
 .price_systems{
     border-top: 1px solid $black5;
-    ._system{
-        display: grid;
-        grid-template-columns: 256px 72px 1fr;
+    ._system{   
         align-items: center;
         .__price{
             padding-right: 8px;
+        }
+    }
+    
+    @media all and ($min-width: $min_width){
+        
+        ._system{
+        
+            display: grid;
+            grid-template-columns: 256px 72px 1fr;
         }
     }
 }
