@@ -203,6 +203,9 @@ foreach(array_reverse($film_terms) as $key => $term)
         <div class="col col_9 last">
         
             <? foreach($film_posts as $key => $_post): ?>
+                <? if(count($film_posts) > 1): ?>
+                    <div class="<? echo ($key > 0) ? ' m1_t': ''; ?>"><? echo $_post['title']; ?></div>
+                <? endif; ?>
                 <dl class="list_definition">
                     <dt>監督</dt><dd>早川由美子</dd>
                 </dl>
@@ -230,36 +233,28 @@ foreach(array_reverse($film_terms) as $key => $term)
         
     </div>
     
-    <div v-if="displayTab == 3">
-        
-        <div class="m2_t">
-            <? foreach($film_posts as $key => $_post): ?>
-                <? if($_post['credits_indexs']): ?>
-                    <? if(count($film_posts) > 1): ?>
-                        <div class="col col_9 last<? echo ($key > 0) ? ' m2_t': ''; ?>"><? echo $_post['title']; ?></div>
-                    <? endif; ?>
-                    <div v-masonry item-selector="._credit_<? echo $key; ?>">
-                        <? for($i=0; $i<count($_post['credits_indexs']); $i++): ?>
-                            <div class="col col_3 _credit _credit_<? echo $key; ?> m1_t" v-masonry-tile>
-                                <p><? echo $_post['credits_indexs'][$i]; ?></p>
-                                <? echo $_post['credits_contents'][$i]; ?>
-                            </div>
-                        <? endfor; ?>
+    <div v-if="displayTab == 3" class="m2_t">
+    
+        <? foreach($film_posts as $key => $_post): ?>
+            <div class="p1_l <? echo ($key > 0) ? ' m2_t': ''; ?>"><? echo $_post['title']; ?></div>
+            <div v-masonry item-selector="._credit_<? echo $key; ?>">
+                <? for($i=0; $i<count($_post['credits_indexs']); $i++): ?>
+                    <div class="col col_3 _credit _credit_<? echo $key; ?> m1_t" v-masonry-tile>
+                        <p><? echo $_post['credits_indexs'][$i]; ?></p>
+                        <? echo $_post['credits_contents'][$i]; ?>
                     </div>
-                </div>
-                <? endif;?>
-            <? endforeach; ?>
-        </div>
-            
-        <div class="col col_9 last">
-            <p class="m4_t">DVD購入や上映についてのお問い合わせはこちらから</p>
-            <div class="inline_block btn priority1">
-                <a href="<? echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
+                <? endfor; ?>
             </div>
-        </div>
-        
+        <? endforeach; ?>
+               
     </div>
-    <div class="clear"></div>
+
+    <div class="col col_9 last">
+        <p class="m4_t">DVD購入や上映についてのお問い合わせはこちらから</p>
+        <div class="inline_block btn priority1">
+            <a href="<? echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>
+        </div>
+    </div>
     
 
 </div><!--.single-->
