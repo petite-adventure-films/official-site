@@ -793,12 +793,15 @@ small{
             position: relative;
             .___img{
                 display: none;
+                position: relative;
                 padding: 4px;
                 border: $white;
                 background: rgba($white, .56);
+                
                 &._displayed{
                     display: block;
                 }
+                
             }
         }
         
@@ -905,6 +908,19 @@ small{
         }
     }
     
+    @media all and (min-width: $min_width){
+    
+        ._gallery{
+    
+            .__contents{
+                .___img{
+                    min-height: 320px;
+                }
+            }
+            
+        }
+    }
+    
 }
 
 
@@ -983,10 +999,12 @@ small{
     .__imgs{
         
         .___img{
+            position: relative;
             display: none;
             min-height: 200px;
             max-width: 304px;
-            border: 1px solid $white;
+            // border: 1px solid $white;
+            // background: rgba($white, .56);
             &._opened{
                 display: block;
             }
@@ -1071,12 +1089,13 @@ small{
 ._contents_modal{
 
     .__contents{
-        display: flex;
+        // display: flex;
+        width: 100%;
         min-height: 80vh;
         background: #ffffff;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        // justify-content: center;
+        // align-items: center;
+        // text-align: center;
     }
 
     .input_page_num{
@@ -1105,16 +1124,12 @@ small{
 
 }
 
-
-
-    .key_messages-enter-active, .key_messages-leave-active{
-        // @include skewY(-2deg);
-        transition: opacity 3s, transform 3s, transform 1s;
-    }
-    .key_messages-enter, .key_messages-leave-to{
-        opacity: 0;
-        @include transform(translateX(100px) skewY(-2deg))
-    }
+.key_messages-enter-active, .key_messages-leave-active{
+    transition: opacity 2s;
+}
+.key_messages-enter, .key_messages-leave-to{
+    opacity: 0;
+}
 
 .outward{
     position: absolute;
@@ -1123,8 +1138,6 @@ small{
     width: 960px;
     margin-left: -460px;
     border-bottom: 1px solid $white;
-    
-    
 
     .cloud{
         position: absolute;
@@ -1202,11 +1215,12 @@ small{
     height: 100px;
     background: rgba($white, .5);
     @include border-radius(50%);
-    &._yellow{ background: rgba($yellow, .3); }
-    &._green{ background: rgba($tkhtd_green_shadow, .3); }
+    &._yellow{ background: rgba($yellow, .2); }
+    &._green{ background: rgba($tkhtd_green_shadow, .4); }
     &._light_green{ background: rgba($tkhtd_green_shadow, .3); }
     &._white{ background: rgba($white, .3); }
     &._beige{ background: rgba($beige, .3); }
 }
+              
 
 }

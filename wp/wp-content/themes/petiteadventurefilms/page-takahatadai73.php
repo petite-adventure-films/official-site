@@ -495,7 +495,7 @@ get_header(); ?>
         <div class="col col_3">
             <?php
             $movie_goodbye_ur = 16;
-            $poster_img = get_post_meta($movie_goodbye_ur, 'films_info_24', TRUE);
+            $poster_img = get_post_meta($movie_goodbye_ur, 'films_info_00', TRUE);
             echo get_post_meta_img($poster_img, 'large'); ?>
         </div>
         <div class="col col_6 last">
@@ -505,7 +505,7 @@ get_header(); ?>
                 <a href="<? echo get_post_permalink($movie_goodbye_ur); ?>">詳しくはこちら</a>
             </div> 
         </div>
-        <div class="m2_t">
+        <div class="col col_9 last m2_t">
             <div class="video">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/c7A2uPQ2Pm8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -560,7 +560,10 @@ get_header(); ?>
                 @click="displayNextPage"></div>
             </div>
             <div class="m2_t __contents">
-                <div v-if="pageLoaded == false" class="loading_ring">読み込み中</div>
+                <div v-if="pageLoaded == false" class="p2_t">
+                    読み込み中
+                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/loading.gif" class="loading_img">
+                </div>
                 <canvas v-show="pageLoaded == true" id="pdf_canvas"></canvas>
             </div>
         </div>
@@ -610,7 +613,9 @@ var VueMasonryPlugin = window['vue-masonry-plugin'].VueMasonryPlugin;
 Vue.use(VueMasonryPlugin);
 
 // lazyload
-Vue.use(VueLazyload);
+Vue.use(VueLazyload, {
+    loading: `<?php echo bloginfo("template_url"); ?>/assets/img/loading.gif`
+});
 
 // youtubeモダル
 Vue.component('modal-youtube', {
@@ -1111,8 +1116,7 @@ var app = new Vue({
         , genBubble(min, max)
         {
         
-        console.log(min, max)
-            for(var i=0; i < (Math.floor(Math.random() * 5) + 1); i++)
+            for(var i=0; i < (Math.floor(Math.random() * 10) + 1); i++)
             {
             
                 var bubble = document.createElement('div'); 
@@ -1173,9 +1177,6 @@ var app = new Vue({
         
         , handleScroll()
         {
-        
-            console.log(window.scrollY)
-
             
             var $el_main_visual  = this.$refs.main_visual.getBoundingClientRect();
             var $el_outward      = this.$refs.outward;
@@ -1197,33 +1198,6 @@ var app = new Vue({
                 $el_outward.style.bottom =  `${outwardPos}px`;
             }
             
-            
-            
-            var bubbles = ['greeting_director', 'main_visual', 'key_messages', 'greeting_residents', 'about_ur', 'timeline', 'goodbye', 'movements'];
-            
-            for(var section of bubbles)
-            {
-                var $el_section = this.$refs[section];
-                var $el_section_rec = $el_section.getBoundingClientRect();
-                
-                if(window.scrollY > $el_section_rec.top)
-                {
-                    
-                    if(this.displayBubbles[section] == undefined)
-                    {
-                        this.displayBubbles[section] = false;
-                    }
-                    
-                    if(this.displayBubbles[section] == false)
-                    {
-                        this.genBubble(window.scrollY, window.scrollY + $el_section_rec.height);
-                        this.displayBubbles[section] = true;
-                    }
-                }
-            }
-            
-            
-            
             //  urメッセージ表示アニメーション
             if(this.displayRsdtMsg.some(v => v == false)){
                 for(var i=0; i<3; i++)
@@ -1243,60 +1217,6 @@ var app = new Vue({
     , mounted(){
         this.displayGoodbyeGalleryByMonth(2013, 11);
         this.selectedGoodbyeGalleryTab = 2013;
-        
-        
-        
-        // var $el_greeting_director = this.$refs.greeting_director;
-        //     var $el_greeting_director_rect = $el_greeting_director.getBoundingClientRect();
-        // var testTimer = []
-        
-        // for(var i=0; i<1; i++){
-        //     var bubble = document.createElement('div'); 
-        //     bubble.classList.add('bubble');
-            
-        //     var size = Math.floor(Math.random() * 200) + 10;
-        //     var pos = Math.floor(Math.random() * (window.innerWidth - size)) + size;
-            
-        //     bubble.style.width = `${size}px`;
-        //     bubble.style.height = `${size}px`;
-            
-        //     bubble.style.left = `${pos}px`;
-        //     bubble.style.top = '200px';
-            
-        //     document.body.prepend(bubble);
-            
-        //     var k = 0;
-        //     var diff = 0;
-        //     var direction = -1;
-            
-        //     var timer = setInterval(() => {
-            
-        //         diff += 1 * direction;
-        //         bubble.style.transform = `translateY(${diff}px)`;
-                
-        //         k++;
-                
-        //         console.log(bubble.getBoundingClientRect().top)
-        //         if(bubble.getBoundingClientRect().top == (size * -1))
-        //         {
-        //             clearInterval(testTimer[timer]);
-        //         }
-                
-        //     }, 100);
-        //     // testTimer.push(timer);
-            
-        //     function abc()
-        //     {
-        //     }
-        // console.log(timer);
-            
-        // }
-        
-        
-        // console.log(testTimer);
-            
-            
-            
     }
     
     , created(){
@@ -1304,8 +1224,6 @@ var app = new Vue({
         this.handleResize();
         
         window.addEventListener('scroll', this.handleScroll);
-        // this.handleScroll();
-        
     }
     
 })
