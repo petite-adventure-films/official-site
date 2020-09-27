@@ -57,13 +57,13 @@
         }
     }
     
-    @media all and ($min-width: $min_width){
+    @media all and (min-width: $min_width){
         
         ._system{
-        
             display: grid;
             grid-template-columns: 256px 72px 1fr;
         }
+        
     }
 }
 

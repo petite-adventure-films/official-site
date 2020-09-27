@@ -6315,7 +6315,7 @@ html .takahatadai73 {
     /* line 55, src/scss/pages/_pafshop.scss */
     .pafshop .price_systems ._system .__price {
       padding-right: 8px; }
-  @media all and (961px: 961px) {
+  @media all and (min-width: 961px) {
     /* line 62, src/scss/pages/_pafshop.scss */
     .pafshop .price_systems ._system {
       display: grid;
