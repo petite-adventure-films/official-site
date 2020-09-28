@@ -424,7 +424,7 @@ get_header(); ?>
             <p>最初4者勉強会として発足した協議体は、その後準備会を経て2016年、地区まちづくり協議会と改組、2017年12月に日野市まちづくり条例に基づき、「高幡台団地地区 地区まちづくり計画」が作成されました。73号棟問題は、その跡地利用を含め、地域住民（自治会、管理組合）を中心としたURと自治体を巻き込んだ協議体の結成につながり、地域活性化の取り組みの中に生かされようとしています。</p>
             <div class="__material">
                 <span class="text_shadow_white">まちづくり計画案.pdf</span>
-                <span @click="showMaterial('まちづくり計画案.pdf')" class="icon icon-search"></span>
+                <span @click="showMaterial('town_planning.pdf')" class="icon icon-search"></span>
                 <a :href="`<? echo get_template_directory_uri(); ?>/assets/pdf/town_planning.pdf`"
                 download="まちづくり計画案.pdf" class="icon icon-file-download"></a>
             </div>
