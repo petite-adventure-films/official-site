@@ -425,7 +425,7 @@ get_header(); ?>
             <div class="__material">
                 <span class="text_shadow_white">まちづくり計画案.pdf</span>
                 <span @click="showMaterial('まちづくり計画案.pdf')" class="icon icon-search"></span>
-                <a :href="`<? echo get_template_directory_uri(); ?>/assets/pdf/まちづくり計画案.pdf`"
+                <a :href="`<? echo get_template_directory_uri(); ?>/assets/pdf/town_planning.pdf`"
                 download="まちづくり計画案.pdf" class="icon icon-file-download"></a>
             </div>
         </div>
