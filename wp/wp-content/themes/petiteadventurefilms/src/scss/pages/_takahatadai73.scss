@@ -121,6 +121,94 @@ small{
   
 
 //**************************************************************
+// .outward
+//**************************************************************
+
+.outward_area{
+    position: relative;
+}
+
+.outward{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid $white;
+}
+
+.outward-enter-active, .outward-leave-active{
+    transition: opacity 3s;
+}
+.outward-enter, .outward-leave-to{
+    opacity: 0;
+}
+
+@media all and (min-width: $min_width){
+    .outward{
+        width: 960px;
+        left: 50%;
+        margin-left: -460px;
+        
+    .cloud{
+    
+        position: absolute;
+        @include border-radius(50% 50% 0 0/100% 100% 0 0);
+        bottom: 0;
+        
+        &._1{
+            left: 8px;
+            width: 200px;
+            height: 100px;
+            background: rgba($tkhtd_green, .30);
+        }
+        &._2{
+            left: 50px;
+            width: 240px;
+            height: 120px;
+            background: rgba($white, .50);
+        }
+        &._3{
+            left: 200px;
+            width: 320px;
+            height: 160px;
+            background: rgba($beige, .40);
+        }
+        &._4{
+            left: 400px;
+            width: 160px;
+            height: 80px;
+            background: rgba($yellow_shadow, .20);
+        }
+        &._5{
+            left: 536px;
+            width: 200px;
+            height: 100px;
+            background: rgba($white, .80);
+        }
+        &._6{
+            left: 640px;
+            width: 160px;
+            height: 80px;
+            background: rgba($beige, .80);
+        }
+        &._7{
+            right: 80px;
+            width: 280px;
+            height: 130px;
+            background: rgba($tkhtd_green, .30);
+        }
+        &._8{
+            right: 8px;
+            width: 200px;
+            height: 100px;
+            background: rgba($tkhtd_green_shadow, .40);
+        }
+        
+    }
+    
+    }
+}
+
+//**************************************************************
 // .greeting_director
 //**************************************************************
 
@@ -734,14 +822,10 @@ small{
 
 .goodbye{
     
-    
-    
     ._gallery{
-    
         
         .__day_indexs{
             position: relative;
-            overflow-x: scroll;
             display: grid;
             grid-template-columns: repeat(31, 1fr);
             &:before{
@@ -808,11 +892,12 @@ small{
         .___btn_navi{
             position: absolute;
             display: block;
-            top: 40%;
-            background: rgba($green, .87);
+            top: 32%;
+            background: rgba($green, .24);
             color: $white;
-            width: 24px;
-            height: 24px;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
             text-align: center;
             
             &._disabled{
@@ -825,20 +910,17 @@ small{
         }
         
         .__thumbs{
-            overflow-x: scroll;
             display: grid;
-            grid-template-columns: repeat(9, 1fr);
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 8px 16px;
             .___thumb{
-                // display: inline-block;
-                float: left;
                 width: 64px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 2px;
                 @include box-sizing(border-box);
                 background: rgba($white, .56);
                 border: 1px solid $white;
-                padding: 2px;
-                &:not(:first-of-type){
-                    margin-left: 8px;
-                }
                 &._selected{
                     img{ @include opacity(.56); }
                 }
@@ -911,6 +993,8 @@ small{
     @media all and (min-width: $min_width){
     
         ._gallery{
+        
+            margin-top: 2px;
     
             .__contents{
                 .___img{
@@ -918,6 +1002,26 @@ small{
                 }
             }
             
+            .__thumbs{
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                grid-gap: 8px 16px;
+            }
+            
+        }
+    }
+    
+    
+    @media all and (max-width: $max_width){
+    
+        ._gallery{
+            margin-top: 16px;
+        
+            .__thumbs{
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 8px 16px;
+            }
         }
     }
     
@@ -1048,9 +1152,13 @@ small{
             position: relative;
             width: 224px;
             height: 224px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .__contents{
+            margin-left: auto;
+            margin-right: auto;
             padding-left: 8px;
             padding-right: 8px;
             padding-bottom: 8px;
@@ -1069,6 +1177,12 @@ small{
             }
         }
 
+    }
+    
+    @media all and (max-width: $max_width){
+        ._resident{
+            width: 100%;
+        }
     }
     
 }
@@ -1131,83 +1245,6 @@ small{
     opacity: 0;
 }
 
-.outward{
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 960px;
-    margin-left: -460px;
-    border-bottom: 1px solid $white;
-
-    .cloud{
-        position: absolute;
-        @include border-radius(50% 50% 0 0/100% 100% 0 0);
-        bottom: 0;
-        &._1{
-            left: 8px;
-            width: 200px;
-            height: 100px;
-            background: rgba($tkhtd_green, .30);
-        }
-        &._2{
-            left: 50px;
-            width: 240px;
-            height: 120px;
-            background: rgba($white, .50);
-        }
-        &._3{
-            left: 200px;
-            width: 320px;
-            height: 160px;
-            background: rgba($beige, .40);
-        }
-        &._4{
-            left: 400px;
-            width: 160px;
-            height: 80px;
-            background: rgba($yellow_shadow, .20);
-        }
-        &._5{
-            left: 536px;
-            width: 200px;
-            height: 100px;
-            background: rgba($white, .80);
-        }
-        &._6{
-            left: 640px;
-            width: 160px;
-            height: 80px;
-            background: rgba($beige, .80);
-        }
-        &._7{
-            right: 80px;
-            width: 280px;
-            height: 130px;
-            background: rgba($tkhtd_green, .30);
-        }
-        &._8{
-            right: 8px;
-            width: 200px;
-            height: 100px;
-            background: rgba($tkhtd_green_shadow, .40);
-        }
-        
-    }
-
-
-}
-
-.outward-enter-active, .outward-leave-active{
-    // @include skewY(-2deg);
-    transition: opacity 3s;
-}
-.outward-enter, .outward-leave-to{
-    opacity: 0;
-}
-
-.outward_area{
-    position: relative;
-}
 
 .bubble{
     position: absolute;

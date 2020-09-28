@@ -345,7 +345,7 @@ get_header(); ?>
             
             <div class="col col_6 last _gallery">
             
-                <div class="__day_indexs m2_t">
+                <div class="__day_indexs">
                     <div
                     v-for="val in goodbyeGallery"
                     :key="`gallery${val.date}`"
@@ -378,14 +378,14 @@ get_header(); ?>
                         <div
                         :class="[
                               '___btn_navi _prev'
-                            , (displayedGoodbyeGalleryNumber == 1) ? '_disabled' : ''
+                            , (displayedGoodbyeGalleryNumber == 1) ? '_disabled' : 'cursor_pointer'
                         ]"
                         @click="ctrlGoodbyeGalleryPrev()">
                             <span class="icon icon-keyboard-arrow-left"></span></div>
                         <div
                         :class="[
                             '___btn_navi _next'
-                            , (displayedGoodbyeGalleryNumber == val.count) ? '_disabled' : ''
+                            , (displayedGoodbyeGalleryNumber == val.count) ? '_disabled' : 'cursor_pointer'
                         ]"
                         @click="ctrlGoodbyeGalleryNext()">
                             <span class="icon icon-keyboard-arrow-right"></span></div>
@@ -397,7 +397,6 @@ get_header(); ?>
                             v-for="index in val.count"
                             :key="`gallery${val.date}_navi_${index}`"
                             @click="displayedGoodbyeGalleryNumber = index"
-                            class="___thumb"
                             :class="[
                                 '___thumb'
                                 , (displayedGoodbyeGalleryNumber == index) ? '_selected' : ''
@@ -426,7 +425,7 @@ get_header(); ?>
             <div class="__material">
                 <span class="text_shadow_white">まちづくり計画案.pdf</span>
                 <span @click="showMaterial('まちづくり計画案.pdf')" class="icon icon-search"></span>
-                <a href="<? echo get_template_directory_uri(); ?>/assets/pdf/まちづくり計画案.pdf"
+                <a :href="`<? echo get_template_directory_uri(); ?>/assets/pdf/まちづくり計画案.pdf`"
                 download="まちづくり計画案.pdf" class="icon icon-file-download"></a>
             </div>
         </div>
@@ -479,7 +478,8 @@ get_header(); ?>
                 <div class="__contents">
                     <h3 class="inline_block m1_r">{{arr.name}}</h3>
                     <div v-if="arr.statement" @click="showStatement(arr.key)" class="btn_action">陳述書</div>
-                    <dl>
+                    <p v-if="arr.key == 9" v-html="arr.message"></p>
+                    <dl v-else>
                         <dt v-if="arr.hobby">趣味</dt><dd v-if="arr.hobby">{{arr.hobby}}</dd>
                         <dt v-if="arr.favouriteIndex">好きな{{arr.favouriteIndex}}</dt><dd v-if="arr.favouriteContents">{{arr.favouriteContents}}</dd>
                         <dt v-if="arr.karaoke">カラオケ18番</dt><dd v-if="arr.karaoke">{{arr.karaoke}}</dd>
