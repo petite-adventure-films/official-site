@@ -8,8 +8,8 @@
 
 article{
 
-	padding-top: 0;
-	padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 
 }
 
@@ -19,30 +19,30 @@ article{
 
 #site_header{
 
-	&.relative{
+    &.relative{
 
-		color: $white;
+        color: $white;
 
-	}
-	
-	a{
-		color: $white;
-	}
-	
-	#site_name{
-		#eng,
-		#jpn{
-			color: $white;
-			&:hover{
-				color: $black2 !important;
-			}
-		}
-	}
-	
-	.site_menu{
-		border-top-color: rgba($black5, .23);
-		border-bottom-color: rgba($black5, .23);
-	}
+    }
+    
+    a{
+        // color: $white;
+    }
+    
+    #site_name{
+        #eng,
+        #jpn{
+            // color: $white;
+            &:hover{
+                color: $black2 !important;
+            }
+        }
+    }
+    
+    .site_menu{
+        border-top-color: rgba($black5, .23);
+        border-bottom-color: rgba($black5, .23);
+    }
 }
 
 
@@ -51,69 +51,69 @@ article{
 //**************************************************************
 
 #video_background_mask{
-	position:  fixed;
-	z-index:  1;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba($black, .54);
+    position:  fixed;
+    z-index:  1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($black, .54);
 }
 
 #video_background{
-	position: fixed;
-	z-index: 0;
-	top: 0;
-	left: 0;
-	min-width: 100%;
-	min-height: 100%;
-	width: auto;
-	height: auto;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 @media screen and (max-device-width: $max_width) {
 
-	html &{
-		background-image: url(assets/img/home/bg.jpg);
-		@include background-size(auto, 100%);
-		background-position: center center;
-		//background-repeat: no-repeat;
-		//background-attachment: fixed;
-	}
-	#video_background{
-		display: none;
-	}
+    html &{
+        background-image: url(assets/img/home/bg.jpg);
+        @include background-size(auto, 100%);
+        background-position: center center;
+        //background-repeat: no-repeat;
+        //background-attachment: fixed;
+    }
+    #video_background{
+        display: none;
+    }
 
 }
 
 
 .video_container{
 
-	@media all and (min-width: $min_width){
+    @media all and (min-width: $min_width){
 
-		&#home_video{
-			z-index:  1000;
-			top: 50%;
-			left: 50%;
-			width: 853px;
-			height: 480px;
-			margin-top: -240px;
-			margin-left: -426.5px;
-		}
+        &#home_video{
+            z-index:  1000;
+            top: 50%;
+            left: 50%;
+            width: 853px;
+            height: 480px;
+            margin-top: -240px;
+            margin-left: -426.5px;
+        }
 
-	}
+    }
 
-	@media all and (max-width: $max_width){
+    @media all and (max-width: $max_width){
 
-		&#home_video{
-			z-index:  1000;
-			top: 10%;
-			height: 100px;
-		}
+        &#home_video{
+            z-index:  1000;
+            top: 10%;
+            height: 100px;
+        }
 
-	}
+    }
 
 }
 
@@ -123,35 +123,35 @@ article{
 
 #main_visual{
 
-	padding-top: 88px;
-	padding-bottom: 112px;
-	color: $white;
+    padding-top: 88px;
+    padding-bottom: 112px;
+    color: $white;
 
-	//h1
-	h1{
-		color: $white;
-	}
-	@media all and (min-width: $min_width){
-		h1{
-			text-align: center;
-		}
-	}
+    //h1
+    h1{
+        color: $white;
+    }
+    @media all and (min-width: $min_width){
+        h1{
+            text-align: center;
+        }
+    }
 
-	//#play_video
-	#play_video{
-		margin-top: 16px;
-		margin-bottom: 16px;
-		color: $green6;
-		@extend .subhead2;
-		&:before{
-			margin-right: 8px;
-			font-family: meterial_design;
-			content: "\e6bd";
-		}
-		&:hover{
-			color: $black2;
-		}
-	}
+    //#play_video
+    #play_video{
+        margin-top: 16px;
+        margin-bottom: 16px;
+        color: $green6;
+        @extend .subhead2;
+        &:before{
+            margin-right: 8px;
+            font-family: meterial_design;
+            content: "\e6bd";
+        }
+        &:hover{
+            color: $black2;
+        }
+    }
 
 }
 
@@ -160,7 +160,7 @@ article{
 //**************************************************************
 
 #sections{
-	padding-bottom: 72px;
+    padding-bottom: 72px;
 }
 
 //**************************************************************
@@ -168,7 +168,7 @@ article{
 //**************************************************************
 
 #latest{
-	margin-top: 56px;
+    margin-top: 56px;
 }
 
 //**************************************************************
@@ -177,12 +177,12 @@ article{
 
 .owl-item,
 .owl-stage-outer{
-	position: relative;
-	z-index: 2;
+    position: relative;
+    z-index: 2;
 }
 
 .owl-controls{
-	z-index: 1;
+    z-index: 1;
 }
 
 

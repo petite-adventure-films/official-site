@@ -17,7 +17,7 @@
     </div>
 <!--footer--></footer>
 
-<div id="additional">
+<div id="additional_2">
     <div class="icon_btn" id="en_btn"><a href="http://en.petiteadventurefilms.com/">EN</a></div>
     <div class="icon_btn" id="twitter"><a href="https://twitter.com/brianandco?lang=ja" target="_blank"><span class="icon-twitter twitter"></span></a></div>
     <div class="icon_btn" id="facebook"><a href="https://www.facebook.com/Petite-Adventure-Films-156815051365447/" target="_blank"><span class="icon-facebook facebook"></span></a></div>

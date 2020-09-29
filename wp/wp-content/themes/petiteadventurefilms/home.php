@@ -94,7 +94,7 @@
     <?php endif;?>
     
     <div class="col col_9 last m4_t">
-        <a href="<?php echo get_permalink(get_page_by_path("takahatadai73")); ?>"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/banner.jpg"></a></div>
+        <a href="<?php echo get_permalink(get_page_by_path("takahatadai73")); ?>"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/banner.jpg"></a>
     </div>
 
     <?php

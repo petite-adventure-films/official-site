@@ -8,23 +8,20 @@
 <title></title>
 <?php add_alternate_link(); ?>
 
+<link href="<?php echo get_template_directory_uri(); ?>/_style.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>">
 <link href='https://fonts.googleapis.com/css?family=Dosis:400,200,300,500,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/script.min.js"></script>
+
+<?php if(is_page('takahatadai73')): ?>
 <link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
-<link href="<?php echo get_template_directory_uri(); ?>/assets/css/plugins/owl.carousel.css" rel="stylesheet">
-<link href="<?php echo get_template_directory_uri(); ?>/assets/css/plugins/owl.theme.default.css" rel="stylesheet">
-
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/script.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue-prlx/dist/v-prlx.min.js"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script> -->
 <script src="https://unpkg.com/vue-masonry@0.11.3/dist/vue-masonry-plugin-window.js"></script>
 <script src="https://unpkg.com/vue-lazyload/vue-lazyload.js"></script>
-
-
-<!-- <script src="https://js.stripe.com/v3/"></script> -->
 <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<?php endif; ?>
+
 <?php wp_head(); ?>
 </head>
 <body class="<?php echo set_body_class(); ?>">
