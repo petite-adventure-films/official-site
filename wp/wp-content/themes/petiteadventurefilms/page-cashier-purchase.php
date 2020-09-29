@@ -375,9 +375,13 @@ v-if="modalExecution === true"></modal-execution>
                     localStorage.removeItem('pafCartTypes')
                     localStorage.removeItem('pafCartCount');
 
-                    this.paymentMessage = 'お支払いに成功しました。<br>注文を完了してください。'
-                    this.paymentCompleted = true
-                    this.isExecuting = false
+                    this.paymentMessage = 'お支払いに成功しました。<br>注文を完了してください。<br>5秒後には自動的に完了されます'
+                    this.paymentCompleted = true;
+                    this.isExecuting = false;
+                    
+                    setTimeout(() => {
+                        this.$emit('complete');
+                    }, 5000);
 
                 }
                 catch(error)

@@ -5,8 +5,6 @@ Template Name: Cashier complete
 
 $data=json_decode(file_get_contents('php://input'),1);
 
-file_put_contents('abc.txt', print_r($data, true), FILE_APPEND);
-
 global $wpdb, $user_ID;
 
 if($data){

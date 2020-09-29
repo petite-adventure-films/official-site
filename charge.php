@@ -1,7 +1,13 @@
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 require_once(__DIR__ . '/stripe-php/init.php');
 
-define('API_KEY', 'sk_test_51H8OJOKluK1zP0j9wWm49GVBmqnK8hC3jV5t7FTrvYPSaFrle6LoYZYqimZKNtJFedfCOQsiblO6iasmKOqJZIly007h5ogvGf');
+define('API_KEY', $_ENV['STRIPE_SECRET_KEY']);
 
 \Stripe\Stripe::setApiKey(API_KEY);
 
