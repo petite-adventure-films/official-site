@@ -731,7 +731,7 @@ function order_ntfct2($data){
 
 --------------------------------------
 
-【ご注文内容】
+■ご注文内容
 
 EOF;
     foreach($data['order'] as $order)
@@ -744,13 +744,13 @@ EOF;
 
     $message .= <<<EOF
 
-【お買上金額】
+■お買上金額
 商品金額合計: {$data['subtotal']}
 送料: {$data['deliveryFee']}
 注文金額合計: {$data['total']}
 ※すべて税込
 
-【お支払い方法】
+■お支払い方法
 {$data['paymentMethod']}
 
 EOF;
@@ -759,7 +759,7 @@ EOF;
     {
         $message .= <<<EOF
 
-【お振込先情報】
+■お振込先情報
 三菱UFJ銀行
 麹町支店（616）普通口座
 口座番号 5171182
@@ -779,7 +779,7 @@ EOF;
     }
     $message .= <<<EOF
 
-【領収書】
+■領収書
 
 EOF;
 
@@ -799,7 +799,7 @@ EOF;
     $message .= <<<EOF
 
 
-【お届け先】
+■お届け先
 〒{$data['zipcode']}
 {$data['prefecture']}{$data['city']}{$data['address1']}
 {$data['address2']}

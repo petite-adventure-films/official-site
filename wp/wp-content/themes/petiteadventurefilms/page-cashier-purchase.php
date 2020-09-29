@@ -375,7 +375,7 @@ v-if="modalExecution === true"></modal-execution>
                     localStorage.removeItem('pafCartTypes')
                     localStorage.removeItem('pafCartCount');
 
-                    this.paymentMessage = 'お支払いに成功しました。<br>注文を完了してください。<br>5秒後には自動的に完了されます'
+                    this.paymentMessage = 'お支払いに成功しました。<br>注文を完了してください。<br>5秒後には自動的に移動します。'
                     this.paymentCompleted = true;
                     this.isExecuting = false;
                     
@@ -618,8 +618,8 @@ v-if="modalExecution === true"></modal-execution>
 
                 if(this.user.receipt == true)
                 {
-                    params.receiptName = this.user.receiptName ? this.user.receiptName : '-'
-                    params.receiptDescription = this.user.receiptDescription ? this.user.receiptDescription : '-'
+                    params.receiptName = this.user.receiptName ? this.user.receiptName : '(記載なし)'
+                    params.receiptDescription = this.user.receiptDescription ? this.user.receiptDescription : '(記載なし)'
                 }
                 else
                 {
