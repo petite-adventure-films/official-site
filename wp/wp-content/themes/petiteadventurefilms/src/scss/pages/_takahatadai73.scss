@@ -150,63 +150,71 @@ small{
         left: 50%;
         margin-left: -460px;
         
-    .cloud{
-    
-        position: absolute;
-        @include border-radius(50% 50% 0 0/100% 100% 0 0);
-        bottom: 0;
-        
-        &._1{
-            left: 8px;
-            width: 200px;
-            height: 100px;
-            background: rgba($tkhtd_green, .30);
-        }
-        &._2{
-            left: 50px;
-            width: 240px;
-            height: 120px;
-            background: rgba($white, .50);
-        }
-        &._3{
-            left: 200px;
-            width: 320px;
-            height: 160px;
-            background: rgba($beige, .40);
-        }
-        &._4{
-            left: 400px;
-            width: 160px;
-            height: 80px;
-            background: rgba($yellow_shadow, .20);
-        }
-        &._5{
-            left: 536px;
-            width: 200px;
-            height: 100px;
-            background: rgba($white, .80);
-        }
-        &._6{
-            left: 640px;
-            width: 160px;
-            height: 80px;
-            background: rgba($beige, .80);
-        }
-        &._7{
-            right: 80px;
-            width: 280px;
-            height: 130px;
-            background: rgba($tkhtd_green, .30);
-        }
-        &._8{
-            right: 8px;
-            width: 200px;
-            height: 100px;
-            background: rgba($tkhtd_green_shadow, .40);
+        img{
+            position: absolute;
+            left: 48px;
+            bottom: 0;
+            width: 720px;
+            opacity: 0.8;
         }
         
-    }
-    
+        .cloud{
+        
+            position: absolute;
+            @include border-radius(50% 50% 0 0/100% 100% 0 0);
+            bottom: 0;
+            
+            &._1{
+                left: 8px;
+                width: 200px;
+                height: 100px;
+                background: rgba($tkhtd_green, .30);
+            }
+            &._2{
+                left: 50px;
+                width: 240px;
+                height: 120px;
+                background: rgba($white, .50);
+            }
+            &._3{
+                left: 200px;
+                width: 320px;
+                height: 160px;
+                background: rgba($beige, .40);
+            }
+            &._4{
+                left: 400px;
+                width: 160px;
+                height: 80px;
+                background: rgba($yellow_shadow, .20);
+            }
+            &._5{
+                left: 536px;
+                width: 200px;
+                height: 100px;
+                background: rgba($white, .80);
+            }
+            &._6{
+                left: 640px;
+                width: 160px;
+                height: 80px;
+                background: rgba($beige, .80);
+            }
+            &._7{
+                right: 80px;
+                width: 280px;
+                height: 130px;
+                background: rgba($tkhtd_green, .30);
+            }
+            &._8{
+                right: 8px;
+                width: 200px;
+                height: 100px;
+                background: rgba($tkhtd_green_shadow, .40);
+            }
+            
+        }
+        
     }
 }
 
