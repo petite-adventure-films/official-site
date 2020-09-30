@@ -47,21 +47,26 @@ foreach(array_reverse($film_terms) as $key => $term)
     
     $film_posts[$key]['title'] = $_post->post_title;
 
-    $film_posts[$key]['poster_img'] = get_post_meta($_post_id, "films_info_00", TRUE);
-    $film_posts[$key]['prizes'] = get_post_meta($_post_id, "films_info_07", FALSE);
+    $film_posts[$key]['dvd_front'] = get_post_meta($_post_id, 'films_info_00', TRUE);
+    $film_posts[$key]['dvd_back'] = get_post_meta($_post_id, 'films_info_31', TRUE);
+    $film_posts[$key]['dvd_front_en'] = get_post_meta($_post_id, 'films_info_23', TRUE);
+    $film_posts[$key]['dvd_back_en'] = get_post_meta($_post_id, 'films_info_33', TRUE);
+    $film_posts[$key]['dvd_specials'] = get_post_meta($_post_id, 'films_info_32', TRUE);
     
-    $genre = get_post_meta($_post_id, "films_info_01", TRUE);
-    $country = get_post_meta($_post_id, "films_info_02", TRUE);
-    $year = get_post_meta($_post_id, "films_info_03", TRUE);
-    $running_time = get_post_meta($_post_id, "films_info_04", TRUE);
+    $film_posts[$key]['prizes'] = get_post_meta($_post_id, 'films_info_07', FALSE);
+    
+    $genre = get_post_meta($_post_id, 'films_info_01', TRUE);
+    $country = get_post_meta($_post_id, 'films_info_02', TRUE);
+    $year = get_post_meta($_post_id, 'films_info_03', TRUE);
+    $running_time = get_post_meta($_post_id, 'films_info_04', TRUE);
     $basic_info = array($genre, $country, $year, $running_time);
     $film_posts[$key]['basic_info'] = array_filter($basic_info, "strlen");
     
-    $film_posts[$key]['detail_indexs'] = get_post_meta_arr($_post_id, "films_info_05");
-    $film_posts[$key]['detail_contents'] = get_post_meta_arr($_post_id, "films_info_06");
+    $film_posts[$key]['detail_indexs'] = get_post_meta_arr($_post_id, 'films_info_05');
+    $film_posts[$key]['detail_contents'] = get_post_meta_arr($_post_id, 'films_info_06');
     
-    $film_posts[$key]['credits_indexs'] = get_post_meta_arr($_post_id, "films_info_10");
-    $film_posts[$key]['credits_contents'] = get_post_meta_arr($_post_id, "films_info_11");
+    $film_posts[$key]['credits_indexs'] = get_post_meta_arr($_post_id, 'films_info_10');
+    $film_posts[$key]['credits_contents'] = get_post_meta_arr($_post_id, 'films_info_11');
     
 }
 
@@ -106,13 +111,27 @@ foreach(array_reverse($film_terms) as $key => $term)
     <!--.header_page--></header>
 
     <div class="col col_4">
-        <? echo get_post_meta_img($film_posts[0]['poster_img'], 'large'); ?>
+        
+        <div class="owl-carousel">
+            <div class="slide"><? echo get_post_meta_img($film_posts[0]['dvd_front'], 'large', 'preload'); ?></div>
+            <div class="slide"><? echo get_post_meta_img($film_posts[0]['dvd_back'], 'large', 'preload'); ?></div>
+            <? if($film_posts[0]['dvd_front_en']): ?>
+                <div class="slide"><? echo get_post_meta_img($film_posts[0]['dvd_front_en'], 'large', 'preload'); ?></div>
+            <? endif; ?>
+            <? if($film_posts[0]['dvd_back_en']): ?>
+                <div class="slide"><? echo get_post_meta_img($film_posts[0]['dvd_back_en'], 'large', 'preload'); ?></div>
+            <? endif; ?>
+            <? if($film_posts[0]['dvd_specials']): ?>
+                <div class="slide"><? echo get_post_meta_img($film_posts[0]['dvd_specials'], 'large', 'preload'); ?></div>
+            <? endif; ?>
+        </div>
+				
     </div>
 
     <div class="col col_5 last">
         
         <? if($film_posts[0]['prizes']): ?>
-            <div class="subhead2 m1_b">
+            <div class="subhead2 pink m1_b">
             <? foreach($film_posts[0]['prizes'] as $prize): ?>
                 <? echo $prize; ?></p>
             <? endforeach; ?>
@@ -120,7 +139,7 @@ foreach(array_reverse($film_terms) as $key => $term)
         <? endif; ?>
         
         <? if($dvd_catch): ?>
-            <div class="subhead2 m1_b">
+            <div class="subhead2 pink m1_b">
                 <? echo $dvd_catch; ?>
             </div>
         <? endif; ?>
@@ -204,7 +223,9 @@ foreach(array_reverse($film_terms) as $key => $term)
         
             <? foreach($film_posts as $key => $_post): ?>
                 <? if(count($film_posts) > 1): ?>
-                    <div class="<? echo ($key > 0) ? ' m1_t': ''; ?>"><? echo $_post['title']; ?></div>
+                    <div class="<? echo ($key > 0) ? ' m1_t': ''; ?>">
+                        <span class="subhead2"><? echo $_post['title']; ?></span>
+                    </div>
                 <? endif; ?>
                 <dl class="list_definition">
                     <dt>監督</dt><dd>早川由美子</dd>
@@ -216,7 +237,7 @@ foreach(array_reverse($film_terms) as $key => $term)
             <? endforeach; ?>
         
             <? if($dvd_intro): ?>
-                <div class="m1_t">
+                <div class="_intro">
                     <? echo $dvd_intro; ?>
                 </div>
             <? endif; ?>
@@ -236,12 +257,15 @@ foreach(array_reverse($film_terms) as $key => $term)
     <div v-if="displayTab == 3" class="m2_t">
     
         <? foreach($film_posts as $key => $_post): ?>
-            <div class="p1_l <? echo ($key > 0) ? ' m2_t': ''; ?>"><? echo $_post['title']; ?></div>
+            <div class="p1_l <? echo ($key > 0) ? ' m2_t': ''; ?>">
+                <span class="subhead2"><? echo $_post['title']; ?></span>
+                <span class="caption2">(敬称略)</span>
+            </div>
             <div v-masonry item-selector="._credit_<? echo $key; ?>">
                 <? for($i=0; $i<count($_post['credits_indexs']); $i++): ?>
-                    <div class="col col_3 _credit _credit_<? echo $key; ?> m1_t" v-masonry-tile>
-                        <p><? echo $_post['credits_indexs'][$i]; ?></p>
-                        <? echo $_post['credits_contents'][$i]; ?>
+                    <div class="col col_3 _credit _credit_<? echo $key; ?>" v-masonry-tile>
+                        <p class="bold"><? echo $_post['credits_indexs'][$i]; ?></p>
+                        <div class="m1_t"><? echo $_post['credits_contents'][$i]; ?></div>
                     </div>
                 <? endfor; ?>
             </div>
@@ -249,7 +273,7 @@ foreach(array_reverse($film_terms) as $key => $term)
                
     </div>
 
-    <div class="col col_9 last">
+    <div class="col col_9 last contents">
         <p class="m4_t">DVD購入や上映についてのお問い合わせはこちらから</p>
         <div class="inline_block btn priority1">
             <a href="<? echo get_permalink(get_page_by_path("contact_jp")); ?>">お問い合わせ</a>

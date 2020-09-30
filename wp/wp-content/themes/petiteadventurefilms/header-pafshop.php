@@ -8,10 +8,9 @@
 <title></title>
 <?php add_alternate_link(); ?>
 
+<link href="<?php echo get_template_directory_uri(); ?>/_style.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>">
 <link href='https://fonts.googleapis.com/css?family=Dosis:400,200,300,500,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/script.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>

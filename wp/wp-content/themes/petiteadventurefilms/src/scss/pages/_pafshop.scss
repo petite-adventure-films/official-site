@@ -99,13 +99,30 @@
     
 }
 
+._intro{
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid $black5;
+}
+
 ._credit{
     min-width: 224px;
+    margin-top: 16px;
 }
+
 
 ._specials{
     p + p{
         margin-top: 8px;
+    }
+    
+    hr{
+        margin-top: 16px;
+        border-top: none;
+        border-bottom: none;
+        & + *{
+            margin-top: 16px;
+        }
     }
     
     figure{

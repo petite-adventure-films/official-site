@@ -45,8 +45,9 @@
 	font-size: 12px;
 	line-height: 12px;
 }
-sup{
-	@extend .caption2;
+
+p{
+	// @extend .body1;
 }
 
 h1{
@@ -70,6 +71,10 @@ h3{
 
 a{
 	text-decoration: none;
+}
+
+strong{
+	font-weight: bold;
 }
 
 .bold{

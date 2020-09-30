@@ -3408,34 +3408,38 @@ img {
   line-height: 20px; }
 
 /* line 43, src/scss/base/_typography.scss */
-.caption2, sup, .small {
+.caption2, .small {
   color: #868686;
   font-size: 12px;
   line-height: 12px; }
 
-/* line 52, src/scss/base/_typography.scss */
+/* line 53, src/scss/base/_typography.scss */
 h1 {
   color: #2c2c2c;
   font-size: 32px;
   line-height: 48px; }
 
-/* line 59, src/scss/base/_typography.scss */
+/* line 60, src/scss/base/_typography.scss */
 h2 {
   color: #2c2c2c;
   font-size: 24px;
   line-height: 40px; }
 
-/* line 65, src/scss/base/_typography.scss */
+/* line 66, src/scss/base/_typography.scss */
 h3 {
   color: #2c2c2c;
   font-size: 20px;
   line-height: 34px; }
 
-/* line 71, src/scss/base/_typography.scss */
+/* line 72, src/scss/base/_typography.scss */
 a {
   text-decoration: none; }
 
-/* line 75, src/scss/base/_typography.scss */
+/* line 76, src/scss/base/_typography.scss */
+strong {
+  font-weight: bold; }
+
+/* line 80, src/scss/base/_typography.scss */
 .bold {
   font-weight: bold; }
 
@@ -6422,25 +6426,39 @@ html .takahatadai73 {
     grid-row: 3;
     grid-column: 2; }
 /* line 102, src/scss/pages/_pafshop.scss */
+.pafshop ._intro {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #f0f0f0; }
+/* line 108, src/scss/pages/_pafshop.scss */
 .pafshop ._credit {
-  min-width: 224px; }
-/* line 107, src/scss/pages/_pafshop.scss */
+  min-width: 224px;
+  margin-top: 16px; }
+/* line 115, src/scss/pages/_pafshop.scss */
 .pafshop ._specials p + p {
   margin-top: 8px; }
-/* line 111, src/scss/pages/_pafshop.scss */
+/* line 119, src/scss/pages/_pafshop.scss */
+.pafshop ._specials hr {
+  margin-top: 16px;
+  border-top: none;
+  border-bottom: none; }
+  /* line 123, src/scss/pages/_pafshop.scss */
+  .pafshop ._specials hr + * {
+    margin-top: 16px; }
+/* line 128, src/scss/pages/_pafshop.scss */
 .pafshop ._specials figure {
   margin-top: 8px; }
-/* line 115, src/scss/pages/_pafshop.scss */
+/* line 132, src/scss/pages/_pafshop.scss */
 .pafshop ._specials figcaption {
   text-align: right; }
-/* line 121, src/scss/pages/_pafshop.scss */
+/* line 138, src/scss/pages/_pafshop.scss */
 .pafshop ._specials .wp-block-embed-youtube .wp-block-embed__wrapper {
   position: relative;
   z-index: 1;
   padding-bottom: 56.25%;
   width: 100%;
   height: 0 !important; }
-  /* line 128, src/scss/pages/_pafshop.scss */
+  /* line 145, src/scss/pages/_pafshop.scss */
   .pafshop ._specials .wp-block-embed-youtube .wp-block-embed__wrapper iframe {
     position: absolute;
     top: 0 !important;
@@ -6448,7 +6466,7 @@ html .takahatadai73 {
     width: 100%;
     height: 100%;
     max-height: 810px; }
-/* line 140, src/scss/pages/_pafshop.scss */
+/* line 157, src/scss/pages/_pafshop.scss */
 .pafshop .confirm_btns {
   width: 304px;
   text-align: left; }
