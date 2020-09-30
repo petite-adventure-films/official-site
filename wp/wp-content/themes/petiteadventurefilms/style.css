@@ -6712,21 +6712,24 @@ html .takahatadai73 {
   .cashier .btn.pay a:hover, .cashier .btn.pay .ele:hover {
     background: red; }
 /* line 281, src/scss/pages/_cashier.scss */
-.cashier .list_qna dt {
+.cashier .list_faq dt {
   position: relative;
   padding-left: 24px; }
-  /* line 284, src/scss/pages/_cashier.scss */
-  .cashier .list_qna dt:before {
+  /* line 285, src/scss/pages/_cashier.scss */
+  .cashier .list_faq dt:not(:first-of-child) {
+    color: red; }
+  /* line 288, src/scss/pages/_cashier.scss */
+  .cashier .list_faq dt:before {
     display: block;
     position: absolute;
     left: 0;
-    content: "Q"; }
-/* line 291, src/scss/pages/_cashier.scss */
-.cashier .list_qna dd {
+    content: 'Q'; }
+/* line 296, src/scss/pages/_cashier.scss */
+.cashier .list_faq dd {
   position: relative;
   padding-left: 24px; }
-  /* line 294, src/scss/pages/_cashier.scss */
-  .cashier .list_qna dd:before {
+  /* line 299, src/scss/pages/_cashier.scss */
+  .cashier .list_faq dd:before {
     display: block;
     position: absolute;
     left: 0;

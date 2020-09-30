@@ -277,15 +277,20 @@
     
 }
 
-.list_qna{
+.list_faq{
     dt{
         position: relative;
         padding-left: 24px;
+        // @extend .subhead2;
+        &:not(:first-of-child){
+            color: red;
+        }
         &:before{
             display: block;
             position: absolute;
             left: 0;
-            content: 'Q'
+            content: 'Q';
+            // font-size: 16px;
         }
     }
     dd{
