@@ -440,7 +440,7 @@ v-if="modalExecution === true"></modal-execution>
         el: '#app'
         , data: {
               products: products
-            , discTypes: ['DVD', 'ブルーレイ']
+            , discTypes: [null, 'DVD', 'ブルーレイ']
             , pafCart : strgPafCart
             , pafCartTypes : strgPafCartTypes || {}
             , pafCartCount : strgPafCartCount || 0

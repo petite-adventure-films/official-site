@@ -174,7 +174,7 @@ v-if="showModal == true"
         el: '#app'
         , data: {
               products: products
-            , discTypes: ['DVD', 'ブルーレイ']
+            , discTypes: [null, 'DVD', 'ブルーレイ']
             , pafCart : strgPafCart || {}
             , pafCartTypes : strgPafCartTypes || {}
             , pafCartCount: strgPafCartCount || 0

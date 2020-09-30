@@ -171,10 +171,11 @@ foreach(array_reverse($film_terms) as $key => $term)
                         <select
                         v-if="typeContents[key].length > 1"
                             v-model="pafCartTypes[key]">
+                            <option value=0 selected>ディスク選択</option>
                             <option
                             v-for="(val3, key3) in typeContents[key]"
                             :key="'type' + key + key3"
-                                :value="key3">{{val3}}</option>
+                                :value="(key3 + 1)">{{val3}}</option>
                         </select>
                         <span v-else>
                             {{typeContents[key][0]}}
