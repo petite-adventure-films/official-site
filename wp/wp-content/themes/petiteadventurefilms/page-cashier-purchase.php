@@ -2,6 +2,14 @@
 /*
 Template Name: Cashier purchase
 */
+// 
+require_once __DIR__ . '../../../../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'../../../../../');
+$dotenv->load();
+
+define('API_KEY', $_ENV['STRIPE_PUBLIC_KEY']);
+
 $film_query = new WP_Query(['post_type' => 'films', 'orderby'=>'ID','order'=>'ASC']);
 $shop_query = new WP_Query(['post_type' => 'pafshop', 'orderby'=>'ID','order'=>'ASC']);
 
@@ -412,7 +420,7 @@ v-if="modalExecution === true"></modal-execution>
         }
 
         , mounted: function(){
-            this.stripe = Stripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
+            this.stripe = Stripe('<? echo API_KEY; ?>');
             this.card = this.stripe.elements().create('card', {
                 hidePostalCode: true
                 , style: {

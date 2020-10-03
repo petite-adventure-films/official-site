@@ -18,7 +18,7 @@ if($data){
         , 'post_type' => $post_type
     );
     $insert_id = wp_insert_post($insert_arg);
-    file_put_contents('abc.txt', print_r($insert_id, true), FILE_APPEND);
+    // file_put_contents('abc.txt', print_r($insert_id, true), FILE_APPEND);
 
     if($insert_id){
 
