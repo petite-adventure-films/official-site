@@ -187,7 +187,7 @@ get_header('pafshop'); ?>
                                 <div>
                                     <div class="__logo _credit_card inline_block"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_visa.gif"></div>
                                     <div class="__logo _credit_card inline_block"> <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_mastercard.gif"></div>
-                                
+                                </div>
                                 <p class="m1_t">注文完了後、お支払い画面へ移動します。</p>
                             </div>
                         </div>
