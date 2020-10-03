@@ -6692,17 +6692,27 @@ html .takahatadai73 {
     display: grid;
     grid-template-columns: 24px 1fr;
     align-items: top; }
-    /* line 222, src/scss/pages/_cashier.scss */
-    .cashier .purchase_details ._method .__logo {
-      height: 24px; }
-  /* line 229, src/scss/pages/_cashier.scss */
+    /* line 223, src/scss/pages/_cashier.scss */
+    .cashier .purchase_details ._method .__logo img {
+      height: 22px;
+      vertical-align: middle; }
+    /* line 227, src/scss/pages/_cashier.scss */
+    .cashier .purchase_details ._method .__logo span {
+      vertical-align: middle; }
+    /* line 229, src/scss/pages/_cashier.scss */
+    .cashier .purchase_details ._method .__logo._japannet img {
+      height: 16px; }
+    /* line 234, src/scss/pages/_cashier.scss */
+    .cashier .purchase_details ._method .__logo._credit_card img {
+      height: 27px; }
+  /* line 242, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .reset_payment {
     color: #53dbff; }
-    /* line 231, src/scss/pages/_cashier.scss */
+    /* line 244, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .reset_payment:hover {
       color: #868686; }
   @media all and (max-width: 960px) {
-    /* line 239, src/scss/pages/_cashier.scss */
+    /* line 252, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .form_ele input[type="text"],
     .cashier .purchase_details .form_ele input[type="email"],
     .cashier .purchase_details .form_ele input[type="number"],
@@ -6710,43 +6720,43 @@ html .takahatadai73 {
     .cashier .purchase_details .form_ele input[type="password"] {
       width: 100%;
       min-width: 100%; } }
-/* line 252, src/scss/pages/_cashier.scss */
+/* line 265, src/scss/pages/_cashier.scss */
 .cashier .card_element {
   padding: 8px;
   border: 3px solid #ff0000;
   background: #ffffff; }
-  /* line 256, src/scss/pages/_cashier.scss */
+  /* line 269, src/scss/pages/_cashier.scss */
   .cashier .card_element.disabled {
     border-color: #f0f0f0;
     pointer-events: none; }
-/* line 266, src/scss/pages/_cashier.scss */
+/* line 279, src/scss/pages/_cashier.scss */
 .cashier .btn.pay a, .cashier .btn.pay .ele {
   border: none;
   background: rgba(255, 0, 0, 0.87);
   color: #ffff00;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
-  /* line 272, src/scss/pages/_cashier.scss */
+  /* line 285, src/scss/pages/_cashier.scss */
   .cashier .btn.pay a:hover, .cashier .btn.pay .ele:hover {
     background: red; }
-/* line 281, src/scss/pages/_cashier.scss */
+/* line 294, src/scss/pages/_cashier.scss */
 .cashier .list_faq dt {
   position: relative;
   padding-left: 24px; }
-  /* line 285, src/scss/pages/_cashier.scss */
+  /* line 298, src/scss/pages/_cashier.scss */
   .cashier .list_faq dt:not(:first-of-child) {
     color: red; }
-  /* line 288, src/scss/pages/_cashier.scss */
+  /* line 301, src/scss/pages/_cashier.scss */
   .cashier .list_faq dt:before {
     display: block;
     position: absolute;
     left: 0;
     content: 'Q'; }
-/* line 296, src/scss/pages/_cashier.scss */
+/* line 309, src/scss/pages/_cashier.scss */
 .cashier .list_faq dd {
   position: relative;
   padding-left: 24px; }
-  /* line 299, src/scss/pages/_cashier.scss */
+  /* line 312, src/scss/pages/_cashier.scss */
   .cashier .list_faq dd:before {
     display: block;
     position: absolute;

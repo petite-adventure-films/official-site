@@ -82,10 +82,8 @@ get_header('pafshop'); ?>
                         class="_details">
                             <div class="cell __index">
                                 {{item.price_info[key].index}}
-                                <span v-if="
-                                   pafCartTypes[`film_${item.prod_key}`]
-                                && pafCartTypes[`film_${item.prod_key}`][key] > 0">
-                                    ({{discTypes[(pafCartTypes[`film_${item.prod_key}`][key])]}})
+                                <span v-if="pafCartTypes[`film_${item.prod_key}`][key] == 2">
+                                    (ブルーレイ)
                                 </span>
                             </div>
                             <div class="__detail_unit_amount_sum">
@@ -173,12 +171,10 @@ get_header('pafshop'); ?>
                             </div>
                             <div class="">
                                 <label for="paymentMethod1">銀行振込</label>
-                                <div class="">
-                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_yucho.png" class="block __logo m1_t">
-                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_mufg.png" class="block __logo m1_t">
-                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_japannet.png" class="block __logo m1_t">
-                                    <p class="m1_t">振込先情報は注文完了後の確認メールに記載されております。振込手数料はご負担下さい。</p>
-                                </div>
+                                <div class="__logo"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_yucho.png"></div>
+                                <div class="__logo"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_mufg.png"> <span class="">三菱UFJ銀行</span></div>
+                                <div class="__logo _japannet"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/bank_logo_japannet.png"></div>
+                                <p class="m1_t">振込先情報は注文完了後の確認メールに記載されております。振込手数料はご負担下さい。</p>
                             </div>
                         </div>
 
@@ -188,11 +184,11 @@ get_header('pafshop'); ?>
                             </div>
                             <div class="">
                                 <label for="paymentMethod2">クレジットカード</label>
-                                <div class="">
-                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_visa.gif" class="inline_block __logo m1_t">
-                                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_mastercard.gif" class="inline_block __logo m1_t">
-                                    <p class="m1_t">注文完了後、お支払い画面へ移動します。</p>
-                                </div>
+                                <div>
+                                    <div class="__logo _credit_card inline_block"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_visa.gif"></div>
+                                    <div class="__logo _credit_card inline_block"> <img src="<?php echo bloginfo("template_url"); ?>/assets/img/pafshop/card_logo_mastercard.gif"></div>
+                                
+                                <p class="m1_t">注文完了後、お支払い画面へ移動します。</p>
                             </div>
                         </div>
 
@@ -440,39 +436,38 @@ v-if="modalExecution === true"></modal-execution>
         el: '#app'
         , data: {
               products: products
-            , discTypes: [null, 'DVD', 'ブルーレイ']
             , pafCart : strgPafCart
             , pafCartTypes : strgPafCartTypes || {}
             , pafCartCount : strgPafCartCount || 0
             , deliveryFee: 0
-            , step : 1
+            , step : 3
             , user:{
-                  name: ''
-                , zipcode: ''
-                , prefecture: ''
-                , city: ''
-                , address1: ''
-                , tel: ''
-                , email: ''
-                , emailConfirm: ''
-                , receipt: false
-                , receiptName: ''
-                , receiptDescription: ''
-                , agree: false
+                //   name: ''
+                // , zipcode: ''
+                // , prefecture: ''
+                // , city: ''
+                // , address1: ''
+                // , tel: ''
+                // , email: ''
+                // , emailConfirm: ''
+                // , receipt: false
+                // , receiptName: ''
+                // , receiptDescription: ''
+                // , agree: false
 
-                // name: 'restard'
-                // , zipcode: '1500034'
-                // , prefecture: '東京都'
-                // , city: '渋谷区神山町'
-                // , address1: '41-7'
-                // , address2: 'エクティ神山町209'
-                // , tel: '08039118917'
-                // , email: 'drestard@gmail.com'
-                // , emailConfirm: 'drestard@gmail.com'
-                // , receipt: true
-                // , receiptName: 'お宛名'
-                // , receiptDescription: '但し書き'
-                // , agree: true
+                name: 'restard'
+                , zipcode: '1500034'
+                , prefecture: '東京都'
+                , city: '渋谷区神山町'
+                , address1: '41-7'
+                , address2: 'エクティ神山町209'
+                , tel: '08039118917'
+                , email: 'drestard@gmail.com'
+                , emailConfirm: 'drestard@gmail.com'
+                , receipt: true
+                , receiptName: 'お宛名'
+                , receiptDescription: '但し書き'
+                , agree: true
             }
             , errors:{
                   agree: '必ずチェックしてください'
@@ -727,7 +722,7 @@ v-if="modalExecution === true"></modal-execution>
                 }
                 else if(!/^\d{10,11}$/.test(this.user.tel))
                 {
-                    this.errors['tel'] = '正しい郵便番号を入力ください 半角数字のみ 例)01234567910'
+                    this.errors['tel'] = '正しい電話番号を入力ください 半角数字のみ 例)0123456791'
                 }
 
             }

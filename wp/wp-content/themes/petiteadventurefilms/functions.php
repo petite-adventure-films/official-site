@@ -599,7 +599,7 @@ function mail_footer(){
 Petite Adventure Films（プチ・アドベンチャー・フィルムズ）
 E-mail info@petiteadventurefilms.com
 TEL 080-4146-3404（早川由美子）
-Web www.petiteadventurefilms.com
+Web https://www.petiteadventurefilms.com
 
 ';
 
@@ -760,6 +760,10 @@ EOF;
         $message .= <<<EOF
 
 ■お振込先情報
+
+※下記の3つよりお選びください。
+お振り込み後、ご一報下さればありがたいです。
+
 三菱UFJ銀行
 麹町支店（616）普通口座
 口座番号 5171182

@@ -39,10 +39,8 @@
                         class="_details">
                             <div class="cell __index">
                                 {{item.price_info[key].index}}
-                                <span v-if="
-                                   pafCartTypes[`film_${item.prod_key}`]
-                                && pafCartTypes[`film_${item.prod_key}`][key] > 0">
-                                    ({{discTypes[(pafCartTypes[`film_${item.prod_key}`][key])]}})
+                                <span v-if="pafCartTypes[`film_${item.prod_key}`][key] == 2">
+                                    (ブルーレイ)
                                 </span>
                             </div>
                             <div class="__detail_unit_amount_sum">
@@ -84,7 +82,7 @@
                 <span class="_fee_amount">{{convertYen(getTotal(true))}}</span>
             </div>
             <p class="m1_t footnotes caption1">
-                <small>※DISC規格の記載がない場合はDVDです</small><br>
+                <small>※DISC種類の記載がない場合はDVDです</small><br>
                 <small>※価格には消費税が含まれています</small><br>
                 <small>※1回のご注文ごとに送料300円が掛かります</small><br>
                 <span class="pink">3,000円以上のお買い上げで送料無料！</span></small>
@@ -174,7 +172,6 @@ v-if="showModal == true"
         el: '#app'
         , data: {
               products: products
-            , discTypes: [null, 'DVD', 'ブルーレイ']
             , pafCart : strgPafCart || {}
             , pafCartTypes : strgPafCartTypes || {}
             , pafCartCount: strgPafCartCount || 0

@@ -167,27 +167,27 @@ foreach(array_reverse($film_terms) as $key => $term)
                 
                 <span class="__index">
                     {{val}}
-                    <span v-if="typeContents.length > 0">
+                    <span v-if="typeContents">
                         <select
-                        v-if="typeContents[key].length > 1"
-                            v-model="pafCartTypes[key]">
-                            <option value=0 selected>ディスク選択</option>
-                            <option
-                            v-for="(val3, key3) in typeContents[key]"
-                            :key="'type' + key + key3"
-                                :value="(key3 + 1)">{{val3}}</option>
+                        v-if="pafCartTypes[key] < 999"
+                            v-model="pafCartTypes[key]"
+                            @change="checkAddCart(key)">
+                                <option
+                                v-for="(val3, key3) in diskTypes"
+                                :key="'price' + key + key3"
+                                    :value="key3">{{val3}}</option>
                         </select>
-                        <span v-else>
-                            {{typeContents[key][0]}}
-                        </span>
+                        <span v-else>DVD</span>
                     </span>
+                    
                 </span>
                 
                 <span class="__price al_r">{{convertYen(priceContents[key])}}</span>
                 
-                <select class="__unit" v-model="pafCart[key]">
+                <select class="__unit" v-model="pafCart[key]" @change="checkAddCart(key)">
                     <option value=0 selected>個数</option>
                     <option
+                    v-if
                     v-for="(val2, key2) in purchaseLimit"
                     :key="'price' + key + key2"
                         :value="val2">{{val2}}</option>
@@ -196,11 +196,16 @@ foreach(array_reverse($film_terms) as $key => $term)
         </div>
 
         <div
-        :class="['btn m1_t cursor_pointer', addCartActive]">
-            <span class="ele" @click="addCart">買い物かごに追加</span>
+        :class="['btn m1_t cursor_pointer', addCartActive ? 'shop' : 'disabled']">
+            <span class="ele" @click="addCart()">買い物かごに追加</span>
         </div>
         
-        <span v-if="errorMessage" class="red">{{errorMessage}}</span>
+        
+        <span
+        v-if="errorMessages"
+            v-for="(val, key) in errorMessages"
+            :key="`message_${key}`"
+            class="red">{{val}}</span>
         <p class="m1_t footnotes caption1">
             <small>※こちらの価格には消費税が含まれています</small><br>
             <small>※1回のご注文ごとに送料300円が掛かります<br>
@@ -313,38 +318,43 @@ v-if="showModal == true"
     // masonry レイアウト
     var VueMasonryPlugin = window['vue-masonry-plugin'].VueMasonryPlugin;
     Vue.use(VueMasonryPlugin);
-
+    
     var price_indexs = <? echo json_encode($price_indexs) ?>;
     var price_contents = <? echo json_encode($price_contents) ?>;
-    
-    var has_types = <? echo json_encode($type_contents) ?> || false;
-    var type_indexs = <? echo json_encode($type_indexs) ?>;
-    var type_contents = <? echo json_encode($type_contents) ?>;
-    var _type_contents = [];
-    if(type_contents)
-    {
-        price_indexs.forEach((v, k) => {
-            var key = type_indexs.findIndex((v2, k2) => v2 == v);
-            console.log('key', key);
-            if(key > -1)
-            {
-                _type_contents[k] = type_contents[key].split(',');
-            }
-            else
-            {
-                _type_contents[k] = ['DVD'];
-            }
-        })
-    }
-    
-    var film_id = 'film_<? echo $film_id ?>';
     
     var emptyPafCart = [];
     var emptyPafCartTypes = [];
     for(var i of price_indexs){
         emptyPafCart.push(0);
-        emptyPafCartTypes.push(0);
+        emptyPafCartTypes.push(999);
     }
+
+    
+    var type_indexs = <? echo json_encode($type_indexs) ?>;
+    var type_contents = <? echo json_encode($type_contents) ?> || false;
+    var paf_cart_types = emptyPafCartTypes;
+    if(type_contents)
+    {
+        price_indexs.forEach((v, k) => {
+            var key = type_indexs.findIndex((v2, k2) => v2 == v);
+            
+            if(key > -1)
+            {
+                paf_cart_types[k] = 0;
+            }
+            else
+            {
+                paf_cart_types[k] = 999;
+            }
+        })
+    
+    }
+    
+    
+    
+    
+    var film_id = 'film_<? echo $film_id ?>';
+    
 
     if(!JSON.parse(localStorage.getItem('pafCart'))){
         localStorage.setItem('pafCart', JSON.stringify({}));
@@ -356,7 +366,8 @@ v-if="showModal == true"
 
     var strgPafCart = JSON.parse(localStorage.getItem('pafCart'));
     var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
-    var strgPafCartTypes = (has_types) ? JSON.parse(localStorage.getItem('pafCartTypes')) : false;
+    var strgPafCartTypes = JSON.parse(localStorage.getItem('pafCartTypes')) || false;
+    
     
 
     Vue.component('modal', {
@@ -374,38 +385,95 @@ v-if="showModal == true"
             , priceContents : price_contents
             
             , typeIndexs : type_indexs || false
-            , typeContents : _type_contents || false
+            , typeContents : type_contents || false
             
+            , diskTypes : ['ディスク選択', 'DVD', 'ブルーレイ']
             , purchaseLimit : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             , strgPafCart : strgPafCart
             , strgPafCartTypes: strgPafCartTypes
             , pafCart : (strgPafCart && strgPafCart[film_id]) ? strgPafCart[film_id] : emptyPafCart
-            , pafCartTypes : (strgPafCartTypes && strgPafCartTypes[film_id]) ? strgPafCartTypes[film_id] : emptyPafCartTypes
+            , pafCartTypes : (strgPafCartTypes && strgPafCartTypes[film_id]) ? strgPafCartTypes[film_id] : paf_cart_types
             , pafCartCount : strgPafCartCount || 0
-            , errorMessage: ''
+            , errorMessages: []
+            , addCartActive: false
             
             
             , showModal: false
             , displayTab: 1
         }
-        , computed: {
-            addCartActive : function()
-            {
-                var count = 0
-                this.pafCart.forEach(v => { count = count + parseInt(v) })
-                //this.errorMessage = ''
-                return count > 0 ? 'shop' : 'disabled'
-            }
-        }
+        
         , methods: {      
             convertYen: function(number)
             {
                 return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(number);
             }
+            
+            , checkProductsCount: function()
+            {
+                var count = 0;
+                this.pafCart.forEach(v => count = count + v);
+                if(count < 1)
+                {
+                    this.addCartActive = false;
+                    throw new Error('個数を入力してください')
+                }
+            }
+            
+            , checkProductHasType: function()
+            {
+                for(var k=0; k<this.pafCart.length; k++)
+                {
+                    var v = this.pafCart[k];
+                    if(v > 0 && this.pafCartTypes[k] < 1)
+                    {
+                        throw new Error('ディスク種類の入力がない箇所があります')
+                    }
+                }
+            }
+            
+            , checkProductHasUnit: function()
+            {
+                for(var k=0; k<this.pafCartTypes.length; k++)
+                {
+                    var v = this.pafCartTypes[k];
+                    if((v > 0 && v < 999) && this.pafCart[k] < 1)
+                    {
+                        throw new Error('個数の入力が箇所があります')
+                    }
+                }
+            }
+            
+            , checkAddCart : function(key)
+            {
+                this.errorMessages = [];
+                this.addCartActive = false;
+                
+                var errors = [];
+                
+                try {
+                
+                    if(this.typeContents)
+                    {
+                        this.checkProductHasType();
+                        this.checkProductHasUnit();
+                    }
+                    
+                    this.checkProductsCount();  
+                    
+                    this.addCartActive = true;
+                    
+                }
+                catch(error)
+                {
+                    this.errorMessages.push(error.message);
+                }
+                
+            }
+            
             , addCart: function()
             {
-                this.errorMessage = ''
-                if(this.addCartActive == 'shop')
+            
+                if(this.addCartActive)
                 {
 
                     if(this.strgPafCart[this.film] === undefined)
@@ -436,10 +504,7 @@ v-if="showModal == true"
                     this.showModal = true;
                     
                 }
-                else
-                {
-                    this.errorMessage = '個数を入力してください'
-                }
+                
             }
             , setPafCartCount: function()
             {
@@ -451,7 +516,6 @@ v-if="showModal == true"
                 })
                 localStorage.setItem('pafCartCount', parseInt(count));
                 this.pafCartCount = count;
-                console.log(this.pafCartCount);
             }
 
             , closeModaltoCashier: function()
@@ -461,14 +525,12 @@ v-if="showModal == true"
         }
         , created: function()
         {
-        console.log('pafCart', this.pafCart);
-        console.log('pafCartTypes', this.pafCartTypes)
             var count = 0;
             this.pafCart.forEach(v => {
                 count = count + parseInt(v)
             })
             if(count > 0){
-                this.errorMessage = 'この商品は買い物かごに追加されています'
+                this.errorMessages = 'この商品は買い物かごに追加されています'
             }
         }
     })
