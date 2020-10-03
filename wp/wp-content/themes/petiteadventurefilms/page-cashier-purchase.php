@@ -532,7 +532,7 @@ v-if="modalExecution === true"></modal-execution>
                 this.addedItems.forEach(a => {
                     a.cart.forEach((v, k) => {
                         if(v > 0){
-                            var type = (a.types[k] == 2) ? `【ブルーレイ】` : type;
+                            var type = (a.types[k] == 2) ? '【ブルーレイ】' : '';
                             arg.push(`${a.basic_info.post_title}${type}【${a.price_info[k].index}】 : ${v}`)
                         }
                     })
