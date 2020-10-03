@@ -532,11 +532,7 @@ v-if="modalExecution === true"></modal-execution>
                 this.addedItems.forEach(a => {
                     a.cart.forEach((v, k) => {
                         if(v > 0){
-                            var type = '';
-                            if(a.types)
-                            {
-                                type = (a.types[k] > 0) ? `【${self.discTypes[v]}】` : type;
-                            }
+                            var type = (a.types[k] == 2) ? `【ブルーレイ】` : type;
                             arg.push(`${a.basic_info.post_title}${type}【${a.price_info[k].index}】 : ${v}`)
                         }
                     })
