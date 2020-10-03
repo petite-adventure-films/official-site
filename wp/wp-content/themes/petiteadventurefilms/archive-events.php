@@ -11,9 +11,10 @@ if(is_post_type_archive()){
 }
 
 $now = date("Ym");
+$thisyear = array();
 $args = array(
 	"orderby" => "slug",
-	"order" => "DESC",
+	"order" => "DESC"
 );
 $eventsdates = get_terms("eventsdate", $args);
 $eventsdates = (array)$eventsdates;
@@ -22,12 +23,15 @@ foreach($eventsdates as $k => $v){
 		$thisyear = $v;
 	}
 }
-foreach($eventsdates as $k => $v){
-	$v = (array)$v;
-	if($thisyear->term_id == $v["parent"]){
-		$months[$k] = $v;
+if(!empty($thisyear)){
+	foreach($eventsdates as $k => $v){
+		$v = (array)$v;
+		if($thisyear->term_id == $v["parent"]){
+			$months[$k] = $v;
+		}
 	}
 }
+
 
 get_header(); ?>
 
@@ -69,9 +73,9 @@ get_header(); ?>
 	</div>
 
 	<div class="m4_t">
-		<div class="col col_5">
+		<div class="col col_4">
 			<ul class="list_archives">
-				<li><?php echo substr($now, 0, 4); ?>年</li>
+				<li><?php echo substr($now, 0, 4); ?></li>
 				<li class="show_contents tab" data-tab="tab_latest">最新</li>
 				<?php
 					if($months){
@@ -80,19 +84,24 @@ get_header(); ?>
 						}
 						array_multisort($key_id , SORT_ASC , $months);
 						foreach($months as $month){
-							echo '<li class="show_contents tab" data-tab="tab_'.$month["slug"].'">'.$month["name"]."</li>";
+							echo '<li class="show_contents tab" data-tab="tab_'.$month["slug"].'">'.mb_substr($month["name"], 5)."</li>";
 						}
 					}
 					$key_id = array();
 				?>
 			</ul>
 		</div>
-		<div class="col col_4 last al_r show_wider">
+		<div class="col col_5 last al_r show_wider">
 			<ul class="list_archives_past">
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013年</a></li>
-				<li><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012年</a></li>
+<!-- 				<li><a href="<?php echo get_permalink(get_page_by_path("events2020 ")); ?>">2020</a></li> -->
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2019 ")); ?>">2019</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2018 ")); ?>">2018</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2017 ")); ?>">2017</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2016 ")); ?>">2016</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2015")); ?>">2015</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2014")); ?>">2014</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2013")); ?>">2013</a></li>
+				<li><a href="<?php echo get_permalink(get_page_by_path("events2012")); ?>">2012</a></li>
 			</ul>
 		</div>
 	</div>
@@ -101,11 +110,12 @@ get_header(); ?>
 		<section class="tab_contents" id="tab_latest">
 			<?php echo get_events($now, TRUE); ?>
 		</section>
-		<?php foreach($months as $month): ?>
+		<?php if(!empty($months)):
+		foreach($months as $month): ?>
 			<section class="tab_contents" id="tab_<?php echo $month["slug"]; ?>">
 			<?php echo get_events($month["slug"]); ?>
 			</section>
-		<?php endforeach; ?>
+		<?php endforeach; endif; ?>
 	</div>
 
 	<aside class="contents m4_t show_smaller list_archives_past_smaller">

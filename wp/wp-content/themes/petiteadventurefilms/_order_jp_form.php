@@ -59,9 +59,35 @@ $disabled = is_page("confirm") ? " disabled" : "";
 <div class="form_contents required" id="pick_dvd">
 	<div class="form_title">
 		<label>ご希望の商品</label>
-		<p>お求めになるDVDの種別と枚数をお選びください</p>
+		<p>お求めになるDVDの種別と枚数をお選びください。</p>
 	</div>
 	<ul class="form_elements">
+		<li id="movie_my_indian_diary_details_jp">
+			<p class="bold">インド日記 〜ガジュマルの木の女たち〜</p>
+			<label for="contact_film7_kind">種別</label>
+			<select name="contact_film7_kind" class="contact_film_kind" id="contact_film7_kind"<?php echo $disabled; ?>>
+				<option value=""<?php echo (!$contact_film7_kind) ? " selected" : ""; ?>>-</option>
+				<option value="4"<?php echo ($contact_film7_kind == 4) ? " selected" : ""; ?>>新作制作応援(DVD)</option>
+				<option value="5"<?php echo ($contact_film7_kind == 5) ? " selected" : ""; ?>>新作制作応援(ブルーレイ)</option>
+				<option value="1"<?php echo ($contact_film7_kind == 1) ? " selected" : "";?>>一般(DVDのみ)</option>
+				<option value="2"<?php echo ($contact_film7_kind == 2) ? " selected" : "";?>>団体･ライブラリー(DVD)</option>
+				<option value="3"<?php echo ($contact_film7_kind == 3) ? " selected" : "";?>>団体･ライブラリー(ブルーレイ)</option>
+			</select><br />
+			<label for="contact_film7_unit">枚数</label>
+			<select name="contact_film7_unit" class="contact_film_unit" id="contact_film7_unit"<?php echo $disabled; ?>>
+				<option value=""<?php echo (!$contact_film7_unit) ? " selected" : ""; ?>>-</option>
+				<option value="1"<?php echo ($contact_film7_unit == 1) ? " selected" : "";?>>1</option>
+				<option value="2"<?php echo ($contact_film7_unit == 2) ? " selected" : "";?>>2</option>
+				<option value="3"<?php echo ($contact_film7_unit == 3) ? " selected" : "";?>>3</option>
+				<option value="4"<?php echo ($contact_film7_unit == 4) ? " selected" : "";?>>4</option>
+				<option value="5"<?php echo ($contact_film7_unit == 5) ? " selected" : "";?>>5</option>
+				<option value="6"<?php echo ($contact_film7_unit == 6) ? " selected" : "";?>>6</option>
+				<option value="7"<?php echo ($contact_film7_unit == 7) ? " selected" : "";?>>7</option>
+				<option value="8"<?php echo ($contact_film7_unit == 8) ? " selected" : "";?>>8</option>
+				<option value="9"<?php echo ($contact_film7_unit == 9) ? " selected" : "";?>>9</option>
+				<option value="10"<?php echo ($contact_film7_unit == 10) ? " selected" : "";?>>10</option>
+			</select>
+		</li>
 		<li>
 			<p class="bold">踊る善福寺/ホームレスごっこ</p>
 			<label for="contact_film1_kind">種別</label>
@@ -227,4 +253,23 @@ $disabled = is_page("confirm") ? " disabled" : "";
 	</ul>
 </div>
 </div>
+
+<?php
+if(!is_page("confirm")): ?>
+<div class="p2_t">
+<div class="form_contents required">
+	<div class="form_title">個人情報の取扱について</div>
+	<div class="contents_law">
+		<?php
+		$contents_law = get_post(4058);
+		$_contents_law = $contents_law->post_content;
+		echo $_contents_law;
+		?>
+	</div>
+	<ul class="form_elements m1_t">
+		<li><input type="checkbox" name="contact_agree" id="contact_agree" value="1"<?php echo ($contact_agree) ? " checked" : ""; ?><?php echo $disabled; ?> /><label for="contact_agree"><span class="pink">上記個人情報の取扱について同意しました</span></label></li>
+	</ul>
+</div>
+</div>
+<?php endif; ?>
 

@@ -11,8 +11,7 @@ if($cats){
 
 get_header();?>
 
-<div class="single">
-<div class="col col_9 last">
+<div class="col col_8">
 
 	<header class="header_page">
 		<nav class="crumbs">
@@ -63,6 +62,10 @@ get_header();?>
 	<?php echo apply_filters('the_content', $post->post_content); ?>
 
 </div>
+<div class="col col_3 last" id="sidebar">
+	<ul>
+		<?php dynamic_sidebar();?>
+	</ul>
 </div>
 
 <?php get_footer(); ?>

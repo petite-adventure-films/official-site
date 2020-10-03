@@ -34,7 +34,7 @@ get_header(); ?>
 		</h1>
 	<!--.header_page--></header>
 
-	<p class="m7_t">DVDのご購入は、以下の注文書に記入・送信してください。<br />折り返しご連絡いたします。</p>
+	<p class="m7_t">DVDのご購入は、注文書に記入・送信してください。<br />折り返しご連絡いたします。</p>
 	<dl class="m2_t list_definition">
 		<dt>DVDの規格</dt><dd>NTSC、DVD-Rディスク（DVD-R対応機器にて再生可能）</dd>
 		<dt>お支払い</dt><dd>先払い（但し、図書館や学校などは後払いも可能。ご相談ください）</dd>
@@ -50,6 +50,8 @@ get_header(); ?>
 	<p class="m2_t">送料<br />
 	180 円（1回のお申込につき、同一住所宛なら何枚でも180円）
 	<br /><span class="pink">3,000円以上のお買い上げで送料無料!</span></p>
+
+	<p class="m2_t caption1"><small>※安定してご利用いただくためには、Google chrome または Firefoxの最新版のご利用を推奨します。</small></p>
 
 	<?php
 	$i = 1;
@@ -83,7 +85,7 @@ get_header(); ?>
 						</div>
 						<dl class="list_definition dvd_price">
 							<?php for($i=0; $i<count($dvd_price); $i++): ?>
-								<dt class="bold"><?php echo $dvd_price_title[$i]; ?>価額</dt>
+								<dt class="bold"><?php echo $dvd_price_title[$i]; ?></dt>
 								<dd>¥<?php echo number_format($dvd_price[$i]); ?></dd>
 							<?php endfor; ?>
 						</dl>
@@ -111,7 +113,6 @@ get_header(); ?>
 	</form>
 </div>
 
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/form_order.js"></script>
 <script type="text/javascript">
 	$(function(){
 
@@ -152,6 +153,259 @@ get_header(); ?>
 			}
 		});
 
+
+
+		//validation
+		var jVal = {
+
+			"text" : function(d){
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("id");
+				var msgId = eleId+"Msg";
+				var msg = $("#"+msgId);
+				//var errorMsg = ele.attr("data-error");
+				if(ele.val()){
+					msg.remove();
+					ele.removeClass("error");
+					ele.closest(".form_contents").addClass("correct");
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+				}
+			},
+
+			"radio" : function(d){
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("name");
+				var msgId = eleId+"Msg";
+				var msg = $("#"+msgId);
+
+				if($("input[name='"+eleId+"']:checked").length != 0){
+					msg.remove();
+					ele.removeClass("error");
+					ele.closest(".form_contents").addClass("correct");
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+				}
+			},
+
+			"select" : function(d){
+
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("name");
+				var msgId = eleId+"Msg";
+				var msg = $("#"+msgId);
+
+				if(ele.val()){
+					msg.remove();
+					ele.removeClass("error");
+					ele.closest(".form_contents").addClass("correct");
+				}else{
+
+				}
+
+			},
+
+
+
+			"email" : function(d){
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("id");
+				var msgId = eleId+"Msg";
+				var msg = $("#"+msgId);
+				var errorTypeMsg = "正しいメール形式ではありません 例)abc@example.com";
+				var errorMsg = "メールアドレスを入力してください";
+				var patt = /^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)*.([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/;
+				if(ele.val()){
+					if(ele.val().match(patt)){
+						msg.remove();
+						ele.removeClass("error");
+						ele.closest(".form_contents").addClass("correct");
+					}else{
+						jVal.errors = true;
+						msg.remove();
+						ele.addClass("error");
+						ele.closest(".form_contents").removeClass("correct");
+						ele.closest(".form_contents").find(".form_elements").after('<div id="'+msgId+'" class="form_err_msg">'+errorTypeMsg+'</div>');
+					}
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+				}
+			},
+
+			"emailConfirm" : function(d){
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("id");
+				var msgId = eleId+"Msg";
+				var msg = $("#"+msgId);
+				var errorMsg = "メールアドレスが一致していません";
+				if(ele.val()){
+					if(ele.val() == $("#contact_email").val()){
+						msg.remove();
+						ele.removeClass("error");
+						ele.closest(".form_contents").addClass("correct");
+					}else{
+						jVal.errors = true;
+						msg.remove();
+						ele.addClass("error");
+						ele.closest(".form_contents").removeClass("correct");
+						ele.closest(".form_contents").find(".form_elements").after('<div id="'+msgId+'" class="form_err_msg">'+errorMsg+'</div>');
+					}
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+				}
+			},
+
+			"cstmOrderCheck" : function(d){
+
+				var kindCount = 0;
+				$(".contact_film_kind").each(function(){
+					if($(this).val()){
+						kindCount++;
+					}
+				});
+
+				var unitCount = 0;
+				$(".contact_film_unit").each(function(){
+					if($(this).val()){
+						unitCount++;
+					}
+				});
+
+				if(kindCount == unitCount && unitCount > 0){
+					$(".contact_film_kind").removeClass("error");
+					$(".contact_film_unit").removeClass("error");
+					$("#pick_dvd").addClass("correct");
+				}else{
+					jVal.errors = true
+					$(".contact_film_kind").addClass("error");
+					$(".contact_film_unit").addClass("error");
+					$("#pick_dvd").removeClass("correct");
+				}
+
+			},
+
+			"cstmOrder" : function(d){
+
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("id");
+
+				var strRare = eleId.slice(-4);
+				var strFront = eleId.slice(0, -4);
+				if (strRare == "kind"){
+					var target = $("#" + strFront + "unit");
+				}else{
+					var target = $("#" + strFront + "kind");
+				}
+
+				if(ele.val() && target.val()){
+					$(".contact_film_kind").removeClass("error");
+					$(".contact_film_unit").removeClass("error");
+					$("#pick_dvd").addClass("correct");
+				}else{
+					jVal.errors = true
+					$(ele).addClass("error");
+					$(target).addClass("error");
+					$("#pick_dvd").removeClass("correct");
+				}
+
+			},
+
+			"cstmZip" : function(d){
+				var ele;
+				if(typeof(d) == "object") ele = $(this);
+				else ele = $(d);
+				var eleId = ele.attr("id");
+				var msgId = eleId+"Msg";
+				var msg = $("#"+msgId);
+				var errorTypeMsg = "正しい形式ではありません 例) 1000005";
+				var errorMsg = "郵便番号を入力してください";
+				var patt = /^\d{3}-?\d{4}$/;
+				if(ele.val()){
+					if(ele.val().match(patt)){
+						msg.remove();
+						ele.removeClass("error");
+						ele.closest(".form_contents").addClass("correct");
+					}else{
+						jVal.errors = true;
+						msg.remove();
+						ele.addClass("error");
+						ele.closest(".form_contents").removeClass("correct");
+						ele.closest(".form_contents").find(".form_elements").after('<div id="'+msgId+'" class="form_err_msg">'+errorTypeMsg+'</div>');
+					}
+				}else{
+					jVal.errors = true;
+					msg.remove();
+					ele.addClass("error");
+					ele.closest(".form_contents").removeClass("correct");
+				}
+			},
+
+			"sendIt" : function (){
+				if(!jVal.errors){
+					$('form')[0].submit();
+				}
+			}
+		};
+
+		$('#send').click(function(){
+
+			$("html, body").animate({ scrollTop: $('form').offset().top }, 200, function (){
+				jVal.errors = false;
+				jVal.text("#contact_name");
+				jVal.cstmZip("#contact_zipcode");
+				jVal.text("#contact_address1");
+				jVal.text("#contact_address2");
+				jVal.email("#contact_email");
+				jVal.text("#contact_tel");
+				jVal.emailConfirm("#contact_email_confirm");
+				jVal.radio("input[name='contact_pay_way']");
+				jVal.radio("input[name='contact_agree']");
+				jVal.cstmOrderCheck(".contact_film_kind");
+				jVal.cstmOrderCheck(".contact_film_unit");
+				jVal.sendIt();
+			});
+
+			return false;
+
+		});
+
+		$("#contact_name").blur(jVal.text);
+		$("#contact_zipcode").blur(jVal.cstmZip);
+		$("#contact_address1").blur(jVal.text);
+		$("#contact_address2").blur(jVal.text);
+		$("#contact_tel").blur(jVal.text);
+		$("#contact_email").blur(jVal.email);
+		$("#contact_email_confirm").blur(jVal.emailConfirm);
+		$(".contact_film_kind").blur(jVal.cstmOrder);
+		$(".contact_film_unit").blur(jVal.cstmOrder);
+		$("input[name='contact_pay_way']").blur(jVal.radio);
+		$("input[name='contact_agree']").blur(jVal.radio);
+
 	});
+
 </script>
 <?php get_footer(); ?>

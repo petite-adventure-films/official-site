@@ -37,23 +37,34 @@ if($_POST){
 		add_post_meta($insert_id, "order_info_10", $contact_film4_unit);
 		add_post_meta($insert_id, "order_info_11", $contact_film5_unit);
 		add_post_meta($insert_id, "order_info_12", $contact_film6_unit);
+		add_post_meta($insert_id, "order_info_27", $contact_film7_unit);
 		add_post_meta($insert_id, "order_info_21", $contact_film1_kind);
 		add_post_meta($insert_id, "order_info_22", $contact_film2_kind);
 		add_post_meta($insert_id, "order_info_23", $contact_film3_kind);
 		add_post_meta($insert_id, "order_info_24", $contact_film4_kind);
 		add_post_meta($insert_id, "order_info_25", $contact_film5_kind);
+		add_post_meta($insert_id, "order_info_26", $contact_film6_kind);
+		add_post_meta($insert_id, "order_info_28", $contact_film7_kind);
 		add_post_meta($insert_id, "order_info_13", $contact_pay_way);
 		add_post_meta($insert_id, "order_info_14", $contact_receipt);
 		add_post_meta($insert_id, "order_info_15", $contact_receipt_name);
 		add_post_meta($insert_id, "order_info_16", $contact_receipt_proviso);
 
-		$contact_kinds = array("", "個人", "団体・ライブラリー");
+		$contact_kinds = array("", "個人", "団体・ライブラリー", "新作製作応援");
+		$contact_kinds2 = array(""
+			, "学生･ワーキングプア(DVDのみ)"
+			, "団体･ライブラリー(DVD)"
+			, "団体･ライブラリー(ブルーレイ)"
+			, "新作制作応援(DVD)"
+			, "新作制作応援(ブルーレイ)"
+		);
 		$contact_film1_kind = ($contact_film1_kind) ? $contact_kinds[$contact_film1_kind] : "-";
 		$contact_film2_kind = ($contact_film2_kind) ? $contact_kinds[$contact_film2_kind] : "-";
 		$contact_film3_kind = ($contact_film3_kind) ? $contact_kinds[$contact_film3_kind] : "-";
 		$contact_film4_kind = ($contact_film4_kind) ? $contact_kinds[$contact_film4_kind] : "-";
 		$contact_film5_kind = ($contact_film5_kind) ? $contact_kinds[$contact_film5_kind] : "-";
 		$contact_film6_kind = ($contact_film6_kind) ? $contact_kinds[$contact_film6_kind] : "-";
+		$contact_film7_kind = ($contact_film7_kind) ? $contact_kinds2[$contact_film7_kind] : "-";
 
 		$contact_film1_unit = ($contact_film1_unit) ? $contact_film1_unit : "-";
 		$contact_film2_unit = ($contact_film2_unit) ? $contact_film2_unit : "-";
@@ -61,6 +72,7 @@ if($_POST){
 		$contact_film4_unit = ($contact_film4_unit) ? $contact_film4_unit : "-";
 		$contact_film5_unit = ($contact_film5_unit) ? $contact_film5_unit : "-";
 		$contact_film6_unit = ($contact_film6_unit) ? $contact_film6_unit : "-";
+		$contact_film7_unit = ($contact_film7_unit) ? $contact_film7_unit : "-";
 
 		$contact_receipt = ($contact_receipt) ? "必要" : "不要";
 		$contact_pay_way = ($contact_pay_way) ? "銀行振込" : "クレジットカード";
@@ -79,12 +91,14 @@ if($_POST){
 			"contact_film4_unit" => $contact_film4_unit,
 			"contact_film5_unit" => $contact_film5_unit,
 			"contact_film6_unit" => $contact_film6_unit,
+			"contact_film7_unit" => $contact_film7_unit,
 			"contact_film1_kind" => $contact_film1_kind,
 			"contact_film2_kind" => $contact_film2_kind,
 			"contact_film3_kind" => $contact_film3_kind,
 			"contact_film4_kind" => $contact_film4_kind,
 			"contact_film5_kind" => $contact_film5_kind,
 			"contact_film6_kind" => $contact_film6_kind,
+			"contact_film7_kind" => $contact_film7_kind,
 			"contact_pay_way" => $contact_pay_way,
 			"contact_receipt" => $contact_receipt,
 			"contact_receipt_name" => $contact_receipt_name,

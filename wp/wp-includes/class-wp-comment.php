@@ -18,7 +18,6 @@ final class WP_Comment {
 	 * Comment ID.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var int
 	 */
 	public $comment_ID;
@@ -27,16 +26,14 @@ final class WP_Comment {
 	 * ID of the post the comment is associated with.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var int
 	 */
 	public $comment_post_ID = 0;
 
 	/**
-	 * Comment author ID.
+	 * Comment author name.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_author = '';
@@ -45,7 +42,6 @@ final class WP_Comment {
 	 * Comment author email address.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_author_email = '';
@@ -54,7 +50,6 @@ final class WP_Comment {
 	 * Comment author URL.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_author_url = '';
@@ -63,7 +58,6 @@ final class WP_Comment {
 	 * Comment author IP address (IPv4 format).
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_author_IP = '';
@@ -72,7 +66,6 @@ final class WP_Comment {
 	 * Comment date in YYYY-MM-DD HH:MM:SS format.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_date = '0000-00-00 00:00:00';
@@ -81,7 +74,6 @@ final class WP_Comment {
 	 * Comment GMT date in YYYY-MM-DD HH::MM:SS format.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_date_gmt = '0000-00-00 00:00:00';
@@ -90,7 +82,6 @@ final class WP_Comment {
 	 * Comment content.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_content;
@@ -99,7 +90,6 @@ final class WP_Comment {
 	 * Comment karma count.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var int
 	 */
 	public $comment_karma = 0;
@@ -108,7 +98,6 @@ final class WP_Comment {
 	 * Comment approval status.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_approved = '1';
@@ -117,7 +106,6 @@ final class WP_Comment {
 	 * Comment author HTTP user agent.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var string
 	 */
 	public $comment_agent = '';
@@ -126,16 +114,15 @@ final class WP_Comment {
 	 * Comment type.
 	 *
 	 * @since 4.4.0
-	 * @access public
+	 * @since 5.5.0 Default value changed to `comment`.
 	 * @var string
 	 */
-	public $comment_type = '';
+	public $comment_type = 'comment';
 
 	/**
 	 * Parent comment ID.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var int
 	 */
 	public $comment_parent = 0;
@@ -144,7 +131,6 @@ final class WP_Comment {
 	 * Comment author ID.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 * @var int
 	 */
 	public $user_id = 0;
@@ -153,7 +139,6 @@ final class WP_Comment {
 	 * Comment children.
 	 *
 	 * @since 4.4.0
-	 * @access protected
 	 * @var array
 	 */
 	protected $children;
@@ -162,7 +147,6 @@ final class WP_Comment {
 	 * Whether children have been populated for this comment object.
 	 *
 	 * @since 4.4.0
-	 * @access protected
 	 * @var bool
 	 */
 	protected $populated_children = false;
@@ -171,7 +155,6 @@ final class WP_Comment {
 	 * Post fields.
 	 *
 	 * @since 4.4.0
-	 * @access protected
 	 * @var array
 	 */
 	protected $post_fields = array( 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_title', 'post_excerpt', 'post_status', 'comment_status', 'ping_status', 'post_name', 'to_ping', 'pinged', 'post_modified', 'post_modified_gmt', 'post_content_filtered', 'post_parent', 'guid', 'menu_order', 'post_type', 'post_mime_type', 'comment_count' );
@@ -180,8 +163,6 @@ final class WP_Comment {
 	 * Retrieves a WP_Comment instance.
 	 *
 	 * @since 4.4.0
-	 * @access public
-	 * @static
 	 *
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
@@ -217,7 +198,6 @@ final class WP_Comment {
 	 * Populates properties with object vars.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @param WP_Comment $comment Comment object.
 	 */
@@ -231,7 +211,6 @@ final class WP_Comment {
 	 * Convert object to array.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @return array Object as array.
 	 */
@@ -243,7 +222,6 @@ final class WP_Comment {
 	 * Get the children of a comment.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @param array $args {
 	 *     Array of arguments used to pass to get_comments() and determine format.
@@ -274,17 +252,17 @@ final class WP_Comment {
 	 *                                 `$meta_query`. Also accepts false, an empty array, or
 	 *                                 'none' to disable `ORDER BY` clause.
 	 * }
-	 * @return array Array of `WP_Comment` objects.
+	 * @return WP_Comment[] Array of `WP_Comment` objects.
 	 */
 	public function get_children( $args = array() ) {
 		$defaults = array(
-			'format' => 'tree',
-			'status' => 'all',
+			'format'       => 'tree',
+			'status'       => 'all',
 			'hierarchical' => 'threaded',
-			'orderby' => '',
+			'orderby'      => '',
 		);
 
-		$_args = wp_parse_args( $args, $defaults );
+		$_args           = wp_parse_args( $args, $defaults );
 		$_args['parent'] = $this->comment_ID;
 
 		if ( is_null( $this->children ) ) {
@@ -298,7 +276,7 @@ final class WP_Comment {
 		if ( 'flat' === $_args['format'] ) {
 			$children = array();
 			foreach ( $this->children as $child ) {
-				$child_args = $_args;
+				$child_args           = $_args;
 				$child_args['format'] = 'flat';
 				// get_children() resets this value automatically.
 				unset( $child_args['parent'] );
@@ -318,7 +296,6 @@ final class WP_Comment {
 	 * Used by `WP_Comment_Query` when bulk-filling descendants.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @param WP_Comment $child Child comment.
 	 */
@@ -330,7 +307,6 @@ final class WP_Comment {
 	 * Get a child comment by ID.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @param int $child_id ID of the child.
 	 * @return WP_Comment|bool Returns the comment object if found, otherwise false.
@@ -350,6 +326,8 @@ final class WP_Comment {
 	 * unneeded database queries.
 	 *
 	 * @since 4.4.0
+	 *
+	 * @param bool $set Whether the comment's children have already been populated.
 	 */
 	public function populated_children( $set ) {
 		$this->populated_children = (bool) $set;
@@ -361,13 +339,12 @@ final class WP_Comment {
 	 * If `$name` matches a post field, the comment post will be loaded and the post's value checked.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @param string $name Property name.
 	 * @return bool
 	 */
 	public function __isset( $name ) {
-		if ( in_array( $name, $this->post_fields ) && 0 !== (int) $this->comment_post_ID ) {
+		if ( in_array( $name, $this->post_fields, true ) && 0 !== (int) $this->comment_post_ID ) {
 			$post = get_post( $this->comment_post_ID );
 			return property_exists( $post, $name );
 		}
@@ -379,13 +356,12 @@ final class WP_Comment {
 	 * If `$name` matches a post field, the comment post will be loaded and the post's value returned.
 	 *
 	 * @since 4.4.0
-	 * @access public
 	 *
 	 * @param string $name
 	 * @return mixed
 	 */
 	public function __get( $name ) {
-		if ( in_array( $name, $this->post_fields ) ) {
+		if ( in_array( $name, $this->post_fields, true ) ) {
 			$post = get_post( $this->comment_post_ID );
 			return $post->$name;
 		}
