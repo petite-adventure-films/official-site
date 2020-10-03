@@ -442,32 +442,32 @@ v-if="modalExecution === true"></modal-execution>
             , deliveryFee: 0
             , step : 3
             , user:{
-                //   name: ''
-                // , zipcode: ''
-                // , prefecture: ''
-                // , city: ''
-                // , address1: ''
-                // , tel: ''
-                // , email: ''
-                // , emailConfirm: ''
-                // , receipt: false
-                // , receiptName: ''
-                // , receiptDescription: ''
-                // , agree: false
+                  name: ''
+                , zipcode: ''
+                , prefecture: ''
+                , city: ''
+                , address1: ''
+                , tel: ''
+                , email: ''
+                , emailConfirm: ''
+                , receipt: false
+                , receiptName: ''
+                , receiptDescription: ''
+                , agree: false
 
-                name: 'restard'
-                , zipcode: '1500034'
-                , prefecture: '東京都'
-                , city: '渋谷区神山町'
-                , address1: '41-7'
-                , address2: 'エクティ神山町209'
-                , tel: '08039118917'
-                , email: 'drestard@gmail.com'
-                , emailConfirm: 'drestard@gmail.com'
-                , receipt: true
-                , receiptName: 'お宛名'
-                , receiptDescription: '但し書き'
-                , agree: true
+                // name: 'restard'
+                // , zipcode: '1500034'
+                // , prefecture: '東京都'
+                // , city: '渋谷区神山町'
+                // , address1: '41-7'
+                // , address2: 'エクティ神山町209'
+                // , tel: '08039118917'
+                // , email: 'drestard@gmail.com'
+                // , emailConfirm: 'drestard@gmail.com'
+                // , receipt: true
+                // , receiptName: 'お宛名'
+                // , receiptDescription: '但し書き'
+                // , agree: true
             }
             , errors:{
                   agree: '必ずチェックしてください'

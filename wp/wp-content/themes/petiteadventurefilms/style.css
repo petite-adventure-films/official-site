@@ -6265,20 +6265,25 @@ html .takahatadai73 {
         text-shadow: none;
         font-family: meterial_design;
         content: "\e7c3"; }
+    /* line 1189, src/scss/pages/_takahatadai73.scss */
+    .takahatadai73 .about_residents ._resident .__contents .___notice {
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 1px solid #f4f6ec; }
 @media all and (max-width: 960px) {
-  /* line 1193, src/scss/pages/_takahatadai73.scss */
+  /* line 1199, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .about_residents ._resident {
     width: 100%; } }
-/* line 1215, src/scss/pages/_takahatadai73.scss */
+/* line 1221, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 ._contents_modal .__contents {
   width: 100%;
   min-height: 80vh;
   background: #ffffff; }
-/* line 1225, src/scss/pages/_takahatadai73.scss */
+/* line 1231, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 ._contents_modal .input_page_num {
   width: 56px;
   min-width: 56px; }
-/* line 1230, src/scss/pages/_takahatadai73.scss */
+/* line 1236, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 ._contents_modal .btn_icon {
   display: inline-block;
   cursor: pointer;
@@ -6291,20 +6296,20 @@ html .takahatadai73 {
   background: rgba(132, 204, 30, 0.56);
   color: #f4f6ec;
   line-height: 40px; }
-  /* line 1240, src/scss/pages/_takahatadai73.scss */
+  /* line 1246, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 ._contents_modal .btn_icon._disabled {
     background: rgba(244, 246, 236, 0.24);
     pointer-events: none; }
-  /* line 1244, src/scss/pages/_takahatadai73.scss */
+  /* line 1250, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 ._contents_modal .btn_icon:hover {
     background: #e6e6e6; }
-/* line 1251, src/scss/pages/_takahatadai73.scss */
+/* line 1257, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .key_messages-enter-active, .takahatadai73 .key_messages-leave-active {
   transition: opacity 2s; }
-/* line 1254, src/scss/pages/_takahatadai73.scss */
+/* line 1260, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .key_messages-enter, .takahatadai73 .key_messages-leave-to {
   opacity: 0; }
-/* line 1259, src/scss/pages/_takahatadai73.scss */
+/* line 1265, src/scss/pages/_takahatadai73.scss */
 .takahatadai73 .bubble {
   position: absolute;
   width: 100px;
@@ -6313,19 +6318,19 @@ html .takahatadai73 {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%; }
-  /* line 1265, src/scss/pages/_takahatadai73.scss */
+  /* line 1271, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .bubble._yellow {
     background: rgba(230, 225, 0, 0.2); }
-  /* line 1266, src/scss/pages/_takahatadai73.scss */
+  /* line 1272, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .bubble._green {
     background: rgba(161, 233, 214, 0.4); }
-  /* line 1267, src/scss/pages/_takahatadai73.scss */
+  /* line 1273, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .bubble._light_green {
     background: rgba(161, 233, 214, 0.3); }
-  /* line 1268, src/scss/pages/_takahatadai73.scss */
+  /* line 1274, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .bubble._white {
     background: rgba(244, 246, 236, 0.3); }
-  /* line 1269, src/scss/pages/_takahatadai73.scss */
+  /* line 1275, src/scss/pages/_takahatadai73.scss */
   .takahatadai73 .bubble._beige {
     background: rgba(245, 245, 220, 0.3); }
 
