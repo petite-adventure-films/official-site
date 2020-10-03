@@ -6502,9 +6502,12 @@ html .takahatadai73 {
     .cashier .order_details ._details .___btn_delete:hover {
       color: #53dbff; }
   /* line 40, src/scss/pages/_cashier.scss */
+  .cashier .order_details ._details .__index {
+    line-height: 20px; }
+  /* line 44, src/scss/pages/_cashier.scss */
   .cashier .order_details ._details .__sum {
     padding-right: 4px; }
-/* line 46, src/scss/pages/_cashier.scss */
+/* line 50, src/scss/pages/_cashier.scss */
 .cashier .order_details ._subtotal {
   margin-top: 4px;
   padding: 4px;
@@ -6514,19 +6517,19 @@ html .takahatadai73 {
   box-sizing: border-box;
   text-align: right; }
 @media all and (min-width: 961px) {
-  /* line 56, src/scss/pages/_cashier.scss */
+  /* line 60, src/scss/pages/_cashier.scss */
   .cashier .order_details ._details {
     display: grid;
     grid-template-columns: 200px 1fr;
     align-items: center; } }
-/* line 75, src/scss/pages/_cashier.scss */
+/* line 79, src/scss/pages/_cashier.scss */
 .cashier .fee {
   border-top: 1px solid #e6e6e6;
   text-align: right;
   margin-top: 8px;
   padding-top: 8px;
   padding-right: 4px; }
-/* line 83, src/scss/pages/_cashier.scss */
+/* line 87, src/scss/pages/_cashier.scss */
 .cashier .total {
   margin-top: 4px;
   padding: 4px;
@@ -6536,26 +6539,26 @@ html .takahatadai73 {
   box-sizing: border-box;
   text-align: right;
   font-weight: bold; }
-/* line 92, src/scss/pages/_cashier.scss */
+/* line 96, src/scss/pages/_cashier.scss */
 .cashier ._fee_index {
   display: inline-block;
   width: 64px;
   text-align: rigth; }
-/* line 97, src/scss/pages/_cashier.scss */
+/* line 101, src/scss/pages/_cashier.scss */
 .cashier ._fee_amount {
   display: inline-block;
   width: 80px; }
-/* line 102, src/scss/pages/_cashier.scss */
+/* line 106, src/scss/pages/_cashier.scss */
 .cashier .confirm_btns {
   width: 304px;
   text-align: left; }
-/* line 107, src/scss/pages/_cashier.scss */
+/* line 111, src/scss/pages/_cashier.scss */
 .cashier .purchase_details {
   position: relative;
   display: grid;
   grid-template-columns: 40px 1fr;
   align-items: center; }
-  /* line 113, src/scss/pages/_cashier.scss */
+  /* line 117, src/scss/pages/_cashier.scss */
   .cashier .purchase_details:before {
     position: absolute;
     top: 4px;
@@ -6564,58 +6567,58 @@ html .takahatadai73 {
     width: 1px;
     background: #f0f0f0;
     content: ''; }
-  /* line 123, src/scss/pages/_cashier.scss */
+  /* line 127, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .grid {
     position: relative; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._1_1 {
     grid-row: 1;
     grid-column: 1; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._1_2 {
     grid-row: 1;
     grid-column: 2; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._2_1 {
     grid-row: 2;
     grid-column: 1; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._2_2 {
     grid-row: 2;
     grid-column: 2; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._3_1 {
     grid-row: 3;
     grid-column: 1; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._3_2 {
     grid-row: 3;
     grid-column: 2; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._4_1 {
     grid-row: 4;
     grid-column: 1; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._4_2 {
     grid-row: 4;
     grid-column: 2; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._5_1 {
     grid-row: 5;
     grid-column: 1; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._5_2 {
     grid-row: 5;
     grid-column: 2; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._6_1 {
     grid-row: 6;
     grid-column: 1; }
-  /* line 129, src/scss/pages/_cashier.scss */
+  /* line 133, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._6_2 {
     grid-row: 6;
     grid-column: 2; }
-  /* line 136, src/scss/pages/_cashier.scss */
+  /* line 140, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .step_icon {
     display: block;
     width: 32px;
@@ -6626,33 +6629,33 @@ html .takahatadai73 {
     line-height: 32px;
     background: #f0f0f0;
     color: #ff3f80; }
-    /* line 144, src/scss/pages/_cashier.scss */
+    /* line 148, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .step_icon._processing {
       background: #ff3f80;
       color: #ffffff; }
-    /* line 148, src/scss/pages/_cashier.scss */
+    /* line 152, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .step_icon._completed {
       background: #f0f0f0;
       color: #868686; }
-  /* line 154, src/scss/pages/_cashier.scss */
+  /* line 158, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .form_ele {
     padding-left: 12px; }
-    /* line 157, src/scss/pages/_cashier.scss */
+    /* line 161, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .form_ele._required {
       position: relative; }
-      /* line 159, src/scss/pages/_cashier.scss */
+      /* line 163, src/scss/pages/_cashier.scss */
       .cashier .purchase_details .form_ele._required:before {
         position: absolute;
         left: 0;
         color: #ff0000;
         content: '*'; }
-  /* line 169, src/scss/pages/_cashier.scss */
+  /* line 173, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .error_message {
     display: block;
     color: #ff0000;
     font-size: 14px;
     line-height: 20px; }
-  /* line 176, src/scss/pages/_cashier.scss */
+  /* line 180, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .contents_law {
     display: block !important;
     overflow: scroll;
@@ -6664,20 +6667,20 @@ html .takahatadai73 {
     border: 1px solid #f0f0f0;
     line-height: 20px;
     font-size: 14px; }
-    /* line 187, src/scss/pages/_cashier.scss */
+    /* line 191, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .contents_law h2, .cashier .purchase_details .contents_law h3, .cashier .purchase_details .contents_law p {
       line-height: 20px;
       font-size: 14px; }
-    /* line 191, src/scss/pages/_cashier.scss */
+    /* line 195, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .contents_law .p2_t {
       padding-top: 0 !important; }
-    /* line 194, src/scss/pages/_cashier.scss */
+    /* line 198, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .contents_law .contents {
       display: none; }
-  /* line 198, src/scss/pages/_cashier.scss */
+  /* line 202, src/scss/pages/_cashier.scss */
   .cashier .purchase_details strong {
     font-weight: bold; }
-  /* line 202, src/scss/pages/_cashier.scss */
+  /* line 206, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .btn_edit_user_info {
     display: inline-block;
     margin-left: 4px;
@@ -6688,36 +6691,36 @@ html .takahatadai73 {
     border-radius: 2px;
     font-size: 16px;
     line-height: 24px; }
-    /* line 210, src/scss/pages/_cashier.scss */
+    /* line 214, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .btn_edit_user_info:hover {
       border-color: #84cc1e;
       color: #84cc1e; }
-  /* line 216, src/scss/pages/_cashier.scss */
+  /* line 220, src/scss/pages/_cashier.scss */
   .cashier .purchase_details ._method {
     display: grid;
     grid-template-columns: 24px 1fr;
     align-items: top; }
-    /* line 223, src/scss/pages/_cashier.scss */
+    /* line 227, src/scss/pages/_cashier.scss */
     .cashier .purchase_details ._method .__logo img {
       height: 22px;
       vertical-align: middle; }
-    /* line 227, src/scss/pages/_cashier.scss */
+    /* line 231, src/scss/pages/_cashier.scss */
     .cashier .purchase_details ._method .__logo span {
       vertical-align: middle; }
-    /* line 229, src/scss/pages/_cashier.scss */
+    /* line 233, src/scss/pages/_cashier.scss */
     .cashier .purchase_details ._method .__logo._japannet img {
       height: 16px; }
-    /* line 234, src/scss/pages/_cashier.scss */
+    /* line 238, src/scss/pages/_cashier.scss */
     .cashier .purchase_details ._method .__logo._credit_card img {
       height: 27px; }
-  /* line 242, src/scss/pages/_cashier.scss */
+  /* line 246, src/scss/pages/_cashier.scss */
   .cashier .purchase_details .reset_payment {
     color: #53dbff; }
-    /* line 244, src/scss/pages/_cashier.scss */
+    /* line 248, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .reset_payment:hover {
       color: #868686; }
   @media all and (max-width: 960px) {
-    /* line 252, src/scss/pages/_cashier.scss */
+    /* line 256, src/scss/pages/_cashier.scss */
     .cashier .purchase_details .form_ele input[type="text"],
     .cashier .purchase_details .form_ele input[type="email"],
     .cashier .purchase_details .form_ele input[type="number"],
@@ -6725,43 +6728,43 @@ html .takahatadai73 {
     .cashier .purchase_details .form_ele input[type="password"] {
       width: 100%;
       min-width: 100%; } }
-/* line 265, src/scss/pages/_cashier.scss */
+/* line 269, src/scss/pages/_cashier.scss */
 .cashier .card_element {
   padding: 8px;
   border: 3px solid #ff0000;
   background: #ffffff; }
-  /* line 269, src/scss/pages/_cashier.scss */
+  /* line 273, src/scss/pages/_cashier.scss */
   .cashier .card_element.disabled {
     border-color: #f0f0f0;
     pointer-events: none; }
-/* line 279, src/scss/pages/_cashier.scss */
+/* line 283, src/scss/pages/_cashier.scss */
 .cashier .btn.pay a, .cashier .btn.pay .ele {
   border: none;
   background: rgba(255, 0, 0, 0.87);
   color: #ffff00;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
-  /* line 285, src/scss/pages/_cashier.scss */
+  /* line 289, src/scss/pages/_cashier.scss */
   .cashier .btn.pay a:hover, .cashier .btn.pay .ele:hover {
     background: red; }
-/* line 294, src/scss/pages/_cashier.scss */
+/* line 298, src/scss/pages/_cashier.scss */
 .cashier .list_faq dt {
   position: relative;
   padding-left: 24px; }
-  /* line 298, src/scss/pages/_cashier.scss */
+  /* line 302, src/scss/pages/_cashier.scss */
   .cashier .list_faq dt:not(:first-of-child) {
     color: red; }
-  /* line 301, src/scss/pages/_cashier.scss */
+  /* line 305, src/scss/pages/_cashier.scss */
   .cashier .list_faq dt:before {
     display: block;
     position: absolute;
     left: 0;
     content: 'Q'; }
-/* line 309, src/scss/pages/_cashier.scss */
+/* line 313, src/scss/pages/_cashier.scss */
 .cashier .list_faq dd {
   position: relative;
   padding-left: 24px; }
-  /* line 312, src/scss/pages/_cashier.scss */
+  /* line 316, src/scss/pages/_cashier.scss */
   .cashier .list_faq dd:before {
     display: block;
     position: absolute;

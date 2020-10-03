@@ -82,7 +82,7 @@ get_header('pafshop'); ?>
                         class="_details">
                             <div class="cell __index">
                                 {{item.price_info[key].index}}
-                                <span v-if="pafCartTypes[`film_${item.prod_key}`][key] == 2">
+                                <span v-if="pafCartTypes[`film_${item.prod_key}`][key] == 2" class="inline_block">
                                     (ブルーレイ)
                                 </span>
                             </div>
