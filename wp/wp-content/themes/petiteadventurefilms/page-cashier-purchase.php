@@ -440,7 +440,7 @@ v-if="modalExecution === true"></modal-execution>
             , pafCartTypes : strgPafCartTypes || {}
             , pafCartCount : strgPafCartCount || 0
             , deliveryFee: 0
-            , step : 3
+            , step : 1
             , user:{
                   name: ''
                 , zipcode: ''
