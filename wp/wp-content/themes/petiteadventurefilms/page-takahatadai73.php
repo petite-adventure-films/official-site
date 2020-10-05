@@ -15,69 +15,67 @@ get_header(); ?>
 
 <div class="single">
     
-
     <div class="col col_9 last">
     
         <div class="outward_area" ref="outward_area">
         
-        <transition name="outward" appear>
-            <div v-show="displayTkhtd73 == true" class="outward" ref="outward">
-                <div class="img">
-                    <img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/takahatadai73.png">
+            <transition name="outward" appear>
+                <div v-show="displayTkhtd73 == true" class="outward" ref="outward">
+                    <div class="img">
+                        <img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/takahatadai73.png">
+                    </div>
+                    <div class="cloud _1"></div>
+                    <div class="cloud _2"></div>
+                    <div class="cloud _3"></div>
+                    <div class="cloud _4"></div>
+                    <div class="cloud _5"></div>
+                    <div class="cloud _6"></div>
+                    <div class="cloud _8"></div>
                 </div>
-                <div class="cloud _1"></div>
-                <div class="cloud _2"></div>
-                <div class="cloud _3"></div>
-                <div class="cloud _4"></div>
-                <div class="cloud _5"></div>
-                <div class="cloud _6"></div>
-                <div class="cloud _8"></div>
+            </transition>
+            
+            <div class="greeting_director" ref="greeting_director">
+                <p class="subhead1 al_c">復刻版公開に寄せて</p>
+                <p>
+                    映画『さようならUR』の主人公でもある、「高幡台団地73号棟に住み続けたい住民の会」。<br>
+                    2013年に立ち退き裁判をたたかっていた当時の「住民の会」ホームページが、この度復刻版となって登場しました！<br>
+                    今回新たに、裁判後の情報も追加しました。UR団地の削減方針は、現在も維持されたままです。高幡台団地73号棟のたたかいが、全国で建て替え・取り壊し問題に直面する方々の取り組みに生かされることを願います。
+                </p>
+                <p class="al_r">
+                    2020年10月<br>
+                    プチ・アドベンチャー・フィルムズ<br>
+                    早川由美子
+                </p>
             </div>
-        </transition>
-        
-        <div class="greeting_director" ref="greeting_director">
-            <p class="subhead1 al_c">復刻版公開に寄せて</p>
-            <p>
-                映画『さようならUR』の主人公でもある、「高幡台団地73号棟に住み続けたい住民の会」。<br>
-                2013年に立ち退き裁判をたたかっていた当時の「住民の会」ホームページが、この度復刻版となって登場しました！<br>
-                今回新たに、裁判後の情報も追加しました。UR団地の削減方針は、現在も維持されたままです。高幡台団地73号棟のたたかいが、全国で建て替え・取り壊し問題に直面する方々の取り組みに生かされることを願います。
-            </p>
-            <p class="al_r">
-                2020年10月<br>
-                プチ・アドベンチャー・フィルムズ<br>
-                早川由美子
-            </p>
-        </div>
-
-        <header class="main_visual" ref="main_visual">
-            <h1>
-                <div ref="flags">
-                    <div class="_flag"><span class="tkhtd_green block">きいろい</span>はたに</div>
-                    <div class="_flag"><span class="tkhtd_green block">ねがいを</span>こめて</div>
-                </div>
-                <div class="_subtitle">
-                    <span class="block">高幡台団地73号棟に</span><span class="block">住み続けたい住民の会</span><span class="block">の記録</span>
-                </div>
-            </h1>
-        </header>
-
-        <div class="key_messages" ref="key_messages">
-            <div
-            v-for="arr in key_messages"
-            :key="'catch' + arr.key"
-                class="_message">
+    
+            <header class="main_visual" ref="main_visual">
+                <h1>
+                    <div ref="flags">
+                        <div class="_flag"><span class="tkhtd_green block">きいろい</span>はたに</div>
+                        <div class="_flag"><span class="tkhtd_green block">ねがいを</span>こめて</div>
+                    </div>
+                    <div class="_subtitle">
+                        <span class="block">高幡台団地73号棟に</span><span class="block">住み続けたい住民の会</span><span class="block">の記録</span>
+                    </div>
+                </h1>
+            </header>
+    
+            <div class="key_messages" ref="key_messages">
                 <div
-                :ref="`ur_msg_${arr.key}`"
-                class="__ur" v-html="arr.ur"></div>
-                <transition appear name="key_messages">
+                v-for="arr in key_messages"
+                :key="'catch' + arr.key"
+                    class="_message">
                     <div
-                    v-show="displayRsdtMsg[(arr.key - 1)]"
-                    class="__rsdt"
-                    v-html="arr.residents"></div>
-                </transition>
+                    :ref="`ur_msg_${arr.key}`"
+                    class="__ur" v-html="arr.ur"></div>
+                    <transition appear name="key_messages">
+                        <div
+                        v-show="displayRsdtMsg[(arr.key - 1)]"
+                        class="__rsdt"
+                        v-html="arr.residents"></div>
+                    </transition>
+                </div>
             </div>
-        </div>
-        
     
         </div>
 
@@ -1153,8 +1151,6 @@ var app = new Vue({
             
                 StartInterval(bubble, size, speed)
             }
-            
-            
         
             function StartInterval(el, size, speed) {
             
@@ -1174,9 +1170,7 @@ var app = new Vue({
                 }, speed);
                 
             }
-    
-   
-   
+
         }
         
         , handleScroll()
@@ -1187,19 +1181,26 @@ var app = new Vue({
             var $el_outward_area = this.$refs.outward_area;
             var $el_outward_area_rect = $el_outward_area.getBoundingClientRect();
             
-            
-            // var is_outward_bubble_created = false;
-            
-            var outwardPos = ($el_outward_area_rect.top + window.scrollY + $el_outward_area_rect.height) - (window.scrollY + window.innerHeight);
-
-            if(outwardPos < 0)
+            if(this.screenSize == 1)
             {
-                $el_outward.style.bottom =  0;
+            
+                var outwardPos = ($el_outward_area_rect.top + window.scrollY + $el_outward_area_rect.height) - (window.scrollY + window.innerHeight);
+    
+                if(outwardPos < 0)
+                {
+                    $el_outward.style.bottom =  0;
+                }
+                else if(window.scrollY > ($el_main_visual.top + window.scrollY))
+                {
+                    this.displayTkhtd73 = true;
+                    $el_outward.style.bottom =  `${outwardPos}px`;
+                }
+                
             }
-            else if(window.scrollY > ($el_main_visual.top + window.scrollY))
+            
+            else
             {
                 this.displayTkhtd73 = true;
-                $el_outward.style.bottom =  `${outwardPos}px`;
             }
             
             //  urメッセージ表示アニメーション

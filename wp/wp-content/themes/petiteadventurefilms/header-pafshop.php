@@ -21,7 +21,7 @@
 <body class="<?php echo set_body_class(); ?>">
 <div id="app">
 
-<nav class="relative" id="site_header">
+<nav class="relative site_header">
     <div class="container">
         <div class="single">
         <div class="col col_9 last">
