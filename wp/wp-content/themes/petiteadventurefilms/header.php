@@ -19,7 +19,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 <script src="https://unpkg.com/vue-masonry@0.11.3/dist/vue-masonry-plugin-window.js"></script>
 <script src="https://unpkg.com/vue-lazyload/vue-lazyload.js"></script>
-<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 <?php endif; ?>
 
 <?php wp_head(); ?>
