@@ -355,11 +355,9 @@ small{
 
     .__rsdt{
         
-        position: absolute;
-        width: 304px;
+        position: relative;
         height: 96px;
-        margin-top: 32px;
-        top: 24px;
+        margin-top: 8px;
         @include skewY(-2deg);
         font-size: 32px;
         line-height: 40px;
@@ -412,7 +410,10 @@ small{
         }
         
         .__rsdt{
-            // position: absolute;
+            position: absolute;
+            top: 24px;
+            width: 304px;
+            margin-top: 32px;
             // top: 16px;
             // right: -280px;
         }
