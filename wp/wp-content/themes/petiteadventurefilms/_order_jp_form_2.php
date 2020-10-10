@@ -23,7 +23,7 @@
     <input type="text" v-model="user.address2" placeholder="建物名・号室">
 </div>
 <div class="form_ele _required m1_t">
-    <input type="number" v-model="user.tel" placeholder="電話番号 例)01234567910"><br>
+    <input type="number" v-model="user.tel" placeholder="電話番号 例)0123456791"><br>
     <span class="error_message" v-if="errors.tel !== false">{{errors.tel}}</span>
 </div>
 <div class="form_ele _required m1_t">
