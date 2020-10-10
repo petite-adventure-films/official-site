@@ -63,7 +63,7 @@ get_header(); ?>
 				"post_type" => "films",
 				"posts_per_type" => -1,
 				"orderby" => "films_info_03",
-				"order" => DESC
+				"order" => "DESC"
 			);
 			$films = query_posts($args);
 			foreach($films as $film): ?>
