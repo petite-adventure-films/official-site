@@ -93,8 +93,13 @@
         </div>
     <?php endif;?>
     
-    <div class="col col_9 last m4_t">
-        <a href="<?php echo get_permalink(get_page_by_path("takahatadai73")); ?>"><img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/banner.jpg"></a>
+    <div class="contents">
+        <div class="col col_9 last">
+            <?php $tkht_banner_img = (is_smartphone() ? 'banner_m': 'banner'); ?> 
+            <a href="<?php echo get_permalink(get_page_by_path("takahatadai73")); ?>">
+                <img src="<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/<?php echo $tkht_banner_img;?>.jpg">
+            </a>
+        </div>
     </div>
 
     <?php

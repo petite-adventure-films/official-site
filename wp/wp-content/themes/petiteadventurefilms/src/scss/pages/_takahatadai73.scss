@@ -598,6 +598,7 @@ small{
     ._display_all_timeline{
         
         position: absolute;
+        z-index: 1;
         top: 16px;
         left: 50%;
         width: 56px;
