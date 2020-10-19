@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.cashier{
+.pafshop{
 
 .order_details{
 
@@ -20,6 +20,10 @@
     ._details{
         
         padding-top: 4px;
+        
+        .__index{
+            line-height: 20px;
+        }
         
         .__detail_unit_amount_sum{
             display: grid;

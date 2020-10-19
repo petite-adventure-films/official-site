@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+[v-cloak] {
+    display:none;
+}
+
 .al_r{
     text-align: right;
 }
@@ -497,12 +501,13 @@ a{
             display: block;
             position: absolute;
             top: 50%;
-            margin-top: -24px;
+            margin: 0 !important;
+            padding: 0 !important;
             width: 48px;
             height: 48px;
             line-height: 48px;
-            @include border-radius(50%);
-            background: rgba($white, .23);
+            @include border-radius(50% !important);
+            background: rgba($white, .23) !important;
             text-align: center;
             &:before{
                 display: block;
@@ -510,6 +515,9 @@ a{
                 font-size: 24px;
                 color: rgba($black, .56);
                 content: "\e6bb";
+            }
+            &:hover{
+                background: rgba($white, .56) !important;
             }
         }
         .owl-next{

@@ -1,75 +1,64 @@
-<?php
-if(is_post_type_archive()){
-    $post_type = get_post_type_object( get_query_var( 'post_type' ));
-    $termLink = get_post_type_archive_link($post_type->name);
-    $termName = $post_type->label;
-}elseif(is_category() || is_tag() || is_tax()){
-    $cat = get_the_category();
-    $cat = $cat[0];
-    $termLink = get_term_link($cat);
-    $termName = $cat->name;
-}
-get_header('pafshop');?>
+<?php get_header('pafshop');?>
 
-<div class="single">
+<router-view
+    @display-modal-check-basket = "modalCheckBasket = true"
+    @display-modal-delete-item  = "confirmDeleteItem"
+    @display-modal-payment      = "modalPayment = true"
+    @hide-modal-payment = "modalPayment = false"
+    ></router-view>
+<div class="clear"></div>
+    
+<?php get_footer('vue'); ?>    
 
-    <?php
-    $i = 1;
-    $args = array(
-        "post_type" => "pafshop",
-        "posts_per_page" => -1
-    );
-    $posts = query_posts($args);
-    if($posts): ?>
-        <ul class="list_films">
-        <?php foreach($posts as $post): ?>
-            <li class="col col_3<?php ($i % 3) ? "" : " last"; ?>">
-                <a href="<?php echo get_permalink($post->ID); ?>">
-                    <?php
-                    $film_terms = get_the_terms($post, 'filmtags');
-                    $film_id = ($film_terms[1]) ? $film_terms[1]->term_id : $film_terms[0]->term_id;
-                    
-                    $film_query = new WP_Query([
-                          'post_type' => 'films'
-                        , 'tax_query' => array(
-                            array(
-                                  'taxonomy' => 'filmtags'
-                                , 'field'    => 'term_id'
-                                , 'terms'    => $film_id
-                            )
-                        )
-                    ]);
-                    
-                    $film_posts = $film_query->posts;
-                    $film_post_id = $film_posts[0]->ID;
-                    
-                    $poster_img = get_post_meta($film_post_id, "films_info_00", TRUE); ?>
-                    <div class="film_poster">
-                        <? echo get_post_meta_img($poster_img, "large"); ?>
-                    </div>
-                    <p class="film_title"><?php echo $post->post_title; ?></p>
-                </a>
-            </li>
-        <?php $i++; endforeach; ?>
-        </ul>
-    <?php endif; ?>
-    <div class="last"></div>
+<!-- //////////////////////////////////////
+// 確認 -->
+<modal
+v-if="modalCheckBasket == true">
+    <template v-slot:close>
+        <div class="icon icon-close" @click="modalCheckBasket = false"></div>
+    </template>
+    <div class="btn cursor_pointer" @click="modalCheckBasket = false">
+        <span class="ele">買い物を続ける</span>
+    </div>
+    <router-link
+        @click.native="modalCheckBasket = false"
+        :to="{ name: 'basket' }"
+        class="block btn shop m1_t">
+        <span class="ele">買い物かごを見る</span>
+    </router-link>
+</modal>
 
-</div>
+<!-- //////////////////////////////////////
+// 削除 -->
+<modal
+v-if="modalDeleteItem == true">
+    <template v-slot:close>
+        <div class="icon icon-close" @click="modalDeleteItem = false"></div>
+    </template>
+    <p>
+        {{toDeleteItem.info.title}}
+        【{{toDeleteItem.info.price_indexs[toDeleteItemKey]}}】を
+        削除してもよろしいでしょうか
+    </p>
+    <div class="btn cursor_pointer m2_t" @click="modalDeleteItem = false">
+        <span class="ele">キャンセル</span>
+    </div>
+    <div class="btn priority1 cursor_pointer m1_t" @click="deleteItem()">
+        <span class="ele">削除</span>
+    </div>
+</modal>
 
-<?php get_footer('scripts'); ?>
 
-<script type="text/javascript">
+<!-- //////////////////////////////////////
+// カード決済 -->
+<modal_payment
+v-if="modalPayment == true"
+    @close="modalPayment = false"></modal_payment>
 
-var strgPafCartCount = JSON.parse(localStorage.getItem('pafCartCount')) || localStorage.setItem('pafCartCount', 0);
+<!-- #app --></div>
 
-var app = new Vue({
-    el: '#app'
-    , data: {
-        pafCartCount: strgPafCartCount || 0
-    }
-});
-</script>
+<?php wp_footer(); ?>
+<script type="text/javascript" src="<?php echo get_template_directory_uri().'/dist/pafshop.js?'.filemtime(get_stylesheet_directory().'/dist/pafshop.js'); ?>"></script>
 
 </body>
 </html>
