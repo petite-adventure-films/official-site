@@ -18,6 +18,8 @@ if($data){
 
     if($insert_id){
 
+        $data['_paymentMethod'] = ($data['paymentMethod'] == 1) ? '銀行振込' : 'クレジットカード';
+        
         order_ntfct2($data);
         
         add_post_meta($insert_id, 'order_info_21', $data['deliveryFee']);
@@ -27,8 +29,6 @@ if($data){
         add_post_meta($insert_id, 'order_info_14', $data['receipt']);
         add_post_meta($insert_id, 'order_info_15', $data['receiptName']);
         add_post_meta($insert_id, 'order_info_16', $data['receiptDescription']);
-        
-        $data['paymentMethod'] = ($data['paymentMethod'] == 1) ? '銀行振込' : 'クレジットカード';
         
         foreach($data['order'] as $order){
             add_post_meta($insert_id, 'order_info_22', $order);
