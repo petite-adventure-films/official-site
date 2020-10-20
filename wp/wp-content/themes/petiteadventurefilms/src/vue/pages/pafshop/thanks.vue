@@ -71,7 +71,9 @@ export default {
                 return false;
         }
     
-        this.$emit('hide-modal-payment');
+        
+        this.$emit('display-modal-payment', false);
+        this.$emit('display-modal-executing', false);
         this.$store.commit('init');
     
         

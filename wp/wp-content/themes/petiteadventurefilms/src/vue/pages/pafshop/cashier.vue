@@ -126,10 +126,7 @@
                     
                     <div
                     v-if="paymentMethod != 0"
-                        @click="exec()" class="btn"
-                        :class="[
-                              'm2_t cursor_pointer'
-                            , (isExecuting) ? 'disabled' : 'shop']">
+                        @click="exec()" class="btn shop m2_t cursor_pointer">
                         <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
                     </div>
 
@@ -169,7 +166,6 @@ export default{
             , inCashier: true
             , paymentMethod: 0
             , templateUrl: process.env.TEMPLATE_URL
-            , isExecuting: false
         }
     }
     
@@ -191,14 +187,14 @@ export default{
         {
             if(this.paymentMethod == 1)
             {
-                this.isExecuting = true;
+                this.$emit('display-modal-executing', false);
                 this.$store.commit('setPaymentCompleted', true);
                 this.$store.dispatch('complete', {paymentMethod: 1});
             }
 
             else if(this.paymentMethod == 2)
             {
-                this.$emit('display-modal-payment');
+                this.$emit('display-modal-payment', true);
             }
         }
         

@@ -25,6 +25,7 @@ new Vue({
         , toDeleteItemKey: null
         
         , modalPayment: false
+        , modalExecuting: false
     }
     
     , computed:
@@ -61,6 +62,16 @@ new Vue({
             this.toDeleteItem = null;
             this.toDeleteItemKey = null;
             this.modalDeleteItem = false;
+        }
+          
+        , displayModalPayment(flag)
+        {
+            this.modalPayment = flag
+        }
+        
+        , displayModalExecuting(flag)
+        {
+            this.modalExecuting = flag
         }
         
     }

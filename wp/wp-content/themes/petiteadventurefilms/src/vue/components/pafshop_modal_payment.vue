@@ -1,7 +1,11 @@
 <template>
     <div class="modal-mask">
         <div class="modal-container">
-            <div class="icon icon-close" @click="close"></div>
+            
+            <div class="icon icon-close"
+                v-if="completed == false && isExecuting == false"
+                @click="close"></div>
+                
             <div class="confirm_btns">
             
                 <div v-if="completed == false">
@@ -50,7 +54,7 @@
                 <div
                 v-if="completed == false && isExecuting == false"
                     @click="close()"
-                    class="m1_t al_c cursor_pointer">お支払い方法選択に戻る</div>
+                    class="m1_t al_c cursor_pointer">お支払い方法選択に戻る
                 </div>
                                
             </div>
@@ -140,6 +144,8 @@ export default{
         ,complete()
         {
             clearTimeout(this.timer);
+            this.$emit('display-modal-payment', false);
+            this.$emit('display-modal-executing', true);
             this.$store.dispatch('complete', { paymentMethod: 2 });
         }
         

@@ -3,8 +3,8 @@
 <router-view
     @display-modal-check-basket = "modalCheckBasket = true"
     @display-modal-delete-item  = "confirmDeleteItem"
-    @display-modal-payment      = "modalPayment = true"
-    @hide-modal-payment = "modalPayment = false"
+    @display-modal-payment      = "displayModalPayment"
+    @display-modal-executing    = "displayModalExecuting"
     ></router-view>
 <div class="clear"></div>
     
@@ -53,7 +53,15 @@ v-if="modalDeleteItem == true">
 // カード決済 -->
 <modal_payment
 v-if="modalPayment == true"
-    @close="modalPayment = false"></modal_payment>
+    @display-modal-payment   = "displayModalPayment"
+    @display-modal-executing = "displayModalExecuting"></modal_payment>
+    
+<!-- //////////////////////////////////////
+// 処理中 -->
+<modal
+v-if="modalExecuting == true">
+    <p class="al_c">処理中...</p>
+</modal>
 
 <!-- #app --></div>
 

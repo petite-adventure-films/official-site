@@ -1,19 +1,22 @@
 <template>
-    <ul
-    v-if="products"
-        class="single list_films">
-        <li
-        v-for="(arr, key) in products"
-        :key="`product${arr.id}`"
-            :class="['col col_3', ((key + 1) % 3) ? '' : 'last']">
-            <router-link :to="{ name: 'product', params: genRouterParams(arr) }">
-                <div class="film_poster">
-                    <img v-lazy="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']">
-                </div>
-                <p class="film_title">{{arr.title}}</p>
-            </router-link>
-        </li>
-    </ul>
+    <div class="">
+        <ul
+        v-if="isLoaded()"
+            class="single list_films">
+            <li
+            v-for="(arr, key) in products"
+            :key="`product${arr.id}`"
+                :class="['col col_3', ((key + 1) % 3) ? '' : 'last']">
+                <router-link :to="{ name: 'product', params: genRouterParams(arr) }">
+                    <div class="film_poster">
+                        <img v-lazy="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']">
+                    </div>
+                    <p class="film_title">{{arr.title}}</p>
+                </router-link>
+            </li>
+        </ul>
+        <div v-else>読み込み中</div>
+    </div>
 </template>
 
 <script>
@@ -45,6 +48,11 @@ export default {
                   data: arr
                 , title: arr.title
             }
+        }
+        
+        , isLoaded()
+        {
+            return (this.products.length > 0) ? true : false;
         }
         
     }
