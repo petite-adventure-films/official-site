@@ -850,11 +850,11 @@ EOF;
 ※すべて税込
 
 ■お支払い方法
-{$data['_paymentMethod']}
+{$data['paymentMethod']}
 
 EOF;
 
-    if($data['_paymentMethod'] == '銀行振込')
+    if($data['paymentMethod'] == '銀行振込')
     {
         $message .= <<<EOF
 

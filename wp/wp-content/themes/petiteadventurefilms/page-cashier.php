@@ -28,6 +28,8 @@ if($data){
         add_post_meta($insert_id, 'order_info_15', $data['receiptName']);
         add_post_meta($insert_id, 'order_info_16', $data['receiptDescription']);
         
+        $data['paymentMethod'] = ($data['paymentMethod'] == 1) ? '銀行振込' : 'クレジットカード';
+        
         foreach($data['order'] as $order){
             add_post_meta($insert_id, 'order_info_22', $order);
         }

@@ -48,6 +48,10 @@ export default {
         }
         
     }
-    
+
+    , async created()
+    {
+        this.$store.dispatch('getPafshopData');
+    }
 }
 </script>
