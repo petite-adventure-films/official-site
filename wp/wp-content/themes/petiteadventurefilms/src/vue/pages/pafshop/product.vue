@@ -105,7 +105,7 @@
         <div class="col col_9 last">
             <div class="tabs m4_t al_c">
                 <div @click="displayTab = 1" :class="['_tab cursor_pointer', (displayTab == 1) ? '_selected' : '']">概要</div>
-                <div @click="displayTab = 2" :class="['_tab cursor_pointer', (displayTab == 2) ? '_selected' : '']">{{dvd_no_specials ? '本編' : '特典'}}</div>
+                <div @click="displayTab = 2" :class="['_tab cursor_pointer', (displayTab == 2) ? '_selected' : '']">{{(product.no_specials == 1) ? '本編' : '特典'}}</div>
                 <div @click="displayTab = 3" :class="['_tab cursor_pointer', (displayTab == 3) ? '_selected' : '']">制作クレジット</div>
             </div>
         </div>

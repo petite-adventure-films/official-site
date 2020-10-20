@@ -850,7 +850,7 @@ EOF;
 ※すべて税込
 
 ■お支払い方法
-{$data['paymentMethod']}
+{($data['paymentMethod'] == 1) ? '銀行振込' : 'クレジットカード'}
 
 EOF;
 
@@ -906,6 +906,8 @@ EOF;
 〒{$data['zipcode']}
 {$data['prefecture']}{$data['city']}{$data['address1']}
 {$data['address2']}
+{$data['tel']}
+{$data['email']}
 
 受付番号: {$data['orderID']}
 
