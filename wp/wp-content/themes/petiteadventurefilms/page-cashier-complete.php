@@ -33,7 +33,7 @@ if($data){
         add_post_meta($insert_id, 'order_info_15', $data['receiptName']);
         add_post_meta($insert_id, 'order_info_16', $data['receiptDescription']);
         
-        $data['paymentMethod'] = ($data['paymentMethod'] == '1') ? '銀行振込' : 'クレジットカード';
+        $data['_paymentMethod'] = ($data['paymentMethod'] == 1) ? '銀行振込' : 'クレジットカード';
         
 		order_ntfct2($data);
         
