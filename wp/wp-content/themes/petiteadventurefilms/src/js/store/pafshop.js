@@ -231,8 +231,6 @@ const store = new Vuex.Store({
             params.total = getters.convertYen(getters.totalAmount + getters.deliveryFee);
             params.paymentMethod = payload.paymentMethod;
             
-            console.log('params', params)
-            
             if(state.user.receipt == true)
             {
                 params.receiptName = state.user.receiptName ? state.user.receiptName : '(記載なし)'
