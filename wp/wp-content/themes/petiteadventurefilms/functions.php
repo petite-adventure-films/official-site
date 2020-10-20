@@ -850,7 +850,7 @@ EOF;
 ※すべて税込
 
 ■お支払い方法
-{($data['paymentMethod'] == 1) ? '銀行振込' : 'クレジットカード'}
+{$data['paymentMethod']}
 
 EOF;
 
