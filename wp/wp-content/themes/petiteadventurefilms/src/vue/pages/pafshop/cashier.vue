@@ -187,7 +187,7 @@ export default{
         {
             if(this.paymentMethod == 1)
             {
-                this.$emit('display-modal-executing', false);
+                this.$emit('display-modal-executing', true);
                 this.$store.commit('setPaymentCompleted', true);
                 this.$store.dispatch('complete', {paymentMethod: 1});
             }
