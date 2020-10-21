@@ -6,7 +6,7 @@
             <li
             v-for="(arr, key) in products"
             :key="`product${arr.id}`"
-                :class="['col col_3', ((key + 1) % 3) ? '' : 'last']">
+                class="col col_3">
                 <router-link :to="{ name: 'product', params: genRouterParams(arr) }">
                     <div class="film_poster">
                         <img v-lazy="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']">
@@ -15,7 +15,9 @@
                 </router-link>
             </li>
         </ul>
-        <div v-else>読み込み中</div>
+        <div
+        v-else
+            class="single"><p class="col col_9">読み込み中</p></div>
     </div>
 </template>
 
