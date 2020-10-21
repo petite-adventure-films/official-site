@@ -4,7 +4,9 @@
             :breadCrumbs="breadCrumbs"
             :article="{title: pageTitle}"></ArticleHeader>
             
-        <div v-if="basketsCount > 0">
+        <div
+        v-if="basketsCount > 0"
+            class="col col_9">
         
             <PafshopBasket
             @triggerModalDeleteItem="triggerModalDeleteItem"></PafshopBasket>
@@ -23,10 +25,13 @@
             
         </div>
         
-        <div v-else>
+        <div
+        v-else
+            class="col col_9">
             <p>お客様の買い物かごに商品はありません。</p>
         </div>
         
+        <div class="clear"></div>
     </div>
 </template>
 
