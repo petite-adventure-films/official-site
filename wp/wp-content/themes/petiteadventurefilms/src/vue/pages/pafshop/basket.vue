@@ -6,7 +6,7 @@
             
         <div
         v-if="basketsCount > 0"
-            class="col col_9">
+            class="col col_6">
         
             <PafshopBasket
             @triggerModalDeleteItem="triggerModalDeleteItem"></PafshopBasket>
@@ -27,7 +27,7 @@
         
         <div
         v-else
-            class="col col_9">
+            class="col col_6">
             <p>お客様の買い物かごに商品はありません。</p>
         </div>
         

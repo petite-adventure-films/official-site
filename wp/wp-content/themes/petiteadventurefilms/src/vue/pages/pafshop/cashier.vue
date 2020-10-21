@@ -1,7 +1,9 @@
 <template>
     <div class="single_pafshop">
     
-        <div v-if="basketsCount > 0">
+        <div
+        v-if="basketsCount > 0"
+            class="col col_6">
         
             <div class="purchase_details">
             
@@ -144,6 +146,7 @@
             
         </div>
         
+        <div class="clear"></div>
     
     </div>
 </template>
