@@ -11,6 +11,105 @@ remove_action( 'wp_head', 'start_post_rel_link', 10);
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10);
 remove_action( 'wp_head', 'wp_generator');*/
 
+add_action('rest_api_init', 'add_custom_fields_to_rest_films');
+function add_custom_fields_to_rest_films(){
+  register_rest_field(
+    'films'
+    , 'custom_fields'
+    , [
+          'get_callback'    => 'get_custom_fields_value_films'
+        , 'update_callback' => null
+        , 'schema'          => null
+    ]
+  );
+}
+function get_custom_fields_value_films(){
+    global $post;
+    
+    $dvd_jacket_jp_front_attachment = wp_get_attachment_image_src(get_post_meta($post->ID, 'films_info_00', true), 'large');
+    list($dvd_jacket_jp_front, $width, $height) = $dvd_jacket_jp_front_attachment;
+    $dvd_jacket_jp_back_attachment = wp_get_attachment_image_src(get_post_meta($post->ID, 'films_info_31', true), 'large');
+    list($dvd_jacket_jp_back, $width, $height) = $dvd_jacket_jp_back_attachment;
+    
+    $dvd_jacket_en_front_attachment = wp_get_attachment_image_src(get_post_meta($post->ID, 'films_info_23', true), 'large');
+    list($dvd_jacket_en_front, $width, $height) = $dvd_jacket_en_front_attachment;
+    $dvd_jacket_en_back_attachment = wp_get_attachment_image_src(get_post_meta($post->ID, 'films_info_33', true), 'large');
+    list($dvd_jacket_en_back, $width, $height) = $dvd_jacket_en_back_attachment;
+    
+    $dvd_specials_attachment = wp_get_attachment_image_src(get_post_meta($post->ID, 'films_info_32', true), 'large');
+    list($dvd_specials, $width, $height) = $dvd_specials_attachment;
+    
+    $prizes = get_post_meta($post->ID, 'films_info_07', FALSE);
+    $genre = get_post_meta($post->ID, 'films_info_01', TRUE);
+    $country = get_post_meta($post->ID, 'films_info_02', TRUE);
+    $year = get_post_meta($post->ID, 'films_info_03', TRUE);
+    $running_time = get_post_meta($post->ID, 'films_info_04', TRUE);
+    $basic_info = array($genre, $country, $year, $running_time);
+    $credits_indexs = get_post_meta_arr($post->ID, 'films_info_10');
+    $credits_contents = get_post_meta_arr($post->ID, 'films_info_11');
+    
+    return [
+          'dvd_jacket_jp_front' => $dvd_jacket_jp_front
+        , 'dvd_jacket_jp_back' => $dvd_jacket_jp_back
+        , 'dvd_jacket_en_front' => $dvd_jacket_en_front
+        , 'dvd_jacket_en_back' => $dvd_jacket_en_back
+        , 'dvd_specials' => $dvd_specials
+        
+        , 'prizes'              => $prizes
+        , 'basic_info'          => $basic_info
+        , 'credits_indexs'      => $credits_indexs
+        , 'credits_contents'    => $credits_contents
+    ];
+}
+
+add_action('rest_api_init', 'add_custom_fields_to_rest_pafshop');
+function add_custom_fields_to_rest_pafshop(){
+  register_rest_field(
+    'pafshop'
+    , 'custom_fields'
+    , [
+          'get_callback'    => 'get_custom_fields_value_pafshop'
+        , 'update_callback' => null
+        , 'schema'          => null
+    ]
+  );
+}
+function get_custom_fields_value_pafshop(){
+
+    global $post;
+    
+    $price_indexs = get_post_meta_arr($post->ID, 'product_info_01');
+    $price_contents = get_post_meta_arr($post->ID, 'product_info_02');
+    
+    $dvd_intro     = get_post_meta($post->ID, 'product_info_03', TRUE);
+    $dvd_catch     = get_post_meta($post->ID, 'product_info_05', TRUE);
+    $dvd_no_specials = get_post_meta($post->ID, 'product_info_06', TRUE);
+    $dvd_contents = apply_filters('the_content', $post->post_content);
+    $disc_indexs   = get_post_meta_arr($post->ID, "product_info_09");
+    $disc_numbers  = get_post_meta_arr($post->ID, "product_info_10");
+    $disc_types    = get_post_meta_arr($post->ID, "product_info_11");
+    $disc_contents = get_post_meta($post->ID, "product_info_12", TRUE);
+    
+    $type_indexs   = get_post_meta_arr($post->ID, 'product_info_07');
+    $type_contents = get_post_meta_arr($post->ID, 'product_info_08');
+    
+    return [
+          'intro'       => $dvd_intro
+        , 'contents'    => $dvd_contents
+        , 'catch'       => strip_tags($dvd_catch, '<br>')
+        , 'no_specials' => $dvd_no_specials
+        , 'disc_indexs'     => $disc_indexs
+        , 'disc_numbers'    => $disc_numbers
+        , 'disc_types'      => $disc_types
+        , 'disc_contents'   => $disc_contents
+        , 'price_indexs'    => $price_indexs
+        , 'price_contents'  => $price_contents
+        , 'type_indexs'     => $type_indexs
+        , 'type_contents'   => $type_contents
+    ];
+    
+}
+
 //sidebar activate
 if(function_exists("register_sidebar")){
     register_sidebar();
@@ -751,11 +850,11 @@ EOF;
 ※すべて税込
 
 ■お支払い方法
-{$data['paymentMethod']}
+{$data['_paymentMethod']}
 
 EOF;
 
-    if($data['paymentMethod'] == '銀行振込')
+    if($data['_paymentMethod'] == '銀行振込')
     {
         $message .= <<<EOF
 
@@ -807,6 +906,8 @@ EOF;
 〒{$data['zipcode']}
 {$data['prefecture']}{$data['city']}{$data['address1']}
 {$data['address2']}
+{$data['tel']}
+{$data['email']}
 
 受付番号: {$data['orderID']}
 
