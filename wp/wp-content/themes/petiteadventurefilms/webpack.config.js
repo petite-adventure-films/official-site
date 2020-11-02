@@ -65,7 +65,6 @@ module.exports =
         , new webpack.DefinePlugin({
             'process.env': {
                   STRIPE_PUBLIC_KEY : JSON.stringify(process.env.STRIPE_PUBLIC_KEY)
-                , STRIPE_SECRET_KEY : JSON.stringify(process.env.STRIPE_SECRET_KEY)
                 , SITE_URL          : JSON.stringify(process.env.SITE_URL)
                 , CONTACT_URL       : JSON.stringify(process.env.CONTACT_URL)
                 , TEMPLATE_URL      : JSON.stringify(process.env.TEMPLATE_URL)
