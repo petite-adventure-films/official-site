@@ -118,12 +118,18 @@ a{
 
 .list_archives{
     > li{
-        display: inline-block;
         &:not(:first-of-type){
             margin-left: 4px;
         }
-        a, &.tab{
+        a, .tab{
+            display: inline-block;
+            min-width: 32px;
             padding: 4px;
+            @include box-sizing(border-box);
+            text-align: center;
+            &:not(:first-of-type){
+                margin-left: 4px;
+            }
         }
     }
 }
