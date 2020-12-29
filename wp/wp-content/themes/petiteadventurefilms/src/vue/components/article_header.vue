@@ -19,6 +19,10 @@
                     </router-link>
                 </div>
             </nav>
+            <!-- <div class="labels">
+                <span class="label _status">中止</span>
+                <span class="label _eventtag">上映会</span>
+            </div> -->
             <h1 class="m5_b">{{articleTitle}}</h1>
         <!--.header_page--></header>
         <div class="clear"></div>

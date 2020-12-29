@@ -33,66 +33,58 @@ const store = new Vuex.Store({
         {
             
             let _data = Array.isArray(payload.events.data) ? payload.events.data : [payload.events.data];
-            _data.forEach((a, k) => {
+            _data.forEach(a => {
             
                 let index = state.events.findIndex(b => b.id == a.id);
                 if(index < 0)
                 {
             
                     let data = a;
-                    data.eventDates = [];
                     
-                    async function getPostNumber()
-                    {
-                        const postURI  = `${process.env.SITE_URL}wp-json/wp/custom/get_event_number?pageID=${a.id}`;
-                        return await axios.get(postURI);
+                    // 映画情報登録
+                    data.filmData = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
+                    
+                    data.eventTagsData = [];
+                    a.eventtags.forEach(a2 => {
+                        let tag = payload.eventTags.data.find(a3 => a3.id == a2);
+                        data.eventTagsData.push(tag.name);
+                    })
+                    
+                    // イベント日付情報登録
+                    data.eventDates = [];
+                    let startYear  = new Date(a.custom_fields.events_info_15).getFullYear();
+                    let startMonth = new Date(a.custom_fields.events_info_15).getMonth();
+                    
+                    let endYear  = new Date(a.custom_fields.events_info_16).getFullYear();
+                    let endMonth = new Date(a.custom_fields.events_info_16).getMonth();
+                    
+                    let startDate = parseInt(`${startYear}${('0' + (startMonth + 1)).slice(-2)}`);
+                    let endDate = parseInt(`${endYear}${('0' + (endMonth + 1)).slice(-2)}`);
+                    
+                    if(endYear && (endMonth > -1)){
+                        for(let i=startDate; i <= endDate; i++)
+                        {
+                            let m = parseInt(i.toString().slice(-2));
+                            if(0 < m && m < 13)
+                            {
+                                data.eventDates.push(i);
+                            }
+                        }   
                     }
                     
-                    getPostNumber().then(res => {
+                    else
+                    {
+                        data.eventDates.push(startDate);
+                    }
                     
-                        // イベント番号取得
-                        data.postNo = res.data;
                     
-                        // 映画情報登録
-                        let filmdata = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
-                        data.filmData = filmdata;
+                    state.events.push(a);
                     
-                        // イベント日付情報登録
-                        let startYear  = new Date(a.custom_fields.events_info_15).getFullYear();
-                        let startMonth = new Date(a.custom_fields.events_info_15).getMonth();
-                        
-                        let endYear  = new Date(a.custom_fields.events_info_16).getFullYear();
-                        let endMonth = new Date(a.custom_fields.events_info_16).getMonth();
-                        
-                        let startDate = parseInt(`${startYear}${('0' + (startMonth + 1)).slice(-2)}`);
-                        let endDate = parseInt(`${endYear}${('0' + (endMonth + 1)).slice(-2)}`);
-                        
-                        if(endYear && (endMonth > -1)){
-                            for(let i=startDate; i <= endDate; i++)
-                            {
-                                let m = parseInt(i.toString().slice(-2));
-                                if(0 < m && m < 13)
-                                {
-                                    data.eventDates.push(i);
-                                }
-                            }   
-                        }
-                        
-                        else
-                        {
-                            data.eventDates.push(startDate);
-                        }
-                        
-                        
-                        state.events.push(a);
-                        
-                        if(state.archivedEvents[startYear] == undefined)
-                        {
-                            state.archivedEvents[startYear] = [];
-                        }
-                        state.archivedEvents[startYear].push(a);
-                    
-                    });
+                    if(state.archivedEvents[startYear] == undefined)
+                    {
+                        state.archivedEvents[startYear] = [];
+                    }
+                    state.archivedEvents[startYear].push(a);
                     
                 }
                 
@@ -100,10 +92,6 @@ const store = new Vuex.Store({
         
         }
         
-        , setFilms: (state, payload) =>
-        {
-            state.films = payload.films.data;
-        }
         
         , updateEventsData: (state, payload) =>
         {
@@ -117,7 +105,8 @@ const store = new Vuex.Store({
         
         async getEventsData({commit}, payload)
         {
-            const filmURI  = `${process.env.SITE_URL}wp-json/wp/v2/films`;
+            let filmURI  = `${process.env.SITE_URL}wp-json/wp/v2/films`;
+            let eventTagsURI  = `${process.env.SITE_URL}wp-json/wp/v2/eventtags`;
             
             let year = (payload && payload.year) ? payload.year : '';
             let eventURI =  `${process.env.SITE_URL}wp-json/wp/v2/events?per_page=100`;
@@ -133,8 +122,9 @@ const store = new Vuex.Store({
             await Promise.all([
                   axios.get(eventURI)
                 , axios.get(filmURI)
-            ]).then(([events, films]) => {
-                commit('setEvents', { year, events, films });
+                , axios.get(eventTagsURI)
+            ]).then(([events, films, eventTags]) => {
+                commit('setEvents', { year, events, films, eventTags });
             })
             
             

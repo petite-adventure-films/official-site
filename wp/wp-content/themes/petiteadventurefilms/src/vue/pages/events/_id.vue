@@ -1,8 +1,14 @@
 <template>
     <div>
     
+            
         <ArticleHeader
             :breadCrumbs="breadCrumbs"></ArticleHeader>
+            
+        <!-- <div class="inline-block labels">
+            <span v-if="info.events_info_18" class="inline-block body1 label _status">{{status[info.events_info_18]}}</span>
+            <span v-for="data in item.eventTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _eventtag">{{data}}</span>
+        </div> -->
             
         <div class="col col_9 last">
             <ul
@@ -77,6 +83,7 @@ export default {
             , postedDate: ''
             , isArchive: false
             , archiveYear: 0
+            , status: {1 :'延期', 2:'中止'}
         }
         
     }

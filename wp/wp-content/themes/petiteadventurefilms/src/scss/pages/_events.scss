@@ -38,11 +38,27 @@
 		}
 	}
 	
-	.label_status{
-		background: $red;
+	
+	.label{
 		padding: 4px;
-		color: $white;
 		@include border-radius(4px);
+		vertical-align: middle;
+		&:not(:first-of-type){
+			margin-left: 4px;
+		}
+		&._status{
+			background: $red;
+			color: $white;
+		}
+		&._eventtag{
+			background: $green1;
+			color: $green;
+		}
+		
+	}
+	
+	.labels, .title{
+		vertical-align: middle;
 	}
 
 }

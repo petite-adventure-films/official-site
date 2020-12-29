@@ -417,7 +417,7 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: ['breadCrumbs'],\n\n  data() {\n    return {\n      siteUrl: \"http://localhost:8000/\"\n    };\n  },\n\n  computed: {\n    articleTitle() {\n      let lastElement = this.breadCrumbs[this.breadCrumbs.length - 1];\n      return lastElement.title;\n    }\n\n  }\n});\n\n//# sourceURL=webpack:///./src/vue/components/article_header.vue?./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: ['breadCrumbs'],\n\n  data() {\n    return {\n      siteUrl: \"http://localhost:8000/\"\n    };\n  },\n\n  computed: {\n    articleTitle() {\n      let lastElement = this.breadCrumbs[this.breadCrumbs.length - 1];\n      return lastElement.title;\n    }\n\n  }\n});\n\n//# sourceURL=webpack:///./src/vue/components/article_header.vue?./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
