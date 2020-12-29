@@ -33,52 +33,66 @@ const store = new Vuex.Store({
         {
             
             let _data = Array.isArray(payload.events.data) ? payload.events.data : [payload.events.data];
-            _data.forEach(a => {
+            _data.forEach((a, k) => {
             
-                if(state.events.findIndex(b => b.id == a.id) < 0)
+                let index = state.events.findIndex(b => b.id == a.id);
+                if(index < 0)
                 {
             
                     let data = a;
                     data.eventDates = [];
                     
-                    // 映画情報登録
-                    let filmdata = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
-                    data.filmData = filmdata;
-                
-                    // イベント日付情報登録
-                    let startYear  = new Date(a.custom_fields.events_info_15).getFullYear();
-                    let startMonth = new Date(a.custom_fields.events_info_15).getMonth();
+                    async function getPostNumber()
+                    {
+                        const postURI  = `${process.env.SITE_URL}wp-json/wp/custom/get_event_number?pageID=${a.id}`;
+                        return await axios.get(postURI);
+                    }
                     
-                    let endYear  = new Date(a.custom_fields.events_info_16).getFullYear();
-                    let endMonth = new Date(a.custom_fields.events_info_16).getMonth();
+                    getPostNumber().then(res => {
                     
-                    let startDate = parseInt(`${startYear}${('0' + (startMonth + 1)).slice(-2)}`);
-                    let endDate = parseInt(`${endYear}${('0' + (endMonth + 1)).slice(-2)}`);
+                        // イベント番号取得
+                        data.postNo = res.data;
                     
-                    if(endYear && (endMonth > -1)){
-                        for(let i=startDate; i <= endDate; i++)
-                        {
-                            let m = parseInt(i.toString().slice(-2));
-                            if(0 < m && m < 13)
+                        // 映画情報登録
+                        let filmdata = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
+                        data.filmData = filmdata;
+                    
+                        // イベント日付情報登録
+                        let startYear  = new Date(a.custom_fields.events_info_15).getFullYear();
+                        let startMonth = new Date(a.custom_fields.events_info_15).getMonth();
+                        
+                        let endYear  = new Date(a.custom_fields.events_info_16).getFullYear();
+                        let endMonth = new Date(a.custom_fields.events_info_16).getMonth();
+                        
+                        let startDate = parseInt(`${startYear}${('0' + (startMonth + 1)).slice(-2)}`);
+                        let endDate = parseInt(`${endYear}${('0' + (endMonth + 1)).slice(-2)}`);
+                        
+                        if(endYear && (endMonth > -1)){
+                            for(let i=startDate; i <= endDate; i++)
                             {
-                                data.eventDates.push(i);
-                            }
-                        }   
-                    }
+                                let m = parseInt(i.toString().slice(-2));
+                                if(0 < m && m < 13)
+                                {
+                                    data.eventDates.push(i);
+                                }
+                            }   
+                        }
+                        
+                        else
+                        {
+                            data.eventDates.push(startDate);
+                        }
+                        
+                        
+                        state.events.push(a);
+                        
+                        if(state.archivedEvents[startYear] == undefined)
+                        {
+                            state.archivedEvents[startYear] = [];
+                        }
+                        state.archivedEvents[startYear].push(a);
                     
-                    else
-                    {
-                        data.eventDates.push(startDate);
-                    }
-                    
-                    
-                    state.events.push(a);
-                    
-                    if(state.archivedEvents[startYear] == undefined)
-                    {
-                        state.archivedEvents[startYear] = [];
-                    }
-                    state.archivedEvents[startYear].push(a);
+                    });
                     
                 }
                 
@@ -115,9 +129,7 @@ const store = new Vuex.Store({
             {
                 eventURI = `${process.env.SITE_URL}wp-json/wp/v2/events/${payload.pageID}`
             }
-            
-            
-            //     let eventURI = ;
+
             await Promise.all([
                   axios.get(eventURI)
                 , axios.get(filmURI)

@@ -155,18 +155,6 @@ function get_custom_fields_value_events(){
   ];
 }
 add_filter( 'rest_events_query', function($args){
-
-    
-    // $args['date_query'] = array(
-    //     array(
-    //           'inclusive' => true
-    //         , 'before' => '2020-12-01'
-    //         // , 'after' => '2019/01/01'
-    //     )    
-    // );
-    // $args['posts_per_page'] = -1;
-    
-    // var_dump(esc_sql($_GET['date']));
     
     // 年別
     if($_GET['year'])
@@ -204,7 +192,21 @@ add_filter( 'rest_events_query', function($args){
     return $args;
 } );
 
-
+// イベント番号取得api
+function add_rest_original_endpoint(){
+    register_rest_route( 'wp/custom', '/get_event_number', array(
+        'methods' => 'GET',
+        'callback' => 'get_event_number',
+    ));
+}
+add_action('rest_api_init', 'add_rest_original_endpoint');
+function get_event_number()
+{
+    $query = new WP_Query(['post_type' => 'events', 'p' => $_GET['pageID']]);
+    return get_post_number($query->posts[0]);
+}
+  
+  
 add_filter( 'widget_categories_args', 'exclude_widget_categories');
 
 
