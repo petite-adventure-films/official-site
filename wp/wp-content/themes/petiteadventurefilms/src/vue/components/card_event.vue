@@ -6,21 +6,18 @@
             {{item.title.rendered}}
         </h2>
         <ul class="list_post_info">
-            <li>
-                <span class="index date">
-                    {{item.custom_fields.events_info_15}}
-                    <span v-if="item.custom_fields.events_info_16">
-                         - {{item.custom_fields.events_info_16}}
-                    </span>
+            <li class="index date">
+                {{item.custom_fields.events_info_15}}
+                <span v-if="item.custom_fields.events_info_16">
+                        - {{item.custom_fields.events_info_16}}
                 </span>
             </li>
             <li class="index place">
                 {{item.custom_fields.events_info_01}}
                 : {{item.custom_fields.events_info_02}}
             </li>
-            <li class="index place">
-                {{item.custom_fields.events_info_01}}
-                : {{item.custom_fields.events_info_02}}
+            <li v-if="filmTitle" class="index label">
+                {{filmTitle}}
             </li>
         </ul>
     </router-link>
@@ -29,7 +26,14 @@
 
 export default {
     props: ['item']
-    
+    , computed:{
+        filmTitle()
+        {
+            return this.item.filmData && this.item.filmData.length > 0
+                 ? this.item.filmData[0].title.rendered
+                 : false;
+        }
+    }
     
 }
 </script>

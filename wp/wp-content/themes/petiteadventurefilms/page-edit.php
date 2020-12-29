@@ -41,7 +41,7 @@ if($posts):
         $post_number = get_post_number($post);
     
         add_post_meta($post->ID, 'events_info_15', $date);
-        // add_post_meta($post->ID, 'events_info_17', $post_number);
+        add_post_meta($post->ID, 'events_info_17', $post_number);
     
     endforeach;
 endif;

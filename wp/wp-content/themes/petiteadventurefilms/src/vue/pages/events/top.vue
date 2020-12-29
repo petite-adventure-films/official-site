@@ -24,31 +24,35 @@
         <div class="clear"></div>
         
         <div class="col col_9">
-            <ul class="list_posts list_events">
+        
+            <!-- イベントがあるとき -->
+            <ul
+            v-if="sortedEvents.length > 0"
+            class="list_posts list_events">
                 <li
                 v-for="item in sortedEvents"
                 :key="`event${item.id}`">
                     <CardEvent :item="item"></CardEvent>
                 </li>
             </ul>
+            
+            <!-- イベントがないとき -->
+            <div v-else class="m4_t">
+                <p>ただ今、予定の上映会・イベントがありません。</p>
+            </div>
         </div>
         <div class="clear"></div>
         
-         <!-- <div class="col col_9 last">
-        <section class="tab_contents" id="tab_latest">
-            <?php echo get_events($now, TRUE); ?>
-        </section>
-        <?php if(!empty($months)):
-        foreach($months as $month): ?>
-            <section class="tab_contents" id="tab_<?php echo $month["slug"]; ?>">
-            <?php echo get_events($month["slug"]); ?>
-            </section>
-        <?php endforeach; endif; ?>
-    </div> -->
-        
-        <div v-for="item in archiveIndexs" :key="`archive${item}`">
-            <router-link :to="{ name: 'archive', params: { year: item } }">{{item}}</router-link>
-        </div>
+
+        <aside class="contents m4_t">
+            <h3>過去のイベントはこちらから</h3>
+            <ul class="list_archives m1_t">
+                <li class="show_contents" v-for="item in archiveIndexs" :key="`archive${item}`">
+                    <router-link :to="{ name: 'archive', params: { year: item } }">{{item}}</router-link>
+                </li>
+			</ul>
+        </aside>
+
         
     </div>
 </template>
@@ -69,22 +73,30 @@ export default {
     , data()
     {
         return{
-            dateIndexs: {}
+              dateIndexs: {}
             , archiveIndexs: []
-            , sortedEvents: []
+            , selectedYear: 0
+            , selectedMonth: 0
         }
         
     }
     , computed:
     {
         ...mapState(['events'])
+        , ...mapGetters(['futureEvents'])
         
         , breadCrumbs()
         {
-
             return [
                   { name: 'top', title: '上映会・イベント' }
             ]
+        }
+        
+        , sortedEvents()
+        {
+            return (this.selectedYear && this.selectedMonth)
+                ? this.events.filter(a => a.eventDates.includes(parseInt(`${this.selectedYear}${this.selectedMonth}`)))
+                : this.futureEvents;
         }
     }
     
@@ -92,14 +104,8 @@ export default {
     {
         displayEvents(year, month)
         {
-            if(year && month)
-            {
-                this.sortedEvents = this.events.filter(a => a.eventDates.includes(parseInt(`${year}${month}`)))
-            }
-            else
-            {
-                this.sortedEvents = this.events;
-            }
+            this.selectedYear  = (year) ? year : 0;
+            this.selectedMonth = (month) ? month : 0;
         }
     }
     
@@ -108,76 +114,38 @@ export default {
     }
         
     , async created()
-    {
-    
-    
-    
-        // console.log('comes?')
-        // const eventURI = `${process.env.SITE_URL}wp-json/wp/v2/events?per_page=100&date=2020/12/20`;
-        // await axios.get(eventURI).then(events => {
-        //     console.log('event', events)
-        // })
-    
+    {    
 
-        if(this.$store.state.events.length === 0)
+        await this.$store.dispatch('getEventsData');
+        
+        let dateIndexs = [];
+        this.$store.state.events.forEach(a => {
+            a.eventDates.forEach(a2 => {
+                dateIndexs.push(a2)
+            })
+        })
+        let indexs = {}
+        dateIndexs = dateIndexs.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+        });
+        dateIndexs = dateIndexs.sort().forEach(a => {
+            if(a > (new Date().getFullYear() * 100))
+            {
+                let year = a.toString().slice(0, 4);
+                let month = a.toString().slice(-2);
+                if(indexs[year] == undefined)
+                {
+                    indexs[year] = [];
+                }
+                indexs[year].push(month);
+            }
+        }) 
+        this.dateIndexs = indexs;
+        
+        for(let i=(new Date().getFullYear() - 1); i >= 2012; i-- )
         {
-            await this.$store.dispatch('getEventsData');
+            this.archiveIndexs.push(i)
         }
-        
-        // this.sortedEvents = this.$store.state.events;
-        
-        // let dateIndexs = [];
-        // this.$store.state.events.forEach(a => {
-        
-        //     a.eventDates = [];
-            
-        //     let startYear  = new Date(a.custom_fields.events_info_15).getFullYear();
-        //     let startMonth = new Date(a.custom_fields.events_info_15).getMonth();
-            
-        //     let endYear = new Date(a.custom_fields.events_info_16).getFullYear();
-        //     let endMonth = new Date(a.custom_fields.events_info_16).getMonth();
-            
-        //     let startDate = parseInt(`${startYear}${('0' + (startMonth + 1)).slice(-2)}`);
-        //     let endDate = parseInt(`${endYear}${('0' + (endMonth + 1)).slice(-2)}`);
-            
-            
-        //     if(endYear && endMonth){
-        //         for(let i=startDate; i <= endDate; i++)
-        //         {
-        //             this.$store.commit('updateEventsData', {id: a.id, date: i});
-        //             dateIndexs.push(i);
-        //         }
-        //     }
-            
-        //     else
-        //     {
-        //         this.$store.commit('updateEventsData', {id: a.id, date: startDate});
-        //         dateIndexs.push(startDate);
-        //     }
-            
-        // });
-        
-        
-        // let indexs = {}
-        // dateIndexs = dateIndexs.filter(function (x, i, self) {
-        //     return self.indexOf(x) === i;
-        // });
-        // dateIndexs = dateIndexs.sort().forEach(a => {
-        //     let year = a.toString().slice(0, 4);
-        //     let month = a.toString().slice(-2);
-        //     if(indexs[year] == undefined)
-        //     {
-        //         indexs[year] = [];
-        //     }
-        //     indexs[year].push(month);
-        // }) 
-        // this.dateIndexs = indexs;
-        
-        // for(let i=(new Date().getFullYear() - 1); i >= 2012; i-- )
-        // {
-        //     this.archiveIndexs.push(i)
-        // }
-        
         
         
     }

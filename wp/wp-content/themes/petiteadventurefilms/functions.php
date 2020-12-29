@@ -152,20 +152,16 @@ function get_custom_fields_value_events(){
       
   ];
 }
-
-add_filter( 'widget_categories_args', 'exclude_widget_categories');
-
-
 add_filter( 'rest_events_query', function($args){
 
     
-    $args['date_query'] = array(
-        array(
-              'inclusive' => true
-            , 'before' => '2020-12-01'
-            // , 'after' => '2019/01/01'
-        )    
-    );
+    // $args['date_query'] = array(
+    //     array(
+    //           'inclusive' => true
+    //         , 'before' => '2020-12-01'
+    //         // , 'after' => '2019/01/01'
+    //     )    
+    // );
     // $args['posts_per_page'] = -1;
     
     // var_dump(esc_sql($_GET['date']));
@@ -205,6 +201,9 @@ add_filter( 'rest_events_query', function($args){
     
     return $args;
 } );
+
+
+add_filter( 'widget_categories_args', 'exclude_widget_categories');
 
 
 //sidebar activate

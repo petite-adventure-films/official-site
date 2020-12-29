@@ -14,7 +14,7 @@
                     itemtype = "http://data-vocabulary.org/Breadcrumb"
                     class    = "crumb">
                     <router-link
-                        :to="{ name: val.name, params: { title: val.title} }">
+                        :to="{ name: val.name, params: { title: val.title, year: (val.year) ? val.year : null } }">
                         {{val.title}}
                     </router-link>
                 </div>
