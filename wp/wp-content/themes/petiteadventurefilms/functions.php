@@ -136,6 +136,7 @@ function get_custom_fields_value_events(){
     $events_info_13 = get_post_meta($post->ID, 'events_info_13', TRUE);
     $events_info_06 = get_post_meta($post->ID, 'events_info_06', TRUE);
     $events_info_17 = get_post_meta($post->ID, 'events_info_17', TRUE);
+    $events_info_18 = get_post_meta($post->ID, 'events_info_18', TRUE);
     
     return [
         'events_info_01' => $events_info_01
@@ -149,6 +150,7 @@ function get_custom_fields_value_events(){
       , 'events_info_13' => $events_info_13
       , 'events_info_06' => $events_info_06
       , 'events_info_17' => $events_info_17
+      , 'events_info_18' => $events_info_18
       
   ];
 }

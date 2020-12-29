@@ -37,5 +37,12 @@
 			}
 		}
 	}
+	
+	.label_status{
+		background: $red;
+		padding: 4px;
+		color: $white;
+		@include border-radius(4px);
+	}
 
 }

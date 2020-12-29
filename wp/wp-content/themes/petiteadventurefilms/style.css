@@ -5228,6 +5228,14 @@ option {
   /* line 35, src/scss/pages/_events.scss */
   .events .list_posts a:hover {
     color: #868686 !important; }
+/* line 41, src/scss/pages/_events.scss */
+.events .label_status {
+  background: #ff0000;
+  padding: 4px;
+  color: #ffffff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px; }
 
 @media all and (min-width: 961px) {
   /* line 8, src/scss/pages/_order.scss */

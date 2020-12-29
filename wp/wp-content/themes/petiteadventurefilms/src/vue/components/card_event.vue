@@ -3,6 +3,7 @@
     :to="{ name: 'event', params: { id: item.id  } }">
         <h2>
             <span class="block caption2">No.{{item.custom_fields.events_info_17}}</span>
+            <span v-if="item.custom_fields.events_info_18" class="inline-block body1 label_status">{{status[item.custom_fields.events_info_18]}}</span>
             {{item.title.rendered}}
         </h2>
         <ul class="list_post_info">
@@ -26,6 +27,13 @@
 
 export default {
     props: ['item']
+    
+    , data()
+    {
+        return{
+            status: {1 :'延期', 2:'中止'}
+        }
+    }
     , computed:{
         filmTitle()
         {

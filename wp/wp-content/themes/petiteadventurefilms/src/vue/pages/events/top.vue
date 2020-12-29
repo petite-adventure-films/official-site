@@ -40,19 +40,18 @@
             <div v-else class="m4_t">
                 <p>ただ今、予定の上映会・イベントがありません。</p>
             </div>
+        
+            <aside class="contents m4_t">
+                <h3>過去のイベントはこちらから</h3>
+                <ul class="list_archives m1_t">
+                    <li class="show_contents" v-for="item in archiveIndexs" :key="`archive${item}`">
+                        <router-link :to="{ name: 'archive', params: { year: item } }">{{item}}</router-link>
+                    </li>
+                </ul>
+            </aside>
+
         </div>
         <div class="clear"></div>
-        
-
-        <aside class="contents m4_t">
-            <h3>過去のイベントはこちらから</h3>
-            <ul class="list_archives m1_t">
-                <li class="show_contents" v-for="item in archiveIndexs" :key="`archive${item}`">
-                    <router-link :to="{ name: 'archive', params: { year: item } }">{{item}}</router-link>
-                </li>
-			</ul>
-        </aside>
-
         
     </div>
 </template>
