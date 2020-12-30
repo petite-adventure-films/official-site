@@ -42,7 +42,17 @@ const store = new Vuex.Store({
                     let data = a;
                     
                     // 映画情報登録
-                    data.filmData = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
+                    data.filmTagsData = [];
+                    // let pafFilmData = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
+                    // pafFilmData.forEach(a2 => data.filmTagsData.push(a2.title.rendered));
+                    
+                    a.filmtags.forEach(a2 => {
+                        let tag = payload.filmTags.data.find(a3 => a3.id == a2);
+                        if(tag)
+                        {
+                            data.filmTagsData.push(tag.name);
+                        }
+                    })
                     
                     data.eventTagsData = [];
                     a.eventtags.forEach(a2 => {
@@ -105,7 +115,7 @@ const store = new Vuex.Store({
         
         async getEventsData({commit}, payload)
         {
-            let filmURI  = `${process.env.SITE_URL}wp-json/wp/v2/films`;
+            let filmURI  = `${process.env.SITE_URL}wp-json/wp/v2/filmtags`;
             let eventTagsURI  = `${process.env.SITE_URL}wp-json/wp/v2/eventtags`;
             
             let year = (payload && payload.year) ? payload.year : '';
@@ -123,8 +133,8 @@ const store = new Vuex.Store({
                   axios.get(eventURI)
                 , axios.get(filmURI)
                 , axios.get(eventTagsURI)
-            ]).then(([events, films, eventTags]) => {
-                commit('setEvents', { year, events, films, eventTags });
+            ]).then(([events, filmTags, eventTags]) => {
+                commit('setEvents', { year, events, filmTags, eventTags });
             })
             
             

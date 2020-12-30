@@ -3790,31 +3790,33 @@ a {
   .grid_item {
     width: 100%; } }
 
-/* line 67, src/scss/components/_components.scss */
-.crumbs:before {
-  margin-right: 8px;
-  font-family: meterial_design;
-  content: "\e7b3";
-  color: #c8c8c8; }
-/* line 74, src/scss/components/_components.scss */
-.crumbs .crumb {
-  display: inline-block;
+/* line 65, src/scss/components/_components.scss */
+.crumbs {
   font-size: 14px;
-  line-height: 20px; }
-  /* line 80, src/scss/components/_components.scss */
-  .crumbs .crumb a {
-    color: #868686; }
-    /* line 82, src/scss/components/_components.scss */
-    .crumbs .crumb a:hover {
-      color: #ff3f80 !important; }
-  /* line 89, src/scss/components/_components.scss */
-  .crumbs .crumb:not(:last-of-type):after {
+  line-height: 14px; }
+  /* line 69, src/scss/components/_components.scss */
+  .crumbs:before {
+    margin-right: 8px;
     font-family: meterial_design;
-    content: "\e7c3";
+    content: "\e7b3";
     color: #c8c8c8; }
-  /* line 95, src/scss/components/_components.scss */
-  .crumbs .crumb:not(:last-of-type) a {
-    color: #2c2c2c; }
+  /* line 76, src/scss/components/_components.scss */
+  .crumbs .crumb {
+    display: inline-block; }
+    /* line 80, src/scss/components/_components.scss */
+    .crumbs .crumb a {
+      color: #868686; }
+      /* line 82, src/scss/components/_components.scss */
+      .crumbs .crumb a:hover {
+        color: #ff3f80 !important; }
+    /* line 89, src/scss/components/_components.scss */
+    .crumbs .crumb:not(:last-of-type):after {
+      font-family: meterial_design;
+      content: "\e7c3";
+      color: #c8c8c8; }
+    /* line 95, src/scss/components/_components.scss */
+    .crumbs .crumb:not(:last-of-type) a {
+      color: #2c2c2c; }
 
 /* line 105, src/scss/components/_components.scss */
 .contents {
@@ -5185,25 +5187,31 @@ option {
   /* line 35, src/scss/pages/_events.scss */
   .events .list_posts a:hover {
     color: #868686 !important; }
-/* line 42, src/scss/pages/_events.scss */
-.events .label {
+/* line 43, src/scss/pages/_events.scss */
+.events .labels .label {
+  display: inline-block;
+  line-height: 16px;
   padding: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   vertical-align: middle; }
-  /* line 46, src/scss/pages/_events.scss */
-  .events .label:not(:first-of-type) {
-    margin-left: 4px; }
   /* line 49, src/scss/pages/_events.scss */
-  .events .label._status {
+  .events .labels .label:not(:first-of-type) {
+    margin-left: 4px; }
+  /* line 52, src/scss/pages/_events.scss */
+  .events .labels .label._status {
     background: #ff0000;
     color: #ffffff; }
-  /* line 53, src/scss/pages/_events.scss */
-  .events .label._eventtag {
+  /* line 56, src/scss/pages/_events.scss */
+  .events .labels .label._eventtag {
     background: #f0fbe8;
     color: #57be0e; }
-/* line 60, src/scss/pages/_events.scss */
+  /* line 60, src/scss/pages/_events.scss */
+  .events .labels .label._filmtag {
+    background: #ff3f80;
+    color: #ffffff; }
+/* line 68, src/scss/pages/_events.scss */
 .events .labels, .events .title, .events h1 {
   vertical-align: middle; }
 

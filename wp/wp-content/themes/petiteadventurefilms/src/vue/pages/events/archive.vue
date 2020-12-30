@@ -5,6 +5,7 @@
             :breadCrumbs="breadCrumbs"></ArticleHeader>
 
         <div class="col col_9">
+        
             <ul class="list_posts list_events">
                 <li
                 v-for="item in sortedEvents"
@@ -12,7 +13,23 @@
                     <CardEvent :item="item"></CardEvent>
                 </li>
             </ul>
+            
+        
+            <aside class="contents m4_t">
+                <h3>イベントアーカイブ</h3>
+                <ul class="list_archives m1_t">
+                    <li
+                    v-for="item in archiveIndexs"
+                    :key="`archive${item}`"
+                        @click="getArchives(item)"
+                        :class="`show_contents tab ${isSelected(item)}`">
+                        {{item}}
+                    </li>
+                </ul>
+            </aside>
+            
         </div>
+        <div class="clear"></div>
         
     </div>
 </template>
@@ -35,6 +52,8 @@ export default {
     {
         return{
             sortedEvents: []
+            , archiveIndexs: []
+            , thisPageYear: 0
         }
         
     }
@@ -47,17 +66,51 @@ export default {
         {
             return [
                   { name: 'top', title: '上映会・イベント' }
-                , { title: this.$route.params.year + '年アーカイブ' }
+                , { title: this.thisPageYear + '年アーカイブ' }
             ]
         }
         
     }
-      
-    , async created()
+    
+    , methods:
     {
-        let thisPageYear = this.$route.params.year;
-        await this.$store.dispatch('getEventsData', {year: thisPageYear});
-        this.sortedEvents = this.$store.state.archivedEvents[thisPageYear]    
+        
+        async getArchives(year)
+        {
+            this.scrollTop();
+            this.thisPageYear = year;
+            this.sortedEvents = [];
+            
+            await this.$store.dispatch('getEventsData', {year: year});
+            this.sortedEvents = this.$store.state.archivedEvents[year];
+        
+        }
+        
+        , isSelected(year)
+        {
+            return (year == this.thisPageYear) ? '_selected' : '';
+        }
+        
+        ,scrollTop(){
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+        
+    }
+      
+    , created()
+    {
+
+        this.thisPageYear = this.$route.params.year || (new Date().getFullYear() - 1);
+        this.getArchives(this.thisPageYear)
+        
+        
+        for(let i=(new Date().getFullYear() - 1); i >= 2012; i-- )
+        {
+            this.archiveIndexs.push(i)
+        }
     }
     
 }

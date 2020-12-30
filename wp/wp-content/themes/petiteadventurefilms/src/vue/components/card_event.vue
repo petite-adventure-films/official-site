@@ -6,6 +6,7 @@
             <span class="block labels">
                 <span v-if="item.custom_fields.events_info_18" class="inline-block body1 label _status">{{status[item.custom_fields.events_info_18]}}</span>
                 <span v-for="data in item.eventTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _eventtag">{{data}}</span>
+                <span v-for="data in item.filmTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _filmtag">{{data}}</span>
             </span>
             <span class="block title">{{item.title.rendered}}</span>
         </h2>
@@ -20,9 +21,9 @@
                 {{item.custom_fields.events_info_01}}
                 : {{item.custom_fields.events_info_02}}
             </li>
-            <li v-if="filmTitle" class="index label">
+            <!-- <li v-if="filmTitle" class="index label">
                 {{filmTitle}}
-            </li>
+            </li> -->
         </ul>
     </router-link>
 </template>

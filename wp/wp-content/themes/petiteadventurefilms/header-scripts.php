@@ -24,7 +24,7 @@
 <?php wp_head(); ?>
 </head>
 <body class="<?php echo set_body_class(); ?>">
-<div id="app">
+<div id="app" v-cloak @scroll="handleScroll">
 
 <nav class="relative site_header" id="site_header">
     <div class="container">

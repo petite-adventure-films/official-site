@@ -39,22 +39,30 @@
     }
     
     
-    .label{
-        padding: 4px;
-        @include border-radius(4px);
-        vertical-align: middle;
-        &:not(:first-of-type){
-            margin-left: 4px;
+    .labels{
+        .label{
+            display: inline-block;
+            line-height: 16px;
+            padding: 4px;
+            @include border-radius(4px);
+            vertical-align: middle;
+            &:not(:first-of-type){
+                margin-left: 4px;
+            }
+            &._status{
+                background: $red;
+                color: $white;
+            }
+            &._eventtag{
+                background: $green1;
+                color: $green7;
+            }
+            &._filmtag{
+                background: $pink;
+                color: $white;
+            }
+            
         }
-        &._status{
-            background: $red;
-            color: $white;
-        }
-        &._eventtag{
-            background: $green1;
-            color: $green7;
-        }
-        
     }
     
     .labels, .title{

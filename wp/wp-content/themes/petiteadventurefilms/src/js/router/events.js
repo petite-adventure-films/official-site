@@ -16,7 +16,7 @@ const router = new VueRouter({
         }
         , {
             name: 'archive'
-            , path: '/archive/:year'
+            , path: '/archive'
             , component: Archive
             , props: true
         }

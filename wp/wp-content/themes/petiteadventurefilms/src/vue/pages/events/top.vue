@@ -40,11 +40,11 @@
             
             <!-- イベントがないとき -->
             <div v-else class="m4_t">
-                <p>ただ今、予定の上映会・イベントがありません。</p>
+                <p>{{message}}</p>
             </div>
         
             <aside class="contents m4_t">
-                <h3>過去のイベントはこちらから</h3>
+                <h3>イベントアーカイブ</h3>
                 <ul class="list_archives m1_t">
                     <li class="show_contents" v-for="item in archiveIndexs" :key="`archive${item}`">
                         <router-link :to="{ name: 'archive', params: { year: item } }">{{item}}</router-link>
@@ -78,6 +78,7 @@ export default {
             , archiveIndexs: []
             , selectedYear: 0
             , selectedMonth: 0
+            , message: 'データを準備しています...'
         }
         
     }
@@ -152,8 +153,6 @@ export default {
         {
             this.archiveIndexs.push(i)
         }
-        
-        
         
     }
     

@@ -3,14 +3,10 @@
     
             
         <ArticleHeader
-            :breadCrumbs="breadCrumbs"></ArticleHeader>
+            :breadCrumbs="breadCrumbs"
+            :labels="labels"></ArticleHeader>
             
-        <!-- <div class="inline-block labels">
-            <span v-if="info.events_info_18" class="inline-block body1 label _status">{{status[info.events_info_18]}}</span>
-            <span v-for="data in item.eventTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _eventtag">{{data}}</span>
-        </div> -->
-            
-        <div class="col col_9 last">
+        <div class="col col_9 lastぎ">
             <ul
             v-if="filmData.length > 0"
             class="list_post_info">
@@ -107,6 +103,33 @@ export default {
                 Array.prototype.splice.apply(arr, [1,0].concat(_arr))
             }
             
+            return arr;
+        }
+        
+        , labels()
+        {
+            let arr = [
+                //   { class: 'status', label: '延期' }
+                // , { class: 'eventtag', label: '上映会' }
+            ];
+            
+            if(this.info.events_info_18)
+            {
+                arr.push({class: 'status', label: this.status[this.info.events_info_18]})
+            }
+            
+            if(this.item.eventTagsData)
+            {
+                this.item.eventTagsData.forEach(a => arr.push({ class: 'eventtag', label: a }))
+            }
+            
+            
+            
+        // <!-- <div class="inline-block labels">
+        //     <span v-if="info.events_info_18" class="inline-block body1 label _status">{{}}</span>
+        //     <span v-for="data in item.eventTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _eventtag">{{data}}</span>
+        // </div> -->
+        
             return arr;
         }
         

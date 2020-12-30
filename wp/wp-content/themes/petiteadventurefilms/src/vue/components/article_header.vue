@@ -19,10 +19,18 @@
                     </router-link>
                 </div>
             </nav>
-            <!-- <div class="labels">
-                <span class="label _status">中止</span>
-                <span class="label _eventtag">上映会</span>
-            </div> -->
+            
+            <div
+            v-if="labels"
+                class="labels">
+                <span
+                v-for="(item, key) in labels"
+                :key="`${key}${item}`"
+                    :class="`inline-block body1 label _${item.class}`">
+                    {{item.label}}
+                </span>
+            </div>
+            
             <h1 class="m5_b">{{articleTitle}}</h1>
         <!--.header_page--></header>
         <div class="clear"></div>
@@ -33,7 +41,7 @@
 
 export default {
 
-    props: ['breadCrumbs']
+    props: ['breadCrumbs', 'labels']
     
     , data()
     {
