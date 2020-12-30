@@ -328,6 +328,7 @@ a{
     &.label{ &:before{ content: "\e63c"; }}
     &.appendix{ &:before{ content: "\e639"; }}
     &.flag{ &:before{ content: "\e70b"; }}
+    &.group{ &:before{ content: "\e8d8";; }}
 }
 
 

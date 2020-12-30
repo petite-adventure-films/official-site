@@ -21,9 +21,6 @@
                 {{item.custom_fields.events_info_01}}
                 : {{item.custom_fields.events_info_02}}
             </li>
-            <!-- <li v-if="filmTitle" class="index label">
-                {{filmTitle}}
-            </li> -->
         </ul>
     </router-link>
 </template>

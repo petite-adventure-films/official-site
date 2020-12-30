@@ -7,45 +7,29 @@
             :labels="labels"></ArticleHeader>
             
         <div class="col col_9 lastぎ">
-            <ul
-            v-if="filmData.length > 0"
-            class="list_post_info">
-                <li>
-                    <span
-                    v-for="film in filmData"
-                    :key="`film${film.id}`"
-                        class="inline_block index film">{{film.title.rendered}}</span>
-                </li>
-            </ul>
             <ul class="list_events_info">
             
                 <li class="index place">
                     {{info.events_info_01}}
                     <span class="inline-block">
-                        : {{info.events_info_02}}
+                        <span v-if="info.events_info_02"> : {{info.events_info_02}}</span>
                         <a
                         v-if="info.events_info_03"
-                            href="info.events_info_03">
+                            href="info.events_info_03" target="_blank">
                             MAP
                         </a>
                     </span>
                 </li>
                 
-                <li class="index flag">
-                    <span v-html="info.events_info_04"></span>
-                </li>
+                <li v-if="info.event_info04" v-html="info.events_info_04" class="index flag"></li>
                 
-                <li class="index date">
-                    <span v-html="info.events_info_09"></span>
-                </li>
+                <li v-if="info.event_info09" v-html="info.events_info_09" class="index date"></li>
                 
-                <li class="index fee">
-                    <span v-html="info.events_info_13"></span>
-                </li>
+                <li v-if="info.event_info13" v-html="info.events_info_13" class="index fee"></li>
                 
-                <li class="index appendix">
-                    <span v-html="info.events_info_06"></span>
-                </li>
+                <li v-if="info.event_info14" v-html="info.events_info_14" class="index group"></li>
+                
+                <li v-if="info.event_info06" v-html="info.events_info_06" class="index appendix"></li>
                 
             </ul>    
             <time
@@ -108,10 +92,7 @@ export default {
         
         , labels()
         {
-            let arr = [
-                //   { class: 'status', label: '延期' }
-                // , { class: 'eventtag', label: '上映会' }
-            ];
+            let arr = [];
             
             if(this.info.events_info_18)
             {
@@ -123,12 +104,10 @@ export default {
                 this.item.eventTagsData.forEach(a => arr.push({ class: 'eventtag', label: a }))
             }
             
-            
-            
-        // <!-- <div class="inline-block labels">
-        //     <span v-if="info.events_info_18" class="inline-block body1 label _status">{{}}</span>
-        //     <span v-for="data in item.eventTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _eventtag">{{data}}</span>
-        // </div> -->
+            if(this.item.filmTagsData)
+            {
+                this.item.filmTagsData.forEach(a => arr.push({ class: 'filmtag', label: a }))
+            }
         
             return arr;
         }

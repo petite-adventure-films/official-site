@@ -68,5 +68,10 @@
     .labels, .title{
         vertical-align: middle;
     }
+    
+    .index.group{
+        &:after{ content: '主催'; }
+        p{ display: inline-block; }
+    }
 
 }
