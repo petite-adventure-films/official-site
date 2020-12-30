@@ -78,7 +78,7 @@ export default {
             , archiveIndexs: []
             , selectedYear: 0
             , selectedMonth: 0
-            , message: 'データを準備しています...'
+            , loaded: false
         }
         
     }
@@ -99,6 +99,12 @@ export default {
             return (this.selectedYear && this.selectedMonth)
                 ? this.events.filter(a => a.eventDates.includes(parseInt(`${this.selectedYear}${this.selectedMonth}`)))
                 : this.futureEvents;
+        }
+        
+        , message()
+        {
+        
+            return (this.loaded) ? 'ただ今、予定の上映会・イベントがありません' : 'データを準備しています...'
         }
     }
     
@@ -124,6 +130,7 @@ export default {
     {    
 
         await this.$store.dispatch('getEventsData');
+        this.loaded = true;
         
         let dateIndexs = [];
         this.$store.state.events.forEach(a => {

@@ -5,8 +5,21 @@
             :breadCrumbs="breadCrumbs"></ArticleHeader>
 
         <div class="col col_9">
+            
+            <ul class="list_archives">
+                <li
+                v-for="item in archiveIndexs"
+                :key="`archive${item}`"
+                    @click="getArchives(item)"
+                    :class="`show_contents tab ${isSelected(item)}`">
+                    {{item}}
+                </li>
+            </ul>
         
-            <ul class="list_posts list_events">
+            <!-- イベントがないとき -->
+            <ul
+            v-if="sortedEvents.length > 0"
+                class="list_posts list_events">
                 <li
                 v-for="item in sortedEvents"
                 :key="`archive${item.id}`">
@@ -14,19 +27,10 @@
                 </li>
             </ul>
             
-        
-            <aside class="contents m4_t">
-                <h3>イベントアーカイブ</h3>
-                <ul class="list_archives m1_t">
-                    <li
-                    v-for="item in archiveIndexs"
-                    :key="`archive${item}`"
-                        @click="getArchives(item)"
-                        :class="`show_contents tab ${isSelected(item)}`">
-                        {{item}}
-                    </li>
-                </ul>
-            </aside>
+            <!-- イベントがないとき -->
+            <div v-else class="m4_t">
+                <p>データを準備しています...</p>
+            </div>
             
         </div>
         <div class="clear"></div>
