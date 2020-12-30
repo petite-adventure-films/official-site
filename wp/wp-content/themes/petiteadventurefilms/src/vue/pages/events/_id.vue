@@ -21,15 +21,15 @@
                     </span>
                 </li>
                 
-                <li v-if="info.event_info04" v-html="info.events_info_04" class="index flag"></li>
+                <li v-if="info.events_info_04" class="index flag"><div v-html="info.events_info_04"></div></li>
                 
-                <li v-if="info.event_info09" v-html="info.events_info_09" class="index date"></li>
+                <li v-if="info.events_info_09" class="index date"><div v-html="info.events_info_09"></div></li>
                 
-                <li v-if="info.event_info13" v-html="info.events_info_13" class="index fee"></li>
+                <li v-if="info.events_info_13" class="index fee"><div v-html="info.events_info_13"></div></li>
                 
-                <li v-if="info.event_info14" v-html="info.events_info_14" class="index group"></li>
+                <li v-if="info.events_info_14" class="index group"><div v-html="info.events_info_14"></div></li>
                 
-                <li v-if="info.event_info06" v-html="info.events_info_06" class="index appendix"></li>
+                <li v-if="info.events_info_06" class="index appendix"><div v-html="info.events_info_06"></div></li>
                 
             </ul>    
             <time

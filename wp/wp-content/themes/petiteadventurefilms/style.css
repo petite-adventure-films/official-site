@@ -5162,17 +5162,35 @@ option {
 .events .list_posts > li {
   position: relative;
   margin-top: 32px;
-  padding-top: 32px;
-  border: 1px solid #f0f0f0; }
-/* line 33, src/scss/pages/_events.scss */
+  padding-top: 32px; }
+  /* line 12, src/scss/pages/_events.scss */
+  .events .list_posts > li:after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    margin-top: -12px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    font-family: meterial_design;
+    line-height: 48px;
+    text-align: center;
+    content: "\e7c3"; }
+  /* line 27, src/scss/pages/_events.scss */
+  .events .list_posts > li:hover:after {
+    background-color: rgba(83, 219, 255, 0.1); }
+/* line 32, src/scss/pages/_events.scss */
 .events .list_posts a {
   display: block;
   padding-right: 48px;
   color: #000000 !important; }
-  /* line 37, src/scss/pages/_events.scss */
+  /* line 36, src/scss/pages/_events.scss */
   .events .list_posts a:hover {
     color: #868686 !important; }
-/* line 45, src/scss/pages/_events.scss */
+/* line 44, src/scss/pages/_events.scss */
 .events .labels .label {
   display: inline-block;
   line-height: 16px;
@@ -5181,30 +5199,30 @@ option {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   vertical-align: middle; }
-  /* line 51, src/scss/pages/_events.scss */
+  /* line 50, src/scss/pages/_events.scss */
   .events .labels .label:not(:first-of-type) {
     margin-left: 4px; }
-  /* line 54, src/scss/pages/_events.scss */
+  /* line 53, src/scss/pages/_events.scss */
   .events .labels .label._status {
     background: #ff0000;
     color: #ffffff; }
-  /* line 58, src/scss/pages/_events.scss */
+  /* line 57, src/scss/pages/_events.scss */
   .events .labels .label._eventtag {
     background: #f0fbe8;
     color: #57be0e; }
-  /* line 62, src/scss/pages/_events.scss */
+  /* line 61, src/scss/pages/_events.scss */
   .events .labels .label._filmtag {
     background: #ff3f80;
     color: #ffffff; }
-/* line 70, src/scss/pages/_events.scss */
+/* line 69, src/scss/pages/_events.scss */
 .events .labels, .events .title, .events h1 {
   vertical-align: middle; }
-/* line 75, src/scss/pages/_events.scss */
-.events .index.group:after {
-  content: '主催'; }
-/* line 76, src/scss/pages/_events.scss */
+/* line 74, src/scss/pages/_events.scss */
 .events .index.group p {
   display: inline-block; }
+  /* line 76, src/scss/pages/_events.scss */
+  .events .index.group p:after {
+    content: ' 主催'; }
 
 @media all and (min-width: 961px) {
   /* line 8, src/scss/pages/_order.scss */

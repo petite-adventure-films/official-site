@@ -43,22 +43,26 @@ const store = new Vuex.Store({
                     
                     // 映画情報登録
                     data.filmTagsData = [];
-                    // let pafFilmData = payload.films.data.filter(a2 => a.filmtags.indexOf(a2.filmtags[0]) > -1);
-                    // pafFilmData.forEach(a2 => data.filmTagsData.push(a2.title.rendered));
+                    if(a.filmtags)
+                    {
+                        a.filmtags.forEach(a2 => {
+                            let tag = payload.filmTags.data.find(a3 => a3.id == a2);
+                            if(tag)
+                            {
+                                data.filmTagsData.push(tag.name);
+                            }
+                        })
+                    }
                     
-                    a.filmtags.forEach(a2 => {
-                        let tag = payload.filmTags.data.find(a3 => a3.id == a2);
-                        if(tag)
-                        {
-                            data.filmTagsData.push(tag.name);
-                        }
-                    })
-                    
+                    //イベント情報登録
                     data.eventTagsData = [];
-                    a.eventtags.forEach(a2 => {
-                        let tag = payload.eventTags.data.find(a3 => a3.id == a2);
-                        data.eventTagsData.push(tag.name);
-                    })
+                    if(a.eventtags)
+                    {
+                        a.eventtags.forEach(a2 => {
+                            let tag = payload.eventTags.data.find(a3 => a3.id == a2);
+                            data.eventTagsData.push(tag.name);
+                        })
+                    }
                     
                     // イベント日付情報登録
                     data.eventDates = [];
