@@ -3,11 +3,11 @@
     :to="{ name: 'event', params: { id: item.id  } }">
         <h2>
             <div class="block caption2">No.{{postNo}}</div>
-            <span class="inline-block labels">
+            <span class="block labels">
                 <span v-if="item.custom_fields.events_info_18" class="inline-block body1 label _status">{{status[item.custom_fields.events_info_18]}}</span>
                 <span v-for="data in item.eventTagsData" :key="`event${item.id}${data}`" class="inline-block body1 label _eventtag">{{data}}</span>
             </span>
-            <span class="inline-block title">{{item.title.rendered}}</span>
+            <span class="block title">{{item.title.rendered}}</span>
         </h2>
         <ul class="list_post_info">
             <li class="index date">

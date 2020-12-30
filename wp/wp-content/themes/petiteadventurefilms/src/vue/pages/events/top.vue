@@ -7,14 +7,16 @@
         <div class="m4_t">
             <div class="col col_9">
                 <ul class="list_archives">
-                    <li class="show_contents tab" @click="displayEvents()">最新</li>
+                    <li
+                    :class="['show_contents tab', tabClass(0, 0)]"
+                    @click="displayEvents()">最新</li>
                     <li v-for="(months, year) in dateIndexs" :key="`index${year}`">
                         {{year}}
                         <div
                         v-for="month in months"
                         :key="`index${year}${month}`"
                             @click="displayEvents(year, month)"
-                            class="show_contents tab">
+                            :class="['show_contents tab', tabClass(year, month)]">
                             {{month}}
                         </div>
                     </li>
@@ -105,6 +107,11 @@ export default {
         {
             this.selectedYear  = (year) ? year : 0;
             this.selectedMonth = (month) ? month : 0;
+        }
+        
+        , tabClass(year, month)
+        {
+            return (this.selectedYear == year && this.selectedMonth == month) ? '_selected' : '';
         }
     }
     

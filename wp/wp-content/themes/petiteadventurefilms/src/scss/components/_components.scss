@@ -121,56 +121,26 @@ a{
         &:not(:first-of-type){
             margin-left: 4px;
         }
-        a, .tab{
-            display: inline-block;
-            min-width: 32px;
-            padding: 4px;
-            @include box-sizing(border-box);
-            text-align: center;
-            &:not(:first-of-type){
-                margin-left: 4px;
-            }
-        }
     }
-}
-.list_archives_past{
-    >li{
+    a, .tab{
         display: inline-block;
+        min-width: 32px;
+        padding: 4px;
+        @include box-sizing(border-box);
+        text-align: center;
+        color: $black !important;
         &:not(:first-of-type){
             margin-left: 4px;
         }
-        a{
-            display: block;
-            padding: 4px;
-            color: $black2;
-            &:hover{
-                color: $black1;
-            }
+        &:hover{
+            color: $black2 !important;
         }
-
-    }
-    &.border_on{
-        >li{
-            a{
-                border: 1px solid rgba($black1, .1);
-                @include border-radius(4px);
-                &:hover{
-                    border: 1px solid transparent !important;
-                    background-color: rgba($blue6, .1);
-                }
-            }
-            &.is_active{
-                a{
-                    background-color: rgba($black1, .06);
-                    &:hover{
-                        border: 1px solid transparent !important;
-                        background-color: rgba($blue6, .1);
-                    }
-                }
-            }
+        &._selected{
+            background: $black4;
         }
     }
 }
+
 .list_posts{
 
     > li{
