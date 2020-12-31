@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.events{
+
+    .list_posts{
+
+        > li{
+            position: relative;
+            margin-top: 32px;
+            padding-top: 32px;
+            
+            &:after{
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                width: 48px;
+                height: 48px;
+                margin-top: -12px;
+                @include border-radius(50%);
+                font-family: meterial_design;
+                line-height: 48px;
+                text-align: center;
+                content: "\e7c3";
+            }
+            &:hover{
+                &:after{
+                    background-color: rgba($blue6, .1);
+                }
+            }
+        }
+        a{
+            display: block;
+            padding-right: 48px;
+            color: $black !important;
+            &:hover{
+                color: $black2 !important;
+            }
+        }
+    }
+    
+    
+    .labels{
+        .label{
+            display: inline-block;
+            line-height: 16px;
+            padding: 4px;
+            @include border-radius(4px);
+            vertical-align: middle;
+            &:not(:first-of-type){
+                margin-left: 4px;
+            }
+            &._status{
+                background: $red;
+                color: $white;
+            }
+            &._eventtag{
+                background: $green1;
+                color: $green7;
+            }
+            &._filmtag{
+                background: $pink;
+                color: $white;
+            }
+            
+        }
+    }
+    
+    .labels, .title{
+        vertical-align: middle;
+    }
+    
+    .index.group{
+        p{
+            display: inline-block;
+            &:after{ content: ' 主催'; }
+        }
+    }
+
+}

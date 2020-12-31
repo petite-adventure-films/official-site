@@ -1,0 +1,69 @@
+<?php
+if(is_post_type_archive()){
+	$post_type = get_post_type_object( get_query_var( "post_type" ));
+	$termLink = get_post_type_archive_link($post_type->name);
+	$termName = $post_type->label;
+}elseif(is_category() || is_tag() || is_tax()){
+	$cat = get_the_category();
+	$cat = $cat[0];
+	$termLink = get_term_link($cat);
+	$termName = $cat->name;
+}
+get_header(); ?>
+
+<div class="single">
+<div class="col col_9 last">
+
+	<header class="page_header">
+		<nav class="crumbs">
+			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+				<a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">
+					<span itemprop="title">HOME</span>
+				</a>
+			</div>
+			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+				<a href="<?php echo $termLink; ?>" itemprop="url">
+					<span itemprop="title"><?php echo $termName; ?></span>
+				</a>
+			</div>
+		</nav>
+		<h1>
+			<?php if(is_day()){
+				printf( __("日別アーカイブ: %s"), get_the_date());
+			}elseif(is_month()){
+				printf( __("月別アーカイブ: %s"), get_the_date("Y年n月"));
+			}elseif(is_year()){
+				printf( __("年別アーカイブ: %s"), get_the_date("Y年"));
+			}elseif(is_post_type_archive()){
+				$post_type = get_post_type_object( get_query_var( "post_type" ));
+				echo $post_type->label;
+			}elseif(is_category() || is_tag() || is_tax()){
+				single_term_title("", true);
+			}else{
+				the_title();
+			}?>
+		</h1>
+	<!--.header_page--></header>
+
+	<?php
+	$paged = (get_query_var("paged")) ? get_query_var("paged") : 1;
+	$args = array(
+		"post_type" => "news",
+		"posts_per_page" => 10,
+		"paged"=>$paged
+	);
+	$posts = query_posts($args);
+	if($posts): ?>
+		<ul class="list_posts">
+		<?php foreach($posts as $post): ?>
+			<li><?php echo get_news($post); ?></li>
+		<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
+
+	<?php if(function_exists("wp_pagenavi")) { wp_pagenavi(); } ?>
+
+</div>
+</div>
+
+<?php get_footer(); ?>
