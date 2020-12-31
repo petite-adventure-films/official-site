@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+#site_footer{
+
+	padding-top: 32px;
+	@extend .caption1;
+	background: none;
+
+	ul{
+		li{
+			display: inline-block;
+			&:not(:last-of-type){
+				margin-right: 4px;
+			}
+		}
+	}
+
+	p{
+		display: inline-block;
+	}
+
+	a{
+		color: $black2;
+		&:hover{
+			color: $pink6;
+		}
+	}
+
+	@media all and (min-width: $min_width){
+		padding-bottom: 32px;
+		text-align: center;
+	}
+
+	@media all and (max-width: $max_width){
+		padding-bottom: 56px;
+	}
+
+}
+
+
+#additional_2{
+
+    z-index: 9999;
+
+    .icon_btn{
+
+        width: 40px;
+        line-height: 40px;
+
+        &#twitter{
+            font-size: 40px;
+        }
+
+        &#facebook{
+            font-size: 40px;
+        }
+
+        &#en_btn{
+            background: rgba($green6, .6);
+            @include border-radius(50%);
+            text-align: center;
+
+            a{
+                color: $white;
+            }
+
+        }
+
+        &#contact{
+            background: rgba($blue6, .6);
+            @include border-radius(50%);
+            text-align: center;
+
+            a{
+                color: $white;
+            }
+
+        }
+        
+        &#home{
+            background: rgba($blue6, .6);
+            @include border-radius(50%);
+            text-align: center;
+
+            a{
+                color: $white;
+            }
+
+        }
+
+        &#go_top{
+
+            background: rgba($black5, .6);
+            @include border-radius(50%);
+            text-align: center;
+
+            a{
+                color: $black1;
+            }
+
+        }
+
+        [target="_blank"]{
+            &:after{
+                content: "";
+            }
+        }
+
+    }
+
+
+    @media all and (min-width: $min_width){
+        
+        display: block;
+        position: fixed;
+        z-index: 9999;
+        right: 8px;
+        top: 32px;
+        bottom: 32px;
+        width: 40px;
+        
+        .icon_btn{
+        
+            // position: static !important;
+            // top: inherit !important;
+            // right: inherit !important;
+        
+            &:not(:first-of-type){
+                margin-top: 8px;
+            }
+
+            &#go_top{
+                position: absolute !important;
+                bottom: 0;
+            }
+
+        }
+
+    }
+
+    @media all and (max-width: $max_width){
+
+        position: fixed;
+        bottom: 8px;
+        width: 100%;
+        //height: 48px;
+        // padding-left: 8px;
+        // padding-right: 8px;
+        @include box-sizing(border-box);
+
+        .icon_btn{
+
+            display: inline-block;
+            vertical-align: top;
+
+            &#go_top{
+                position: absolute !important;
+                top: 0;
+                right: 16px;
+            }
+
+        }
+
+    }
+
+}
