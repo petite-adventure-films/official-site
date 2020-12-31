@@ -110,6 +110,106 @@ function get_custom_fields_value_pafshop(){
     
 }
 
+add_action('rest_api_init', 'add_custom_fields_to_rest_events');
+function add_custom_fields_to_rest_events(){
+  register_rest_field(
+    'events'
+    , 'custom_fields'
+    , [
+          'get_callback'    => 'get_custom_fields_value_events'
+        , 'update_callback' => 'update_custom_fields_value_events'
+        , 'schema'          => null
+    ]
+  );
+}
+function get_custom_fields_value_events(){
+    global $post;
+    
+    $events_info_01 = get_post_meta($post->ID, 'events_info_01', TRUE);
+    $events_info_02 = get_post_meta($post->ID, 'events_info_02', TRUE);
+    $events_info_03 = get_post_meta($post->ID, 'events_info_03', TRUE);
+    $events_info_04 = get_post_meta($post->ID, 'events_info_04', TRUE);
+    $events_info_15 = get_post_meta($post->ID, 'events_info_15', TRUE);
+    $events_info_16 = get_post_meta($post->ID, 'events_info_16', TRUE);
+    $events_info_09 = get_post_meta($post->ID, 'events_info_09', TRUE);
+    $events_info_14 = get_post_meta($post->ID, 'events_info_14', TRUE);
+    $events_info_13 = get_post_meta($post->ID, 'events_info_13', TRUE);
+    $events_info_06 = get_post_meta($post->ID, 'events_info_06', TRUE);
+    $events_info_17 = get_post_meta($post->ID, 'events_info_17', TRUE);
+    $events_info_18 = get_post_meta($post->ID, 'events_info_18', TRUE);
+    
+    return [
+        'events_info_01' => $events_info_01
+      , 'events_info_02' => $events_info_02
+      , 'events_info_03' => $events_info_03
+      , 'events_info_04' => $events_info_04
+      , 'events_info_15' => $events_info_15
+      , 'events_info_16' => $events_info_16
+      , 'events_info_09' => $events_info_09
+      , 'events_info_14' => $events_info_14
+      , 'events_info_13' => $events_info_13
+      , 'events_info_06' => $events_info_06
+      , 'events_info_17' => $events_info_17
+      , 'events_info_18' => $events_info_18
+      
+  ];
+}
+add_filter( 'rest_events_query', function($args){
+    
+    // 年別
+    if($_GET['year'])
+    {
+        $args['meta_query'] = array(
+            'relation' => 'AND',
+            array(
+                'key'   => 'events_info_15',
+                'value' => esc_sql( $_GET['year'] ).'/01/01',
+                'compare' => '>=',
+                'type' => 'DATE'
+            )
+            , array(
+                'key'   => 'events_info_15',
+                'value' => esc_sql( $_GET['year'] ).'/12/31',
+                'compare' => '<=',
+                'type' => 'DATE'
+            )
+        );
+    }
+    
+    // 最新
+    else
+    {
+        $args['meta_query'] = array(
+            array(
+                'key'   => 'events_info_15',
+                'value' => date('Y').'/01/01',
+                'compare' => '>=',
+                'type' => 'DATE'
+            )
+        );
+    }
+    
+    return $args;
+} );
+
+// イベント番号取得api
+function add_rest_original_endpoint(){
+    register_rest_route( 'wp/custom', '/get_event_number', array(
+        'methods' => 'GET',
+        'callback' => 'get_event_number',
+    ));
+}
+add_action('rest_api_init', 'add_rest_original_endpoint');
+function get_event_number()
+{
+    $query = new WP_Query(['post_type' => 'events', 'p' => $_GET['pageID']]);
+    return get_post_number($query->posts[0]);
+}
+  
+  
+add_filter( 'widget_categories_args', 'exclude_widget_categories');
+
+
 //sidebar activate
 if(function_exists("register_sidebar")){
     register_sidebar();
@@ -120,7 +220,6 @@ function exclude_widget_categories( $args){
     $args['exclude'] = $exclude;
     return $args;
 }
-add_filter( 'widget_categories_args', 'exclude_widget_categories');
 
 //スマートフォンキャリア判別
 function is_smartphone(){
@@ -540,7 +639,7 @@ function get_place_info($post){
 }
 
 function get_event_timestamp($terms){
-    //year
+    //yearpost_number
     foreach ($terms as $v){
         if ($v -> parent === 0){
             $year_id = $v->term_id;

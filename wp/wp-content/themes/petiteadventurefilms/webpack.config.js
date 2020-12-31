@@ -12,7 +12,8 @@ module.exports =
     , entry:
     {
         // index: './src/js/index.js',
-          pafshop: './src/js/pages/pafshop.js'
+            pafshop: './src/js/pages/pafshop.js'
+          , events: './src/js/pages/events.js'
         // style: './src/js/css/style.css'
     }
     , watch: true

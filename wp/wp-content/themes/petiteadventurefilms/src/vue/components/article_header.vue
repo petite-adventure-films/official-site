@@ -14,11 +14,23 @@
                     itemtype = "http://data-vocabulary.org/Breadcrumb"
                     class    = "crumb">
                     <router-link
-                        :to="{ name: val.name, params: { title: val.title} }">
+                        :to="{ name: val.name, params: { title: val.title, year: (val.year) ? val.year : null } }">
                         {{val.title}}
                     </router-link>
                 </div>
             </nav>
+            
+            <div
+            v-if="labels"
+                class="labels">
+                <span
+                v-for="(item, key) in labels"
+                :key="`${key}${item}`"
+                    :class="`inline-block body1 label _${item.class}`">
+                    {{item.label}}
+                </span>
+            </div>
+            
             <h1 class="m5_b">{{articleTitle}}</h1>
         <!--.header_page--></header>
         <div class="clear"></div>
@@ -29,7 +41,7 @@
 
 export default {
 
-    props: ['breadCrumbs']
+    props: ['breadCrumbs', 'labels']
     
     , data()
     {
