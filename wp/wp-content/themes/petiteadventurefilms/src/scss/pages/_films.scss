@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.films{
+
+#film_poster{
+
+	@media all and (max-width: $max_width){
+		max-width: 304px;
+		margin-top: 16px;
+	}
+
+}
+
+.list_posts{
+	> li{
+		padding-top: 0;
+	}
+}
+
+.grid_item{
+	margin-bottom: 16px;
+	p{
+		margin-top: 8px;
+	}
+}
+
+.list_films{
+
+	li{
+		margin-top: 56px;
+	}
+
+}
+
+.btn{
+
+	//.priority1
+	&.priority1{
+		a{
+			background: rgba($pink6, .87);
+			&:hover{
+				background: rgba($pink7, 1);
+			}
+		}
+	}
+
+}
+
+}
