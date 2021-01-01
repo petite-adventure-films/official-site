@@ -64,11 +64,12 @@ if($posts):
         $post_type =  'videos';
 
         $insert_arg = array(
-              'post_status' => 'publish'
-            , 'post_title' => $post->post_title
+              'post_status'  => 'publish'
+            , 'post_title'   => $post->post_title
             , 'post_content' => $post->post_content
+            , 'post_date'    => $post->post_date
             , 'comment_status' => 'closed'
-            , 'post_type' => $post_type
+            , 'post_type'      => $post_type
         );
         $insert_id = wp_insert_post($insert_arg);
         
