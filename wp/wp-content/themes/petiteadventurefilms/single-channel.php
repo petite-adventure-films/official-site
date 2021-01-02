@@ -25,8 +25,8 @@ $video = get_post_meta($post->ID, "video_info_01", TRUE);
 				</a>
 			</div>
 			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
-				<a href="<?php echo $term_link; ?>" itemprop="url">
-					<span itemprop="title"><?php echo $term_name; ?></span>
+				<a href="<?php echo get_permalink(get_page_by_path("channel")); ?>" itemprop="url">
+					<span itemprop="title">チャンネル</span>
 				</a>
 			</div>
 			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">

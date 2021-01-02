@@ -69,6 +69,7 @@ module.exports =
                 , SITE_URL          : JSON.stringify(process.env.SITE_URL)
                 , CONTACT_URL       : JSON.stringify(process.env.CONTACT_URL)
                 , TEMPLATE_URL      : JSON.stringify(process.env.TEMPLATE_URL)
+                , SITE_NAME         : JSON.stringify(process.env.SITE_NAME)
             }
         })
     ]

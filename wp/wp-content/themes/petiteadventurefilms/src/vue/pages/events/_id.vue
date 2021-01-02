@@ -1,7 +1,6 @@
 <template>
     <div>
-    
-            
+           
         <ArticleHeader
             :breadCrumbs="breadCrumbs"
             :labels="labels"></ArticleHeader>
@@ -43,6 +42,9 @@
 
 import { mapState, mapGetters } from 'vuex'
 import Vue from 'vue'
+
+import VueMeta from 'vue-meta'
+Vue.use(VueMeta)
 
 import axios  from 'axios'
 Vue.prototype.$http = axios;
@@ -145,10 +147,16 @@ export default {
             this.setEventData(_index);
         }
         
-        
-        this.isArchive = Math.min(...this.item.eventDates) < parseInt(202000);
+        this.isArchive = Math.min(...this.item.eventDates) < parseInt(new Date().getFullYear() * 100);
         this.archiveYear = Math.max(...this.item.eventDates).toString().slice(0, 4);
         
+    }
+    
+    , metaInfo()
+    {
+        return {
+              title: `${this.title} | ${process.env.SITE_NAME}`
+        }
     }
     
 }
