@@ -21,8 +21,8 @@ get_header(); ?>
 				</a>
 			</div>
 			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
-				<a href="<?php echo $termLink; ?>" itemprop="url">
-					<span itemprop="title"><?php echo $termName; ?></span>
+                <a href="<?php echo get_permalink(get_page_by_path("channel")); ?>" itemprop="url">
+					<span itemprop="title">チャンネル</span>
 				</a>
 			</div>
 		</nav>
@@ -52,7 +52,7 @@ get_header(); ?>
 	<?php
 	$i = 1;
 	$args = array(
-		"post_type" => "videos",
+		"post_type" => "channel",
 		"posts_per_page" => -1
 	);
 	$posts = query_posts($args);
