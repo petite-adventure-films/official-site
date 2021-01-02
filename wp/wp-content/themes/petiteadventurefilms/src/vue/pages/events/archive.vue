@@ -42,6 +42,9 @@
 import { mapState, mapGetters } from 'vuex'
 import Vue from 'vue'
 
+import VueMeta from 'vue-meta'
+Vue.use(VueMeta)
+
 import axios  from 'axios'
 Vue.prototype.$http = axios;
 
@@ -114,6 +117,13 @@ export default {
         for(let i=(new Date().getFullYear() - 1); i >= 2012; i-- )
         {
             this.archiveIndexs.push(i)
+        }
+    }
+    
+    , metaInfo()
+    {
+        return {
+              title: `上映会・イベント${this.thisPageYear}年アーカイブ | ${process.env.SITE_NAME}`
         }
     }
     

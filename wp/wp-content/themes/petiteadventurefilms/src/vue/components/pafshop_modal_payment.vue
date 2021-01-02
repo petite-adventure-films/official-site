@@ -151,7 +151,8 @@ export default{
         
         , close()
         {
-            this.$emit('close')
+            //this.$emit('close')
+            this.$emit('display-modal-payment', false);
         }
         
         , input(e)

@@ -4,7 +4,7 @@
         v-if="isLoaded()"
             class="single list_films">
             <li
-            v-for="(arr, key) in products"
+            v-for="arr in products"
             :key="`product${arr.id}`"
                 class="col col_3">
                 <router-link :to="{ name: 'product', params: genRouterParams(arr) }">
