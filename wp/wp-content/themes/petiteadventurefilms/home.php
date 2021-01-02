@@ -105,7 +105,7 @@
     <?php
     $i = 1;
     $args = array(
-        "post_type" => "channel",
+        "post_type" => "videos",
         "posts_per_page" => -1
     );
     $videos = query_posts($args);
