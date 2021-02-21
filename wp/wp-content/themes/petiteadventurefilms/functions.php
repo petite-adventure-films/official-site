@@ -239,10 +239,7 @@ function is_smartphone(){
         'webmate'		 // Other iPhone browser
     );
     $pattern_s = '/'.implode('|', $useragents_s).'/i';
-    $ua_mobile = preg_match( '/Mobile/', $_SERVER['HTTP_USER_AGENT'] );
-    if($ua_mobile == 1){
-        return preg_match($pattern_s, $_SERVER['HTTP_USER_AGENT']);
-    }
+    return preg_match($pattern_s, $_SERVER['HTTP_USER_AGENT']);
 }
 
 function IEbrowserVer(){

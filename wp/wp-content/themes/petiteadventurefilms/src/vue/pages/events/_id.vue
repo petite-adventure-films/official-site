@@ -14,7 +14,7 @@
                         <span v-if="info.events_info_02"> : {{info.events_info_02}}</span>
                         <a
                         v-if="info.events_info_03"
-                            href="info.events_info_03" target="_blank">
+                            :href="info.events_info_03" target="_blank">
                             MAP
                         </a>
                     </span>
