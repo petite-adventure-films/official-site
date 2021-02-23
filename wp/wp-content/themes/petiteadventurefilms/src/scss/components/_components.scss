@@ -257,10 +257,16 @@ a{
             }
 
             .film_poster{
-                overflow: hidden;
                 height: 316px;
             }
 
+        }
+        
+
+        @media all and (max-width: $max_width){
+            .film_poster{
+                height: 200px;
+            }
         }
 
         a{
@@ -304,6 +310,18 @@ a{
 
         }
 
+        .film_poster{
+            text-align: center;
+            height: 200px;
+            @include box-sizing(border-box);
+            border: 1px solid $black5;
+            img{
+                width: inherit;
+                height: 100%; 
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
     }
 
 }

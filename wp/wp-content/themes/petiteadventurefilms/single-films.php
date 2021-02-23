@@ -83,19 +83,23 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
     <div class="col col_6">
 
         <?php if($catch): ?>
-            <div class="subhead1 m2_t pink"><?php echo $catch; ?></div>
+            <div class="subhead1 pink"><?php echo $catch; ?></div>
         <?php endif; ?>
 
-        <?php if($prizes): ?>
-            <div class="subhead1 m2_t pink">
+        <?php
+        if($prizes):
+            $margin_class1 = ($catch) ? 'm2_t' : ''; ?>
+            <div class="subhead1 <? echo $margin_class1; ?> pink">
             <?php foreach($prizes as $prize): ?>
                 <p><?php echo $prize; ?></p>
             <?php endforeach; ?>
             </div>
         <?php endif; ?>
 
-        <?php if($excerpt): ?>
-            <div class="subhead1 m2_t"><?php echo $excerpt; ?></div>
+        <?php
+        if($excerpt):
+        $margin_class2 = ($catch || $prizes) ? 'm2_t' : '';?>
+            <div class="subhead1 <? echo $margin_class2; ?>"><?php echo $excerpt; ?></div>
         <?php endif; ?>
 
         <?php if($basic_info): ?>
@@ -113,16 +117,16 @@ $sell_dvd_appendix = get_post_meta($post->ID, "films_info_22", TRUE);
 
     </div>
 
-    <div class="col col_3 last m3_t">
+    <div class="col col_3 last">
         <div id="film_poster">
-            <?php echo get_post_meta_img($poster_img, "large"); ?>
+            <div class="_img"><?php echo get_post_meta_img($poster_img, "large"); ?></div>
             <?php if(!$sell_dvd): ?>
                 <div class="m2_t m2_b btn priority1">
                     <a href="<?php echo get_post_type_archive_link("pafshop"); ?>">SHOP</a>
-                    <?php if($sell_dvd_appendix): ?>
-                        <p class="m1_t caption1"><?php echo $sell_dvd_appendix; ?></p>
-                    <?php endif; ?>
                 </div>
+            <?php endif; ?>
+            <?php if($sell_dvd_appendix): ?>
+                <p class="m1_t caption1"><?php echo $sell_dvd_appendix; ?></p>
             <?php endif; ?>
         </div>
     </div>
