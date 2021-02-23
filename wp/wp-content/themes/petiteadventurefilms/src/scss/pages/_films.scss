@@ -4,6 +4,17 @@
 
 #film_poster{
 
+	._img{
+		height: 320px;
+		@include box-sizing(border-box);
+		border: 1px solid $black5;
+		text-align: center;
+		
+		img{
+			height: 100%;
+		}
+	}
+
 	@media all and (max-width: $max_width){
 		max-width: 304px;
 		margin-top: 16px;
@@ -28,6 +39,15 @@
 
 	li{
 		margin-top: 56px;
+		._img{
+			text-align: center;
+			height: 320px;
+			@include box-sizing(border-box);
+			border: 1px solid $black5;
+			img{
+				height: 100%;
+			}
+		}
 	}
 
 }

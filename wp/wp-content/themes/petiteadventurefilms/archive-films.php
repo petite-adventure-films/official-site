@@ -56,11 +56,13 @@ get_header(); ?>
 		<?php foreach($posts as $post): ?>
 			<li class="col col_3<?php ($i % 3) ? "" : " last"; ?>">
 				<a href="<?php echo get_permalink($post->ID); ?>">
-				<?php
-				$poster_img = get_post_meta($post->ID, "films_info_00", TRUE);
-				echo get_post_meta_img($poster_img, "large");
-				?>
-				<p class="film_title"><?php echo $post->post_title; ?></p>
+					<div class="_img">
+						<?php
+						$poster_img = get_post_meta($post->ID, "films_info_00", TRUE);
+						echo get_post_meta_img($poster_img, "large");
+						?>
+					</div>
+					<p class="film_title"><?php echo $post->post_title; ?></p>
 				</a>
 			</li>
 		<?php $i++; endforeach; ?>
