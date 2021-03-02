@@ -160,8 +160,8 @@ add_filter( 'rest_events_query', function($args){
     if($_GET['year'])
     {
         $args['meta_query'] = array(
-            'relation' => 'AND',
-            array(
+            'relation' => 'AND'
+            , array(
                 'key'   => 'events_info_15',
                 'value' => esc_sql( $_GET['year'] ).'/01/01',
                 'compare' => '>=',
@@ -171,19 +171,6 @@ add_filter( 'rest_events_query', function($args){
                 'key'   => 'events_info_15',
                 'value' => esc_sql( $_GET['year'] ).'/12/31',
                 'compare' => '<=',
-                'type' => 'DATE'
-            )
-        );
-    }
-    
-    // 最新
-    else
-    {
-        $args['meta_query'] = array(
-            array(
-                'key'   => 'events_info_15',
-                'value' => date('Y').'/01/01',
-                'compare' => '>=',
                 'type' => 'DATE'
             )
         );

@@ -18,12 +18,9 @@ const store = new Vuex.Store({
     
     , getters:
     {
-        // this.events
         futureEvents: (state) =>
         {
-            let thisYear  = new Date().getFullYear().toString();
-            let thisMonth = ('0' + (new Date().getMonth() + 1)).slice(-2);
-            return state.events.filter(a => Math.max(...a.eventDates) > parseInt(thisYear + thisMonth));
+            return state.events.filter(a => new Date(a.custom_fields.events_info_16) >= new Date() || new Date(a.custom_fields.events_info_15) >= new Date());
         }
     }
     
@@ -74,6 +71,8 @@ const store = new Vuex.Store({
                     
                     let startDate = parseInt(`${startYear}${('0' + (startMonth + 1)).slice(-2)}`);
                     let endDate = parseInt(`${endYear}${('0' + (endMonth + 1)).slice(-2)}`);
+                    
+                    console.log('star', startDate, endDate)
                     
                     if(endYear && (endMonth > -1)){
                         for(let i=startDate; i <= endDate; i++)
@@ -138,6 +137,7 @@ const store = new Vuex.Store({
                 , axios.get(filmURI)
                 , axios.get(eventTagsURI)
             ]).then(([events, filmTags, eventTags]) => {
+            console.log('event', events)
                 commit('setEvents', { year, events, filmTags, eventTags });
             })
             
