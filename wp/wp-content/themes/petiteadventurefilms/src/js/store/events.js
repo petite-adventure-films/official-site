@@ -18,12 +18,9 @@ const store = new Vuex.Store({
     
     , getters:
     {
-        // this.events
         futureEvents: (state) =>
         {
-            let thisYear  = new Date().getFullYear().toString();
-            let thisMonth = ('0' + (new Date().getMonth() + 1)).slice(-2);
-            return state.events.filter(a => Math.max(...a.eventDates) > parseInt(thisYear + thisMonth));
+            return state.events.filter(a => new Date(a.custom_fields.events_info_16) >= new Date() || new Date(a.custom_fields.events_info_15) >= new Date());
         }
     }
     
