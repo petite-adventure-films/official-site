@@ -367,7 +367,7 @@ get_header(); ?>
                         '___img'
                         , (displayedGoodbyeGalleryNumber == index) ? '_displayed' : ''
                     ]">
-                        <img v-lazy="getGoodbyeGalleryImgPath(val.date, index)">
+                        <img :src="getGoodbyeGalleryImgPath(val.date, index)">
                     </div>
                     
                     <div
@@ -399,7 +399,7 @@ get_header(); ?>
                                 '___thumb'
                                 , (displayedGoodbyeGalleryNumber == index) ? '_selected' : ''
                             ]"
-                        ><img v-lazy="getGoodbyeGalleryImgPath(val.date, index)"></div>
+                        ><img :src="getGoodbyeGalleryImgPath(val.date, index)"></div>
                         <div class="clear"></div>
                     </div>
                     
@@ -453,7 +453,7 @@ get_header(); ?>
                     , (selectedMovementsTab == (key + 1)) ? '_opened' : ''
                 ]">
                     <img
-                    v-lazy="getMovementsImgPath(val.date, index)"
+                    :src="getMovementsImgPath(val.date, index)"
                     @click="showMovementsImage(val.date, index)">
                 </div>
                 <div class="clear"></div>
@@ -471,7 +471,7 @@ get_header(); ?>
                 v-masonry-tile
                 class="col col_3 _resident">
                 <div class="__img">
-                    <img v-lazy="`<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/resident_${arr.key}.png`" :title="arr.name">
+                    <img :src="`<?php echo bloginfo("template_url"); ?>/assets/img/takahatadai73/resident_${arr.key}.png`" :title="arr.name">
                 </div>
                 <div class="__contents">
                     <h3 class="inline_block m1_r">{{arr.name}}</h3>
@@ -498,7 +498,8 @@ get_header(); ?>
             <?php
             $movie_goodbye_ur = 16;
             $poster_img = get_post_meta($movie_goodbye_ur, 'films_info_00', TRUE);
-            echo get_post_meta_img($poster_img, 'large'); ?>
+            ?>
+            <img src="<?= wp_get_attachment_image_url($poster_img, 'full') ?>">
         </div>
         <div class="col col_6 last">
             <p>この高幡台団地73号棟問題、そして私たちの活動は、ドキュメンタリー映画『さようならUR』（監督：早川由美子）に詳しく描かれています。</p>
@@ -593,7 +594,7 @@ get_header(); ?>
         <div class="modal-container _contents_modal _image">
             <div class="icon icon-close" @click="close()"></div>
             <div class="__contents">
-                <img v-lazy="url" class="">
+                <img :src="url" class="">
             </div>
         </div>
     </div>
@@ -837,7 +838,6 @@ var app = new Vue({
                 arr[year].push(month);
                 arr[year] = arr[year].filter((v, k, self) => { return self.indexOf(v) === k });
             })
-            
             return arr;
         }
         
@@ -943,11 +943,9 @@ var app = new Vue({
         , ctrlGoodbyeGalleryNext()
         {
             var max = this.goodbyeGalleryByDay[0].count;
-            // console.log('d', max, this.displayedGoodbyeGalleryNumber)
             if(this.displayedGoodbyeGalleryNumber < max)
             {
                 this.displayedGoodbyeGalleryNumber = this.displayedGoodbyeGalleryNumber + 1;
-                // console.log('d', max, this.displayedGoodbyeGalleryNumber)
             }
             
         }
@@ -1022,7 +1020,6 @@ var app = new Vue({
 
             })
 
-            // console.log('arr2', arr);
 
             return arr;
         }

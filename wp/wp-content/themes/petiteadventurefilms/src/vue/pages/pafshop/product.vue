@@ -179,9 +179,7 @@ import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 
 import Carousel from 'vue-owl-carousel'
-import VueLazyload from 'vue-lazyload'
 import {VueMasonryPlugin} from 'vue-masonry';
-Vue.use(VueLazyload)
 Vue.use(VueMasonryPlugin)
 
 import ArticleHeader from 'VUE/components/article_header.vue'
