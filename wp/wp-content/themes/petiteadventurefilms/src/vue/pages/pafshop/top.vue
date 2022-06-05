@@ -9,7 +9,7 @@
                 class="col col_3">
                 <router-link :to="{ name: 'product', params: genRouterParams(arr) }">
                     <div class="film_poster">
-                        <img v-lazy="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']">
+                        <img :src="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']" clas>
                     </div>
                     <p class="film_title">{{arr.title}}</p>
                 </router-link>
@@ -24,9 +24,6 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import Vue from 'vue'
-import VueLazyload from 'vue-lazyload'
-
-Vue.use(VueLazyload)
 
 export default {
 
