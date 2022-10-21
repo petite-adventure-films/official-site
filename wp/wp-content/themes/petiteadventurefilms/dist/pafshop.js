@@ -698,6 +698,7 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = typeof global !=
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/vue-demi/lib/index.mjs":
 /*!*********************************************!*\
   !*** ./node_modules/vue-demi/lib/index.mjs ***!
@@ -710,6 +711,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+=======
+>>>>>>> origin/develop
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/vue/components/article_header.vue?vue&type=template&id=47a0eebd&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/vue/components/article_header.vue?vue&type=template&id=47a0eebd& ***!
