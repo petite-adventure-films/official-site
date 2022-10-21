@@ -210,7 +210,6 @@ const store = new Vuex.Store({
             let params = state.user;
             
             let arr = [];
-            // params.order
             getters.itemsInBasket.forEach(a => {
                 
                 a.basket.unit.forEach((a2, k2) => {

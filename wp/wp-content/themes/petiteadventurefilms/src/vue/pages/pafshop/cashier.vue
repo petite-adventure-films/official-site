@@ -125,18 +125,26 @@
                             <p class="m1_t">注文完了後、お支払い画面へ移動します。</p>
                         </div>
                     </div>
-                    
-                    <div
-                    v-if="paymentMethod != 0"
-                        @click="exec()" class="btn shop m2_t cursor_pointer">
-                        <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
-                    </div>
 
-                    <div
-                    v-if="paymentMethod != 0"
-                        @click="paymentMethod = 0"
-                        class="m1_t btn cursor_pointer">
-                        <span class="ele">選びなおす</span>
+                    <div v-if="paymentMethod !== 0" class="m2_t">
+                        <vue-recaptcha
+                            @verify="onVerify"
+                            @expired="onExpired"
+                            :sitekey="reCAPTCHASiteKey">
+                        </vue-recaptcha>
+                        
+                        <div
+                        v-if="isVerified === true"
+                            @click="exec()" class="btn shop m2_t cursor_pointer">
+                            <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
+                        </div>
+
+                        <div
+                        v-if="isVerified === true"
+                            @click="paymentMethod = 0"
+                            class="m1_t btn cursor_pointer">
+                            <span class="ele">選びなおす</span>
+                        </div>
                     </div>
                         
                 </div>
@@ -157,10 +165,11 @@ import { mapState, mapGetters } from 'vuex'
 
 import PafshopBasket from 'VUE/components/pafshop_basket.vue'
 import PafshopUserform from 'VUE/components/pafshop_userform.vue'
+import { VueRecaptcha } from 'vue-recaptcha'
 
 export default{
 
-    components: { PafshopBasket, PafshopUserform }
+    components: { PafshopBasket, PafshopUserform, VueRecaptcha }
 
     , data()
     {
@@ -169,6 +178,8 @@ export default{
             , inCashier: true
             , paymentMethod: 0
             , templateUrl: process.env.TEMPLATE_URL
+            , isVerified: false
+            , reCAPTCHASiteKey: process.env.RECAPTCHA_SITE_KEY
         }
     }
     
@@ -200,6 +211,24 @@ export default{
                 this.$emit('display-modal-payment', true);
             }
         }
+
+        , onVerify(response)
+        {
+            if(response !== '') {
+                this.isVerified = true
+            } else {
+                return false
+            }
+        }
+        
+        , onExpired() {
+            this.resetRecaptcha()
+        }
+
+        , resetRecaptcha() {
+            this.$refs.recaptcha.reset()
+            this.isVerified = false
+        }
         
     }
     
@@ -220,8 +249,8 @@ export default{
             }})
             return false;
         }
-    
-        
+
+
         if(!this.$store.state.orderID)
         {
             this.$store.dispatch('setOrderID');

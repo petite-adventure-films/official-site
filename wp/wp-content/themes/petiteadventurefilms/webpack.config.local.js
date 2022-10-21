@@ -53,8 +53,6 @@ module.exports =
             , config$   : path.resolve(__dirname, `./src/js/config/${environment}.js`)
             , VUE : path.resolve(__dirname, './src/vue/')
             , JS : path.resolve(__dirname, './src/js/')
-            
-
         },
     }
     , plugins: [
@@ -73,4 +71,11 @@ module.exports =
             }
         })
     ]
+    , devServer: {
+        proxy: {
+          '/create.php': {
+            target: 'http://localhost:8081/create.php',
+          }
+        }
+      }
 }
