@@ -172,8 +172,7 @@ export default{
 
     , async created()
     {
-        // this.stripe = await loadStripe(process.env.STRIPE_PUBLIC_KEY);
-        this.stripe = await loadStripe('pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR');
+        this.stripe = await loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
         const { clientSecret } = await fetch('/create.php', {
             method: 'POST',
