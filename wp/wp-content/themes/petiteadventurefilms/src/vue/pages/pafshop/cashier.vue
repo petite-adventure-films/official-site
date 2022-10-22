@@ -130,7 +130,7 @@
                         <vue-recaptcha
                             @verify="onVerify"
                             @expired="onExpired"
-                            :sitekey="reCAPTCHASiteKey">
+                            :sitekey="reCaptchaSiteKey">
                         </vue-recaptcha>
                         
                         <div
@@ -179,7 +179,7 @@ export default{
             , paymentMethod: 0
             , templateUrl: process.env.TEMPLATE_URL
             , isVerified: false
-            , reCAPTCHASiteKey: process.env.RECAPTCHA_SITE_KEY
+            , reCaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
         }
     }
     
