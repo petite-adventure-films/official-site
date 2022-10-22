@@ -226,7 +226,6 @@ export default{
         }
 
         , resetRecaptcha() {
-            this.$refs.recaptcha.reset()
             this.isVerified = false
         }
         
