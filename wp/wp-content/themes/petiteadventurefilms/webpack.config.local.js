@@ -53,8 +53,6 @@ module.exports =
             , config$   : path.resolve(__dirname, `./src/js/config/${environment}.js`)
             , VUE : path.resolve(__dirname, './src/vue/')
             , JS : path.resolve(__dirname, './src/js/')
-            
-
         },
     }
     , plugins: [
@@ -70,7 +68,15 @@ module.exports =
                 , SITE_URL          : JSON.stringify(process.env.SITE_URL)
                 , CONTACT_URL       : JSON.stringify(process.env.CONTACT_URL)
                 , TEMPLATE_URL      : JSON.stringify(process.env.TEMPLATE_URL)
+                , RECAPTCHA_SITE_KEY: JSON.stringify(process.env.RECAPTCHA_SITE_KEY)
             }
         })
     ]
+    , devServer: {
+        proxy: {
+          '/create.php': {
+            target: 'http://localhost:8081/create.php',
+          }
+        }
+      }
 }

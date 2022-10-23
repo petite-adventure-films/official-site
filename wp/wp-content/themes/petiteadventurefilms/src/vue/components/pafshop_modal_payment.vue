@@ -29,7 +29,7 @@
                         :class="[
                               'card_element m2_t'
                             , (isExecuting == true) ? 'disabled' : '']"
-                        ref="cardElement"></div>
+                        ref="paymentElement"></div>
                 </div>
                     
                 <div
@@ -72,7 +72,8 @@ export default{
     {
         return{
             stripe: null
-            , cardElement: null
+            , paymentElement: null
+            , elements: null
             , message: ''
             , completed: false
             , isEntered: false
@@ -83,7 +84,7 @@ export default{
     
     , computed:
     {
-        ...mapState(['orderID'])
+        ...mapState(['orderID', 'user'])
         , ...mapGetters(['convertYen', 'totalAmount', 'deliveryFee'])
     }
     
@@ -95,49 +96,44 @@ export default{
             this.isExecuting = true;
             this.message = 'お支払い中です'
 
-            try
-            {
-                let tokenResult = await this.stripe.createToken(this.cardElement)
-                if (
-                    !tokenResult ||
-                    !tokenResult.token ||
-                    !tokenResult.token.id ||
-                    tokenResult.token.id == ''
-                ) {
-                    this.isExecuting = false;
-                    throw new Error('トークン発行エラー');
-                }
-                
+            const { paymentIntent, error } = await this.stripe.confirmPayment({
+                elements: this.elements,
+                redirect: 'if_required',
+                confirmParams: {
+                    shipping: {
+                        address: {
+                            city: this.user.city,
+                            line1: this.user.address1,
+                            line2: this.user.address2,
+                            postal_code: this.user.zipcode,
+                            state: this.user.prefecture,
+                            country: 'JP'
+                        },
+                        name: this.user.name,
+                        phone: this.user.tel
+                    }
+                    , receipt_email: this.user.email
+                    , payment_method_data: {
+                        billing_details: {
+                            email: this.user.email
+                        }
+                    }
+                },
+            });
 
-                let url = `${process.env.SITE_URL}charge.php`
-                let params = {
-                      token: tokenResult.token.id
-                    , amount: (this.totalAmount + this.deliveryFee)
-                    , orderID: this.orderID
-                }
-
-                let chargeResult = await this.$http.post(url, params);
-
-                if (!chargeResult || chargeResult.data !== 'success') {
-                    this.isExecuting = false;
-                    throw new Error('お支払いエラー')
-                }
-                
-                this.$store.commit('setPaymentCompleted', true);
-                this.message = 'お支払いに成功しました。<br>注文を完了してください。<br>5秒後には自動的に移動します。'
-                this.completed = true;
+            if (error && (error.type === 'card_error' || error.type === 'validation_error')) {
                 this.isExecuting = false;
-                
-                
-                this.timer = setTimeout(() => {
-                    this.complete();
-                }, 5000);
+                throw new Error('お支払いエラー')
+            }
+            
+            this.$store.commit('setPaymentCompleted', true);
+            this.message = 'お支払いに成功しました。<br>注文を完了してください。<br>5秒後には自動的に移動します。'
+            this.completed = true;
+            this.isExecuting = false;
 
-            }
-            catch(error)
-            {
-                this.message = error.message
-            }
+            this.timer = setTimeout(() => {
+                this.complete();
+            }, 5000);
             
         }
         
@@ -151,7 +147,6 @@ export default{
         
         , close()
         {
-            //this.$emit('close')
             this.$emit('display-modal-payment', false);
         }
         
@@ -178,7 +173,20 @@ export default{
     , async created()
     {
         this.stripe = await loadStripe(process.env.STRIPE_PUBLIC_KEY);
-        this.cardElement = this.stripe.elements().create('card', {
+
+        const { clientSecret } = await fetch('/create.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                amount: this.totalAmount,
+                receipt_email: this.user.email,
+                order_id: this.orderID
+            }),
+        }).then((r) => r.json());
+
+        this.elements = this.stripe.elements({ clientSecret });
+
+        this.paymentElement = this.elements.create('payment', {
             hidePostalCode: true
             , style: {
                 base: {
@@ -186,9 +194,9 @@ export default{
                 }
             }
         });
-        this.cardElement.mount(this.$refs.cardElement);
-        this.cardElement.addEventListener('input', this.input);
-        this.cardElement.addEventListener('change', this.change);
+        this.paymentElement.mount(this.$refs.paymentElement);
+        this.paymentElement.addEventListener('input', this.input);
+        this.paymentElement.addEventListener('change', this.change);
     }
     
 }
