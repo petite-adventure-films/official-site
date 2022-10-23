@@ -106,7 +106,7 @@
                             <div class="">
                                 <div class="__logo"><img :src="`${templateUrl}assets/img/pafshop/bank_logo_yucho.png`" title="ゆうちょう銀行"></div>
                                 <div class="__logo"><img :src="`${templateUrl}assets/img/pafshop/bank_logo_mufg.png`"> <span class="">三菱UFJ銀行</span></div>
-                                <div class="__logo _japannet"><img :src="`${templateUrl}assets/img/pafshop/bank_logo_japannet.png`" title="ジャパンネット銀行"></div>
+                                <div class="__logo _paypay"><img :src="`${templateUrl}assets/img/pafshop/bank_logo_paypay.png`" title="PayPay銀行"></div>
                                 <p class="m1_t">振込先情報は注文完了後の確認メールに記載されております。振込手数料はご負担下さい。</p>
                             </div>
                         </div>
