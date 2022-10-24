@@ -7,15 +7,9 @@ $dotenv->load();
 
 require_once(__DIR__ . '/stripe-php/init.php');
 
-// This is your test secret API key.
-\Stripe\Stripe::setApiKey('sk_test_51H8OJOKluK1zP0j9wWm49GVBmqnK8hC3jV5t7FTrvYPSaFrle6LoYZYqimZKNtJFedfCOQsiblO6iasmKOqJZIly007h5ogvGf');
+define('API_KEY', $_ENV['STRIPE_SECRET_KEY']);
 
-function calculateOrderAmount(): int {
-    // Replace this constant with a calculation of the order's amount
-    // Calculate the order total on the server to prevent
-    // people from directly manipulating the amount on the client
-    return 1400;
-}
+\Stripe\Stripe::setApiKey(API_KEY);
 
 header('Content-Type: application/json');
 
