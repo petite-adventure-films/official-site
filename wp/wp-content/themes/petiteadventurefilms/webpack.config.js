@@ -8,7 +8,7 @@ const environment = process.env.NODE_ENV || 'dev';
 
 module.exports = 
 {
-    mode: 'development'
+    mode: 'production'
     , entry:
     {
         // index: './src/js/index.js',
@@ -70,6 +70,7 @@ module.exports =
                 , CONTACT_URL       : JSON.stringify(process.env.CONTACT_URL)
                 , TEMPLATE_URL      : JSON.stringify(process.env.TEMPLATE_URL)
                 , SITE_NAME         : JSON.stringify(process.env.SITE_NAME)
+                , RECAPTCHA_SITE_KEY: JSON.stringify(process.env.RECAPTCHA_SITE_KEY)
             }
         })
     ]

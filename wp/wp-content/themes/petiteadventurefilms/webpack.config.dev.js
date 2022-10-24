@@ -70,6 +70,7 @@ module.exports =
                 , SITE_URL          : JSON.stringify(process.env.SITE_URL)
                 , CONTACT_URL       : JSON.stringify(process.env.CONTACT_URL)
                 , TEMPLATE_URL      : JSON.stringify(process.env.TEMPLATE_URL)
+                , RECAPTCHA_SITE_KEY: JSON.stringify(process.env.RECAPTCHA_SITE_KEY)
             }
         })
     ]

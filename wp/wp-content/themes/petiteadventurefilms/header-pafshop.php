@@ -10,6 +10,7 @@
 <link href="<?php echo get_template_directory_uri(); ?>/_style.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>">
 <link href='https://fonts.googleapis.com/css?family=Dosis:400,200,300,500,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php wp_head(); ?>
 </head>
 <body class="<?php echo set_body_class(); ?>">
