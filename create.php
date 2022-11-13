@@ -25,9 +25,7 @@ try {
         'customer' => $customer->id,
         'amount' => $jsonObj->amount,
         'currency' => 'jpy',
-        'automatic_payment_methods' => [
-            'enabled' => true,
-        ],
+        'payment_method_types' => ['card'],
         'receipt_email' => $jsonObj->receipt_email,
         'metadata' => ['order_id' => $jsonObj->order_id]
     ]);

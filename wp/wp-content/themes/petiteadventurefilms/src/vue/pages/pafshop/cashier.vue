@@ -139,12 +139,12 @@
                             <span class="ele">{{(paymentMethod == 1) ? '注文を完了する' : 'お支払いへ進む'}}</span>
                         </div>
 
-                        <!-- <div
+                        <div
                         v-if="isVerified === true"
                             @click="paymentMethod = 0"
                             class="m1_t btn cursor_pointer">
                             <span class="ele">選びなおす</span>
-                        </div> -->
+                        </div>
                     </div>
                         
                 </div>
@@ -176,7 +176,7 @@ export default{
         return{
               step: 1
             , inCashier: true
-            , paymentMethod: 1
+            , paymentMethod: 0
             , templateUrl: process.env.TEMPLATE_URL
             , isVerified: false
             , reCaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
