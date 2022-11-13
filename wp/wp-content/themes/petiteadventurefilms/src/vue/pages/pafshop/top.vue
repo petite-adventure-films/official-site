@@ -9,7 +9,7 @@
                 class="col col_3">
                 <router-link :to="{ name: 'product', params: genRouterParams(arr) }">
                     <div class="film_poster">
-                        <img :src="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']" clas>
+                        <img :src="arr.filmData[0]['custom_fields']['dvd_jacket_jp_front']">
                     </div>
                     <p class="film_title">{{arr.title}}</p>
                 </router-link>
