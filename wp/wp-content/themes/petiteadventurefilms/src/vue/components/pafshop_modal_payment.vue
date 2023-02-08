@@ -178,7 +178,7 @@ export default{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                amount: this.totalAmount,
+                amount: this.totalAmount + this.deliveryFee,
                 receipt_email: this.user.email,
                 order_id: this.orderID
             }),
