@@ -116,8 +116,8 @@ const store = new Vuex.Store({
         
         async getEventsData({commit}, payload)
         {
-            let filmURI  = `${process.env.SITE_URL}wp-json/wp/v2/filmtags`;
-            let eventTagsURI  = `${process.env.SITE_URL}wp-json/wp/v2/eventtags`;
+            let filmURI  = `${process.env.SITE_URL}wp-json/wp/v2/filmtags?per_page=100`;
+            let eventTagsURI  = `${process.env.SITE_URL}wp-json/wp/v2/eventtags?per_page=100`;
             
             let year = (payload && payload.year) ? payload.year : '';
             let eventURI =  `${process.env.SITE_URL}wp-json/wp/v2/events?per_page=100`;
