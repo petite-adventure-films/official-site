@@ -14,13 +14,13 @@ get_header(); ?>
 <div class="single">
 
 	<header class="col col_9 last page_header">
-		<nav class="crumbs">
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+		<nav class="crumbs" aria-label="Breadcrumb">
+			<div class="crumb">
 				<a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">
 					<span itemprop="title">HOME</span>
 				</a>
 			</div>
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+			<div class="crumb" aria-current="page">
                 <a href="<?php echo get_permalink(get_page_by_path("channel")); ?>" itemprop="url">
 					<span itemprop="title">チャンネル</span>
 				</a>

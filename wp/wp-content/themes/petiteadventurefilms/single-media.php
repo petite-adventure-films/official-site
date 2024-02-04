@@ -19,18 +19,18 @@ $article_contents = get_post_meta($post->ID, "media_info_08", true);
 <div class="single">
 
 	<div class="col col_9 last header_page">
-		<nav class="crumbs">
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+		<nav class="crumbs" aria-label="Breadcrumb">
+			<div class="crumb">
 				<a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">
 					<span itemprop="title">HOME</span>
 				</a>
 			</div>
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+			<div class="crumb">
 				<a href="<?php echo $term_link; ?>" itemprop="url">
 					<span itemprop="title"><?php echo $term_name; ?></span>
 				</a>
 			</div>
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+			<div class="crumb" aria-current="page">
 				<a href="<?php echo get_permalink($post->ID); ?>" itemprop="url">
 					<span itemprop="title">
 					【<? echo $media_name; ?>】<? echo $media_volume; ?>掲載 <? echo $media_contents; ?>

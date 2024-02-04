@@ -75,18 +75,18 @@ foreach(array_reverse($film_terms) as $key => $term)
 <div class="single">
 
     <header class="col col_9 last header_page">
-        <nav class="crumbs">
-            <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+        <nav class="crumbs" aria-label="Breadcrumb">
+            <div class="crumb">
                 <a href="<? echo get_bloginfo("url"); ?>" itemprop="url">
                     <span itemprop="title">HOME</span>
                 </a>
             </div>
-            <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+            <div class="crumb">
                 <a href="<? echo $term_link; ?>" itemprop="url">
                     <span itemprop="title"><? echo $term_name; ?></span>
                 </a>
             </div>
-            <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+            <div class="crumb" aria-current="page">
                 <a href="<? echo get_permalink($post->ID); ?>" itemprop="url">
                     <span itemprop="title"><? echo $post->post_title; ?></span>
                 </a>

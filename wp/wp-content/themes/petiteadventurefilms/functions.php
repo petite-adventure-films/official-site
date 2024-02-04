@@ -1008,7 +1008,7 @@ EOF;
 
     wp_mail($data['email'], $subject, $message, mail_header());
     wp_mail(get_bloginfo("admin_email"), $subject, $message, mail_header());
-    // wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
+    wp_mail("petiteadventurefilms@gmail.com", $subject, $message, mail_header($email));
 
 }
 

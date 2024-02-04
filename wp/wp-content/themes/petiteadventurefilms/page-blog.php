@@ -7,13 +7,13 @@ get_header(); ?>
 <div class="col col_8">
 
 	<header class="page_header">
-		<nav class="crumbs">
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+		<nav class="crumbs" aria-label="Breadcrumb">
+			<div class="crumb">
 				<a href="<?php echo get_bloginfo("url"); ?>" itemprop="url">
 					<span itemprop="title">HOME</span>
 				</a>
 			</div>
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+			<div class="crumb" aria-current="page">
 				<a href="<?php echo get_permalink($post->ID); ?>" itemprop="url">
 					<span itemprop="title"><?php echo $post->post_title; ?></span>
 				</a>
