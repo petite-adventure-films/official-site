@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+   # mysqlコンテナ
+   db:
+     image: mysql:5.7              # コンテナイメージ
+     platform: linux/amd64
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: unless-stopped       # 自動起動の有効化
+     environment:                  # 環境変数
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: wp_db
+       MYSQL_USER: wp_user
+       MYSQL_PASSWORD: wp_pass
+
+   # wordpressコンテナ
+   wordpress:
+     depends_on:
+       - db                        #依存関係（dbコンテナ実行後に起動）
+     image: wordpress:latest       # コンテナイメージ
+     ports:
+       - "8000:80"                 # ポートフォワード（ホスト側のポート8000をコンテナのポート80に転送）
+     restart: unless-stopped       # 自動起動の有効化
+     environment:                  # 環境変数
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_NAME: wp_db
+       WORDPRESS_DB_USER: wp_user
+       WORDPRESS_DB_PASSWORD: wp_pass
+     volumes:
+       - ./html:/var/www/html      # マウント設定（ホスト内のディレクトリ:マウントコンテナのディレクトリ）※ホスト内のディレクトリはdocker-compose.ymlからの相対パス
+      #  - ./php.ini:/usr/local/etc/php/php.ini
+     working_dir: /var/www/html/wp
+volumes:
+    db_data: {}

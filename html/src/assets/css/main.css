@@ -1,0 +1,30 @@
+/* @tailwind components; */
+@tailwind utilities;
+
+@layer utilities {
+  .palt {
+    font-feature-settings: 'palt';
+  }
+  .text-2xs {
+    font-size: 0.625rem;
+    line-height: 0.625rem;
+  }
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+  .link-text {
+    @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
+  }
+  .wrapper {
+    @apply relative min-w-80 max-w-screen-sm min-h-dvh mx-auto px-4 pt-16 pb-8 sm:px-16;
+  }
+}
+
+*:focus {
+  outline: none;
+}
+
+/* ブログ記事内 */
+.m2_t {
+  margin-top: 1em;
+}

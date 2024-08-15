@@ -1,0 +1,76 @@
+name: 'Deploy'
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-files-related-stripe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_DEBUG: false
+          envkey_IS_DEV: true
+          envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY_TEST }}
+          file_name: .env
+          directory: html/stripe
+          fail_on_empty: false
+          sort_keys: false
+      - name: Sync files related stripe
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}stripe/
+          local-dir: ./html/stripe/
+  deploy-generated-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Use Node.js 18
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Make envfile for nuxt
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_DEBUG: false
+          envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_DEV }}
+          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_TEST }}
+          file_name: .env
+          directory: html
+          fail_on_empty: false
+          sort_keys: false
+      - name: Generate static files
+        run: |
+          cd html
+          bun install
+          bun generate
+      - name: Sync generated files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+          local-dir: ./html/.output/public/
+          timeout: 180000
+          exclude: |
+            stripe/**
+      - name: Sync wp theme files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}wp/wp-content/themes/
+          local-dir: ./html/wp/wp-content/themes/
