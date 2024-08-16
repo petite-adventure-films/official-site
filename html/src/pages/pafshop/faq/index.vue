@@ -29,7 +29,7 @@ const list = [
   },
   {
     index: '購入したDVDで、上映会を開催することはできますか？',
-    text: 'DVD・ブルーレイには上映権はついていません。上映をご希望の場合は、上映会についてをご覧ください。',
+    text: 'DVD・ブルーレイには上映権はついていません。上映をご希望の場合は、<a href="/four-walling/" class="link-text">自主上映について</a>をご覧ください。',
   },
   {
     index: 'ディスクの規格は？',
@@ -54,15 +54,17 @@ const list = [
         :key="`${detail}-${detail.index}`"
         class="flex flex-wrap gap-x-1"
       >
-        <dt class="flex gap-x-1 items-center">
-          <span>Q.</span><span>{{ detail.index }}</span>
+        <dt class="flex gap-x-1 items-start before:content-['Q.']">
+          <span>{{ detail.index }}</span>
         </dt>
-        <dd class="flex gap-x-1">
-          <span>A.</span><span>{{ detail.text }}</span>
+        <dd class="flex gap-x-1 before:content-['A.']">
+          <span v-html="detail.text" />
         </dd>
       </div>
     </dl>
-    <p>その他の質問などがありましたら 下記からお問い合わせください。</p>
-    <ButtonLink to="/contact/">お問い合わせ</ButtonLink>
+    <p class="mt-16">
+      その他の質問などがありましたら、下記からお問い合わせください。
+    </p>
+    <ButtonLink to="/contact/" class="mt-4">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>
