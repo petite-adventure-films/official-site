@@ -135,7 +135,7 @@ const isShop = route.path.includes('/pafshop/');
       <li><NuxtLink to="/contact/">お問い合わせ</NuxtLink></li>
     </ul>
     <p class="mt-8 text-xs">
-      Copyright © Since 2016 Petite Adventure Films.<br />All rights reserved.
+      © 2009 Petite Adventure Films. All rights reserved.
     </p>
   </footer>
 </template>
