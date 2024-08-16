@@ -980,7 +980,7 @@ export const takahatadai73Timeline: {
               {
                 type: 'youtube',
                 name: '判決後の報告集会動画',
-                url: 'https://www.youtube.com/embed/dDI5cxmVnIQ',
+                url: 'https://www.youtube.com/watch?v=dDI5cxmVnIQ',
               },
             ],
           },
@@ -1111,7 +1111,13 @@ export const takahatadai73Timeline: {
   },
 };
 
-export const goodbyeGallery = {
+export const goodbyeGallery: {
+  [year: number]: {
+    [month: number]: {
+      [day: number]: number;
+    };
+  };
+} = {
   2013: {
     11: {
       13: 1,
@@ -1187,7 +1193,11 @@ export const goodbyeGallery = {
   },
 };
 
-export const movements = [
+export const movements: {
+  year: number;
+  month: number;
+  count: number;
+}[] = [
   {
     year: 2016,
     month: 7,
@@ -1235,7 +1245,17 @@ export const movements = [
   },
 ];
 
-export const residents = [
+export const residents: {
+  key: number;
+  name: string;
+  message: string;
+  notice?: string;
+  hobby: string;
+  favouriteIndex: string;
+  favouriteContents: string;
+  karaoke: string;
+  statement: boolean;
+}[] = [
   {
     key: 1,
     name: '中川京子',

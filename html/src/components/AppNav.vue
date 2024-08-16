@@ -30,7 +30,7 @@ const isIncludedPage = (key: string) =>
           :key="`site-nav-${key}`"
         >
           <NuxtLink
-            :to="`/${key === 'index' ? '?op=skip' : `${key}`}`"
+            :to="`/${key === 'index' ? '?op=skip' : `${key}`}/`"
             :class="[
               'block text-center py-2 px-4 border-t border-black palt sm:hover:bg-gray-100 sm:hover:text-black',
               isIncludedPage(key) ? 'bg-gray-100' : '',

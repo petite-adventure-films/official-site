@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import {
-  DocumentArrowDownIcon,
-  MagnifyingGlassPlusIcon,
-} from '@heroicons/vue/24/solid';
 import { movements } from '~/constants/takahatadai73';
 
 const isModalOpen = ref(false);
 const imgPathToEnlarge = ref('');
 
-const enlargeImage = (year, month, num) => {
+const enlargeImage = (year: number, month: number, num: number) => {
   isModalOpen.value = true;
   const paddedMonth = month.toString().padStart(2, '0');
   imgPathToEnlarge.value = useAsset(
-    `takahatadai73/movements_${year}${paddedMonth}_${num}.jpg`,
+    `takahatadai73/movements_${year}${paddedMonth}_${num.toString()}.jpg`,
   );
 };
 </script>
@@ -36,11 +32,11 @@ const enlargeImage = (year, month, num) => {
     </p>
     <a
       :href="`/assets/documents/takahatadai73/town_planning.pdf`"
-      :download="`まちづくり計画案.pdf`"
+      download="まちづくり計画案.pdf"
       target="_blank"
       class="flex items-center link-text text-xs mt-2"
-      >まちづくり計画案.pdf <DocumentArrowDownIcon class="w-4 h-4"
-    /></a>
+      >まちづくり計画案.pdf</a
+    >
 
     <div class="flex flex-wrap mt-4 gap-y-2">
       <div
@@ -49,7 +45,7 @@ const enlargeImage = (year, month, num) => {
         class="w-full"
         :class="[
           flyers.count > 2 ? 'sm:w-full' : 'sm:w-1/2',
-          flyers.year == '2019' ? 'sm:w-full' : '',
+          flyers.year === 2019 ? 'sm:w-full' : '',
         ]"
       >
         <h4>{{ flyers.year }}年{{ flyers.month }}月</h4>
@@ -66,12 +62,12 @@ const enlargeImage = (year, month, num) => {
                   `takahatadai73/movements_${flyers.year}${flyers.month.toString().padStart(2, '0')}_${num + 1}.jpg`,
                 )
               "
-              class="block"
+              class="block border border-white"
             />
             <div
-              class="absolute bottom-1 right-1 flex justify-center items-center rounded-full w-6 h-6 border-2 border-white bg-tkhd73-green-shadow group-hover:bg-white"
+              class="absolute bottom-1 right-1 flex justify-center items-center rounded-full w-6 h-6 border-2 border-white bg-white group-hover:border-tkhd73-green"
             >
-              <MagnifyingGlassPlusIcon class="w-3 h-3 text-tkhd73-green" />
+              🔍
             </div>
           </button>
         </div>

@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import { CameraIcon } from '@heroicons/vue/24/solid';
 import { goodbyeGallery } from '~/constants/takahatadai73';
 
-const initialYear = Object.keys(goodbyeGallery).shift();
-const initialMonth = Object.keys(goodbyeGallery[initialYear]).shift();
-const initialDay = Object.keys(
-  goodbyeGallery[initialYear][initialMonth],
-).shift();
-
-const currentYear = ref(initialYear);
-const currentMonth = ref(initialMonth);
-const currentDay = ref(initialDay);
+const currentYear = ref(2013);
+const currentMonth = ref(11);
+const currentDay = ref(13);
 
 const currentGallery = computed(
   () => goodbyeGallery[currentYear.value][currentMonth.value],
@@ -19,21 +12,22 @@ const currentGalleryNumber = computed(
   () => goodbyeGallery[currentYear.value][currentMonth.value][currentDay.value],
 );
 
-const setCurrentGallery = (year: string, month?: string) => {
+const setCurrentGallery = (year: number, month?: number) => {
   const _year = year;
-  const _month = month ? month : Object.keys(goodbyeGallery[year]).shift();
-  const _day = Object.keys(goodbyeGallery[year][_month]).shift();
-  currentYear.value = Number(_year);
-  currentMonth.value = Number(_month);
-  currentDay.value = Number(_day);
+  const _month = month
+    ? month
+    : Number(Object.keys(goodbyeGallery[year]).shift());
+  const _day = Number(Object.keys(goodbyeGallery[year][_month]).shift());
+  currentYear.value = _year;
+  currentMonth.value = _month;
+  currentDay.value = _day;
 };
 
-const getImgSrc = (number: string) => {
+const getImgSrc = (number: number) => {
   const paddedMonth = currentMonth.value.toString().padStart(2, '0');
   const paddedDay = currentDay.value.toString().padStart(2, '0');
-  const imgSrc = `goodbye_${currentYear.value}${paddedMonth}${paddedDay}_${number}.jpg`;
-  return new URL(`../../assets/images/takahatadai73/${imgSrc}`, import.meta.url)
-    .href;
+  const imgSrc = `goodbye_${currentYear.value}${paddedMonth}${paddedDay}_${number.toString()}.jpg`;
+  return useAsset(`takahatadai73/${imgSrc}`);
 };
 </script>
 
@@ -101,15 +95,12 @@ const getImgSrc = (number: string) => {
                 @click="setCurrentGallery(year, month)"
               >
                 <span class="flex items-center flex-col">
-                  {{ month }}
-                  <CameraIcon
+                  {{ month }}<br />
+                  <span
                     v-if="Object.prototype.hasOwnProperty.call(months, month)"
-                    class="w-4 h-4 text-tkhd73-green"
-                    :class="[
-                      'group-[.selected]:text-white',
-                      'group-hover:text-white',
-                    ]"
-                  />
+                    class="block"
+                    >📷</span
+                  >
                   <span v-else class="block w-f h-4" />
                 </span>
               </button>
@@ -145,7 +136,9 @@ const getImgSrc = (number: string) => {
     <GalleryImage
       :slide-number="currentGalleryNumber"
       class="mt-4"
-      border-color="white"
+      img-border-color="white"
+      bullet-color="white"
+      bullet-color-active="tkhd73-green"
     >
       <template #gallery="{ currentIndex }">
         <div

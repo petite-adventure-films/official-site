@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { DocumentArrowDownIcon } from '@heroicons/vue/24/solid';
 import { residents } from '~/constants/takahatadai73';
-
-const getImgSrc = (num) => {
-  return new URL(
-    `../../assets/images/takahatadai73/resident_${num}.png`,
-    import.meta.url,
-  ).href;
-};
 </script>
 
 <template>
@@ -20,7 +13,10 @@ const getImgSrc = (num) => {
     <masonry-wall :items="residents" :column-width="224" :gap="16" class="mt-8">
       <template #default="{ item }">
         <div>
-          <img :src="getImgSrc(item.key)" />
+          <img
+            :src="useAsset(`takahatadai73/resident_${item.key}.png`)"
+            class="block w-48 m-auto"
+          />
           <div
             class="bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm border-t border-white p-4"
           >

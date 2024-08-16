@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { DocumentArrowDownIcon, PlayCircleIcon } from '@heroicons/vue/24/solid';
 import { takahatadai73Timeline } from '~/constants/takahatadai73';
 
 const isPC = useMediaQuery('(min-width: 768px)');
@@ -51,7 +50,7 @@ const isEventDisplayed = (category, year, month) => {
     </h3>
     <p class="text-xs mt-4 text-center">※2020年10月現在</p>
 
-    <div class="relative mt-8 border-t border-black">
+    <div class="relative mt-8 border-t border-white">
       <div
         class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gray-100"
       />
@@ -168,17 +167,16 @@ const isEventDisplayed = (category, year, month) => {
                             :href="`/assets/documents/takahatadai73/${material.name}`"
                             :download="material.name"
                             target="_blank"
-                            class="flex items-center link-text"
-                            >{{ material.name }}
-                            <DocumentArrowDownIcon class="w-4 h-4"
-                          /></a>
+                            class="inline-flex items-center link-text"
+                            >{{ material.name }}</a
+                          >
                           <NuxtLink
                             v-else-if="material.type === 'youtube'"
                             :to="material.url"
                             target="_blank"
-                            class="flex items-center link-text"
-                            >{{ material.name }}<PlayCircleIcon class="w-4 h-4"
-                          /></NuxtLink>
+                            class="inline-flex items-center link-text"
+                            >{{ material.name }}</NuxtLink
+                          >
                         </li>
                       </ul>
                     </li>
