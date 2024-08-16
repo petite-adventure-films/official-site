@@ -11,19 +11,19 @@ route.meta.title = 'イベント・上映会';
 const { posts } = await useWpGetListCustom<EventList>('events');
 const getDefaultTabIndex = ref(0);
 
-watch(posts, async () => {
-  const thisYear = new Date().getFullYear();
-  const thisMonth = new Date().getMonth() + 1;
-  let index = 0;
-  if (posts.value.data && posts.value.data[thisYear]) {
-    for (const month in posts.value.data[thisYear]) {
-      if (Number(month) === thisMonth) {
-        getDefaultTabIndex.value = index;
-      }
-      index++;
+const thisYear = new Date().getFullYear();
+const thisMonth = new Date().getMonth() + 1;
+let index = 0;
+if (posts.value.data && posts.value.data[thisYear]) {
+  for (const month in posts.value.data[thisYear]) {
+    if (Number(month) >= thisMonth) {
+      getDefaultTabIndex.value = index;
+      break;
     }
+    index++;
   }
-});
+}
+watch(posts, async () => {});
 </script>
 
 <template>
@@ -36,7 +36,7 @@ watch(posts, async () => {
       v-if="posts && posts.data && Object.keys(posts.data).length > 0"
       :default-index="getDefaultTabIndex"
     >
-      <HeadlessTabList>
+      <HeadlessTabList class="flex flex-wrap gap-2">
         <div
           v-for="(months, year) in posts.data"
           :key="`events-tab-${year}`"
@@ -67,7 +67,7 @@ watch(posts, async () => {
             <ArchiveList>
               <li v-for="data in list" :key="`event-${data.id}`">
                 <PostCard
-                  :to="`/events/${data.id}`"
+                  :to="`/events/${data.id}/`"
                   :title="data.title"
                   :no="data.no"
                   :status="data.status"

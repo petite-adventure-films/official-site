@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { EventStatus } from '~/types/event_status';
 import type { Tag } from '~/types/tag';
+import type { RouteLocationAsPath } from 'vue-router'; // Import the RouteLocation type from the appropriate module
 
 const slots = useSlots();
 const props = withDefaults(
   defineProps<{
-    to: string | { path: string; query?: { [key: string]: string } };
+    to: string | RouteLocationAsPath;
     title: string;
     thumbnailSrc?: string | false;
     recommended?: boolean;

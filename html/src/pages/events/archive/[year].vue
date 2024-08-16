@@ -26,7 +26,7 @@ const { posts } = await useWpGetList<Event>('events_archive', {
     <ArchiveList v-if="posts">
       <li v-for="data in posts.data" :key="`event-${data.id}`">
         <PostCard
-          :to="{ path: `/events/${data.id}`, query: { from: year } }"
+          :to="{ path: `/events/${data.id}/` }"
           :title="data.title"
           :no="data.no"
           :status="data.status"

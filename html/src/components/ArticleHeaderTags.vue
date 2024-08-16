@@ -19,7 +19,7 @@ const props = withDefaults(
 
 <template>
   <div
-    v-if="props.status || props.filmTags || props.eventTags"
+    v-if="props.status || props.filmTags || props.eventTags || props.no"
     class="flex justify-between items-center gap-2 mb-1"
   >
     <div class="flex flex-wrap gap-2">

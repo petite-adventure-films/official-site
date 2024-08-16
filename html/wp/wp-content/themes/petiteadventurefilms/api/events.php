@@ -128,7 +128,7 @@ function get_values_events_detail()
         'post_type' => 'events',
         'p' => $_GET['pageId']
     );
-    $get_data = fn () => [
+    $get_data = fn() => [
         'id' => get_the_ID(),
         'title' => get_the_title(),
         'content' => wpautop(get_the_content(), true),
@@ -138,6 +138,7 @@ function get_values_events_detail()
         'place' => get_post_meta(get_the_ID(), "events_info_01", TRUE),
         'address' => get_post_meta(get_the_ID(), "events_info_02", TRUE),
         'map' => get_post_meta(get_the_ID(), "events_info_03", TRUE),
+        'date_from' => get_post_meta(get_the_ID(), 'events_info_15', TRUE),
         'dates_details' => get_post_meta(get_the_ID(), "events_info_09", TRUE),
         'access_details' => get_post_meta(get_the_ID(), "events_info_04", TRUE),
         'fee_details' => get_post_meta(get_the_ID(), "events_info_13", TRUE),
@@ -145,7 +146,6 @@ function get_values_events_detail()
         'appendix_contents' => get_post_meta(get_the_ID(), "events_info_06", TRUE),
         'film_tags' => get_the_terms(get_the_ID(), 'filmtags'),
     ];
-    // sleep(5);
     return get_detail($args, $get_data);
 }
 
@@ -189,7 +189,7 @@ function get_values_events_archive()
             ),
         )
     );
-    $get_data = fn () => [
+    $get_data = fn() => [
         'id' => get_the_ID(),
         'title' => get_the_title(),
         'status' => get_post_meta(get_the_ID(), "events_info_18", TRUE),
@@ -209,12 +209,9 @@ function get_values_events_archive()
 function get_post_number($post)
 {
     global $wpdb;
-    $number = $wpdb->get_var("
-        SELECT COUNT( * )
-        FROM $wpdb->posts
-        WHERE post_date <= '{$post->post_date}'
-        AND post_status = 'publish'
-        AND post_type = ('{$post->post_type}')
-    ");
+
+    $where = $wpdb->prepare("WHERE p.post_date <= %s AND p.post_type = %s AND p.post_status = 'publish'", $post->post_date, $post->post_type);
+    $sql = "SELECT COUNT(*) FROM $wpdb->posts AS p $where";
+    $number = (int)$wpdb->get_var($sql);
     return $number;
 }

@@ -20,7 +20,9 @@
         <p class="mt-2">
           映画は、これまでに全国各地で上映され、山形国際ドキュメンタリー映画祭2011では、スカパー！IDEHA賞を受賞しました。中国、韓国でも上映され、国境を越えた共感が寄せられました。映画本編に、3時間の特典映像を加えたDVDが発売中です。ぜひご覧ください！
         </p>
-        <ButtonLink to="/films/16" class="mt-4">詳しくはこちら</ButtonLink>
+        <ButtonLink to="/films/goodbye_ur/" class="mt-4"
+          >詳しくはこちら</ButtonLink
+        >
       </div>
     </div>
     <Video youtube-id="c7A2uPQ2Pm8" class="mt-4" />
