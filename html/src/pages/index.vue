@@ -5,56 +5,102 @@ const $animationWrapper = ref<HTMLElement | null>(null);
 const $kv = ref<HTMLElement | null>(null);
 const $introCatch = ref<HTMLElement | null>(null);
 const $bgVideo = ref<HTMLVideoElement | null>(null);
+const $bgVideoPoster = ref<HTMLImageElement | null>(null);
 const $maskVideo = ref<HTMLVideoElement | null>(null);
+const $maskVideoPoster = ref<HTMLImageElement | null>(null);
 
 const { query } = useRoute();
 
-if (query?.op === 'skip') {
-  $animationWrapper.value?.classList.add('skipped');
-}
+const isPC = useMediaQuery('(min-width: 768px)');
+const isModalOpen = ref(false);
 
 const { posts: news } = await useWpGetList<News>('news', {
   query: { per_page: 1 },
 });
 
-const isModalOpen = ref(false);
+const opForcedToEnd = () => {
+  $animationWrapper.value?.classList.add('op-skipped');
+  $animationWrapper.value?.classList.add('loaded');
+
+  if (isPC.value) {
+    $bgVideo.value?.play().catch(() => {
+      $bgVideo.value?.classList.add('hidden');
+    });
+  } else {
+    $bgVideo.value?.classList.add('hidden');
+  }
+};
+
+const kvForcedToEnd = () => {
+  $maskVideo.value?.classList.add('hidden');
+};
 
 onMounted(() => {
-  const kvTop = $kv.value?.offsetTop || 0;
-  const introCatchTop = $introCatch.value?.offsetTop || 0;
-  $introCatch.value?.setAttribute(
-    'style',
-    `--pos-to: ${(introCatchTop - kvTop) * -1}px`,
-  );
-  !query?.op && $animationWrapper.value?.classList.add('loaded');
+  // 低電力モードなど、なんらかの理由で動画が再生できない場合、OPをスキップ
+  $bgVideo.value?.play().catch(() => {
+    opForcedToEnd();
+  });
 
-  let isMaskVideoPlayedAgain = false;
-  $maskVideo.value?.addEventListener('playing', () => {
-    if (!isMaskVideoPlayedAgain) {
-      const time = $bgVideo.value?.currentTime;
-      $maskVideo.value.currentTime = time;
-      isMaskVideoPlayedAgain = true;
+  // op=skip がクエリに含まれている場合、OPをスキップ、maskVideoを再生
+  if (query?.op) {
+    opForcedToEnd();
+    $maskVideo.value?.play().catch(() => {
+      kvForcedToEnd();
+    });
+  } else {
+    $bgVideo.value?.play().catch(() => {
+      opForcedToEnd();
+    });
+    $maskVideo.value?.play().catch(() => {
+      kvForcedToEnd();
+    });
+
+    const kvTop = $kv.value?.offsetTop || 0;
+    const introCatchTop = $introCatch.value?.offsetTop || 0;
+    $introCatch.value?.setAttribute(
+      'style',
+      `--pos-to: ${(introCatchTop - kvTop) * -1}px`,
+    );
+    $animationWrapper.value?.classList.add('loaded');
+
+    // PCの場合、bgVideoとmaskVideoの再生位置を同期
+    if (isPC.value) {
+      let isMaskVideoPlayedAgain = false;
+      $maskVideo.value?.addEventListener('playing', () => {
+        if (!isMaskVideoPlayedAgain) {
+          const time = $bgVideo.value?.currentTime;
+          $maskVideo.value.currentTime = time;
+          isMaskVideoPlayedAgain = true;
+        }
+      });
+      $maskVideo.value?.addEventListener('pause', () => {
+        isMaskVideoPlayedAgain = false;
+      });
     }
-  });
-  $maskVideo.value?.addEventListener('pause', () => {
-    isMaskVideoPlayedAgain = false;
-  });
+  }
 });
 </script>
 
 <template>
   <div ref="$animationWrapper">
-    <video
-      ref="$bgVideo"
-      autoplay
-      loop
-      muted
-      preload
-      playsinline
-      class="fixed top-0 left-0 -z-10 w-full h-full object-cover"
-    >
-      <source src="~/assets/video/home.mp4" type="video/mp4" />
-    </video>
+    <div class="fixed top-0 left-0 -z-10 w-full h-full">
+      <img
+        ref="$bgVideoPoster"
+        src="~/assets/images/home/op.png"
+        alt=""
+        class="absolute top-0 left-0 w-full h-full object-cover"
+      />
+      <video
+        ref="$bgVideo"
+        loop="true"
+        muted="true"
+        preload="true"
+        playsinline="true"
+        class="absolute top-0 left-0 w-full h-full object-cover"
+      >
+        <source src="~/assets/video/home.mp4" type="video/mp4" />
+      </video>
+    </div>
     <div
       class="fixed top-0 left-0 -z-10 w-full h-full bg-black bg-opacity-50"
     />
@@ -73,13 +119,18 @@ onMounted(() => {
         <main>
           <div ref="$kv" class="mt-4 text-center">
             <div class="mask w-[320px] h-[220px] mx-auto">
+              <img
+                ref="$maskVideoPoster"
+                src="~/assets/images/home/op.png"
+                alt=""
+                class="fixed top-0 left-0 z-0 w-full h-full object-cover"
+              />
               <video
                 ref="$maskVideo"
-                autoplay
-                loop
-                muted
-                preload
-                playsinline
+                loop="true"
+                muted="true"
+                preload="true"
+                playsinline="true"
                 class="fixed top-0 left-0 z-0 w-full h-full object-cover"
               >
                 <source src="~/assets/video/home.mp4" type="video/mp4" />
@@ -149,7 +200,8 @@ onMounted(() => {
     </div>
 
     <Modal :open="isModalOpen" @close="isModalOpen = false">
-      <video playsinline controls>
+      <img src="~/assets/images/home/op.png" alt="" />
+      <video muted controls class="absolute w-full top-0 left-0">
         <source src="~/assets/video/home.mp4" type="video/mp4" />
       </video>
     </Modal>

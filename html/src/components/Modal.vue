@@ -15,7 +15,7 @@ const props = withDefaults(
     class="flex justify-center items-center fixed z-50 w-full h-full top-0 left-0 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg"
   >
     <div
-      class="overflow-scroll flex item-center max-w-screen-sm max-h-[calc(100vh_-_10%)]"
+      class="overflow-scroll relative flex item-center max-w-screen-sm max-h-[calc(100vh_-_10%)]"
     >
       <HeadlessDialogPanel>
         <slot />
