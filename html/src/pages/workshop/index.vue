@@ -53,8 +53,7 @@ const { posts } = await useWpGetList<Blog>('blog', {
     </template>
     <Section title="映像ワークショップで学べる内容（例）">
       <p>
-        ワークショップで学ぶ内容は、受講者のレベルや目的、受講期間（講座の回数）等により、カスタマイズが可能です。ご相談ください。<br />
-        『インド日記』のオリジナルは206分ですが、上映用の100分バージョンもあります。
+        ワークショップで学ぶ内容は、受講者のレベルや目的、受講期間（講座の回数）等により、カスタマイズが可能です。ご相談ください。
       </p>
       <dl class="mt-4 [&_dd]:mt-2">
         <div>
@@ -66,7 +65,7 @@ const { posts } = await useWpGetList<Blog>('blog', {
         <div class="mt-4">
           <dt>編集</dt>
           <dd>
-            集ソフトの使い方、スライドショーの作成、動画の編集、ナレーション・テロップの作成、音楽の使用、「伝える」ための編集の工夫など、基礎から応用まで対応。
+            編集ソフトの使い方、スライドショーの作成、動画の編集、ナレーション・テロップの作成、音楽の使用、「伝える」ための編集の工夫など、基礎から応用まで対応。
           </dd>
         </div>
         <div class="mt-4">
@@ -78,7 +77,7 @@ const { posts } = await useWpGetList<Blog>('blog', {
       </dl>
       <p class="mt-2 text-xs text-gray-500">
         ※撮影の基礎から作品の公開までをひと通り学び、講座修了時までに3分間の映像作品を制作するコースの例は、<ExternalLink
-          href="http://civiltachikawa.sakura.ne.jp/shimin-koza-n35.html"
+          href="https://civiltachikawa.sakura.ne.jp/shimin-koza-n49.html"
           >こちら</ExternalLink
         >をご覧ください。
       </p>
@@ -91,14 +90,13 @@ const { posts } = await useWpGetList<Blog>('blog', {
     </Section>
     <Section title="必要な機材（応相談）">
       <p>
-        カメラ（市販のビデオカメラ、デジカメ、スマホなど、動画が撮影できるもの）<br />
-        Windowsノートパソコン（Windows 10以降）
+        動画が撮影できる機器（ビデオカメラ、デジカメ、スマホ、タブレットなど）<br />
+        ノートパソコン（WindowsまたはMac）
       </p>
       <p class="mt-2 text-xs text-gray-500">
         ※講座の内容により、必要な機材は変わります。<br />
         ※団体での受講の場合、プロジェクター、スクリーン、スピーカーなどが必要な場合があります。<br />
-        ※講座で使用する機材は、1人1台ではなく、数人で1台のカメラとパソコンを共有する形でも可能です。<br />
-        ※講座では、Windows10搭載の「フォト」アプリ（無料）を使って、動画の編集をします。
+        ※講座で使用する機材は、1人1台ではなく、数人で1台のカメラとパソコンを共有する形でも可能です。
       </p>
     </Section>
     <Section title="ワークショップの費用">
@@ -112,36 +110,48 @@ const { posts } = await useWpGetList<Blog>('blog', {
     </Section>
 
     <Section title="これまでの主なワークショップ開催実績">
-      <dl class="mt-2">
+      <dl class="mt-2 flex flex-col gap-y-2">
         <div
           v-for="detail in [
             {
               index: '市民の学習・活動・交流センター シビル',
-              text: '2015年&2017年&2020年 / 一般対象、全6～8回コース',
+              text: ['2015年&2017年&2020年&2023年 / 一般対象、全6～8回コース'],
+            },
+            {
+              index: '川崎市麻生区岡上分館',
+              text: [
+                '2022年 / 一般対象、全5回コース、あさおドーガサークルと共同担当',
+              ],
             },
             {
               index: '川崎市麻生市民館',
-              text: '2019年 / 一般対象、全3回コース',
+              text: ['2019年 / 一般対象、全3回コース'],
             },
             {
               index: '東京女子大学',
-              text: '2016年 / 大学生対象、全2回コース',
+              text: ['2016年 / 大学生対象、全2回コース'],
             },
             {
               index: '環境まちづくりNPO エコメッセ',
-              text: '2015年 / 会員対象、1日コース',
+              text: ['2015年 / 会員対象、1日コース'],
             },
             {
-              index: 'Dislocate',
-              text: '2013年 / 小学生親子対象、全2回コース、映画監督コーム･チャンラズマイさんと共同担当',
+              index: 'あなたの公-差-転（Kosaten/Dislocate）',
+              text: [
+                '2013年 / 小学生親子対象、全2回コース、映画監督コーム･チャンラズマイさんと共同担当',
+                '2017年 / 主に移住者や外国にルーツを持つ方々を対象、1日コース',
+              ],
             },
+
             {
               index: '日本ジャーナリスト会議・ジャーナリスト養成講座',
-              text: '2012年 / 学生&一般対象、1日コース',
+              text: ['2012年 / 学生&一般対象、1日コース'],
             },
             {
               index: '市民メディアセンター MediR',
-              text: '2011年 / 一般対象、全6回コース、映画監督根来祐さんと共同担当',
+              text: [
+                '2011年 / 一般対象、全6回コース、映画監督根来祐さんと共同担当',
+              ],
             },
           ]"
           :key="`${detail}-${detail.index}`"
@@ -150,7 +160,9 @@ const { posts } = await useWpGetList<Blog>('blog', {
           <dt class="flex gap-2">
             {{ detail.index }}
           </dt>
-          <dd>{{ detail.text }}</dd>
+          <dd v-for="text in detail.text" :key="`${detail}-${text}`">
+            {{ text }}
+          </dd>
         </div>
       </dl>
     </Section>
