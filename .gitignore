@@ -24,7 +24,6 @@ logs
 # ignore everything in the root except the "wp-content" directory.
 html/wp/*
 !html/wp/wp-content/
-.htaccess
 
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
