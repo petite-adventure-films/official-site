@@ -21,7 +21,7 @@ const getBreadCrumbs = () => {
   const crumbs = [{ to: '/events/', name: 'イベント・上映会' }];
   if (from) {
     crumbs.push({
-      to: `/archive/events-${from}/`,
+      to: `/events/${from}/`,
       name: `${from}年のイベント・上映会`,
     });
   }
