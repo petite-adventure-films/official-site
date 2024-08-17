@@ -61,7 +61,7 @@ const onSubmit = handleSubmit(async () => {
         :required="true"
         label="名前"
         :error-message="errors['form.name']"
-        :disabled="stage === Stage.CONFIRM"
+        :disabled="stage >= Stage.CONFIRM"
       />
       <FormInputText
         v-model="email"
@@ -71,7 +71,7 @@ const onSubmit = handleSubmit(async () => {
         label="メールアドレス"
         :error-message="errors['formEmail.email']"
         class="mt-4"
-        :disabled="stage === Stage.CONFIRM"
+        :disabled="stage >= Stage.CONFIRM"
       />
       <FormInputText
         v-model="emailConfirm"
@@ -81,7 +81,7 @@ const onSubmit = handleSubmit(async () => {
         label="メールアドレス確認"
         :error-message="errors['formEmail.emailConfirm']"
         class="mt-4"
-        :disabled="stage === Stage.CONFIRM"
+        :disabled="stage >= Stage.CONFIRM"
       />
       <FormTextarea
         v-model="message"
@@ -90,7 +90,7 @@ const onSubmit = handleSubmit(async () => {
         label="お問い合わせ内容"
         :error-message="errors['form.message']"
         class="mt-4"
-        :disabled="stage === Stage.CONFIRM"
+        :disabled="stage >= Stage.CONFIRM"
       />
 
       <div class="mt-8">

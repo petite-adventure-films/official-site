@@ -43,7 +43,7 @@ const requiredClass = computed(() =>
         :name="name"
         :required="props.required"
         :placeholder="props.placeholder"
-        class="w-full h-32 border border-black block p-2 disabled:border-gray-100"
+        class="w-full h-32 rounded-none border border-black block p-2 disabled:border-gray-100"
         :disabled="props.disabled"
         @change="$emit('change')"
       />
