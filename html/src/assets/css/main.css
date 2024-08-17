@@ -16,7 +16,7 @@
     @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
   }
   .link-text[target='_blank']::after {
-    content: '↗️';
+    content: '↗︎';
   }
   .wrapper {
     @apply relative min-w-80 max-w-screen-sm min-h-dvh mx-auto px-4 pt-16 pb-8 sm:px-16;

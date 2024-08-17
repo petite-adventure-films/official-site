@@ -32,7 +32,7 @@ const setCurrentIndex = (num: number) => {
 };
 
 const arrowColor = 'text-white';
-const imgBorderColor = computed(() => `[&_img]:border-${props.imgBorderColor}`);
+const imgBorderColor = computed(() => `border-${props.imgBorderColor}`);
 const arrowBgColor = computed(() => `bg-${props.imgBorderColor}`);
 const bulletColor = computed(() => `bg-${props.bulletColor}`);
 const bulletActiveColor = computed(() => `bg-${props.bulletColorActive}`);
@@ -41,8 +41,8 @@ const bulletActiveColor = computed(() => `bg-${props.bulletColorActive}`);
 <template>
   <div class="relative">
     <div
-      class="relative [&_[data-selected=false]]:opacity-0 [&_[data-selected=false]]:absolute [&_[data-selected=false]]:pointer-events-none [&_[data-selected=true]]:opacity-100 [&_[data-selected=true]]:relative [&_img]:border"
-      :class="imgBorderColor"
+      class="relative [&_[data-selected=false]]:opacity-0 [&_[data-selected=false]]:absolute [&_[data-selected=false]]:pointer-events-none [&_[data-selected=true]]:opacity-100 [&_[data-selected=true]]:relative border"
+      :class="[imgBorderColor]"
     >
       <slot name="gallery" v-bind="{ currentIndex }" />
 
@@ -55,7 +55,7 @@ const bulletActiveColor = computed(() => `bg-${props.bulletColorActive}`);
           class="flex justify-center items-center w-8 h-8 mr-auto bg-opacity-25"
           :class="[arrowColor, arrowBgColor]"
         >
-          ⬅️
+          ←
         </div>
       </button>
       <button
@@ -67,7 +67,7 @@ const bulletActiveColor = computed(() => `bg-${props.bulletColorActive}`);
           class="flex justify-center items-center w-8 h-8 ml-auto bg-opacity-25"
           :class="[arrowColor, arrowBgColor]"
         >
-          ➡️
+          →
         </div>
       </button>
     </div>
