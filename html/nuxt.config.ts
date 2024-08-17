@@ -92,6 +92,17 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    optimizeDeps: {
+      include: ['pdfjs-dist'],
+      esbuildOptions: {
+        supported: {
+          'top-level-await': true,
+        },
+      },
+    },
+  },
+
   compatibilityDate: '2024-07-21',
 
   recaptcha: {

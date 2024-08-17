@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Media } from '~/types/media';
-import PDF from 'pdf-vue3';
+import { VuePDF, usePDF } from '@tato30/vue-pdf';
 
 definePageMeta({
   layout: false,
@@ -8,14 +8,19 @@ definePageMeta({
 
 const route = useRoute();
 const pageId = route.params.id as string;
+const pdf = ref();
 const { detail } = await useWpGetListDetail<Media>('media_detail', { pageId });
 route.meta.title = detail.value?.data.title || 'メディア紹介';
+if (detail.value?.data.media_pdf_url) {
+  const { pdf } = usePDF(detail.value?.data.media_pdf_url);
+  pdf.value = pdf;
+}
 </script>
 
 <template>
   <NuxtLayout name="post">
     <template #breadcrumb>
-      <BreadCrumb :crumbs="[{ to: '/media', name: 'メディア紹介' }]" />
+      <BreadCrumb :crumbs="[{ to: '/media/', name: 'メディア紹介' }]" />
     </template>
     <template v-if="detail" #headerTags>
       <ArticleHeaderTags :film-tags="detail.data.film_tags" />
@@ -25,10 +30,9 @@ route.meta.title = detail.value?.data.title || 'メディア紹介';
       v-if="detail && detail.data.media_video"
       :youtube-id="detail.data.media_video"
     />
-    <PDF
-      v-if="detail && detail.data.media_pdf_url"
-      :src="detail.data.media_pdf_url"
-    />
+    <ClientOnly>
+      <VuePDF v-if="detail && detail.data.media_pdf_url" :pdf="pdf" />
+    </ClientOnly>
     <AttachedInfo
       v-if="detail"
       :info="[
