@@ -43,6 +43,19 @@ export default defineNuxtConfig({
           rel: 'stylesheet',
           href: 'https://cdn.jsdelivr.net/npm/yakuhanjp@4.0.1/dist/css/yakuhanjp_s.css',
         },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'anonymous',
+        },
+        {
+          href: 'https://fonts.googleapis.com/css2?family=Dosis:wght@400&display=swap',
+          rel: 'stylesheet',
+        },
       ],
     },
   },

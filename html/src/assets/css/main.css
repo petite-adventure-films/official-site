@@ -1,26 +1,23 @@
 /* @tailwind components; */
-@tailwind utilities;
 
-@layer utilities {
-  .palt {
-    font-feature-settings: 'palt';
-  }
-  .text-2xs {
-    font-size: 0.625rem;
-    line-height: 0.625rem;
-  }
-  .aspect-video {
-    aspect-ratio: 16 / 9;
-  }
-  .link-text {
-    @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
-  }
-  .link-text[target='_blank']::after {
-    content: '↗︎';
-  }
-  .wrapper {
-    @apply relative min-w-80 max-w-screen-sm min-h-dvh mx-auto px-4 pt-16 pb-8 sm:px-16;
-  }
+.wrapper {
+  @apply relative min-w-80 max-w-screen-sm min-h-dvh mx-auto px-4 pt-8 pb-8 sm:px-16;
+}
+
+.link-text {
+  @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
+}
+
+.link-text[target='_blank']::after {
+  content: '↗︎';
+}
+
+.palt {
+  font-feature-settings: 'palt';
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 
 *:focus {

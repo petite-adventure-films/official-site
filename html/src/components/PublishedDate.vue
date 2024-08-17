@@ -10,7 +10,9 @@ const props = withDefaults(
 </script>
 
 <template>
-  <time class="block mt-2 text-xs text-gray-500" :datetime="props.dateTime">
-    {{ props.dateTime }}
-  </time>
+  <div>
+    <time class="block mt-2 text-xs text-gray-500" :datetime="props.dateTime">
+      {{ props.dateTime }}
+    </time>
+  </div>
 </template>

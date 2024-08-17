@@ -33,6 +33,10 @@ route.meta.title = detail.value?.data.title || 'チャンネル';
       ]"
     />
     <ArticleContents v-if="detail" :contents="detail.data.content" />
-    <PublishedDate v-if="detail" :date-time="detail.data.published" />
+    <PublishedDate
+      v-if="detail"
+      :date-time="detail.data.published"
+      class="mt-8"
+    />
   </NuxtLayout>
 </template>

@@ -125,7 +125,7 @@ onMounted(() => {
       <div class="wrapper bg-white">
         <AppHeader />
         <main>
-          <div ref="$kv" class="mt-4 text-center">
+          <div ref="$kv" class="mt-8 text-center">
             <div class="mask w-[320px] h-[220px] mx-auto">
               <img
                 ref="$maskVideoPoster"
@@ -186,7 +186,7 @@ onMounted(() => {
               >📝 BLOG</ButtonLink
             >
             <ButtonLink :disabled="false" type="shop" to="/pafshop/"
-              >🛍️ 公式SHOP</ButtonLink
+              >🛍️ SHOP</ButtonLink
             >
           </div>
 

@@ -15,6 +15,12 @@ const isShop = route.path.includes('/pafshop/');
         >🏠 HOME</NuxtLink
       >
       <NuxtLink
+        v-else
+        to="/pafshop/"
+        class="block text-xs sm:hover:text-gray-500"
+        >🛍️ SHOP</NuxtLink
+      >
+      <NuxtLink
         to="https://x.com/brianandco"
         target="_blank"
         rel="noopener noreferrer"

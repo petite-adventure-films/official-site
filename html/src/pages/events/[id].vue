@@ -44,28 +44,38 @@ const getBreadCrumbs = () => {
     </template>
     <template v-if="detail" #h2>{{ detail.data.title }}</template>
     <dl v-if="detail" class="[&>dt:not(:first-child)]:mt-8 [&>dt]:font-bold">
-      <dt>開催期間</dt>
-      <dd class="[&_a]:link-text" v-html="detail.data.dates_details" />
-      <dt>開催場所</dt>
-      <dd>
-        <p>
-          <span class="[&_a]:link-text" v-html="detail.data.place" /><br />
-          <span class="[&_a]:link-text" v-html="detail.data.address" />
-          <ExternalLink
-            v-if="detail.data.map"
-            :href="detail.data.map"
-            class="ml-1"
-            >MAP</ExternalLink
-          >
-        </p>
-        <p class="[&_a]:link-text" v-html="detail.data.access_details" />
-      </dd>
-      <dt>入場料</dt>
-      <dd class="[&_a]:link-text" v-html="detail.data.fee_details" />
-      <dt>主催者</dt>
-      <dd class="[&_a]:link-text" v-html="detail.data.host_details" />
-      <dt>備考</dt>
-      <dd class="[&_a]:link-text" v-html="detail.data.appendix_contents" />
+      <div v-if="detail.data.dates_details">
+        <dt>開催期間</dt>
+        <dd class="[&_a]:link-text" v-html="detail.data.dates_details" />
+      </div>
+      <div v-if="detail.data.place">
+        <dt>開催場所</dt>
+        <dd>
+          <p>
+            <span class="[&_a]:link-text" v-html="detail.data.place" /><br />
+            <span class="[&_a]:link-text" v-html="detail.data.address" />
+            <ExternalLink
+              v-if="detail.data.map"
+              :href="detail.data.map"
+              class="ml-1"
+              >MAP</ExternalLink
+            >
+          </p>
+          <p class="[&_a]:link-text" v-html="detail.data.access_details" />
+        </dd>
+      </div>
+      <div v-if="detail.data.fee_details">
+        <dt>入場料</dt>
+        <dd class="[&_a]:link-text" v-html="detail.data.fee_details" />
+      </div>
+      <div v-if="detail.data.host_details">
+        <dt>主催者</dt>
+        <dd class="[&_a]:link-text" v-html="detail.data.host_details" />
+      </div>
+      <div v-if="detail.data.appendix_contents">
+        <dt>備考</dt>
+        <dd class="[&_a]:link-text" v-html="detail.data.appendix_contents" />
+      </div>
     </dl>
   </NuxtLayout>
 </template>

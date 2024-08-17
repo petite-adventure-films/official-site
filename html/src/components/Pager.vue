@@ -31,7 +31,7 @@ const pages = [...new Set(_pages)];
 </script>
 
 <template>
-  <ul class="flex gap-2 justify-center mt-8">
+  <ul class="flex flex-wrap gap-2 justify-center mt-8">
     <li
       v-for="(num, key) in pages"
       :key="`page-${num}`"

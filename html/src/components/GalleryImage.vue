@@ -100,7 +100,10 @@ const touchend = () => {
         </div>
       </button>
     </div>
-    <div v-if="slideNumber > 1" class="flex gap-2 justify-center mt-4">
+    <div
+      v-if="slideNumber > 1"
+      class="flex flex-wrap gap-2 justify-center mt-4"
+    >
       <button
         v-for="num in [...Array(props.slideNumber).keys()]"
         :key="`bullet-${num}`"

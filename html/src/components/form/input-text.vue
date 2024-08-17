@@ -49,7 +49,7 @@ const requiredClass = computed(() =>
         :required="props.required"
         :placeholder="props.placeholder"
         :disabled="props.disabled"
-        class="w-full h-full p-2"
+        class="w-full h-full p-2 d disabled:text-black disabled:opacity-100 disabled:bg-gray-50"
         @change="$emit('change')"
       />
     </div>
