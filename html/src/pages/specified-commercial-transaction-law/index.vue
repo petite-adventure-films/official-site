@@ -29,6 +29,6 @@ const list = [
     </template>
     <template #h2>特定商取引法に基づく表記</template>
     <DefinitionList class="mt-2" :list="list" />
-    <ButtonLink to="/contact" class="mt-16">お問い合わせ</ButtonLink>
+    <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>

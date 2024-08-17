@@ -17,6 +17,6 @@ definePageMeta({
       個人情報に関するご確認、ご要望およびお問合せなどにつきましては、
       以下の連絡先までお願いいたします。
     </p>
-    <ButtonLink to="/contact" class="mt-4">お問い合わせ</ButtonLink>
+    <ButtonLink to="/contact/" class="mt-4">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>

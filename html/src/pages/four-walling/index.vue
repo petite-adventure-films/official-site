@@ -36,7 +36,7 @@ definePageMeta({
         自主上映会を開催してくださるサポーターの方を、大募集中です！<br />
         地域で、職場で、学校で、グループで…など、自主上映会開催に興味のある方は、以下「お問い合わせ」よりご連絡ください。
       </p>
-      <ButtonLink to="/contact" class="mt-4">お問い合わせ</ButtonLink>
+      <ButtonLink to="/contact/" class="mt-4">お問い合わせ</ButtonLink>
     </template>
     <Section title="上映料（全作品共通）">
       <p>
@@ -142,6 +142,6 @@ definePageMeta({
         JASRACの楽曲使用料（ビデオ上映使用料）の目安：座席数、入場料等により異なりますが、100名収容の会場で入場料500円の場合、1回の上映につき約300～400円です。
       </p>
     </Section>
-    <ButtonLink to="/contact" class="mt-16">お問い合わせ</ButtonLink>
+    <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>

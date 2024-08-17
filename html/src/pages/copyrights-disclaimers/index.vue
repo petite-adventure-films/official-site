@@ -35,6 +35,6 @@ definePageMeta({
     <p class="mt-2">
       当サイトに掲載されている情報については万全を期しておりますが、当サイトを利用することで発生したトラブルや損失、損害に対して、プチ・アドベンチャー・フィルムズは一切責任を負いません。また、プチ・アドベンチャー・フィルムズは、他の機関が提供するページに関して、当サイトのページからのリンクの有無に関わらず、その内容には一切関知しません。
     </p>
-    <ButtonLink to="/contact" class="mt-16">お問い合わせ</ButtonLink>
+    <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>

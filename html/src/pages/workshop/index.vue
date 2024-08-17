@@ -49,7 +49,7 @@ const { posts } = await useWpGetList<Blog>('blog', {
           </div>
         </template>
       </GalleryImage>
-      <ButtonLink to="/contact" class="mt-4">お問い合わせ</ButtonLink>
+      <ButtonLink to="/contact/" class="mt-4">お問い合わせ</ButtonLink>
     </template>
     <Section title="映像ワークショップで学べる内容（例）">
       <p>
@@ -182,6 +182,6 @@ const { posts } = await useWpGetList<Blog>('blog', {
         </li>
       </ArchiveList>
     </Section>
-    <ButtonLink to="/contact" class="mt-16">お問い合わせ</ButtonLink>
+    <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>

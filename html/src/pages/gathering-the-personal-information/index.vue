@@ -56,6 +56,6 @@ definePageMeta({
       Filmsへ個人情報をご提供いただくかどうかは、お客様の任意です。個人情報をご提供いただけない場合は、サービスに関するご相談やお問合せに回答できない場合があります。
     </p>
     <p class="mt-16">個人情報保護管理者：Petite Adventure Films 早川由美子</p>
-    <ButtonLink to="/contact" class="mt-16">お問い合わせ</ButtonLink>
+    <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
   </NuxtLayout>
 </template>
