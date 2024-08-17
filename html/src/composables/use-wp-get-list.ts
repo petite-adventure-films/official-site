@@ -19,7 +19,12 @@ export const useWpGetList = async <T>(
 ) => {
   const config = useRuntimeConfig();
   const url = `${config.public.API_BASE}wp/wp-json/wp/v2/${endpoint}`;
-  const { status, data } = await useFetch(url, options);
+  const { data, error } = await useFetch(url, options);
   const posts = data as Ref<{ data: T[]; total_pages: number }>;
-  return { status, posts };
+  if (!posts.value || error.value) {
+    throw createError({
+      statusCode: 404,
+    });
+  }
+  return { posts };
 };

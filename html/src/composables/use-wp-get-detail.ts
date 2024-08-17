@@ -6,9 +6,14 @@ export const useWpGetListDetail = async <T>(
 ) => {
   const config = useRuntimeConfig();
   const url = `${config.public.API_BASE}wp/wp-json/wp/v2/${endpoint}`;
-  const { status, data } = await useFetch(url, {
+  const { data, error } = await useFetch(url, {
     query,
   });
   const detail = data as Ref<{ data: T }>;
-  return { status, detail };
+  if (!detail.value || error.value) {
+    throw createError({
+      statusCode: 404,
+    });
+  }
+  return { detail };
 };

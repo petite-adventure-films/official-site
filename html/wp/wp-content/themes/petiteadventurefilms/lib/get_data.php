@@ -18,6 +18,11 @@ function get_list(array $args, callable $get_data)
       array_push($data, $get_data());
     }
   }
+
+  if (empty($data)) {
+    return new WP_REST_Response(array(), 404);
+  }
+
   return new WP_REST_Response(array('data' => $data, 'total_pages' => $query->max_num_pages), 200);
 }
 
@@ -39,5 +44,10 @@ function get_detail(array $args, callable $get_data)
       $data = $get_data();
     }
   }
+
+  if (empty($data)) {
+    return new WP_REST_Response(array(), 404);
+  }
+
   return new WP_REST_Response(array('data' => $data), 200);
 }
