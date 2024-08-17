@@ -35,6 +35,14 @@ const kvForcedToEnd = () => {
   $maskVideo.value?.classList.add('hidden');
 };
 
+// mountされる前に一度実行
+if (query?.op) {
+  opForcedToEnd();
+  $maskVideo.value?.play().catch(() => {
+    kvForcedToEnd();
+  });
+}
+
 onMounted(() => {
   // 低電力モードなど、なんらかの理由で動画が再生できない場合、OPをスキップ
   $bgVideo.value?.play().catch(() => {
