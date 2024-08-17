@@ -2,6 +2,7 @@
 import type { News } from '~/types/news';
 
 const $animationWrapper = ref<HTMLElement | null>(null);
+const $contentsWrapper = ref<HTMLElement | null>(null);
 const $kv = ref<HTMLElement | null>(null);
 const $introCatch = ref<HTMLElement | null>(null);
 const $bgVideo = ref<HTMLVideoElement | null>(null);
@@ -19,8 +20,9 @@ const { posts: news } = await useWpGetList<News>('news', {
 });
 
 const opForcedToEnd = () => {
-  $animationWrapper.value?.classList.add('op-skipped');
   $animationWrapper.value?.classList.add('loaded');
+  $animationWrapper.value?.classList.add('op-skipped');
+  $contentsWrapper.value?.classList.add('op-skipped');
 
   if (isPC.value) {
     $bgVideo.value?.play().catch(() => {
@@ -109,9 +111,7 @@ onMounted(() => {
         <source src="~/assets/video/home.mp4" type="video/mp4" />
       </video>
     </div>
-    <div
-      class="fixed top-0 left-0 -z-10 w-full h-full bg-black bg-opacity-50"
-    />
+    <div class="fixed top-0 left-0 -z-10 w-full h-full op-mask" />
     <div
       v-if="!query?.op"
       class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
@@ -121,7 +121,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="contents-wrapper" :class="query?.op ? 'op-skipped' : ''">
+    <div ref="$contentsWrapper" class="contents-wrapper">
       <div class="wrapper bg-white">
         <AppHeader />
         <main>
@@ -233,6 +233,13 @@ onMounted(() => {
 }
 .loaded .contents-wrapper {
   opacity: 1;
+}
+.op-mask {
+  background-color: #ffffff;
+}
+.loaded .op-mask {
+  background-color: #000000;
+  opacity: 0.5;
 }
 .mask {
   clip-path: url(#introCatchPath);
