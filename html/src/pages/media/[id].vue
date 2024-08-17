@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Media } from '~/types/media';
-import { VuePDF, usePDF } from '@tato30/vue-pdf';
 
 definePageMeta({
   layout: false,
@@ -8,13 +7,8 @@ definePageMeta({
 
 const route = useRoute();
 const pageId = route.params.id as string;
-const pdf = ref();
 const { detail } = await useWpGetListDetail<Media>('media_detail', { pageId });
 route.meta.title = detail.value?.data.title || 'メディア紹介';
-if (detail.value?.data.media_pdf_url) {
-  const { pdf } = usePDF(detail.value?.data.media_pdf_url);
-  pdf.value = pdf;
-}
 </script>
 
 <template>
@@ -30,9 +24,10 @@ if (detail.value?.data.media_pdf_url) {
       v-if="detail && detail.data.media_video"
       :youtube-id="detail.data.media_video"
     />
-    <ClientOnly>
-      <VuePDF v-if="detail && detail.data.media_pdf_url" :pdf="pdf" />
-    </ClientOnly>
+    <AppPdfViewer
+      v-if="detail && detail.data.media_pdf_url"
+      :src="detail.data.media_pdf_url"
+    />
     <AttachedInfo
       v-if="detail"
       :info="[
