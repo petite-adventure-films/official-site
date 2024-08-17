@@ -36,13 +36,42 @@ const imgBorderColor = computed(() => `border-${props.imgBorderColor}`);
 const arrowBgColor = computed(() => `bg-${props.imgBorderColor}`);
 const bulletColor = computed(() => `bg-${props.bulletColor}`);
 const bulletActiveColor = computed(() => `bg-${props.bulletColorActive}`);
+
+// スワイプ
+const minimumDistance = 30;
+const startX = ref(0);
+const startY = ref(0);
+const endX = ref(0);
+const endY = ref(0);
+const touchstart = (e: TouchEvent) => {
+  startX.value = e.touches[0].pageX;
+  startY.value = e.touches[0].pageY;
+};
+const touchmove = (e: TouchEvent) => {
+  endX.value = e.changedTouches[0].pageX;
+  endY.value = e.changedTouches[0].pageY;
+};
+const touchend = () => {
+  const distanceX = Math.abs(endX.value - startX.value);
+  const distanceY = Math.abs(endY.value - startY.value);
+  if (distanceX > distanceY && distanceX > minimumDistance) {
+    if (endX.value - startX.value > 0) {
+      ctrlGallery(-1);
+    } else {
+      ctrlGallery(1);
+    }
+  }
+};
 </script>
 
 <template>
-  <div class="relative">
+  <div>
     <div
       class="relative [&_[data-selected=false]]:opacity-0 [&_[data-selected=false]]:absolute [&_[data-selected=false]]:pointer-events-none [&_[data-selected=true]]:opacity-100 [&_[data-selected=true]]:relative border"
       :class="[imgBorderColor]"
+      @touchstart="touchstart"
+      @touchmove="touchmove"
+      @touchend="touchend"
     >
       <slot name="gallery" v-bind="{ currentIndex }" />
 
