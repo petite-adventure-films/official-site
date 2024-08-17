@@ -69,6 +69,11 @@ export default defineNuxtConfig({
     },
   },
 
+  components: {
+    global: true,
+    dirs: ['~/components'],
+  },
+
   veeValidate: {
     autoImports: true,
   },

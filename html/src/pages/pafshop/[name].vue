@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { itemInBasket } from '~/types/item-in-basket';
-import type { DVD_detail } from '~/types/dvd';
 import type { Film } from '~/types/film';
 import { PRODUCTS_DVD } from '~/constants/products_dvd';
 import { FILMS } from '~/constants/film_info';
@@ -17,11 +16,9 @@ const pageName = route.params.name as string;
 const { basket, updateBasket } = useBasketState();
 
 // dvd情報
-const dvd = PRODUCTS_DVD.find((f) => f.name === pageName); //
-const { detail } = await useWpGetListDetail<DVD_detail>('dvd_detail', {
-  pageName,
-});
-route.meta.title = detail.value?.data.title || 'SHOP';
+const dvd = PRODUCTS_DVD.find((f) => f.name === pageName);
+route.meta.title = dvd?.title || 'SHOP';
+const articleCompontent = `ShopArticle${dvd?.article_component}`;
 
 // 映画情報
 const filmInfo: Film[] = [];
@@ -91,12 +88,6 @@ const moveToBasket = () => {
   isModalOpen.value = false;
   router.push('/pafshop/cart/');
 };
-
-const intro = ref('');
-
-onMounted(() => {
-  intro.value = detail?.value?.data?.intro; // v-htmlが不安なので改めて代入
-});
 </script>
 
 <template>
@@ -118,11 +109,7 @@ onMounted(() => {
       </template>
     </GalleryImage>
     <div class="mt-8">
-      <div
-        v-if="detail?.data.catch"
-        class="text-purple-600 font-bold mb-4"
-        v-html="detail.data.catch"
-      />
+      <p class="text-xl sm:text-xl text-purple-600 mb-2" v-html="dvd?.catch" />
       <DefinitionList :list="discSpec" />
       <ul class="mt-4 [&_li:not(:first-of-type)]:mt-2">
         <li
@@ -132,7 +119,7 @@ onMounted(() => {
         >
           <span class="flex-1 flex gap-x-1 flex-wrap"
             ><span>{{ item.type }}</span
-            ><span v-if="dvd.disc.length > 1" class="palt">{{
+            ><span v-if="dvd && dvd.disc.length > 1" class="palt">{{
               item.disc
             }}</span>
           </span>
@@ -160,7 +147,11 @@ onMounted(() => {
       <HeadlessTabGroup>
         <HeadlessTabList class="w-full flex mt-16">
           <HeadlessTab
-            v-for="tab in ['概要', '特典', '制作クレジット']"
+            v-for="tab in [
+              '概要',
+              dvd?.article_type === 'main' ? '本編' : '特典',
+              '制作クレジット',
+            ]"
             :key="tab"
             v-slot="{ selected }"
             as="template"
@@ -202,13 +193,12 @@ onMounted(() => {
                 </li>
               </ul>
             </div>
-            <p class="mt-8" v-html="intro" />
+            <p class="mt-8" v-html="dvd?.intro" />
           </HeadlessTabPanel>
           <HeadlessTabPanel class="pt-8">
-            <ArticleContents
-              :contents="detail?.data.content"
-              margin-top="mt-0"
-              class="[&_p+p]:mt-2 [&_figure]:block [&_figure]:mt-2 [&_figcaption]:mt-1 [&_figcaption]:text-sm [&_figure+p]:mt-2"
+            <component
+              :is="articleCompontent"
+              class="[&_h4]:mt-4 [&_p]:mt-2 [&_figure]:block [&_figure]:mt-2 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_img]:block [&_img]:mt-2"
             />
           </HeadlessTabPanel>
           <HeadlessTabPanel class="pt-8">
@@ -236,6 +226,7 @@ onMounted(() => {
           </HeadlessTabPanel>
         </HeadlessTabPanels>
       </HeadlessTabGroup>
+      <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
     </div>
     <Modal :open="isModalOpen" @close="isModalOpen = false">
       <div class="w-56 flex justify-center flex-col">

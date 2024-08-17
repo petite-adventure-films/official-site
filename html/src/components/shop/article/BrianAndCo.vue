@@ -1,0 +1,10 @@
+<template>
+  <div>
+    <p>
+      <strong>特典映像の内容</strong
+      ><br />本編未収録映像による短編『ウェストミンスター心の美術館（泥棒編）』<br />本編未収録映像による短編『ニューカッスルの平和の戦士』
+    </p>
+    <p><strong>フォト・ギャラリー</strong></p>
+    <p><strong>予告編</strong></p>
+  </div>
+</template>
