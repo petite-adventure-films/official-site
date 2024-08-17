@@ -91,28 +91,9 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    esbuild: {
-      options: {
-        target: 'es2022',
-      },
-    },
     prerender: {
       crawlLinks: true,
       failOnError: false,
-    },
-  },
-
-  vite: {
-    build: {
-      target: ['es2022', 'edge89', 'firefox89', 'chrome89', 'safari15'],
-    },
-    optimizeDeps: {
-      include: ['pdfjs-dist'],
-      esbuildOptions: {
-        supported: {
-          'top-level-await': true,
-        },
-      },
     },
   },
 
