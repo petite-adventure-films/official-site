@@ -65,7 +65,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
     '@vueuse/nuxt',
     'nuxt-headlessui',
