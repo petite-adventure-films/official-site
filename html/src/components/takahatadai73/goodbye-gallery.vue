@@ -12,6 +12,8 @@ const currentGalleryNumber = computed(
   () => goodbyeGallery[currentYear.value][currentMonth.value][currentDay.value],
 );
 
+const $gallery = ref();
+
 const setCurrentGallery = (year: number, month?: number) => {
   const _year = year;
   const _month = month
@@ -21,6 +23,13 @@ const setCurrentGallery = (year: number, month?: number) => {
   currentYear.value = _year;
   currentMonth.value = _month;
   currentDay.value = _day;
+
+  $gallery.value.setCurrentIndex(0);
+};
+
+const setCurrentGalleryInit = (day: number) => {
+  currentDay.value = day;
+  $gallery.value.setCurrentIndex(0);
 };
 
 const getImgSrc = (number: number) => {
@@ -126,7 +135,7 @@ const getImgSrc = (number: number) => {
               ? 'bg-white'
               : 'bg-tkhd73-green-shadow',
           ]"
-          @click="currentDay = day"
+          @click="setCurrentGalleryInit(day)"
         >
           {{ day }}
         </button>
@@ -134,6 +143,7 @@ const getImgSrc = (number: number) => {
     </div>
 
     <GalleryImage
+      ref="$gallery"
       :slide-number="currentGalleryNumber"
       class="mt-4"
       img-border-color="white"
@@ -147,7 +157,7 @@ const getImgSrc = (number: number) => {
           :class="[
             currentIndex === img - 1
               ? 'opacity-100'
-              : 'opacity-0 absolute pointer-events-none',
+              : 'opacity-0 top-0 left-0 absolute pointer-events-none',
           ]"
         >
           <img :src="getImgSrc(img)" />

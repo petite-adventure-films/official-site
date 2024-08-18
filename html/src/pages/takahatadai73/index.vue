@@ -5,10 +5,6 @@ definePageMeta({
   title: '高幡台団地73号棟に住み続けたい住民の会',
   layout: false,
 });
-
-const getImgSrc = (fileName: string) =>
-  new URL(`../../assets/images/takahatadai73/${fileName}`, import.meta.url)
-    .href;
 </script>
 
 <template>
@@ -190,9 +186,10 @@ const getImgSrc = (fileName: string) =>
                   >{{ timeline.year }}年</span
                 >
                 <p class="flex">
-                  <img :src="getImgSrc(timeline.logo)" class="h-6" /><span>{{
-                    timeline.name
-                  }}</span>
+                  <img
+                    :src="useAsset(`takahatadai73/${timeline.logo}`)"
+                    class="h-6"
+                  /><span>{{ timeline.name }}</span>
                 </p>
                 <p class="mt-2" v-html="timeline.description" />
               </li>

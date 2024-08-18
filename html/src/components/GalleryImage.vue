@@ -31,6 +31,10 @@ const setCurrentIndex = (num: number) => {
   currentIndex.value = num;
 };
 
+defineExpose({
+  setCurrentIndex,
+});
+
 const arrowColor = 'text-white';
 const imgBorderColor = computed(() => `border-${props.imgBorderColor}`);
 const arrowBgColor = computed(() => `bg-${props.imgBorderColor}`);
