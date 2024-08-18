@@ -168,7 +168,7 @@ const { posts } = await useWpGetList<Blog>('blog', {
     </Section>
     <Section
       title="最近の映像ワークショップレポート"
-      view-more-to="/blog/上映会・イベントレポート/"
+      view-more-to="/blog/tag/映像ワークショップ/"
     >
       <ArchiveList v-if="posts" class="mt-4 w-full">
         <li v-for="data in posts.data" :key="data.id">
