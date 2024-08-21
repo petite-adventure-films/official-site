@@ -2,7 +2,7 @@ name: 'Deploy wordpress'
 
 on:
   repository_dispatch:
-    types: [deploy-wordpess]
+    types: [deploy_from_wordpress]
 
 jobs:
   deploy-generated-files:
