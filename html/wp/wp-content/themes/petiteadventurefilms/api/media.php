@@ -60,7 +60,6 @@ function get_values_media_detail()
     'title' => html_entity_decode(get_the_title()),
     'content' => wpautop(get_the_content(), true),
     'published' => get_the_date(),
-    'updated' => get_the_modified_date(),
     'media_name' => get_post_meta(get_the_ID(), "media_info_01", TRUE),
     'media_volume' => get_post_meta(get_the_ID(), "media_info_02", TRUE),
     'media_contents' => get_post_meta(get_the_ID(), "media_info_03", TRUE),

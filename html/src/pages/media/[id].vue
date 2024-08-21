@@ -53,7 +53,6 @@ route.meta.title = detail.value?.data.title || 'メディア紹介';
     <PublishedDate
       v-if="detail"
       :published-date="detail.data.published"
-      :updated-date="detail.data.updated"
       class="mt-8"
     />
   </NuxtLayout>

@@ -34,7 +34,6 @@ route.meta.title = detail.value?.data.title || 'BLOG';
     <PublishedDate
       v-if="detail"
       :published-date="detail.data.published"
-      :updated-date="detail.data.updated"
       class="mt-8"
     />
   </NuxtLayout>

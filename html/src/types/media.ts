@@ -5,7 +5,6 @@ export type Media = {
   title: string;
   content: string;
   published: Date;
-  updated: Date;
   media_name: string;
   media_volume: string;
   media_contents: string;

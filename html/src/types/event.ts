@@ -5,7 +5,6 @@ export type Event = {
   id: string;
   title: string;
   published: Date;
-  updated?: Date;
   no: string;
   status: EventStatus;
   date_to: string;

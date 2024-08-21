@@ -3,5 +3,4 @@ export type News = {
   title: string;
   content: string;
   published: Date;
-  updated: Date;
 };

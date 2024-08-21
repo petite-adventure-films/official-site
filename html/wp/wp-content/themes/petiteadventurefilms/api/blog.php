@@ -60,7 +60,6 @@ function get_values_blog()
     'title' => html_entity_decode(get_the_title()),
     'name' => get_post_field('post_name', get_the_ID()),
     'published' => get_the_date(),
-    'updated' => get_the_modified_date(),
     'recommended' => get_post_meta(get_the_ID(), 'recommend', true),
     'film_tags' => get_the_terms(get_the_ID(), 'filmtags'),
     'event_tags' => get_the_terms(get_the_ID(), 'eventtags'),
@@ -98,7 +97,6 @@ function get_values_blog_detail()
     'content' => wpautop(get_the_content(), true),
     'recommended' => get_post_meta(get_the_ID(), 'recommend', true),
     'published' => get_the_date(),
-    'updated' => get_the_modified_date(),
     'film_tags' => get_the_terms(get_the_ID(), 'filmtags'),
     'categories' => get_the_terms(get_the_ID(), 'category'),
   ];
