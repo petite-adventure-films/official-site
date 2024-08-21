@@ -22,9 +22,9 @@ function get_values_dvd()
     'post_type' => 'pafshop',
     'pages_per_page' => -1
   );
-  $get_data = fn () => [
+  $get_data = fn() => [
     'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'name' => get_post_field('post_name', get_the_ID()),
     'catch' => get_post_meta(get_the_ID(), 'product_info_05', TRUE),
   ];
@@ -54,9 +54,9 @@ function get_values_dvd_detail()
     'post_type' => 'pafshop',
     'name' => $_GET['pageName']
   );
-  $get_data = fn () => [
+  $get_data = fn() => [
     'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'name' => get_post_field('post_name', get_the_ID()),
     'content' => wpautop(get_the_content(), true),
     'intro' => get_post_meta(get_the_ID(), 'product_info_03', TRUE),

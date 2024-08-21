@@ -13,7 +13,8 @@ const props = withDefaults(
 
 <template>
   <div
-    :class="`${marginTop} [&_p:has(iframe)]:aspect-video [&_iframe]:w-full [&_iframe]:h-full [&_a]:link-text [&_img]:mt-2`"
+    class="[&_p:has(iframe)]:aspect-video [&_iframe]:w-full [&_iframe]:h-full [&_a]:link-text [&_img]:mt-2 [&_img]:border [&_img]:border-black"
+    :class="marginTop"
     v-html="props.contents"
   />
 </template>

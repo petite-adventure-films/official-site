@@ -125,8 +125,8 @@ definePageMeta({
           <h2 class="text-xl sm:text-2xl text-tkhd73-ur font-bold">
             URって何？
           </h2>
-          <div class="sm:flex sm:gap-8">
-            <div class="mt-4 [&_p+p]:mt-2 sm:flex-1">
+          <div class="relative sm:w-96">
+            <div class="mt-4 [&_p+p]:mt-2 sm:pr-4">
               <p>
                 高度経済成長真っ只中の<strong>1955年</strong>、
                 主に<strong>大都市圏の深刻な住宅不足を解消</strong>するため、
@@ -172,7 +172,7 @@ definePageMeta({
               </p>
             </div>
             <ul
-              class="flex flex-col gap-8 mt-4 pl-4 border-l border-tkhd73-ur sm:w-56 sm:mt-0"
+              class="flex flex-col gap-8 mt-4 p-4 border-l border-tkhd73-ur sm:w-56 sm:h-full sm:mt-0 sm:absolute sm:top-0 sm:-right-56"
             >
               <li
                 v-for="(timeline, key) in urTimeline"
@@ -189,7 +189,8 @@ definePageMeta({
                   <img
                     :src="useAsset(`takahatadai73/${timeline.logo}`)"
                     class="h-6"
-                  /><span>{{ timeline.name }}</span>
+                  />
+                  <span class="pl-1">{{ timeline.name }}</span>
                 </p>
                 <p class="mt-2" v-html="timeline.description" />
               </li>

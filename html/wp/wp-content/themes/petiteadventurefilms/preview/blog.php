@@ -26,7 +26,7 @@
           </nav>
 
           <!-- 'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'name' => get_post_field('post_name', get_the_ID()),
     'published' => get_the_date(),
     'updated' => get_the_modified_date(),

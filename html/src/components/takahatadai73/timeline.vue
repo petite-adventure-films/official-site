@@ -62,7 +62,7 @@ const isEventDisplayed = (category, year, month) => {
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         >
           <button
-            class="block w-14 h-14 mx-auto rounded-full text-xs text-tkhd73-green border-2 border-white leading-none"
+            class="block w-14 h-14 mx-auto rounded-full text-xs text-tkhd73-green border-2 border-white leading-none sm:hover:bg-white"
             :class="isShowwAllTimeline ? 'bg-white' : 'bg-tkhd73-green-shadow'"
             @click="showAllTimeline()"
           >
@@ -101,7 +101,7 @@ const isEventDisplayed = (category, year, month) => {
                     :class="[
                       status[category][year][month]
                         ? 'bg-white'
-                        : 'bg-tkhd73-green-shadow',
+                        : 'bg-tkhd73-green-shadow  sm:hover:bg-white',
                     ]"
                   >
                     <button

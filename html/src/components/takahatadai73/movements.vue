@@ -65,7 +65,7 @@ const enlargeImage = (year: number, month: number, num: number) => {
               class="block border border-white"
             />
             <div
-              class="absolute bottom-1 right-1 flex justify-center items-center rounded-full w-6 h-6 border-2 border-white bg-white group-hover:border-tkhd73-green"
+              class="absolute bottom-1 right-1 flex justify-center items-center rounded-full w-6 h-6 border-2 border-white bg-tkhd73-green-shadow text-xs sm:group-hover:bg-white"
             >
               🔍
             </div>

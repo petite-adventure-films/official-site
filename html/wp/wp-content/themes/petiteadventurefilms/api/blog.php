@@ -57,7 +57,7 @@ function get_values_blog()
   );
   $data = fn() => [
     'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'name' => get_post_field('post_name', get_the_ID()),
     'published' => get_the_date(),
     'updated' => get_the_modified_date(),
@@ -94,7 +94,7 @@ function get_values_blog_detail()
   );
   $data = fn() => [
     'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'content' => wpautop(get_the_content(), true),
     'recommended' => get_post_meta(get_the_ID(), 'recommend', true),
     'published' => get_the_date(),

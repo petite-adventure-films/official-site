@@ -41,7 +41,7 @@ function get_values_events()
             $query->the_post();
             array_push($data, [
                 'id' => get_the_ID(),
-                'title' => get_the_title(),
+                'title' => html_entity_decode(get_the_title()),
                 'status' => get_post_meta(get_the_ID(), "events_info_18", TRUE),
                 'date_from' => format_date(get_post_meta(get_the_ID(), 'events_info_15', TRUE)),
                 'date_to' => format_date(get_post_meta(get_the_ID(), 'events_info_16', TRUE)),
@@ -130,7 +130,7 @@ function get_values_events_detail()
     );
     $get_data = fn() => [
         'id' => get_the_ID(),
-        'title' => get_the_title(),
+        'title' => html_entity_decode(get_the_title()),
         'content' => wpautop(get_the_content(), true),
         'published' => get_the_date(),
         'updated' => get_the_modified_date(),
@@ -192,7 +192,7 @@ function get_values_events_archive()
     );
     $get_data = fn() => [
         'id' => get_the_ID(),
-        'title' => get_the_title(),
+        'title' => html_entity_decode(get_the_title()),
         'status' => get_post_meta(get_the_ID(), "events_info_18", TRUE),
         'date_from' => format_date(get_post_meta(get_the_ID(), 'events_info_15', TRUE)),
         'date_to' => format_date(get_post_meta(get_the_ID(), 'events_info_16', TRUE)),

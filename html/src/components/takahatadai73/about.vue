@@ -11,7 +11,7 @@
       <img
         src="~/assets/images/films/goodbye_ur_thumbnail.jpg"
         alt="さようならUR"
-        class="w-56"
+        class="sm:w-56"
       />
       <div class="mt-4 sm:mt-0">
         <p>

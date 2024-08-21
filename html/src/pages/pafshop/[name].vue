@@ -198,7 +198,7 @@ const moveToBasket = () => {
           <HeadlessTabPanel class="pt-8">
             <component
               :is="articleCompontent"
-              class="[&_h4]:mt-4 [&_p]:mt-2 [&_figure]:block [&_figure]:mt-2 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_img]:block [&_img]:mt-2"
+              class="[&_h4]:mt-4 [&_p]:mt-2 [&_figure]:block [&_figure]:mt-2 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_img]:block [&_img]:mt-2 [&_img]:border [&_img]:border-black"
             />
           </HeadlessTabPanel>
           <HeadlessTabPanel class="pt-8">
@@ -218,7 +218,7 @@ const moveToBasket = () => {
                 >
                   <template #default="{ item }">
                     <dt>{{ item.index }}</dt>
-                    <dd class="mt-4" v-html="item.text" />
+                    <dd class="mt-2" v-html="item.text" />
                   </template>
                 </masonry-wall>
               </dl>

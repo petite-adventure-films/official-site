@@ -24,7 +24,7 @@ function get_values_media()
   );
   $get_data = fn() => [
     'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'media_name' => get_post_meta(get_the_ID(), "media_info_01", TRUE),
     'media_volume' => get_post_meta(get_the_ID(), "media_info_02", TRUE),
     'media_contents' => get_post_meta(get_the_ID(), "media_info_03", TRUE),
@@ -57,14 +57,14 @@ function get_values_media_detail()
   );
   $get_data = fn() => [
     'id' => get_the_ID(),
-    'title' => get_the_title(),
+    'title' => html_entity_decode(get_the_title()),
     'content' => wpautop(get_the_content(), true),
     'published' => get_the_date(),
     'updated' => get_the_modified_date(),
     'media_name' => get_post_meta(get_the_ID(), "media_info_01", TRUE),
     'media_volume' => get_post_meta(get_the_ID(), "media_info_02", TRUE),
     'media_contents' => get_post_meta(get_the_ID(), "media_info_03", TRUE),
-    'media_video' => get_post_meta(get_the_ID(), "media_info_04", TRUE),
+    'media_video' => get_post_meta(get_the_ID(), "media_info_09", TRUE),
     'media_pdf_url' => wp_get_attachment_url(get_post_meta(get_the_ID(), "media_info_05", TRUE)),
     'article_title' => get_post_meta(get_the_ID(), "media_info_06", TRUE),
     'article_subtitle' => get_post_meta(get_the_ID(), "media_info_07", TRUE),

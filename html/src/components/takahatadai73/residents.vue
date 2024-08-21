@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { DocumentArrowDownIcon } from '@heroicons/vue/24/solid';
 import { residents } from '~/constants/takahatadai73';
 </script>
 
@@ -15,7 +14,7 @@ import { residents } from '~/constants/takahatadai73';
         <div>
           <img
             :src="useAsset(`takahatadai73/resident_${item.key}.png`)"
-            class="block w-48 m-auto"
+            class="block w-56 m-auto"
           />
           <div
             class="bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm border-t border-white p-4"
@@ -28,8 +27,8 @@ import { residents } from '~/constants/takahatadai73';
                 :download="`statement_${item.key}.pdf`"
                 target="_blank"
                 class="flex items-center link-text text-xs"
-                >陳述書<DocumentArrowDownIcon class="w-4 h-4"
-              /></a>
+                >陳述書</a
+              >
             </div>
             <DefinitionList
               v-if="item.hobby || item.favouriteIndex || item.karaoke"

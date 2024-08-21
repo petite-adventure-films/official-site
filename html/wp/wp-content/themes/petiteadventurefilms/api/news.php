@@ -23,7 +23,7 @@ function get_values_news()
     );
     $get_data = fn() => [
         'id' => get_the_ID(),
-        'title' => get_the_title(),
+        'title' => html_entity_decode(get_the_title()),
         'content' => get_the_content(),
         'published' => get_the_date(),
         'updated' => get_the_modified_date()
