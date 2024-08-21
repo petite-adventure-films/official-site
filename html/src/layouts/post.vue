@@ -18,7 +18,7 @@ useSeoMeta({
   <div class="wrapper bg-white">
     <AppHeader />
     <AppNav />
-    <main class="mt-16">
+    <main class="mt-8">
       <header>
         <slot name="breadcrumb" />
         <slot name="headerTags" />

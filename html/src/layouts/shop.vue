@@ -25,7 +25,7 @@ onMounted(() => {
   <div class="wrapper">
     <ShopAppHeader />
     <ShopAppNav />
-    <main class="mt-16">
+    <main class="mt-8">
       <header>
         <slot name="breadcrumb" />
         <slot name="headerTags" />

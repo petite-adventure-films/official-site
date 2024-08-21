@@ -18,7 +18,7 @@ useSeoMeta({
     <header>
       <ShopAppName />
     </header>
-    <main class="mt-16">
+    <main class="mt-8">
       <header>
         <h2 class="text-2xl"><slot name="h2" /></h2>
       </header>
