@@ -157,7 +157,7 @@ onMounted(() => {
             class="link-text mt-8 mx-auto block text-xs"
             @click="isModalOpen = true"
           >
-            📹 オープニング映像の全編を見る（1:15）
+            オープニング映像の全編を見る（1:15）▶️
           </button>
 
           <div class="flex flex-wrap justify-center mt-8 gap-2">

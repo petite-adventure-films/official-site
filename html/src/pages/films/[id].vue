@@ -92,7 +92,7 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
       <figure class="[&_div:not(:first-of-type)]:mt-4">
         <div v-for="item in data.recommends" :key="`${item}-${item.by}`">
           <figcaption>{{ item.by }}</figcaption>
-          <blockquote v-html="item.text" />
+          <blockquote class="mt-2" v-html="item.text" />
         </div>
       </figure>
     </Section>
@@ -121,7 +121,7 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
         <masonry-wall :items="data.credits" :column-width="224" :gap="16">
           <template #default="{ item }">
             <dt>{{ item.index }}</dt>
-            <dd v-html="item.text" />
+            <dd class="mt-2" v-html="item.text" />
           </template>
         </masonry-wall>
       </dl>
@@ -132,7 +132,7 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
     >
       <div v-if="data.national_screenings">
         <h4>国内</h4>
-        <ul>
+        <ul class="mt-2">
           <li
             v-for="(item, index) in data.national_screenings"
             :key="`${item}-${index}`"
@@ -143,7 +143,7 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
       </div>
       <div v-if="data.global_screenings" class="mt-4">
         <h4>海外</h4>
-        <ul>
+        <ul class="mt-2">
           <li
             v-for="(item, index) in data.global_screenings"
             :key="`${item}-${index}`"

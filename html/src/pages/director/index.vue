@@ -48,7 +48,7 @@ for (const film of FILMS) {
     </template>
 
     <Section title="Filmography" margin-top="mt-8">
-      <ul class="flex flex-col gap-4 border-l border-black pl-4">
+      <ul class="flex flex-col gap-4 border-l border-black p-4">
         <li
           v-for="year in Object.entries(tilmline).reverse()"
           :key="`film-${year[0]}`"
@@ -56,7 +56,7 @@ for (const film of FILMS) {
         >
           <span class="absolute block w-2 h-2 bg-black rounded top-0 -left-5" />
           <h4>{{ year[0] }}年</h4>
-          <ul class="ml-4">
+          <ul class="ml-2">
             <li v-for="film in year[1]" :key="`film-${film.film_id}`">
               <NuxtLink :to="`/films/${film.film_id}/`" class="link-text">{{
                 film.title

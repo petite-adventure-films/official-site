@@ -26,7 +26,7 @@ const yearArgs = Array.from(
     >
       <NuxtLink
         :to="`/events/archive/${year}/`"
-        class="block border border-black px-2 py-1 group-[.is-active]:bg-black group-[.is-active]:text-white sm:hover:bg-gray-100"
+        class="block border border-black px-2 py-1 group-[.is-active]:bg-gray-100 sm:hover:bg-gray-100"
         >{{ year }}</NuxtLink
       >
     </li>

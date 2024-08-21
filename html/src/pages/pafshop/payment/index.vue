@@ -83,7 +83,7 @@ watch(isRecapchaVerified, (newValue) => {
       <form id="payment-form">
         <div id="payment-element" class="mt-8" />
         <Button v-if="isRecapchaVerified" :disabled="isCompleted" class="mt-8">
-          支払う
+          購入する
         </Button>
         <div id="payment-message" class="hidden" />
       </form>

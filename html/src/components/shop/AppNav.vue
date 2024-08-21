@@ -3,7 +3,7 @@ const { counterInBasket } = useBasketState();
 </script>
 
 <template>
-  <div class="sticky -top-[1px] my-8 z-50 flex gap-2 justify-center">
+  <div class="sticky -top-[1px] mt-16 z-50 flex gap-2 justify-center">
     <NuxtLink
       to="/pafshop/faq/"
       class="relative flex flex-col w-12 h-12 justify-center items-center bg-gray-50 sm:hover:bg-white sm:hover:text-black"

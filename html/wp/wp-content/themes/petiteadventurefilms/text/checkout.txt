@@ -9,9 +9,9 @@
 {items}
 
 ■お買上金額
-商品金額合計: {subtotal}
-送料: {shippingFee}
-注文金額合計: {total}
+商品金額合計: ¥{subtotal}
+送料: ¥{shippingFee}
+注文金額合計: ¥{total}
 ※すべて税込
 
 ■お支払い方法

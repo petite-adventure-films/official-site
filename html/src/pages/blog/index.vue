@@ -35,7 +35,7 @@ const { posts } = await useWpGetList<Blog>('blog');
       <Pager page="blog" :total-pages="posts.total_pages" current-page="1" />
     </div>
     <template #aside>
-      <BlogCategories class="mt-16" />
+      <BlogCategories />
     </template>
   </NuxtLayout>
 </template>

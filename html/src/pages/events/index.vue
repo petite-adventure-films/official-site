@@ -50,7 +50,7 @@ watch(posts, async () => {});
           >
             <span
               :class="[
-                'block border border-black px-2 py-1 text-gray-500',
+                'block border border-black px-2 py-1',
                 `${selected ? 'bg-gray-100' : ''} sm:hover:bg-gray-100`,
               ]"
               >{{ month }}</span

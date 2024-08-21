@@ -31,20 +31,18 @@ const onSubmit = handleSubmit(async () => {
   stage.value = Stage.COMPLETE;
   const config = useRuntimeConfig();
   const apiUrl = `${config.public.API_BASE}wp/wp-json/wp/v2/contact/`;
-  useFetch(apiUrl, {
+  const { error } = await useFetch(apiUrl, {
     method: 'POST',
     body: JSON.stringify({
       name: name.value,
       email: email.value,
       message: message.value,
     }),
-  }).then(({ error }) => {
-    if (error) {
-      router.push('/contact/error/');
-      return false;
-    }
-    router.push('/contact/thanks/');
   });
+  if (error.value) {
+    router.push('/contact/error/');
+  }
+  router.push('/contact/thanks/');
 });
 </script>
 

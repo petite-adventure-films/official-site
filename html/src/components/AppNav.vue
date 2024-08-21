@@ -10,7 +10,7 @@ const isIncludedPage = (key: string) =>
 </script>
 
 <template>
-  <div class="sticky -top-[1px] my-8 z-50 flex gap-2 justify-center">
+  <div class="sticky -top-[1px] mt-16 z-50 flex gap-2 justify-center">
     <HeadlessMenu v-slot="{ open }">
       <HeadlessMenuButton
         :class="[

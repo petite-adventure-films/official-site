@@ -6,7 +6,7 @@
     </p>
     <Section title="&lt;Part 1: 20分&gt;">
       <h4>・ 農地の強制収用に反対する、農民たちの抗議集会</h4>
-      <p>
+      <p class="mt-2">
         高度経済成長を続けるインドでは、政府が経済発展のために、農地を強制収用できる特例を作ろうとしていた。特例が成立すれば、農地がわずかなお金で買い叩かれ、農民は追い出されてしまう。その特例に反対した農民たちが全国から集まった、抗議集会を取材。
       </p>
       <img :src="useAsset('pafshop/my_india_diary_main_1.jpg')" alt="" />
@@ -15,7 +15,7 @@
       <img :src="useAsset('pafshop/my_india_diary_main_4.jpg')" alt="" />
       <img :src="useAsset('pafshop/my_india_diary_main_5.jpg')" alt="" />
       <h4>・ デリーの路上</h4>
-      <p>
+      <p class="mt-2">
         私は、バックパッカー向けの安宿が集まるエリア、Main
         Bazaar（メイン・バザール）に宿泊していた。路上でカメラを回し、昼夜問わず活気あふれる、この街の様子を伝える。
       </p>
@@ -24,7 +24,7 @@
       <img :src="useAsset('pafshop/my_india_diary_main_8.jpg')" alt="" />
       <img :src="useAsset('pafshop/my_india_diary_main_9.jpg')" alt="" />
       <h4>・ 深夜のデリー</h4>
-      <p>
+      <p class="mt-2">
         映画祭スタッフで、ドキュメンタリー監督でもあるウマ・タヌクさん。彼女に、「夜の街を見ないと、本当のデリーはわからない」と力説され、彼女とタクシーをチャーターして深夜のデリーに繰り出す。日中は見えにくい・見えなくされている、インド社会の最底辺を覗く。
       </p>
       <img :src="useAsset('pafshop/my_india_diary_main_10.jpg')" alt="" />
@@ -82,7 +82,7 @@
     </Section>
     <Section title="&lt;Part 4: 47分&gt;">
       <h4>・ SEWA自前のラジオ局、Rudi no Radio</h4>
-      <p>
+      <p class="mt-2">
         2001年にグジャラート州で大地震が起き、交通や情報が寸断された教訓から、自前のコミュニティラジオ局として2005年に発足。衛生、暮らし、教育、女性の健康など、生活に直結する情報を、各地域の言語で発信。
       </p>
       <p>
@@ -94,7 +94,7 @@
       <img :src="useAsset('pafshop/my_india_diary_main_26.jpg')" alt="" />
       <img :src="useAsset('pafshop/my_india_diary_main_27.jpg')" alt="" />
       <h4>・ ビデオSEWAの写真ワークショップ</h4>
-      <p>
+      <p class="mt-2">
         中心地からだいぶ離れた小さな村で行われた、2日間の写真ワークショップ。写真の技術を覚え、自分たちの暮らしを守ろうとする女性たちとの交流…と思いきや、彼女たちから私への、怒涛の「逆取材」が待ち構えていたのだった！
       </p>
       <img :src="useAsset('pafshop/my_india_diary_main_28.jpg')" alt="" />
@@ -102,7 +102,7 @@
       <img :src="useAsset('pafshop/my_india_diary_main_30.jpg')" alt="" />
       <img :src="useAsset('pafshop/my_india_diary_main_31.jpg')" alt="" />
       <h4>・ スラム街訪問</h4>
-      <p>
+      <p class="mt-2">
         ビデオSEWAメンバーが暮らす、スラム街を訪問。この先には、一体どんな光景と暮らしが…」？
       </p>
       <img :src="useAsset('pafshop/my_india_diary_main_32.jpg')" alt="" />

@@ -38,7 +38,7 @@ const enlargeImage = (year: number, month: number, num: number) => {
       >まちづくり計画案.pdf</a
     >
 
-    <div class="flex flex-wrap mt-4 gap-y-2">
+    <div class="flex flex-wrap mt-4 gap-y-4">
       <div
         v-for="(flyers, key) in movements"
         :key="key"

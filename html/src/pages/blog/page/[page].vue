@@ -42,7 +42,7 @@ const { posts } = await useWpGetList<Blog>('blog', {
       />
     </div>
     <template #aside>
-      <BlogCategories class="mt-16" />
+      <BlogCategories />
     </template>
   </NuxtLayout>
 </template>

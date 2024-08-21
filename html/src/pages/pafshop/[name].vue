@@ -172,12 +172,12 @@ const moveToBasket = () => {
               :key="info.film_id"
               class="[&:not(:first-child)]:mt-4"
             >
-              <h4 v-if="filmInfo.length > 1">
+              <h4 v-if="filmInfo.length > 1" class="mb-2 font-bold">
                 {{ info.title }}
               </h4>
-              <p class="mt-2">監督: {{ info.director }}</p>
+              <p>監督: {{ info.director }}</p>
               <ul
-                class="flex flex-wrap gap-x-2 mt-2 [&>li:not(:first-child)]:before:content-['/']"
+                class="flex flex-wrap gap-x-2 [&>li:not(:first-child)]:before:content-['/']"
               >
                 <li
                   v-for="item in [
@@ -193,7 +193,7 @@ const moveToBasket = () => {
                 </li>
               </ul>
             </div>
-            <p class="mt-8" v-html="dvd?.intro" />
+            <div class="mt-8" v-html="dvd?.intro" />
           </HeadlessTabPanel>
           <HeadlessTabPanel class="pt-8">
             <component
@@ -207,10 +207,10 @@ const moveToBasket = () => {
               :key="info.film_id"
               class="[&:not(:first-child)]:mt-4"
             >
-              <h4 v-if="filmInfo.length > 1">
+              <h4 v-if="filmInfo.length > 1" class="mb-2 font-bold">
                 {{ info.title }}
               </h4>
-              <dl v-if="info?.credits" class="mt-2">
+              <dl v-if="info?.credits">
                 <masonry-wall
                   :items="info.credits"
                   :column-width="224"
@@ -218,7 +218,7 @@ const moveToBasket = () => {
                 >
                   <template #default="{ item }">
                     <dt>{{ item.index }}</dt>
-                    <dd v-html="item.text" />
+                    <dd class="mt-4" v-html="item.text" />
                   </template>
                 </masonry-wall>
               </dl>
@@ -235,7 +235,6 @@ const moveToBasket = () => {
         >
         <Button
           :disabled="false"
-          direction="left"
           type="shop-secondary"
           class="mt-2"
           @click="isModalOpen = false"
