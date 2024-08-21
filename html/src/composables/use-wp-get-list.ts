@@ -18,12 +18,8 @@ export const useWpGetList = async <T>(
   options?: Options,
 ) => {
   const config = useRuntimeConfig();
-  const router = useRouter();
   const url = `${config.public.API_BASE}wp/wp-json/wp/v2/${endpoint}`;
-  const { data, error } = await useFetch(url, options);
+  const { data } = await useFetch(url, options);
   const posts = data as Ref<{ data: T[]; total_pages: number }>;
-  if (!posts.value || error.value) {
-    router.push('/404/');
-  }
   return { posts };
 };
