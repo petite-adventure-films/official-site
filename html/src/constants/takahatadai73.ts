@@ -980,7 +980,7 @@ export const takahatadai73Timeline: {
               {
                 type: 'youtube',
                 name: '判決後の報告集会動画',
-                url: 'https://www.youtube.com/watch?v=dDI5cxmVnIQ',
+                url: 'https://www.youtube-nocookie.com/watch?v=dDI5cxmVnIQ',
               },
             ],
           },

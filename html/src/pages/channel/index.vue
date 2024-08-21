@@ -35,7 +35,7 @@ const { posts } = await useWpGetList<Channel>('channel', {
           :to="`/channel/${data.id}/`"
           :film-tags="data.film_tags"
           :title="data.title"
-          :thumbnail-src="`https://img.youtube.com/vi/${data.youtube_id}/maxresdefault.jpg`"
+          :thumbnail-src="`https://img.youtube-nocookie.com/vi/${data.youtube_id}/maxresdefault.jpg`"
           :attached-info="[
             data.created_country,
             data.created_year,
