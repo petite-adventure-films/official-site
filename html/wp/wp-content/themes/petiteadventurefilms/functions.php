@@ -19,7 +19,7 @@ add_theme_support('post-thumbnails');
 // プレビューURL変更
 function replace_preview_link($url)
 {
-  $pattern = "/(http:\/\/[^\/]+)\/wp\/([^\/]+)\/.*\?preview_id=([0-9]+)/";
+  $pattern = "/(https?:\/\/[^\/]+)\/wp\/([^\/]+)\/.*\?preview_id=([0-9]+)/";
   preg_match($pattern, $url, $matches);
 
   if (isset($matches[1], $matches[2], $matches[3])) {
