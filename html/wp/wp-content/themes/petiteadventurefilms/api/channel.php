@@ -22,7 +22,7 @@ function get_values_channel()
     'post_type' => 'channel',
     'posts_per_page' => $_GET['per_page']
   );
-  $get_data = fn () => [
+  $get_data = fn() => [
     'id' => get_the_ID(),
     'title' => get_the_title(),
     'youtube_id' => get_post_meta(get_the_ID(), 'video_info_00', TRUE),
@@ -30,7 +30,8 @@ function get_values_channel()
     'created_country' => get_post_meta(get_the_ID(), 'video_info_03', TRUE),
     'running_time' => get_post_meta(get_the_ID(), 'video_info_04', TRUE),
     'film_tags' => get_the_terms(get_the_ID(), 'filmtags'),
-    'published' => get_the_date("Y-m-d"),
+    'published' => get_the_date(),
+    'updated' => get_the_modified_date()
   ];
   return get_list($args, $get_data);
 }
@@ -57,11 +58,12 @@ function get_values_channel_detail()
     'post_type' => 'channel',
     'p' => $_GET['pageId']
   );
-  $get_data = fn () => [
+  $get_data = fn() => [
     'id' => get_the_ID(),
     'title' => get_the_title(),
     'content' => wpautop(get_the_content(), true),
-    'published' => get_the_date("Y-m-d"),
+    'published' => get_the_date(),
+    'updated' => get_the_modified_date(),
     'youtube_id' => get_post_meta(get_the_ID(), 'video_info_00', TRUE),
     'created_year' => get_post_meta(get_the_ID(), 'video_info_02', TRUE),
     'created_country' => get_post_meta(get_the_ID(), 'video_info_03', TRUE),

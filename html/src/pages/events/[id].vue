@@ -77,5 +77,11 @@ const getBreadCrumbs = () => {
         <dd class="[&_a]:link-text" v-html="detail.data.appendix_contents" />
       </div>
     </dl>
+    <PublishedDate
+      v-if="detail"
+      :published-date="detail.data.published"
+      :updated-date="detail.data.updated"
+      class="mt-8"
+    />
   </NuxtLayout>
 </template>

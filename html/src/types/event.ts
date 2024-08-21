@@ -4,7 +4,8 @@ import type { EventStatus } from '~/types/event_status';
 export type Event = {
   id: string;
   title: string;
-  published: string;
+  published: Date;
+  updated?: Date;
   no: string;
   status: EventStatus;
   date_to: string;

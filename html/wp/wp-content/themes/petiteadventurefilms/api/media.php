@@ -22,7 +22,7 @@ function get_values_media()
     'post_type' => 'media',
     'posts_per_page' => $_GET['per_page']
   );
-  $get_data = fn () => [
+  $get_data = fn() => [
     'id' => get_the_ID(),
     'title' => get_the_title(),
     'media_name' => get_post_meta(get_the_ID(), "media_info_01", TRUE),
@@ -55,11 +55,12 @@ function get_values_media_detail()
     'post_type' => 'media',
     'p' => $_GET['pageId']
   );
-  $get_data = fn () => [
+  $get_data = fn() => [
     'id' => get_the_ID(),
     'title' => get_the_title(),
     'content' => wpautop(get_the_content(), true),
-    'published' => get_the_date("Y-m-d"),
+    'published' => get_the_date(),
+    'updated' => get_the_modified_date(),
     'media_name' => get_post_meta(get_the_ID(), "media_info_01", TRUE),
     'media_volume' => get_post_meta(get_the_ID(), "media_info_02", TRUE),
     'media_contents' => get_post_meta(get_the_ID(), "media_info_03", TRUE),

@@ -41,7 +41,6 @@ const { posts } = await useWpGetList<Channel>('channel', {
             data.created_year,
             data.running_time,
           ]"
-          :published="data.published"
         />
       </li>
     </ArchiveList>

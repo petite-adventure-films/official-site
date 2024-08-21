@@ -11,7 +11,7 @@ const props = withDefaults(
     thumbnailSrc?: string | false;
     recommended?: boolean;
     excerpt?: string;
-    published?: string;
+    published?: Date;
     attachedInfo?: string[];
     no?: string;
     status?: EventStatus;
@@ -25,7 +25,7 @@ const props = withDefaults(
     thumbnailSrc: '',
     recommended: false,
     excerpt: '',
-    published: '',
+    published: undefined,
     attachedInfo: undefined,
     no: '',
     status: undefined,
@@ -62,7 +62,7 @@ const isHovered = ref(false);
       <H3>{{ props.title }}</H3>
       <p v-if="props.excerpt" class="mt-2" v-html="props.excerpt" />
       <AttachedInfo v-if="props.attachedInfo" :info="props.attachedInfo" />
-      <PublishedDate v-if="props.published" :date-time="props.published" />
+      <PublishedDate v-if="props.published" :published-date="props.published" />
     </div>
   </NuxtLink>
 </template>
