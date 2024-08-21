@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: 'Deploy develop'
 
 on:
   push:
@@ -29,6 +29,19 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}stripe/
           local-dir: ./html/stripe/
+  deploy-files-related-wordpress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Sync wp theme files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}wp/wp-content/themes/
+          local-dir: ./html/wp/wp-content/themes/
   deploy-generated-files:
     runs-on: ubuntu-latest
     steps:
@@ -63,8 +76,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
           local-dir: ./html/.output/public/
-          exclude: |
-            stripe/**
       - name: Sync wp theme files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
