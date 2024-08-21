@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { News } from '~/types/news';
 definePageMeta({
-  title: '新着情報',
+  title: 'お知らせ',
   layout: false,
 });
 const { posts } = await useWpGetList<News>('news');
@@ -12,7 +12,7 @@ const { posts } = await useWpGetList<News>('news');
     <template #breadcrumb>
       <BreadCrumb />
     </template>
-    <template #h2>新着情報</template>
+    <template #h2>お知らせ</template>
     <div v-if="posts">
       <ArchiveList>
         <NewsList :posts="posts.data" />

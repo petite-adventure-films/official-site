@@ -4,7 +4,7 @@ import type { News } from '~/types/news';
 const route = useRoute();
 definePageMeta({
   layout: false,
-  title: '新着情報',
+  title: 'お知らせ',
 });
 
 const page = route.params.page as string;
@@ -18,7 +18,7 @@ const { posts } = await useWpGetList<News>('news', {
     <template #breadcrumb>
       <BreadCrumb />
     </template>
-    <template #h2>新着情報</template>
+    <template #h2>お知らせ</template>
     <div v-if="posts">
       <ArchiveList>
         <NewsList :posts="posts.data" />
