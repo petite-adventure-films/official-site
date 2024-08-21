@@ -1,5 +1,9 @@
 name: 'Deploy wordpress'
 
+on:
+  repository_dispatch:
+    types: [deploy-wordpess]
+
 jobs:
   deploy-generated-files:
     runs-on: ubuntu-latest
