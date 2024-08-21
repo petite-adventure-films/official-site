@@ -5,7 +5,7 @@ export type Blog = {
   name: string;
   title: string;
   content: string;
-  recommended: '1' | '';
+  recommended: '1' | '0';
   published: Date;
   updated: Date;
   thumbnail: string;

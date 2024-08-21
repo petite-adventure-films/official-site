@@ -17,7 +17,10 @@ route.meta.title = detail.value?.data.title || 'BLOG';
       <BreadCrumb :crumbs="[{ to: '/blog/', name: 'BLOG' }]" />
     </template>
     <template v-if="detail" #headerTags>
-      <EmojiRecommended v-if="detail && detail.data.recommended" class="mb-1" />
+      <EmojiRecommended
+        v-if="detail && detail.data.recommended === '1'"
+        class="mb-1"
+      />
       <ArticleHeaderTags :film-tags="detail.data.film_tags" />
     </template>
     <template v-if="detail" #h2>
