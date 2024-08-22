@@ -164,13 +164,13 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
       </ul>
     </Section>
     <Section v-if="data?.related_infomation" title="関連情報（敬称略）">
-      <ul>
+      <ul class="flex flex-col gap-y-2">
         <li
           v-for="(item, index) in data.related_infomation"
           :key="`${item}-${index}`"
-        >
-          <span class="[&_a]:link-text" v-html="item" />
-        </li>
+          class="[&_a]:link-text"
+          v-html="item"
+        />
       </ul>
     </Section>
     <NuxtLink
