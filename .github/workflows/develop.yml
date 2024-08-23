@@ -88,3 +88,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
           local-dir: ./html/.output/public/
+          exclude: |
+            .htaccess
+            maintenance.html

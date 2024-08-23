@@ -10,7 +10,7 @@ $query = new WP_Query($args);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
   <meta charset="UTF-8">
