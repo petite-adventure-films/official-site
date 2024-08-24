@@ -58,7 +58,7 @@ function get_values_media_detail()
   $get_data = fn() => [
     'id' => get_the_ID(),
     'title' => html_entity_decode(get_the_title()),
-    'content' => wpautop(get_the_content(), true),
+    'content' => wpautop(html_entity_decode(get_the_content()), true),
     'published' => get_the_date(),
     'media_name' => get_post_meta(get_the_ID(), "media_info_01", TRUE),
     'media_volume' => get_post_meta(get_the_ID(), "media_info_02", TRUE),

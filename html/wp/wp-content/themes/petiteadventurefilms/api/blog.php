@@ -94,7 +94,7 @@ function get_values_blog_detail()
   $data = fn() => [
     'id' => get_the_ID(),
     'title' => html_entity_decode(get_the_title()),
-    'content' => wpautop(get_the_content(), true),
+    'content' => wpautop(html_entity_decode(get_the_content()), true),
     'recommended' => get_post_meta(get_the_ID(), 'recommend', true),
     'published' => get_the_date(),
     'film_tags' => get_the_terms(get_the_ID(), 'filmtags'),

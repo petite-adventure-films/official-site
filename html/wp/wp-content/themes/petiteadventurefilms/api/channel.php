@@ -61,7 +61,7 @@ function get_values_channel_detail()
   $get_data = fn() => [
     'id' => get_the_ID(),
     'title' => html_entity_decode(get_the_title()),
-    'content' => wpautop(get_the_content(), true),
+    'content' => wpautop(html_entity_decode(get_the_content()), true),
     'published' => get_the_date(),
     'youtube_id' => get_post_meta(get_the_ID(), 'video_info_00', TRUE),
     'created_year' => get_post_meta(get_the_ID(), 'video_info_02', TRUE),
