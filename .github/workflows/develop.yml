@@ -66,8 +66,8 @@ jobs:
       - name: Run a one-line script 
         id: getinput 
         run: | 
-            testJson=`cat ./input.json | tr -d '\n'` 
-            echo "::set-output name=testdata::$testJson" 
+          testJson=`cat ./input.json | tr -d '\n'` 
+          echo "::set-output name=testdata::$testJson" 
       - name: Create Message 
         uses: ./.github/actions/action-a 
         id: create-message 
