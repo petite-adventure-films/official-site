@@ -88,18 +88,11 @@ jobs:
         with:
           envkey_DEBUG: false
           envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_PRD }}
-          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_PRD }}
+          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PRD }}
           file_name: .env
           directory: html
           fail_on_empty: false
           sort_keys: false
-      - name: add .env
-        run: | 
-          ftp -n <<END
-          open ${{ secrets.FTP_SERVER }}
-          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/.env ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.env
-          END
       - name: Generate static files
         run: |
           cd html

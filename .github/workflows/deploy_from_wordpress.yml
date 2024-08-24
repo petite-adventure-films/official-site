@@ -7,7 +7,6 @@ on:
 jobs:
   switch-maintenace-mode:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -34,19 +33,12 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: false
-          envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_DEV }}
-          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_TEST }}
+          envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_PRD }}
+          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PRD }}
           file_name: .env
           directory: html
           fail_on_empty: false
           sort_keys: false
-      - name: add .env
-        run: | 
-          ftp -n <<END
-          open ${{ secrets.FTP_SERVER }}
-          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/.env ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.env
-          END
       - name: Generate static files
         run: |
           cd html
@@ -58,12 +50,16 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_PRD_JA }}
           local-dir: ./html/.output/public/
+          exclude: |
+            .htaccess
+            maintenance.html
       - name: Maintenace mode out
         run: | 
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
+          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
           END
+ 
