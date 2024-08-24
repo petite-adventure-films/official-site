@@ -6,6 +6,12 @@ on:
       - develop
 
 jobs:
+  ftp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: | 
+          ftp -h
   # deploy-static-files:
   #   runs-on: ubuntu-latest
   #   steps:
