@@ -73,6 +73,7 @@ jobs:
           script: |
             whoami
             ls -al
+            exit
       
       # - name: Setup Bun
       #   uses: oven-sh/setup-bun@v1
