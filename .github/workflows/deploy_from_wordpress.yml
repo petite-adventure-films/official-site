@@ -40,6 +40,13 @@ jobs:
           directory: html
           fail_on_empty: false
           sort_keys: false
+      - name: add .env
+        run: | 
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          put ./html/maintenance/in/.env ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.env
+          END
       - name: Generate static files
         run: |
           cd html
