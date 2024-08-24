@@ -1,0 +1,48 @@
+<script setup lang="ts">
+import type { Blog } from '~/types/blog';
+
+definePageMeta({
+  title: 'BLOG',
+  layout: false,
+});
+
+const route = useRoute();
+const page = route.params.page as string;
+const { posts } = await useWpGetList<Blog>('blog', {
+  query: { page },
+});
+</script>
+
+<template>
+  <NuxtLayout name="post">
+    <template #breadcrumb>
+      <BreadCrumb />
+    </template>
+    <template #h2>BLOG</template>
+    <template #lead>
+      <BlogTab />
+    </template>
+    <div v-if="posts">
+      <ArchiveList>
+        <li v-for="data in posts.data" :key="data.id">
+          <PostCard
+            :to="`/${data.name}/`"
+            :title="data.title"
+            :thumbnail-src="data.thumbnail"
+            :published="data.published"
+            :film-tags="data.film_tags"
+            :attached-info="data.categories.map((c) => c.name)"
+          />
+        </li>
+      </ArchiveList>
+      <Pager
+        page="blog"
+        :total-pages="posts.total_pages"
+        :current-page="page"
+      />
+    </div>
+    <template #aside>
+      <BlogCategories />
+    </template>
+  </NuxtLayout>
+</template>

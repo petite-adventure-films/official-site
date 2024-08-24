@@ -1,0 +1,35 @@
+<script setup lang="ts">
+import type { Media } from '~/types/media';
+
+definePageMeta({
+  title: 'メディア紹介',
+  layout: false,
+});
+
+const { posts } = await useWpGetList<Media>('media', {
+  query: { per_page: -1 },
+});
+</script>
+
+<template>
+  <NuxtLayout name="post">
+    <template #breadcrumb>
+      <BreadCrumb />
+    </template>
+    <template #h2>メディア紹介</template>
+    <ArchiveList v-if="posts">
+      <li v-for="data in posts.data" :key="data.id">
+        <PostCard
+          :to="`/media/${data.id}/`"
+          :title="data.title"
+          :film-tags="data.film_tags"
+          :attached-info="[
+            data.media_name,
+            data.media_volume,
+            data.media_contents,
+          ]"
+        />
+      </li>
+    </ArchiveList>
+  </NuxtLayout>
+</template>

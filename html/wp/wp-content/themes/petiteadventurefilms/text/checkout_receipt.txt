@@ -1,0 +1,2 @@
+お宛名: {receiptName}
+但し書き: {receiptDescription}

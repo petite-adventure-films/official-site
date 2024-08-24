@@ -1,0 +1,61 @@
+<script setup lang="ts">
+definePageMeta({
+  title: '個人情報の取り扱いについて',
+  layout: false,
+});
+</script>
+
+<template>
+  <NuxtLayout name="post">
+    <template #breadcrumb>
+      <BreadCrumb />
+    </template>
+    <template #h2>個人情報の取り扱いについて</template>
+    <H3>1.利用目的</H3>
+    <p class="mt-2">
+      サービスに関するお知らせ及びご相談やお問合せにお応えするためです。
+    </p>
+    <H3 class="mt-8">2.個人情報の第三者提供</H3>
+    <h4 class="mt-4">(1)提供する目的</h4>
+    <p class="mt-2">
+      本サービスを行うにあたり、ご相談やお問合せに適切な回答をするため、Petite
+      Adventure
+      Filmsに関係する法人・団体または個人に、個人情報を含む情報を提供することがあります。
+    </p>
+    <h4 class="mt-4">(2)提供する個人情報の項目</h4>
+    <p class="mt-2">
+      氏名、メールアドレス、電話番号、住所、お問合せ内容等のフォームにご記入いただいた情報（お問合せ後にご本人から通知を受ける等により、Petite
+      Adventure Filmsが知り得た変更情報を含みます）。
+    </p>
+    <h4 class="mt-4">(3)提供の手段又は方法</h4>
+    <p class="mt-2">
+      電話による連絡、書類の送付、電子的若しくは電磁的な方法等。
+    </p>
+    <h4 class="mt-4">(4)提供先</h4>
+    <p class="mt-2">Petite Adventure Filmsに関係する法人・団体または個人</p>
+    <h4 class="mt-4">(5)第三者への提供停止</h4>
+    <p class="mt-2">
+      お客様は個人情報の第三者提供の停止を求めることができます。
+    </p>
+    <H3 class="mt-8">3.個人情報の取扱の委託</H3>
+    <p class="mt-2">
+      Petite Adventure
+      Filmsは、前第1項の個人情報の利用目的の範囲において、貨物発送などの場合については、関連会社や委託先に個人情報の取扱を委託する場合があります。
+    </p>
+    <H3 class="mt-8">4.開示等の求めに関する手続き方法</H3>
+    <p class="mt-2">
+      利用目的通知の求め、開示、訂正、追加、削除の求め、利用停止又は消去の求め、第三者への提供停止については、以下へお問合せください。<br />
+      開示等の求めの受付窓口：Petite Adventure
+      Films（プチ・アドベンチャー・フィルムズ）
+    </p>
+    <H3 class="mt-8"
+      >5.個人情報提供の任意性及び提供いただけなかった場合について</H3
+    >
+    <p class="mt-2">
+      Petite Adventure
+      Filmsへ個人情報をご提供いただくかどうかは、お客様の任意です。個人情報をご提供いただけない場合は、サービスに関するご相談やお問合せに回答できない場合があります。
+    </p>
+    <p class="mt-16">個人情報保護管理者：Petite Adventure Films 早川由美子</p>
+    <ButtonLink to="/contact/" class="mt-16">お問い合わせ</ButtonLink>
+  </NuxtLayout>
+</template>
