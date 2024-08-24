@@ -88,9 +88,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
           local-dir: ./html/maintenance/in/
-          exclude: |
-            /
-            !maintenace/
+          exclude: **/**
       - name: Sync generated files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -107,6 +105,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
           local-dir: ./html/maintenance/out/
-          exclude: |
-            /
-            !maintenace/
+          exclude: **/**
