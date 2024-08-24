@@ -70,7 +70,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
-          script: whoami
+          script: |
+            whoami
+            ls -al
       
       # - name: Setup Bun
       #   uses: oven-sh/setup-bun@v1
