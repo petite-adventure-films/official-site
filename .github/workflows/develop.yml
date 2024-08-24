@@ -80,6 +80,14 @@ jobs:
           cd html
           bun install
           bun generate
+      - name: maintenace-in
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+          local-dir: ./html/maintenance/in/
       - name: Sync generated files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -88,6 +96,11 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
           local-dir: ./html/.output/public/
-          exclude: |
-            .htaccess
-            maintenance.html
+      - name: maintenace-out
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+          local-dir: ./html/maintenance/out/
