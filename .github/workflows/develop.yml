@@ -6,54 +6,54 @@ on:
       - develop
 
 jobs:
-  deploy-static-files:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_DEBUG: false
-          envkey_IS_DEV: true
-          envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY_TEST }}
-          file_name: .env
-          directory: html/stripe
-          fail_on_empty: false
-          sort_keys: false
-      - name: Sync files related vendor
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}vendor/
-          local-dir: ./html/vendor/
-      - name: Sync files related stripe
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}stripe/
-          local-dir: ./html/stripe/
-      - name: Make envfile for wordpress
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_DEBUG: false
-          envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          file_name: .env
-          directory: html/wp/wp-content/themes/petiteadventurefilms
-          fail_on_empty: false
-          sort_keys: false
-      - name: Sync WP theme files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}wp/wp-content/themes/
-          local-dir: ./html/wp/wp-content/themes/
+  # deploy-static-files:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v1
+  #     - name: Make envfile
+  #       uses: SpicyPizza/create-envfile@v2.0
+  #       with:
+  #         envkey_DEBUG: false
+  #         envkey_IS_DEV: true
+  #         envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY_TEST }}
+  #         file_name: .env
+  #         directory: html/stripe
+  #         fail_on_empty: false
+  #         sort_keys: false
+  #     - name: Sync files related vendor
+  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+  #       with:
+  #         server: ${{ secrets.FTP_SERVER }}
+  #         username: ${{ secrets.FTP_USERNAME }}
+  #         password: ${{ secrets.FTP_PASSWORD }}
+  #         server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}vendor/
+  #         local-dir: ./html/vendor/
+  #     - name: Sync files related stripe
+  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+  #       with:
+  #         server: ${{ secrets.FTP_SERVER }}
+  #         username: ${{ secrets.FTP_USERNAME }}
+  #         password: ${{ secrets.FTP_PASSWORD }}
+  #         server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}stripe/
+  #         local-dir: ./html/stripe/
+  #     - name: Make envfile for wordpress
+  #       uses: SpicyPizza/create-envfile@v2.0
+  #       with:
+  #         envkey_DEBUG: false
+  #         envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         file_name: .env
+  #         directory: html/wp/wp-content/themes/petiteadventurefilms
+  #         fail_on_empty: false
+  #         sort_keys: false
+  #     - name: Sync WP theme files
+  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+  #       with:
+  #         server: ${{ secrets.FTP_SERVER }}
+  #         username: ${{ secrets.FTP_USERNAME }}
+  #         password: ${{ secrets.FTP_PASSWORD }}
+  #         server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}wp/wp-content/themes/
+  #         local-dir: ./html/wp/wp-content/themes/
   deploy-generated-files:
     runs-on: ubuntu-latest
     steps:
@@ -64,20 +64,20 @@ jobs:
         with:
           node-version: 18
       - name: Run a one-line script 
-          id: getinput 
-          run: | 
-             testJson=`cat ./input.json | tr -d '\n'` 
-             echo "::set-output name=testdata::$testJson" 
+        id: getinput 
+        run: | 
+            testJson=`cat ./input.json | tr -d '\n'` 
+            echo "::set-output name=testdata::$testJson" 
       - name: Create Message 
-          uses: ./.github/actions/action-a 
-          id: create-message 
-          with: 
-             json-data: ${{ steps.getinput.outputs.testdata}} # 準備したデータ 
+        uses: ./.github/actions/action-a 
+        id: create-message 
+        with: 
+            json-data: ${{ steps.getinput.outputs.testdata}} # 準備したデータ 
         # 作ったアクションの実行 ここまで 
 
-        # 表示確認 
-        - name: Output Message 
-          run: echo ${{ steps.create-message.outputs.result-message }} # アク
+      # 表示確認 
+      - name: Output Message 
+        run: echo ${{ steps.create-message.outputs.result-message }} # アク
       
       # - name: Setup Bun
       #   uses: oven-sh/setup-bun@v1
