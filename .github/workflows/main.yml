@@ -8,10 +8,9 @@ on:
       - closed
 
 jobs:
-if_merged:
-  if: github.event.pull_request.merged == true
     switch-maintenace-mode:
       runs-on: ubuntu-latest
+      if: github.event.pull_request.merged == true
       steps:
         - name: Checkout code
           uses: actions/checkout@v1
@@ -25,6 +24,7 @@ if_merged:
             END
     deploy-static-files:
       runs-on: ubuntu-latest
+      if: github.event.pull_request.merged == true
       steps:
         - name: Checkout code
           uses: actions/checkout@v1
@@ -73,6 +73,7 @@ if_merged:
             local-dir: ./html/wp/wp-content/themes/
     deploy-generated-files:
       runs-on: ubuntu-latest
+      if: github.event.pull_request.merged == true
       steps:
         - name: Checkout code
           uses: actions/checkout@v1
