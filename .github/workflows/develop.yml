@@ -90,6 +90,7 @@ jobs:
           local-dir: ./html/maintenance/in/
           exclude: |
             **/**
+            !maintenance/**
       - name: Sync generated files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -108,3 +109,4 @@ jobs:
           local-dir: ./html/maintenance/out/
           exclude: |
             **/**
+            !maintenance/**
