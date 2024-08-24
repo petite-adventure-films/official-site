@@ -11,7 +11,11 @@ jobs:
     steps:
       - name: Test
         run: | 
-          ftp -h
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          ls
+          END
   # deploy-static-files:
   #   runs-on: ubuntu-latest
   #   steps:
