@@ -63,50 +63,57 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-      - name: Make envfile for nuxt
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_DEBUG: false
-          envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_DEV }}
-          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_TEST }}
-          file_name: .env
-          directory: html
-          fail_on_empty: false
-          sort_keys: false
-      - name: Generate static files
-        run: |
-          cd html
-          bun install
-          bun generate
-      - name: maintenace-in
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
-          local-dir: ./html/maintenance/in/
-          exclude: |
-            **/**
-            !maintenance/**
-      - name: Sync generated files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
-          local-dir: ./html/.output/public/
-      - name: maintenace-out
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
-          local-dir: ./html/maintenance/out/
-          exclude: |
-            **/**
-            !maintenance/**
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: 21
+        script: whoami
+      
+      # - name: Setup Bun
+      #   uses: oven-sh/setup-bun@v1
+      # - name: Make envfile for nuxt
+      #   uses: SpicyPizza/create-envfile@v2.0
+      #   with:
+      #     envkey_DEBUG: false
+      #     envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_DEV }}
+      #     envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_TEST }}
+      #     file_name: .env
+      #     directory: html
+      #     fail_on_empty: false
+      #     sort_keys: false
+      # - name: Generate static files
+      #   run: |
+      #     cd html
+      #     bun install
+      #     bun generate
+      # - name: maintenace-in
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}maintenance/
+      #     local-dir: ./html/maintenance/
+      
+      # - name: Sync generated files
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+      #     local-dir: ./html/.output/public/
+      # - name: maintenace-out
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+      #     local-dir: ./html/maintenance/out/
+      #     exclude: |
+      #       **/**
+      #       !maintenance/
