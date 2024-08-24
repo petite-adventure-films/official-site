@@ -26,7 +26,7 @@ function contact_ntfct($req)
   $subject = "【プチ・アドベンチャー・フィルムズ】お問い合わせ受付のお知らせ";
 
   wp_mail($email, $subject, $body, mail_header(get_bloginfo("admin_email")));
-  // wp_mail("petiteadventurefilms@gmail.com", $subject, $body, mail_header($email));
+  wp_mail("petiteadventurefilms@gmail.com", $subject, $body, mail_header($email));
 
   return new WP_REST_Response(null, 200);
 }
