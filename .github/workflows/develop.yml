@@ -98,7 +98,7 @@ jobs:
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/in/.env ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.env
+          put ./html/.env ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.env
           END
       - name: Generate static files
         run: |
