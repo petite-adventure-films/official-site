@@ -1,13 +1,16 @@
-name: 'Deploy develop'
+name: 'Deploy develop'  
 
-on:
-  push:
-    branches:
-      - develop
+on:  
+  pull_request:
+    branches:  
+      - develop  
+    types:
+      - closed
 
 jobs:
   switch-maintenace-mode:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -21,6 +24,7 @@ jobs:
           END
   deploy-static-files:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -69,6 +73,7 @@ jobs:
           local-dir: ./html/wp/wp-content/themes/
   deploy-generated-files:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -104,10 +109,11 @@ jobs:
           exclude: |
             .htaccess
             maintenance.html
-      - name: Maintenace mode out
-        run: | 
-          ftp -n <<END
-          open ${{ secrets.FTP_SERVER }}
-          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
-          END
+      # - name: Maintenace mode out
+      #   run: | 
+      #     ftp -n <<END
+      #     open ${{ secrets.FTP_SERVER }}
+      #     user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+      #     put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
+      #     END
+ 
