@@ -19,8 +19,8 @@ jobs:
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
-          put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_DEV }}maintenance.html
+          put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
+          put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_PRD_JA }}maintenance.html
           END
   deploy-static-files:
     runs-on: ubuntu-latest
@@ -32,8 +32,8 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: false
-          envkey_IS_DEV: true
-          envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY_TEST }}
+          envkey_IS_DEV: false
+          envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY_PRD }}
           file_name: .env
           directory: html/stripe
           fail_on_empty: false
@@ -44,7 +44,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}vendor/
+          server-dir: ${{ secrets.FTP_SERVER_DIR_PRD_JA }}vendor/
           local-dir: ./html/vendor/
       - name: Sync files related stripe
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -52,7 +52,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}stripe/
+          server-dir: ${{ secrets.FTP_SERVER_DIR_PRD_JA }}stripe/
           local-dir: ./html/stripe/
       - name: Make envfile for wordpress
         uses: SpicyPizza/create-envfile@v2.0
@@ -69,7 +69,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}wp/wp-content/themes/
+          server-dir: ${{ secrets.FTP_SERVER_DIR_PRD_JA }}wp/wp-content/themes/
           local-dir: ./html/wp/wp-content/themes/
   deploy-generated-files:
     runs-on: ubuntu-latest
@@ -87,8 +87,8 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: false
-          envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_DEV }}
-          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_TEST }}
+          envkey_NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE_PRD }}
+          envkey_NUXT_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_STRIPE_PUBLISHABLE_KEY_PRD }}
           file_name: .env
           directory: html
           fail_on_empty: false
@@ -104,7 +104,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR_PRD_JA }}
           local-dir: ./html/.output/public/
           exclude: |
             .htaccess
@@ -114,6 +114,6 @@ jobs:
       #     ftp -n <<END
       #     open ${{ secrets.FTP_SERVER }}
       #     user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-      #     put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
+      #     put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
       #     END
  
