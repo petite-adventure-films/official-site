@@ -5,6 +5,20 @@ on:
     types: [deploy_from_wordpress]
 
 jobs:
+  switch-maintenace-mode:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Maintenace mode in
+        run: | 
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
+          put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_DEV }}maintenance.html
+          END
   deploy-generated-files:
     runs-on: ubuntu-latest
     steps:
@@ -39,3 +53,10 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_DEV }}
           local-dir: ./html/.output/public/
+      - name: Maintenace mode out
+        run: | 
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
+          END
