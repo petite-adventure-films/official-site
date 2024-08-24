@@ -63,17 +63,21 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          script: |
-            whoami
-            ls -al
-            exit
+      - name: Run a one-line script 
+          id: getinput 
+          run: | 
+             testJson=`cat ./input.json | tr -d '\n'` 
+             echo "::set-output name=testdata::$testJson" 
+      - name: Create Message 
+          uses: ./.github/actions/action-a 
+          id: create-message 
+          with: 
+             json-data: ${{ steps.getinput.outputs.testdata}} # 準備したデータ 
+        # 作ったアクションの実行 ここまで 
+
+        # 表示確認 
+        - name: Output Message 
+          run: echo ${{ steps.create-message.outputs.result-message }} # アク
       
       # - name: Setup Bun
       #   uses: oven-sh/setup-bun@v1
