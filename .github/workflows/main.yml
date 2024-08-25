@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      contains(github.pull_request.labels.*.name, 'すべて更新')
+      contains(github.event.pull_request.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      (contains(github.pull_request.labels.*.name, 'すべて更新') || contains(github.pull_request.labels.*.name, '静的ファイル更新'))
+      (contains(github.event.pull_request.labels.*.name, 'すべて更新') || contains(github.event.pull_request.labels.*.name, '静的ファイル更新'))
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      contains(github.pull_request.labels.*.name, 'すべて更新')
+      contains(github.event.pull_request.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
