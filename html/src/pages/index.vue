@@ -13,6 +13,7 @@ const $maskVideoPoster = ref<HTMLImageElement | null>(null);
 const { query } = useRoute();
 
 const isPC = useMediaQuery('(min-width: 768px)');
+const opSkipped = query.op === 'skip';
 const isModalOpen = ref(false);
 
 const { posts: news } = await useWpGetList<News>('news', {
@@ -38,7 +39,7 @@ const kvForcedToEnd = () => {
 };
 
 // mountされる前に一度実行
-if (query?.op) {
+if (opSkipped) {
   opForcedToEnd();
   $maskVideo.value?.play().catch(() => {
     kvForcedToEnd();
@@ -51,8 +52,16 @@ onMounted(() => {
     opForcedToEnd();
   });
 
+  // OPが終了したら、SPはbgVideoは非表示
+  $introCatch.value?.addEventListener('animationend', () => {
+    if (!isPC.value) {
+      $bgVideo.value?.pause();
+      $bgVideo.value?.classList.add('hidden');
+    }
+  });
+
   // op=skip がクエリに含まれている場合、OPをスキップ、maskVideoを再生
-  if (query?.op) {
+  if (opSkipped) {
     opForcedToEnd();
     $maskVideo.value?.play().catch(() => {
       kvForcedToEnd();
@@ -107,13 +116,14 @@ onMounted(() => {
         preload="true"
         playsinline="true"
         class="absolute top-0 left-0 w-full h-full object-cover"
+        :class="{ hidden: opSkipped && !isPC }"
       >
         <source src="~/assets/video/home.mp4" type="video/mp4" />
       </video>
     </div>
     <div class="fixed top-0 left-0 -z-10 w-full h-full op-mask" />
     <div
-      v-if="!query?.op"
+      v-if="!opSkipped"
       class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
     >
       <div ref="$introCatch" class="intro-catch">
