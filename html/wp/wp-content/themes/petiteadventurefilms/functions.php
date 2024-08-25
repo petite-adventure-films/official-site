@@ -62,6 +62,7 @@ function dispatch_github_actions()
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   $response = curl_exec($ch);
   var_dump($response);
+  var_dump(GITHUB_TOKEN);
   curl_close($ch);
   return $response;
 }
