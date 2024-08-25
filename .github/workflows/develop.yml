@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      !contains(github.event.issue.labels.*.name, '静的ファイルのみ更新')
+      contains(github.event.issue.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -60,7 +60,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: false
-          envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_DISPATCH }}
           file_name: .env
           directory: html/wp/wp-content/themes/petiteadventurefilms
           fail_on_empty: false
@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      !contains(github.event.issue.labels.*.name, '静的ファイルのみ更新')
+      contains(github.event.issue.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
