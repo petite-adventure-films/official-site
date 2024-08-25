@@ -61,6 +61,7 @@ function dispatch_github_actions()
   curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   $response = curl_exec($ch);
+  var_dump($response);
   curl_close($ch);
   return $response;
 }
