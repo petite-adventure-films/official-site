@@ -10,7 +10,7 @@ on:
 jobs:
   switch-maintenace-mode:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'UpdateAll')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -24,7 +24,7 @@ jobs:
           END
   deploy-static-files:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && (contains(github.event.pull_request.labels.*.name, 'UpdateAll') || contains(github.event.pull_request.labels.*.name, 'UpdateStatic'))
+    if: github.event.pull_request.merged == true && (contains(github.event.pull_request.labels.*.name, 'すべて更新') || contains(github.event.pull_request.labels.*.name, '静的ファイル更新'))
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -73,7 +73,7 @@ jobs:
           local-dir: ./html/wp/wp-content/themes/
   deploy-generated-files:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'UpdateAll')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
