@@ -56,7 +56,10 @@ onMounted(() => {
   $introCatch.value?.addEventListener('animationend', () => {
     if (!isPC.value) {
       $bgVideo.value?.pause();
-      $bgVideo.value?.classList.add('hidden');
+      $bgVideo.value?.classList.add('opacity-0');
+      $bgVideo.value?.addEventListener('transitionend', () => {
+        $bgVideo.value?.classList.add('hidden');
+      });
     }
   });
 
