@@ -69,7 +69,7 @@ function dispatch_github_actions()
 add_action('admin_menu', 'custom_menu_page');
 function custom_menu_page()
 {
-  add_menu_page('更新', '更新', 'manage_options', 'custom_menu_page', 'add_custom_menu_page', 'dashicons-update', 2);
+  add_menu_page('サイト更新', 'サイト更新', 'manage_options', 'custom_menu_page', 'add_custom_menu_page', 'dashicons-update', 2);
 }
 function add_custom_menu_page()
 {
