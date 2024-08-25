@@ -139,12 +139,12 @@ onMounted(() => {
                 muted="true"
                 preload="true"
                 playsinline="true"
-                class="fixed top-0 left-0 z-0 w-full h-full object-cover"
+                class="hidden sm:block fixed top-0 left-0 z-0 w-full h-full object-cover"
               >
                 <source src="~/assets/video/home.mp4" type="video/mp4" />
               </video>
               <div
-                class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20"
+                class="fixed top-0 left-0 w-full h-full bg-black sm:bg-opacity-20"
               />
               <KvMessageMask />
             </div>
