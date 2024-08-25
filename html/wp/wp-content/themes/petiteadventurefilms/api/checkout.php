@@ -6,6 +6,7 @@ function checkout_ntfct($req)
   $subtotal = $req['subTotal'];
   $shipping_fee = $req['shippingFee'];
   $customer_info = $req['customerInfo'];
+  $payment_method = $req['paymentMethod'];
   $email = $customer_info['email'];
 
   // アイテムのリストを作成
@@ -27,7 +28,7 @@ function checkout_ntfct($req)
 
   // お支払い方法を作成
   $payment = '';
-  if ($customer_info['paymentMethod'] === 'bank_transfer') {
+  if ($payment_method === 'bank_transfer') {
     $payment = '銀行振込';
     $payment .= file_get_contents(__DIR__ . '/../text/checkout_bank_info.txt');
   } else {
