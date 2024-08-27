@@ -1,9 +1,9 @@
-name: 'Deploy'  
+name: 'Deploy'
 
-on:  
+on:
   pull_request:
-    branches:  
-      - main  
+    branches:
+      - main
     types:
       - closed
 
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
       - name: Maintenace mode in
-        run: | 
+        run: |
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
@@ -75,6 +75,13 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR_PRD_JA }}wp/wp-content/themes/
           local-dir: ./html/wp/wp-content/themes/
+      - name: Sync .htaccess
+        run: |
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
+          END
   deploy-generated-files:
     runs-on: ubuntu-latest
     if: |
@@ -116,10 +123,9 @@ jobs:
             .htaccess
             maintenance.html
       - name: Maintenace mode out
-        run: | 
+        run: |
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
           put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
           END
- 
