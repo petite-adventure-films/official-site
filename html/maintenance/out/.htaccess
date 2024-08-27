@@ -10,12 +10,16 @@ ErrorDocument 404 /404.html
   ExpiresActive On
 
   # Media
-    ExpiresByType image/png "access plus 1 months"
-    ExpiresByType image/jpeg "access plus 1 months"
-    ExpiresByType video/mp4 "access plus 1 months"
-    ExpiresByType image/gif "access plus 1 months"
-    ExpiresByType text/css "access plus 1 months"
-    ExpiresByType text/javascript "access plus 1 months"
+    ExpiresByType audio/ogg "access plus 1 month"
+    ExpiresByType image/bmp "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/jpeg" access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/ogg "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
 
   # Web fonts
     ExpiresByType application/font-woff "access plus 1 month"
