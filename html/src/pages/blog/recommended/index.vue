@@ -5,8 +5,13 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 route.meta.title = '⭐️おすすめ記事 - BLOG';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}blog/recommended/`,
+});
 
 const { posts } = await useWpGetList<Blog>('blog', {
   query: {

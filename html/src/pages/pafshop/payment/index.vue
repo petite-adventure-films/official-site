@@ -2,11 +2,16 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { useRecaptchaProvider } from 'vue-recaptcha';
 
-const router = useRouter();
-
 definePageMeta({
   layout: false,
-  title: 'Petite Adventure Films SHOP',
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'SHOP';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}pafshop/`,
 });
 
 useRecaptchaProvider();
@@ -14,7 +19,6 @@ const isRecapchaVerified = ref();
 
 const { subTotalInBasket, shippingFee } = useBasketState();
 
-const config = useRuntimeConfig();
 const stripe = await loadStripe(config.public.STRIPE_PUBLISHABLE_KEY);
 const paymentElement = ref();
 const elements = ref();

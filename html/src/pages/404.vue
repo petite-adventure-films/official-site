@@ -1,16 +1,11 @@
 <script setup>
 definePageMeta({
-  title: '404 Not Found',
   layout: false,
 });
-useHead({
-  meta: [
-    {
-      name: 'robots',
-      content: 'noindex,nofollow',
-    },
-  ],
-});
+
+const route = useRoute();
+
+route.meta.title = '404 Not Found';
 </script>
 
 <template>

@@ -1,7 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  title: '特定商取引法に基づく表記',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '特定商取引法に基づく表記';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}specified-commercial-transaction-law/`,
 });
 
 const list = [

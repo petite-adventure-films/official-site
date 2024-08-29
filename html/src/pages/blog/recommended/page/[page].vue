@@ -2,12 +2,16 @@
 import type { Blog } from '~/types/blog';
 
 definePageMeta({
-  title: 'BLOG',
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 route.meta.title = '⭐️おすすめ記事 - BLOG';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}blog/recommended/`,
+});
 
 const page = route.params.page as string;
 const { posts } = await useWpGetList<Blog>('blog', {

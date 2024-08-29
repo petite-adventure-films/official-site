@@ -8,6 +8,7 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const router = useRouter();
 const pageName = route.params.name as string;
@@ -17,8 +18,12 @@ const { basket, updateBasket } = useBasketState();
 
 // dvd情報
 const dvd = PRODUCTS_DVD.find((f) => f.name === pageName);
-route.meta.title = dvd?.title || 'SHOP';
 const articleCompontent = `ShopArticle${dvd?.article_component}`;
+
+route.meta.title = `${dvd?.title}`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}pafshop/${dvd?.name}/`,
+});
 
 // 映画情報
 const filmInfo: Film[] = [];

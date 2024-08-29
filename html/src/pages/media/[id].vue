@@ -5,10 +5,16 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 const pageId = route.params.id as string;
 const { detail } = await useWpGetListDetail<Media>('media_detail', { pageId });
-route.meta.title = detail.value?.data.title || 'メディア紹介';
+
+route.meta.title = `${detail.value?.data.title} - メディア紹介`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}media/${detail.value?.data.id}/`,
+});
 </script>
 
 <template>

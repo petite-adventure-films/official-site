@@ -3,10 +3,17 @@ import { Stage } from '~/types/pafshop-stage';
 import type { Customer } from '~/types/pafshop-customer';
 
 definePageMeta({
-  title: 'Petite Adventure Films SHOP',
   layout: false,
 });
+
+const config = useRuntimeConfig();
+const route = useRoute();
 const router = useRouter();
+
+route.meta.title = 'SHOP';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}pafshop/`,
+});
 
 const { basket, subTotalInBasket, shippingFee, emptyBasket } = useBasketState();
 const stage = useCheckoutStage();
@@ -20,7 +27,6 @@ const params = {
   paymentMethod: paymentMethod.value,
   customerInfo: customerInfo.value,
 };
-const config = useRuntimeConfig();
 const apiUrl = `${config.public.API_BASE}wp/wp-json/wp/v2/checkout/`;
 const { error } = await useFetch(apiUrl, {
   method: 'POST',

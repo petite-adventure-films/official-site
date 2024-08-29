@@ -2,8 +2,15 @@
 import { FILMS } from '~/constants/film_info';
 
 definePageMeta({
-  title: '監督について',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '監督について';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}director/`,
 });
 
 const tilmline: { [key: string]: { title: string; film_id: string }[] } = {};

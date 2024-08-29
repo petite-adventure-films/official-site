@@ -1,7 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Petite Adventure Films SHOP',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'SHOP';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}pafshop/`,
 });
 </script>
 

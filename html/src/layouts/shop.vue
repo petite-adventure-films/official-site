@@ -4,11 +4,8 @@ const route = useRoute();
 const config = useRuntimeConfig();
 const { updateBasket } = useBasketState();
 
-const title = `${route.meta.title} - SHOP - ${config.public.SITE_NAME}`;
-useServerSeoMeta({
-  title,
-  ogTitle: title,
-});
+const pageTitle = route.meta.title ? `${route.meta.title} - ` : '';
+const title = `${pageTitle}SHOP - ${config.public.SITE_NAME}`;
 useSeoMeta({
   title,
   ogTitle: title,

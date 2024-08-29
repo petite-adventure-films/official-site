@@ -3,8 +3,13 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 route.meta.title = 'よくある質問';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}pafshop/faq/`,
+});
 
 const list = [
   {

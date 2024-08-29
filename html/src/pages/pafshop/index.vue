@@ -2,8 +2,13 @@
 import { PRODUCTS_DVD } from '~/constants/products_dvd';
 
 definePageMeta({
-  title: 'SHOP',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}pafshop/`,
 });
 </script>
 

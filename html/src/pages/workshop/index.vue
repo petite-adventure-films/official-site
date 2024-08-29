@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import type { Blog } from '~/types/blog';
 definePageMeta({
-  title: '映像制作を学びませんか？',
   layout: false,
 });
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '映像制作を学びませんか？';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}workshop/`,
+});
+
 const { posts } = await useWpGetList<Blog>('blog', {
   query: {
     tag: '映像ワークショップ',

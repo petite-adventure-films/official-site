@@ -1,7 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  title: '自主上映について',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '自主上映について';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}four-walling/`,
 });
 </script>
 

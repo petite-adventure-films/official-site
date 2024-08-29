@@ -2,8 +2,15 @@
 import type { Media } from '~/types/media';
 
 definePageMeta({
-  title: 'メディア紹介',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'メディア紹介';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}media/`,
 });
 
 const { posts } = await useWpGetList<Media>('media', {

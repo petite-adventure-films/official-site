@@ -5,12 +5,18 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const pageId = route.params.id as string;
 const { detail } = await useWpGetListDetail<Event>('events_detail', {
   pageId,
 });
-route.meta.title = detail.value?.data.title || 'イベント・上映会';
+
+route.meta.title = `${detail.value?.data.title} - イベント・上映会`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}events/${detail.value?.data.id}/`,
+});
+
 const dateFrom = new Date(detail.value?.data.date_from);
 const from =
   dateFrom.getFullYear() < new Date().getFullYear()
