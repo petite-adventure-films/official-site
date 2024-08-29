@@ -1,9 +1,9 @@
-name: 'Deploy develop'  
+name: 'Deploy develop'
 
-on:  
+on:
   pull_request:
-    branches:  
-      - develop  
+    branches:
+      - develop
     types:
       - closed
 
@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      contains(github.event.issue.labels.*.name, 'すべて更新')
+      contains(github.event.pull_request.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
       - name: Maintenace mode in
-        run: | 
+        run: |
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      (contains(github.event.issue.labels.*.name, 'すべて更新') || contains(github.event.issue.labels.*.name, '静的ファイル更新'))
+      (contains(github.event.pull_request.labels.*.name, 'すべて更新') || contains(github.event.pull_request.labels.*.name, '静的ファイル更新'))
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      contains(github.event.issue.labels.*.name, 'すべて更新')
+      contains(github.event.pull_request.labels.*.name, 'すべて更新')
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -100,7 +100,7 @@ jobs:
           fail_on_empty: false
           sort_keys: false
       - name: add .env
-        run: | 
+        run: |
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
@@ -123,10 +123,9 @@ jobs:
             .htaccess
             maintenance.html
       - name: Maintenace mode out
-        run: | 
+        run: |
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
           put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
           END
- 
