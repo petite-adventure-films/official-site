@@ -45,7 +45,7 @@ const discSpec = computed(() => {
     const content: string[] = [];
     for (const key in dvd.disc) {
       const item = dvd.disc[key];
-      structure.push(`${item.index}${item.number}組`);
+      structure.push(`${item.index}${item.number}枚組`);
       type.push(`${item.index} ${item.type}`);
       if (content[Number(key) - 1] !== item.content) {
         content.push(item.content);
