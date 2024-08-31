@@ -135,7 +135,8 @@ Wordpress 上で公開する時は、メニューの `サイト更新` → `更�
 実行後、[Actions のジョブ](https://github.com/petite-adventure-films/ja/actions) から進行が確認できる。
 ![Screenshot 2024-08-31 at 21 44 47](https://github.com/user-attachments/assets/78a8aa7a-fbf7-42e1-ab68-b07299e39027)
 
-> [!CAUTION] > `更新作業を始める` 実行後、再度更新を行う際には、必ず前回のワークフローが終了しているか確認すること。
+> [!CAUTION]
+> `更新作業を始める` 実行後、再度更新を行う際には、必ず前回のワークフローが終了しているか確認すること。
 > 予期せぬエラーが発生する可能性があるので、一度更新作業が始まったら、ワークフローのキャンセルはなるべく避けること。
 
 ### `すべて更新` 時と Wordpress から公開時の本番公開の流れ
