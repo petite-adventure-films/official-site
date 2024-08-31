@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import type { Event } from '~/types/event';
 
-const route = useRoute();
-const year = route.params.year as string;
-
 definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
+const route = useRoute();
+
+const year = route.params.year as string;
+
 route.meta.title = `${year}年 - イベント・上映会`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}events/archive/${year}/`,
+});
 
 const { posts } = await useWpGetList<Event>('events_archive', {
   query: {

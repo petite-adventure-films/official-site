@@ -2,16 +2,21 @@
 import type { Channel } from '~/types/channel';
 
 definePageMeta({
-  title: 'チャンネル',
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const pageId = route.params.id as string;
+
 const { detail } = await useWpGetListDetail<Channel>('channel_detail', {
   pageId,
 });
-route.meta.title = detail.value?.data.title || 'チャンネル';
+
+route.meta.title = `${detail.value?.data.title} - チャンネル`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}channel/${detail.value?.data.id}/`,
+});
 </script>
 
 <template>

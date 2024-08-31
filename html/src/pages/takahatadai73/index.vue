@@ -2,8 +2,15 @@
 import { keyMessages, urTimeline } from '~/constants/takahatadai73';
 
 definePageMeta({
-  title: '高幡台団地73号棟に住み続けたい住民の会',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '「高幡台団地73号棟に住み続けたい住民の会」の記録';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}takahatadai73/`,
 });
 </script>
 

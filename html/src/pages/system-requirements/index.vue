@@ -1,8 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
-  title: '推奨環境',
   layout: false,
 });
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '推奨環境';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}system-requirements/`,
+});
+
 const list = [
   {
     index: 'Microsoft Windowsをお使いの場合',

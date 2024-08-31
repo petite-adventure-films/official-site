@@ -5,11 +5,15 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const tagName = route.params.tagName as string;
-route.meta.title = `${tagName} - BLOG`;
-
 const page = route.params.page as string;
+
+route.meta.title = `${tagName} - BLOG`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}blog/${tagName}/`,
+});
 
 const { posts } = await useWpGetList<Blog>('blog', {
   query: { page, tag: tagName },

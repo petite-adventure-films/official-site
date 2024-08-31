@@ -5,9 +5,15 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
+
 const route = useRoute();
 const categoryName = route.params.categoryName as string;
+
 route.meta.title = `${categoryName} - BLOG`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}blog/${categoryName}`,
+});
 
 const page = route.params.page as string;
 const { posts } = await useWpGetList<Blog>('blog', {

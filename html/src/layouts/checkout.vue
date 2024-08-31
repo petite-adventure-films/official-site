@@ -2,11 +2,6 @@
 const config = useRuntimeConfig();
 
 const title = `SHOP - ${config.public.SITE_NAME}`;
-useServerSeoMeta({
-  title,
-  ogTitle: title,
-  robots: 'noindex, nofollow',
-});
 useSeoMeta({
   title,
   ogTitle: title,

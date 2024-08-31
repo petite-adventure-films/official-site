@@ -6,11 +6,16 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
-const pageId = route.params.id as string;
 
+const pageId = route.params.id as string;
 const data = ref<Film | undefined>(FILMS.find((f) => f.film_id === pageId));
-route.meta.title = data.value?.title || '映画情報';
+
+route.meta.title = `${data.value?.title} - 映画`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}films/${data.value?.id}/`,
+});
 
 const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
   useAsset(`films/${data.value?.film_id}_still_${i + 1}.jpg`),

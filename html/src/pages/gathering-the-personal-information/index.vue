@@ -1,7 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  title: '個人情報の取り扱いについて',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '個人情報の取り扱いについて';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}gathering-the-personal-information/`,
 });
 </script>
 

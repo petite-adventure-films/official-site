@@ -1,7 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'サイトご利用について',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'サイトご利用について';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}copyrights-disclaimers/`,
 });
 </script>
 

@@ -5,8 +5,13 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 route.meta.title = 'イベント・上映会';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}events/`,
+});
 
 const { posts } = await useWpGetListCustom<EventList>('events');
 const getDefaultTabIndex = ref(0);

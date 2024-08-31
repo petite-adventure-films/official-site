@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import type { News } from '~/types/news';
 
-const route = useRoute();
 definePageMeta({
   layout: false,
   title: 'お知らせ',
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'お知らせ';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}news/`,
 });
 
 const page = route.params.page as string;

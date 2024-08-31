@@ -5,10 +5,16 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 const pageName = route.params.pageName as string;
 const { detail } = await useWpGetListDetail<Blog>('blog_detail', { pageName });
-route.meta.title = detail.value?.data.title || 'BLOG';
+
+route.meta.title = `${detail.value?.data.title} - 'BLOG`;
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}${pageName}/`,
+});
 </script>
 
 <template>

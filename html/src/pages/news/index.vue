@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import type { News } from '~/types/news';
 definePageMeta({
-  title: 'お知らせ',
   layout: false,
 });
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'お知らせ';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}news/`,
+});
+
 const { posts } = await useWpGetList<News>('news');
 </script>
 

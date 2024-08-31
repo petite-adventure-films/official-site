@@ -3,6 +3,7 @@
 const siteName = 'Petite Adventure Films';
 const siteDescription =
   'インディペンデントのドキュメンタリー監督、早川由美子の作品と上映情報を紹介しています。これまでに、反戦・平和運動、住宅・貧困問題、震災・原発問題など、マスメディアでは取り上げられにくいテーマを、独自の視点で表現。これまでの主な作品『ブライアンと仲間たち』、『さようならUR』、『木田さんと原発、そして日本』など。';
+const siteUrl = 'https://www.petiteadventurefilms.com/';
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -29,7 +30,10 @@ export default defineNuxtConfig({
         { property: 'og:title', content: siteName },
         { property: 'og:description', content: siteDescription },
         { property: 'og:site_name', content: siteName },
-        { property: 'og:url', content: 'https://petiteadventurefilms.com/' },
+        {
+          property: 'og:url',
+          content: siteUrl,
+        },
         { property: 'og:image', content: '/assets/images/ogp.jpg' },
         { name: 'twitter:card', content: 'summary_large_image' },
       ],
@@ -70,6 +74,8 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     '@vee-validate/nuxt',
     'vue-recaptcha/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
 
   css: ['~/assets/css/main.css'],
@@ -93,6 +99,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       SITE_NAME: siteName,
+      SITE_URL: siteUrl,
       API_BASE: '/',
       recaptcha: {
         v2SiteKey: '6LdBq5kiAAAAAFp2PvRbCv4U6DrqxTEOfLVqggJL',
@@ -109,9 +116,34 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['@vue-pdf-viewer/viewer'],
+      },
+    },
+  },
+
+  robots: {
+    disallow: [
+      '/404',
+      '/pafshop/payment',
+      '/pafshop/checkout',
+      '/pafshop/thanks',
+      '/pafshop/error',
+      '/pafshop/cart',
+      '/contact/thanks',
+      '/contact/error',
+    ],
+  },
+
   compatibilityDate: '2024-07-21',
 
   recaptcha: {
     plugin: false,
+  },
+
+  site: {
+    url: siteUrl,
   },
 });

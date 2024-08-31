@@ -3,10 +3,6 @@ const route = useRoute();
 const config = useRuntimeConfig();
 
 const title = `${route.meta.title} - ${config.public.SITE_NAME}`;
-useServerSeoMeta({
-  title,
-  ogTitle: title,
-});
 useSeoMeta({
   title,
   ogTitle: title,

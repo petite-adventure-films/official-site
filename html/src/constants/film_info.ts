@@ -250,6 +250,7 @@ export const FILMS: Film[] = [
       'O!!iDO短編映画祭（2014年･東京）',
     ],
     global_screenings: [
+      'Pori Art Museum "EAST ASIAN VIDEO FRAMES: SHADES OF URBANIZATION"（2016年・フィンランド）',
       'Split映画祭（2014年･クロアチア）',
       'A Corto di Donne映画祭（2014年･イタリア）',
       'Hanoi DOCLAB（2014年･ベトナム）',
@@ -394,7 +395,7 @@ export const FILMS: Film[] = [
     ],
     teaser_youtube_id: '',
     movie_youtube_id: '',
-    excerpt: '今は福島のこといつかは貴方の町のこと…',
+    excerpt: '今は福島のこと<br>いつかは貴方の町のこと…',
     gallery_num: 11,
     credits: [
       {
@@ -435,8 +436,8 @@ export const FILMS: Film[] = [
     ],
     related_infomation: [
       '<a href="http://asama888.cocolog-nifty.com/" target="_blank" rel="noopener noreferrer">山本宗補</a><br>フォトジャーナリスト。この映画に写真を提供して頂きました。',
-      '<a href="http://www.hirose-takashi.jp/" target="_blank" rel="noopener noreferrer">広瀬隆</a><br>ジャーナリスト。この映画の推薦文を書いていただきました。',
-      '<a href="http://fukushima-sokai.com/" target="_blank" rel="noopener noreferrer">福島原発告訴団</a><br>この映画の推薦文を書いていただいた武藤類子さんが団長を務める、福島原発告訴団のホームページ。',
+      '<a href="https://ja.wikipedia.org/wiki/%E5%BA%83%E7%80%AC%E9%9A%86" target="_blank" rel="noopener noreferrer">広瀬隆</a><br>ジャーナリスト。この映画の推薦文を書いていただきました。広瀬隆さんに関するWikipediaのページ。',
+      '<a href="https://shien-dan.org/category/kokuso/" target="_blank" rel="noopener noreferrer">福島原発告訴団</a><br>この映画の推薦文を書いていただいた武藤類子さんが団長を務める、福島原発告訴団の紹介ページ（福島原発刑事訴訟支援団ホームページ内）。',
     ],
     has_dvd: true,
     has_dvd_appendix: '英語字幕付きDVDもあります！海外のお友達にぜひ！',
@@ -560,7 +561,7 @@ export const FILMS: Film[] = [
     teaser_youtube_id: 'c7A2uPQ2Pm8',
     movie_youtube_id: '',
     excerpt:
-      '耐震問題で揺れるUR（旧住宅公団）の団地生活基盤の住居が足元から揺らぐ…',
+      '耐震問題で揺れるUR（旧住宅公団）の団地<br>生活基盤の住居が足元から揺らぐ…',
     gallery_num: 9,
     credits: [
       {

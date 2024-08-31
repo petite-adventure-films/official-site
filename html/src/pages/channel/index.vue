@@ -2,8 +2,15 @@
 import type { Channel } from '~/types/channel';
 
 definePageMeta({
-  title: 'チャンネル',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = 'チャンネル';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}channel/`,
 });
 
 const { posts } = await useWpGetList<Channel>('channel', {

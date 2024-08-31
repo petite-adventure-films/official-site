@@ -3,8 +3,15 @@ import type { Film, FilmId } from '~/types/film';
 import { FILMS } from '~/constants/film_info';
 
 definePageMeta({
-  title: '映画',
   layout: false,
+});
+
+const config = useRuntimeConfig();
+const route = useRoute();
+
+route.meta.title = '映画';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}films/`,
 });
 
 const getAttachedInfo = (data: Film) => {

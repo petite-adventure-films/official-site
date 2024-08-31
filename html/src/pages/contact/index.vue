@@ -6,8 +6,13 @@ definePageMeta({
   layout: false,
 });
 
+const config = useRuntimeConfig();
 const route = useRoute();
+
 route.meta.title = 'お問い合わせ';
+useSeoMeta({
+  ogUrl: `${config.public.SITE_URL}contact/`,
+});
 
 enum Stage {
   INPUT = 1,
