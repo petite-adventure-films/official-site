@@ -129,15 +129,17 @@ develop ブランチへの Pull request が merge されたら、開発環境へ
 
 ### Wordpress から公開
 
-Wordpress 上で公開する時は、メニューの `サイト更新` → `更新作業を始める` から実行できる。
-![Screenshot 2024-08-31 at 21 43 42](https://github.com/user-attachments/assets/008301ec-3bde-45b2-a3a3-6a9494d1cfdf)
+Wordpress 上で公開する時は、メニューの `サイト更新` → `更新作業を始める` から実行できる。　　
 
-実行後、[Actions のジョブ](https://github.com/petite-adventure-films/ja/actions) から進行が確認できる。
-![Screenshot 2024-08-31 at 21 44 47](https://github.com/user-attachments/assets/78a8aa7a-fbf7-42e1-ab68-b07299e39027)
+<img src="https://github.com/user-attachments/assets/008301ec-3bde-45b2-a3a3-6a9494d1cfdf" width="320px">
+
+実行後、[Actions のジョブ](https://github.com/petite-adventure-films/ja/actions) から進行が確認できる。　
+
+<img src="https://github.com/user-attachments/assets/78a8aa7a-fbf7-42e1-ab68-b07299e39027" width="420px">
 
 > [!CAUTION]
-> `更新作業を始める` 実行後、再度更新を行う際には、必ず前回のワークフローが終了しているか確認すること。
-> 予期せぬエラーが発生する可能性があるので、一度更新作業が始まったら、ワークフローのキャンセルはなるべく避けること。
+> `更新作業を始める` 実行後、再度更新を行う際には、必ず前回のワークフローが終了しているか確認する  
+> 予期せぬエラーが発生する可能性があるので、一度更新作業が始まったら、ワークフローのキャンセルはなるべく避ける  
 
 ### `すべて更新` 時と Wordpress から公開時の本番公開の流れ
 
