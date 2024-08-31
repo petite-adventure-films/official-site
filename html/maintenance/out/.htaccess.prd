@@ -4,6 +4,15 @@ ErrorDocument 404 /404.html
   RewriteEngine On
   RewriteCond %{HTTP_HOST} !^www\.
   RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+  RewriteRule ^films/13599(.*)$ /films/atarashikimura$1 [L,R=301]
+  RewriteRule ^films/4455(.*)$ /films/my_india_diary$1 [L,R=301]
+  RewriteRule ^films/2184(.*)$ /films/four_years_on$1 [L,R=301]
+  RewriteRule ^films/2183(.*)$ /films/apprentice_homeless$1 [L,R=301]
+  RewriteRule ^films/2173(.*)$ /films/dancing_zempukuji$1 [L,R=301]
+  RewriteRule ^films/2171(.*)$ /films/a_woman_from_fukushima$1 [L,R=301]
+  RewriteRule ^films/2169(.*)$ /films/otome_house$1 [L,R=301]
+  RewriteRule ^films/16(.*)$ /films/goodbye_ur$1 [L,R=301]
+  RewriteRule ^films/2161(.*)$ /films/brian_and_co$1 [L,R=301]
 </IfModule>
 
 <ifModule mod_expires.c>
