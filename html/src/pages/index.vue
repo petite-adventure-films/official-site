@@ -140,7 +140,11 @@ onMounted(() => {
                 preload="true"
                 playsinline="true"
                 class="fixed top-0 left-0 z-0 w-full h-full object-cover"
+                data-title="インドの路上　行き交う人々"
+                data-description="ドキュメンタリー映画『インド日記』より抜粋　早川由美子監督"
+                :poster="`${$config.public.SITE_URL}assets/images/home/op.png`"
               >
+                <!-- posterの設定は本来不要だが（擬似的にimgを置いているため）sitemapのためにあえて設定している -->
                 <source src="~/assets/video/home.mp4" type="video/mp4" />
               </video>
               <div
