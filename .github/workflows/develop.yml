@@ -8,27 +8,25 @@ on:
       - closed
 
 jobs:
-  switch-maintenace-mode:
+  limit-access-to-the-site:
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.merged == true &&
-      contains(github.event.pull_request.labels.*.name, 'すべて更新')
+      github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Maintenace mode in
+      - name: Limit access to the site
         run: |
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
-          put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_DEV }}maintenance.html
+          put ./html/maintenance/out/.htaccess.dev ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
+          put ./html/maintenance/out/.htpasswd ${{ secrets.FTP_SERVER_DIR_DEV }}.htpasswd
           END
   deploy-static-files:
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.merged == true &&
-      (contains(github.event.pull_request.labels.*.name, 'すべて更新') || contains(github.event.pull_request.labels.*.name, '静的ファイル更新'))
+      github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -78,8 +76,7 @@ jobs:
   deploy-generated-files:
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.merged == true &&
-      contains(github.event.pull_request.labels.*.name, 'すべて更新')
+      github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -122,10 +119,4 @@ jobs:
           exclude: |
             .htaccess
             maintenance.html
-      - name: Maintenace mode out
-        run: |
-          ftp -n <<END
-          open ${{ secrets.FTP_SERVER }}
-          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
-          END
+            403.html
