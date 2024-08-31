@@ -119,31 +119,30 @@ Github Secrets に登録されています。
 
 ### Pull request → merge で公開
 
-main ブランチに Pull request が merge されたら、本番環境へ反映
+main ブランチに Pull request が merge されたら、本番環境へ反映  
 develop ブランチへの Pull request が merge されたら、開発環境へ反映
 
-この際、`すべて更新` のタグがある時は、Stripe、Wordpress 構築関連ファイルと、Wordpress の内容を build したすべてのページが更新される。
+この際、`すべて更新` のタグがある時は、Stripe、Wordpress 構築関連ファイルと、Wordpress の内容を build したすべてのページが更新される。  
 `構築ファイル更新` のタグがある時は、Stripe、Wordpress 構築関連ファイルのみ更新される。
 
 タグがなにもない時は、公開作業は行われない。
 
 ### Wordpress から公開
 
-Wordpress 上で公開する時は、メニューの `サイト更新` → `更新作業を始める` から実行できる。　　
+Wordpress 上で公開する時は、メニューの `サイト更新` → `更新作業を始める` から実行できる。
 
 <img src="https://github.com/user-attachments/assets/008301ec-3bde-45b2-a3a3-6a9494d1cfdf" width="320px">
 
-実行後、[Actions のジョブ](https://github.com/petite-adventure-films/ja/actions) から進行が確認できる。　
+実行後、[Actions のジョブ](https://github.com/petite-adventure-films/ja/actions) から進行が確認できる。
 
 <img src="https://github.com/user-attachments/assets/78a8aa7a-fbf7-42e1-ab68-b07299e39027" width="420px">
 
-> [!CAUTION]
-> `更新作業を始める` 実行後、再度更新を行う際には、必ず前回のワークフローが終了しているか確認する  
-> 予期せぬエラーが発生する可能性があるので、一度更新作業が始まったら、ワークフローのキャンセルはなるべく避ける  
+> [!CAUTION] > `更新作業を始める` 実行後、再度更新を行う際には、必ず前回のワークフローが終了しているか確認する  
+> 予期せぬエラーが発生する可能性があるので、一度更新作業が始まったら、ワークフローのキャンセルはなるべく避ける
 
 ### `すべて更新` 時と Wordpress から公開時の本番公開の流れ
 
-build 時間が平均的に 30 分ほどかかるので、その間はメンテナンスモードを表示している。
+build 時間が平均的に 30 分ほどかかるので、その間はメンテナンスモードを表示している。  
 Github Actions が実行されたら、
 
 1. /maintenance/in/.htaccess がサーバー root にコピーされ、メンテナンスモードになる。
