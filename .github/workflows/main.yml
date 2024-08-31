@@ -120,5 +120,5 @@ jobs:
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/out/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
+          put ./html/maintenance/out/.htaccess.prd ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
           END

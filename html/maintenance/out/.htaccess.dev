@@ -1,0 +1,36 @@
+AuthType Basic
+AuthName "Secret"
+AuthUserFile /.htpasswd
+
+<limit GET>
+require valid-user
+</limit>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+<ifModule mod_expires.c>
+  ExpiresActive On
+
+  # Media
+  ExpiresByType audio/ogg "access plus 1 month"
+  ExpiresByType image/bmp "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType video/ogg "access plus 1 month"
+  ExpiresByType video/webm "access plus 1 month"
+
+  # Web fonts
+  ExpiresByType application/font-woff "access plus 1 month"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+  ExpiresByType application/x-font-ttf "access plus 1 month"
+  ExpiresByType font/opentype "access plus 1 month"
+
+</ifModule>
