@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-define('GITHUB_TOKEN', $_ENV['GITHUB_TOKEN']);
+define('ACCESS_TOKEN_DISPATCH', $_ENV['ACCESS_TOKEN_DISPATCH']);
 
 // API
 require_once('lib/get_data.php');
@@ -46,7 +46,7 @@ function dispatch_github_actions()
 {
   $url = 'https://api.github.com/repos/petite-adventure-films/ja/dispatches';
   $headers = [
-    'Authorization: bearer ' . GITHUB_TOKEN,
+    'Authorization: bearer ' . ACCESS_TOKEN_DISPATCH,
     'Accept: application/vnd.github+json',
     'X-GitHub-Api-Version: 2022-11-28',
     'User-Agent: deploy_from_wordpress'
