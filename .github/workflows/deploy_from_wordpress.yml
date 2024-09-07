@@ -15,8 +15,8 @@ jobs:
           ftp -n <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
-          put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_DEV }}maintenance.html
+          put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD }}.htaccess
+          put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_PRD }}maintenance.html
           END
   deploy-generated-files:
     runs-on: ubuntu-latest
