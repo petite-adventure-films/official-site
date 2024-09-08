@@ -30,10 +30,6 @@ useSeoMeta({
       v-if="detail && detail.data.media_video"
       :youtube-id="detail.data.media_video"
     />
-    <AppPdfViewer
-      v-if="detail && detail.data.media_pdf_url"
-      :src="detail.data.media_pdf_url"
-    />
     <AttachedInfo
       v-if="detail"
       :info="[
