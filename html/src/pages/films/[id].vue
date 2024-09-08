@@ -94,11 +94,13 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
       <Video :youtube-id="data.movie_youtube_id" />
     </Section>
     <Section v-if="data?.recommends" title="推薦の言葉">
-      <figure class="[&_div:not(:first-of-type)]:mt-4">
-        <div v-for="item in data.recommends" :key="`${item}-${item.by}`">
-          <figcaption>{{ item.by }}</figcaption>
-          <blockquote class="mt-2" v-html="item.text" />
-        </div>
+      <figure
+        class="mt-4"
+        v-for="item in data.recommends"
+        :key="`${item}-${item.by}`"
+      >
+        <figcaption>{{ item.by }}</figcaption>
+        <blockquote class="mt-2" v-html="item.text" />
       </figure>
     </Section>
     <Section v-if="data?.teaser_youtube_id" title="予告編">
