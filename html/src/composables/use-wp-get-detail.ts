@@ -11,7 +11,7 @@ export const useWpGetListDetail = async <T>(
     query,
   });
   const detail = data as Ref<{ data: T }>;
-  if (!detail.value || error.value) {
+  if (error.value && error.value.statusCode === 404) {
     router.push('/404/');
   }
   return { detail };
