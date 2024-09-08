@@ -96,7 +96,7 @@ onMounted(() => {
     <div class="fixed top-0 left-0 -z-10 w-full h-full">
       <img
         ref="$bgVideoPoster"
-        src="~/assets/images/home/op.png"
+        src="/assets/images/op.png"
         alt=""
         class="absolute top-0 left-0 w-full h-full object-cover"
       />
@@ -129,7 +129,7 @@ onMounted(() => {
             <div class="mask w-[320px] h-[220px] mx-auto">
               <img
                 ref="$maskVideoPoster"
-                src="~/assets/images/home/op.png"
+                src="/assets/images/op.png"
                 alt=""
                 class="fixed top-0 left-0 z-0 w-full h-full object-cover"
               />
@@ -142,7 +142,7 @@ onMounted(() => {
                 class="fixed top-0 left-0 z-0 w-full h-full object-cover"
                 data-title="インドの路上　行き交う人々"
                 data-description="ドキュメンタリー映画『インド日記』より抜粋　早川由美子監督"
-                :poster="`${$config.public.SITE_URL}assets/images/home/op.png`"
+                :poster="`${$config.public.SITE_URL}assets/images/op.png`"
               >
                 <!-- posterの設定は本来不要だが（擬似的にimgを置いているため）sitemapのためにあえて設定している -->
                 <source src="~/assets/video/home.mp4" type="video/mp4" />
@@ -212,7 +212,7 @@ onMounted(() => {
     </div>
 
     <Modal :open="isModalOpen" @close="isModalOpen = false">
-      <img src="~/assets/images/home/op.png" alt="" />
+      <img src="/assets/images/op.png" alt="" />
       <video muted controls class="absolute w-full top-0 left-0">
         <source src="~/assets/video/home.mp4" type="video/mp4" />
       </video>
