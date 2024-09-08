@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    publishedDate: Date;
+    publishedDate: string;
   }>(),
   {
     publishedDate: undefined,
