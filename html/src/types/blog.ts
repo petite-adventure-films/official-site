@@ -6,7 +6,7 @@ export type Blog = {
   title: string;
   content: string;
   recommended: '1' | '0';
-  published: Date;
+  published: string;
   thumbnail: string;
   categories: Tag[];
   film_tags: Tag[] | false;

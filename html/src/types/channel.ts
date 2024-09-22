@@ -4,7 +4,7 @@ export type Channel = {
   id: string;
   title: string;
   content: string;
-  published: Date;
+  published: string;
   youtube_id: string;
   created_year: string;
   created_country: string;

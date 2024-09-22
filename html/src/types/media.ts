@@ -4,7 +4,7 @@ export type Media = {
   id: string;
   title: string;
   content: string;
-  published: Date;
+  published: string;
   media_name: string;
   media_volume: string;
   media_contents: string;

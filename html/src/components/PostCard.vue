@@ -11,7 +11,7 @@ const props = withDefaults(
     thumbnailSrc?: string | false;
     recommended?: boolean;
     excerpt?: string;
-    published?: Date;
+    published?: string;
     attachedInfo?: string[];
     no?: string;
     status?: EventStatus;
