@@ -6,6 +6,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
   RewriteRule ^films/13599(.*)$ /films/atarashikimura$1 [L,R=301]
   RewriteRule ^films/4455(.*)$ /films/my_india_diary$1 [L,R=301]
+  RewriteRule ^films/my_india_diary(.*)$ /films/my_indian_diary$1 [L,R=301]
   RewriteRule ^films/2184(.*)$ /films/four_years_on$1 [L,R=301]
   RewriteRule ^films/2183(.*)$ /films/apprentice_homeless$1 [L,R=301]
   RewriteRule ^films/2173(.*)$ /films/dancing_zempukuji$1 [L,R=301]
