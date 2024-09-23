@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { Film, FilmId } from '~/types/film';
+import type { Film } from '~/types/film';
 import { FILMS } from '~/constants/film_info';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -11,6 +12,8 @@ const route = useRoute();
 
 route.meta.title = '映画';
 useSeoMeta({
+  description: META.films,
+  ogDescription: META.films,
   ogUrl: `${config.public.SITE_URL}films/`,
 });
 

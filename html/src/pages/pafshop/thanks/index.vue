@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Stage } from '~/types/pafshop-stage';
 import type { Customer } from '~/types/pafshop-customer';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -12,6 +13,8 @@ const router = useRouter();
 
 route.meta.title = 'SHOP';
 useSeoMeta({
+  description: META.pafshop,
+  ogDescription: META.pafshop,
   ogUrl: `${config.public.SITE_URL}pafshop/`,
 });
 

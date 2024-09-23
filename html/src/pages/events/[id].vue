@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Event } from '~/types/event';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -14,6 +15,8 @@ const { detail } = await useWpGetListDetail<Event>('events_detail', {
 
 route.meta.title = `${detail.value?.data.title} - イベント・上映会`;
 useSeoMeta({
+  description: META.events,
+  ogDescription: META.events,
   ogUrl: `${config.public.SITE_URL}events/${detail.value?.data.id}/`,
 });
 

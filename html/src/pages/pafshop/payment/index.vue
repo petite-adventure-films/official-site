@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { loadStripe } from '@stripe/stripe-js';
 import { useRecaptchaProvider } from 'vue-recaptcha';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -11,6 +12,8 @@ const route = useRoute();
 
 route.meta.title = 'SHOP';
 useSeoMeta({
+  description: META.pafshop,
+  ogDescription: META.pafshop,
   ogUrl: `${config.public.SITE_URL}pafshop/`,
 });
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { EventList } from '~/types/event';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -10,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = 'イベント・上映会';
 useSeoMeta({
+  description: META.events,
+  ogDescription: META.events,
   ogUrl: `${config.public.SITE_URL}events/`,
 });
 

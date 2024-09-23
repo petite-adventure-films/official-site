@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Event } from '~/types/event';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -12,6 +13,8 @@ const year = route.params.year as string;
 
 route.meta.title = `${year}年 - イベント・上映会`;
 useSeoMeta({
+  description: META['events/archive'].replace('%s', year),
+  ogDescription: META['events/archive'].replace('%s', year),
   ogUrl: `${config.public.SITE_URL}events/archive/${year}/`,
 });
 

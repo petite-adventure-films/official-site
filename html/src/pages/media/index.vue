@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Media } from '~/types/media';
+import META  from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -10,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = 'メディア紹介';
 useSeoMeta({
+  description: META.media,
+  ogDescription: META.media,
   ogUrl: `${config.public.SITE_URL}media/`,
 });
 

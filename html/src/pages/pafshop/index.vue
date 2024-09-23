@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { PRODUCTS_DVD } from '~/constants/products_dvd';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -8,6 +9,8 @@ definePageMeta({
 const config = useRuntimeConfig();
 
 useSeoMeta({
+  description: META.pafshop,
+  ogDescription: META.pafshop,
   ogUrl: `${config.public.SITE_URL}pafshop/`,
 });
 </script>
