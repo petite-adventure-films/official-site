@@ -11,7 +11,7 @@ const isIncludedPage = (key: string) =>
 
 <template>
   <div class="sticky -top-[1px] mt-8 z-50 flex gap-2 justify-center">
-    <HeadlessMenu v-slot="{ open }">
+    <HeadlessMenu v-slot="{ open }" as="div">
       <HeadlessMenuButton
         :class="[
           'relative z-10 flex flex-col w-12 h-12 justify-center items-center',
@@ -23,7 +23,7 @@ const isIncludedPage = (key: string) =>
       </HeadlessMenuButton>
       <HeadlessMenuItems
         as="nav"
-        class="absolute left-1/2 w-48 -translate-x-1/2 sm:w-auto bg-white border border-black pt-12 px-2 pb-2 text-xs"
+        class="absolute top-0 left-1/2 w-48 -translate-x-1/2 sm:w-auto bg-white border border-black pt-12 px-2 pb-2 text-xs"
       >
         <HeadlessMenuItem
           v-for="(name, key) in SITE_NAV"

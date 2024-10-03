@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Film } from '~/types/film';
 import { FILMS } from '~/constants/film_info';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -14,6 +15,8 @@ const data = ref<Film | undefined>(FILMS.find((f) => f.film_id === pageId));
 
 route.meta.title = `${data.value?.title} - 映画`;
 useSeoMeta({
+  description: META[`films/${pageId}` as keyof typeof META],
+  ogDescription: META[`films/${pageId}` as keyof typeof META],
   ogUrl: `${config.public.SITE_URL}films/${data.value?.id}/`,
 });
 
@@ -95,9 +98,9 @@ const galleryImages = [...Array(data.value?.gallery_num).keys()].map((i) =>
     </Section>
     <Section v-if="data?.recommends" title="推薦の言葉">
       <figure
-        class="mt-4"
         v-for="item in data.recommends"
         :key="`${item}-${item.by}`"
+        class="mt-4"
       >
         <figcaption>{{ item.by }}</figcaption>
         <blockquote class="mt-2" v-html="item.text" />

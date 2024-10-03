@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import META from '~/constants/meta.json';
+
 definePageMeta({
   layout: false,
 });
@@ -8,6 +10,8 @@ const route = useRoute();
 
 route.meta.title = '自主上映について';
 useSeoMeta({
+  description: META['four-walling'],
+  ogDescription: META['four-walling'],
   ogUrl: `${config.public.SITE_URL}four-walling/`,
 });
 </script>

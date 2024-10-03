@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import META from '~/constants/meta.json';
+
 definePageMeta({
   layout: false,
 });
@@ -8,6 +10,8 @@ const route = useRoute();
 
 route.meta.title = 'よくある質問';
 useSeoMeta({
+  description: META.pafshop,
+  ogDescription: META.pafshop,
   ogUrl: `${config.public.SITE_URL}pafshop/faq/`,
 });
 

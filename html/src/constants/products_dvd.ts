@@ -2,8 +2,8 @@ import type { DVD } from '~/types/dvd';
 export const PRODUCTS_DVD: DVD[] = [
   {
     id: 6,
-    name: 'my_india_diary',
-    film_id: 'my_india_diary',
+    name: 'my_indian_diary',
+    film_id: 'my_indian_diary',
     article_component: 'MyIndiaDiary',
     title: 'インド日記～ガジュマルの木の女たち～',
     prices: [

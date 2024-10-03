@@ -3,6 +3,7 @@ import type { itemInBasket } from '~/types/item-in-basket';
 import type { Film } from '~/types/film';
 import { PRODUCTS_DVD } from '~/constants/products_dvd';
 import { FILMS } from '~/constants/film_info';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -22,6 +23,8 @@ const articleCompontent = `ShopArticle${dvd?.article_component}`;
 
 route.meta.title = `${dvd?.title}`;
 useSeoMeta({
+  description: META.pafshop,
+  ogDescription: META.pafshop,
   ogUrl: `${config.public.SITE_URL}pafshop/${dvd?.name}/`,
 });
 

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Blog } from '~/types/blog';
+import META from '~/constants/meta.json';
+
 definePageMeta({
   layout: false,
 });
@@ -9,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = '映像制作を学びませんか？';
 useSeoMeta({
+  description: META.workshop,
+  ogDescription: META.workshop,
   ogUrl: `${config.public.SITE_URL}workshop/`,
 });
 

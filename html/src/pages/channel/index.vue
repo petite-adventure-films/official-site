@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Channel } from '~/types/channel';
+import MEGA from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -10,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = 'チャンネル';
 useSeoMeta({
+  description: MEGA.channel,
+  ogDescription: MEGA.channel,
   ogUrl: `${config.public.SITE_URL}channel/`,
 });
 

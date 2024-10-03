@@ -1,6 +1,6 @@
 export type FilmId =
   | 'atarashikimura'
-  | 'my_india_diary'
+  | 'my_indian_diary'
   | 'four_years_on'
   | 'apprentice_homeless'
   | 'dancing_zempukuji'

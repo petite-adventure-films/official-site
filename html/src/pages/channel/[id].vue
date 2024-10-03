@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Channel } from '~/types/channel';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -15,6 +16,8 @@ const { detail } = await useWpGetListDetail<Channel>('channel_detail', {
 
 route.meta.title = `${detail.value?.data.title} - チャンネル`;
 useSeoMeta({
+  description: META.channel,
+  ogDescription: META.channel,
   ogUrl: `${config.public.SITE_URL}channel/${detail.value?.data.id}/`,
 });
 </script>

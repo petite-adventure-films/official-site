@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { FILMS } from '~/constants/film_info';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -10,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = '監督について';
 useSeoMeta({
+  description: META.director,
+  ogDescription: META.director,
   ogUrl: `${config.public.SITE_URL}director/`,
 });
 

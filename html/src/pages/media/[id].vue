@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Media } from '~/types/media';
+import * as PDFJS from 'pdfjs-dist'
+PDFJS.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS.version}/build/pdf.worker.mjs`
 
 definePageMeta({
   layout: false,
@@ -14,6 +16,42 @@ const { detail } = await useWpGetListDetail<Media>('media_detail', { pageId });
 route.meta.title = `${detail.value?.data.title} - メディア紹介`;
 useSeoMeta({
   ogUrl: `${config.public.SITE_URL}media/${detail.value?.data.id}/`,
+});
+
+const $pdfViewer = ref<HTMLCanvasElement | null>(null);
+
+onMounted(() => {
+  const loadingTask = PDFJS.getDocument(detail.value?.data.media_pdf_url)
+  loadingTask.promise.then((pdf) => {
+    // 1ページ目を取得
+    // 現状1ページしかないので、決め内で取得
+    pdf.getPage(1).then((page) => {
+      const scale = 1.5
+      const viewport = page.getViewport({ scale: scale })
+      // Canvasを作成してPDFをレンダリング
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+      canvas.height = viewport.height
+      canvas.width = viewport.width
+      // CanvasをDOMに追加
+      if ($pdfViewer.value) {
+        $pdfViewer.value.appendChild(canvas)
+      }
+      // PDFページをCanvasにレンダリング
+      if (context) {
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        }
+        page.render(renderContext)
+      } else {
+        console.error('Failed to get canvas context');
+      }
+    })
+  }, (reason) => {
+    // PDFのロードに失敗した場合
+    console.error(reason)
+  })
 });
 </script>
 
@@ -30,6 +68,7 @@ useSeoMeta({
       v-if="detail && detail.data.media_video"
       :youtube-id="detail.data.media_video"
     />
+    <div v-if="detail && detail.data.media_pdf_url" ref="$pdfViewer" class="w-full [&_canvas]:w-full [&_canvas]:border [&_canvas]:border-black"/>
     <AttachedInfo
       v-if="detail"
       :info="[

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Blog } from '~/types/blog';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -10,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = 'BLOG';
 useSeoMeta({
+  description: META.blog,
+  ogDescription: META.blog,
   ogUrl: `${config.public.SITE_URL}blog/`,
 });
 

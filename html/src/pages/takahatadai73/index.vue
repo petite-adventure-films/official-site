@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { keyMessages, urTimeline } from '~/constants/takahatadai73';
+import META from '~/constants/meta.json';
 
 definePageMeta({
   layout: false,
@@ -10,6 +11,8 @@ const route = useRoute();
 
 route.meta.title = '「高幡台団地73号棟に住み続けたい住民の会」の記録';
 useSeoMeta({
+  description: META.takahatadai73,
+  ogDescription: META.takahatadai73,
   ogUrl: `${config.public.SITE_URL}takahatadai73/`,
 });
 </script>
