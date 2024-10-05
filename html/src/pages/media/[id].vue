@@ -21,7 +21,11 @@ useSeoMeta({
 const $pdfViewer = ref<HTMLCanvasElement | null>(null);
 
 onMounted(() => {
-  const loadingTask = PDFJS.getDocument(detail.value?.data.media_pdf_url)
+  const loadingTask = PDFJS.getDocument({
+    url: detail.value?.data.media_pdf_url,
+    cMapUrl: `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS.version}/cmaps/`,
+    cMapPacked: true,
+  })
   loadingTask.promise.then((pdf) => {
     // 1ページ目を取得
     // 現状1ページしかないので、決め内で取得
