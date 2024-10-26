@@ -17,21 +17,22 @@ useSeoMeta({
 });
 
 const { posts } = await useWpGetListCustom<EventList>('events');
-const getDefaultTabIndex = ref(0);
 
-const thisYear = new Date().getFullYear();
-const thisMonth = new Date().getMonth() + 1;
-let index = 0;
-if (posts.value.data && posts.value.data[thisYear]) {
-  for (const month in posts.value.data[thisYear]) {
-    if (Number(month) >= thisMonth) {
-      getDefaultTabIndex.value = index;
-      break;
+const latestEvents = computed(() => {
+  const flattened = [];
+  if (posts.value.data) {
+    for (const year in posts.value.data) {
+      for (const month in posts.value.data[year]) {
+        const filteredData = posts.value.data[year][month].filter((event) => {
+          const eventDate = new Date(event.date_to || event.date_from);
+          return eventDate >= new Date();
+        });
+        flattened.push(...filteredData);
+      }
     }
-    index++;
   }
-}
-watch(posts, async () => {});
+  return flattened.reverse();
+});
 </script>
 
 <template>
@@ -42,9 +43,19 @@ watch(posts, async () => {});
     <template #h2>イベント・上映会</template>
     <HeadlessTabGroup
       v-if="posts && posts.data && Object.keys(posts.data).length > 0"
-      :default-index="getDefaultTabIndex"
+      as="div"
+      :default-index="0"
     >
       <HeadlessTabList class="flex flex-wrap gap-2">
+        <HeadlessTab v-slot="{ selected }">
+          <span
+            :class="[
+              'block border border-black px-2 py-1',
+              `${selected ? 'bg-gray-100' : ''} sm:hover:bg-gray-100`,
+            ]"
+            >最新</span
+          >
+        </HeadlessTab>
         <div
           v-for="(months, year) in posts.data"
           :key="`events-tab-${year}`"
@@ -67,6 +78,24 @@ watch(posts, async () => {});
         </div>
       </HeadlessTabList>
       <HeadlessTabPanels class="mt-8">
+        <HeadlessTabPanel>
+          <ArchiveList>
+            <li v-for="data in latestEvents" :key="`event-${data.id}`">
+              <PostCard
+                :to="`/events/${data.id}/`"
+                :title="data.title"
+                :no="data.no"
+                :status="data.status"
+                :film-tags="data.film_tags"
+                :event-tags="data.event_tags"
+                :attached-info="[
+                  `${data.date_from}${data.date_to ? ` - ${data.date_to}` : ''}`,
+                  data.place,
+                ]"
+              />
+            </li>
+          </ArchiveList>
+        </HeadlessTabPanel>
         <div v-for="(months, year) in posts.data" :key="`events-tab-${year}`">
           <HeadlessTabPanel
             v-for="(list, month) in months"
