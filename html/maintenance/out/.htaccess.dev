@@ -9,7 +9,7 @@ require valid-user
   RewriteRule (.*) https://dev.petiteadventurefilms.com/$1 [R=301,L]
 </IfModule>
 
-<ifModule mod_expires.c>
+<IfModule mod_expires.c>
   ExpiresActive On
 
   # Media
@@ -30,4 +30,4 @@ require valid-user
   ExpiresByType application/x-font-ttf "access plus 1 month"
   ExpiresByType font/opentype "access plus 1 month"
 
-</ifModule>
+</IfModule>
