@@ -16,7 +16,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^films/2161(.*)$ /films/brian_and_co$1 [L,R=301]
 </IfModule>
 
-<ifModule mod_expires.c>
+<IfModule mod_expires.c>
   ExpiresActive On
 
   # Media
@@ -37,4 +37,4 @@ ErrorDocument 404 /404.html
   ExpiresByType application/x-font-ttf "access plus 1 month"
   ExpiresByType font/opentype "access plus 1 month"
 
-</ifModule>
+</IfModule>
