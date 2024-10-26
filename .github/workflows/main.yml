@@ -8,6 +8,7 @@ on:
       - closed
 
 jobs:
+  # htaccessを更新するとサーバーエラーになるため一時停止
   # switch-maintenace-mode:
   # runs-on: ubuntu-latest
   # if: |
