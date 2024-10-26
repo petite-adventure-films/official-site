@@ -18,11 +18,12 @@ jobs:
         uses: actions/checkout@v1
       - name: Maintenace mode in
         run: |
-          ftp -n <<END
+          ftp -n -v <<END
           open ${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
           put ./html/maintenance/in/.htaccess ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
           put ./html/maintenance/in/maintenance.html ${{ secrets.FTP_SERVER_DIR_PRD_JA }}maintenance.html
+          bye
           END
   deploy-static-files:
     runs-on: ubuntu-latest
