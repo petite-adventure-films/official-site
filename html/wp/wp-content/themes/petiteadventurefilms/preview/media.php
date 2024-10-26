@@ -58,7 +58,7 @@
             <span class="before:content-['#'] before:pr-[1px]"><?= get_post_meta(get_the_ID(), 'media_info_03', TRUE); ?></span><!--]-->
           </div>
           <div class="mt-8 [&amp;_p:has(iframe)]:aspect-video [&amp;_iframe]:w-full [&amp;_iframe]:h-full [&amp;_a]:link-text [&amp;_img]:mt-2">
-            <? the_content(); ?>
+            <? echo wpautop(html_entity_decode(get_the_content()), true) ?>
           </div>
           <? if (get_post_meta(get_the_ID(), "media_info_06", TRUE) || (get_post_meta(get_the_ID(), "media_info_07", TRUE))) { ?>
             <article class="relative mt-8 border border-black py-8 px-4 before:content-['記事本文'] before:text-xs before:px-2 before:py-1 before:bg-gray-100 before:absolute before:right-0 before:top-0">
