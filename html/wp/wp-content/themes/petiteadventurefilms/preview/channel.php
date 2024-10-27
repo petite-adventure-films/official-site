@@ -47,7 +47,7 @@
             <span class="before:content-['#'] before:pr-[1px]"><?= get_post_meta(get_the_ID(), 'video_info_04', TRUE); ?></span><!--]-->
           </div>
           <div class="mt-8 [&amp;_p:has(iframe)]:aspect-video [&amp;_iframe]:w-full [&amp;_iframe]:h-full [&amp;_a]:link-text [&amp;_img]:mt-2">
-            <? echo wpautop(html_entity_decode(get_the_content()), true) ?>
+            <? echo wpautop(get_the_content(), true) ?>
           </div>
           <div class="mt-8">
             <time class="block mt-2 text-xs text-gray-500"><?= get_the_date() ?></time>

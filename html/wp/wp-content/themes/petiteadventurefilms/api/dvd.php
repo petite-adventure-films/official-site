@@ -58,7 +58,7 @@ function get_values_dvd_detail()
     'id' => get_the_ID(),
     'title' => html_entity_decode(get_the_title()),
     'name' => get_post_field('post_name', get_the_ID()),
-    'content' => wpautop(html_entity_decode(get_the_content()), true),
+    'content' => wpautop(get_the_content(), true),
     'intro' => get_post_meta(get_the_ID(), 'product_info_03', TRUE),
     'catch' => get_post_meta(get_the_ID(), 'product_info_05', TRUE),
   ];
