@@ -1,0 +1,17 @@
+ErrorDocument 503 /maintenance.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !/maintenance.html
+  RewriteCond %{REQUEST_FILENAME} !\.(php|jpg|png|css)$
+  RewriteRule ^.*$ - [R=503,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Retry-After 3600
+</IfModule>
+
+#%PHP_START%#
+# Make no changes between _START and _END tag, generated automatically.
+AddHandler application/x-lsphp74 .php
+#%PHP_END%#
