@@ -55,11 +55,10 @@ jobs:
           exclude: |
             .htaccess
             maintenance.html
-      # htaccessを更新するとサーバーエラーになるため一時停止
-      # - name: Maintenace mode out
-      #   run: |
-      #     ftp -n <<END
-      #     open ${{ secrets.FTP_SERVER }}
-      #     user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-      #     put ./html/maintenance/out/.htaccess.prd ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
-      #     END
+      - name: Maintenace mode out
+        run: |
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          put ./html/maintenance/out/.htaccess.prd ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
+          END
