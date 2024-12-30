@@ -5,6 +5,7 @@ require valid-user
 
 <IfModule mod_rewrite.c>
   RewriteEngine on
+  RewriteCond %{HTTPS} off
   RewriteCond %{HTTP_HOST} ^dev\.petiteadventurefilms\.com$
   RewriteRule (.*) https://dev.petiteadventurefilms.com/$1 [R=301,L]
 </IfModule>
