@@ -19,6 +19,18 @@ const { posts: news } = await useWpGetList<News>('news', {
   query: { per_page: 1 },
 });
 
+const isScrollDisabled = ref(true);
+
+const enableScroll = () => {
+  document.body.style.overflow = 'auto';
+  isScrollDisabled.value = false;
+};
+
+const disableScroll = () => {
+  document.body.style.overflow = 'hidden';
+  isScrollDisabled.value = true;
+};
+
 const opForcedToEnd = () => {
   if ($animationWrapper.value && $contentsWrapper.value) {
     $animationWrapper.value.classList.add('loaded', 'op-skipped');
@@ -47,23 +59,29 @@ if (query?.op) {
 }
 
 onMounted(() => {
+  disableScroll();
+
   // 低電力モードなど、なんらかの理由で動画が再生できない場合、OPをスキップ
   $bgVideo.value?.play().catch(() => {
     opForcedToEnd();
+    enableScroll();
   });
 
   // op=skip がクエリに含まれている場合、OPをスキップ、maskVideoを再生
   if (query?.op) {
     opForcedToEnd();
+    enableScroll();
     $maskVideo.value?.play().catch(() => {
       kvForcedToEnd();
     });
   } else {
     $bgVideo.value?.play().catch(() => {
       opForcedToEnd();
+      enableScroll();
     });
     $maskVideo.value?.play().catch(() => {
       kvForcedToEnd();
+      enableScroll();
     });
 
     const kvTop = $kv.value?.offsetTop || 0;
@@ -75,6 +93,10 @@ onMounted(() => {
       );
     }
     $animationWrapper.value?.classList.add('loaded');
+
+    $animationWrapper.value?.addEventListener('animationend', () => {
+      enableScroll();
+    });
 
     // PCの場合、bgVideoとmaskVideoの再生位置を同期
     if (isPC.value) {
