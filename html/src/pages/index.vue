@@ -20,9 +20,10 @@ const { posts: news } = await useWpGetList<News>('news', {
 });
 
 const opForcedToEnd = () => {
-  $animationWrapper.value?.classList.add('loaded');
-  $animationWrapper.value?.classList.add('op-skipped');
-  $contentsWrapper.value?.classList.add('op-skipped');
+  if ($animationWrapper.value && $contentsWrapper.value) {
+    $animationWrapper.value.classList.add('loaded', 'op-skipped');
+    $contentsWrapper.value.classList.add('op-skipped');
+  }
 
   if (isPC.value) {
     $bgVideo.value?.play().catch(() => {
@@ -67,19 +68,20 @@ onMounted(() => {
 
     const kvTop = $kv.value?.offsetTop || 0;
     const introCatchTop = $introCatch.value?.offsetTop || 0;
-    $introCatch.value?.setAttribute(
-      'style',
-      `--pos-to: ${(introCatchTop - kvTop) * -1}px`,
-    );
+    if ($introCatch.value) {
+      $introCatch.value.setAttribute(
+        'style',
+        `--pos-to: ${(introCatchTop - kvTop) * -1}px`,
+      );
+    }
     $animationWrapper.value?.classList.add('loaded');
 
     // PCの場合、bgVideoとmaskVideoの再生位置を同期
     if (isPC.value) {
       let isMaskVideoPlayedAgain = false;
       $maskVideo.value?.addEventListener('playing', () => {
-        if (!isMaskVideoPlayedAgain) {
-          const time = $bgVideo.value?.currentTime;
-          $maskVideo.value.currentTime = time;
+        if (!isMaskVideoPlayedAgain && $bgVideo.value) {
+          $maskVideo.value!.currentTime = $bgVideo.value.currentTime;
           isMaskVideoPlayedAgain = true;
         }
       });
@@ -140,8 +142,8 @@ onMounted(() => {
                 preload="true"
                 playsinline="true"
                 class="fixed top-0 left-0 z-0 w-full h-full object-cover"
-                data-title="インドの路上　行き交う人々"
-                data-description="ドキュメンタリー映画『インド日記』より抜粋　早川由美子監督"
+                data-title="インドの路上 行き交う人々"
+                data-description="ドキュメンタリー映画『インド日記』より抜粋 早川由美子監督"
                 :poster="`${$config.public.SITE_URL}assets/images/op.png`"
               >
                 <!-- posterの設定は本来不要だが（擬似的にimgを置いているため）sitemapのためにあえて設定している -->
