@@ -67,7 +67,7 @@ function get_values_media_detail()
     'media_pdf_url' => wp_get_attachment_url(get_post_meta(get_the_ID(), "media_info_05", TRUE)),
     'article_title' => get_post_meta(get_the_ID(), "media_info_06", TRUE),
     'article_subtitle' => get_post_meta(get_the_ID(), "media_info_07", TRUE),
-    'article_contents' => get_post_meta(get_the_ID(), "media_info_08", TRUE),
+    'article_contents' => wpautop(get_post_meta(get_the_ID(), "media_info_08", TRUE)),
     'film_tags' => get_the_terms(get_the_ID(), 'filmtags'),
   ];
   return get_detail($args, $get_data);
