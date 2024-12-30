@@ -123,9 +123,8 @@ export default defineNuxtConfig({
   robots: {
     disallow: [
       '/404',
-      '/pafshop/payment',
-      '/pafshop/checkout',
       '/pafshop/thanks',
+      '/pafshop/cancel',
       '/pafshop/error',
       '/pafshop/cart',
       '/contact/thanks',

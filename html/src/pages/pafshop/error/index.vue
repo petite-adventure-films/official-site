@@ -25,7 +25,7 @@ useSeoMeta({
       エラーが発生しました。<br />お手数ですが、もう一度始めからやり直してください。
     </p>
     <p class="mt-2">
-      <NuxtLink to="/pafshop/checkout/" class="link-text mt-8"
+      <NuxtLink to="/pafshop/cart/" class="link-text mt-8"
         >注文手続きに戻る</NuxtLink
       ><br />
       <NuxtLink to="/?op=skip" class="link-text mt-8"
