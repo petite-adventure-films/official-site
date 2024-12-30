@@ -42,7 +42,7 @@ try {
             'amount' =>  $jsonObj['shipping_fee'],
             'currency' => 'jpy',
           ],
-          'display_name' => '一律送料',
+          'display_name' => 'クリックポスト等',
         ],
       ],
     ],
