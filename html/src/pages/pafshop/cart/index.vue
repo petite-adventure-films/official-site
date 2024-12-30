@@ -35,7 +35,7 @@ const purchase = async () => {
     }
     isPurchasing.value = true;
     const response = await $fetch(
-      `${config.public.API_BASE}/stripe/checkout.php`,
+      `${config.public.API_BASE}stripe/checkout.php`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
