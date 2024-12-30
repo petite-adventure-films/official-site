@@ -60,8 +60,8 @@ try {
         ],
       ],
     ],
-    'success_url' => $BASE_URL . 'pafshop/thanks/',
-    'cancel_url' => $BASE_URL . 'pafshop/cancel/',
+    'success_url' => BASE_URL . 'pafshop/thanks/',
+    'cancel_url' => BASE_URL . 'pafshop/cancel/',
   ]);
   http_response_code(200);
   echo json_encode(['url' => $checkout_session->url]);
