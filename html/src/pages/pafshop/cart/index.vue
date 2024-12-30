@@ -27,7 +27,7 @@ const {
 const loading = ref(true);
 const isPurchasing = ref(false);
 
-// 決済画面描画
+// stripe決済へ
 const purchase = async () => {
   try {
     if (isPurchasing.value) {
