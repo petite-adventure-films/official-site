@@ -42,7 +42,7 @@ for (const film of FILMS) {
       <img
         src="~/assets/images/director/profile.jpg"
         alt="早川由美子"
-        class="mt-4"
+        class="mt-4 border border-black"
       />
       <p class="mt-4">
         1975年東京都出身。成蹊大学法学部、London School of
