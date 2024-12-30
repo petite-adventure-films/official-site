@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
-  .link-text {
+  .link-text:not([aria-disabled='true']) {
     @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
+  }
+  .link-text[aria-disabled='true'] {
+    @apply text-gray-500 pointer-events-none;
   }
 
   .link-text[target='_blank']::after {
