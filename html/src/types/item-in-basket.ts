@@ -6,3 +6,15 @@ export type itemInBasket = {
   disc: string;
   unit: number;
 };
+
+export type itemsToCheckout = {
+  quantity: number;
+  price_data: {
+    currency: string;
+    product_data: {
+      name: string;
+      description: string;
+    };
+    unit_amount: number;
+  };
+};

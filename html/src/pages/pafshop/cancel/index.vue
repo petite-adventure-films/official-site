@@ -21,12 +21,9 @@ useSeoMeta({
     <template #breadcrumb>
       <ShopBreadCrumb />
     </template>
-    <template #h2> 注文完了 </template>
-    <p>ご注文、誠にありがとうございます。</p>
-    <p>
-      ご注文内容の確認についてご連絡を差し上げます。
-      <br />しばらくお待ちください。
-    </p>
+    <template #h2> 注文キャンセル </template>
+    <p>注文をキャンセルいたしました。</p>
+    <p>またの機会がありましたらよろしくお願いいたします。</p>
     <p class="mt-2">
       <NuxtLink to="/pafshop/" class="link-text mt-8">SHOPへ戻る</NuxtLink
       ><br />
