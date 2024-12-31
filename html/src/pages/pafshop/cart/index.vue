@@ -34,7 +34,7 @@ const purchase = async () => {
       return;
     }
     isPurchasing.value = true;
-    const response = await $fetch(
+    const response: { url?: string } = await $fetch(
       `${config.public.API_BASE}stripe/checkout.php`,
       {
         method: 'POST',
@@ -66,7 +66,10 @@ onMounted(() => {
 
 <template>
   <NuxtLayout name="checkout">
-    <div v-if="!loading && basket && basket.length > 0">
+    <div v-if="isPurchasing" class="flex justify-center items-center h-32">
+      お手続き中です。しばらくお待ちください。
+    </div>
+    <div v-else-if="!loading && basket && basket.length > 0">
       <ShopBasketItem :basket="basket" :editable="true" />
       <dl>
         <div class="flex justify-between py-1 px-2 border-t text-right">
@@ -98,7 +101,7 @@ onMounted(() => {
         >注文する</Button
       ><br />
       <p class="mt-2 text-sm text-gray-500">
-        ※注文後、Stripe決済画面に移動します。
+        ※注文後、Stripe決済ページに移動します。
       </p>
       <NuxtLink
         :to="isPurchasing ? '' : '/pafshop/'"
