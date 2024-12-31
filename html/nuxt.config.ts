@@ -73,7 +73,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-headlessui',
     '@vee-validate/nuxt',
-    'vue-recaptcha/nuxt',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
   ],
@@ -100,10 +99,7 @@ export default defineNuxtConfig({
     public: {
       SITE_NAME: siteName,
       SITE_URL: siteUrl,
-      API_BASE: '/',
-      recaptcha: {
-        v2SiteKey: '6LdBq5kiAAAAAFp2PvRbCv4U6DrqxTEOfLVqggJL',
-      },
+      API_BASE: 'http://localhost:8000',
       STRIPE_PUBLISHABLE_KEY:
         'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR',
     },
@@ -127,9 +123,8 @@ export default defineNuxtConfig({
   robots: {
     disallow: [
       '/404',
-      '/pafshop/payment',
-      '/pafshop/checkout',
       '/pafshop/thanks',
+      '/pafshop/cancel',
       '/pafshop/error',
       '/pafshop/cart',
       '/contact/thanks',
@@ -138,10 +133,6 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-07-21',
-
-  recaptcha: {
-    plugin: false,
-  },
 
   site: {
     url: siteUrl,

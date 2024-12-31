@@ -17,7 +17,6 @@ require_once('api/media.php');
 require_once('api/blog.php');
 require_once('api/dvd.php');
 require_once('api/contact.php');
-require_once('api/checkout.php');
 
 // アイキャッチ画像有効化
 add_theme_support('post-thumbnails');

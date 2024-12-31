@@ -22,6 +22,8 @@ jobs:
           envkey_DEBUG: false
           envkey_IS_DEV: false
           envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY_PRD }}
+          envkey_STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET_PRD }}
+          envkey_BASE_URL: https://www.petiteadventurefilms.com/
           file_name: .env
           directory: html/stripe
           fail_on_empty: false

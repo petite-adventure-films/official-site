@@ -18,7 +18,6 @@
     "pdfjs-dist": "^4.6.82",
     "stripe": "^16.5.0",
     "vue": "^3.4.21",
-    "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

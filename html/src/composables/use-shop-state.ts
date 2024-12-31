@@ -1,7 +1,7 @@
 import { Stage } from '~/types/pafshop-stage';
-import type { itemInBasket } from '~/types/item-in-basket';
+import type { itemInBasket, itemsToCheckout } from '~/types/item-in-basket';
 import type { Customer } from '~/types/pafshop-customer';
-import type { PaymentMethod } from '~/types/pafshop-payment-method.js';
+import type { PaymentMethod } from '~/types/pafshop-payment-method';
 
 export const deteleAllItems = (basket: Ref<itemInBasket[]>) => () => {
   basket.value.length = 0;
@@ -49,6 +49,10 @@ export const useBasketState = () => {
   const counterInBasket = useState('counterInBasket', () => 0);
   const subTotal = useState('subTotal', () => 0);
   const shippingFee = useState('shippingFee', () => 0);
+  const itemsToCheckout = useState<itemsToCheckout[]>(
+    'itemsToCheckout',
+    () => [],
+  );
 
   watch(
     basket.value,
@@ -62,12 +66,24 @@ export const useBasketState = () => {
         0,
       );
       shippingFee.value = subTotal.value >= 3000 ? 0 : 300;
+      itemsToCheckout.value = newValue.map((item) => ({
+        quantity: item.unit,
+        price_data: {
+          currency: 'jpy',
+          product_data: {
+            name: item.title,
+            description: `${item.type} ${item.disc}`,
+          },
+          unit_amount: item.amount,
+        },
+      }));
     },
     { deep: true },
   );
 
   return {
     basket: shallowReadonly(basket),
+    itemsToCheckout: readonly(itemsToCheckout),
     counterInBasket: readonly(counterInBasket),
     subTotalInBasket: readonly(subTotal),
     shippingFee: readonly(shippingFee),
