@@ -50,7 +50,8 @@ try {
     'mode' => 'payment',
     'payment_method_types' => [
       'card',
-      'customer_balance'
+      'customer_balance',
+      'konbini'
     ],
     'payment_method_options' => [
       'customer_balance' => [
@@ -58,6 +59,9 @@ try {
         'bank_transfer' => [
           'type' => 'jp_bank_transfer'
         ],
+      ],
+      'konbini' => [
+        'expires_after_days' => 3
       ],
     ],
     'success_url' => BASE_URL . 'pafshop/thanks/',
