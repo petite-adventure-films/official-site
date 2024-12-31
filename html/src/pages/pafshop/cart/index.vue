@@ -68,11 +68,23 @@ onMounted(() => {
   <NuxtLayout name="checkout">
     <template #h2>注文内容の確認</template>
     <div v-if="!loading && basket && basket.length > 0">
-      <p class="sticky top-0 py-1 px-2 bg-gray-100 text-xl text-right">
-        合計金額:
-        <span>￥{{ subTotalInBasket.toLocaleString() }}</span>
-      </p>
       <ShopBasketItem :basket="basket" :editable="true" />
+      <dl>
+        <div class="flex justify-between py-1 px-2 border-b text-right">
+          <dt>商品合計</dt>
+          <dd>￥{{ subTotalInBasket.toLocaleString() }}</dd>
+        </div>
+        <div class="flex justify-between py-1 px-2 border-b text-right">
+          <dt>送料</dt>
+          <dd>￥{{ shippingFee.toLocaleString() }}</dd>
+        </div>
+        <div
+          class="flex justify-between py-1 px-2 bg-gray-100 border-b font-bold text-right"
+        >
+          <dt>合計</dt>
+          <dd>￥{{ (subTotalInBasket + shippingFee).toLocaleString() }}</dd>
+        </div>
+      </dl>
       <p class="mt-2 text-sm text-gray-500">
         ※価格には消費税が含まれています<br />
         ※1回のご注文ごとに送料300円が掛かります<br />
@@ -84,10 +96,13 @@ onMounted(() => {
         class="mt-4"
         :disabled="isPurchasing"
         @click="purchase"
-        >注文を確定する</Button
+        >注文する</Button
       ><br />
+      <p class="mt-2 text-sm text-gray-500">
+        ※注文後、Stripe決済画面に移動します。
+      </p>
       <NuxtLink
-        :to="isPurchasing ? null : '/pafshop/'"
+        :to="isPurchasing ? '' : '/pafshop/'"
         :aria-disabled="isPurchasing"
         :role="isPurchasing ? 'button' : null"
         class="block link-text mt-4"
