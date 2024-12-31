@@ -50,20 +50,16 @@ try {
     'mode' => 'payment',
     'payment_method_types' => [
       'card',
-      // 'customer_balance',
-      // 'konbini'
+      'customer_balance',
     ],
-    // 'payment_method_options' => [
-    //   'customer_balance' => [
-    //     'funding_type' => 'bank_transfer',
-    //     'bank_transfer' => [
-    //       'type' => 'jp_bank_transfer'
-    //     ],
-    //   ],
-    //   'konbini' => [
-    //     'expires_after_days' => 3
-    //   ],
-    // ],
+    'payment_method_options' => [
+      'customer_balance' => [
+        'funding_type' => 'bank_transfer',
+        'bank_transfer' => [
+          'type' => 'jp_bank_transfer'
+        ],
+      ],
+    ],
     'success_url' => BASE_URL . 'pafshop/thanks/',
     'cancel_url' => BASE_URL . 'pafshop/cancel/',
   ]);
