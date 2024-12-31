@@ -18,7 +18,7 @@ watch(basket.value, (newValue) => {
 
 <template>
   <ul class="[&_li:not(:first-of-type)]:pt-4">
-    <li v-for="(item, key) in _basket" :key="key" class="py-4 px-2 border-b">
+    <li v-for="(item, key) in _basket" :key="key" class="py-4 px-2 border-t">
       <div>{{ item.title }}</div>
       <div class="flex flex-wrap justify-between items-center">
         <div>{{ item.type }}{{ item.disc }}</div>

@@ -66,20 +66,19 @@ onMounted(() => {
 
 <template>
   <NuxtLayout name="checkout">
-    <template #h2>注文内容の確認</template>
     <div v-if="!loading && basket && basket.length > 0">
       <ShopBasketItem :basket="basket" :editable="true" />
       <dl>
-        <div class="flex justify-between py-1 px-2 border-b text-right">
+        <div class="flex justify-between py-1 px-2 border-t text-right">
           <dt>商品合計</dt>
           <dd>￥{{ subTotalInBasket.toLocaleString() }}</dd>
         </div>
-        <div class="flex justify-between py-1 px-2 border-b text-right">
+        <div class="flex justify-between py-1 px-2 border-t text-right">
           <dt>送料</dt>
           <dd>￥{{ shippingFee.toLocaleString() }}</dd>
         </div>
         <div
-          class="flex justify-between py-1 px-2 bg-gray-100 border-b font-bold text-right"
+          class="flex justify-between py-1 px-2 bg-gray-100 border-y font-bold text-right"
         >
           <dt>合計</dt>
           <dd>￥{{ (subTotalInBasket + shippingFee).toLocaleString() }}</dd>
@@ -93,7 +92,7 @@ onMounted(() => {
 
       <Button
         type="shop"
-        class="mt-4"
+        class="mt-8"
         :disabled="isPurchasing"
         @click="purchase"
         >注文する</Button

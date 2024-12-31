@@ -1,13 +1,14 @@
 <script setup lang="ts">
 const route = useRoute();
 const isShop = route.path.includes('/pafshop/');
+const isCart = route.path.includes('/pafshop/cart/');
 </script>
 
 <template>
   <footer
     class="mt-16 text-xs text-center [&_a:hover]:text-gray-500 [&_.router-link-exact-active]:text-gray-500"
   >
-    <div class="flex justify-center gap-4">
+    <div v-if="!isCart" class="flex justify-center gap-4">
       <NuxtLink
         v-if="isShop"
         to="/?op=skip"
