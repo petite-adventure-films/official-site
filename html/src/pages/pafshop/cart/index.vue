@@ -111,8 +111,16 @@ onMounted(() => {
         >買い物を続ける</NuxtLink
       >
     </div>
-    <div v-else-if="!loading && basket.length === 0">
-      <p>カートに商品がありません</p>
+    <div
+      v-else-if="!loading && basket.length === 0"
+      class="flex items-center h-32"
+    >
+      <div>
+        <p>カートに商品がありません</p>
+        <NuxtLink to="/pafshop/" class="inline-flex link-text mt-4"
+          >買い物を続ける</NuxtLink
+        >
+      </div>
     </div>
   </NuxtLayout>
 </template>
