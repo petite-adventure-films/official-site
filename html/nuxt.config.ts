@@ -99,6 +99,8 @@ export default defineNuxtConfig({
     public: {
       SITE_NAME: siteName,
       SITE_URL: siteUrl,
+      THIS_YEAR: new Date().getFullYear(),
+      SINCE: 2011,
       API_BASE: '/',
       STRIPE_PUBLISHABLE_KEY:
         'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR',

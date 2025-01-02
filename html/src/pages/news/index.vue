@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { News } from '~/types/news';
 import META from '~/constants/meta.json';
+import type { News } from '~/types/news';
 
 definePageMeta({
   layout: false,
@@ -29,7 +29,9 @@ const { posts } = await useWpGetList<News>('news');
       <ArchiveList>
         <NewsList :posts="posts.data" />
       </ArchiveList>
-      <Pager page="news" :total-pages="posts.total_pages" current-page="1" />
     </div>
+    <template #aside>
+      <NewsArchiveList />
+    </template>
   </NuxtLayout>
 </template>

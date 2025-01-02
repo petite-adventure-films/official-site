@@ -18,15 +18,15 @@ const yearArgs = Array.from(
 </script>
 
 <template>
-  <H3>イベント・上映会アーカイブ</H3>
+  <H3>お知らせアーカイブ</H3>
   <ul class="mt-4 flex flex-wrap gap-2">
     <li
       v-for="year in yearArgs"
-      :key="`archive-event-${year}`"
+      :key="`archive-news-${year}`"
       :class="['group', props.currentYear === year ? 'is-active' : '']"
     >
       <NuxtLink
-        :to="`/events/archive/${year}/`"
+        :to="`/news/archive/${year}/`"
         class="block border border-black px-2 py-1 group-[.is-active]:bg-gray-100 sm:hover:bg-gray-100"
         >{{ year }}</NuxtLink
       >
