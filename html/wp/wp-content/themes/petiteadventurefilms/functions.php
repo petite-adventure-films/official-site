@@ -6,10 +6,13 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 define('ACCESS_TOKEN_DISPATCH', $_ENV['ACCESS_TOKEN_DISPATCH']);
 
-// API
+// lib
 require_once('lib/get_data.php');
 require_once('lib/format_date.php');
 require_once('lib/mail.php');
+require_once('lib/save_static_json.php');
+
+// API
 require_once('api/news.php');
 require_once('api/events.php');
 require_once('api/channel.php');
@@ -87,3 +90,10 @@ function add_custom_menu_page()
     <? }  ?>
   </div>
 <? }
+
+add_action('rest_api_init', function () {
+  register_rest_route('custom/v1', '/save-static-json', array(
+    'methods' => 'POST',
+    'callback' => 'save_static_json',
+  ));
+});
