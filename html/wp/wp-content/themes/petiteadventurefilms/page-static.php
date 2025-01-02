@@ -37,16 +37,24 @@
         const response = await fetch(`/wp/wp-json/wp/v2/${type}?archive=true&per_page=-1`);
         const postData = await response.json();
 
-        const blob = new Blob([JSON.stringify(postData, null, 2)], {
-          type: 'application/json'
-        });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${type}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        messageDiv.textContent = `${type}.jsonが正常にダウンロードされました。`;
+        try {
+          const saveResponse = await fetch('/wp/wp-json/custom/v1/save-static-json', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              type: type,
+              data: postData.data
+            }, null, 2)
+          });
+
+          const saveResult = await saveResponse.json();
+          messageDiv.innerHTML = `<p>${saveResult}</p>`;
+        } catch (error) {
+          console.error('Error saving file:', error);
+          messageDiv.innerHTML += '<p>Failed to save file.</p>';
+        }
       }
     });
   </script>
