@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Channel } from '~/types/channel';
 import MEGA from '~/constants/meta.json';
+import type { Channel } from '~/types/channel';
 
 definePageMeta({
   layout: false,
@@ -45,7 +45,7 @@ const { posts } = await useWpGetList<Channel>('channel', {
           :to="`/channel/${data.id}/`"
           :film-tags="data.film_tags"
           :title="data.title"
-          :thumbnail-src="`https://img.youtube.com/vi/${data.youtube_id}/maxresdefault.jpg`"
+          :thumbnail-src="`https://img.youtube.com/vi/${useGetYouTubeId(data.youtube_id)}/maxresdefault.jpg`"
           :attached-info="[
             data.created_country,
             data.created_year,
