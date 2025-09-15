@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Blog } from '~/types/blog';
 import META from '~/constants/meta.json';
+import type { Blog } from '~/types/blog';
 
 definePageMeta({
   layout: false,
@@ -125,6 +125,10 @@ const { posts } = await useWpGetList<Blog>('blog', {
       <dl class="mt-2 flex flex-col gap-y-2">
         <div
           v-for="detail in [
+            {
+              index: '成蹊大学経営学部・社会理解実践講義「メディアと映像表現」',
+              text: ['2025年～ / 学部生対象、前期&後期'],
+            },
             {
               index: '市民の学習・活動・交流センター シビル',
               text: ['2015年&2017年&2020年&2023年 / 一般対象、全6～8回コース'],
