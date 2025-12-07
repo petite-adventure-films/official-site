@@ -34,10 +34,10 @@ Petite Adventure Films 公式サイト・ショップ 日本語版を開発・�
 ├── .github
 │ └── workflows
 ├── html
-│ ├── maintenance
-│ │ ├── in - 公開時メンテナンスモードにするための関連ファイル一式
-│ │ └── out - 公開時メンテナンスモードを開けるための関連ファイル一式
 │ ├── src - nuxt環境
+│ ├── security
+│ │ ├── .htaccess - Webサーバー設定ファイル（Basic認証・リダイレクト等）
+│ │ └── .htpasswd - Basic認証用パスワードファイル
 │ ├── stripe - Stripe関連
 │ ├── vendor
 │ └── wp - wordpress関連
@@ -122,8 +122,18 @@ Github Secrets に登録されています。
 main ブランチに Pull request が merge されたら、本番環境へ反映  
 develop ブランチへの Pull request が merge されたら、開発環境へ反映
 
-この際、`すべて更新` のタグがある時は、Stripe、Wordpress 構築関連ファイルと、Wordpress の内容を build したすべてのページが更新される。  
-`構築ファイル更新` のタグがある時は、Stripe、Wordpress 構築関連ファイルのみ更新される。
+この際、`すべて更新` のタグがある時は、以下のファイルが更新される。
+
+- Stripe 関連ファイル
+- Wordpress 構築関連ファイル
+- セキュリティ設定ファイル（.htaccess / .htpasswd）
+- Wordpress の内容を build したすべてのページ
+
+`構築ファイル更新` のタグがある時は、以下のみ更新される。
+
+- Stripe 関連ファイル
+- Wordpress 構築関連ファイル
+- セキュリティ設定ファイル（.htaccess / .htpasswd）
 
 タグがなにもない時は、公開作業は行われない。
 
@@ -142,12 +152,10 @@ Wordpress 上で公開する時は、メニューの `サイト更新` → `更�
 
 ### `すべて更新` 時と Wordpress から公開時の本番公開の流れ
 
-build 時間が平均的に 30 分ほどかかるので、その間はメンテナンスモードを表示している。  
-Github Actions が実行されたら、
+Github Actions が実行されたら、以下の順序でデプロイが行われる。
 
-1. /maintenance/in/.htaccess がサーバー root にコピーされ、メンテナンスモードになる。
-2. 構築関連ファイルと、build したファイルが更新される。
-3. maintenance/in/.htaccess.prd がサーバー root にコピされ、メンテナンスモードが開ける。
+1. **セキュリティ設定の更新**: `html/security/` 内の `.htaccess` と `.htpasswd` がサーバーのルートディレクトリにアップロードされる。
+2. **静的ファイルの同期**: 構築関連ファイルと、Nuxt で generate された静的ファイル一式が更新される。
 
 ### 環境変数の一覧
 
