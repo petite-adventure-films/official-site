@@ -1,3 +1,10 @@
+<Files wp-login.php>
+  AuthType Basic
+  AuthName "Restricted Area"
+  AuthUserFile /export/sd208/www/jp/r/e/gmoserver/3/2/sd0848932/petiteadventurefilms.com/.htpasswd
+  Require valid-user
+</Files>
+
 ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>

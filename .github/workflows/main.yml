@@ -16,6 +16,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+      - name: Update Security Files (.htaccess & .htpasswd)
+        run: |
+          ftp -n <<END
+          open ${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          put ./html/security/.htaccess.prd ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htaccess
+          put ./html/security/.htpasswd.prd ${{ secrets.FTP_SERVER_DIR_PRD_JA }}.htpasswd
+          END
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
@@ -100,4 +108,4 @@ jobs:
           local-dir: ./html/.output/public/
           exclude: |
             .htaccess
-            maintenance.html
+            .htpasswd
