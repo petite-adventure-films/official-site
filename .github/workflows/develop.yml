@@ -8,21 +8,6 @@ on:
       - closed
 
 jobs:
-  limit-access-to-the-site:
-    runs-on: ubuntu-latest
-    if: |
-      github.event.pull_request.merged == true
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Limit access to the site
-        run: |
-          ftp -n <<END
-          open ${{ secrets.FTP_SERVER }}
-          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          put ./html/security/.htaccess.dev ${{ secrets.FTP_SERVER_DIR_DEV }}.htaccess
-          put ./html/security/.htpasswd.dev ${{ secrets.FTP_SERVER_DIR_DEV }}.htpasswd
-          END
   deploy-static-files:
     runs-on: ubuntu-latest
     if: |
@@ -123,5 +108,3 @@ jobs:
           exclude: |
             .htaccess
             .htpasswd
-            maintenance.html
-            403.html
