@@ -8,7 +8,7 @@ const props = withDefaults(
   },
 );
 
-const thisYear = 2025;
+const thisYear = 2026;
 const startYear = 2011;
 const yearArgs = Array.from(
   { length: thisYear - 1 - startYear + 1 },
