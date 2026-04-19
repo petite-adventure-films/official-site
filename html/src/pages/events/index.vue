@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { EventList } from '~/types/event';
 import META from '~/constants/meta.json';
+import type { EventList } from '~/types/event';
 
 definePageMeta({
   layout: false,
@@ -79,7 +79,7 @@ const latestEvents = computed(() => {
       </HeadlessTabList>
       <HeadlessTabPanels class="mt-8">
         <HeadlessTabPanel>
-          <ArchiveList>
+          <ArchiveList v-if="latestEvents.length > 0">
             <li v-for="data in latestEvents" :key="`event-${data.id}`">
               <PostCard
                 :to="`/events/${data.id}/`"
@@ -95,6 +95,7 @@ const latestEvents = computed(() => {
               />
             </li>
           </ArchiveList>
+          <p v-else>ただ今、予定の上映会・イベントがありません</p>
         </HeadlessTabPanel>
         <div v-for="(months, year) in posts.data" :key="`events-tab-${year}`">
           <HeadlessTabPanel

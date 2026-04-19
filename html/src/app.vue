@@ -5,4 +5,5 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <div class="gtranslate_wrapper"></div>
 </template>
