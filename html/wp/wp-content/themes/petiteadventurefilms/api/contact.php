@@ -1,6 +1,27 @@
 <?
+function verify_recaptcha(string $token): bool
+{
+  $response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+    'body' => [
+      'secret'   => RECAPTCHA_SECRET_KEY,
+      'response' => $token,
+    ],
+  ]);
+
+  if (is_wp_error($response)) {
+    return false;
+  }
+
+  $body = json_decode(wp_remote_retrieve_body($response), true);
+  return !empty($body['success']) && $body['score'] >= 0.5;
+}
+
 function contact_ntfct($req)
 {
+  $recaptcha_token = $req['recaptchaToken'] ?? '';
+  if (!verify_recaptcha($recaptcha_token)) {
+    return new WP_REST_Response('reCAPTCHA verification failed', 400);
+  }
 
   $email = $req['email'];
   $name = $req['name'];

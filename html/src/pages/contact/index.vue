@@ -14,6 +14,15 @@ useSeoMeta({
   ogUrl: `${config.public.SITE_URL}contact/`,
 });
 
+useHead({
+  script: [
+    {
+      src: `https://www.google.com/recaptcha/api.js?render=${config.public.RECAPTCHA_SITE_KEY}`,
+      async: true,
+    },
+  ],
+});
+
 enum Stage {
   INPUT = 1,
   CONFIRM = 2,
@@ -32,16 +41,37 @@ const { value: email } = useField<string>('formEmail.email');
 const { value: emailConfirm } = useField<string>('formEmail.emailConfirm');
 const { value: message } = useField<string>('form.message');
 
+const getRecaptchaToken = (): Promise<string> =>
+  new Promise((resolve, reject) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).grecaptcha.ready(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).grecaptcha
+        .execute(config.public.RECAPTCHA_SITE_KEY, { action: 'contact' })
+        .then(resolve)
+        .catch(reject);
+    });
+  });
+
 const onSubmit = handleSubmit(async () => {
   stage.value = Stage.COMPLETE;
-  const config = useRuntimeConfig();
   const apiUrl = `${config.public.API_BASE}wp/wp-json/wp/v2/contact/`;
+
+  let recaptchaToken: string;
+  try {
+    recaptchaToken = await getRecaptchaToken();
+  } catch {
+    router.push('/contact/error/');
+    return;
+  }
+
   const { error } = await useFetch(apiUrl, {
     method: 'POST',
     body: JSON.stringify({
       name: name.value,
       email: email.value,
       message: message.value,
+      recaptchaToken,
     }),
   });
   if (error.value) {

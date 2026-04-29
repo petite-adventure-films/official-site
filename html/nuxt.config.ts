@@ -102,6 +102,7 @@ export default defineNuxtConfig({
       API_BASE: '/',
       STRIPE_PUBLISHABLE_KEY:
         'pk_test_51H8OJOKluK1zP0j9cc4YOhcbQhCa8G31WAFcxruwZkvh9VIFNfFO11CFbY7tqQtTuqZqXvfOlEYtcKlQjzhFNbYi00EsaSxkXR',
+      RECAPTCHA_SITE_KEY: '6LfniM8sAAAAAAfEVYy6wtrkIw6aoz7xs_3FCtJz',
     },
   },
 
