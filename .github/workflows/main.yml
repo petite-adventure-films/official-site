@@ -78,10 +78,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Use Node.js 18
-        uses: actions/setup-node@v1
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
       - name: Make envfile for nuxt
