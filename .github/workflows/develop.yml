@@ -64,6 +64,7 @@ jobs:
         with:
           envkey_DEBUG: false
           envkey_ACCESS_TOKEN_DISPATCH: ${{ secrets.ACCESS_TOKEN_DISPATCH }}
+          envkey_RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
           file_name: .env
           directory: html/wp/wp-content/themes/petiteadventurefilms
           fail_on_empty: false
