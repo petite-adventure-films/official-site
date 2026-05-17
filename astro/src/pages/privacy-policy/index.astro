@@ -1,0 +1,14 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import PrivacyPolicy from '../../components/PrivacyPolicy.astro';
+import ButtonLink from '../../components/ButtonLink.astro';
+---
+
+<PostLayout title="プライバシーポリシー">
+  <PrivacyPolicy />
+  <p class="mt-16">
+    個人情報の取り扱いに関する問合せ先<br />
+    個人情報に関するご確認、ご要望およびお問合せなどにつきましては、以下の連絡先までお願いいたします。
+  </p>
+  <ButtonLink href="/contact/" class="mt-4">お問い合わせ</ButtonLink>
+</PostLayout>

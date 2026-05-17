@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<h3 class:list={[className]}>
+  <span class="font-bold"><slot /></span>
+  {Astro.slots.has('sub') && (
+    <span class="block text-xs"><slot name="sub" /></span>
+  )}
+</h3>

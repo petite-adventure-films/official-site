@@ -10,6 +10,12 @@
   --color-tkhd73-ur: #73184b;
 }
 
+@layer base {
+  p {
+    margin: 0;
+  }
+}
+
 @layer utilities {
   .link-text:not([aria-disabled='true']) {
     @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
