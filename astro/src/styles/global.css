@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: YakuHanJPs, sans-serif;
+  --font-family-site-name: Dosis, sans-serif;
+  --color-tkhd73-yellow: #e6e100;
+  --color-tkhd73-yellow-shadow: #ced81c;
+  --color-tkhd73-green: #009177;
+  --color-tkhd73-green-shadow: #a1e9d6;
+  --color-tkhd73-ur: #73184b;
+}
+
+@layer utilities {
+  .link-text:not([aria-disabled='true']) {
+    @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
+  }
+  .link-text[aria-disabled='true'] {
+    @apply text-gray-500 pointer-events-none;
+  }
+  .link-text[target='_blank']::after {
+    content: '↗︎';
+  }
+}
+
+.wrapper {
+  @apply relative min-w-80 max-w-screen-sm min-h-dvh mx-auto px-4 pt-8 pb-8 sm:px-16;
+}
+
+.palt {
+  font-feature-settings: 'palt';
+}
+
+*:focus {
+  outline: none;
+}
+
+.m2_t {
+  margin-top: 1em;
+}
