@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import AppHeader from '../components/AppHeader.astro';
+import AppNav from '../components/AppNav.astro';
+import AppFooter from '../components/AppFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const SITE_NAME = 'Petite Adventure Films';
+const { title, description = '', ogImage } = Astro.props;
+const fullTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonicalURL} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="wrapper bg-white">
+      <AppHeader />
+      <AppNav />
+      <main class="mt-8">
+        <slot />
+      </main>
+      <AppFooter />
+    </div>
+  </body>
+</html>
