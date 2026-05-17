@@ -22,13 +22,20 @@ const isActive = (key: string) => {
 ---
 
 <div class="sticky -top-[1px] mt-8 z-50 flex gap-2 justify-center">
-  <details class="relative">
-    <summary
-      class="flex flex-col w-12 h-12 justify-center items-center bg-black text-white cursor-pointer list-none text-xs select-none"
+  <div class="relative">
+    <button
+      id="nav-toggle"
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="relative z-10 flex flex-col w-12 h-12 justify-center items-center bg-black text-white sm:hover:bg-white sm:hover:border sm:hover:border-black sm:hover:text-black"
     >
-      MENU
-    </summary>
-    <nav class="absolute top-0 left-1/2 w-48 -translate-x-1/2 sm:w-auto bg-white border border-black pt-12 px-2 pb-2 text-xs">
+      <span class="text-xs">MENU</span>
+    </button>
+    <nav
+      id="nav-menu"
+      hidden
+      class="absolute top-0 left-1/2 w-48 min-w-max -translate-x-1/2 bg-white border border-black pt-12 px-2 pb-2 text-xs"
+    >
       {Object.entries(NAV).map(([key, name]) => (
         <a
           href={key === '' ? '/' : `/${key}/`}
@@ -41,5 +48,35 @@ const isActive = (key: string) => {
         </a>
       ))}
     </nav>
-  </details>
+  </div>
 </div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle') as HTMLButtonElement;
+  const menu = document.getElementById('nav-menu') as HTMLElement;
+
+  const closedClasses = ['bg-black', 'text-white', 'sm:hover:bg-white', 'sm:hover:border', 'sm:hover:border-black', 'sm:hover:text-black'];
+
+  function openMenu() {
+    menu.removeAttribute('hidden');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.classList.remove(...closedClasses);
+  }
+
+  function closeMenu() {
+    menu.setAttribute('hidden', '');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.classList.add(...closedClasses);
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.hasAttribute('hidden') ? openMenu() : closeMenu();
+  });
+
+  document.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
