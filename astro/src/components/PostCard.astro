@@ -1,0 +1,33 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  published?: string;
+  categories?: { name: string }[];
+  filmTags?: { name: string }[] | false;
+  class?: string;
+}
+
+const { href, title, published, categories = [], filmTags = false, class: className } = Astro.props;
+---
+
+<a href={href} class:list={['relative block border border-black sm:hover:bg-gray-100', className]}>
+  <div class="p-4">
+    <p class="font-bold">{title}</p>
+    {(categories.length > 0 || (filmTags && filmTags.length > 0)) && (
+      <div class="flex flex-wrap gap-x-2 mt-2 text-xs">
+        {filmTags && filmTags.map((t) => (
+          <span class="before:content-['#'] before:pr-px">{t.name}</span>
+        ))}
+        {categories.map((c) => (
+          <span class="before:content-['#'] before:pr-px">{c.name}</span>
+        ))}
+      </div>
+    )}
+    {published && (
+      <div class="mt-2 text-xs text-gray-500">
+        <time datetime={published}>{published}</time>
+      </div>
+    )}
+  </div>
+</a>
