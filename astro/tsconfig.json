@@ -9,6 +9,7 @@
     "dist"
   ],
   "compilerOptions": {
+    "types": ["node"],
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
