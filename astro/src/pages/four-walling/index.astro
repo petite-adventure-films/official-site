@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import PostLayout from '@layouts/PostLayout.astro';
+import Section from '@components/Section.astro';
+import ExternalLink from '@components/ExternalLink.astro';
+import ButtonLink from '@components/ButtonLink.astro';
+import GalleryImage from '@components/GalleryImage.astro';
+
+import galleryImg1 from '@assets/images/four-walling/four-walling_image_1.jpg';
+import galleryImg2 from '@assets/images/four-walling/four-walling_image_2.jpg';
+import galleryImg3 from '@assets/images/four-walling/four-walling_image_3.jpg';
+import galleryImg4 from '@assets/images/four-walling/four-walling_image_4.jpg';
+
+import flyerIndiaDiaryFront from '@assets/images/four-walling/flyer_india_diary_front.jpg';
+import flyerGoodbyeUrFront from '@assets/images/four-walling/flyer_goodbye_ur_front.jpg';
+import flyerBrianAndCoFront from '@assets/images/four-walling/flyer_brian_and_co_front.jpg';
+import flyerIndiaDiaryBack from '@assets/images/four-walling/flyer_india_diary_back.jpg';
+import flyerGoodbyeUrBack from '@assets/images/four-walling/flyer_goodbye_ur_back.jpg';
+import flyerBrianAndCoBack from '@assets/images/four-walling/flyer_brian_and_co_back.jpg';
+
+import posterIndiaDiary from '@assets/images/four-walling/poster_india_diary.jpg';
+import posterGoodbyeUr from '@assets/images/four-walling/poster_goodbye_ur.jpg';
+import posterBrianAndCo from '@assets/images/four-walling/poster_brian_and_co.jpg';
+
+const flyers = [
+  { src: flyerIndiaDiaryFront, alt: 'インド日記チラシ表' },
+  { src: flyerGoodbyeUrFront, alt: 'さようならURチラシ表' },
+  { src: flyerBrianAndCoFront, alt: 'ブライアンと仲間たちチラシ表' },
+  { src: flyerIndiaDiaryBack, alt: 'インド日記チラシ裏' },
+  { src: flyerGoodbyeUrBack, alt: 'さようならURチラシ裏' },
+  { src: flyerBrianAndCoBack, alt: 'ブライアンと仲間たちチラシ裏' },
+];
+
+const posters = [
+  { src: posterIndiaDiary, alt: 'インド日記ポスター' },
+  { src: posterGoodbyeUr, alt: 'さようならURポスター' },
+  { src: posterBrianAndCo, alt: 'ブライアンと仲間たちポスター' },
+];
+---
+
+<PostLayout title="自主上映について" description="自主上映会サポーター募集！お住まいの地域、学校、グループで、映画を上映しませんか？">
+  <p>
+    自主上映会サポーター募集！<br />お住まいの地域、学校、グループで、映画を上映しませんか？
+  </p>
+  <GalleryImage
+    class="mt-4"
+    images={[
+      { src: galleryImg1, alt: '自主上映の様子 1' },
+      { src: galleryImg2, alt: '自主上映の様子 2' },
+      { src: galleryImg3, alt: '自主上映の様子 3' },
+      { src: galleryImg4, alt: '自主上映の様子 4' },
+    ]}
+  />
+  <p class="mt-4">
+    自主上映会を開催してくださるサポーターの方を、大募集中です！<br />
+    地域で、職場で、学校で、グループで…など、自主上映会開催に興味のある方は、以下「お問い合わせ」よりご連絡ください。
+  </p>
+  <ButtonLink href="/contact/" class="mt-4">お問い合わせ</ButtonLink>
+
+  <Section title="上映料（全作品共通）">
+    <p>
+      完全自主制作作品のため、制作支援として上映料のカンパをお願いしています。<br />
+      1回の上映につき、入場者20名以下の場合、上映料は1万円となります。<br />
+      20名を超える場合は、入場者数×500円です。<br />
+      （例えば入場者40名の場合、上映料は2万円となります）<br />
+      『インド日記』のオリジナルは206分ですが、上映用の100分バージョンもあります。
+    </p>
+    <p class="mt-2 text-xs text-gray-500">
+      ※上映料についてご相談に応じます。<br />
+      ※上映の条件は予告なく変更する場合があります。最新の上映条件は、常にこのウェブサイト上で公開しています。<br />
+      ※講演などのご依頼も歓迎いたします。<br />
+      ※入場料の設定は自由です。<br />
+      ※商業的な上映や、映画館などでの上映については、別途ご連絡ください。
+    </p>
+  </Section>
+
+  <Section title="宣伝資材">
+    <p>
+      上映作品のスチール写真やテキストは、無償でご提供します。<br />
+      『ブライアンと仲間たち』、『さようならUR』、『インド日記』は、チラシとポスターもご用意しています。
+    </p>
+    <h4 class="mt-4">映画のチラシ</h4>
+    <p class="mt-2">
+      1枚5円（50枚単位）＋送料実費<br />
+      B5両面、フルカラー、裏面に上映会情報印刷用の余白あり
+    </p>
+    <div class="flex flex-wrap gap-4 mt-4">
+      {flyers.map((img) => (
+        <Image src={img.src} alt={img.alt} class="w-40 border border-black" loading="lazy" />
+      ))}
+    </div>
+
+    <h4 class="mt-4">映画のポスター</h4>
+    <p class="mt-2">
+      1枚300円（1枚単位）＋送料実費<br />
+      『インド日記』=B2片面、フルカラー<br />
+      『さようならUR』= B2片面、フルカラー<br />
+      『ブライアンと仲間たち』= A1片面、フルカラー
+    </p>
+    <div class="flex flex-wrap gap-4 mt-4">
+      {posters.map((img) => (
+        <Image src={img.src} alt={img.alt} class="w-40 border border-black" loading="lazy" />
+      ))}
+    </div>
+
+    <h4 class="mt-4">JASRACへの楽曲使用料（『ブライアンと仲間たち』、『さようならUR』のみ）</h4>
+    <p class="mt-2">
+      入場料が有料の場合は、日本音楽著作権協会（JASRAC）への楽曲使用料支払い義務が発生します。主催者様の名義で、上映日の5日前までにJASRACへ手続きをお願いします。<br />
+      JASRACへの手続きと使用料計算方法の目安は<ExternalLink href="https://www.jasrac.or.jp/users/">こちら</ExternalLink><br />
+      JASRACの楽曲使用料（ビデオ上映使用料）の目安：座席数、入場料等により異なりますが、100名収容の会場で入場料500円の場合、1回の上映につき約300～400円です。
+    </p>
+  </Section>
+
+  <ButtonLink href="/contact/" class="mt-16">お問い合わせ</ButtonLink>
+</PostLayout>
