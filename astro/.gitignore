@@ -4,6 +4,7 @@ dist/
 .astro/
 # wrangler local state
 .wrangler/state/
+.wrangler/deploy/
 
 # dependencies
 node_modules/
