@@ -44,7 +44,7 @@ add_filter('preview_post_link', 'replace_preview_link');
 // wordpressからデプロイできるように
 function dispatch_github_actions()
 {
-  $url = 'https://api.github.com/repos/petite-adventure-films/ja/dispatches';
+  $url = 'https://api.github.com/repos/petite-adventure-films/official-site/dispatches';
   $headers = [
     'Authorization: bearer ' . ACCESS_TOKEN_DISPATCH,
     'Accept: application/vnd.github+json',
