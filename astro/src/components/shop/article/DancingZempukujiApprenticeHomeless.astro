@@ -8,7 +8,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const img = (n: number) =>
-  images[`/src/assets/images/pafshop/dancing_zempukuji__apprentice_homeless_specials_${n}.jpg`]?.default;
+  images[`/src/assets/images/pafshop/dancing_zempukuji__apprentice_homeless_specials_${n}.jpg`]
+    ?.default;
 ---
 
 <div>
@@ -30,16 +31,20 @@ const img = (n: number) =>
       百歳を越えてなお現役で働くコーヒー豆店主は、表立って語られることのない、かつてのこの国の姿を今に伝える。
     </p>
     {img(5) && <Image src={img(5)!} alt="" class="mt-2 border border-black" />}
-    <p class="mt-2">映画は、体の奥で眠っていた感覚を揺さぶり、目覚めさせ、あなたはきっと踊りだしたくなるだろう。</p>
     <p class="mt-2">
-      &lt;主な出演アーティスト&gt;<br />チェ・ジェチョル、堀越彩子、堀越功、飯野竜彦、飯野路代、大杉雅一、無形民俗文化財・石山裕雅社中、橋本フサヨ、かぽーれかぽーれよいとな
+      映画は、体の奥で眠っていた感覚を揺さぶり、目覚めさせ、あなたはきっと踊りだしたくなるだろう。
+    </p>
+    <p class="mt-2">
+      &lt;主な出演アーティスト&gt;<br
+      />チェ・ジェチョル、堀越彩子、堀越功、飯野竜彦、飯野路代、大杉雅一、無形民俗文化財・石山裕雅社中、橋本フサヨ、かぽーれかぽーれよいとな
     </p>
   </Section>
 
   <Section title="ホームレスごっこ">
     {img(6) && <Image src={img(6)!} alt="" class="border border-black" />}
     <p class="mt-2">
-      いつから公共の場所は、私たちが自由に使える場所ではなくなってしまったのだろう？<br />ベンチは撤去され、演奏は取り締まられ、野宿者はますます寝床の確保が難しくなっている。
+      いつから公共の場所は、私たちが自由に使える場所ではなくなってしまったのだろう？<br
+      />ベンチは撤去され、演奏は取り締まられ、野宿者はますます寝床の確保が難しくなっている。
     </p>
     {img(7) && <Image src={img(7)!} alt="" class="mt-2 border border-black" />}
     <p class="mt-2">

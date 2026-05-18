@@ -9,7 +9,15 @@ interface Props {
   class?: string;
 }
 
-const { href, title, excerpt, published, categories = [], filmTags = false, class: className } = Astro.props;
+const {
+  href,
+  title,
+  excerpt,
+  published,
+  categories = [],
+  filmTags = false,
+  class: className,
+} = Astro.props;
 const hasThumbnail = Astro.slots.has('thumbnail');
 ---
 
@@ -18,20 +26,23 @@ const hasThumbnail = Astro.slots.has('thumbnail');
   <div class="p-4">
     <p class="font-bold">{title}</p>
     {excerpt && <p class="mt-2 text-sm" set:html={excerpt} />}
-    {(categories.length > 0 || (filmTags && filmTags.length > 0)) && (
-      <div class="flex flex-wrap gap-x-2 mt-2 text-xs">
-        {filmTags && filmTags.map((t) => (
-          <span class="before:content-['#'] before:pr-px">{t.name}</span>
-        ))}
-        {categories.map((c) => (
-          <span class="before:content-['#'] before:pr-px">{c.name}</span>
-        ))}
-      </div>
-    )}
-    {published && (
-      <div class="mt-2 text-xs text-gray-500">
-        <time datetime={published}>{published}</time>
-      </div>
-    )}
+    {
+      (categories.length > 0 || (filmTags && filmTags.length > 0)) && (
+        <div class="mt-2 flex flex-wrap gap-x-2 text-xs">
+          {filmTags &&
+            filmTags.map((t) => <span class="before:pr-px before:content-['#']">{t.name}</span>)}
+          {categories.map((c) => (
+            <span class="before:pr-px before:content-['#']">{c.name}</span>
+          ))}
+        </div>
+      )
+    }
+    {
+      published && (
+        <div class="mt-2 text-xs text-gray-500">
+          <time datetime={published}>{published}</time>
+        </div>
+      )
+    }
   </div>
 </a>

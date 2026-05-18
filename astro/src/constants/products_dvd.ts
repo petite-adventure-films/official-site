@@ -33,7 +33,12 @@ export const PRODUCTS_DVD: DVD[] = [
       { type: '団体･ライブラリー', disc: ['DVD'], amount: 10000 },
     ],
     disc: [
-      { index: 'DVD', number: 1, type: 'NTSC/DVD-R', content: '｢踊る善福寺｣(50分) / ｢ホームレスごっこ｣(16分)' },
+      {
+        index: 'DVD',
+        number: 1,
+        type: 'NTSC/DVD-R',
+        content: '｢踊る善福寺｣(50分) / ｢ホームレスごっこ｣(16分)',
+      },
     ],
     image_num: 2,
     catch: 'アートプロジェクト｢Dislocate｣参加<br />２作品を収録！',
@@ -54,7 +59,12 @@ export const PRODUCTS_DVD: DVD[] = [
     ],
     specials: true,
     disc: [
-      { index: 'DVD', number: 1, type: 'NTSC/DVD-R', content: '本編(前＆後編合計64分)、豪華特典映像' },
+      {
+        index: 'DVD',
+        number: 1,
+        type: 'NTSC/DVD-R',
+        content: '本編(前＆後編合計64分)、豪華特典映像',
+      },
     ],
     image_num: 2,
     catch: '豪華特典映像＆英語版あり！',
@@ -73,7 +83,12 @@ export const PRODUCTS_DVD: DVD[] = [
       { type: '団体･ライブラリー', disc: ['DVD'], amount: 10000 },
     ],
     disc: [
-      { index: 'DVD', number: 1, type: 'NTSC/DVD-R', content: '本編(43分) / 豪華漫画本(フルカラー12P)' },
+      {
+        index: 'DVD',
+        number: 1,
+        type: 'NTSC/DVD-R',
+        content: '本編(43分) / 豪華漫画本(フルカラー12P)',
+      },
     ],
     image_num: 3,
     catch: '豪華フルカラー漫画本プレゼント！',
@@ -91,9 +106,7 @@ export const PRODUCTS_DVD: DVD[] = [
       { type: '一般', disc: ['DVD'], amount: 2500 },
       { type: '団体･ライブラリー', disc: ['DVD'], amount: 10000 },
     ],
-    disc: [
-      { index: 'DVD', number: 2, type: 'NTSC/DVD-R', content: '本編(73分) / 豪華特典映像' },
-    ],
+    disc: [{ index: 'DVD', number: 2, type: 'NTSC/DVD-R', content: '本編(73分) / 豪華特典映像' }],
     image_num: 2,
     intro:
       '<p class="font-bold">耐震問題で揺れるUR（旧住宅公団）の団地<br />生活基盤の住居が足元から揺らぐ…</p><p class="mt-2">UR（旧住宅公団）が突然取り壊しを決めた、東京都日野市の高幡台団地73号棟。URの決定に疑問を持ち、立ち退きを拒否する住民たちへの取材を皮切りに、カメラは住宅問題の専門家、国交省、ついにはURの理事長へと立ち向かう！　映画は映画は公共住宅問題にとどまらず、日本の組織体制の問題をも浮き彫りにする。山形国際ドキュメンタリー映画祭2011 第1回スカパー！IDEHA賞受賞作品。</p>',
@@ -109,9 +122,7 @@ export const PRODUCTS_DVD: DVD[] = [
       { type: '一般', disc: ['DVD'], amount: 1500 },
       { type: '団体･ライブラリー', disc: ['DVD'], amount: 10000 },
     ],
-    disc: [
-      { index: 'DVD', number: 1, type: 'NTSC/DVD-R', content: '本編(97分) / 豪華特典映像' },
-    ],
+    disc: [{ index: 'DVD', number: 1, type: 'NTSC/DVD-R', content: '本編(97分) / 豪華特典映像' }],
     image_num: 2,
     intro:
       '<p class="font-bold">王室でも、サッカーでもない、"新たなイギリス"ここに誕生！</p><p class="mt-2">イギリス国会前の広場で、英米政府によるイラクへの経済制裁・対テロ攻撃に反対し、2001年より10年間座り込みを続けた平和活動家、ブライアン･ホウ。映画は、ブライアンと彼のサポーターたちに密着し、国家の圧力により表現の自由が脅かされている現状と、それに対してユーモアあふれる精神で対抗する人々の姿を伝える。これぞ、イギリス民主主義の底力！　2009年度日本ジャーナリスト会議・黒田清JCJ新人賞受賞作品。</p>',

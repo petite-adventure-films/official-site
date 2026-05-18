@@ -62,8 +62,7 @@ export const FILMS: Film[] = [
     country: 'インド・日本',
     created_at: '2016',
     running_time: '206分(上映版100分)',
-    catch:
-      '次回作のエンドクレジットにお名前掲載！<br>新作応援価格DVD/ブルーレイ、販売中！',
+    catch: '次回作のエンドクレジットにお名前掲載！<br>新作応援価格DVD/ブルーレイ、販売中！',
     details: [
       {
         index: '監督･撮影･編集･ナレーション･日本語字幕',
@@ -245,10 +244,7 @@ export const FILMS: Film[] = [
         text: 'Dislocate',
       },
     ],
-    national_screenings: [
-      '札幌国際短編映画祭（2014年･札幌）',
-      'O!!iDO短編映画祭（2014年･東京）',
-    ],
+    national_screenings: ['札幌国際短編映画祭（2014年･札幌）', 'O!!iDO短編映画祭（2014年･東京）'],
     global_screenings: [
       'Pori Art Museum "EAST ASIAN VIDEO FRAMES: SHADES OF URBANIZATION"（2016年・フィンランド）',
       'Split映画祭（2014年･クロアチア）',
@@ -527,9 +523,7 @@ export const FILMS: Film[] = [
     country: '日本',
     created_at: '2011',
     running_time: '73分',
-    prizes: [
-      '山形国際ドキュメンタリー映画祭2011<br />第1回スカパー！IDEHA賞受賞作品',
-    ],
+    prizes: ['山形国際ドキュメンタリー映画祭2011<br />第1回スカパー！IDEHA賞受賞作品'],
     recommends: [
       {
         by: '大谷昭宏（ジャーナリスト）',
@@ -560,8 +554,7 @@ export const FILMS: Film[] = [
     ],
     teaser_youtube_id: 'c7A2uPQ2Pm8',
     movie_youtube_id: '',
-    excerpt:
-      '耐震問題で揺れるUR（旧住宅公団）の団地<br>生活基盤の住居が足元から揺らぐ…',
+    excerpt: '耐震問題で揺れるUR（旧住宅公団）の団地<br>生活基盤の住居が足元から揺らぐ…',
     gallery_num: 9,
     credits: [
       {

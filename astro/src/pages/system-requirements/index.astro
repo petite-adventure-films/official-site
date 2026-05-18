@@ -5,7 +5,10 @@ import DefinitionList from '@components/DefinitionList.astro';
 import ExternalLink from '@components/ExternalLink.astro';
 
 const list = [
-  { index: 'Microsoft Windowsをお使いの場合', text: 'Microsoft Edge, Mozilla Firefox, Google chrome 最新版' },
+  {
+    index: 'Microsoft Windowsをお使いの場合',
+    text: 'Microsoft Edge, Mozilla Firefox, Google chrome 最新版',
+  },
   { index: 'Apple Macintoshをお使いの場合', text: 'Safari, Mozilla Firefox, Google chrome 最新版' },
   { index: 'iOSをお使いの場合', text: 'iOS 最新版 / Safari, Google chrome 最新版' },
   { index: 'androidOSをお使いの場合', text: 'Android 最新版 / Google chrome 最新版' },
@@ -29,7 +32,9 @@ const list = [
   </p>
   <p class="mt-2">
     Safari<br />
-    <ExternalLink href="http://www.apple.com/safari/download">www.apple.com/safari/download</ExternalLink>
+    <ExternalLink href="http://www.apple.com/safari/download"
+      >www.apple.com/safari/download</ExternalLink
+    >
   </p>
   <H3 class="mt-8">JavaScriptについて</H3>
   <p class="mt-2">

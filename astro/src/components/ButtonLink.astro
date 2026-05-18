@@ -8,7 +8,8 @@ interface Props {
 const { href, type = 'primary', class: className } = Astro.props;
 
 const typeClasses = {
-  primary: 'border border-black text-white bg-blue-600 sm:hover:bg-gray-100 sm:hover:border-blue-600 sm:hover:text-blue-600',
+  primary:
+    'border border-black text-white bg-blue-600 sm:hover:bg-gray-100 sm:hover:border-blue-600 sm:hover:text-blue-600',
   secondary: 'border border-blue-600 text-blue-600 sm:hover:bg-gray-100',
   shop: 'border border-black bg-purple-600 text-purple-50 sm:hover:bg-purple-100 sm:hover:text-purple-600 sm:hover:border-purple-600',
 };
@@ -17,7 +18,7 @@ const typeClasses = {
 <a
   href={href}
   class:list={[
-    'inline-flex gap-2 items-center px-6 py-4 text-base font-medium',
+    'inline-flex items-center gap-2 px-6 py-4 text-base font-medium',
     typeClasses[type],
     className,
   ]}

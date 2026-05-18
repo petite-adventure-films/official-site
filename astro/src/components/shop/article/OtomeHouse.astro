@@ -14,14 +14,17 @@ const img = (name: string) => images[`/src/assets/images/pafshop/${name}`]?.defa
   <Section title="豪華フルカラー漫画本プレゼント！" marginTop="mt-0">
     <p>
       乙女ハウスで1年間暮らしたイラストレーター、高田ナッツさんによる、乙女ハウスを舞台にした未発表作品『宿ナシ女
-      シェアハウスへ行く』（フルカラー、12ページ）を、『乙女ハウス』DVDご購入の方にプレゼント！<br />乙女ハウスへたどり着くまで、そして乙女ハウスでの暮らしぶりがユーモラスに描かれています。必見の作品！
+      シェアハウスへ行く』（フルカラー、12ページ）を、『乙女ハウス』DVDご購入の方にプレゼント！<br
+      />乙女ハウスへたどり着くまで、そして乙女ハウスでの暮らしぶりがユーモラスに描かれています。必見の作品！
     </p>
     <p>『宿ナシ女 シェアハウスへ行く』</p>
-    {img('otome_house_specials_1.jpg') && (
-      <figure>
-        <Image src={img('otome_house_specials_1.jpg')!} alt="" class="mt-2 border border-black" />
-        <figcaption class="mt-1 text-xs">作・画：高田ナッツ</figcaption>
-      </figure>
-    )}
+    {
+      img('otome_house_specials_1.jpg') && (
+        <figure>
+          <Image src={img('otome_house_specials_1.jpg')!} alt="" class="mt-2 border border-black" />
+          <figcaption class="mt-1 text-xs">作・画：高田ナッツ</figcaption>
+        </figure>
+      )
+    }
   </Section>
 </div>

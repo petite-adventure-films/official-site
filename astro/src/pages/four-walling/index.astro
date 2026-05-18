@@ -38,7 +38,10 @@ const posters = [
 ];
 ---
 
-<PostLayout title="自主上映について" description="自主上映会サポーター募集！お住まいの地域、学校、グループで、映画を上映しませんか？">
+<PostLayout
+  title="自主上映について"
+  description="自主上映会サポーター募集！お住まいの地域、学校、グループで、映画を上映しませんか？"
+>
   <p>
     自主上映会サポーター募集！<br />お住まいの地域、学校、グループで、映画を上映しませんか？
   </p>
@@ -67,7 +70,8 @@ const posters = [
     </p>
     <p class="mt-2 text-xs text-gray-500">
       ※上映料についてご相談に応じます。<br />
-      ※上映の条件は予告なく変更する場合があります。最新の上映条件は、常にこのウェブサイト上で公開しています。<br />
+      ※上映の条件は予告なく変更する場合があります。最新の上映条件は、常にこのウェブサイト上で公開しています。<br
+      />
       ※講演などのご依頼も歓迎いたします。<br />
       ※入場料の設定は自由です。<br />
       ※商業的な上映や、映画館などでの上映については、別途ご連絡ください。
@@ -84,10 +88,12 @@ const posters = [
       1枚5円（50枚単位）＋送料実費<br />
       B5両面、フルカラー、裏面に上映会情報印刷用の余白あり
     </p>
-    <div class="flex flex-wrap gap-4 mt-4">
-      {flyers.map((img) => (
-        <Image src={img.src} alt={img.alt} class="w-40 border border-black" loading="lazy" />
-      ))}
+    <div class="mt-4 flex flex-wrap gap-4">
+      {
+        flyers.map((img) => (
+          <Image src={img.src} alt={img.alt} class="w-40 border border-black" loading="lazy" />
+        ))
+      }
     </div>
 
     <h4 class="mt-4">映画のポスター</h4>
@@ -97,16 +103,21 @@ const posters = [
       『さようならUR』= B2片面、フルカラー<br />
       『ブライアンと仲間たち』= A1片面、フルカラー
     </p>
-    <div class="flex flex-wrap gap-4 mt-4">
-      {posters.map((img) => (
-        <Image src={img.src} alt={img.alt} class="w-40 border border-black" loading="lazy" />
-      ))}
+    <div class="mt-4 flex flex-wrap gap-4">
+      {
+        posters.map((img) => (
+          <Image src={img.src} alt={img.alt} class="w-40 border border-black" loading="lazy" />
+        ))
+      }
     </div>
 
     <h4 class="mt-4">JASRACへの楽曲使用料（『ブライアンと仲間たち』、『さようならUR』のみ）</h4>
     <p class="mt-2">
-      入場料が有料の場合は、日本音楽著作権協会（JASRAC）への楽曲使用料支払い義務が発生します。主催者様の名義で、上映日の5日前までにJASRACへ手続きをお願いします。<br />
-      JASRACへの手続きと使用料計算方法の目安は<ExternalLink href="https://www.jasrac.or.jp/users/">こちら</ExternalLink><br />
+      入場料が有料の場合は、日本音楽著作権協会（JASRAC）への楽曲使用料支払い義務が発生します。主催者様の名義で、上映日の5日前までにJASRACへ手続きをお願いします。<br
+      />
+      JASRACへの手続きと使用料計算方法の目安は<ExternalLink href="https://www.jasrac.or.jp/users/"
+        >こちら</ExternalLink
+      ><br />
       JASRACの楽曲使用料（ビデオ上映使用料）の目安：座席数、入場料等により異なりますが、100名収容の会場で入場料500円の場合、1回の上映につき約300～400円です。
     </p>
   </Section>

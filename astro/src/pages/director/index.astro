@@ -13,14 +13,20 @@ const timeline = FILMS.reduce<Record<string, { film_id: string; title: string }[
 const filmography = Object.entries(timeline).sort(([a], [b]) => Number(b) - Number(a));
 ---
 
-<PostLayout title="監督プロフィール" description="早川由美子（はやかわゆみこ）ドキュメンタリー監督のプロフィールページです。">
+<PostLayout
+  title="監督プロフィール"
+  description="早川由美子（はやかわゆみこ）ドキュメンタリー監督のプロフィールページです。"
+>
   <p class="text-xl">
     早川由美子（はやかわゆみこ）<br />
     ドキュメンタリー監督
   </p>
   <Image src={profileImg} alt="早川由美子" class="mt-4 border border-black" />
   <p class="mt-4">
-    1975年東京都出身。成蹊大学法学部卒業。イギリスのLondon School of JournalismにてPostgraduate Journalism Courseを修了。公務員、会社員を経て、ジャーナリストを志し2007年に渡英。ロンドンでジャーナリズムを学ぶ傍ら、独学で映像制作を始める。イギリス国会前の平和活動家、ブライアン･ホウを追った初監督作『ブライアンと仲間たち パーラメント･スクエアSW1』(2009年)で、日本ジャーナリスト会議･黒田清JCJ新人賞を受賞。
+    1975年東京都出身。成蹊大学法学部卒業。イギリスのLondon School of JournalismにてPostgraduate
+    Journalism
+    Courseを修了。公務員、会社員を経て、ジャーナリストを志し2007年に渡英。ロンドンでジャーナリズムを学ぶ傍ら、独学で映像制作を始める。イギリス国会前の平和活動家、ブライアン･ホウを追った初監督作『ブライアンと仲間たち
+    パーラメント･スクエアSW1』(2009年)で、日本ジャーナリスト会議･黒田清JCJ新人賞を受賞。
   </p>
   <p class="mt-2">
     2009年に帰国し、以降は東京を拠点に活動。日本の公共住宅問題を取り上げた2作目『さようならUR』(2011年)で、山形国際ドキュメンタリー映画祭･スカパー!IDEHA賞を受賞。その他の作品に、『木田さんと原発、そして日本』(2013年)、『インド日記～ガジュマルの木の女たち～』(2016年)、『日々新～早春の日向新しき村～』（2020年）など。
@@ -31,19 +37,23 @@ const filmography = Object.entries(timeline).sort(([a], [b]) => Number(b) - Numb
 
   <Section title="Filmography" marginTop="mt-8">
     <ul class="flex flex-col gap-4 border-l border-black p-4">
-      {filmography.map(([year, films]) => (
-        <li class="relative">
-          <span class="absolute block w-2 h-2 bg-black rounded top-0 -left-5" />
-          <h4>{year}年</h4>
-          <ul class="ml-2">
-            {films.map((film) => (
-              <li>
-                <a href={`/films/${film.film_id}/`} class="link-text">{film.title}</a>
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
+      {
+        filmography.map(([year, films]) => (
+          <li class="relative">
+            <span class="absolute top-0 -left-5 block h-2 w-2 rounded bg-black" />
+            <h4>{year}年</h4>
+            <ul class="ml-2">
+              {films.map((film) => (
+                <li>
+                  <a href={`/films/${film.film_id}/`} class="link-text">
+                    {film.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
     </ul>
   </Section>
 </PostLayout>
