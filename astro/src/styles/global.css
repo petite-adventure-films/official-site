@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@source "../**/*.astro";
 
 @theme {
-  --font-family-sans: YakuHanJPs, sans-serif;
-  --font-family-site-name: Dosis, sans-serif;
+  --font-sans: YakuHanJPs, sans-serif;
+  --font-site-name: Dosis, sans-serif;
   --color-tkhd73-yellow: #e6e100;
   --color-tkhd73-yellow-shadow: #ced81c;
   --color-tkhd73-green: #009177;
@@ -24,6 +25,17 @@
     @apply text-gray-500 pointer-events-none;
   }
   .link-text[target='_blank']::after {
+    content: '↗︎';
+  }
+  .link-text-children a:not([aria-disabled='true']) {
+    color: var(--color-blue-600);
+    text-decoration-line: underline;
+  }
+  .link-text-children a:not([aria-disabled='true']):hover {
+    text-decoration-line: none;
+    color: var(--color-blue-400);
+  }
+  .link-text-children a[target='_blank']::after {
     content: '↗︎';
   }
 }

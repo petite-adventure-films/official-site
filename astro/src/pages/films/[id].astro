@@ -1,0 +1,221 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import PostLayout from '@layouts/PostLayout.astro';
+import Section from '@components/Section.astro';
+import ButtonLink from '@components/ButtonLink.astro';
+import GalleryImage from '@components/GalleryImage.astro';
+import Video from '@components/Video.astro';
+import { FILMS } from '@/constants/film_info';
+import type { Film } from '@/types/film';
+
+export function getStaticPaths() {
+  return FILMS.map((film) => ({
+    params: { id: film.film_id },
+    props: { film },
+  }));
+}
+
+interface Props {
+  film: Film;
+}
+
+const { film } = Astro.props;
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/films/*.jpg',
+  { eager: true },
+);
+
+const thumbnail = allImages[`/src/assets/images/films/${film.film_id}_thumbnail.jpg`]?.default;
+
+const galleryImages = Array.from({ length: film.gallery_num ?? 0 }, (_, i) => {
+  const src = allImages[`/src/assets/images/films/${film.film_id}_still_${i + 1}.jpg`]?.default;
+  return src ? { src, alt: '' } : null;
+}).filter((x): x is { src: ImageMetadata; alt: string } => x !== null);
+
+const bannerImage = film.special_page
+  ? allImages[`/src/assets/images/films/${film.special_page.banner}`]?.default
+  : undefined;
+
+const description = `${film.title}（${film.genre}/${film.created_at}年/${film.country}/${film.running_time}/監督：${film.director}）`;
+
+const credits = film.credits ?? [];
+---
+
+<PostLayout
+  title={`${film.title} - 映画`}
+  heading={film.title}
+  description={description}
+  crumbs={[{ to: '/films/', name: '映画' }]}
+>
+  <div class="mb-8">
+    {thumbnail && (
+      <Image src={thumbnail} alt="thumbnail" class="border border-black w-full" />
+    )}
+    {film.poster_appendix && (
+      <p class="mt-2 text-xs text-gray-500">{film.poster_appendix}</p>
+    )}
+  </div>
+
+  {film.prizes?.map((item) => (
+    <p class="text-xl text-purple-600 mb-2" set:html={item} />
+  ))}
+
+  {film.catch && (
+    <p class="text-xl text-purple-600 mb-2" set:html={film.catch} />
+  )}
+
+  <p class="text-xl" set:html={film.excerpt} />
+
+  <ul class="flex flex-wrap gap-x-2 mt-2 [&>li:not(:first-child)]:before:content-['/']">
+    {[film.genre, film.country, film.created_at, film.running_time].map((info) => (
+      <li class="flex gap-2">{info}</li>
+    ))}
+  </ul>
+
+  {film.details && film.details.length > 0 && (
+    <dl class="mt-2 mb-4">
+      {film.details.map((detail) => (
+        <div class="flex flex-wrap gap-x-2 [&>dt]:after:content-[':']">
+          <dt class="flex gap-2">{detail.index}</dt>
+          <dd>{detail.text}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+
+  {film.has_dvd && (
+    <div>
+      <ButtonLink type="shop" href={`/pafshop/${film.shop_uri ?? film.film_id}/`}>
+        DVDを購入する
+      </ButtonLink>
+      {film.has_dvd_appendix && (
+        <p class="mt-2 text-xs text-gray-500">{film.has_dvd_appendix}</p>
+      )}
+    </div>
+  )}
+
+  {film.movie_youtube_id && (
+    <Section title="映画本編">
+      <Video youtubeId={film.movie_youtube_id} />
+    </Section>
+  )}
+
+  {film.recommends && (
+    <Section title="推薦の言葉">
+      {film.recommends.map((item) => (
+        <figure class="mt-4">
+          <figcaption>{item.by}</figcaption>
+          <blockquote class="mt-2" set:html={item.text} />
+        </figure>
+      ))}
+    </Section>
+  )}
+
+  {film.teaser_youtube_id && (
+    <Section title="予告編">
+      <Video youtubeId={film.teaser_youtube_id} />
+    </Section>
+  )}
+
+  <Section title="あらすじ">
+    <div set:html={film.content} />
+  </Section>
+
+  {galleryImages.length > 0 && (
+    <Section title="ギャラリー">
+      <GalleryImage images={galleryImages} />
+    </Section>
+  )}
+
+  {credits.length > 0 && (
+    <Section title="制作クレジット（敬称略）">
+      <div class="credits-masonry">
+        {credits.map((credit) => (
+          <div class="mb-4">
+            <dt>{credit.index}</dt>
+            <dd class="mt-2" set:html={credit.text} />
+          </div>
+        ))}
+      </div>
+    </Section>
+  )}
+
+  {(film.national_screenings || film.global_screenings) && (
+    <Section title="映画祭上映履歴">
+      {film.national_screenings && (
+        <div>
+          <h4>国内</h4>
+          <ul class="mt-2">
+            {film.national_screenings.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+      {film.global_screenings && (
+        <div class="mt-4">
+          <h4>海外</h4>
+          <ul class="mt-2">
+            {film.global_screenings.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+    </Section>
+  )}
+
+  {film.media_screenings && (
+    <Section title="放映・劇場公開履歴">
+      <ul>
+        {film.media_screenings.map((item) => <li>{item}</li>)}
+      </ul>
+    </Section>
+  )}
+
+  {film.related_infomation && (
+    <Section title="関連情報（敬称略）">
+      <ul class="flex flex-col gap-y-2">
+        {film.related_infomation.map((item) => (
+          <li class="link-text-children" set:html={item} />
+        ))}
+      </ul>
+    </Section>
+  )}
+
+  {film.special_page && bannerImage && (
+    <a href={film.special_page.to} class="block group mt-16">
+      <Image
+        src={bannerImage}
+        alt={film.special_page.text}
+        class="block sm:group-hover:opacity-75"
+      />
+    </a>
+  )}
+</PostLayout>
+
+<script>
+  const container = document.querySelector<HTMLElement>('.credits-masonry');
+  if (container) {
+    const items = Array.from(container.children) as HTMLElement[];
+
+    const wrap = document.createElement('div');
+    wrap.className = 'flex gap-4';
+    const cols = [document.createElement('dl'), document.createElement('dl')];
+    cols.forEach((col) => { col.className = 'flex-1'; wrap.appendChild(col); });
+
+    // DOMに先に挿入して正しい列幅で計測できるようにする
+    container.replaceWith(wrap);
+
+    const heights = [0, 0];
+    const mb = 16; // mb-4 = 1rem = 16px
+    for (const item of items) {
+      // 実際の列幅で高さを計測するためcol0に一時配置
+      cols[0].appendChild(item);
+      const h = item.getBoundingClientRect().height + mb;
+      cols[0].removeChild(item);
+
+      const shorter = heights[0] <= heights[1] ? 0 : 1;
+      cols[shorter].appendChild(item);
+      heights[shorter] += h;
+    }
+  }
+</script>
