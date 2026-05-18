@@ -14,9 +14,13 @@ const { title, marginTop = 'mt-16', viewMoreTo, class: className } = Astro.props
 <section class:list={[marginTop, className]}>
   <div class="flex flex-wrap items-center gap-2">
     <H3>{title}</H3>
-    {viewMoreTo && (
-      <a href={viewMoreTo} class="text-xs link-text">VIEW MORE</a>
-    )}
+    {
+      viewMoreTo && (
+        <a href={viewMoreTo} class="link-text text-xs">
+          VIEW MORE
+        </a>
+      )
+    }
   </div>
   <div class="mt-4">
     <slot />

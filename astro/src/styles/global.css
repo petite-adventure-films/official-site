@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@source "../**/*.astro";
+@import 'tailwindcss';
+@source '../**/*.astro';
 
 @theme {
   --font-sans: YakuHanJPs, sans-serif;
@@ -19,10 +19,10 @@
 
 @layer utilities {
   .link-text:not([aria-disabled='true']) {
-    @apply text-blue-600 underline sm:hover:no-underline sm:hover:text-blue-400;
+    @apply text-blue-600 underline sm:hover:text-blue-400 sm:hover:no-underline;
   }
   .link-text[aria-disabled='true'] {
-    @apply text-gray-500 pointer-events-none;
+    @apply pointer-events-none text-gray-500;
   }
   .link-text[target='_blank']::after {
     content: '↗︎';
@@ -41,7 +41,7 @@
 }
 
 .wrapper {
-  @apply relative min-w-80 max-w-screen-sm min-h-dvh mx-auto px-4 pt-8 pb-8 sm:px-16;
+  @apply relative mx-auto min-h-dvh max-w-screen-sm min-w-80 px-4 pt-8 pb-8 sm:px-16;
 }
 
 .palt {

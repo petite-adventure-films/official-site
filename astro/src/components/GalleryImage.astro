@@ -12,53 +12,57 @@ const { images, class: className } = Astro.props;
 
 <div class:list={['gallery-widget', className]}>
   <div class="relative border border-black">
-    {images.map((img, i) => (
-      <div
-        data-gallery-item
-        class:list={[
-          i === 0
-            ? 'relative opacity-100'
-            : 'absolute inset-0 opacity-0 pointer-events-none',
-          'transition-opacity duration-300',
-        ]}
-      >
-        <Image src={img.src} alt={img.alt} class="w-full" loading={i === 0 ? 'eager' : 'lazy'} />
-      </div>
-    ))}
-    {images.length > 1 && (
-      <>
-        <button
-          data-prev
-          aria-label="前の画像"
-          class="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r sm:hover:from-purple-100/25"
+    {
+      images.map((img, i) => (
+        <div
+          data-gallery-item
+          class:list={[
+            i === 0 ? 'relative opacity-100' : 'pointer-events-none absolute inset-0 opacity-0',
+            'transition-opacity duration-300',
+          ]}
         >
-          <div class="flex justify-center items-center w-8 h-8 mr-auto bg-black/25 text-white">
-            ←
-          </div>
-        </button>
-        <button
-          data-next
-          aria-label="次の画像"
-          class="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l sm:hover:from-purple-100/25"
-        >
-          <div class="flex justify-center items-center w-8 h-8 ml-auto bg-black/25 text-white">
-            →
-          </div>
-        </button>
-      </>
-    )}
+          <Image src={img.src} alt={img.alt} class="w-full" loading={i === 0 ? 'eager' : 'lazy'} />
+        </div>
+      ))
+    }
+    {
+      images.length > 1 && (
+        <>
+          <button
+            data-prev
+            aria-label="前の画像"
+            class="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r sm:hover:from-purple-100/25"
+          >
+            <div class="mr-auto flex h-8 w-8 items-center justify-center bg-black/25 text-white">
+              ←
+            </div>
+          </button>
+          <button
+            data-next
+            aria-label="次の画像"
+            class="absolute top-0 right-0 h-full w-1/4 bg-gradient-to-l sm:hover:from-purple-100/25"
+          >
+            <div class="ml-auto flex h-8 w-8 items-center justify-center bg-black/25 text-white">
+              →
+            </div>
+          </button>
+        </>
+      )
+    }
   </div>
-  {images.length > 1 && (
-    <div class="flex flex-wrap gap-2 justify-center mt-4">
-      {images.map((_, i) => (
-        <button
-          data-bullet={i}
-          aria-label={`画像${i + 1}`}
-          class:list={[i === 0 ? 'bg-black' : 'bg-gray-100', 'w-2 h-2']}
-        />
-      ))}
-    </div>
-  )}
+  {
+    images.length > 1 && (
+      <div class="mt-4 flex flex-wrap justify-center gap-2">
+        {images.map((_, i) => (
+          <button
+            data-bullet={i}
+            aria-label={`画像${i + 1}`}
+            class:list={[i === 0 ? 'bg-black' : 'bg-gray-100', 'h-2 w-2']}
+          />
+        ))}
+      </div>
+    )
+  }
 </div>
 
 <script>
@@ -82,12 +86,20 @@ const { images, class: className } = Astro.props;
     bullets.forEach((b, i) => b.addEventListener('click', () => go(i)));
 
     let startX = 0;
-    widget.addEventListener('touchstart', (e) => {
-      startX = (e as TouchEvent).touches[0].pageX;
-    }, { passive: true });
-    widget.addEventListener('touchend', (e) => {
-      const dx = (e as TouchEvent).changedTouches[0].pageX - startX;
-      if (Math.abs(dx) > 30) go(dx > 0 ? current - 1 : current + 1);
-    }, { passive: true });
+    widget.addEventListener(
+      'touchstart',
+      (e) => {
+        startX = (e as TouchEvent).touches[0].pageX;
+      },
+      { passive: true },
+    );
+    widget.addEventListener(
+      'touchend',
+      (e) => {
+        const dx = (e as TouchEvent).changedTouches[0].pageX - startX;
+        if (Math.abs(dx) > 30) go(dx > 0 ? current - 1 : current + 1);
+      },
+      { passive: true },
+    );
   });
 </script>

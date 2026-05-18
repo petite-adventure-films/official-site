@@ -24,23 +24,28 @@ const filmCards = FILMS.map((film) => {
   description="ドキュメンタリー監督、早川由美子がこれまでに制作した映画の、あらすじや予告編が掲載されています。"
 >
   <ul>
-    {filmCards.map(({ film, thumbnail, attachedInfo }, i) => (
-      <li class={i > 0 ? 'mt-8' : undefined}>
-        <a href={`/films/${film.film_id}/`} class="relative block border border-black sm:hover:bg-gray-100">
-          {thumbnail && <Image src={thumbnail} alt="" class="w-full" />}
-          <div class="p-4">
-            <p class="font-bold">{film.title}</p>
-            <p class="mt-2" set:html={film.excerpt} />
-            {attachedInfo.length > 0 && (
-              <div class="flex flex-wrap gap-x-2 mt-2 text-xs">
-                {attachedInfo.map((info) => (
-                  <span class="before:content-['#'] before:pr-px">{info}</span>
-                ))}
-              </div>
-            )}
-          </div>
-        </a>
-      </li>
-    ))}
+    {
+      filmCards.map(({ film, thumbnail, attachedInfo }, i) => (
+        <li class={i > 0 ? 'mt-8' : undefined}>
+          <a
+            href={`/films/${film.film_id}/`}
+            class="relative block border border-black sm:hover:bg-gray-100"
+          >
+            {thumbnail && <Image src={thumbnail} alt="" class="w-full" />}
+            <div class="p-4">
+              <p class="font-bold">{film.title}</p>
+              <p class="mt-2" set:html={film.excerpt} />
+              {attachedInfo.length > 0 && (
+                <div class="mt-2 flex flex-wrap gap-x-2 text-xs">
+                  {attachedInfo.map((info) => (
+                    <span class="before:pr-px before:content-['#']">{info}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </PostLayout>

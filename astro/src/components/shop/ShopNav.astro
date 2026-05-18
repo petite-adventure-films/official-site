@@ -2,11 +2,11 @@
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="sticky -top-[1px] mt-8 z-50 flex gap-2 justify-center">
+<div class="sticky -top-px z-50 mt-8 flex justify-center gap-2">
   <a
     href="/pafshop/faq/"
     class:list={[
-      'relative flex flex-col w-12 h-12 justify-center items-center bg-gray-50 sm:hover:bg-white sm:hover:text-black',
+      'relative flex h-12 w-12 flex-col items-center justify-center bg-gray-50 sm:hover:bg-white sm:hover:text-black',
       currentPath === '/pafshop/faq/' ? 'bg-white' : '',
     ]}
   >
@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
   </a>
   <a
     href="/pafshop/cart/"
-    class="relative flex flex-col w-12 h-12 justify-center items-center border border-purple-600 bg-gray-50 sm:hover:bg-white"
+    class="relative flex h-12 w-12 flex-col items-center justify-center border border-purple-600 bg-gray-50 sm:hover:bg-white"
   >
     🛒<span class="text-xs leading-none">0</span>
   </a>
