@@ -1,6 +1,6 @@
-# Petite Adventure Films 日本語版
+# Petite Adventure Films
 
-Petite Adventure Films 公式サイト・ショップ 日本語版を開発・運用するためのリポジトリです。
+Petite Adventure Films 公式サイト・ショップ を開発・運用するためのリポジトリです。
 
 ## 使用技術一覧
 
