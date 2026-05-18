@@ -1,0 +1,29 @@
+---
+import ShopLayout from './ShopLayout.astro';
+import BreadCrumb from '@components/BreadCrumb.astro';
+
+interface Crumb {
+  to?: string;
+  name?: string;
+}
+
+interface Props {
+  title: string;
+  heading?: string;
+  description?: string;
+  ogImage?: string;
+  crumbs?: Crumb[];
+}
+
+const { title, heading, description, ogImage, crumbs = [] } = Astro.props;
+---
+
+<ShopLayout title={title} description={description} ogImage={ogImage}>
+  <header>
+    <BreadCrumb crumbs={crumbs} />
+    <h2 class="text-xl font-bold">{heading ?? title}</h2>
+  </header>
+  <div class="mt-8">
+    <slot />
+  </div>
+</ShopLayout>
