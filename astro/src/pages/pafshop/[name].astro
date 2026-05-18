@@ -15,7 +15,8 @@ import OtomeHouse from '@components/shop/article/OtomeHouse.astro';
 import GoodbyeUR from '@components/shop/article/GoodbyeUR.astro';
 import BrianAndCo from '@components/shop/article/BrianAndCo.astro';
 
-const META_PAFSHOP = 'ドキュメンタリー監督、早川由美子の映画のDVDやブルーレイを購入できる、オンライン・ショップです。';
+const META_PAFSHOP =
+  'ドキュメンタリー監督、早川由美子の映画のDVDやブルーレイを購入できる、オンライン・ショップです。';
 
 export function getStaticPaths() {
   return PRODUCTS_DVD.map((dvd) => ({
@@ -55,10 +56,9 @@ if (dvd.disc.length > 0) {
 }
 
 // ギャラリー画像
-const allImages = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/images/pafshop/*.jpg',
-  { eager: true },
-);
+const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/pafshop/*.jpg', {
+  eager: true,
+});
 const galleryImages = Array.from({ length: dvd.image_num }, (_, i) => {
   const src = allImages[`/src/assets/images/pafshop/${dvd.name}_${i + 1}.jpg`]?.default;
   return src ? { src, alt: '' } : null;
@@ -76,78 +76,82 @@ const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
   <GalleryImage images={galleryImages} class="mt-8 md:mt-0" />
 
   <div class="mt-8">
-    {dvd.catch && <p class="text-xl sm:text-xl text-purple-600 mb-2" set:html={dvd.catch} />}
+    {dvd.catch && <p class="mb-2 text-xl text-purple-600 sm:text-xl" set:html={dvd.catch} />}
     <DefinitionList list={discSpec} />
 
     <ul class="mt-4 [&_li:not(:first-of-type)]:mt-2">
-      {dvd.prices.flatMap((price) =>
-        price.disc.map((disc) => (
-          <li class="flex gap-2 items-center">
-            <span class="flex-1 flex gap-x-1 flex-wrap">
-              <span>{price.type}</span>
-              {dvd.disc.length > 1 && <span class="palt">{disc}</span>}
-            </span>
-            <span>¥{price.amount.toLocaleString()}</span>
-            <select class="border border-black p-1 w-16">
-              <option value="0">数量</option>
-              {Array.from({ length: 10 }, (_, i) => (
-                <option value={i + 1}>{i + 1}</option>
-              ))}
-            </select>
-          </li>
-        ))
-      )}
+      {
+        dvd.prices.flatMap((price) =>
+          price.disc.map((disc) => (
+            <li class="flex items-center gap-2">
+              <span class="flex flex-1 flex-wrap gap-x-1">
+                <span>{price.type}</span>
+                {dvd.disc.length > 1 && <span class="palt">{disc}</span>}
+              </span>
+              <span>¥{price.amount.toLocaleString()}</span>
+              <select class="w-16 border border-black p-1">
+                <option value="0">数量</option>
+                {Array.from({ length: 10 }, (_, i) => (
+                  <option value={i + 1}>{i + 1}</option>
+                ))}
+              </select>
+            </li>
+          )),
+        )
+      }
     </ul>
 
     <button
       id="cart-open"
-      class="mt-4 w-full inline-flex justify-center items-center px-6 py-4 text-base font-medium border border-black bg-purple-600 text-purple-50 sm:hover:bg-purple-100 sm:hover:text-purple-600 sm:hover:border-purple-600"
+      class="mt-4 inline-flex w-full items-center justify-center border border-black bg-purple-600 px-6 py-4 text-base font-medium text-purple-50 sm:hover:border-purple-600 sm:hover:bg-purple-100 sm:hover:text-purple-600"
     >
       カートに入れる
     </button>
 
     <Tabs tabs={[{ label: '概要' }, { label: tabLabel2 }, { label: '制作クレジット' }]}>
       <div data-panel="0" class="pt-8 [&_p+p]:mt-2">
-        {filmInfo.map((info) => (
-          <div class="not-first:mt-4">
-            {filmInfo.length > 1 && <h4 class="mb-2 font-bold">{info.title}</h4>}
-            <p>監督: {info.director}</p>
-            <ul class="flex flex-wrap gap-x-2 [&>li:not(:first-child)]:before:content-['/']">
-              {[info.genre, info.country, info.created_at, info.running_time].map((item) => (
-                <li class="flex gap-2">{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-        {dvd.intro && (
-          <div class="mt-8" set:html={dvd.intro} />
-        )}
+        {
+          filmInfo.map((info) => (
+            <div class="not-first:mt-4">
+              {filmInfo.length > 1 && <h4 class="mb-2 font-bold">{info.title}</h4>}
+              <p>監督: {info.director}</p>
+              <ul class="flex flex-wrap gap-x-2 [&>li:not(:first-child)]:before:content-['/']">
+                {[info.genre, info.country, info.created_at, info.running_time].map((item) => (
+                  <li class="flex gap-2">{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+        {dvd.intro && <div class="mt-8" set:html={dvd.intro} />}
       </div>
 
       <div
         data-panel="1"
         hidden
-        class="pt-8 [&_h4]:mt-4 [&_p]:mt-2 [&_figure]:block [&_figure]:mt-2 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_img]:block [&_img]:mt-2 [&_img]:border [&_img]:border-black"
+        class="pt-8 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_figure]:mt-2 [&_figure]:block [&_h4]:mt-4 [&_img]:mt-2 [&_img]:block [&_img]:border [&_img]:border-black [&_p]:mt-2"
       >
         {ArticleComponent && <ArticleComponent />}
       </div>
 
       <div data-panel="2" hidden class="pt-8">
-        {filmInfo.map((info) => (
-          <div class="not-first:mt-4">
-            {filmInfo.length > 1 && <h4 class="mb-2 font-bold">{info.title}</h4>}
-            {info.credits && (
-              <div class="credits-masonry">
-                {info.credits.map((credit) => (
-                  <div class="mb-4">
-                    <dt>{credit.index}</dt>
-                    <dd class="mt-2" set:html={credit.text} />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+        {
+          filmInfo.map((info) => (
+            <div class="not-first:mt-4">
+              {filmInfo.length > 1 && <h4 class="mb-2 font-bold">{info.title}</h4>}
+              {info.credits && (
+                <div class="credits-masonry">
+                  {info.credits.map((credit) => (
+                    <div class="mb-4">
+                      <dt>{credit.index}</dt>
+                      <dd class="mt-2" set:html={credit.text} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        }
       </div>
     </Tabs>
 
@@ -158,18 +162,18 @@ const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
 <div
   id="cart-modal"
   hidden
-  class="flex justify-center items-center fixed z-50 w-full h-full top-0 left-0 bg-white/90"
+  class="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-white/90"
 >
-  <div class="flex flex-col gap-2 w-56">
+  <div class="flex w-56 flex-col gap-2">
     <a
       href="/pafshop/cart/"
-      class="inline-flex justify-center items-center px-6 py-4 text-base font-medium border border-black bg-purple-600 text-purple-50 sm:hover:bg-purple-100 sm:hover:text-purple-600 sm:hover:border-purple-600"
+      class="inline-flex items-center justify-center border border-black bg-purple-600 px-6 py-4 text-base font-medium text-purple-50 sm:hover:border-purple-600 sm:hover:bg-purple-100 sm:hover:text-purple-600"
     >
       カートを見る
     </a>
     <button
       id="cart-close"
-      class="inline-flex justify-center items-center px-6 py-4 text-base font-medium border border-purple-600 text-purple-600 sm:hover:bg-gray-100"
+      class="inline-flex items-center justify-center border border-purple-600 px-6 py-4 text-base font-medium text-purple-600 sm:hover:bg-gray-100"
     >
       買い物を続ける
     </button>
@@ -202,7 +206,10 @@ const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
     const wrap = document.createElement('div');
     wrap.className = 'flex gap-4';
     const cols = [document.createElement('dl'), document.createElement('dl')];
-    cols.forEach((col) => { col.className = 'flex-1'; wrap.appendChild(col); });
+    cols.forEach((col) => {
+      col.className = 'flex-1';
+      wrap.appendChild(col);
+    });
     container.replaceWith(wrap);
     const heights = [0, 0];
     const mb = 16;

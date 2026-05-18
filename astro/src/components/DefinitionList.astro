@@ -8,16 +8,20 @@ const { list, class: className } = Astro.props;
 ---
 
 <dl class:list={[className]}>
-  {list.map((detail) => (
-    <div class="flex flex-wrap gap-x-1 [&>dt]:after:content-[':']">
-      <dt class="flex gap-x-1 items-center">{detail.index}</dt>
-      {Array.isArray(detail.text) ? (
-        <div class="inline-flex flex-wrap gap-x-1 [&_dd:not(:last-of-type)]:after:content-['、']">
-          {detail.text.map((t) => <dd>{t}</dd>)}
-        </div>
-      ) : (
-        <dd>{detail.text}</dd>
-      )}
-    </div>
-  ))}
+  {
+    list.map((detail) => (
+      <div class="flex flex-wrap gap-x-1 [&>dt]:after:content-[':']">
+        <dt class="flex items-center gap-x-1">{detail.index}</dt>
+        {Array.isArray(detail.text) ? (
+          <div class="inline-flex flex-wrap gap-x-1 [&_dd:not(:last-of-type)]:after:content-['、']">
+            {detail.text.map((t) => (
+              <dd>{t}</dd>
+            ))}
+          </div>
+        ) : (
+          <dd>{detail.text}</dd>
+        )}
+      </div>
+    ))
+  }
 </dl>

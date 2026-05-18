@@ -12,24 +12,44 @@ const { crumbs = [] } = Astro.props;
 ---
 
 <nav aria-label="Breadcrumb" class="mb-2">
-  <ul class="flex gap-1 flex-wrap text-xs text-gray-500 [&_li]:flex [&_li]:gap-1 [&_li]:items-center">
+  <ul
+    class="flex flex-wrap gap-1 text-xs text-gray-500 [&_li]:flex [&_li]:items-center [&_li]:gap-1"
+  >
     <li>
       <a href="/?op=skip" class="link-text">HOME</a>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-3"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
       </svg>
     </li>
-    {crumbs.map((crumb) => (
-      <li>
-        {crumb.to ? (
-          <a href={crumb.to} class="link-text">{crumb.name}</a>
-        ) : (
-          <span>{crumb.name}</span>
-        )}
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-      </li>
-    ))}
+    {
+      crumbs.map((crumb) => (
+        <li>
+          {crumb.to ? (
+            <a href={crumb.to} class="link-text">
+              {crumb.name}
+            </a>
+          ) : (
+            <span>{crumb.name}</span>
+          )}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-3"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+        </li>
+      ))
+    }
   </ul>
 </nav>

@@ -7,11 +7,15 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/images/pafshop/goodbye_ur_specials_*.jpg',
   { eager: true },
 );
-const img = (n: number) => images[`/src/assets/images/pafshop/goodbye_ur_specials_${n}.jpg`]?.default;
+const img = (n: number) =>
+  images[`/src/assets/images/pafshop/goodbye_ur_specials_${n}.jpg`]?.default;
 ---
 
 <div>
-  <Section title="①『さようならUR』制作秘話 ～未公開映像＋完成から1年後の住民インタビュー （67分）" marginTop="mt-0">
+  <Section
+    title="①『さようならUR』制作秘話 ～未公開映像＋完成から1年後の住民インタビュー （67分）"
+    marginTop="mt-0"
+  >
     <p>映画完成から約1年後、映画に登場する住民の皆さんに、再びインタビューを敢行！</p>
     <p class="mt-2">
       撮影の裏話、監督との出会い、日常生活を記録されるということ、家庭内での意見の不一致、裁判をたたかう現在の心境などなど、率直に語ります。
@@ -58,30 +62,37 @@ const img = (n: number) => images[`/src/assets/images/pafshop/goodbye_ur_special
       2011年山形国際ドキュメンタリー映画祭の、日本の新作ドキュメンタリーを紹介するプログラム「ニュー・ドックス・ジャパン」にて、『さようならUR』が上映された後の質疑応答。「マイケル・ムーアよりすごい！」との声まで出たQ&A、ぜひご笑覧ください。
     </p>
     <p class="mt-2">質疑応答の様子</p>
-    {img(8) && (
-      <figure class="mt-2">
-        <Image src={img(8)!} alt="" class="border border-black" />
-        <figcaption class="mt-1 text-xs">写真提供：山形国際ドキュメンタリー映画祭</figcaption>
-      </figure>
-    )}
+    {
+      img(8) && (
+        <figure class="mt-2">
+          <Image src={img(8)!} alt="" class="border border-black" />
+          <figcaption class="mt-1 text-xs">写真提供：山形国際ドキュメンタリー映画祭</figcaption>
+        </figure>
+      )
+    }
     {img(9) && <Image src={img(9)!} alt="" class="mt-2 border border-black" />}
     {img(10) && <Image src={img(10)!} alt="" class="mt-2 border border-black" />}
   </Section>
 
   <Section title="④ ソウル国際女性映画祭2012 上映後のQ&A （19分）">
     <p>
-      2012年には、なんと海を渡った『さようならUR』。韓国・ソウルの国際女性映画祭で上映されました。上映後の質疑応答を収録。日本と韓国の住宅政策の違い、東日本大震災で73号棟は無事だったのか、韓国でも進む公共部門の民営化etc、海外ならではの質問や感想が飛び交います！（日本語字幕付き。韓国語翻訳：LEE CHOI Eunjooさん）
+      2012年には、なんと海を渡った『さようならUR』。韓国・ソウルの国際女性映画祭で上映されました。上映後の質疑応答を収録。日本と韓国の住宅政策の違い、東日本大震災で73号棟は無事だったのか、韓国でも進む公共部門の民営化etc、海外ならではの質問や感想が飛び交います！（日本語字幕付き。韓国語翻訳：LEE
+      CHOI Eunjooさん）
     </p>
     <p class="mt-2">質疑応答の様子</p>
-    {img(11) && (
-      <figure class="mt-2">
-        <Image src={img(11)!} alt="" class="border border-black" />
-        <figcaption class="mt-1 text-xs">写真提供：ソウル国際女性映画祭</figcaption>
-      </figure>
-    )}
+    {
+      img(11) && (
+        <figure class="mt-2">
+          <Image src={img(11)!} alt="" class="border border-black" />
+          <figcaption class="mt-1 text-xs">写真提供：ソウル国際女性映画祭</figcaption>
+        </figure>
+      )
+    }
   </Section>
 
   <Section title="⑤ 映画予告編 （1分39秒）">
-    <p>『さようならUR』映画予告編を収録しました。インターネット上で公開している予告編と同じです。</p>
+    <p>
+      『さようならUR』映画予告編を収録しました。インターネット上で公開している予告編と同じです。
+    </p>
   </Section>
 </div>
