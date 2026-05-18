@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Section from '@components/Section.astro';
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/pafshop/goodbye_ur_specials_*.jpg',
+  { eager: true },
+);
+const img = (n: number) => images[`/src/assets/images/pafshop/goodbye_ur_specials_${n}.jpg`]?.default;
+---
+
+<div>
+  <Section title="①『さようならUR』制作秘話 ～未公開映像＋完成から1年後の住民インタビュー （67分）" marginTop="mt-0">
+    <p>映画完成から約1年後、映画に登場する住民の皆さんに、再びインタビューを敢行！</p>
+    <p class="mt-2">
+      撮影の裏話、監督との出会い、日常生活を記録されるということ、家庭内での意見の不一致、裁判をたたかう現在の心境などなど、率直に語ります。
+    </p>
+    {img(1) && <Image src={img(1)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">
+      また、映画には泣く泣く入れることが出来なかった、未公開の映像もふんだんに交えながら、『さようならUR』が作られていった過程を辿ります。
+    </p>
+    <p class="mt-2">例えば…</p>
+    <p class="mt-2">
+      「何でこんなにこの問題に肩入れしてくるの？　何でメシ食ってる人？」から始まった、畦地さんの撮影。マスメディアでもない、利害関係者でもない、自主制作のドキュメンタリー作家の取材を、住民はどのように受け止めたのでしょうか？
+    </p>
+    {img(2) && <Image src={img(2)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">
+      立ち退きの心労から心身を病む人が絶えない中、73号棟問題発生後の、中川さんの驚くべき体調の変化とは…？
+    </p>
+    {img(3) && <Image src={img(3)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">
+      追出し説得の現場を撮影するため、住民である村井さんと結託して、UR職員を誘い出すことを計画。果たして職員は来るのか？　撮影は成功するのか？　…手に汗握る緊迫のやり取りを、カメラが奇跡的に捉える！
+    </p>
+    {img(4) && <Image src={img(4)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">
+      登場人物の人柄に惚れた、彼らについてもっと知りたいという人や、自分でもドキュメンタリー映画を作ってみたいという人などに、ぜひご覧いただきたい映像です。
+    </p>
+  </Section>
+
+  <Section title="② 直撃取材の達人に聞く！ ジャーナリスト・寺澤有さんインタビュー （74分）">
+    <p>
+      映画に登場するUR・小川忠男理事長（当時）の直撃取材は、フリーランスのジャーナリスト・寺澤有さんに協力していただいて実現しました。直撃取材歴20年以上の達人に、その極意をインタビュー！
+    </p>
+    <p class="mt-2"><a href="http://incidents.jp/" class="link-text">寺澤有</a>さん</p>
+    {img(5) && <Image src={img(5)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">インタビュー時の様子</p>
+    {img(6) && <Image src={img(6)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">UR理事長直撃シーンについてのコメント指導も！</p>
+    {img(7) && <Image src={img(7)!} alt="" class="mt-2 border border-black" />}
+    <p class="mt-2">
+      インタビューでは、直撃相手の顔や住所の特定、内部情報の入手といった、直撃取材をするための基本的なことから、これまでの直撃エピソード、SLAPP（恫喝）訴訟の経験など、調査報道ジャーナリストのお仕事の一端が語られます。ジャーナリスト志望者でなくとも、必見のインタビュー！
+    </p>
+  </Section>
+
+  <Section title="③ 山形国際ドキュメンタリー映画祭2011 上映後のQ&A （22分）">
+    <p>
+      2011年山形国際ドキュメンタリー映画祭の、日本の新作ドキュメンタリーを紹介するプログラム「ニュー・ドックス・ジャパン」にて、『さようならUR』が上映された後の質疑応答。「マイケル・ムーアよりすごい！」との声まで出たQ&A、ぜひご笑覧ください。
+    </p>
+    <p class="mt-2">質疑応答の様子</p>
+    {img(8) && (
+      <figure class="mt-2">
+        <Image src={img(8)!} alt="" class="border border-black" />
+        <figcaption class="mt-1 text-xs">写真提供：山形国際ドキュメンタリー映画祭</figcaption>
+      </figure>
+    )}
+    {img(9) && <Image src={img(9)!} alt="" class="mt-2 border border-black" />}
+    {img(10) && <Image src={img(10)!} alt="" class="mt-2 border border-black" />}
+  </Section>
+
+  <Section title="④ ソウル国際女性映画祭2012 上映後のQ&A （19分）">
+    <p>
+      2012年には、なんと海を渡った『さようならUR』。韓国・ソウルの国際女性映画祭で上映されました。上映後の質疑応答を収録。日本と韓国の住宅政策の違い、東日本大震災で73号棟は無事だったのか、韓国でも進む公共部門の民営化etc、海外ならではの質問や感想が飛び交います！（日本語字幕付き。韓国語翻訳：LEE CHOI Eunjooさん）
+    </p>
+    <p class="mt-2">質疑応答の様子</p>
+    {img(11) && (
+      <figure class="mt-2">
+        <Image src={img(11)!} alt="" class="border border-black" />
+        <figcaption class="mt-1 text-xs">写真提供：ソウル国際女性映画祭</figcaption>
+      </figure>
+    )}
+  </Section>
+
+  <Section title="⑤ 映画予告編 （1分39秒）">
+    <p>『さようならUR』映画予告編を収録しました。インターネット上で公開している予告編と同じです。</p>
+  </Section>
+</div>

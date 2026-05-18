@@ -1,7 +1,7 @@
 ---
 import '@styles/global.css';
 import AppHeader from '@components/AppHeader.astro';
-import AppNav from '@components/AppNav.astro';
+import ShopNav from '@components/shop/ShopNav.astro';
 import AppFooter from '@components/AppFooter.astro';
 
 interface Props {
@@ -37,7 +37,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <body>
     <div class="wrapper bg-white">
       <AppHeader />
-      <AppNav />
+      <ShopNav />
       <main class="mt-8">
         <slot />
       </main>

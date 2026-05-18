@@ -2,18 +2,22 @@
 interface Props {
   href: string;
   title: string;
+  excerpt?: string;
   published?: string;
   categories?: { name: string }[];
   filmTags?: { name: string }[] | false;
   class?: string;
 }
 
-const { href, title, published, categories = [], filmTags = false, class: className } = Astro.props;
+const { href, title, excerpt, published, categories = [], filmTags = false, class: className } = Astro.props;
+const hasThumbnail = Astro.slots.has('thumbnail');
 ---
 
 <a href={href} class:list={['relative block border border-black sm:hover:bg-gray-100', className]}>
+  {hasThumbnail && <slot name="thumbnail" />}
   <div class="p-4">
     <p class="font-bold">{title}</p>
+    {excerpt && <p class="mt-2 text-sm" set:html={excerpt} />}
     {(categories.length > 0 || (filmTags && filmTags.length > 0)) && (
       <div class="flex flex-wrap gap-x-2 mt-2 text-xs">
         {filmTags && filmTags.map((t) => (

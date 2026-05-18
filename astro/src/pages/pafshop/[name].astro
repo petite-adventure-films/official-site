@@ -1,0 +1,218 @@
+---
+import type { ImageMetadata } from 'astro';
+import PostLayout from '@layouts/ShopPostLayout.astro';
+import GalleryImage from '@components/GalleryImage.astro';
+import DefinitionList from '@components/DefinitionList.astro';
+import ButtonLink from '@components/ButtonLink.astro';
+import Tabs from '@components/Tabs.astro';
+import { PRODUCTS_DVD } from '@/constants/products_dvd';
+import { FILMS } from '@/constants/film_info';
+
+import MyIndiaDiary from '@components/shop/article/MyIndiaDiary.astro';
+import DancingZempukujiApprenticeHomeless from '@components/shop/article/DancingZempukujiApprenticeHomeless.astro';
+import AWomanFromFukushima from '@components/shop/article/AWomanFromFukushima.astro';
+import OtomeHouse from '@components/shop/article/OtomeHouse.astro';
+import GoodbyeUR from '@components/shop/article/GoodbyeUR.astro';
+import BrianAndCo from '@components/shop/article/BrianAndCo.astro';
+
+const META_PAFSHOP = 'ドキュメンタリー監督、早川由美子の映画のDVDやブルーレイを購入できる、オンライン・ショップです。';
+
+export function getStaticPaths() {
+  return PRODUCTS_DVD.map((dvd) => ({
+    params: { name: dvd.name },
+    props: { dvd },
+  }));
+}
+
+const { dvd } = Astro.props;
+
+const articleMap: Record<string, any> = {
+  MyIndiaDiary,
+  DancingZempukujiApprenticeHomeless,
+  AWomanFromFukushima,
+  OtomeHouse,
+  GoodbyeUR,
+  BrianAndCo,
+};
+const ArticleComponent = articleMap[dvd.article_component];
+
+// 映画情報
+const filmIds = Array.isArray(dvd.film_id) ? dvd.film_id : [dvd.film_id];
+const filmInfo = filmIds.flatMap((id) => {
+  const film = FILMS.find((f) => f.film_id === id);
+  return film ? [film] : [];
+});
+
+// ディスク仕様
+const discSpec: { index: string; text: string[] }[] = [];
+if (dvd.disc.length > 0) {
+  const structure = dvd.disc.map((d) => `${d.index}${d.number}枚組`);
+  const types = dvd.disc.map((d) => `${d.index} ${d.type}`);
+  const contents = [...new Set(dvd.disc.map((d) => d.content))];
+  discSpec.push({ index: '構成', text: structure });
+  discSpec.push({ index: 'ディスク種類', text: types });
+  discSpec.push({ index: '収録内容', text: contents });
+}
+
+// ギャラリー画像
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/pafshop/*.jpg',
+  { eager: true },
+);
+const galleryImages = Array.from({ length: dvd.image_num }, (_, i) => {
+  const src = allImages[`/src/assets/images/pafshop/${dvd.name}_${i + 1}.jpg`]?.default;
+  return src ? { src, alt: '' } : null;
+}).filter((x): x is { src: ImageMetadata; alt: string } => x !== null);
+
+const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
+---
+
+<PostLayout
+  title={`${dvd.title} - SHOP`}
+  heading={dvd.title}
+  description={META_PAFSHOP}
+  crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
+>
+  <GalleryImage images={galleryImages} class="mt-8 md:mt-0" />
+
+  <div class="mt-8">
+    {dvd.catch && <p class="text-xl sm:text-xl text-purple-600 mb-2" set:html={dvd.catch} />}
+    <DefinitionList list={discSpec} />
+
+    <ul class="mt-4 [&_li:not(:first-of-type)]:mt-2">
+      {dvd.prices.flatMap((price) =>
+        price.disc.map((disc) => (
+          <li class="flex gap-2 items-center">
+            <span class="flex-1 flex gap-x-1 flex-wrap">
+              <span>{price.type}</span>
+              {dvd.disc.length > 1 && <span class="palt">{disc}</span>}
+            </span>
+            <span>¥{price.amount.toLocaleString()}</span>
+            <select class="border border-black p-1 w-16">
+              <option value="0">数量</option>
+              {Array.from({ length: 10 }, (_, i) => (
+                <option value={i + 1}>{i + 1}</option>
+              ))}
+            </select>
+          </li>
+        ))
+      )}
+    </ul>
+
+    <button
+      id="cart-open"
+      class="mt-4 w-full inline-flex justify-center items-center px-6 py-4 text-base font-medium border border-black bg-purple-600 text-purple-50 sm:hover:bg-purple-100 sm:hover:text-purple-600 sm:hover:border-purple-600"
+    >
+      カートに入れる
+    </button>
+
+    <Tabs tabs={[{ label: '概要' }, { label: tabLabel2 }, { label: '制作クレジット' }]}>
+      <div data-panel="0" class="pt-8 [&_p+p]:mt-2">
+        {filmInfo.map((info) => (
+          <div class="not-first:mt-4">
+            {filmInfo.length > 1 && <h4 class="mb-2 font-bold">{info.title}</h4>}
+            <p>監督: {info.director}</p>
+            <ul class="flex flex-wrap gap-x-2 [&>li:not(:first-child)]:before:content-['/']">
+              {[info.genre, info.country, info.created_at, info.running_time].map((item) => (
+                <li class="flex gap-2">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        {dvd.intro && (
+          <div class="mt-8" set:html={dvd.intro} />
+        )}
+      </div>
+
+      <div
+        data-panel="1"
+        hidden
+        class="pt-8 [&_h4]:mt-4 [&_p]:mt-2 [&_figure]:block [&_figure]:mt-2 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_img]:block [&_img]:mt-2 [&_img]:border [&_img]:border-black"
+      >
+        {ArticleComponent && <ArticleComponent />}
+      </div>
+
+      <div data-panel="2" hidden class="pt-8">
+        {filmInfo.map((info) => (
+          <div class="not-first:mt-4">
+            {filmInfo.length > 1 && <h4 class="mb-2 font-bold">{info.title}</h4>}
+            {info.credits && (
+              <div class="credits-masonry">
+                {info.credits.map((credit) => (
+                  <div class="mb-4">
+                    <dt>{credit.index}</dt>
+                    <dd class="mt-2" set:html={credit.text} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </Tabs>
+
+    <ButtonLink href="/contact/" class="mt-16">お問い合わせ</ButtonLink>
+  </div>
+</PostLayout>
+
+<div
+  id="cart-modal"
+  hidden
+  class="flex justify-center items-center fixed z-50 w-full h-full top-0 left-0 bg-white/90"
+>
+  <div class="flex flex-col gap-2 w-56">
+    <a
+      href="/pafshop/cart/"
+      class="inline-flex justify-center items-center px-6 py-4 text-base font-medium border border-black bg-purple-600 text-purple-50 sm:hover:bg-purple-100 sm:hover:text-purple-600 sm:hover:border-purple-600"
+    >
+      カートを見る
+    </a>
+    <button
+      id="cart-close"
+      class="inline-flex justify-center items-center px-6 py-4 text-base font-medium border border-purple-600 text-purple-600 sm:hover:bg-gray-100"
+    >
+      買い物を続ける
+    </button>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('cart-modal') as HTMLElement;
+
+  const openModal = () => {
+    modal.removeAttribute('hidden');
+    document.body.classList.add('overflow-hidden');
+  };
+  const closeModal = () => {
+    modal.setAttribute('hidden', '');
+    document.body.classList.remove('overflow-hidden');
+  };
+
+  document.getElementById('cart-open')?.addEventListener('click', openModal);
+  document.getElementById('cart-close')?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+</script>
+
+<script>
+  const container = document.querySelector<HTMLElement>('.credits-masonry');
+  if (container) {
+    const items = Array.from(container.children) as HTMLElement[];
+    const wrap = document.createElement('div');
+    wrap.className = 'flex gap-4';
+    const cols = [document.createElement('dl'), document.createElement('dl')];
+    cols.forEach((col) => { col.className = 'flex-1'; wrap.appendChild(col); });
+    container.replaceWith(wrap);
+    const heights = [0, 0];
+    const mb = 16;
+    for (const item of items) {
+      cols[0].appendChild(item);
+      const h = item.getBoundingClientRect().height + mb;
+      cols[0].removeChild(item);
+      const shorter = heights[0] <= heights[1] ? 0 : 1;
+      cols[shorter].appendChild(item);
+      heights[shorter] += h;
+    }
+  }
+</script>
