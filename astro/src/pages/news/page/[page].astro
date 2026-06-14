@@ -1,0 +1,30 @@
+---
+import { wpGetList } from '@/lib/wp-api';
+import type { News } from '@/types/news';
+import PostLayout from '@layouts/PostLayout.astro';
+
+export function getStaticPaths() {
+  return { page: 2 };
+}
+
+const { page } = Astro.props;
+
+const { data: posts } = await wpGetList<News>('news', {
+  per_page: 10,
+  page,
+});
+---
+
+<PostLayout title="お知らせ">
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <h2>{post.title}</h2>
+          <div set:html={post.content} />
+          <time datetime={post.published}>{post.published}</time>
+        </li>
+      ))
+    }
+  </ul>
+</PostLayout>
