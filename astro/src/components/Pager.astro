@@ -1,0 +1,43 @@
+---
+import { buildPageItems } from '@/lib/pager';
+
+interface Props {
+  page: string;
+  currentPage: number;
+  totalPages: number;
+}
+
+const { page, currentPage, totalPages } = Astro.props;
+
+const pageItems = buildPageItems(currentPage, totalPages);
+const basePath = `/${page}`;
+const getPageHref = (pageNumber: number) =>
+  pageNumber === 1 ? `${basePath}/` : `${basePath}/page/${pageNumber}/`;
+---
+
+{
+  totalPages > 1 && (
+    <nav aria-label="Pagination" class="mt-8">
+      <ul class="flex flex-wrap justify-center gap-2">
+        {pageItems.map((item) => (
+          <li>
+            {item === 'ellipsis' ? (
+              <span class="block px-2 py-1 text-gray-500">...</span>
+            ) : (
+              <a
+                href={getPageHref(item)}
+                aria-current={item === currentPage ? 'page' : undefined}
+                class:list={[
+                  'block border border-black px-2 py-1 text-sm sm:hover:bg-gray-100',
+                  item === currentPage && 'bg-gray-100',
+                ]}
+              >
+                {item}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
