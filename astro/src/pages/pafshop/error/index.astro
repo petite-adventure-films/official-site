@@ -2,7 +2,13 @@
 import ShopPostLayout from '@layouts/ShopPostLayout.astro';
 ---
 
-<ShopPostLayout title="SHOP" heading="エラー" crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}>
+<ShopPostLayout
+  title="注文エラー - SHOP"
+  heading="エラー"
+  description="注文手続き中にエラーが発生しました。"
+  noIndex
+  crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
+>
   <p>
     エラーが発生しました。<br />お手数ですが、もう一度始めからやり直してください。
   </p>

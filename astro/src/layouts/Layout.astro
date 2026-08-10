@@ -3,19 +3,28 @@ import '@styles/global.css';
 import AppHeader from '@components/AppHeader.astro';
 import AppNav from '@components/AppNav.astro';
 import AppFooter from '@components/AppFooter.astro';
+import SeoHead from '@components/SeoHead.astro';
+import type { OgType } from '@/constants/seo';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogType?: OgType;
+  noIndex?: boolean;
   transparentWrapper?: boolean;
   wrapperClass?: string;
 }
 
-const SITE_NAME = 'Petite Adventure Films';
-const { title, description = '', ogImage, transparentWrapper = false, wrapperClass } = Astro.props;
-const fullTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const {
+  title,
+  description,
+  ogImage,
+  ogType,
+  noIndex,
+  transparentWrapper = false,
+  wrapperClass,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -24,13 +33,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="canonical" href={canonicalURL} />
-    <title>{fullTitle}</title>
-    {description && <meta name="description" content={description} />}
-    <meta property="og:title" content={fullTitle} />
-    {description && <meta property="og:description" content={description} />}
-    <meta property="og:url" content={canonicalURL} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <SeoHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      ogType={ogType}
+      noIndex={noIndex}
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

@@ -7,6 +7,7 @@ import PublishedDate from '@components/PublishedDate.astro';
 import Video from '@components/Video.astro';
 import { wpGetDetail, wpGetList } from '@/lib/wp-api';
 import { getYouTubeId } from '@/lib/youtube';
+import { createMetaDescription } from '@/lib/seo';
 import type { ChannelDetail, ChannelSummary } from '@/types/channel';
 
 export async function getStaticPaths() {
@@ -20,13 +21,16 @@ const channel = await wpGetDetail<ChannelDetail>('channel_detail', {
 if (!channel) return Astro.redirect('/404/');
 
 const youtubeId = getYouTubeId(channel.youtube_id);
-const description = 'ドキュメンタリー監督、早川由美子がYouTubeで公開した映像をご紹介します。';
+const description = createMetaDescription(channel.content);
+const ogImage = youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg` : undefined;
 ---
 
 <PostLayout
   title={`${channel.title} - チャンネル`}
   heading={channel.title}
   description={description}
+  ogImage={ogImage}
+  ogType="video.other"
   crumbs={[{ to: '/channel/', name: 'チャンネル' }]}
 >
   <Fragment slot="headerTags">

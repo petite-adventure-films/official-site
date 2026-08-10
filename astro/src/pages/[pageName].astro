@@ -5,6 +5,7 @@ import AttachedInfo from '@components/AttachedInfo.astro';
 import PublishedDate from '@components/PublishedDate.astro';
 import PostLayout from '@layouts/PostLayout.astro';
 import { decodeWordPressSlug, getAllBlogDetails } from '@/lib/blog-data';
+import { createMetaDescription } from '@/lib/seo';
 import type { Blog } from '@/types/blog';
 
 export async function getStaticPaths() {
@@ -41,12 +42,15 @@ interface Props {
 }
 
 const { detail } = Astro.props;
+const description = createMetaDescription(detail.content);
 ---
 
 <PostLayout
   title={`${detail.title} - BLOG`}
   heading={detail.title}
+  description={description}
   ogImage={detail.thumbnail || undefined}
+  ogType="article"
   crumbs={[{ to: '/blog/', name: 'BLOG' }]}
 >
   <div slot="headerTags">
