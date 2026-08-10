@@ -4,6 +4,7 @@ import AppHeader from '@components/AppHeader.astro';
 import AppNav from '@components/AppNav.astro';
 import AppFooter from '@components/AppFooter.astro';
 import SeoHead from '@components/SeoHead.astro';
+import SiteStructuredData from '@components/SiteStructuredData.astro';
 import type { OgType } from '@/constants/seo';
 
 interface Props {
@@ -40,6 +41,7 @@ const {
       ogType={ogType}
       noIndex={noIndex}
     />
+    <SiteStructuredData />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

@@ -2,6 +2,7 @@
 import { NEWS_PER_PAGE } from '@/constants/pagination';
 import { wpGetList } from '@/lib/wp-api';
 import ArticleContents from '@components/ArticleContents.astro';
+import NewsStructuredData from '@components/NewsStructuredData.astro';
 import Pager from '@components/Pager.astro';
 import type { News } from '@/types/news';
 import PostLayout from '@layouts/PostLayout.astro';
@@ -39,6 +40,7 @@ const { data: posts } = await wpGetList<News>('news', {
   heading="お知らせ"
   description={`プチ・アドベンチャー・フィルムズからのお知らせ、${String(currentPage)}ページ目です。`}
 >
+  <NewsStructuredData {posts} />
   <p class="mb-4 text-sm text-gray-500">{currentPage} / {totalPages}ページ</p>
   <ul class="[&>li:not(:first-child)]:mt-8">
     {
