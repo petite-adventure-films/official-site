@@ -9,10 +9,11 @@ interface Props {
   description?: string;
   ogImage?: string;
   transparentWrapper?: boolean;
+  wrapperClass?: string;
 }
 
 const SITE_NAME = 'Petite Adventure Films';
-const { title, description = '', ogImage, transparentWrapper = false } = Astro.props;
+const { title, description = '', ogImage, transparentWrapper = false, wrapperClass } = Astro.props;
 const fullTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -40,9 +41,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.0.1/dist/css/yakuhanjp_s.css"
       rel="stylesheet"
     />
+    <slot name="head" />
   </head>
   <body>
-    <div class:list={['wrapper', !transparentWrapper && 'bg-white']}>
+    <slot name="background" />
+    <div class:list={['wrapper', !transparentWrapper && 'bg-white', wrapperClass]}>
       <AppHeader />
       <AppNav />
       <main class="mt-8">
