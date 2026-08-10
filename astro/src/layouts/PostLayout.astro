@@ -16,13 +16,23 @@ interface Props {
 }
 
 const { title, heading, description, ogImage, crumbs = [] } = Astro.props;
+const hasHeaderTags = Astro.slots.has('headerTags');
+const hasLead = Astro.slots.has('lead');
 ---
 
 <Layout title={title} description={description} ogImage={ogImage}>
   <header>
     <BreadCrumb crumbs={crumbs} />
+    {hasHeaderTags && <slot name="headerTags" />}
     <h2 class="text-xl font-bold">{heading ?? title}</h2>
   </header>
+  {
+    hasLead && (
+      <div class="mt-8">
+        <slot name="lead" />
+      </div>
+    )
+  }
   <div class="mt-8">
     <slot />
   </div>

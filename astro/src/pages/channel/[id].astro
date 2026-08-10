@@ -1,0 +1,39 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import ArticleContents from '@components/ArticleContents.astro';
+import AttachedInfo from '@components/AttachedInfo.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import Video from '@components/Video.astro';
+import { wpGetDetail, wpGetList } from '@/lib/wp-api';
+import { getYouTubeId } from '@/lib/youtube';
+import type { ChannelDetail, ChannelSummary } from '@/types/channel';
+
+export async function getStaticPaths() {
+  const { data } = await wpGetList<ChannelSummary>('channel', { per_page: -1 });
+  return data.map((channel) => ({ params: { id: String(channel.id) } }));
+}
+
+const channel = await wpGetDetail<ChannelDetail>('channel_detail', {
+  pageId: Astro.params.id!,
+});
+if (!channel) return Astro.redirect('/404/');
+
+const youtubeId = getYouTubeId(channel.youtube_id);
+const description = 'ドキュメンタリー監督、早川由美子がYouTubeで公開した映像をご紹介します。';
+---
+
+<PostLayout
+  title={`${channel.title} - チャンネル`}
+  heading={channel.title}
+  description={description}
+  crumbs={[{ to: '/channel/', name: 'チャンネル' }]}
+>
+  <Fragment slot="headerTags">
+    <ArticleHeaderTags filmTags={channel.film_tags} />
+  </Fragment>
+  {youtubeId && <Video youtubeId={youtubeId} />}
+  <AttachedInfo info={[channel.created_country, channel.created_year, channel.running_time]} />
+  <ArticleContents contents={channel.content} />
+  <PublishedDate date={channel.published} class="mt-8" />
+</PostLayout>
