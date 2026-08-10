@@ -1,0 +1,44 @@
+---
+import BlogArchivePage from '@components/blog/BlogArchivePage.astro';
+import { BLOG_META } from '@/constants/blog';
+import {
+  decodeBlogTagSlug,
+  filterBlogByTag,
+  getBlogSnapshot,
+  paginateBlogPosts,
+} from '@/lib/blog-data';
+import type { Blog } from '@/types/blog';
+
+export async function getStaticPaths() {
+  const snapshot = await getBlogSnapshot();
+  return snapshot.tags.flatMap((tag) => {
+    const posts = filterBlogByTag(snapshot, tag.id);
+    if (posts.length === 0) return [];
+    return [
+      {
+        params: { tagName: decodeBlogTagSlug(tag.slug) },
+        props: { tagName: tag.name, ...paginateBlogPosts(posts, 1) },
+      },
+    ];
+  });
+}
+
+interface Props {
+  tagName: string;
+  posts: Blog[];
+  totalPages: number;
+}
+
+const { tagName, posts, totalPages } = Astro.props;
+const tagPath = Astro.params.tagName ?? tagName;
+---
+
+<BlogArchivePage
+  posts={posts}
+  totalPages={totalPages}
+  currentPage={1}
+  pagerPath={`blog/tag/${tagPath}`}
+  title={`${tagName} - BLOG`}
+  heading={tagName}
+  description={BLOG_META.archive(tagName)}
+/>

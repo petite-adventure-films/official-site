@@ -1,0 +1,58 @@
+---
+import ArchiveList from '@components/ArchiveList.astro';
+import Pager from '@components/Pager.astro';
+import PostLayout from '@layouts/PostLayout.astro';
+import BlogCard from './BlogCard.astro';
+import BlogCategories from './BlogCategories.astro';
+import BlogTabs from './BlogTabs.astro';
+import type { Blog } from '@/types/blog';
+
+interface Props {
+  posts: Blog[];
+  totalPages: number;
+  currentPage: number;
+  pagerPath: string;
+  title: string;
+  heading: string;
+  description: string;
+  currentCategory?: string;
+  tab?: 'all' | 'recommended';
+}
+
+const {
+  posts,
+  totalPages,
+  currentPage,
+  pagerPath,
+  title,
+  heading,
+  description,
+  currentCategory = '',
+  tab,
+} = Astro.props;
+const crumbs = heading === 'BLOG' ? [] : [{ to: '/blog/', name: 'BLOG' }];
+---
+
+<PostLayout title={title} heading={heading} description={description} crumbs={crumbs}>
+  {tab && <BlogTabs slot="lead" recommended={tab === 'recommended'} />}
+  {
+    currentPage > 1 && (
+      <p class="mb-4 text-sm text-gray-500">
+        {currentPage} / {totalPages}ページ
+      </p>
+    )
+  }
+  <ArchiveList>
+    {
+      posts.map((post) => (
+        <li>
+          <BlogCard post={post} />
+        </li>
+      ))
+    }
+  </ArchiveList>
+  <Pager page={pagerPath} currentPage={currentPage} totalPages={totalPages} />
+  <aside class="mt-16">
+    <BlogCategories currentCategory={currentCategory} />
+  </aside>
+</PostLayout>
