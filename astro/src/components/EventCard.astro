@@ -1,0 +1,24 @@
+---
+import ArticleHeaderTags from './ArticleHeaderTags.astro';
+import AttachedInfo from './AttachedInfo.astro';
+import type { EventSummary } from '@/types/event';
+
+interface Props {
+  event: EventSummary;
+}
+
+const { event } = Astro.props;
+---
+
+<a href={`/events/${event.id}/`} class="block border border-black p-4 sm:hover:bg-gray-100">
+  <ArticleHeaderTags
+    status={event.status}
+    filmTags={event.film_tags}
+    eventTags={event.event_tags}
+    no={event.no}
+  />
+  <p class="font-bold">{event.title}</p>
+  <AttachedInfo
+    info={[`${event.date_from}${event.date_to ? ` - ${event.date_to}` : ''}`, event.place]}
+  />
+</a>

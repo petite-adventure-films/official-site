@@ -1,0 +1,36 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ArchiveList from '@components/ArchiveList.astro';
+import EventCard from '@components/EventCard.astro';
+import EventArchiveLinks from '@components/EventArchiveLinks.astro';
+import { wpGetList } from '@/lib/wp-api';
+import type { EventSummary } from '@/types/event';
+
+export function getStaticPaths() {
+  const currentYear = new Date().getFullYear();
+  return Array.from({ length: currentYear - 2011 }, (_, index) => 2011 + index).map((year) => ({
+    params: { year: String(year) },
+  }));
+}
+
+const year = Astro.params.year!;
+const { data: events } = await wpGetList<EventSummary>('events_archive', { year });
+---
+
+<PostLayout
+  title={`${year}年 - イベント・上映会`}
+  heading={`${year}年のイベント・上映会`}
+  description={`${year}年の映画上映会、講演、ワークショップなどの開催情報です。`}
+  crumbs={[{ to: '/events/', name: 'イベント・上映会' }]}
+>
+  <ArchiveList>
+    {
+      events.map((event) => (
+        <li>
+          <EventCard event={event} />
+        </li>
+      ))
+    }
+  </ArchiveList>
+  <EventArchiveLinks currentYear={Number(year)} />
+</PostLayout>

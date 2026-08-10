@@ -1,0 +1,18 @@
+---
+interface Props {
+  info: Array<string | null | undefined>;
+}
+
+const stripHtml = (value: string) => value.replace(/<[^>]*>/g, '');
+const info = Astro.props.info.filter((value): value is string => Boolean(value));
+---
+
+{
+  info.length > 0 && (
+    <div class="mt-2 flex flex-wrap gap-x-2 text-xs">
+      {info.map((value) => (
+        <span class="before:pr-px before:content-['#']">{stripHtml(value)}</span>
+      ))}
+    </div>
+  )
+}
