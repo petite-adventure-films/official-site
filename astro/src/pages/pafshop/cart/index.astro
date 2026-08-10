@@ -1,0 +1,8 @@
+---
+import ShopPostLayout from '@layouts/ShopPostLayout.astro';
+import Cart from '@components/Cart';
+---
+
+<ShopPostLayout title="SHOP" heading="カート" crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}>
+  <Cart client:load />
+</ShopPostLayout>
