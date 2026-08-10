@@ -1,6 +1,6 @@
 ---
 import '@styles/global.css';
-import AppHeader from '@components/AppHeader.astro';
+import ShopHeader from '@components/shop/ShopHeader.astro';
 import ShopNav from '@components/shop/ShopNav.astro';
 import AppFooter from '@components/AppFooter.astro';
 
@@ -41,8 +41,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
-    <div class="wrapper bg-white">
-      <AppHeader />
+    <div class="wrapper">
+      <ShopHeader />
       <ShopNav />
       <main class="mt-8">
         <slot />

@@ -1,7 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
-import PostLayout from '@layouts/ShopPostLayout.astro';
+import ShopLayout from '@layouts/ShopLayout.astro';
 import PostCard from '@components/PostCard.astro';
 import { PRODUCTS_DVD } from '@/constants/products_dvd';
 
@@ -14,7 +14,7 @@ const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/imag
 const thumbnail = (name: string) => allImages[`/src/assets/images/pafshop/${name}_1.jpg`]?.default;
 ---
 
-<PostLayout title="SHOP" description={META_PAFSHOP} crumbs={[]}>
+<ShopLayout title="SHOP" description={META_PAFSHOP}>
   <ul class="grid grid-cols-1 gap-8">
     {
       PRODUCTS_DVD.map((product) => {
@@ -35,4 +35,4 @@ const thumbnail = (name: string) => allImages[`/src/assets/images/pafshop/${name
       })
     }
   </ul>
-</PostLayout>
+</ShopLayout>

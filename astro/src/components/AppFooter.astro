@@ -1,6 +1,6 @@
 ---
 const currentPath = Astro.url.pathname;
-const isShop = currentPath.includes('/pafshop/');
+const isShop = currentPath.startsWith('/pafshop/') && currentPath !== '/pafshop/';
 const isCart = currentPath.includes('/pafshop/cart/');
 ---
 
