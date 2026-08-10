@@ -1,4 +1,7 @@
 ---
+import JsonLd from '@components/JsonLd.astro';
+import { createBreadcrumbList } from '@/lib/structured-data';
+
 interface Crumb {
   to?: string;
   name?: string;
@@ -6,11 +9,20 @@ interface Crumb {
 
 interface Props {
   crumbs?: Crumb[];
+  currentName: string;
 }
 
-const { crumbs = [] } = Astro.props;
+const { crumbs = [], currentName } = Astro.props;
+const breadcrumbItems = [
+  { name: 'HOME', url: new URL('/', Astro.site).href },
+  ...crumbs
+    .filter((crumb): crumb is Required<Crumb> => Boolean(crumb.name && crumb.to))
+    .map((crumb) => ({ name: crumb.name, url: new URL(crumb.to, Astro.site).href })),
+  { name: currentName, url: new URL(Astro.url.pathname, Astro.site).href },
+];
 ---
 
+<JsonLd data={createBreadcrumbList(breadcrumbItems)} />
 <nav aria-label="Breadcrumb" class="mb-2">
   <ul
     class="flex flex-wrap gap-1 text-xs text-gray-500 [&_li]:flex [&_li]:items-center [&_li]:gap-1"

@@ -1,9 +1,11 @@
 @import 'tailwindcss';
 @source '../**/*.astro';
+@source '../**/*.tsx';
 
 @theme {
   --font-sans: YakuHanJPs, sans-serif;
   --font-site-name: Dosis, sans-serif;
+  --font-document-title: 'Noto Serif JP', serif;
   --color-tkhd73-yellow: #e6e100;
   --color-tkhd73-yellow-shadow: #ced81c;
   --color-tkhd73-green: #009177;
@@ -12,6 +14,11 @@
 }
 
 @layer base {
+  main {
+    font-size: 0.875rem;
+    line-height: 1.625;
+  }
+
   p {
     margin: 0;
   }
@@ -25,7 +32,7 @@
     @apply pointer-events-none text-gray-500;
   }
   .link-text[target='_blank']::after {
-    content: '↗︎';
+    content: '↗️';
   }
   .link-text-children a:not([aria-disabled='true']) {
     color: var(--color-blue-600);
@@ -36,7 +43,7 @@
     color: var(--color-blue-400);
   }
   .link-text-children a[target='_blank']::after {
-    content: '↗︎';
+    content: '↗️';
   }
 }
 

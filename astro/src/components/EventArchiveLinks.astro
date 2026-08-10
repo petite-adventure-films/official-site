@@ -1,0 +1,32 @@
+---
+import H3 from './H3.astro';
+
+interface Props {
+  currentYear?: number;
+}
+
+const { currentYear = 0 } = Astro.props;
+const thisYear = new Date().getFullYear();
+const years = Array.from({ length: thisYear - 2011 }, (_, index) => thisYear - 1 - index);
+---
+
+<section class="mt-16">
+  <H3>イベント・上映会アーカイブ</H3>
+  <ul class="mt-4 flex flex-wrap gap-2">
+    {
+      years.map((year) => (
+        <li>
+          <a
+            href={`/events/archive/${year}/`}
+            class:list={[
+              'block border border-black px-2 py-1 sm:hover:bg-gray-100',
+              currentYear === year && 'bg-gray-100',
+            ]}
+          >
+            {year}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

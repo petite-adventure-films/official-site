@@ -1,0 +1,31 @@
+---
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import AttachedInfo from '@components/AttachedInfo.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import { decodeWordPressSlug } from '@/lib/blog-data';
+import type { Blog } from '@/types/blog';
+
+interface Props {
+  post: Blog;
+}
+
+const { post } = Astro.props;
+const articlePath = `/${decodeWordPressSlug(post.name)}/`;
+---
+
+<a href={articlePath} class="relative block border border-black sm:hover:bg-gray-100">
+  {
+    post.thumbnail && (
+      <div class="border-b border-black bg-white">
+        <img src={post.thumbnail} alt="" class="block w-full" loading="lazy" />
+      </div>
+    )
+  }
+  <div class="p-4">
+    {post.recommended === '1' && <span class="mb-1 block">⭐️</span>}
+    <ArticleHeaderTags filmTags={post.film_tags} />
+    <h3 class="text-base font-bold">{post.title}</h3>
+    <AttachedInfo info={post.categories.map((category) => category.name)} />
+    <PublishedDate date={post.published} />
+  </div>
+</a>

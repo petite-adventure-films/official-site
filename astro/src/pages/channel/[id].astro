@@ -1,0 +1,65 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import ArticleContents from '@components/ArticleContents.astro';
+import AttachedInfo from '@components/AttachedInfo.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import Video from '@components/Video.astro';
+import JsonLd from '@components/JsonLd.astro';
+import { wpGetDetail, wpGetList } from '@/lib/wp-api';
+import { getYouTubeId } from '@/lib/youtube';
+import { createMetaDescription } from '@/lib/seo';
+import { minutesToIsoDuration, toIsoDate } from '@/lib/structured-data';
+import type { ChannelDetail, ChannelSummary } from '@/types/channel';
+
+export async function getStaticPaths() {
+  const { data } = await wpGetList<ChannelSummary>('channel', { per_page: -1 });
+  return data.map((channel) => ({ params: { id: String(channel.id) } }));
+}
+
+const channel = await wpGetDetail<ChannelDetail>('channel_detail', {
+  pageId: Astro.params.id!,
+});
+if (!channel) return Astro.redirect('/404/');
+
+const youtubeId = getYouTubeId(channel.youtube_id);
+const description = createMetaDescription(channel.content);
+const ogImage = youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg` : undefined;
+const videoData = youtubeId
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      '@id': `${new URL(Astro.url.pathname, Astro.site).href}#video`,
+      name: channel.title,
+      description,
+      thumbnailUrl: [ogImage!],
+      uploadDate: toIsoDate(channel.published),
+      duration: minutesToIsoDuration(channel.running_time),
+      embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeId}`,
+      contentUrl: `https://www.youtube.com/watch?v=${youtubeId}`,
+      inLanguage: 'ja-JP',
+      publisher: {
+        '@type': 'Organization',
+        '@id': `${new URL('/', Astro.site).href}#organization`,
+      },
+    }
+  : undefined;
+---
+
+<PostLayout
+  title={`${channel.title} - チャンネル`}
+  heading={channel.title}
+  description={description}
+  ogImage={ogImage}
+  ogType="video.other"
+  crumbs={[{ to: '/channel/', name: 'チャンネル' }]}
+>
+  {videoData && <JsonLd data={videoData} />}
+  <Fragment slot="headerTags">
+    <ArticleHeaderTags filmTags={channel.film_tags} />
+  </Fragment>
+  {youtubeId && <Video youtubeId={youtubeId} />}
+  <AttachedInfo info={[channel.created_country, channel.created_year, channel.running_time]} />
+  <ArticleContents contents={channel.content} />
+  <PublishedDate date={channel.published} class="mt-8" />
+</PostLayout>

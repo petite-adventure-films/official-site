@@ -1,0 +1,24 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import EventArchiveLinks from '@components/EventArchiveLinks.astro';
+import EventTabs from '@components/EventTabs.astro';
+import { getLatestEvents } from '@/lib/event';
+import { wpGetCustom } from '@/lib/wp-api';
+import type { EventList } from '@/types/event';
+
+const description =
+  'ドキュメンタリー監督、早川由美子の映画上映会、講演、ワークショップなどの開催情報です。';
+const groupedEvents = (await wpGetCustom<EventList>('events')) ?? {};
+const latestEvents = getLatestEvents(groupedEvents);
+---
+
+<PostLayout title="イベント・上映会" description={description}>
+  {
+    Object.keys(groupedEvents).length > 0 ? (
+      <EventTabs groupedEvents={groupedEvents} latestEvents={latestEvents} />
+    ) : (
+      <p>ただ今、予定の上映会・イベントがありません</p>
+    )
+  }
+  <EventArchiveLinks />
+</PostLayout>

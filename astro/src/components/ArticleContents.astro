@@ -1,0 +1,16 @@
+---
+interface Props {
+  contents?: string;
+  marginTop?: string;
+}
+
+const { contents = '', marginTop = 'mt-8' } = Astro.props;
+---
+
+<div
+  class:list={[
+    marginTop,
+    'link-text-children [&_iframe]:h-full [&_iframe]:w-full [&_img]:mt-2 [&_img]:border [&_img]:border-black [&_p:has(iframe)]:aspect-video',
+  ]}
+  set:html={contents}
+/>

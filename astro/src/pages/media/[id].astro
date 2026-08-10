@@ -1,0 +1,82 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import ArticleContents from '@components/ArticleContents.astro';
+import AttachedInfo from '@components/AttachedInfo.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import Video from '@components/Video.astro';
+import H3 from '@components/H3.astro';
+import JsonLd from '@components/JsonLd.astro';
+import PdfViewer from '@components/PdfViewer';
+import { wpGetDetail, wpGetList } from '@/lib/wp-api';
+import { getYouTubeId } from '@/lib/youtube';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { toIsoDate } from '@/lib/structured-data';
+import type { MediaDetail, MediaSummary } from '@/types/media';
+
+export async function getStaticPaths() {
+  const { data } = await wpGetList<MediaSummary>('media', { per_page: -1 });
+  return data.map((item) => ({ params: { id: String(item.id) } }));
+}
+
+const media = await wpGetDetail<MediaDetail>('media_detail', { pageId: Astro.params.id! });
+if (!media) return Astro.redirect('/404/');
+const description = createMetaDescription(
+  [media.media_name, media.article_title, media.article_contents || media.content].join(' '),
+);
+const articleUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${articleUrl}#article`,
+  mainEntityOfPage: articleUrl,
+  headline: toPlainText(media.article_title || media.title),
+  description,
+  articleBody: toPlainText(media.article_contents || media.content),
+  datePublished: toIsoDate(media.published),
+  author: {
+    '@type': 'Organization',
+    name: toPlainText(media.media_name) || 'Petite Adventure Films',
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': `${new URL('/', Astro.site).href}#organization`,
+  },
+  inLanguage: 'ja-JP',
+};
+---
+
+<PostLayout
+  title={`${media.title} - メディア紹介`}
+  heading={media.title}
+  description={description}
+  ogType="article"
+  crumbs={[{ to: '/media/', name: 'メディア紹介' }]}
+>
+  <JsonLd data={articleData} />
+  <Fragment slot="headerTags">
+    <ArticleHeaderTags filmTags={media.film_tags} />
+  </Fragment>
+  {media.media_video && <Video youtubeId={getYouTubeId(media.media_video)} />}
+  {
+    media.media_pdf_url && (
+      <div class="mt-4">
+        <PdfViewer src={media.media_pdf_url} title={media.title} />
+      </div>
+    )
+  }
+  <AttachedInfo info={[media.media_name, media.media_volume, media.media_contents]} />
+  <ArticleContents contents={media.content} />
+  {
+    media.article_title && media.article_contents && (
+      <article class="relative mt-8 border border-black px-4 py-8 before:absolute before:top-0 before:right-0 before:bg-gray-100 before:px-2 before:py-1 before:text-xs before:content-['記事本文']">
+        <H3 class="mb-8">
+          {media.article_title}
+          {media.article_subtitle && <Fragment slot="sub">{media.article_subtitle}</Fragment>}
+        </H3>
+        <div class="link-text-children mt-8 [&_p]:mt-2" set:html={media.article_contents} />
+      </article>
+    )
+  }
+  <PublishedDate date={media.published} class="mt-8" />
+</PostLayout>

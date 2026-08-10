@@ -1,0 +1,88 @@
+---
+import ArticleContents from '@components/ArticleContents.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import AttachedInfo from '@components/AttachedInfo.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import JsonLd from '@components/JsonLd.astro';
+import PostLayout from '@layouts/PostLayout.astro';
+import { decodeWordPressSlug, getAllBlogDetails } from '@/lib/blog-data';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { toIsoDate } from '@/lib/structured-data';
+import type { Blog } from '@/types/blog';
+
+export async function getStaticPaths() {
+  const reservedRootRoutes = new Set([
+    'channel',
+    'contact',
+    'copyrights-disclaimers',
+    'director',
+    'events',
+    'films',
+    'four-walling',
+    'gathering-the-personal-information',
+    'media',
+    'news',
+    'pafshop',
+    'privacy-policy',
+    'specified-commercial-transaction-law',
+    'system-requirements',
+    'takahatadai73',
+    'workshop',
+    'blog',
+  ]);
+  const details = await getAllBlogDetails();
+  return details
+    .filter((detail) => !reservedRootRoutes.has(decodeWordPressSlug(detail.name)))
+    .map((detail) => ({
+      params: { pageName: decodeWordPressSlug(detail.name) },
+      props: { detail },
+    }));
+}
+
+interface Props {
+  detail: Blog;
+}
+
+const { detail } = Astro.props;
+const description = createMetaDescription(detail.content);
+const articleUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${articleUrl}#article`,
+  mainEntityOfPage: articleUrl,
+  headline: toPlainText(detail.title),
+  description,
+  image: detail.thumbnail || undefined,
+  datePublished: toIsoDate(detail.published),
+  articleBody: toPlainText(detail.content ?? ''),
+  author: {
+    '@type': 'Person',
+    name: '早川由美子',
+    url: new URL('/director/', Astro.site).href,
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': `${new URL('/', Astro.site).href}#organization`,
+  },
+  inLanguage: 'ja-JP',
+};
+---
+
+<PostLayout
+  title={`${detail.title} - BLOG`}
+  heading={detail.title}
+  description={description}
+  ogImage={detail.thumbnail || undefined}
+  ogType="article"
+  crumbs={[{ to: '/blog/', name: 'BLOG' }]}
+>
+  <JsonLd data={articleData} />
+  <div slot="headerTags">
+    {detail.recommended === '1' && <span class="mb-1 block">⭐️</span>}
+    <ArticleHeaderTags filmTags={detail.film_tags} />
+  </div>
+  <AttachedInfo info={detail.categories.map((category) => category.name)} />
+  <ArticleContents contents={detail.content} />
+  <PublishedDate date={detail.published} class="mt-8" />
+</PostLayout>

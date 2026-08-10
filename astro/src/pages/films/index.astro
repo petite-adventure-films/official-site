@@ -2,7 +2,10 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import PostLayout from '@layouts/PostLayout.astro';
+import JsonLd from '@components/JsonLd.astro';
 import { FILMS } from '@/constants/film_info';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { minutesToIsoDuration } from '@/lib/structured-data';
 
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/images/films/*_thumbnail.jpg',
@@ -17,12 +20,41 @@ const filmCards = FILMS.map((film) => {
   if (film.prizes) attachedInfo.push('受賞歴あり');
   return { film, thumbnail, attachedInfo };
 });
+
+const movieList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '早川由美子の映画作品',
+  itemListElement: filmCards.map(({ film, thumbnail }, index) => {
+    const url = new URL(`/films/${film.film_id}/`, Astro.site).href;
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      url,
+      item: {
+        '@type': 'Movie',
+        name: film.title,
+        url,
+        image: thumbnail ? new URL(thumbnail.src, Astro.site).href : undefined,
+        description: createMetaDescription(film.content),
+        dateCreated: film.created_at,
+        countryOfOrigin: film.country,
+        duration: minutesToIsoDuration(film.running_time),
+        director: {
+          '@type': 'Person',
+          name: toPlainText(film.director),
+        },
+      },
+    };
+  }),
+};
 ---
 
 <PostLayout
   title="映画"
   description="ドキュメンタリー監督、早川由美子がこれまでに制作した映画の、あらすじや予告編が掲載されています。"
 >
+  <JsonLd data={movieList} />
   <ul>
     {
       filmCards.map(({ film, thumbnail, attachedInfo }, i) => (

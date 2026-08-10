@@ -6,7 +6,10 @@ import Section from '@components/Section.astro';
 import ButtonLink from '@components/ButtonLink.astro';
 import GalleryImage from '@components/GalleryImage.astro';
 import Video from '@components/Video.astro';
+import JsonLd from '@components/JsonLd.astro';
 import { FILMS } from '@/constants/film_info';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { minutesToIsoDuration } from '@/lib/structured-data';
 import type { Film } from '@/types/film';
 
 export function getStaticPaths() {
@@ -40,14 +43,41 @@ const bannerImage = film.special_page
 const description = `${film.title}（${film.genre}/${film.created_at}年/${film.country}/${film.running_time}/監督：${film.director}）`;
 
 const credits = film.credits ?? [];
+const movieUrl = new URL(Astro.url.pathname, Astro.site).href;
+const movieData = {
+  '@context': 'https://schema.org',
+  '@type': 'Movie',
+  '@id': `${movieUrl}#movie`,
+  name: film.title,
+  url: movieUrl,
+  image: thumbnail ? new URL(thumbnail.src, Astro.site).href : undefined,
+  description: createMetaDescription(film.content),
+  dateCreated: film.created_at,
+  countryOfOrigin: film.country,
+  duration: minutesToIsoDuration(film.running_time),
+  genre: film.genre,
+  director: {
+    '@type': 'Person',
+    name: toPlainText(film.director),
+    url: new URL('/director/', Astro.site).href,
+  },
+  productionCompany: {
+    '@type': 'Organization',
+    '@id': `${new URL('/', Astro.site).href}#organization`,
+    name: 'Petite Adventure Films',
+  },
+};
 ---
 
 <PostLayout
   title={`${film.title} - 映画`}
   heading={film.title}
   description={description}
+  ogImage={thumbnail?.src}
+  ogType="video.movie"
   crumbs={[{ to: '/films/', name: '映画' }]}
 >
+  <JsonLd data={movieData} />
   <div class="mb-8">
     {thumbnail && <Image src={thumbnail} alt="thumbnail" class="w-full border border-black" />}
     {film.poster_appendix && <p class="mt-2 text-xs text-gray-500">{film.poster_appendix}</p>}

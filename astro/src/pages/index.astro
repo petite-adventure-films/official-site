@@ -1,7 +1,82 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import ArticleContents from '@components/ArticleContents.astro';
+import ButtonLink from '@components/ButtonLink.astro';
+import H3 from '@components/H3.astro';
+import HomeHero from '@components/HomeHero.astro';
+import HomeOpening from '@components/HomeOpening.astro';
+import HomeVideoModal from '@components/HomeVideoModal';
+import PublishedDate from '@components/PublishedDate.astro';
+import Section from '@components/Section.astro';
+import bannerImage from '@assets/images/films/banner_takahatadai73.jpg';
+import { wpGetList } from '@/lib/wp-api';
+import type { News } from '@/types/news';
+
+const { data: news } = await wpGetList<News>('news', { per_page: 1 });
+const description =
+  'インディペンデントのドキュメンタリー監督、早川由美子の作品と上映情報を紹介しています。';
 ---
 
-<Layout title="">
-  <p>Petite Adventure Films</p>
+<Layout
+  title=""
+  description={description}
+  ogImage="/assets/images/op.png"
+  wrapperClass="home-content"
+>
+  <Fragment slot="head">
+    <script is:inline>
+      (() => {
+        const key = 'paf:home-opening:v1';
+        let hasSeenOpening = false;
+        try {
+          hasSeenOpening = sessionStorage.getItem(key) === 'seen';
+        } catch {
+          // Storageが使えない場合は、通常どおりOPを再生する。
+        }
+        document.documentElement.dataset.homeOpening = hasSeenOpening ? 'skip' : 'pending';
+      })();
+    </script>
+  </Fragment>
+
+  <Fragment slot="background">
+    <HomeOpening />
+  </Fragment>
+
+  <HomeHero />
+  <HomeVideoModal client:load />
+
+  <nav aria-label="主要コンテンツ" class="mt-8 flex flex-wrap justify-center gap-2">
+    <ButtonLink href="/events/">📢 上映会・イベント</ButtonLink>
+    <ButtonLink href="/films/">🎬 映画</ButtonLink>
+    <ButtonLink href="/director/" type="secondary">😀 監督プロフィール</ButtonLink>
+    <ButtonLink href="/channel/" type="secondary">📺 チャンネル</ButtonLink>
+    <ButtonLink href="/media/" type="secondary">⭐ メディア紹介</ButtonLink>
+    <ButtonLink href="/four-walling/" type="secondary">🍿 自主上映について</ButtonLink>
+    <ButtonLink href="/workshop/" type="secondary">📹 映像制作を学びませんか？</ButtonLink>
+    <ButtonLink href="/blog/" type="secondary">📝 BLOG</ButtonLink>
+    <ButtonLink href="/pafshop/" type="shop">🛍️ SHOP</ButtonLink>
+  </nav>
+
+  <Section title="お知らせ" viewMoreTo="/news/">
+    <ul>
+      {
+        news.map((post) => (
+          <li>
+            <H3>{post.title}</H3>
+            <ArticleContents contents={post.content} marginTop="mt-2" />
+            <PublishedDate date={post.published} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <a href="/takahatadai73/" class="group mt-16 block">
+    <Image
+      src={bannerImage}
+      alt="高幡台団地73号棟に住み続けたい住民の会の記録 特設サイトへ"
+      class="block w-full sm:group-hover:opacity-75"
+    />
+  </a>
 </Layout>

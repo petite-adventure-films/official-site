@@ -1,0 +1,27 @@
+---
+import ShopPostLayout from '@layouts/ShopPostLayout.astro';
+---
+
+<ShopPostLayout
+  title="注文完了 - SHOP"
+  heading="注文完了"
+  description="ご注文の受付完了ページです。"
+  noIndex
+  crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
+>
+  <p>ご注文、誠にありがとうございます。</p>
+  <p class="mt-2">
+    ご注文内容の確認についてご連絡を差し上げます。<br />しばらくお待ちください。
+  </p>
+  <p class="mt-2">
+    <a href="/pafshop/" class="link-text">SHOPへ戻る</a><br />
+    <a href="/" class="link-text">公式サイトへ戻る</a>
+  </p>
+</ShopPostLayout>
+
+<script>
+  import { BASKET_STORAGE_KEY, notifyBasketChanged } from '@/lib/cart';
+
+  sessionStorage.removeItem(BASKET_STORAGE_KEY);
+  notifyBasketChanged();
+</script>

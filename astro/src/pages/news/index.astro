@@ -1,0 +1,36 @@
+---
+import { NEWS_PER_PAGE } from '@/constants/pagination';
+import { wpGetList } from '@/lib/wp-api';
+import type { News } from '@/types/news';
+import ArticleContents from '@components/ArticleContents.astro';
+import NewsStructuredData from '@components/NewsStructuredData.astro';
+import Pager from '@components/Pager.astro';
+import PostLayout from '@layouts/PostLayout.astro';
+
+const { data: posts, total_pages: totalPages } = await wpGetList<News>('news', {
+  per_page: NEWS_PER_PAGE,
+});
+---
+
+<PostLayout
+  title="お知らせ"
+  description="プチ・アドベンチャー・フィルムズからの最新のお知らせです。"
+>
+  <NewsStructuredData {posts} />
+  <ul class="[&>li:not(:first-child)]:mt-8">
+    {
+      posts.map((post) => (
+        <li>
+          <article>
+            <h3 class="text-base font-bold">{post.title}</h3>
+            <ArticleContents contents={post.content} marginTop="mt-2" />
+            <div class="mt-2 text-sm text-gray-500">
+              <time datetime={post.published}>{post.published}</time>
+            </div>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+  <Pager page="news" currentPage={1} totalPages={totalPages} />
+</PostLayout>

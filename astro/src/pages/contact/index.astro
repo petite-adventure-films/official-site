@@ -1,0 +1,24 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ContactForm from '@components/ContactForm';
+---
+
+<PostLayout
+  title="お問い合わせ"
+  description="プチ・アドベンチャー・フィルムズへのお問い合わせフォームです。"
+>
+  <script>
+    import { initBotId } from 'botid/client/core';
+
+    initBotId({
+      protect: [
+        {
+          path: '/api/contact',
+          method: 'POST',
+          advancedOptions: { checkLevel: 'basic' },
+        },
+      ],
+    });
+  </script>
+  <ContactForm client:load />
+</PostLayout>

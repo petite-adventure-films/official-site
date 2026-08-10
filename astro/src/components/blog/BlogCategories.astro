@@ -1,0 +1,28 @@
+---
+import { BLOG_CATEGORIES } from '@/constants/blog';
+
+interface Props {
+  currentCategory?: string;
+}
+
+const { currentCategory = '' } = Astro.props;
+---
+
+<div>
+  <h3 class="text-base font-bold">カテゴリ</h3>
+  <ul>
+    {
+      BLOG_CATEGORIES.map((category) => (
+        <li>
+          <a
+            href={`/blog/${category}/`}
+            aria-current={currentCategory === category ? 'page' : undefined}
+            class:list={['link-text', currentCategory === category && 'text-blue-400 no-underline']}
+          >
+            #{category}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

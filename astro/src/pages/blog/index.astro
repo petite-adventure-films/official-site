@@ -1,0 +1,18 @@
+---
+import BlogArchivePage from '@components/blog/BlogArchivePage.astro';
+import { BLOG_META } from '@/constants/blog';
+import { getAllBlogPosts, paginateBlogPosts } from '@/lib/blog-data';
+
+const archive = paginateBlogPosts(await getAllBlogPosts(), 1);
+---
+
+<BlogArchivePage
+  posts={archive.posts}
+  totalPages={archive.totalPages}
+  currentPage={1}
+  pagerPath="blog"
+  title="BLOG"
+  heading="BLOG"
+  description={BLOG_META.all}
+  tab="all"
+/>

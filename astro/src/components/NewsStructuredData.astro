@@ -1,0 +1,36 @@
+---
+import JsonLd from '@components/JsonLd.astro';
+import { toPlainText } from '@/lib/seo';
+import { toIsoDate } from '@/lib/structured-data';
+import type { News } from '@/types/news';
+
+interface Props {
+  posts: News[];
+}
+
+const { posts } = Astro.props;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const siteUrl = new URL('/', Astro.site).href;
+const data = {
+  '@context': 'https://schema.org',
+  '@graph': posts.map((post) => ({
+    '@type': 'NewsArticle',
+    '@id': `${pageUrl}#news-${post.id}`,
+    mainEntityOfPage: `${pageUrl}#news-${post.id}`,
+    headline: toPlainText(post.title),
+    articleBody: toPlainText(post.content),
+    datePublished: toIsoDate(post.published),
+    author: {
+      '@type': 'Organization',
+      '@id': `${siteUrl}#organization`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      '@id': `${siteUrl}#organization`,
+    },
+    inLanguage: 'ja-JP',
+  })),
+};
+---
+
+<JsonLd {data} />

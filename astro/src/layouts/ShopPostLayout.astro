@@ -1,6 +1,7 @@
 ---
 import ShopLayout from './ShopLayout.astro';
 import BreadCrumb from '@components/BreadCrumb.astro';
+import type { OgType } from '@/constants/seo';
 
 interface Crumb {
   to?: string;
@@ -12,15 +13,23 @@ interface Props {
   heading?: string;
   description?: string;
   ogImage?: string;
+  ogType?: OgType;
+  noIndex?: boolean;
   crumbs?: Crumb[];
 }
 
-const { title, heading, description, ogImage, crumbs = [] } = Astro.props;
+const { title, heading, description, ogImage, ogType, noIndex, crumbs = [] } = Astro.props;
 ---
 
-<ShopLayout title={title} description={description} ogImage={ogImage}>
+<ShopLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType={ogType}
+  noIndex={noIndex}
+>
   <header>
-    <BreadCrumb crumbs={crumbs} />
+    <BreadCrumb crumbs={crumbs} currentName={heading ?? title} />
     <h2 class="text-xl font-bold">{heading ?? title}</h2>
   </header>
   <div class="mt-8">

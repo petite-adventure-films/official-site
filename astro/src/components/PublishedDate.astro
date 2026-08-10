@@ -1,0 +1,12 @@
+---
+interface Props {
+  date: string;
+  class?: string;
+}
+
+const { date, class: className } = Astro.props;
+---
+
+<div class:list={['mt-2 text-xs text-gray-500', className]}>
+  <time datetime={date}>{date}</time>
+</div>

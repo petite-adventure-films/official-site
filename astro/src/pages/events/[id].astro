@@ -1,0 +1,165 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import ExternalLink from '@components/ExternalLink.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import JsonLd from '@components/JsonLd.astro';
+import { parseEventDate } from '@/lib/event';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { DEFAULT_OG_IMAGE } from '@/constants/seo';
+import { toIsoDate } from '@/lib/structured-data';
+import { wpGetCustom, wpGetDetail, wpGetList } from '@/lib/wp-api';
+import type { EventDetail, EventList, EventSummary } from '@/types/event';
+
+export async function getStaticPaths() {
+  const grouped = (await wpGetCustom<EventList>('events')) ?? {};
+  const currentEvents = Object.values(grouped).flatMap((months) => Object.values(months).flat());
+  const currentYear = new Date().getFullYear();
+  const archiveYears = Array.from({ length: currentYear - 2011 }, (_, index) =>
+    String(2011 + index),
+  );
+  const archives = await Promise.all(
+    archiveYears.map((year) => wpGetList<EventSummary>('events_archive', { year })),
+  );
+  const events = [...currentEvents, ...archives.flatMap((archive) => archive.data)];
+  const uniqueEvents = Array.from(new Map(events.map((event) => [event.id, event])).values());
+
+  return uniqueEvents.map((event) => ({
+    params: { id: String(event.id) },
+    props: { eventSummary: event },
+  }));
+}
+
+const { eventSummary } = Astro.props as { eventSummary: EventSummary };
+const event = await wpGetDetail<EventDetail>('events_detail', { pageId: Astro.params.id! });
+if (!event) return Astro.redirect('/404/');
+const description = createMetaDescription(
+  [event.title, event.dates_details, event.place, event.address].join(' '),
+);
+
+const eventYear = parseEventDate(eventSummary.date_from).getFullYear();
+const crumbs = [{ to: '/events/', name: 'イベント・上映会' }];
+if (eventYear < new Date().getFullYear()) {
+  crumbs.push({
+    to: `/events/archive/${eventYear}/`,
+    name: `${eventYear}年のイベント・上映会`,
+  });
+}
+
+const eventUrl = new URL(Astro.url.pathname, Astro.site).href;
+const eventStatus = {
+  '': 'https://schema.org/EventScheduled',
+  '1': 'https://schema.org/EventPostponed',
+  '2': 'https://schema.org/EventCancelled',
+}[event.status];
+const placeName = toPlainText(event.place);
+const isOnlineEvent = /online|zoom|オンライン/i.test(placeName);
+const organizerName = toPlainText(event.host_details);
+const eventData = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  '@id': `${eventUrl}#event`,
+  name: toPlainText(event.title),
+  description,
+  url: eventUrl,
+  image: [new URL(DEFAULT_OG_IMAGE, Astro.site).href],
+  startDate: toIsoDate(eventSummary.date_from),
+  endDate: toIsoDate(eventSummary.date_to || eventSummary.date_from),
+  eventStatus,
+  eventAttendanceMode: isOnlineEvent
+    ? 'https://schema.org/OnlineEventAttendanceMode'
+    : 'https://schema.org/OfflineEventAttendanceMode',
+  location: placeName
+    ? isOnlineEvent
+      ? {
+          '@type': 'VirtualLocation',
+          name: placeName,
+          url: event.map || eventUrl,
+        }
+      : {
+          '@type': 'Place',
+          name: placeName,
+          address: event.address
+            ? {
+                '@type': 'PostalAddress',
+                streetAddress: toPlainText(event.address),
+              }
+            : undefined,
+        }
+    : undefined,
+  organizer: {
+    '@type': 'Organization',
+    name: organizerName || 'Petite Adventure Films',
+    url: organizerName ? undefined : new URL('/', Astro.site).href,
+  },
+  inLanguage: 'ja-JP',
+};
+---
+
+<PostLayout
+  title={`${event.title} - イベント・上映会`}
+  heading={event.title}
+  description={description}
+  ogType="article"
+  crumbs={crumbs}
+>
+  <JsonLd data={eventData} />
+  <ArticleHeaderTags
+    status={event.status}
+    filmTags={event.film_tags}
+    eventTags={event.event_tags}
+    no={event.no}
+  />
+  <dl class="link-text-children [&_dt]:font-bold">
+    {
+      event.dates_details && (
+        <div>
+          <dt>開催期間</dt>
+          <dd set:html={event.dates_details} />
+        </div>
+      )
+    }
+    {
+      event.place && (
+        <div class="mt-4">
+          <dt>開催場所</dt>
+          <dd>
+            <div set:html={event.place} />
+            <div class="inline-block" set:html={event.address} />
+            {event.map && (
+              <ExternalLink href={event.map} class="ml-1">
+                MAP
+              </ExternalLink>
+            )}
+            <div set:html={event.access_details} />
+          </dd>
+        </div>
+      )
+    }
+    {
+      event.fee_details && (
+        <div class="mt-4">
+          <dt>入場料</dt>
+          <dd set:html={event.fee_details} />
+        </div>
+      )
+    }
+    {
+      event.host_details && (
+        <div class="mt-4">
+          <dt>主催者</dt>
+          <dd set:html={event.host_details} />
+        </div>
+      )
+    }
+    {
+      event.appendix_contents && (
+        <div class="mt-4">
+          <dt>備考</dt>
+          <dd set:html={event.appendix_contents} />
+        </div>
+      )
+    }
+  </dl>
+  <PublishedDate date={event.published} class="mt-8" />
+</PostLayout>

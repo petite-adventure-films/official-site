@@ -4,9 +4,12 @@ import PostLayout from '@layouts/ShopPostLayout.astro';
 import GalleryImage from '@components/GalleryImage.astro';
 import DefinitionList from '@components/DefinitionList.astro';
 import ButtonLink from '@components/ButtonLink.astro';
+import JsonLd from '@components/JsonLd.astro';
 import Tabs from '@components/Tabs.astro';
+import AddToCart from '@components/AddToCart';
 import { PRODUCTS_DVD } from '@/constants/products_dvd';
 import { FILMS } from '@/constants/film_info';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
 
 import MyIndiaDiary from '@components/shop/article/MyIndiaDiary.astro';
 import DancingZempukujiApprenticeHomeless from '@components/shop/article/DancingZempukujiApprenticeHomeless.astro';
@@ -65,48 +68,56 @@ const galleryImages = Array.from({ length: dvd.image_num }, (_, i) => {
 }).filter((x): x is { src: ImageMetadata; alt: string } => x !== null);
 
 const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
+const description = [dvd.title, dvd.catch, dvd.intro].filter(Boolean).join(' ');
+const productUrl = new URL(Astro.url.pathname, Astro.site).href;
+const productData = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': `${productUrl}#product`,
+  name: dvd.title,
+  description: createMetaDescription(description),
+  url: productUrl,
+  image: galleryImages.map((image) => new URL(image.src.src, Astro.site).href),
+  brand: {
+    '@type': 'Brand',
+    name: 'Petite Adventure Films',
+  },
+  offers: dvd.prices.map((price, index) => ({
+    '@type': 'Offer',
+    '@id': `${productUrl}#offer-${index + 1}`,
+    name: `${toPlainText(price.type)} ${price.disc.join('・')}`,
+    price: price.amount,
+    priceCurrency: 'JPY',
+    availability: 'https://schema.org/InStock',
+    url: productUrl,
+  })),
+};
 ---
 
 <PostLayout
   title={`${dvd.title} - SHOP`}
   heading={dvd.title}
-  description={META_PAFSHOP}
+  description={description || META_PAFSHOP}
+  ogImage={galleryImages[0]?.src.src}
+  ogType="product"
   crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
 >
+  <JsonLd data={productData} />
   <GalleryImage images={galleryImages} class="mt-8 md:mt-0" />
 
   <div class="mt-8">
     {dvd.catch && <p class="mb-2 text-xl text-purple-600 sm:text-xl" set:html={dvd.catch} />}
     <DefinitionList list={discSpec} />
 
-    <ul class="mt-4 [&_li:not(:first-of-type)]:mt-2">
-      {
-        dvd.prices.flatMap((price) =>
-          price.disc.map((disc) => (
-            <li class="flex items-center gap-2">
-              <span class="flex flex-1 flex-wrap gap-x-1">
-                <span>{price.type}</span>
-                {dvd.disc.length > 1 && <span class="palt">{disc}</span>}
-              </span>
-              <span>¥{price.amount.toLocaleString()}</span>
-              <select class="w-16 border border-black p-1">
-                <option value="0">数量</option>
-                {Array.from({ length: 10 }, (_, i) => (
-                  <option value={i + 1}>{i + 1}</option>
-                ))}
-              </select>
-            </li>
-          )),
-        )
-      }
-    </ul>
-
-    <button
-      id="cart-open"
-      class="mt-4 inline-flex w-full items-center justify-center border border-black bg-purple-600 px-6 py-4 text-base font-medium text-purple-50 sm:hover:border-purple-600 sm:hover:bg-purple-100 sm:hover:text-purple-600"
-    >
-      カートに入れる
-    </button>
+    <AddToCart
+      client:load
+      product={{
+        name: dvd.name,
+        title: dvd.title,
+        prices: dvd.prices,
+        showDisc: dvd.disc.length > 1,
+      }}
+    />
 
     <Tabs tabs={[{ label: '概要' }, { label: tabLabel2 }, { label: '制作クレジット' }]}>
       <div data-panel="0" class="pt-8 [&_p+p]:mt-2">
@@ -158,46 +169,6 @@ const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
     <ButtonLink href="/contact/" class="mt-16">お問い合わせ</ButtonLink>
   </div>
 </PostLayout>
-
-<div
-  id="cart-modal"
-  hidden
-  class="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-white/90"
->
-  <div class="flex w-56 flex-col gap-2">
-    <a
-      href="/pafshop/cart/"
-      class="inline-flex items-center justify-center border border-black bg-purple-600 px-6 py-4 text-base font-medium text-purple-50 sm:hover:border-purple-600 sm:hover:bg-purple-100 sm:hover:text-purple-600"
-    >
-      カートを見る
-    </a>
-    <button
-      id="cart-close"
-      class="inline-flex items-center justify-center border border-purple-600 px-6 py-4 text-base font-medium text-purple-600 sm:hover:bg-gray-100"
-    >
-      買い物を続ける
-    </button>
-  </div>
-</div>
-
-<script>
-  const modal = document.getElementById('cart-modal') as HTMLElement;
-
-  const openModal = () => {
-    modal.removeAttribute('hidden');
-    document.body.classList.add('overflow-hidden');
-  };
-  const closeModal = () => {
-    modal.setAttribute('hidden', '');
-    document.body.classList.remove('overflow-hidden');
-  };
-
-  document.getElementById('cart-open')?.addEventListener('click', openModal);
-  document.getElementById('cart-close')?.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-</script>
 
 <script>
   const container = document.querySelector<HTMLElement>('.credits-masonry');

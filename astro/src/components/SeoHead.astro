@@ -1,0 +1,42 @@
+---
+import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, X_ACCOUNT } from '@/constants/seo';
+import type { OgType } from '@/constants/seo';
+import { createMetaDescription } from '@/lib/seo';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: OgType;
+  noIndex?: boolean;
+}
+
+const { title, description, ogImage, ogType = 'website', noIndex = false } = Astro.props;
+const fullTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
+const metaDescription = createMetaDescription(description ?? SITE_DESCRIPTION);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(ogImage || DEFAULT_OG_IMAGE, Astro.site);
+const robots = noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+---
+
+<link rel="canonical" href={canonicalURL} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<title>{fullTitle}</title>
+<meta name="description" content={metaDescription} />
+<meta name="robots" content={robots} />
+
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:image:alt" content={`${title || SITE_NAME}のイメージ`} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={X_ACCOUNT} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={imageURL} />
+<meta name="twitter:image:alt" content={`${title || SITE_NAME}のイメージ`} />
