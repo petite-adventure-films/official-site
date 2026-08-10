@@ -1,0 +1,35 @@
+---
+import JsonLd from '@components/JsonLd.astro';
+import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/seo';
+
+const siteUrl = new URL('/', Astro.site).href;
+const organizationId = `${siteUrl}#organization`;
+const websiteId = `${siteUrl}#website`;
+
+const data = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: SITE_NAME,
+      url: siteUrl,
+      sameAs: [
+        'https://x.com/brianandco',
+        'https://www.youtube.com/user/petiteadventurefilms',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteUrl,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      publisher: { '@id': organizationId },
+      inLanguage: 'ja-JP',
+    },
+  ],
+};
+---
+
+<JsonLd {data} />

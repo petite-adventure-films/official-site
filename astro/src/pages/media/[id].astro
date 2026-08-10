@@ -6,10 +6,12 @@ import AttachedInfo from '@components/AttachedInfo.astro';
 import PublishedDate from '@components/PublishedDate.astro';
 import Video from '@components/Video.astro';
 import H3 from '@components/H3.astro';
+import JsonLd from '@components/JsonLd.astro';
 import PdfViewer from '@components/PdfViewer';
 import { wpGetDetail, wpGetList } from '@/lib/wp-api';
 import { getYouTubeId } from '@/lib/youtube';
-import { createMetaDescription } from '@/lib/seo';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { toIsoDate } from '@/lib/structured-data';
 import type { MediaDetail, MediaSummary } from '@/types/media';
 
 export async function getStaticPaths() {
@@ -22,6 +24,26 @@ if (!media) return Astro.redirect('/404/');
 const description = createMetaDescription(
   [media.media_name, media.article_title, media.article_contents || media.content].join(' '),
 );
+const articleUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${articleUrl}#article`,
+  mainEntityOfPage: articleUrl,
+  headline: toPlainText(media.article_title || media.title),
+  description,
+  articleBody: toPlainText(media.article_contents || media.content),
+  datePublished: toIsoDate(media.published),
+  author: {
+    '@type': 'Organization',
+    name: toPlainText(media.media_name) || 'Petite Adventure Films',
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': `${new URL('/', Astro.site).href}#organization`,
+  },
+  inLanguage: 'ja-JP',
+};
 ---
 
 <PostLayout
@@ -31,6 +53,7 @@ const description = createMetaDescription(
   ogType="article"
   crumbs={[{ to: '/media/', name: 'メディア紹介' }]}
 >
+  <JsonLd data={articleData} />
   <Fragment slot="headerTags">
     <ArticleHeaderTags filmTags={media.film_tags} />
   </Fragment>

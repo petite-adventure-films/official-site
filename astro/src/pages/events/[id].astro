@@ -3,8 +3,11 @@ import PostLayout from '@layouts/PostLayout.astro';
 import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
 import ExternalLink from '@components/ExternalLink.astro';
 import PublishedDate from '@components/PublishedDate.astro';
+import JsonLd from '@components/JsonLd.astro';
 import { parseEventDate } from '@/lib/event';
-import { createMetaDescription } from '@/lib/seo';
+import { createMetaDescription, toPlainText } from '@/lib/seo';
+import { DEFAULT_OG_IMAGE } from '@/constants/seo';
+import { toIsoDate } from '@/lib/structured-data';
 import { wpGetCustom, wpGetDetail, wpGetList } from '@/lib/wp-api';
 import type { EventDetail, EventList, EventSummary } from '@/types/event';
 
@@ -42,6 +45,55 @@ if (eventYear < new Date().getFullYear()) {
     name: `${eventYear}年のイベント・上映会`,
   });
 }
+
+const eventUrl = new URL(Astro.url.pathname, Astro.site).href;
+const eventStatus = {
+  '': 'https://schema.org/EventScheduled',
+  '1': 'https://schema.org/EventPostponed',
+  '2': 'https://schema.org/EventCancelled',
+}[event.status];
+const placeName = toPlainText(event.place);
+const isOnlineEvent = /online|zoom|オンライン/i.test(placeName);
+const organizerName = toPlainText(event.host_details);
+const eventData = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  '@id': `${eventUrl}#event`,
+  name: toPlainText(event.title),
+  description,
+  url: eventUrl,
+  image: [new URL(DEFAULT_OG_IMAGE, Astro.site).href],
+  startDate: toIsoDate(eventSummary.date_from),
+  endDate: toIsoDate(eventSummary.date_to || eventSummary.date_from),
+  eventStatus,
+  eventAttendanceMode: isOnlineEvent
+    ? 'https://schema.org/OnlineEventAttendanceMode'
+    : 'https://schema.org/OfflineEventAttendanceMode',
+  location: placeName
+    ? isOnlineEvent
+      ? {
+          '@type': 'VirtualLocation',
+          name: placeName,
+          url: event.map || eventUrl,
+        }
+      : {
+          '@type': 'Place',
+          name: placeName,
+          address: event.address
+            ? {
+                '@type': 'PostalAddress',
+                streetAddress: toPlainText(event.address),
+              }
+            : undefined,
+        }
+    : undefined,
+  organizer: {
+    '@type': 'Organization',
+    name: organizerName || 'Petite Adventure Films',
+    url: organizerName ? undefined : new URL('/', Astro.site).href,
+  },
+  inLanguage: 'ja-JP',
+};
 ---
 
 <PostLayout
@@ -51,6 +103,7 @@ if (eventYear < new Date().getFullYear()) {
   ogType="article"
   crumbs={crumbs}
 >
+  <JsonLd data={eventData} />
   <ArticleHeaderTags
     status={event.status}
     filmTags={event.film_tags}
