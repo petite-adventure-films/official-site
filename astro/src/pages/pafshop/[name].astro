@@ -66,12 +66,14 @@ const galleryImages = Array.from({ length: dvd.image_num }, (_, i) => {
 }).filter((x): x is { src: ImageMetadata; alt: string } => x !== null);
 
 const tabLabel2 = dvd.article_type === 'main' ? '本編' : '特典';
+const description = [dvd.title, dvd.catch, dvd.intro].filter(Boolean).join(' ');
 ---
 
 <PostLayout
   title={`${dvd.title} - SHOP`}
   heading={dvd.title}
-  description={META_PAFSHOP}
+  description={description || META_PAFSHOP}
+  ogImage={galleryImages[0]?.src.src}
   crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
 >
   <GalleryImage images={galleryImages} class="mt-8 md:mt-0" />

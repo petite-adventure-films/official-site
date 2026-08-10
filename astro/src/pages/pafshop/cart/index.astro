@@ -3,7 +3,13 @@ import ShopPostLayout from '@layouts/ShopPostLayout.astro';
 import Cart from '@components/Cart';
 ---
 
-<ShopPostLayout title="SHOP" heading="カート" crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}>
+<ShopPostLayout
+  title="カート - SHOP"
+  heading="カート"
+  description="DVD・ブルーレイの注文内容を確認するカートページです。"
+  noIndex
+  crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
+>
   <script>
     import { initBotId } from 'botid/client/core';
 

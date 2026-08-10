@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import BreadCrumb from '@components/BreadCrumb.astro';
+import type { OgType } from '@/constants/seo';
 
 interface Crumb {
   to?: string;
@@ -12,16 +13,27 @@ interface Props {
   heading?: string;
   description?: string;
   ogImage?: string;
+  ogType?: OgType;
+  noIndex?: boolean;
   crumbs?: Crumb[];
   showBreadcrumb?: boolean;
 }
 
-const { title, heading, description, ogImage, crumbs = [], showBreadcrumb = true } = Astro.props;
+const {
+  title,
+  heading,
+  description,
+  ogImage,
+  ogType,
+  noIndex,
+  crumbs = [],
+  showBreadcrumb = true,
+} = Astro.props;
 const hasHeaderTags = Astro.slots.has('headerTags');
 const hasLead = Astro.slots.has('lead');
 ---
 
-<Layout title={title} description={description} ogImage={ogImage}>
+<Layout title={title} description={description} ogImage={ogImage} ogType={ogType} noIndex={noIndex}>
   <header>
     {showBreadcrumb && <BreadCrumb crumbs={crumbs} />}
     {hasHeaderTags && <slot name="headerTags" />}

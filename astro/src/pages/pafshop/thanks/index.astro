@@ -2,7 +2,13 @@
 import ShopPostLayout from '@layouts/ShopPostLayout.astro';
 ---
 
-<ShopPostLayout title="SHOP" heading="注文完了" crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}>
+<ShopPostLayout
+  title="注文完了 - SHOP"
+  heading="注文完了"
+  description="ご注文の受付完了ページです。"
+  noIndex
+  crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
+>
   <p>ご注文、誠にありがとうございます。</p>
   <p class="mt-2">
     ご注文内容の確認についてご連絡を差し上げます。<br />しばらくお待ちください。

@@ -46,6 +46,8 @@ const credits = film.credits ?? [];
   title={`${film.title} - 映画`}
   heading={film.title}
   description={description}
+  ogImage={thumbnail?.src}
+  ogType="video.movie"
   crumbs={[{ to: '/films/', name: '映画' }]}
 >
   <div class="mb-8">

@@ -9,6 +9,7 @@ import H3 from '@components/H3.astro';
 import PdfViewer from '@components/PdfViewer';
 import { wpGetDetail, wpGetList } from '@/lib/wp-api';
 import { getYouTubeId } from '@/lib/youtube';
+import { createMetaDescription } from '@/lib/seo';
 import type { MediaDetail, MediaSummary } from '@/types/media';
 
 export async function getStaticPaths() {
@@ -18,11 +19,16 @@ export async function getStaticPaths() {
 
 const media = await wpGetDetail<MediaDetail>('media_detail', { pageId: Astro.params.id! });
 if (!media) return Astro.redirect('/404/');
+const description = createMetaDescription(
+  [media.media_name, media.article_title, media.article_contents || media.content].join(' '),
+);
 ---
 
 <PostLayout
   title={`${media.title} - メディア紹介`}
   heading={media.title}
+  description={description}
+  ogType="article"
   crumbs={[{ to: '/media/', name: 'メディア紹介' }]}
 >
   <Fragment slot="headerTags">

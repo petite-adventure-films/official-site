@@ -2,7 +2,13 @@
 import ShopPostLayout from '@layouts/ShopPostLayout.astro';
 ---
 
-<ShopPostLayout title="SHOP" heading="注文キャンセル" crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}>
+<ShopPostLayout
+  title="注文キャンセル - SHOP"
+  heading="注文キャンセル"
+  description="注文キャンセルの確認ページです。"
+  noIndex
+  crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}
+>
   <p>注文をキャンセルいたしました。</p>
   <p>またの機会がありましたらよろしくお願いいたします。</p>
   <p class="mt-2">

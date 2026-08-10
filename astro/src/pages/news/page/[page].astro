@@ -34,7 +34,11 @@ const { data: posts } = await wpGetList<News>('news', {
 });
 ---
 
-<PostLayout title="お知らせ">
+<PostLayout
+  title={`お知らせ ${String(currentPage)}ページ`}
+  heading="お知らせ"
+  description={`プチ・アドベンチャー・フィルムズからのお知らせ、${String(currentPage)}ページ目です。`}
+>
   <p class="mb-4 text-sm text-gray-500">{currentPage} / {totalPages}ページ</p>
   <ul class="[&>li:not(:first-child)]:mt-8">
     {

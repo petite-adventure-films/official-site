@@ -11,7 +11,10 @@ const { data: posts, total_pages: totalPages } = await wpGetList<News>('news', {
 });
 ---
 
-<PostLayout title="お知らせ">
+<PostLayout
+  title="お知らせ"
+  description="プチ・アドベンチャー・フィルムズからの最新のお知らせです。"
+>
   <ul class="[&>li:not(:first-child)]:mt-8">
     {
       posts.map((post) => (
