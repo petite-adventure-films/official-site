@@ -1,50 +1,43 @@
 ---
 import BlogArchivePage from '@components/blog/BlogArchivePage.astro';
-import { BLOG_META } from '@/constants/blog';
-import {
-  decodeBlogTagSlug,
-  filterBlogByTag,
-  getBlogSnapshot,
-  paginateBlogPosts,
-} from '@/lib/blog-data';
+import { BLOG_META, WORKSHOP_REPORT_ARCHIVE } from '@/constants/blog';
+import { filterWorkshopReportBlog, getAllBlogPosts, paginateBlogPosts } from '@/lib/blog-data';
 import type { Blog } from '@/types/blog';
 
 export async function getStaticPaths() {
-  const snapshot = await getBlogSnapshot();
-  return snapshot.tags.flatMap((tag) => {
-    const posts = filterBlogByTag(snapshot, tag.id);
-    const { totalPages } = paginateBlogPosts(posts, 1);
-    return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => {
-      const currentPage = index + 2;
-      return {
-        params: { tagName: decodeBlogTagSlug(tag.slug), page: String(currentPage) },
-        props: {
-          tagName: tag.name,
-          currentPage,
-          ...paginateBlogPosts(posts, currentPage),
-        },
-      };
-    });
+  const posts = await getAllBlogPosts();
+  const workshopReports = filterWorkshopReportBlog(posts);
+  const { totalPages } = paginateBlogPosts(workshopReports, 1);
+  return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => {
+    const currentPage = index + 2;
+    return {
+      params: { tagName: WORKSHOP_REPORT_ARCHIVE.slug, page: String(currentPage) },
+      props: {
+        ...WORKSHOP_REPORT_ARCHIVE,
+        currentPage,
+        ...paginateBlogPosts(workshopReports, currentPage),
+      },
+    };
   });
 }
 
 interface Props {
-  tagName: string;
+  name: string;
+  slug: string;
   posts: Blog[];
   totalPages: number;
   currentPage: number;
 }
 
-const { tagName, posts, totalPages, currentPage } = Astro.props;
-const tagPath = Astro.params.tagName ?? tagName;
+const { name, slug, posts, totalPages, currentPage } = Astro.props;
 ---
 
 <BlogArchivePage
   posts={posts}
   totalPages={totalPages}
   currentPage={currentPage}
-  pagerPath={`blog/tag/${tagPath}`}
-  title={`${tagName} - BLOG`}
-  heading={tagName}
-  description={BLOG_META.archive(tagName)}
+  pagerPath={`blog/tag/${slug}`}
+  title={`${name} - BLOG`}
+  heading={name}
+  description={BLOG_META.archive(name)}
 />

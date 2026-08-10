@@ -79,7 +79,7 @@ const articleData = {
 >
   <JsonLd data={articleData} />
   <div slot="headerTags">
-    {detail.recommended === '1' && <span class="mb-1 block">⭐️</span>}
+    {detail.isRecommended && <span class="mb-1 block">⭐️</span>}
     <ArticleHeaderTags filmTags={detail.film_tags} />
   </div>
   <AttachedInfo info={detail.categories.map((category) => category.name)} />

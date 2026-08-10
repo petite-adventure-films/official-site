@@ -1,15 +1,8 @@
 import { BLOG_PER_PAGE } from '@/constants/blog';
-import { wpGetDetail, wpGetList, wpGetNativeCollection } from '@/lib/wp-api';
-import type { Blog, BlogNativePost, BlogTag } from '@/types/blog';
-
-export type BlogSnapshot = {
-  posts: Blog[];
-  tags: BlogTag[];
-  postTagIds: Map<number, number[]>;
-};
+import { wpGetDetail, wpGetList } from '@/lib/wp-api';
+import type { Blog } from '@/types/blog';
 
 let postsPromise: Promise<Blog[]> | undefined;
-let snapshotPromise: Promise<BlogSnapshot> | undefined;
 let detailsPromise: Promise<Blog[]> | undefined;
 
 export function paginateBlogPosts(posts: Blog[], page: number) {
@@ -22,12 +15,12 @@ export function filterBlogByCategory(posts: Blog[], categoryName: string) {
   return posts.filter((post) => post.categories.some((category) => category.name === categoryName));
 }
 
-export function filterRecommendedBlog(posts: Blog[]) {
-  return posts.filter((post) => post.recommended === '1');
+export function filterWorkshopReportBlog(posts: Blog[]) {
+  return posts.filter((post) => post.isWorkshopReport);
 }
 
-export function filterBlogByTag(snapshot: BlogSnapshot, tagId: number) {
-  return snapshot.posts.filter((post) => snapshot.postTagIds.get(post.id)?.includes(tagId));
+export function filterRecommendedBlog(posts: Blog[]) {
+  return posts.filter((post) => post.isRecommended);
 }
 
 export function decodeWordPressSlug(slug: string) {
@@ -37,8 +30,6 @@ export function decodeWordPressSlug(slug: string) {
     return slug;
   }
 }
-
-export const decodeBlogTagSlug = decodeWordPressSlug;
 
 export function getAllBlogPosts(): Promise<Blog[]> {
   postsPromise ??= (async () => {
@@ -51,22 +42,6 @@ export function getAllBlogPosts(): Promise<Blog[]> {
     return pages.flat();
   })();
   return postsPromise;
-}
-
-export function getBlogSnapshot(): Promise<BlogSnapshot> {
-  snapshotPromise ??= (async () => {
-    const [posts, nativePosts, tags] = await Promise.all([
-      getAllBlogPosts(),
-      wpGetNativeCollection<BlogNativePost>('posts', { _fields: 'id,tags' }),
-      wpGetNativeCollection<BlogTag>('tags', { _fields: 'id,name,slug,count' }),
-    ]);
-    return {
-      posts,
-      tags: tags.filter((tag) => tag.count > 0),
-      postTagIds: new Map(nativePosts.map((post) => [post.id, post.tags])),
-    };
-  })();
-  return snapshotPromise;
 }
 
 async function mapWithConcurrency<T, R>(

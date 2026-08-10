@@ -5,13 +5,9 @@ import ExternalLink from '@components/ExternalLink.astro';
 import ButtonLink from '@components/ButtonLink.astro';
 import GalleryImage from '@components/GalleryImage.astro';
 import PostCard from '@components/PostCard.astro';
-import type { Blog } from '@/types/blog';
-import { wpGetList } from '@/lib/wp-api';
+import { filterWorkshopReportBlog, getAllBlogPosts } from '@/lib/blog-data';
 
-const { data: workshopPosts } = await wpGetList<Blog>('blog', {
-  tag: '映像ワークショップ',
-  per_page: 5,
-}).catch(() => ({ data: [], total_pages: 0 }));
+const workshopPosts = filterWorkshopReportBlog(await getAllBlogPosts()).slice(0, 5);
 
 import workshopImg1 from '@assets/images/workshop/workshop_image_1.jpg';
 import workshopImg2 from '@assets/images/workshop/workshop_image_2.jpg';

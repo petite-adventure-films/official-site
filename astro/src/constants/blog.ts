@@ -1,5 +1,10 @@
 export const BLOG_PER_PAGE = 10;
 
+export const WORKSHOP_REPORT_ARCHIVE = {
+  name: '映像ワークショップレポート',
+  slug: '映像ワークショップレポート',
+} as const;
+
 export const BLOG_CATEGORIES = [
   '上映会・イベントレポート',
   '制作日誌',
