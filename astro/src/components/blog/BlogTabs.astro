@@ -1,0 +1,32 @@
+---
+interface Props {
+  recommended?: boolean;
+}
+
+const { recommended = false } = Astro.props;
+---
+
+<ul class="flex">
+  <li class="border-t border-l border-black">
+    {
+      recommended ? (
+        <a class="block bg-gray-100 p-2 sm:hover:bg-white" href="/blog/">
+          全記事
+        </a>
+      ) : (
+        <span class="block p-2">全記事</span>
+      )
+    }
+  </li>
+  <li class="border-x border-t border-black">
+    {
+      recommended ? (
+        <span class="block p-2">⭐️ おすすめ記事</span>
+      ) : (
+        <a class="block bg-gray-100 p-2 sm:hover:bg-white" href="/blog/recommended/">
+          ⭐️ おすすめ記事
+        </a>
+      )
+    }
+  </li>
+</ul>

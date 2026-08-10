@@ -1,0 +1,18 @@
+---
+import BlogArchivePage from '@components/blog/BlogArchivePage.astro';
+import { BLOG_META } from '@/constants/blog';
+import { filterRecommendedBlog, getAllBlogPosts, paginateBlogPosts } from '@/lib/blog-data';
+
+const archive = paginateBlogPosts(filterRecommendedBlog(await getAllBlogPosts()), 1);
+---
+
+<BlogArchivePage
+  posts={archive.posts}
+  totalPages={archive.totalPages}
+  currentPage={1}
+  pagerPath="blog/recommended"
+  title="⭐️おすすめ記事 - BLOG"
+  heading="BLOG"
+  description={BLOG_META.recommended}
+  tab="recommended"
+/>

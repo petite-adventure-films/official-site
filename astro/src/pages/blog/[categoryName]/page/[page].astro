@@ -1,0 +1,45 @@
+---
+import BlogArchivePage from '@components/blog/BlogArchivePage.astro';
+import { BLOG_CATEGORIES, BLOG_META } from '@/constants/blog';
+import { filterBlogByCategory, getAllBlogPosts, paginateBlogPosts } from '@/lib/blog-data';
+import type { Blog } from '@/types/blog';
+
+export async function getStaticPaths() {
+  const posts = await getAllBlogPosts();
+  return BLOG_CATEGORIES.flatMap((categoryName) => {
+    const categoryPosts = filterBlogByCategory(posts, categoryName);
+    const { totalPages } = paginateBlogPosts(categoryPosts, 1);
+    return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => {
+      const currentPage = index + 2;
+      return {
+        params: { categoryName, page: String(currentPage) },
+        props: {
+          categoryName,
+          currentPage,
+          ...paginateBlogPosts(categoryPosts, currentPage),
+        },
+      };
+    });
+  });
+}
+
+interface Props {
+  categoryName: string;
+  posts: Blog[];
+  totalPages: number;
+  currentPage: number;
+}
+
+const { categoryName, posts, totalPages, currentPage } = Astro.props;
+---
+
+<BlogArchivePage
+  posts={posts}
+  totalPages={totalPages}
+  currentPage={currentPage}
+  pagerPath={`blog/${categoryName}`}
+  title={`${categoryName} - BLOG`}
+  heading={categoryName}
+  description={BLOG_META.archive(categoryName)}
+  currentCategory={categoryName}
+/>

@@ -1,0 +1,59 @@
+---
+import ArticleContents from '@components/ArticleContents.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import AttachedInfo from '@components/AttachedInfo.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import PostLayout from '@layouts/PostLayout.astro';
+import { decodeWordPressSlug, getAllBlogDetails } from '@/lib/blog-data';
+import type { Blog } from '@/types/blog';
+
+export async function getStaticPaths() {
+  const reservedRootRoutes = new Set([
+    'channel',
+    'contact',
+    'copyrights-disclaimers',
+    'director',
+    'events',
+    'films',
+    'four-walling',
+    'gathering-the-personal-information',
+    'media',
+    'news',
+    'pafshop',
+    'privacy-policy',
+    'specified-commercial-transaction-law',
+    'system-requirements',
+    'takahatadai73',
+    'workshop',
+    'blog',
+  ]);
+  const details = await getAllBlogDetails();
+  return details
+    .filter((detail) => !reservedRootRoutes.has(decodeWordPressSlug(detail.name)))
+    .map((detail) => ({
+      params: { pageName: decodeWordPressSlug(detail.name) },
+      props: { detail },
+    }));
+}
+
+interface Props {
+  detail: Blog;
+}
+
+const { detail } = Astro.props;
+---
+
+<PostLayout
+  title={`${detail.title} - BLOG`}
+  heading={detail.title}
+  ogImage={detail.thumbnail || undefined}
+  crumbs={[{ to: '/blog/', name: 'BLOG' }]}
+>
+  <div slot="headerTags">
+    {detail.recommended === '1' && <span class="mb-1 block">⭐️</span>}
+    <ArticleHeaderTags filmTags={detail.film_tags} />
+  </div>
+  <AttachedInfo info={detail.categories.map((category) => category.name)} />
+  <ArticleContents contents={detail.content} />
+  <PublishedDate date={detail.published} class="mt-8" />
+</PostLayout>
