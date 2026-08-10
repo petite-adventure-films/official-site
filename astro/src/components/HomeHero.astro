@@ -1,0 +1,35 @@
+---
+import HomeOpeningMask from './HomeOpeningMask.astro';
+---
+
+<section class="text-center">
+  <HomeOpeningMask />
+  <div
+    data-home-hero
+    class="home-hero-mask relative mx-auto h-[220px] w-[320px] overflow-hidden bg-black"
+  >
+    <img src="/assets/images/op.png" alt="" class="fixed inset-0 size-full object-cover" />
+    <video
+      data-home-hero-video
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="/assets/images/op.png"
+      class="fixed inset-0 size-full object-cover"
+      aria-label="インドの路上 行き交う人々。ドキュメンタリー映画『インド日記』より抜粋"
+    >
+      <source src="/assets/video/home.mp4" type="video/mp4" />
+    </video>
+    <div class="fixed inset-0 bg-black/20"></div>
+  </div>
+  <p class="mx-auto mt-4 max-w-80">
+    メインストリームのメディアでは取り上げられにくい課題を、マスメディアとはまったく異なる視点と手法で、大胆かつユニークに映像制作を行うプロダクションです。
+  </p>
+</section>
+
+<style>
+  .home-hero-mask {
+    clip-path: url('#introCatchPath');
+  }
+</style>

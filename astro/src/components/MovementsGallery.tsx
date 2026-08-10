@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Modal from './Modal';
+import ModalOpenIcon from './ModalOpenIcon';
 
 export interface MovementGalleryImage {
   src: string;
@@ -49,9 +50,7 @@ export default function MovementsGallery({ entries }: MovementsGalleryProps) {
                     className="block border border-white"
                     loading="lazy"
                   />
-                  <span className="bg-tkhd73-green-shadow absolute right-1 bottom-1 flex size-6 items-center justify-center rounded-full border-2 border-white text-xs sm:group-hover:bg-white">
-                    🔍
-                  </span>
+                  <ModalOpenIcon className="absolute right-1 bottom-1" />
                 </button>
               ))}
             </div>

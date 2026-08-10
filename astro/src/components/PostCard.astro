@@ -24,13 +24,20 @@ const hasThumbnail = Astro.slots.has('thumbnail');
 <a href={href} class:list={['relative block border border-black sm:hover:bg-gray-100', className]}>
   {hasThumbnail && <slot name="thumbnail" />}
   <div class="p-4">
-    <p class="font-bold">{title}</p>
+    {
+      filmTags && filmTags.length > 0 && (
+        <div class="mb-1 flex flex-wrap gap-2">
+          {filmTags.map((tag) => (
+            <span class="bg-purple-100 px-1.5 py-0.5 text-xs text-purple-600">{tag.name}</span>
+          ))}
+        </div>
+      )
+    }
+    <h3 class="text-base font-bold">{title}</h3>
     {excerpt && <p class="mt-2 text-sm" set:html={excerpt} />}
     {
-      (categories.length > 0 || (filmTags && filmTags.length > 0)) && (
+      categories.length > 0 && (
         <div class="mt-2 flex flex-wrap gap-x-2 text-xs">
-          {filmTags &&
-            filmTags.map((t) => <span class="before:pr-px before:content-['#']">{t.name}</span>)}
           {categories.map((c) => (
             <span class="before:pr-px before:content-['#']">{c.name}</span>
           ))}

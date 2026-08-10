@@ -1,0 +1,55 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import ArchiveList from '@components/ArchiveList.astro';
+import PostCard from '@components/PostCard.astro';
+import ExternalLink from '@components/ExternalLink.astro';
+import { wpGetList } from '@/lib/wp-api';
+import { getYouTubeId } from '@/lib/youtube';
+import type { ChannelSummary } from '@/types/channel';
+
+const description =
+  'ドキュメンタリー監督、早川由美子がこれまでにYouTubeで公開した映像の中から、厳選した動画をご紹介します。';
+const { data: channels } = await wpGetList<ChannelSummary>('channel', { per_page: -1 });
+---
+
+<PostLayout title="チャンネル" description={description}>
+  <Fragment slot="lead">
+    <p>
+      これまでにYouTubeで公開した映像の中から、厳選した動画をご紹介します。<br />
+      プチ・アドベンチャー・フィルムズのYouTube全動画は
+      <ExternalLink href="https://www.youtube.com/user/petiteadventurefilms">こちら</ExternalLink
+      >から
+    </p>
+  </Fragment>
+  <ArchiveList>
+    {
+      channels.map((channel) => {
+        const youtubeId = getYouTubeId(channel.youtube_id);
+        return (
+          <li>
+            <PostCard
+              href={`/channel/${channel.id}/`}
+              title={channel.title}
+              filmTags={channel.film_tags}
+              categories={[
+                { name: channel.created_country },
+                { name: channel.created_year },
+                { name: channel.running_time },
+              ].filter((tag) => tag.name)}
+            >
+              {youtubeId && (
+                <img
+                  slot="thumbnail"
+                  src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
+                  alt=""
+                  loading="lazy"
+                  class="w-full border-b border-black"
+                />
+              )}
+            </PostCard>
+          </li>
+        );
+      })
+    }
+  </ArchiveList>
+</PostLayout>

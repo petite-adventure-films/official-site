@@ -32,7 +32,7 @@
     @apply pointer-events-none text-gray-500;
   }
   .link-text[target='_blank']::after {
-    content: '↗︎';
+    content: '↗️';
   }
   .link-text-children a:not([aria-disabled='true']) {
     color: var(--color-blue-600);
@@ -43,7 +43,7 @@
     color: var(--color-blue-400);
   }
   .link-text-children a[target='_blank']::after {
-    content: '↗︎';
+    content: '↗️';
   }
 }
 
