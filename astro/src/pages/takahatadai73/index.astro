@@ -5,7 +5,9 @@ import Layout from '@layouts/Layout.astro';
 import ButtonLink from '@components/ButtonLink.astro';
 import DefinitionList from '@components/DefinitionList.astro';
 import GoodbyeGallery from '@components/GoodbyeGallery';
+import ModalOpenIcon from '@components/ModalOpenIcon';
 import MovementsGallery from '@components/MovementsGallery';
+import PdfModalController from '@components/PdfModalController';
 import Video from '@components/Video.astro';
 import {
   goodbyeGallery,
@@ -361,15 +363,36 @@ const movementGalleryEntries = movements.map((flyers) => {
                                             <li class="text-xs">
                                               <a
                                                 href={materialHref(material)}
-                                                download={
-                                                  material.type === 'document'
-                                                    ? (material.path ?? material.name)
+                                                target={
+                                                  material.type === 'youtube' ? '_blank' : undefined
+                                                }
+                                                rel={
+                                                  material.type === 'youtube'
+                                                    ? 'noreferrer'
                                                     : undefined
                                                 }
-                                                target="_blank"
-                                                class="link-text inline-flex items-center"
+                                                data-pdf-viewer={
+                                                  material.type === 'document' ? true : undefined
+                                                }
+                                                data-pdf-viewer-title={
+                                                  material.type === 'document'
+                                                    ? material.name
+                                                    : undefined
+                                                }
+                                                class={
+                                                  material.type === 'document'
+                                                    ? 'group inline-flex items-center gap-1'
+                                                    : 'link-text inline-flex items-center'
+                                                }
                                               >
-                                                {material.name}
+                                                {material.type === 'document' ? (
+                                                  <>
+                                                    <span class="link-text">{material.name}</span>
+                                                    <ModalOpenIcon />
+                                                  </>
+                                                ) : (
+                                                  material.name
+                                                )}
                                               </a>
                                             </li>
                                           ))}
@@ -419,11 +442,12 @@ const movementGalleryEntries = movements.map((flyers) => {
         </div>
         <a
           href="/assets/documents/takahatadai73/town_planning.pdf"
-          download="まちづくり計画案.pdf"
-          target="_blank"
-          class="link-text mt-2 inline-flex text-xs"
+          data-pdf-viewer
+          data-pdf-viewer-title="まちづくり計画案"
+          class="group mt-2 inline-flex items-center gap-1 text-xs"
         >
-          まちづくり計画案.pdf
+          <span class="link-text">まちづくり計画案.pdf</span>
+          <ModalOpenIcon />
         </a>
 
         <MovementsGallery client:load entries={movementGalleryEntries} />
@@ -452,11 +476,12 @@ const movementGalleryEntries = movements.map((flyers) => {
                       {resident.statement && (
                         <a
                           href={`/assets/documents/takahatadai73/statement_${resident.key}.pdf`}
-                          download={`statement_${resident.key}.pdf`}
-                          target="_blank"
-                          class="link-text text-xs"
+                          data-pdf-viewer
+                          data-pdf-viewer-title={`${resident.name}さんの陳述書`}
+                          class="group inline-flex items-center gap-1 text-xs"
                         >
-                          陳述書
+                          <span class="link-text">陳述書</span>
+                          <ModalOpenIcon />
                         </a>
                       )}
                     </div>
@@ -474,6 +499,8 @@ const movementGalleryEntries = movements.map((flyers) => {
           }
         </div>
       </section>
+
+      <PdfModalController client:load />
 
       <section class="mt-48">
         <h2 class={sectionTitleClass}>私たちについて<br />もっと詳しく知りたい方は…</h2>
