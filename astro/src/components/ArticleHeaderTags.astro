@@ -1,0 +1,36 @@
+---
+import type { Tag } from '@/types/tag';
+import type { EventStatus } from '@/types/event';
+
+interface Props {
+  status?: EventStatus;
+  filmTags?: Tag[] | false;
+  eventTags?: Tag[] | false;
+  no?: string | number;
+}
+
+const { status = '', filmTags = false, eventTags = false, no } = Astro.props;
+---
+
+{
+  (status || filmTags || eventTags || no) && (
+    <div class="mb-1 flex items-center justify-between gap-2">
+      <div class="flex flex-wrap gap-2">
+        {status && (
+          <span class="bg-red-600 px-1.5 py-0.5 text-xs text-red-100">
+            {status === '1' ? '延期' : '中止'}
+          </span>
+        )}
+        {filmTags &&
+          filmTags.map((tag) => (
+            <span class="bg-purple-100 px-1.5 py-0.5 text-xs text-purple-600">{tag.name}</span>
+          ))}
+        {eventTags &&
+          eventTags.map((tag) => (
+            <span class="bg-cyan-100 px-1.5 py-0.5 text-xs text-cyan-600">{tag.name}</span>
+          ))}
+      </div>
+      {no && <span class="text-xs text-gray-500">#{no}</span>}
+    </div>
+  )
+}

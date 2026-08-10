@@ -27,17 +27,48 @@ export type WpListQuery = {
 
 type WpListResponse<T> = { data: T[]; total_pages: number };
 
+type WpDetailResponse<T> = { data: T };
+
+export type WpDetailQuery = {
+  pageId?: string;
+  pageName?: string;
+};
+
 export async function wpGetList<T>(
   endpoint: WpEndpoint,
   query?: WpListQuery,
 ): Promise<WpListResponse<T>> {
   const url = new URL(`${WP_API_BASE}/${endpoint}`);
   if (query) {
-    for (const [key, value] of Object.entries(query)) {
+    for (const [key, value] of Object.entries(query) as Array<
+      [string, string | number | undefined]
+    >) {
       if (value !== undefined) url.searchParams.set(key, String(value));
     }
   }
   const res = await fetch(url.toString());
   if (!res.ok) return { data: [], total_pages: 0 };
-  return res.json();
+  return (await res.json()) as WpListResponse<T>;
+}
+
+export async function wpGetDetail<T>(
+  endpoint: WpEndpoint,
+  query: WpDetailQuery,
+): Promise<T | null> {
+  const url = new URL(`${WP_API_BASE}/${endpoint}`);
+  for (const [key, value] of Object.entries(query) as Array<[string, string | undefined]>) {
+    if (value !== undefined) url.searchParams.set(key, value);
+  }
+
+  const res = await fetch(url.toString());
+  if (!res.ok) return null;
+  const response = (await res.json()) as WpDetailResponse<T>;
+  return response.data;
+}
+
+export async function wpGetCustom<T>(endpoint: WpEndpoint): Promise<T | null> {
+  const res = await fetch(`${WP_API_BASE}/${endpoint}`);
+  if (!res.ok) return null;
+  const response = (await res.json()) as WpDetailResponse<T>;
+  return response.data;
 }
