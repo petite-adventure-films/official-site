@@ -27,19 +27,17 @@ export default function Cart() {
     if (!items || items.length === 0 || purchasing) return;
     setPurchasing(true);
     try {
-      const response = await fetch('/stripe/checkout.php', {
+      const response = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          requestId: crypto.randomUUID(),
           items: items.map((item) => ({
+            name: item.name,
+            type: item.type,
+            disc: item.disc,
             quantity: item.unit,
-            price_data: {
-              currency: 'jpy',
-              product_data: { name: item.title, description: `${item.type} ${item.disc}` },
-              unit_amount: item.amount,
-            },
           })),
-          shipping_fee: totals.shipping,
         }),
       });
       const body = (await response.json()) as { url?: string };

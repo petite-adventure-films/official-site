@@ -4,5 +4,18 @@ import Cart from '@components/Cart';
 ---
 
 <ShopPostLayout title="SHOP" heading="カート" crumbs={[{ to: '/pafshop/', name: 'SHOP' }]}>
+  <script>
+    import { initBotId } from 'botid/client/core';
+
+    initBotId({
+      protect: [
+        {
+          path: '/api/stripe/checkout',
+          method: 'POST',
+          advancedOptions: { checkLevel: 'basic' },
+        },
+      ],
+    });
+  </script>
   <Cart client:load />
 </ShopPostLayout>
