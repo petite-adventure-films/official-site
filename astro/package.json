@@ -9,11 +9,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "export:wordpress": "node scripts/export-wordpress.mjs",
+    "inventory:wordpress-media": "node scripts/inventory-wordpress-media.mjs",
+    "probe:wordpress-media": "node scripts/probe-wordpress-media.mjs",
     "verify:static": "node scripts/verify-static-output.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types",
     "test": "vitest run",
+    "test:wordpress-media-inventory": "node --test scripts/inventory-wordpress-media.test.mjs",
     "test:watch": "vitest"
   },
   "dependencies": {

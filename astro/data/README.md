@@ -19,3 +19,30 @@ pnpm export:wordpress -- \
 ```
 
 The export contains only publicly available content. It does not export drafts, private posts, users, credentials, or WordPress configuration.
+
+## Media inventory
+
+Extract every referenced WordPress upload URL and its referring content records without downloading the files:
+
+```sh
+pnpm inventory:wordpress-media
+```
+
+This writes:
+
+- `data/wordpress-media-inventory.json`: machine-readable URL and reference inventory
+- `data/wordpress-media-inventory-summary.md`: human-readable counts and probe results
+
+Probe remote availability and `Content-Length` separately. The defaults use two concurrent `HEAD` requests with a 250 ms delay per worker and resume previously checked entries:
+
+```sh
+pnpm probe:wordpress-media
+```
+
+Use `--limit` for a small trial before checking the full inventory:
+
+```sh
+pnpm probe:wordpress-media -- --limit 20
+```
+
+The probe does not download response bodies or media files.
