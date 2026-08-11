@@ -14,7 +14,7 @@ vi.mock('stripe', () => ({
   },
 }));
 
-import checkoutHandler from './checkout';
+import checkoutHandler from '../../../api/stripe/checkout.js';
 
 const requestId = '5b1446b4-ae4d-4cb0-9677-c7fa80fa5656';
 const validPayload = {

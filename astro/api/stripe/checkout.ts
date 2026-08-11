@@ -31,7 +31,7 @@ export default {
     }
 
     const parsed = parseCheckoutPayload(requestBody);
-    if (!parsed.success) {
+    if ('error' in parsed) {
       return jsonResponse({ error: parsed.error }, 400);
     }
 

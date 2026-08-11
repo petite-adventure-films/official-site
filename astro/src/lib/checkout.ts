@@ -1,4 +1,5 @@
-import { PRODUCTS_DVD } from '../constants/products_dvd';
+// 決済時にブラウザから送られた価格を信用せず、サーバー側でも同じ商品マスターを参照する。
+import { PRODUCTS_DVD } from '../constants/products_dvd.js';
 
 export type CheckoutItem = {
   name: string;
