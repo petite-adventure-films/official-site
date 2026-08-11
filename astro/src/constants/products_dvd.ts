@@ -1,4 +1,5 @@
-import type { DVD } from '@/types/dvd';
+// Stripe Functionからも参照される共有データのため、Node.js ESM互換の相対パスで型を読む。
+import type { DVD } from '../types/dvd.js';
 
 export const PRODUCTS_DVD: DVD[] = [
   {
