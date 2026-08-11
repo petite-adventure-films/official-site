@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/snapshot/v1",
+  "title": "Published content snapshot",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "snapshotId": {
+      "type": "string",
+      "pattern": "^snapshot_[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "sourceRevisionIds": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/revisionId"
+      },
+      "uniqueItems": true
+    },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/publishedRecord" }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.petiteadventurefilms.com/schemas/asset/v1"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "snapshotId",
+    "createdAt",
+    "sourceRevisionIds",
+    "records",
+    "assets"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "publishedRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+        },
+        "revisionId": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/revisionId"
+        },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "eventNumber": { "type": "integer", "minimum": 1 },
+        "payload": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/v1"
+        }
+      },
+      "required": ["id", "revisionId", "payload"],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "enum": ["news", "blog", "event", "pressCoverage", "video"]
+                  }
+                },
+                "required": ["type"]
+              }
+            },
+            "required": ["payload"]
+          },
+          "then": {
+            "properties": {
+              "publishedAt": { "type": "string", "format": "date-time" }
+            },
+            "required": ["publishedAt"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "type": "object",
+                "properties": { "type": { "const": "event" } },
+                "required": ["type"]
+              }
+            },
+            "required": ["payload"]
+          },
+          "then": {
+            "properties": {
+              "eventNumber": { "type": "integer", "minimum": 1 }
+            },
+            "required": ["eventNumber"]
+          },
+          "else": { "not": { "required": ["eventNumber"] } }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

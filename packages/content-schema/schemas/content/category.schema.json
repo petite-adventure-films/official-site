@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/category/v1",
+  "title": "Blog category payload",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/payloadBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "category" },
+        "slug": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/slug"
+        },
+        "label": { "type": "string", "minLength": 1 },
+        "sortOrder": { "type": "integer", "minimum": 0 },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["slug", "label", "sortOrder", "isActive"]
+    }
+  ],
+  "unevaluatedProperties": false
+}

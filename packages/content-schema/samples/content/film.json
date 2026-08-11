@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "type": "film",
+  "title": "さようならUR",
+  "slug": "goodbye_ur",
+  "body": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "高幡台団地73号棟をめぐるドキュメンタリー。"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "directors": ["早川由美子"],
+  "genres": ["ドキュメンタリー"],
+  "countries": ["日本"],
+  "releaseYear": 2011,
+  "versions": [{ "label": "本編", "durationMinutes": 73 }],
+  "summary": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "耐震問題で揺れるURの団地。" }]
+        }
+      ]
+    }
+  },
+  "galleryAssetIds": ["asset_film_goodbye_ur_poster"],
+  "credits": [
+    {
+      "label": "監督・撮影・編集",
+      "body": {
+        "schemaVersion": 1,
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [{ "type": "text", "text": "早川由美子" }]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "screenings": [
+    {
+      "name": "山形国際ドキュメンタリー映画祭",
+      "year": 2011,
+      "location": "山形",
+      "country": "日本",
+      "scope": "domestic"
+    }
+  ]
+}

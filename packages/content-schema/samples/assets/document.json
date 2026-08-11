@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "asset_tokyo_shimbun_20251005",
+  "type": "asset",
+  "kind": "document",
+  "originalFilename": "tokyo-shimbun-2025-10-05.pdf",
+  "createdAt": "2025-10-07T00:00:00+09:00",
+  "original": {
+    "storageKey": "originals/fe/fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210.pdf",
+    "mimeType": "application/pdf",
+    "sizeBytes": 123456,
+    "sha256": "fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210"
+  }
+}

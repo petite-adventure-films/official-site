@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "type": "event",
+  "title": "『さようならUR』上映＆ディスカッション＠フランス・パリ",
+  "slug": "18010",
+  "eventStatus": "normal",
+  "dateRange": {
+    "startsOn": "2026-04-08",
+    "endsOn": "2026-04-08"
+  },
+  "venue": {
+    "name": "INALCO（国立東洋言語文化研究所）",
+    "address": "65 Rue des Grands Moulins, 75013 Paris, France",
+    "mapUrl": "https://maps.app.goo.gl/BjJArcfgz62Gq6Ah7"
+  },
+  "scheduleNotes": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "2026年4月8日（水）18:00～" }]
+        }
+      ]
+    }
+  },
+  "admission": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        { "type": "paragraph", "content": [{ "type": "text", "text": "無料" }] }
+      ]
+    }
+  },
+  "organizer": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Fenêtres sur le Japon" }]
+        }
+      ]
+    }
+  },
+  "notes": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            { "type": "text", "text": "フランス語字幕付きで上映されます。" }
+          ]
+        }
+      ]
+    }
+  },
+  "filmIds": ["film_goodbye_ur"],
+  "eventKindIds": ["eventkind_screening"]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "type": "news",
+  "title": "2026年10月24日より全8回の映像ワークショップを開講します",
+  "body": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            { "type": "text", "text": "映像ワークショップを開催します。" }
+          ]
+        }
+      ]
+    }
+  }
+}

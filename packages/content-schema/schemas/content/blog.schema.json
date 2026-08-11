@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/blog/v1",
+  "title": "Blog payload",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/payloadBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "blog" },
+        "title": { "type": "string", "minLength": 1 },
+        "slug": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/slug"
+        },
+        "body": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "categoryId": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+        },
+        "filmIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        },
+        "coverAssetId": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+        },
+        "isRecommended": { "type": "boolean" },
+        "isWorkshopReport": { "type": "boolean" }
+      },
+      "required": [
+        "title",
+        "slug",
+        "body",
+        "categoryId",
+        "filmIds",
+        "isRecommended",
+        "isWorkshopReport"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

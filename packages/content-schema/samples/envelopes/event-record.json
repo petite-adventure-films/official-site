@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "event_paris_goodbye_ur_20260408",
+  "type": "event",
+  "publication": {
+    "state": "published",
+    "publishedAt": "2026-04-01T00:00:00+09:00"
+  },
+  "workingRevisionId": "rev_event_paris_goodbye_ur_2",
+  "publishedRevisionId": "rev_event_paris_goodbye_ur_1",
+  "eventNumber": 230,
+  "createdAt": "2026-04-01T00:00:00+09:00",
+  "updatedAt": "2026-04-01T00:00:00+09:00"
+}

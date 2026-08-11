@@ -1,0 +1,16 @@
+{
+  "name": "@petite-adventure-films/content-schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./asset.schema.json": "./schemas/asset.schema.json",
+    "./content.schema.json": "./schemas/content.schema.json",
+    "./content-record.schema.json": "./schemas/content-record.schema.json",
+    "./rich-text.schema.json": "./schemas/rich-text.schema.json",
+    "./revision.schema.json": "./schemas/revision.schema.json",
+    "./snapshot.schema.json": "./schemas/snapshot.schema.json",
+    "./source-reference.schema.json": "./schemas/source-reference.schema.json",
+    "./schemas/*": "./schemas/*"
+  }
+}

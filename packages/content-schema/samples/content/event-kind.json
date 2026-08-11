@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "type": "eventKind",
+  "label": "上映会",
+  "sortOrder": 10,
+  "isActive": true
+}

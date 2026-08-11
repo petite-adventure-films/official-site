@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/source-reference/v1",
+  "title": "Migration source reference",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "targetId": {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+    },
+    "source": { "const": "wordpress" },
+    "sourceType": { "type": "string", "minLength": 1 },
+    "sourceId": { "type": "string", "minLength": 1 },
+    "sourceUrl": { "type": "string", "format": "uri" }
+  },
+  "required": ["schemaVersion", "targetId", "source", "sourceType", "sourceId"],
+  "additionalProperties": false
+}

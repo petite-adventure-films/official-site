@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/product/v1",
+  "title": "Product payload",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/payloadBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "product" },
+        "title": { "type": "string", "minLength": 1 },
+        "slug": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/slug"
+        },
+        "filmIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        },
+        "isAvailable": { "type": "boolean", "readOnly": true },
+        "variants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+              },
+              "label": { "type": "string", "minLength": 1 },
+              "format": { "enum": ["DVD", "Blu-ray"] },
+              "priceJpy": { "type": "integer", "minimum": 0 },
+              "isAvailable": { "type": "boolean" }
+            },
+            "required": ["id", "label", "format", "priceJpy", "isAvailable"],
+            "additionalProperties": false
+          }
+        },
+        "packageContents": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "format": { "enum": ["DVD", "Blu-ray"] },
+              "quantity": { "type": "integer", "minimum": 1 },
+              "specification": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "required": ["format", "quantity", "specification", "description"],
+            "additionalProperties": false
+          }
+        },
+        "galleryAssetIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        },
+        "tagline": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "introduction": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "filmIds",
+        "isAvailable",
+        "variants",
+        "packageContents",
+        "galleryAssetIds"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

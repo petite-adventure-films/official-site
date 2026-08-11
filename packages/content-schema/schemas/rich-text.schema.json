@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/rich-text/v1",
+  "title": "Tiptap rich text document",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "doc": { "$ref": "#/$defs/doc" }
+  },
+  "required": ["schemaVersion", "doc"],
+  "additionalProperties": false,
+  "$defs": {
+    "doc": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "doc" },
+        "content": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/node" }
+        }
+      },
+      "required": ["type", "content"],
+      "additionalProperties": false
+    },
+    "node": {
+      "oneOf": [
+        { "$ref": "#/$defs/textNode" },
+        { "$ref": "#/$defs/assetImageNode" },
+        { "$ref": "#/$defs/youtubeNode" },
+        { "$ref": "#/$defs/structuralNode" }
+      ]
+    },
+    "textNode": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "text" },
+        "text": { "type": "string" },
+        "marks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/mark" }
+        }
+      },
+      "required": ["type", "text"],
+      "additionalProperties": false
+    },
+    "assetImageNode": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "assetImage" },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+            },
+            "alt": { "type": "string" },
+            "caption": { "type": ["string", "null"] }
+          },
+          "required": ["assetId", "alt", "caption"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "attrs"],
+      "additionalProperties": false
+    },
+    "youtubeNode": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "youtube" },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "videoId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{11}$"
+            }
+          },
+          "required": ["videoId"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "attrs"],
+      "additionalProperties": false
+    },
+    "structuralNode": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "paragraph",
+            "heading",
+            "bulletList",
+            "orderedList",
+            "listItem",
+            "blockquote",
+            "codeBlock",
+            "hardBreak",
+            "horizontalRule",
+            "table",
+            "tableRow",
+            "tableHeader",
+            "tableCell"
+          ]
+        },
+        "attrs": { "type": "object" },
+        "content": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/node" }
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": ["bold", "italic", "underline", "strike", "code", "link"]
+        },
+        "attrs": { "type": "object" }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    }
+  }
+}

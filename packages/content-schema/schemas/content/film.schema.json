@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/film/v1",
+  "title": "Film payload",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/payloadBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "film" },
+        "title": { "type": "string", "minLength": 1 },
+        "slug": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/slug"
+        },
+        "body": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "directors": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "genres": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "countries": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "releaseYear": { "type": "integer", "minimum": 1800, "maximum": 2200 },
+        "versions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "durationMinutes": { "type": "integer", "minimum": 1 }
+            },
+            "required": ["durationMinutes"],
+            "additionalProperties": false
+          }
+        },
+        "summary": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "tagline": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "galleryAssetIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        },
+        "details": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/labeledRichText" }
+        },
+        "credits": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/labeledRichText" }
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "by": { "type": "string", "minLength": 1 },
+              "body": {
+                "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+              }
+            },
+            "required": ["by", "body"],
+            "additionalProperties": false
+          }
+        },
+        "prizes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "screenings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "year": { "type": "integer", "minimum": 1800, "maximum": 2200 },
+              "location": { "type": "string" },
+              "country": { "type": "string" },
+              "scope": { "enum": ["domestic", "international", "media"] }
+            },
+            "required": ["name", "scope"],
+            "additionalProperties": false
+          }
+        },
+        "relatedLinks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string", "minLength": 1 },
+              "url": { "type": "string", "format": "uri" },
+              "description": { "type": "string" }
+            },
+            "required": ["label", "url"],
+            "additionalProperties": false
+          }
+        },
+        "teaserVideo": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/youtubeVideo"
+        },
+        "fullVideo": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/youtubeVideo"
+        },
+        "posterNote": { "type": "string" },
+        "specialPage": {
+          "type": "object",
+          "properties": {
+            "url": { "type": "string", "format": "uri-reference" },
+            "label": { "type": "string", "minLength": 1 },
+            "bannerAssetId": {
+              "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+            }
+          },
+          "required": ["url", "label", "bannerAssetId"],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "body",
+        "directors",
+        "genres",
+        "countries",
+        "releaseYear",
+        "versions",
+        "summary",
+        "galleryAssetIds"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "labeledRichText": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "body": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        }
+      },
+      "required": ["label", "body"],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/press-coverage/v1",
+  "title": "Press coverage payload",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/payloadBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "pressCoverage" },
+        "title": { "type": "string", "minLength": 1 },
+        "slug": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/slug"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "issue": { "type": "string" }
+          },
+          "required": ["name"],
+          "additionalProperties": false
+        },
+        "coverageType": {
+          "enum": [
+            "newspaper",
+            "magazine",
+            "web",
+            "radio",
+            "television",
+            "review",
+            "contribution",
+            "video",
+            "other"
+          ]
+        },
+        "summary": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "articleExcerpt": {
+          "type": "object",
+          "properties": {
+            "headline": { "type": "string", "minLength": 1 },
+            "subheadline": { "type": "string" },
+            "body": {
+              "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+            }
+          },
+          "required": ["headline", "body"],
+          "additionalProperties": false
+        },
+        "attachmentAssetIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        },
+        "video": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/youtubeVideo"
+        },
+        "filmIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "source",
+        "coverageType",
+        "summary",
+        "attachmentAssetIds",
+        "filmIds"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/event/v1",
+  "title": "Event payload",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/payloadBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "event" },
+        "title": { "type": "string", "minLength": 1 },
+        "slug": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/slug"
+        },
+        "eventStatus": { "enum": ["normal", "postponed", "cancelled"] },
+        "dateRange": {
+          "type": "object",
+          "properties": {
+            "startsOn": { "type": "string", "format": "date" },
+            "endsOn": { "type": "string", "format": "date" }
+          },
+          "required": ["startsOn"],
+          "additionalProperties": false
+        },
+        "venue": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "address": { "type": "string" },
+            "mapUrl": { "type": "string", "format": "uri" }
+          },
+          "required": ["name"],
+          "additionalProperties": false
+        },
+        "scheduleNotes": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "access": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "admission": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "organizer": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "notes": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/rich-text/v1"
+        },
+        "filmIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        },
+        "eventKindIds": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/idArray"
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "eventStatus",
+        "dateRange",
+        "venue",
+        "filmIds",
+        "eventKindIds"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

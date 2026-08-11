@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "type": "product",
+  "title": "さようならUR",
+  "slug": "goodbye_ur",
+  "filmIds": ["film_goodbye_ur"],
+  "isAvailable": true,
+  "variants": [
+    {
+      "id": "variant_goodbye_ur_general_dvd",
+      "label": "一般 DVD",
+      "format": "DVD",
+      "priceJpy": 2500,
+      "isAvailable": true
+    },
+    {
+      "id": "variant_goodbye_ur_library_dvd",
+      "label": "団体・ライブラリー DVD",
+      "format": "DVD",
+      "priceJpy": 10000,
+      "isAvailable": true
+    }
+  ],
+  "packageContents": [
+    {
+      "format": "DVD",
+      "quantity": 2,
+      "specification": "NTSC/DVD-R",
+      "description": "本編73分／特典映像"
+    }
+  ],
+  "galleryAssetIds": [
+    "asset_product_goodbye_ur_1",
+    "asset_product_goodbye_ur_2"
+  ]
+}
