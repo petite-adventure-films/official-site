@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/asset/v1",
+  "title": "Media asset",
+  "oneOf": [
+    { "$ref": "#/$defs/imageAsset" },
+    { "$ref": "#/$defs/documentAsset" }
+  ],
+  "$defs": {
+    "storedFile": {
+      "type": "object",
+      "properties": {
+        "storageKey": {
+          "type": "string",
+          "pattern": "^(?:originals|renditions)/[a-f0-9]{2}/[a-f0-9]{64}\\.[a-z0-9]+$"
+        },
+        "mimeType": {
+          "type": "string",
+          "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$"
+        },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "required": ["storageKey", "mimeType", "sizeBytes", "sha256"]
+    },
+    "originalImage": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/storedFile" },
+        {
+          "type": "object",
+          "properties": {
+            "width": { "type": "integer", "minimum": 1 },
+            "height": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["width", "height"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "rendition": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/storedFile" },
+        {
+          "type": "object",
+          "properties": {
+            "purpose": { "const": "display" },
+            "format": { "const": "webp" },
+            "width": { "type": "integer", "minimum": 1, "maximum": 960 },
+            "height": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["purpose", "format", "width", "height"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "assetBase": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "id": {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+        },
+        "type": { "const": "asset" },
+        "originalFilename": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "type",
+        "originalFilename",
+        "createdAt"
+      ]
+    },
+    "imageAsset": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/assetBase" },
+        {
+          "type": "object",
+          "properties": {
+            "kind": { "const": "image" },
+            "defaultAltText": { "type": "string" },
+            "original": { "$ref": "#/$defs/originalImage" },
+            "renditions": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/rendition" },
+              "maxItems": 1
+            }
+          },
+          "required": ["kind", "defaultAltText", "original", "renditions"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "documentAsset": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/assetBase" },
+        {
+          "type": "object",
+          "properties": {
+            "kind": { "const": "document" },
+            "original": { "$ref": "#/$defs/storedFile" }
+          },
+          "required": ["kind", "original"]
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

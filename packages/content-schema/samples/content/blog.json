@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "type": "blog",
+  "title": "【お申し込み受付中！】2026年シビル市民講座",
+  "slug": "2026_civil_video_ws",
+  "body": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "全8回の映像ワークショップを担当します。"
+            }
+          ]
+        },
+        {
+          "type": "assetImage",
+          "attrs": {
+            "assetId": "asset_workshop_2026",
+            "alt": "映像ワークショップの案内",
+            "caption": null
+          }
+        }
+      ]
+    }
+  },
+  "categoryId": "category_zoukibayashi",
+  "filmIds": [],
+  "isRecommended": false,
+  "isWorkshopReport": false
+}

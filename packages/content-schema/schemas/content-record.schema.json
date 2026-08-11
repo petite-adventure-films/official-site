@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content-record/v1",
+  "title": "CMS content record",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/id"
+    },
+    "type": {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/contentType"
+    },
+    "publication": {
+      "type": "object",
+      "properties": {
+        "state": { "enum": ["draft", "scheduled", "published", "archived"] },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "scheduledFor": { "type": "string", "format": "date-time" }
+      },
+      "required": ["state"],
+      "allOf": [
+        {
+          "if": {
+            "properties": { "state": { "const": "scheduled" } },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "scheduledFor": { "type": "string", "format": "date-time" }
+            },
+            "required": ["scheduledFor"]
+          }
+        },
+        {
+          "if": {
+            "properties": { "state": { "enum": ["published", "archived"] } },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "publishedAt": { "type": "string", "format": "date-time" }
+            },
+            "required": ["publishedAt"]
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "workingRevisionId": {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/revisionId"
+    },
+    "publishedRevisionId": {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/revisionId"
+    },
+    "eventNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "readOnly": true
+    },
+    "createdAt": { "type": "string", "format": "date-time", "readOnly": true },
+    "updatedAt": { "type": "string", "format": "date-time", "readOnly": true }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "type",
+    "publication",
+    "workingRevisionId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "publication": {
+            "type": "object",
+            "properties": { "state": { "enum": ["published", "archived"] } },
+            "required": ["state"]
+          }
+        },
+        "required": ["publication"]
+      },
+      "then": {
+        "properties": {
+          "publishedRevisionId": {
+            "$ref": "https://www.petiteadventurefilms.com/schemas/common/v1#/$defs/revisionId"
+          }
+        },
+        "required": ["publishedRevisionId"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": { "const": "event" },
+          "publication": {
+            "type": "object",
+            "properties": { "state": { "enum": ["published", "archived"] } },
+            "required": ["state"]
+          }
+        },
+        "required": ["type", "publication"]
+      },
+      "then": {
+        "properties": { "eventNumber": { "type": "integer", "minimum": 1 } },
+        "required": ["eventNumber"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "not": { "const": "event" } } },
+        "required": ["type"]
+      },
+      "then": { "not": { "required": ["eventNumber"] } }
+    }
+  ],
+  "additionalProperties": false
+}

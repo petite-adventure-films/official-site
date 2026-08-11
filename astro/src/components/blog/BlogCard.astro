@@ -22,7 +22,7 @@ const articlePath = `/${decodeWordPressSlug(post.name)}/`;
     )
   }
   <div class="p-4">
-    {post.recommended === '1' && <span class="mb-1 block">⭐️</span>}
+    {post.isRecommended && <span class="mb-1 block">⭐️</span>}
     <ArticleHeaderTags filmTags={post.film_tags} />
     <h3 class="text-base font-bold">{post.title}</h3>
     <AttachedInfo info={post.categories.map((category) => category.name)} />

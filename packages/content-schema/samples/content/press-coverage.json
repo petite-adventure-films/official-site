@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "type": "pressCoverage",
+  "title": "日野・高幡台元住民「教訓引き継いで」",
+  "slug": "17839",
+  "source": {
+    "name": "東京新聞（多摩武蔵野版）",
+    "issue": "2025年10月5日"
+  },
+  "coverageType": "newspaper",
+  "summary": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            { "type": "text", "text": "高島平団地での上映会が掲載されました。" }
+          ]
+        }
+      ]
+    }
+  },
+  "attachmentAssetIds": ["asset_tokyo_shimbun_20251005"],
+  "filmIds": ["film_goodbye_ur"]
+}

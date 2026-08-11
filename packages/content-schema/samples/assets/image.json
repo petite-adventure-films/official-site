@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "asset_workshop_2026",
+  "type": "asset",
+  "kind": "image",
+  "originalFilename": "workshop-2026.jpg",
+  "createdAt": "2026-08-11T00:00:00+09:00",
+  "defaultAltText": "映像ワークショップの案内",
+  "original": {
+    "storageKey": "originals/01/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef.jpg",
+    "mimeType": "image/jpeg",
+    "sizeBytes": 4234567,
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "width": 4032,
+    "height": 3024
+  },
+  "renditions": [
+    {
+      "purpose": "display",
+      "storageKey": "renditions/ab/abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789.webp",
+      "mimeType": "image/webp",
+      "format": "webp",
+      "sizeBytes": 98542,
+      "sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "width": 960,
+      "height": 720
+    }
+  ]
+}

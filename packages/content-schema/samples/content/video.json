@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "type": "video",
+  "title": "治安維持法施行100年の節目に…",
+  "slug": "17837",
+  "description": {
+    "schemaVersion": 1,
+    "doc": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "講演の記録です。" }]
+        }
+      ]
+    }
+  },
+  "source": { "provider": "youtube", "videoId": "kwHsbFrH2EA" },
+  "production": {
+    "year": 2025,
+    "country": "日本",
+    "durationSeconds": 3752
+  },
+  "filmIds": []
+}

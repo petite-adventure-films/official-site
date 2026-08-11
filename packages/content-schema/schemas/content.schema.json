@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/v1",
+  "title": "Content payload",
+  "oneOf": [
+    { "$ref": "https://www.petiteadventurefilms.com/schemas/content/news/v1" },
+    { "$ref": "https://www.petiteadventurefilms.com/schemas/content/blog/v1" },
+    { "$ref": "https://www.petiteadventurefilms.com/schemas/content/event/v1" },
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/content/press-coverage/v1"
+    },
+    { "$ref": "https://www.petiteadventurefilms.com/schemas/content/video/v1" },
+    { "$ref": "https://www.petiteadventurefilms.com/schemas/content/film/v1" },
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/content/product/v1"
+    },
+    { "$ref": "https://www.petiteadventurefilms.com/schemas/content/faq/v1" },
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/content/category/v1"
+    },
+    {
+      "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-kind/v1"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "mappings": [
+    {
+      "legacyTermId": 256,
+      "legacyName": "インド日記",
+      "filmId": "film_my_indian_diary"
+    },
+    {
+      "legacyTermId": 153,
+      "legacyName": "さようならUR",
+      "filmId": "film_goodbye_ur"
+    },
+    {
+      "legacyTermId": 3,
+      "legacyName": "ブライアンと仲間たち",
+      "filmId": "film_brian_and_co"
+    },
+    {
+      "legacyTermId": 166,
+      "legacyName": "ホームレスごっこ",
+      "filmId": "film_apprentice_homeless"
+    },
+    {
+      "legacyTermId": 160,
+      "legacyName": "乙女ハウス",
+      "filmId": "film_otome_house"
+    },
+    {
+      "legacyTermId": 2727,
+      "legacyName": "革命前夜",
+      "filmId": "film_four_years_on"
+    },
+    {
+      "legacyTermId": 4651,
+      "legacyName": "日々新",
+      "filmId": "film_atarashikimura"
+    },
+    {
+      "legacyTermId": 164,
+      "legacyName": "木田さんと原発、そして日本",
+      "filmId": "film_a_woman_from_fukushima"
+    },
+    {
+      "legacyTermId": 165,
+      "legacyName": "踊る善福寺",
+      "filmId": "film_dancing_zempukuji"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "revisionId": "rev_event_paris_goodbye_ur_1",
+  "contentId": "event_paris_goodbye_ur_20260408",
+  "state": "published",
+  "createdAt": "2026-04-01T00:00:00+09:00",
+  "createdBy": "site-owner",
+  "payload": {
+    "schemaVersion": 1,
+    "type": "event",
+    "title": "『さようならUR』上映＆ディスカッション＠フランス・パリ",
+    "slug": "18010",
+    "eventStatus": "normal",
+    "dateRange": { "startsOn": "2026-04-08", "endsOn": "2026-04-08" },
+    "venue": { "name": "INALCO（国立東洋言語文化研究所）" },
+    "filmIds": ["film_goodbye_ur"],
+    "eventKindIds": ["eventkind_screening"]
+  }
+}

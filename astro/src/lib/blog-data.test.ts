@@ -1,21 +1,20 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  decodeBlogTagSlug,
   filterBlogByCategory,
-  filterBlogByTag,
   filterRecommendedBlog,
+  filterWorkshopReportBlog,
   paginateBlogPosts,
   decodeWordPressSlug,
-  type BlogSnapshot,
 } from './blog-data';
 import type { Blog } from '@/types/blog';
 
-const post = (id: number, category: string, recommended = '0'): Blog => ({
+const post = (id: number, category: string, isRecommended = false): Blog => ({
   id,
   name: `post-${String(id)}`,
   title: `記事${String(id)}`,
-  recommended,
+  isRecommended,
+  isWorkshopReport: id <= 2,
   published: '2026/08/10',
   thumbnail: false,
   categories: [{ name: category }],
@@ -23,7 +22,7 @@ const post = (id: number, category: string, recommended = '0'): Blog => ({
 });
 
 const posts = Array.from({ length: 12 }, (_, index) =>
-  post(index + 1, index % 2 === 0 ? '制作日誌' : '雑木林コラム', index === 0 ? '1' : '0'),
+  post(index + 1, index % 2 === 0 ? '制作日誌' : '雑木林コラム', index === 0),
 );
 
 describe('blog data', () => {
@@ -36,20 +35,11 @@ describe('blog data', () => {
     expect(filterRecommendedBlog(posts)).toEqual([posts[0]]);
   });
 
-  it('WordPressタグIDで記事を抽出する', () => {
-    const snapshot: BlogSnapshot = {
-      posts,
-      tags: [],
-      postTagIds: new Map([
-        [1, [10]],
-        [2, [20]],
-      ]),
-    };
-    expect(filterBlogByTag(snapshot, 10)).toEqual([posts[0]]);
+  it('ワークショップレポートだけを抽出する', () => {
+    expect(filterWorkshopReportBlog(posts)).toEqual(posts.slice(0, 2));
   });
 
-  it('URLエンコードされたタグslugを戻す', () => {
-    expect(decodeBlogTagSlug('%e6%98%a0%e5%83%8f')).toBe('映像');
+  it('URLエンコードされたslugを戻す', () => {
     expect(decodeWordPressSlug('2020%e5%b9%b4')).toBe('2020年');
   });
 });
