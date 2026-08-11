@@ -40,3 +40,6 @@ html/wp/wp-content/plugins/hello.php
 # ignore specific themes
 html/wp/wp-content/themes/twenty*/
 
+# ignore the "docs" directory
+docs
+
