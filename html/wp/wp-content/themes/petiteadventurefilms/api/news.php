@@ -1,4 +1,4 @@
-<?
+<?php
 
 // お知らせ
 add_action('rest_api_init', 'register_news_api');
@@ -18,8 +18,8 @@ function get_values_news()
 {
     $args = array(
         'post_type' => 'news',
-        'paged' => $_GET['page'],
-        'posts_per_page' => $_GET['per_page']
+        'paged' => ($_GET['page'] ?? 1),
+        'posts_per_page' => ($_GET['per_page'] ?? get_option('posts_per_page'))
     );
     $get_data = fn() => [
         'id' => get_the_ID(),

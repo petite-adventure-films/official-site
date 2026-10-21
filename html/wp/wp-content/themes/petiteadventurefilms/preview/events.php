@@ -17,7 +17,7 @@
               <li><a href="/?op=skip" class="link-text">HOME</a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
                 </svg></li>
-              <li><a href="/<? echo $post_type_obj->name; ?>/" class="link-text"><? echo $post_type_obj->label; ?>
+              <li><a href="/<?php echo $post_type_obj->name; ?>/" class="link-text"><?php echo $post_type_obj->label; ?>
                 </a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
                 </svg></li>
@@ -25,77 +25,77 @@
           </nav>
           <div class="flex justify-between items-center gap-2 mb-1">
             <div class="flex flex-wrap gap-2">
-              <? if (!empty($filmtags)) { ?>
+              <?php if (!empty($filmtags)) { ?>
                 <div class="flex flex-wrap gap-2">
-                  <? foreach ($filmtags as $filmtag) { ?>
+                  <?php foreach ($filmtags as $filmtag) { ?>
                     <span class="bg-purple-100 text-purple-600 text-xs px-1.5 py-0.5"><?= $filmtag->name ?></span>
-                  <? } ?>
+                  <?php } ?>
                 </div>
-              <? } ?>
-              <? if (!empty($eventtags)) { ?>
+              <?php } ?>
+              <?php if (!empty($eventtags)) { ?>
                 <div class="flex flex-wrap gap-2">
-                  <? foreach ($eventtags as $eventtag) { ?>
+                  <?php foreach ($eventtags as $eventtag) { ?>
                     <span class="bg-cyan-100 text-cyan-600 text-xs px-1.5 py-0.5"><?= $eventtag->name ?></span>
-                  <? } ?>
+                  <?php } ?>
                 </div>
-              <? } ?>
+              <?php } ?>
             </div>
             <span class="text-xs text-gray-500"> #000</span>
           </div>
           <h2 class="text-xl font-bold"><?php the_title(); ?></h2>
         </header>
         <div class="mt-8">
-          <? if (get_post_meta(get_the_ID(), "events_info_09", TRUE)) { ?>
+          <?php if (get_post_meta(get_the_ID(), "events_info_09", TRUE)) { ?>
             <div>
               <dt>開催期間</dt>
               <dd>
                 <div><?= get_post_meta(get_the_ID(), 'events_info_09', TRUE) ?></div>
               </dd>
             </div>
-          <? } ?>
+          <?php } ?>
 
-          <? if (get_post_meta(get_the_ID(), "events_info_09", TRUE)) { ?>
+          <?php if (get_post_meta(get_the_ID(), "events_info_09", TRUE)) { ?>
             <div class="mt-4">
               <dt>開催場所</dt>
               <dd>
                 <div><?= get_post_meta(get_the_ID(), 'events_info_01', TRUE) ?></div>
                 <div class="inline-block"><?= get_post_meta(get_the_ID(), 'events_info_02', TRUE) ?></div>
-                <? if (get_post_meta(get_the_ID(), 'events_info_03', TRUE)) { ?>
+                <?php if (get_post_meta(get_the_ID(), 'events_info_03', TRUE)) { ?>
                   <a href="<?= get_post_meta(get_the_ID(), 'events_info_03', TRUE) ?>" rel="noopener noreferrer" target="_blank" class="inline-flex items-center link-text ml-1">MAP</a>
-                <? } ?>
+                <?php } ?>
                 <div>
                   <p><?= get_post_meta(get_the_ID(), 'events_info_04', TRUE) ?></p>
                 </div>
               </dd>
             </div>
-          <? } ?>
+          <?php } ?>
 
-          <? if (get_post_meta(get_the_ID(), "events_info_13", TRUE)) { ?>
+          <?php if (get_post_meta(get_the_ID(), "events_info_13", TRUE)) { ?>
             <div class="mt-4">
               <dt>入場料</dt>
               <dd>
                 <p><?= get_post_meta(get_the_ID(), 'events_info_13', TRUE) ?></p>
               </dd>
             </div>
-          <? } ?>
+          <?php } ?>
 
-          <? if (get_post_meta(get_the_ID(), "events_info_14", TRUE)) { ?>
+          <?php if (get_post_meta(get_the_ID(), "events_info_14", TRUE)) { ?>
             <div class="mt-4">
               <dt>主催者</dt>
               <dd>
                 <p><?= get_post_meta(get_the_ID(), 'events_info_14', TRUE) ?></p>
               </dd>
             </div>
-          <? } ?>
+          <?php } ?>
 
-          <? if (get_post_meta(get_the_ID(), "events_info_06", TRUE)) { ?>
+          <?php if (get_post_meta(get_the_ID(), "events_info_06", TRUE)) { ?>
             <div class="mt-4">
               <dt>備考</dt>
               <dd>
                 <p><?= get_post_meta(get_the_ID(), 'events_info_06', TRUE) ?></p>
               </dd>
             </div>
-          <? } ?>
+          <?php } ?>
 
           </dl>
         </div>
@@ -106,35 +106,35 @@
       <div class="p-4">
         <div class="flex justify-between items-center gap-2 mb-1">
           <div class="flex flex-wrap gap-2">
-            <? if (!empty($filmtags)) { ?>
+            <?php if (!empty($filmtags)) { ?>
               <div class="flex flex-wrap gap-2">
-                <? foreach ($filmtags as $filmtag) { ?>
+                <?php foreach ($filmtags as $filmtag) { ?>
                   <span class="bg-purple-100 text-purple-600 text-xs px-1.5 py-0.5"><?= $filmtag->name ?></span>
-                <? } ?>
+                <?php } ?>
               </div>
-            <? } ?>
-            <? if (!empty($eventtags)) { ?>
+            <?php } ?>
+            <?php if (!empty($eventtags)) { ?>
               <div class="flex flex-wrap gap-2">
-                <? foreach ($eventtags as $eventtag) { ?>
+                <?php foreach ($eventtags as $eventtag) { ?>
                   <span class="bg-cyan-100 text-cyan-600 text-xs px-1.5 py-0.5"><?= $eventtag->name ?></span>
-                <? } ?>
+                <?php } ?>
               </div>
-            <? } ?>
+            <?php } ?>
           </div><span class="text-xs text-gray-500"> #000</span>
         </div>
         <h3><span class="font-bold"><?php the_title(); ?></span></h3>
         <div class="flex flex-wrap gap-x-2 mt-2 text-xs">
           <span class="before:content-['#'] before:pr-[1px]"><?= format_date(get_post_meta(get_the_ID(), 'events_info_15', TRUE)); ?>
-            <? if (get_post_meta(get_the_ID(), 'events_info_16', TRUE)) { ?>
+            <?php if (get_post_meta(get_the_ID(), 'events_info_16', TRUE)) { ?>
               - <?= format_date(get_post_meta(get_the_ID(), 'events_info_16', TRUE)); ?>
-            <? } ?>
+            <?php } ?>
           </span>
           <span class="before:content-['#'] before:pr-[1px]"><?= get_post_meta(get_the_ID(), 'events_info_01', TRUE); ?></span>
         </div>
       </div>
     </div>
   </div>
-<? }
+<?php }
     }
 ?>
 </div>

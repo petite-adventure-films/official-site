@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * メディア紹介記事一覧の詳細を取得
@@ -20,7 +20,7 @@ function get_values_media()
 {
   $args = array(
     'post_type' => 'media',
-    'posts_per_page' => $_GET['per_page']
+    'posts_per_page' => ($_GET['per_page'] ?? get_option('posts_per_page'))
   );
   $get_data = fn() => [
     'id' => get_the_ID(),
@@ -51,6 +51,9 @@ function register_media_detail_api()
 }
 function get_values_media_detail()
 {
+  if (empty($_GET['pageId']) || !is_scalar($_GET['pageId'])) {
+    return new WP_REST_Response(['error' => 'Missing or invalid pageId'], 400);
+  }
   $args = array(
     'post_type' => 'media',
     'p' => $_GET['pageId']

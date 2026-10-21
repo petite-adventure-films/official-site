@@ -49,7 +49,7 @@ $query = new WP_Query($args);
 
 <body style="font-family: YakuHanJP, sans-serif;">
 
-  <?
+  <?php
   switch ($_GET['type']) {
     case 'news':
       require_once('preview/news.php');

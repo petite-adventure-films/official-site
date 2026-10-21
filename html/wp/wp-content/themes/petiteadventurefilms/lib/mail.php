@@ -1,4 +1,4 @@
-<?
+<?php
 
 function mail_header($from = NULL)
 {

@@ -1,4 +1,4 @@
-<?
+<?php
 function verify_recaptcha(string $token): bool
 {
   $response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
@@ -13,7 +13,7 @@ function verify_recaptcha(string $token): bool
   }
 
   $body = json_decode(wp_remote_retrieve_body($response), true);
-  return !empty($body['success']) && $body['score'] >= 0.5;
+  return !empty($body['success']) && ($body['score'] ?? 0) >= 0.5;
 }
 
 function contact_ntfct($req)

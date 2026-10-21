@@ -75,16 +75,16 @@ function add_custom_menu_page()
 ?>
   <div class="wrap">
     <h2>更新</h2>
-    <?
+    <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['run']) && $_POST['run'] === 'run') {
       dispatch_github_actions();
     ?>
       <p>GitHub Actionsが実行されました。更新までしばらくお待ちください。<br>
         結果は<a href="https://github.com/petite-adventure-films/ja/actions/" target="_blank" rel="noopener noreferrer"> Actionsのジョブ</a>を確認してください。</p>
-    <? } else { ?>
+    <?php } else { ?>
       <form method="post" action="">
         <button type="submit" name="run" value="run">更新作業を始める</button>
       </form>
-    <? }  ?>
+    <?php }  ?>
   </div>
-<? }
+<?php }
