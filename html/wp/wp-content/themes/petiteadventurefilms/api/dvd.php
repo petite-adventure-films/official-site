@@ -50,6 +50,9 @@ function register_dvd_detail_api()
 }
 function get_values_dvd_detail()
 {
+  if (empty($_GET['pageName']) || !is_scalar($_GET['pageName'])) {
+    return new WP_REST_Response(['error' => 'Missing or invalid pageName'], 400);
+  }
   $args = array(
     'post_type' => 'pafshop',
     'name' => $_GET['pageName']

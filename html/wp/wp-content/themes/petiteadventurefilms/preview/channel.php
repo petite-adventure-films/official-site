@@ -16,25 +16,25 @@
               <li><a href="/?op=skip" class="link-text">HOME</a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
                 </svg></li>
-              <li><a href="/<? echo $post_type_obj->name; ?>/" class="link-text"><? echo $post_type_obj->label; ?>
+              <li><a href="/<?php echo $post_type_obj->name; ?>/" class="link-text"><?php echo $post_type_obj->label; ?>
                 </a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
                 </svg></li>
             </ul>
           </nav>
-          <? if (!empty($filmtags) || !empty($eventtags)) { ?>
+          <?php if (!empty($filmtags) || !empty($eventtags)) { ?>
             <div class="flex justify-between items-center gap-2 mb-1">
               <div class="flex flex-wrap gap-2">
-                <? if (!empty($filmtags)) { ?>
+                <?php if (!empty($filmtags)) { ?>
                   <div class="flex flex-wrap gap-2">
-                    <? foreach ($filmtags as $filmtag) { ?>
+                    <?php foreach ($filmtags as $filmtag) { ?>
                       <span class="bg-purple-100 text-purple-600 text-xs px-1.5 py-0.5"><?= $filmtag->name ?></span>
-                    <? } ?>
+                    <?php } ?>
                   </div>
-                <? } ?>
+                <?php } ?>
               </div>
             </div>
-          <? } ?>
+          <?php } ?>
           <h2 class="text-xl font-bold"><?php the_title(); ?></h2>
         </header>
         <div class="mt-8">
@@ -47,7 +47,7 @@
             <span class="before:content-['#'] before:pr-[1px]"><?= get_post_meta(get_the_ID(), 'video_info_04', TRUE); ?></span><!--]-->
           </div>
           <div class="mt-8 [&amp;_p:has(iframe)]:aspect-video [&amp;_iframe]:w-full [&amp;_iframe]:h-full [&amp;_a]:link-text [&amp;_img]:mt-2">
-            <? echo wpautop(get_the_content(), true) ?>
+            <?php echo wpautop(get_the_content(), true) ?>
           </div>
           <div class="mt-8">
             <time class="block mt-2 text-xs text-gray-500"><?= get_the_date() ?></time>
@@ -60,26 +60,26 @@
         <img src="https://img.youtube.com/vi/<?= get_post_meta(get_the_ID(), 'video_info_00', TRUE) ?>/maxresdefault.jpg" alt="">
       </div>
       <div class="p-4">
-        <? if (!empty($filmtags) || !empty($eventtags)) { ?>
+        <?php if (!empty($filmtags) || !empty($eventtags)) { ?>
           <div class="flex justify-between items-center gap-2 mb-1">
             <div class="flex flex-wrap gap-2">
-              <? if (!empty($filmtags)) { ?>
+              <?php if (!empty($filmtags)) { ?>
                 <div class="flex flex-wrap gap-2">
-                  <? foreach ($filmtags as $filmtag) { ?>
+                  <?php foreach ($filmtags as $filmtag) { ?>
                     <span class="bg-purple-100 text-purple-600 text-xs px-1.5 py-0.5"><?= $filmtag->name ?></span>
-                  <? } ?>
+                  <?php } ?>
                 </div>
-              <? } ?>
-              <? if (!empty($eventtags)) { ?>
+              <?php } ?>
+              <?php if (!empty($eventtags)) { ?>
                 <div class="flex flex-wrap gap-2">
-                  <? foreach ($eventtags as $eventtag) { ?>
+                  <?php foreach ($eventtags as $eventtag) { ?>
                     <span class="bg-cyan-100 text-cyan-600 text-xs px-1.5 py-0.5"><?= $eventtag->name ?></span>
-                  <? } ?>
+                  <?php } ?>
                 </div>
-              <? } ?>
+              <?php } ?>
             </div>
           </div>
-        <? } ?>
+        <?php } ?>
         <h3><span class="font-bold"><?php the_title(); ?></span></h3>
         <div class="flex flex-wrap gap-x-2 mt-2 text-xs">
           <span class="before:content-['#'] before:pr-[1px]"><?= get_post_meta(get_the_ID(), 'video_info_02', TRUE); ?></span>
@@ -89,7 +89,7 @@
       </div>
     </div>
   </div>
-<? }
+<?php }
     }
 ?>
 </div>

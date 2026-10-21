@@ -53,6 +53,7 @@ function get_values_events()
         }
     }
 
+    $result = [];
     foreach ($data as $item) {
         $dateFrom = $item['date_from'];
         $dateFrom = formatDate($dateFrom);
@@ -124,6 +125,9 @@ function register_events_detail_api()
 }
 function get_values_events_detail()
 {
+  if (empty($_GET['pageId']) || !is_scalar($_GET['pageId'])) {
+    return new WP_REST_Response(['error' => 'Missing or invalid pageId'], 400);
+  }
     $args = array(
         'post_type' => 'events',
         'p' => $_GET['pageId']
@@ -168,7 +172,10 @@ function register_events_archive_api()
 }
 function get_values_events_archive()
 {
-    $year = $_GET['year'];
+    $year = $_GET['year'] ?? date('Y');
+    if (!is_scalar($year) || !preg_match('/^[0-9]{4}$/', (string) $year)) {
+        return new WP_REST_Response(['error' => 'Invalid year'], 400);
+    }
     $startDate = new DateTime("$year-01-01");
     $endDate = new DateTime("$year-12-31");
     $args = array(

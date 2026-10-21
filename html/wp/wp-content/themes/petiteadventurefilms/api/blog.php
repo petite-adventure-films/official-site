@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * ブログ記事のサムネイルがない時は、記事内の画像を取得
@@ -7,10 +7,10 @@ function catch_that_image($post_id = NULL)
 {
   if (!empty($post_id)) {
     $posts = get_post($post_id);
-    $post_content = $posts->post_content;
+    $post_content = $posts->post_content ?? '';
   } else {
     global $post, $posts;
-    $post_content = $post->post_content;
+    $post_content = $post->post_content ?? '';
   }
 
   $first_img = '';
@@ -18,7 +18,7 @@ function catch_that_image($post_id = NULL)
   ob_end_clean();
 
   $output = preg_match_all('/<img.*?src=(["\'])(.+?)\1.*?>/i', $post_content, $matches);
-  $first_img = $matches[2][0];
+  $first_img = $matches[2][0] ?? false;
 
   if (empty($first_img)) {
     $first_img = false;
@@ -47,13 +47,13 @@ function get_values_blog()
 {
   $args = array(
     'post_type' => 'post',
-    'paged' => $_GET['page'],
-    'posts_per_page' => $_GET['per_page'],
-    'category_name' => $_GET['category_name'],
-    'tag' => $_GET['tag'],
-    'post__not_in' => [$_GET['post__not_in']],
-    'meta_key' => $_GET['meta_key'],
-    'meta_value' => $_GET['meta_value'],
+    'paged' => ($_GET['page'] ?? 1),
+    'posts_per_page' => ($_GET['per_page'] ?? get_option('posts_per_page')),
+    'category_name' => ($_GET['category_name'] ?? ''),
+    'tag' => ($_GET['tag'] ?? ''),
+    'post__not_in' => isset($_GET['post__not_in']) ? [$_GET['post__not_in']] : [],
+    'meta_key' => ($_GET['meta_key'] ?? ''),
+    'meta_value' => ($_GET['meta_value'] ?? ''),
   );
   $data = fn() => [
     'id' => get_the_ID(),
@@ -87,6 +87,9 @@ function register_blog_detail_api()
 }
 function get_values_blog_detail()
 {
+  if (empty($_GET['pageName']) || !is_scalar($_GET['pageName'])) {
+    return new WP_REST_Response(['error' => 'Missing or invalid pageName'], 400);
+  }
   $args = array(
     'post_type' => 'post',
     'name' => $_GET['pageName']

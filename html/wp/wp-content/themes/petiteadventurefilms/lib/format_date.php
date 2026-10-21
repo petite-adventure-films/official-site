@@ -1,4 +1,4 @@
-<?
+<?php
 // 日付成形
 function format_date($date)
 {
