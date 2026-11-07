@@ -1,0 +1,16 @@
+---
+// Figma: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=20-53
+interface Props {
+  kind: 'film' | 'event' | 'status';
+}
+const { kind } = Astro.props;
+const colors = {
+  film: 'bg-paf-tag-film-bg text-paf-tag-film-text',
+  event: 'bg-paf-tag-event-bg text-paf-tag-event-text',
+  status: 'bg-paf-status-error text-paf-text-on-action',
+};
+---
+
+<span class:list={['px-paf-6 py-paf-2 text-paf-card-meta max-w-full wrap-anywhere', colors[kind]]}
+  ><slot /></span
+>

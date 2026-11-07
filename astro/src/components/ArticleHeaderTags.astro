@@ -1,6 +1,8 @@
 ---
+// Figma: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=20-57
 import type { Tag } from '@/types/tag';
 import type { EventStatus } from '@/types/event';
+import TagLabel from './Tag.astro';
 
 interface Props {
   status?: EventStatus;
@@ -10,27 +12,23 @@ interface Props {
 }
 
 const { status = '', filmTags = false, eventTags = false, no } = Astro.props;
+const hasNumber = no !== undefined && no !== '';
 ---
 
 {
-  (status || filmTags || eventTags || no) && (
-    <div class="mb-1 flex items-center justify-between gap-2">
-      <div class="flex flex-wrap gap-2">
-        {status && (
-          <span class="bg-red-600 px-1.5 py-0.5 text-xs text-red-100">
-            {status === '1' ? '延期' : '中止'}
-          </span>
-        )}
-        {filmTags &&
-          filmTags.map((tag) => (
-            <span class="bg-purple-100 px-1.5 py-0.5 text-xs text-purple-600">{tag.name}</span>
-          ))}
-        {eventTags &&
-          eventTags.map((tag) => (
-            <span class="bg-cyan-100 px-1.5 py-0.5 text-xs text-cyan-600">{tag.name}</span>
-          ))}
+  (status ||
+    (filmTags && filmTags.length > 0) ||
+    (eventTags && eventTags.length > 0) ||
+    hasNumber) && (
+    <div class="gap-paf-8 mb-[var(--article-tags-margin,var(--paf-spacing-4))] flex items-start">
+      <div class="gap-paf-8 flex min-w-0 flex-1 flex-wrap">
+        {status && <TagLabel kind="status">{status === '1' ? '延期' : '中止'}</TagLabel>}
+        {filmTags && filmTags.map((tag) => <TagLabel kind="film">{tag.name}</TagLabel>)}
+        {eventTags && eventTags.map((tag) => <TagLabel kind="event">{tag.name}</TagLabel>)}
       </div>
-      {no && <span class="text-xs text-gray-500">#{no}</span>}
+      {hasNumber && (
+        <span class="text-paf-card-meta text-paf-text-secondary wrap-anywhere">#{no}</span>
+      )}
     </div>
   )
 }

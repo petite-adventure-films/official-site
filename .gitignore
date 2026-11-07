@@ -40,6 +40,12 @@ html/wp/wp-content/plugins/hello.php
 # ignore specific themes
 html/wp/wp-content/themes/twenty*/
 
-# ignore the "docs" directory
-docs
+# docs: track adopted conclusions only; local plans/logs stay untracked.
+/docs/*
+!/docs/README.md
+!/docs/quality-criteria.md
+!/docs/development-rules.md
 
+
+# Spec Kit working artifacts remain local; adopted specifications are opted in.
+/specs/

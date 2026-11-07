@@ -1,5 +1,12 @@
+lefthook: ./astro/node_modules/.bin/lefthook
+
 pre-commit:
   parallel: true
   jobs:
     - name: lint-staged
       run: cd astro && npx lint-staged
+
+pre-push:
+  jobs:
+    - name: e2e
+      run: pnpm --dir astro run test:e2e

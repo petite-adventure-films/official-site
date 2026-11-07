@@ -28,3 +28,8 @@ pnpm-debug.log*
 .vercel
 .env*
 !.env.example
+
+# Playwright
+.e2e-dist/
+playwright-report/
+test-results/
