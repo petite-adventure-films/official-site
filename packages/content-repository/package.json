@@ -1,0 +1,10 @@
+{
+  "name": "@petite-adventure-films/content-repository",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./file-json": "./src/file-json.ts"
+  }
+}
