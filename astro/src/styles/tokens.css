@@ -21,11 +21,12 @@
   --paf-spacing-16: 16px;
   --paf-focus-width: 2px;
   --paf-border-width: 1px;
-  --paf-card-title-size: 14px;
-  --paf-card-title-line-height: 22.75px;
+  /* Figmaの文字サイズはルート16pxを基準にremへ換算し、利用者の文字サイズ設定に追従する。 */
+  --paf-card-title-size: 0.875rem;
+  --paf-card-title-line-height: 1.625;
   --paf-card-title-weight: 700;
-  --paf-card-meta-size: 12px;
-  --paf-card-meta-line-height: 16px;
+  --paf-card-meta-size: 0.75rem;
+  --paf-card-meta-line-height: calc(4 / 3);
   --paf-card-meta-weight: 400;
 }
 

@@ -1,5 +1,33 @@
 import { expect, test } from '@playwright/test';
 
+test('基準文字サイズを拡大するとカードの文字と行高も拡大する', async ({ page }) => {
+  await page.goto('/events/archive/2025/');
+  const card = page.getByRole('link', { name: /さようならUR.*#226/ });
+  const title = card.locator('p');
+  const tag = card.getByText('上映会', { exact: true });
+  const info = card.getByText(/^#高島平地域センター/);
+
+  // ブラウザー設定画面の自動操作ではなく、remの基準となるルート文字サイズを変えて検証する。
+  await page.addStyleTag({ content: 'html { font-size: 16px !important; }' });
+  await expect(title).toHaveCSS('font-size', '14px');
+  await expect(title).toHaveCSS('line-height', '22.75px');
+  for (const label of [tag, info]) {
+    await expect(label).toHaveCSS('font-size', '12px');
+    await expect(label).toHaveCSS('line-height', '16px');
+  }
+
+  await page.addStyleTag({ content: 'html { font-size: 32px !important; }' });
+  await expect(title).toHaveCSS('font-size', '28px');
+  await expect(title).toHaveCSS('line-height', '45.5px');
+  for (const label of [tag, info]) {
+    await expect(label).toHaveCSS('font-size', '24px');
+    await expect(label).toHaveCSS('line-height', '32px');
+  }
+  expect(await card.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(true);
+  await card.click();
+  await expect(page).toHaveURL('/events/17820/');
+});
+
 test('月別タブの選択に応じて一覧が切り替わる', async ({ page }) => {
   await page.goto('/events/');
   const latest = page.getByRole('tab', { name: '最新', exact: true });
