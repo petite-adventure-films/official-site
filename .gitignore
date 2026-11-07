@@ -43,6 +43,9 @@ html/wp/wp-content/themes/twenty*/
 # docs: track adopted conclusions only; local plans/logs stay untracked.
 /docs/*
 !/docs/README.md
-!/docs/paf-principles.md
 !/docs/quality-criteria.md
+!/docs/development-rules.md
 
+
+# Spec Kit working artifacts remain local; adopted specifications are opted in.
+/specs/
