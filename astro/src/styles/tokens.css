@@ -1,0 +1,57 @@
+/* Figma: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=14-51 */
+/* Figma: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=20-53 */
+/* 文字は既存サイトのフォントを継承。FigmaのNoto Sans JPは表示見本とし、サイズ・太さ・行高を対応させる。 */
+:root {
+  --paf-color-bg-page: #ffffff;
+  --paf-color-bg-subtle: #f5f5f5;
+  --paf-color-text-primary: #202124;
+  --paf-color-text-secondary: #52525b;
+  --paf-color-border-default: #71717a;
+  --paf-color-focus-ring: #1d4ed8;
+  --paf-color-tag-film-bg: #f3e8ff;
+  --paf-color-tag-film-text: #6b21a8;
+  --paf-color-tag-event-bg: #cffafe;
+  --paf-color-tag-event-text: #155e75;
+  --paf-color-status-error: #b91c1c;
+  --paf-color-text-on-action: #ffffff;
+  --paf-spacing-2: 2px;
+  --paf-spacing-4: 4px;
+  --paf-spacing-6: 6px;
+  --paf-spacing-8: 8px;
+  --paf-spacing-16: 16px;
+  --paf-focus-width: 2px;
+  --paf-border-width: 1px;
+  --paf-card-title-size: 14px;
+  --paf-card-title-line-height: 22.75px;
+  --paf-card-title-weight: 700;
+  --paf-card-meta-size: 12px;
+  --paf-card-meta-line-height: 16px;
+  --paf-card-meta-weight: 400;
+}
+
+/* TailwindのユーティリティからFigma由来のトークンを参照する。 */
+@theme inline {
+  --color-paf-bg-page: var(--paf-color-bg-page);
+  --color-paf-bg-subtle: var(--paf-color-bg-subtle);
+  --color-paf-text-primary: var(--paf-color-text-primary);
+  --color-paf-text-secondary: var(--paf-color-text-secondary);
+  --color-paf-border-default: var(--paf-color-border-default);
+  --color-paf-focus-ring: var(--paf-color-focus-ring);
+  --color-paf-tag-film-bg: var(--paf-color-tag-film-bg);
+  --color-paf-tag-film-text: var(--paf-color-tag-film-text);
+  --color-paf-tag-event-bg: var(--paf-color-tag-event-bg);
+  --color-paf-tag-event-text: var(--paf-color-tag-event-text);
+  --color-paf-status-error: var(--paf-color-status-error);
+  --color-paf-text-on-action: var(--paf-color-text-on-action);
+  --spacing-paf-2: var(--paf-spacing-2);
+  --spacing-paf-4: var(--paf-spacing-4);
+  --spacing-paf-6: var(--paf-spacing-6);
+  --spacing-paf-8: var(--paf-spacing-8);
+  --spacing-paf-16: var(--paf-spacing-16);
+  --text-paf-card-title: var(--paf-card-title-size);
+  --text-paf-card-title--line-height: var(--paf-card-title-line-height);
+  --text-paf-card-title--font-weight: var(--paf-card-title-weight);
+  --text-paf-card-meta: var(--paf-card-meta-size);
+  --text-paf-card-meta--line-height: var(--paf-card-meta-line-height);
+  --text-paf-card-meta--font-weight: var(--paf-card-meta-weight);
+}

@@ -1,4 +1,5 @@
 ---
+// Figma: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=14-51
 import ArticleHeaderTags from './ArticleHeaderTags.astro';
 import AttachedInfo from './AttachedInfo.astro';
 import type { EventSummary } from '@/types/event';
@@ -10,15 +11,25 @@ interface Props {
 const { event } = Astro.props;
 ---
 
-<a href={`/events/${event.id}/`} class="block border border-black p-4 sm:hover:bg-gray-100">
+<a
+  href={`/events/${event.id}/`}
+  class="event-card gap-paf-8 border-paf-border-default bg-paf-bg-page p-paf-16 text-paf-text-primary hover:bg-paf-bg-subtle flex min-w-0 flex-col border-[length:var(--paf-border-width)] border-solid wrap-anywhere no-underline [--article-tags-margin:0] [--attached-info-margin:0]"
+>
   <ArticleHeaderTags
     status={event.status}
     filmTags={event.film_tags}
     eventTags={event.event_tags}
     no={event.no}
   />
-  <p class="font-bold">{event.title}</p>
+  <p class="text-paf-card-title">{event.title}</p>
   <AttachedInfo
     info={[`${event.date_from}${event.date_to ? ` - ${event.date_to}` : ''}`, event.place]}
   />
 </a>
+
+<style>
+  /* グローバルな非レイヤーのfocusリセットより優先して表示する。 */
+  .event-card:focus-visible {
+    outline: var(--paf-focus-width) solid var(--paf-color-focus-ring);
+  }
+</style>

@@ -1,4 +1,6 @@
 ---
+// Figma: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=14-44
+// EventCardの付帯情報に対応する共通スタイル。
 interface Props {
   info: Array<string | null | undefined>;
 }
@@ -9,9 +11,9 @@ const info = Astro.props.info.filter((value): value is string => Boolean(value))
 
 {
   info.length > 0 && (
-    <div class="mt-2 flex flex-wrap gap-x-2 text-xs">
+    <div class="gap-x-paf-8 text-paf-card-meta text-paf-text-secondary mt-[var(--attached-info-margin,var(--paf-spacing-8))] flex flex-wrap gap-y-0 wrap-anywhere">
       {info.map((value) => (
-        <span class="before:pr-px before:content-['#']">{stripHtml(value)}</span>
+        <span class="max-w-full min-w-0">#{stripHtml(value)}</span>
       ))}
     </div>
   )
