@@ -5,6 +5,7 @@
 - 原則: `.specify/memory/constitution.md`
 - 品質基準: `docs/quality-criteria.md`
 - 開発・実装ルール: `docs/development-rules.md`
+- CMSの画面設計・実装・レビューでは、`docs/cms-ui-rules.md` とそこから参照するFigma共通定義も読む。
 
 ファイルの変更前に、`docs/development-rules.md` のブランチ運用に従って作業ブランチと統合先を確認する。
 
