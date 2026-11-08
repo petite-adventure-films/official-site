@@ -10,7 +10,7 @@ pnpm run test:e2e
 pnpm run test:e2e:report
 ```
 
-初回セットアップ時に `lefthook install` でGitフックを登録する。開発中は `pnpm run test:e2e` で確認し、ファイル変更を含むpush時にもpre-pushフックが同じテストを実行する。失敗した場合はpushを停止する。フックだけを確認する場合は `pnpm exec lefthook run pre-push --force` を実行する。
+初回セットアップ時に `lefthook install` でGitフックを登録する。開発中は `pnpm run test:e2e` で確認し、push対象にアプリ・データ・依存関係・テスト設定の変更が含まれる場合はpre-pushフックが同じテストを実行する。対象判定は `scripts/e2e-scope.mjs` をCIと共有し、文書のみなら省略する。失敗した場合はpushを停止する。判定のテストはリポジトリルートで `node --test scripts/e2e-scope.test.mjs` を実行する。
 
 通常の公開ページをビルドし、専用ポート4325でpreviewを起動する。既存サーバーは再利用しない。ビルド先は `.e2e-dist/` とし、通常の `dist/` と分ける。
 
@@ -18,4 +18,4 @@ pnpm run test:e2e:report
 
 ChromiumのPC・360px幅で月別タブ、キーボード操作、カードから詳細への遷移、年別一覧の折り返しを検証する。テストは見た目の完全一致やWCAG全項目の適合を保証しない。
 
-PRでは `Astro E2E / Playwright (Chromium)` が実行される。Actionsの `playwright-report` 成果物をダウンロードするとHTMLレポートと失敗時のスクリーンショット・トレースを確認できる（保存期間7日）。ローカルでは `playwright-report/` と `test-results/` に出力する。
+PRでは変更判定を行い、対象の変更がある場合だけ `Astro E2E / Playwright (Chromium)` のブラウザテストを実行する。文書のみでもチェックは成功で終了する。CIはPR全体、pre-pushはpush対象のファイルを判定する。手動のworkflow_dispatchでは常にE2Eを実行する。Actionsの `playwright-report` 成果物をダウンロードするとHTMLレポートと失敗時のスクリーンショット・トレースを確認できる（保存期間7日）。ローカルでは `playwright-report/` と `test-results/` に出力する。

@@ -21,19 +21,40 @@ jobs:
         working-directory: astro
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect E2E changes
+        id: scope
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          else
+            node ../scripts/e2e-scope.mjs --diff "$BASE_SHA" "$HEAD_SHA"
+          fi
+      - name: Test change detection
+        run: node --test ../scripts/e2e-scope.test.mjs
       - uses: pnpm/action-setup@v4
+        if: steps.scope.outputs.required == 'true'
         with:
           version: 10.28.2
       - uses: actions/setup-node@v4
+        if: steps.scope.outputs.required == 'true'
         with:
           node-version: 24
           cache: pnpm
           cache-dependency-path: astro/pnpm-lock.yaml
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm run test:e2e
+      - if: steps.scope.outputs.required == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.scope.outputs.required == 'true'
+        run: pnpm exec playwright install --with-deps chromium
+      - if: steps.scope.outputs.required == 'true'
+        run: pnpm run test:e2e
       - name: Upload Playwright report and failure artifacts
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && steps.scope.outputs.required == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
