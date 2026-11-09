@@ -4,7 +4,7 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 
 ## 基準と参照先
 
-編集はPC・1440px・ライトモードを基準にする。文字と余白で整理し、左右の領域は薄い背景と細い境界線で区切る。SPの対応範囲、ダークモード、一覧固有のレイアウトは未決定。
+編集はPC・1440px・ライトモードを基準にする。文字と余白で整理し、左右の領域は薄い背景と細い境界線で区切る。強調は文字サイズを大きくせず、通常サイズの太字を基本とする。SPの対応範囲、ダークモード、一覧固有のレイアウトは未決定。
 
 - [代表編集画面](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=17-2247)
 - [共通部品](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=20-1095)
@@ -13,27 +13,44 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 | --- | --- |
 | [CMSLayout](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=26-477) | 共通サイドナビとページ領域 |
 | [EditorLayout](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=26-339) | 一覧への導線、本文、管理サイドバー |
-| [Section](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=23-611) | 見出しと内容の意味的なまとまり |
+| [Section](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=23-611) | 任意の見出しと内容の意味的なまとまり |
 | [Field](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=23-663) | ラベルと単一または複数の入力・選択要素 |
 | [Field / Outlined](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=23-678) | フォーム内で枠・ラベル・余白をMUI入力欄と揃えるField |
+
+一覧用の共通定義は次の代表案で確認する。
+
+| 共通定義 | 役割 |
+| --- | --- |
+| [ListLayout](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-297) | 上部の検索・操作、一覧本体、下部のページ送りを標準Slotで配置 |
+| [ListRow](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-301) | タイトルと任意の公開ステータス・種別・ユーザー・日時の列。内容は標準Slotに配置 |
+| [Pagination](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-304) | 全件数・表示範囲と、先頭・現在ページ周辺・末尾へのページ送り |
+
+ListRowは `Show status` / `Show type` / `Show user` / `Show date` で列の有無を切り替える。既定はタイトル＋公開ステータス。組合せごとのvariantは作らない。ユーザー・日時の意味は利用場面の列見出しで示す。[通常一覧・ゴミ箱の行見本](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=67-60)は利用者確認済み。
+
+履歴選択用の共通部品：[HistoryListItem](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=59-743)。年を含む保存日時とユーザー表示名を一行にまとめ、行全体で選択する。選択は背景色で示し、選択中・最新・並び順・件数の補足文字は置かない。選択中とキーボードフォーカスを独立して定義する。MUI ListItemButtonに対応づけるローカル部品で、代表画面は利用者確認済み。詳細は [保存履歴の画面契約](../specs/002-cms-foundation/contracts/screens.md#保存履歴の代表画面利用者確認済み) を参照する。
+
+ステータス変更の共通ダイアログ：[StatusDialog](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=66-388)。公開・下書き・ゴミ箱で同じ構造を使い、タイトル・記事名・影響説明・確定ボタンの文言と色を切り替える。確定色はSuccess / Primary / Error。代表案は利用者確認待ち。操作契約は [共通画面契約](../specs/002-cms-foundation/contracts/screens.md#ステータス変更の確認ダイアログ) を参照する。
 
 ## コンポーネントの境界
 
 - HTML上の意味的な区切りがあり、構造が反復するものを共通コンポーネントにする。
 - 共通Layout・Section・Fieldはインスタンスとして使う。名前やAuto Layoutを付けただけのフレームを共通化済みと扱わない。
 - 内容はFigmaの標準Slotへ直接配置する。内容の差し替えだけを目的としたSectionContent／FieldContentなどの補助コンポーネントを作らない。
-- Sectionは枠で囲まず、見出しと余白で区切る。実装の意味構造は内容に応じてsectionと見出し、fieldsetとlegendなどで表す。
+- Sectionは枠で囲まず、余白で区切る。見出しは原則非表示とし、識別に必要な場合のみFieldラベルと同じ文字スタイルで表示する。実装の意味構造は内容に応じてsectionと見出し、fieldsetとlegendなどで表す。
 - Fieldはラベルを含めたまとまり。TextFieldだけでなく、Chip群やSwitchも入力・選択要素として扱う。構造と見た目の双方を共通定義へ対応づける。
 
 ## 編集画面の配置
 
-- 共通ナビは左。絵文字と項目名を使える。未確定のナビ項目は追加しない。
-- ページ上部は一覧へ戻る導線。大きな「○○の編集」見出しは置かず、本文は記事タイトルの入力から始める。
-- 本文側に記事内容、右側に管理情報を置く。右側は次のSectionで構成する。
-  - 保存・公開：公開状態、保存状態、保存履歴、プレビュー、保存・公開操作、作成日時、最終編集日時。
-  - タグ：コンテンツを関連づけるタグ。見出しは「タグ」とする。
-  - type固有の設定：イベントの開催状況、対象typeのおすすめなど。画面では具体的な見出しを使う。
-- 操作や状態の表示場所をページごとに変更しない。公開操作の詳細や右側の追従動作は別途確定する。
+- 共通ナビは左。項目名は通常サイズとし、現在地を太字で示す。絵文字と項目名を使える。アカウントが領域外へはみ出さないようナビの高さをレイアウトに合わせる。未確定のナビ項目は追加しない。
+- 独立したヘッダー行は設けず、本文上部の操作行に一覧へ戻る導線を左、編集操作を右にまとめる。次に記事タイトルの入力を置く。
+- 本文側の上部、タイトル入力の前に編集操作を置く。保存状態・保存履歴・保存・プレビューの順に1行で右揃えにする。保存は塗りつぶし、プレビューは枠線、保存履歴はテキストボタン。
+- 右側は公開管理、type固有の設定、タグの順に独立したSectionとして配置し、余白と薄い横線で区切る。
+  - 公開管理：公開ステータスと緑（MUI Success）の枠線の公開ボタンを左揃えで配置し、その下に作成・最終編集日時をまとめる。公開前に確認を挟む。
+  - type固有の設定：イベントでは開催状況。タグとは別Section。
+  - タグ：コンテンツを関連づけるタグ。
+- 削除は管理サイドバーの最下部に区切って置き、「ゴミ箱へ移動」と表示する。ゴミ箱から復元できる方式とする。
+- 公開ステータスは一覧・編集で同じMUI Chipの表示バッジを使用し、保存状態のテキストと分ける。
+- 操作や状態の表示場所をページごとに変更しない。公開時の保存・検証の詳細や右側の追従動作は別途確定する。
 
 ## 入力・選択UI
 

@@ -1,0 +1,34 @@
+# CMS共通設計の選定理由
+
+対象 #392。Access + D1の構成は確認済み。外部設定・契約変更は未実施。詳細な導入条件は設計・導入時に確認する。
+
+## 認証と実行環境
+
+Decision: CMS専用Worker + Accessの2メールアドレス限定認証を推奨する。
+Rationale: 公開サイトの静的アセットから管理用APIと下書きを隔離し、独自パスワード管理を省ける。現行wranglerには静的assets設定のみで、CMS認証はまだない。
+Alternatives: 独自メール認証は送信・セッション・復旧の保守が増える。既存IdPログインは両者の利用アカウントが判明すれば比較できる。
+
+公式: [メールコード](https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/one-time-pin/)、[JWT検証](https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/validating-json/)、[セッション管理](https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/)。許可メール、管理者の復旧手段、ホスト名、契約・費用は導入前に確認する。
+
+## 保存
+
+Decision: D1と条件付き更新を推奨。下書き用スキーマを公開用から分離する。
+Rationale: 2人による同時編集をversion比較で検知できる。現行eventスキーマの必須項目は入力途中の保存と合わない。保存は公開処理を起動しない。
+Alternatives: ローカルJSONはローカル検証には使えるが、Workerの永続保存には外部ストレージが必要。保存ごとのGit commitは編集と公開を結びつける。
+
+[D1の更新件数・prepared statements](https://developers.cloudflare.com/d1/worker-api/prepared-statements/)を用いて、1件更新できた場合だけ保存成功とする。操作IDを作成・更新・複製に付け、応答喪失後の再送も同じ結果を返す。
+
+## 復旧
+
+Decision: SQL/JSONの取り出しと別DBへの復元検証を必須にする。外部保管先・頻度・保持期間は#397で確認。
+Rationale: D1固有の復旧機能だけに依存せず内容を取り出せるようにする。
+Alternatives: Time Travel単独は長期保全の代わりにしない。保持期間はFree 7日、Paid 30日。
+
+公式: [export/import](https://developers.cloudflare.com/d1/best-practices/import-export-data/)、[Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/)、[上限](https://developers.cloudflare.com/d1/platform/limits/)。export中に利用が制限される可能性を保存失敗の処理・実施時間に考慮する。
+
+## プレビューと入力
+
+Decision: 同一画面のフォーム状態を共有表示コンポーネントへ渡す。自動保存 + 明示的保存を推奨する。
+Rationale: 一時保存・別タブ同期が不要で、未保存内容を確認できる。安全な表示用モデルを公開側と共有し、二重の描画仕様を減らす。
+Alternatives: 別タブのプレビューは状態受け渡しと認証が増える。保存済みだけの表示は合意した要件に合わない。
+
