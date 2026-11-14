@@ -8,6 +8,11 @@ const storageArgs = testStorage ? ['--persist-to', testStorage] : [];
 const migration = spawnSync('pnpm', ['exec', 'wrangler', 'd1', 'migrations', 'apply', 'DB', '--local', '--config', 'wrangler.local.jsonc', ...storageArgs], { stdio: 'inherit' });
 if (migration.status !== 0) process.exit(migration.status ?? 1);
 
+if (testStorage) {
+  const seed = spawnSync('pnpm', ['exec', 'wrangler', 'd1', 'execute', 'DB', '--local', '--config', 'wrangler.local.jsonc', ...storageArgs, '--file', 'e2e/history-fixtures.sql'], { stdio: 'inherit' });
+  if (seed.status !== 0) { rmSync(testStorage, { recursive: true, force: true }); process.exit(seed.status ?? 1); }
+}
+
 const children = ['dev:api', 'dev:ui'].map((script) =>
   spawn('pnpm', ['run', script, ...(script === 'dev:api' ? storageArgs : [])], { stdio: 'inherit' }),
 );

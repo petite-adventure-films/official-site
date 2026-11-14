@@ -34,3 +34,9 @@
   body { margin: 0; font-family: Roboto, sans-serif; color: var(--color-cms-text); }
   fieldset { min-width: 0; }
 }
+/* Figma HistoryListItem 59:743: selection and focus are independent. */
+@theme { --color-cms-history-selected: rgb(25 118 210 / 8%); }
+@layer components {
+  .cms-history-item.Mui-selected { background: var(--color-cms-history-selected); }
+  .cms-history-item:focus-visible { outline: 2px solid var(--color-cms-primary); outline-offset: -2px; }
+}

@@ -8,10 +8,10 @@ import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database, ty
 const validatePublication = new Ajv({ allErrors: true }).compile(publicationSchema);
 export class RestoreInvalid extends Error {}
 type SourceKind = 'publication' | 'protectedDraft';
-type Input = { actor: string; operationId: string; contentId: string; expectedVersion: number; sourceKind: SourceKind; sourceId: string };
-export type HistoryItem = { kind: SourceKind; id: string; payloadSchemaVersion: string; payload: unknown; at: string; actor: string };
+type Input = { actor: string; actorName?: string; operationId: string; contentId: string; expectedVersion: number; sourceKind: SourceKind; sourceId: string };
+export type HistoryItem = { kind: SourceKind; id: string; payloadSchemaVersion: string; payload: unknown; at: string; actor: string; actorName: string | null };
 
-function restorePayload(source: HistoryItem): EventDraft {
+export function restorePayload(source: HistoryItem): EventDraft {
   if (source.kind === 'protectedDraft') {
     if (source.payloadSchemaVersion !== 'event-draft/v1' || !validateDraft(source.payload)) throw new RestoreInvalid('unsupported_snapshot');
     return source.payload as EventDraft;
@@ -24,20 +24,20 @@ function restorePayload(source: HistoryItem): EventDraft {
   return result;
 }
 
-/** Internal restoration only; no route/UI or deployment dispatch. */
+/** Draft restoration shared by the authenticated history API; never dispatches a deployment. */
 export class RestoreService {
   constructor(private db: Database) {}
   async history(contentId: string): Promise<HistoryItem[]> {
     if (!await new ContentDraftRepository(this.db).get(contentId)) throw new DraftNotFound();
     const rows = await this.db.prepare(`SELECT 'protectedDraft' AS kind, id, payload_schema_version AS schema,
-        payload, protected_at AS at, protected_by AS actor, 0 AS group_order, 0 AS version
+        payload, protected_at AS at, protected_by AS actor, protected_name AS actor_name, 0 AS group_order, 0 AS version
       FROM protected_drafts WHERE content_id = ?
       UNION ALL SELECT 'publication', id, json_extract(payload, '$.payloadSchemaVersion'), payload,
-        published_at, published_by, 1, version FROM publication_revisions WHERE content_id = ?
+        published_at, published_by, published_name, 1, version FROM publication_revisions WHERE content_id = ?
       ORDER BY group_order, version DESC`).bind(contentId, contentId)
-      .all<{ kind: SourceKind; id: string; schema: string; payload: string; at: string; actor: string }>();
+      .all<{ kind: SourceKind; id: string; schema: string; payload: string; at: string; actor: string; actor_name: string | null }>();
     return rows.results.map(row => ({ kind: row.kind, id: row.id, payloadSchemaVersion: row.schema,
-      payload: JSON.parse(row.payload), at: row.at, actor: row.actor }));
+      payload: JSON.parse(row.payload), at: row.at, actor: row.actor, actorName: row.actor_name }));
   }
   async restore(input: Input): Promise<Draft> {
     const fingerprint = JSON.stringify(['restore', input.contentId, input.expectedVersion, input.sourceKind, input.sourceId]);
@@ -61,9 +61,9 @@ export class RestoreService {
     const response: Draft = { ...current, payload, version: current.version + 1, updatedAt: now, updatedBy: input.actor };
     try {
       await this.db.prepare(`INSERT INTO restore_operations (actor_id, operation_id, fingerprint, content_id, expected_version,
-        source_kind, source_id, protection_id, response, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
+        source_kind, source_id, protection_id, response, created_at, actor_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
         input.actor, input.operationId, fingerprint, input.contentId, input.expectedVersion,
-        input.sourceKind, input.sourceId, crypto.randomUUID(), JSON.stringify(response), now,
+        input.sourceKind, input.sourceId, crypto.randomUUID(), JSON.stringify(response), now, input.actorName ?? null,
       ).run();
       return response;
     } catch (error) {

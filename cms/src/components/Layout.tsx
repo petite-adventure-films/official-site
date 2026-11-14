@@ -13,7 +13,7 @@ export function CMSLayout({ children, user }: { children: ReactNode; user: strin
   </div>;
 }
 export function EditorLayout({ children, aside }: { children: ReactNode; aside: ReactNode }) {
-  return <div className="flex gap-cms-section items-stretch"><div className="min-w-0 flex-1 flex flex-col gap-cms-section">{children}</div>
+  return <div className="flex gap-cms-section items-stretch min-h-[calc(100vh-var(--spacing-cms-page-top)-var(--spacing-cms-page-bottom))]"><div className="min-w-0 flex-1 flex flex-col gap-cms-section">{children}</div>
     <aside className="w-cms-aside shrink-0 border-l border-cms-divider pl-cms-content flex flex-col gap-cms-section">{aside}</aside></div>;
 }
 export function Section({ children, label }: { children: ReactNode; label: string }) {

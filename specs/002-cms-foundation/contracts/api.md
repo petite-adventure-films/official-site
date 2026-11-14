@@ -48,4 +48,6 @@ API、非同期状態、再送、配信確認、機械認証は [公開接続の
 
 入力上の問題はHTTP 200で `{ok:false,version,issues:[{field,code,message}]}`、項目検証成功は `{ok:true,version}` を返す。これは公開要求の422とは別の検査用APIで、公開用payloadを返さず、DB・公開状態・履歴・操作記録を変更しない。slugの所有権・旧URL予約・実配信可否は未検証であり、okは確認した版の入力項目に対する結果に限る。
 
-履歴の統合取得と下書き復元は、現在 `worker/services/restore.ts` の内部サービスまで実装済み。上記のhistory/restore HTTPルートは未接続。本人確認・Origin制限・要求検証・画面の保存完了待ちはAPI/画面接続時に既存の保存契約に揃えて検証する。
+履歴GETと復元POSTは既存の認証・Origin制限を通して接続済み。GETは `{ version, items }` を返し、各itemは `id`, `kind`, `at`, `actorName`, `payload` を持つ。payloadは確認表示用の下書き形式へ変換した値。操作者IDや配信内部情報は返さない。未知の保存スキーマは422として取得／復元を止める。
+
+復元POSTは上表の4項目だけを受け取り、操作者のID・表示名・時刻はサーバーで決定する。競合409、対象なし404、要求不正や未対応snapshot422。再送は同じ操作ID・要求で元の結果を返す。

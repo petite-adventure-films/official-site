@@ -11,7 +11,7 @@ let drafts: ContentDraftRepository;
 let service: PublicationService;
 beforeEach(async () => {
   fixture = await createWorkerFixture();
-  for (const name of ['0001_content_drafts', '0002_tags', '0003_duplicate', '0004_publication_history']) {
+  for (const name of ['0001_content_drafts', '0002_tags', '0003_duplicate', '0004_publication_history', '0005_restore', '0006_history_names']) {
     const sql = await readFile(new URL(`../../migrations/${name}.sql`, import.meta.url), 'utf8');
     await fixture.db.batch(unstable_splitSqlQuery(sql).map(s => fixture.db.prepare(s)));
   }

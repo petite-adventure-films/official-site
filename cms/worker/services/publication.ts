@@ -6,7 +6,7 @@ export class PublicationInvalid extends Error {
   constructor(readonly issues: PublicationIssue[]) { super('invalid_publication'); }
 }
 export class PublicationConflict extends Error {}
-type Input = { actor: string; operationId: string; contentId: string; expectedVersion: number; expectedPublicationVersion: number };
+type Input = { actor: string; actorName?: string; operationId: string; contentId: string; expectedVersion: number; expectedPublicationVersion: number };
 type Operation = {
   id: string; actor_id: string; operation_id: string; fingerprint: string; content_id: string;
   draft_version: number; expected_publication_version: number; payload: string | null;
@@ -70,11 +70,11 @@ export class PublicationService {
     try {
       await this.db.prepare(`INSERT INTO publication_operations
         (id, actor_id, operation_id, fingerprint, content_id, draft_version, expected_publication_version,
-         payload, draft_snapshot, content_hash, state, revision_id, created_at, completed_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
+         payload, draft_snapshot, content_hash, state, revision_id, created_at, completed_at, actor_name)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
         id, input.actor, input.operationId, fingerprint, draft.id, draft.version, input.expectedPublicationVersion,
         noop ? null : JSON.stringify(candidate.payload), noop ? null : JSON.stringify(draft.payload), contentHash,
-        noop ? 'noop' : 'ready', noop ? current.revision_id : null, now, noop ? now : null,
+        noop ? 'noop' : 'ready', noop ? current.revision_id : null, now, noop ? now : null, input.actorName ?? null,
       ).run();
     } catch (error) {
       const prior = await replay();

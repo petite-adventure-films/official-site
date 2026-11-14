@@ -2,6 +2,7 @@ import { enforceMutationRequest, HttpError, type Actor } from './auth';
 import type { Database } from './repositories/content-drafts';
 import { publicationCheck } from './routes/publication-check';
 import { contents } from './routes/contents';
+import { history } from './routes/history';
 import { duplicate } from './routes/duplicate';
 import { tags } from './routes/tags';
 export type AppEnvironment = { DB?: Database; ASSETS?: { fetch(request: Request): Promise<Response> } };
@@ -17,6 +18,8 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     const check = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/check-publication$/i);
     if (check) return publicationCheck(request, env.DB, check[1]);
+    const historyRoute = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(history|restore)$/i);
+    if (historyRoute) return history(request, env.DB, actor, historyRoute[1], historyRoute[2]);
     const copy = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/duplicate$/i);
     if (copy) return duplicate(request, env.DB, actor, copy[1]);
     return contents(request, env.DB, actor);
