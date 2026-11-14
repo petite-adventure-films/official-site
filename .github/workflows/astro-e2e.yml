@@ -1,4 +1,4 @@
-name: Astro E2E
+name: Application E2E
 
 on:
   pull_request:
@@ -32,6 +32,8 @@ jobs:
         run: |
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             echo "required=true" >> "$GITHUB_OUTPUT"
+            echo "astro=true" >> "$GITHUB_OUTPUT"
+            echo "cms=true" >> "$GITHUB_OUTPUT"
           else
             node ../scripts/e2e-scope.mjs --diff "$BASE_SHA" "$HEAD_SHA"
           fi
@@ -46,13 +48,24 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          cache-dependency-path: astro/pnpm-lock.yaml
-      - if: steps.scope.outputs.required == 'true'
+          cache-dependency-path: |
+            astro/pnpm-lock.yaml
+            cms/pnpm-lock.yaml
+      - if: steps.scope.outputs.astro == 'true'
         run: pnpm install --frozen-lockfile
-      - if: steps.scope.outputs.required == 'true'
+      - if: steps.scope.outputs.cms == 'true'
+        run: pnpm --dir ../cms install --frozen-lockfile
+      - if: steps.scope.outputs.astro == 'true'
         run: pnpm exec playwright install --with-deps chromium
-      - if: steps.scope.outputs.required == 'true'
+      - if: steps.scope.outputs.cms == 'true'
+        run: pnpm --dir ../cms exec playwright install --with-deps chromium
+      - if: steps.scope.outputs.astro == 'true'
         run: pnpm run test:e2e
+      - if: steps.scope.outputs.cms == 'true'
+        run: |
+          pnpm --dir ../cms run build
+          pnpm --dir ../cms test
+          pnpm --dir ../cms run test:e2e
       - name: Upload Playwright report and failure artifacts
         if: ${{ !cancelled() && steps.scope.outputs.required == 'true' }}
         uses: actions/upload-artifact@v4
@@ -61,4 +74,6 @@ jobs:
           path: |
             astro/playwright-report/
             astro/test-results/
+            cms/playwright-report/
+            cms/test-results/
           retention-days: 7

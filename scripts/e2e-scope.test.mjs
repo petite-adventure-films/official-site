@@ -1,6 +1,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { needsE2E } from './e2e-scope.mjs';
+import { needsE2E, e2eTargets } from './e2e-scope.mjs';
+
+test('CMS and public applications run only their relevant suites', () => {
+  assert.deepEqual(e2eTargets(['cms/src/main.tsx']), ['cms']);
+  assert.deepEqual(e2eTargets(['cms/worker/auth.ts']), ['cms']);
+  assert.deepEqual(e2eTargets(['cms/migrations/0001.sql']), ['cms']);
+  assert.deepEqual(e2eTargets(['cms/pnpm-lock.yaml']), ['cms']);
+  assert.deepEqual(e2eTargets(['astro/src/pages/index.astro']), ['astro']);
+  assert.deepEqual(e2eTargets(['packages/event-presentation/src/EventBody.tsx']), ['astro', 'cms']);
+  assert.deepEqual(e2eTargets(['scripts/e2e-scope.mjs']), ['astro', 'cms']);
+  assert.deepEqual(e2eTargets(['cms/README.md']), []);
+});
 
 test('documentation-only changes skip browser tests', () => {
   assert.equal(needsE2E(['docs/development-rules.md', 'specs/001/spec.md', 'AGENTS.md', '.gitignore', 'astro/e2e/README.md', 'packages/content-schema/README.md']), false);
