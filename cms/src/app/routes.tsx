@@ -3,28 +3,18 @@ import { HistoryEntry } from '../features/content/components/HistoryEntry';
 import { DuplicateAction } from '../features/content/components/DuplicateAction';
 import { ContentList } from '../features/content/components/ContentList';
 import { loadSession } from '../features/auth/session';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Button, Chip, CircularProgress, Link, TextField, Typography } from '@mui/material';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import { CMSLayout, EditorLayout, Section } from '../components/Layout';
 import { api, ApiError, type SavedDraft, type Tags } from '../lib/api-client';
 import { EventForm, EventSettings } from '../features/events/components/EventForm';
 import { emptyDraft, type EventDraft } from '../features/events/draft';
-import { usePublicationCheck } from '../features/content/hooks/usePublicationCheck';
 import { useDraftSave } from '../features/content/hooks/useDraftSave';
 
 function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; tags: Tags }) {
   const draft = useDraftSave(existing?.payload ?? emptyDraft(), existing);
-  const check = usePublicationCheck(draft.flush);
-  const fields = useRef<HTMLDivElement>(null);
-  const errors = Object.fromEntries(check.issues.map(issue => [issue.field, issue.message]));
-  function change(value: EventDraft) { check.clear(); draft.change(value); }
-  useEffect(() => {
-    if (!check.checking && check.issues.length) {
-      const target = fields.current?.querySelector<HTMLElement>('[aria-invalid="true"]');
-      target?.focus();
-    }
-  }, [check.checking, check.issues]);
+  const change = draft.change;
   const [duplicating, setDuplicating] = useState(false);
   const [openingHistory, setOpeningHistory] = useState(false);
   const [historyError, setHistoryError] = useState('');
@@ -32,12 +22,12 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
   useEffect(() => { if (restored) { try { sessionStorage.removeItem('cms-restored'); } catch { /* Optional notification only. */ } } }, [restored]);
   const conflict = draft.error instanceof ApiError && draft.error.status === 409;
   return <>
-    {(duplicating || check.checking || openingHistory) && <Typography role="status" variant="body2">{openingHistory ? '公開履歴を開いています…' : check.checking ? '入力内容を確認中…' : '複製中…'}</Typography>}
-    <div ref={fields} inert={duplicating || check.checking || openingHistory || undefined} aria-busy={duplicating || check.checking || openingHistory}><EditorLayout aside={<>
-    <Section label="公開管理"><div className="flex flex-wrap items-center gap-cms-actions"><Chip size="small" label="下書き" /><Button variant="outlined" color="success" disabled={draft.blocked || check.checking} onClick={() => void check.check()}>公開</Button></div>
+    {(duplicating || openingHistory) && <Typography role="status" variant="body2">{openingHistory ? '公開履歴を開いています…' : '複製中…'}</Typography>}
+    <div inert={duplicating || openingHistory || undefined} aria-busy={duplicating || openingHistory}><EditorLayout aside={<>
+    <Section label="公開管理"><div className="flex flex-wrap items-center gap-cms-actions"><Chip size="small" label="下書き" /><Button variant="outlined" color="success" disabled>公開</Button></div>
       {draft.saved && <div className="flex flex-col gap-cms-detail"><Typography variant="caption">作成日時 {new Date(draft.saved.createdAt).toLocaleString('ja-JP')}</Typography><Typography variant="caption">最終編集日時 {new Date(draft.saved.updatedAt).toLocaleString('ja-JP')}</Typography></div>}
     </Section>
-    <div className="border-t border-cms-divider pt-cms-content flex flex-col gap-cms-section"><EventSettings value={draft.value} change={change} tags={tags} errors={errors} /></div>
+    <div className="border-t border-cms-divider pt-cms-content flex flex-col gap-cms-section"><EventSettings value={draft.value} change={change} tags={tags} /></div>
     <div className="border-t border-cms-divider pt-cms-content"><Section label="記事の管理"><div className="flex flex-wrap items-start gap-cms-actions"><DuplicateAction flush={draft.flush} disabled={draft.blocked} busy={duplicating} onBusy={setDuplicating} /><Button color="error" disabled>ゴミ箱へ移動</Button></div></Section></div>
   </>}>
     <div className="flex flex-wrap items-center gap-cms-actions">
@@ -51,8 +41,7 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
     </Alert>}
     {restored && <Alert severity="success">選んだ内容を下書きに戻しました。</Alert>}
     {historyError && <Alert severity="error">{historyError}</Alert>}
-    {check.message && <Alert severity={check.passed ? "success" : "error"}>{check.message}</Alert>}
-    <EventForm value={draft.value} change={change} contentId={draft.saved?.id} errors={errors} />
+    <EventForm value={draft.value} change={change} contentId={draft.saved?.id} />
   </EditorLayout></div></>;
 }
 export function App() {

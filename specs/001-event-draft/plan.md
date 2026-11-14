@@ -94,7 +94,7 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 
 配信先に依存しない `prepareEventPublication` と `event-publication/v1` を追加。新規CMSのプレーンテキスト入力から公開候補だけを組み立てる。詳細契約は [データ設計](data-model.md#公開候補データの生成配信前)。現在は純粋な検証・変換処理で、公開ボタン・API・Astroのビルド入力・配信サービスへの接続は未実装。
 
-公開候補の入力検査は、配信しない `POST /api/contents/:id/check-publication` と編集画面の「公開」（現段階では入力検査のみ）に接続済み。保存済み版・現在のタグを確認し、項目別エラーを表示する。公開API・URL予約・Astroへの接続・外部配信は別作業として残る。
+公開候補の入力検査は `POST /api/contents/:id/check-publication` とAPIテストで検証する。編集画面には検査だけを実行する仮の公開操作を置かず、実公開接続までは公開ボタンを非活性とする。公開API・URL予約・Astroへの接続・外部配信は別作業として残る。
 
 固定候補・配信結果照合・成功時の履歴確定は、配信先に接続しない内部サービスとして実装済み。過去内容への再公開は新規履歴、現在公開中と同内容の場合だけ省略する。API・画面・実配信との接続、公開停止は未実装。範囲と制約は[公開接続契約](../002-cms-foundation/contracts/publication.md#ローカルで検証する公開確定処理)を参照。
 
