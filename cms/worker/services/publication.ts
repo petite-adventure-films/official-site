@@ -1,3 +1,4 @@
+import { PublicationUrls, type EventRoutes } from './publication-urls';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
 import { prepareEventPublication, type EventPublication, type PublicationIssue } from '../event-publication';
 import { tags } from '../routes/tags';
@@ -11,9 +12,9 @@ type Operation = {
   id: string; actor_id: string; operation_id: string; fingerprint: string; content_id: string;
   draft_version: number; expected_publication_version: number; payload: string | null;
   content_hash: string; state: 'ready' | 'delivering' | 'unknown' | 'failed' | 'succeeded' | 'noop';
-  attempt: number; revision_id: string | null; receipt: string | null; completed_at: string | null;
+  target_slug: string; routes: string | null; attempt: number; revision_id: string | null; receipt: string | null; completed_at: string | null;
 };
-export type Delivery = { operationId: string; attempt: number; contentId: string; hash: string; payload: EventPublication };
+export type Delivery = { operationId: string; attempt: number; contentId: string; hash: string; payload: EventPublication; routes: EventRoutes };
 export type DeliveryResult = { status: 'unknown' } | {
   status: 'succeeded' | 'failed'; operationId: string; attempt: number; hash: string; receipt: string;
 };
@@ -28,7 +29,7 @@ async function hash(value: unknown) {
   return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-/** Internal service only. Provider, release manifest, URL ownership and API wiring remain separate. */
+/** Internal service only. Provider, release manifest and API wiring remain separate. */
 export class PublicationService {
   constructor(private db: Database) {}
   async get(id: string) {
@@ -63,6 +64,7 @@ export class PublicationService {
     const candidate = prepareEventPublication(draft.payload, { contentId: draft.id,
       filmTagIds: new Set(available.filmTags.map(tag => tag.id)), eventTagIds: new Set(available.eventTags.map(tag => tag.id)) });
     if (!candidate.ok) throw new PublicationInvalid(candidate.issues);
+    const routes = await new PublicationUrls(this.db).plan(draft.id, candidate.payload.slug);
     const contentHash = await hash(candidate.payload);
     const noop = current?.content_hash === contentHash;
     const id = crypto.randomUUID();
@@ -70,11 +72,11 @@ export class PublicationService {
     try {
       await this.db.prepare(`INSERT INTO publication_operations
         (id, actor_id, operation_id, fingerprint, content_id, draft_version, expected_publication_version,
-         payload, draft_snapshot, content_hash, state, revision_id, created_at, completed_at, actor_name)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
+         payload, draft_snapshot, content_hash, state, revision_id, created_at, completed_at, actor_name, target_slug, routes)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
         id, input.actor, input.operationId, fingerprint, draft.id, draft.version, input.expectedPublicationVersion,
         noop ? null : JSON.stringify(candidate.payload), noop ? null : JSON.stringify(draft.payload), contentHash,
-        noop ? 'noop' : 'ready', noop ? current.revision_id : null, now, noop ? now : null, input.actorName ?? null,
+        noop ? 'noop' : 'ready', noop ? current.revision_id : null, now, noop ? now : null, input.actorName ?? null, candidate.payload.slug, JSON.stringify(routes),
       ).run();
     } catch (error) {
       const prior = await replay();
@@ -84,8 +86,9 @@ export class PublicationService {
     return this.get(id);
   }
   private delivery(operation: Operation): Delivery {
+    if (!operation.routes) throw new PublicationConflict('missing_publication_routes');
     return { operationId: operation.id, attempt: operation.attempt, contentId: operation.content_id,
-      hash: operation.content_hash, payload: JSON.parse(operation.payload!) };
+      hash: operation.content_hash, payload: JSON.parse(operation.payload!), routes: JSON.parse(operation.routes) };
   }
   private async settle(operation: Operation, result: DeliveryResult) {
     if (result.status !== 'unknown' && (result.operationId !== operation.id || result.attempt !== operation.attempt ||
@@ -113,6 +116,7 @@ export class PublicationService {
   async reconcile(id: string, adapter: PublicationDelivery) {
     const operation = await this.get(id);
     if (operation.state !== 'unknown' && operation.state !== 'delivering') return operation;
+    if (!operation.routes) throw new PublicationConflict('missing_publication_routes');
     let result: DeliveryResult;
     try { result = await adapter.inspect(this.delivery(operation)); }
     catch { result = { status: 'unknown' }; }

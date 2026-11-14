@@ -83,3 +83,9 @@ CMS Vitest 92件、Playwright 19件、build・最終typecheck成功。履歴API�
 Figma 54:970の高精度設計情報・画像と、実装の `cms/test-results/history-1440.png` を照合。CMSLayout・EditorLayout・Section・MUI Typography/Button、HistoryListItem 59:743に対応するMUI ListItemButton/Chipを使用。ChevronLeftは既存MUIアイコンを再利用。画面固有の画像素材はなし。リスト内のdetail/relatedと行内側の余白を分離し、右側の境界線はLayoutの最低表示高まで伸ばした。1000pxの `history-long-1000.png` で長い名前・長文の折り返し、横はみ出しなし、フォーカスと選択の独立表示、HTML文字列が実行されないことも確認した。
 
 履歴はE2E一時DBだけにfixtureを投入して実API・DBで検証。通常の開発DBやクラウドにはfixtureを入れていない。実配信は未接続で、通常の下書きに履歴がなければボタンは非活性のまま。通常の開発サーバーは検証後に再起動した。本人の画面レビュー、読み上げを含むWCAG全体評価、実際の公開から履歴生成までの検証は未完了。
+
+## 公開URLの予約・切替・転送計画
+
+CMS Vitest 101件、Playwright 19件、build（型検査含む）成功。新規9件のテストで既知WordPress URL全234件の予約、他記事との重複、下書き変更とURL切替の分離、A→B→Cと元のslugへの変更、3件の履歴整理後も残る所有権、確実な失敗後の再試行、結果不明の照合、同時要求・DB挿入時の再検査、URL確定失敗時の公開・履歴を含むロールバック、Unicodeの一度だけのエンコード、同内容no-opを検証した。旧DBの保持中履歴からの移行と、転送計画を持たない旧処理を配信しないことも確認した。テストのDB結果型を明示して型検査を再実行した。
+
+転送先は配信アダプターへ渡す構造化データまで。HTTPの転送・canonical・サイトマップ・サイト内リンク・公開APIの項目エラー・公開停止との連携は未接続。旧URL予約の根拠は2026-08-10の保存済みsnapshotであり、最新の本番全URLとの照合は未確認。画面変更はなし。E2Eは一時DBを使用し、終了後に通常の開発サーバーを再起動した。

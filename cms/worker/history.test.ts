@@ -6,7 +6,7 @@ let fixture: Awaited<ReturnType<typeof createWorkerFixture>>;
 const id = '00000000-0000-4000-8000-000000000001';
 beforeEach(async () => {
   fixture = await createWorkerFixture('local');
-  for (const name of ['0001_content_drafts', '0002_tags', '0003_duplicate', '0004_publication_history', '0005_restore', '0006_history_names']) {
+  for (const name of ['0001_content_drafts', '0002_tags', '0003_duplicate', '0004_publication_history', '0005_restore', '0006_history_names', '0007_publication_urls']) {
     const sql = await readFile(new URL(`../migrations/${name}.sql`, import.meta.url), 'utf8');
     await fixture.db.batch(unstable_splitSqlQuery(sql).map(s => fixture.db.prepare(s)));
   }

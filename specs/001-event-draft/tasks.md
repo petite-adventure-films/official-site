@@ -97,7 +97,7 @@ T033の現状: [公開接続の設計案](../002-cms-foundation/contracts/public
 
 - [ ] T040 [US7] ゴミ箱一覧とAPI、移動時の公開停止失敗、30日境界・実行時刻・再試行、復元と削除の競合、履歴・保護枠・共有タグ等の関連データ境界を `specs/002-cms-foundation/contracts/api.md` と `specs/002-cms-foundation/data-model.md` に設計する。未合意の削除対象を自動で広げず、判断が必要なら確認する。
 - [ ] T041 [US7] 移動・復元・公開停止失敗・再送・期限境界・競合・他記事保持を `cms/worker/trash.test.ts` に定義する。時刻を制御して30日を検証し、実時間の待機や本番データを使わない。
-- [ ] T042 [US7] ゴミ箱状態・削除期限を `cms/migrations/0007_trash.sql` に追加し、`cms/worker/services/trash.ts` と `cms/worker/routes/trash.ts` に移動・復元を実装する。元の種別へ下書きとして戻し、再公開しない。
+- [ ] T042 [US7] ゴミ箱状態・削除期限を `cms/migrations/0008_trash.sql` に追加し、`cms/worker/services/trash.ts` と `cms/worker/routes/trash.ts` に移動・復元を実装する。元の種別へ下書きとして戻し、再公開しない。
 - [ ] T043 [US7] 定期削除と再試行可能な処理記録を `cms/worker/jobs/purge-trash.ts` と `cms/wrangler.jsonc` に実装する。T040の関連データ範囲を守り、二重実行・部分失敗・復元との競合を安全に処理する。
 - [ ] T044 [US7] 共通一覧の通常／ゴミ箱切り替えと移動・復元導線を `cms/src/features/content/components/TrashActions.tsx` と `cms/src/features/content/components/ContentList.tsx` に実装する。削除した人・日時を見出しで区別し、復元後もゴミ箱一覧に留まる。Figmaと `specs/002-cms-foundation/contracts/screens.md` を揃える。
 - [ ] T045 [US7] `cms/e2e/trash.spec.ts` で移動確認・キャンセル・公開停止・復元後非公開・期限経過後の取得不可を検証する。
@@ -141,6 +141,8 @@ US4の入力状態はT013でデータモデルに含め、T029で切り替えを
 
 - [x] T054 配信先に接続しない内部処理として、固定公開候補・操作再送・配信attempt・結果照合・成功時の原子的な履歴確定と最新3件保持を実装する。テスト用配信処理で成功・失敗・再試行・DB失敗・競合・過去内容再公開を検証する。T034〜T039の実配信・公開停止・復元・画面は未完了のままとする。
 
-- [x] T055 公開履歴と復元前保護枠を内部サービスで取得・復元する。復元前下書きの保護、保護枠との交換、原子的な更新、再送・同時操作・他記事・削除済み履歴・スキーマ互換性・DB失敗を検証する。APIと履歴画面への接続はT037/T038に残す。保護枠は追加migration `0005_restore.sql` とし、後続ゴミ箱migrationは `0007_trash.sql` とする。
+- [x] T055 公開履歴と復元前保護枠を内部サービスで取得・復元する。復元前下書きの保護、保護枠との交換、原子的な更新、再送・同時操作・他記事・削除済み履歴・スキーマ互換性・DB失敗を検証する。APIと履歴画面への接続はT037/T038に残す。保護枠は追加migration `0005_restore.sql` とし、後続ゴミ箱migrationは `0008_trash.sql` とする。
 
 - [x] T056 履歴取得・復元APIと履歴画面を接続し、保存完了待ち、0件の非活性／URL置換、取得失敗、キーボード選択、復元成功後の編集復帰、競合、応答喪失の同一要求再試行を検証する。表示名は認証済みの情報から保持する。実配信は未接続のため、ブラウザー検証の履歴は一時DB専用のfixtureを使用する。
+
+- [x] T057 イベントのURL所有権・公開成功時の現行URL更新・過去URLからの直接転送計画を内部公開処理へ接続する。既知WordPressイベント234件とarchiveを予約し、同時要求・失敗・再試行・不明結果・履歴3件整理後の所有権・DB確定失敗を検証する。実配信の転送設定、公開APIの項目エラー、公開停止、最新本番URLの棚卸しはT050/T052に残す。追加migrationは `0007_publication_urls.sql`、後続ゴミ箱は `0008_trash.sql`。
