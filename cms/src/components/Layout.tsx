@@ -1,6 +1,6 @@
 // Figma: https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=26-477
 // EditorLayout: node-id=26-339; Section: node-id=23-611; Field: node-id=23-663
-import type { ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 import { Typography, Link } from '@mui/material';
 export function CMSLayout({ children, user }: { children: ReactNode; user: string }) {
   return <div className="flex min-h-screen">
@@ -19,8 +19,10 @@ export function EditorLayout({ children, aside }: { children: ReactNode; aside: 
 export function Section({ children, label }: { children: ReactNode; label: string }) {
   return <section aria-label={label} className="flex flex-col gap-cms-content">{children}</section>;
 }
-export function Field({ children, label, outlined = false }: { children: ReactNode; label: string; outlined?: boolean }) {
-  return <fieldset className={outlined ? 'relative rounded border border-cms-divider px-cms-input-x py-cms-input-y' : 'border-0 m-0 p-0'}>
+export function Field({ children, label, outlined = false, error }: { children: ReactNode; label: string; outlined?: boolean; error?: string }) {
+  const errorId = useId();
+  return <fieldset aria-invalid={error ? true : undefined} aria-describedby={error ? errorId : undefined} tabIndex={error ? -1 : undefined} className={outlined ? 'relative rounded border border-cms-divider px-cms-input-x py-cms-input-y' : 'border-0 m-0 p-0'}>
     <legend className={outlined ? "absolute -top-cms-heading left-cms-heading bg-white px-cms-detail text-xs" : "text-sm mb-cms-heading"}>{label}</legend><div className="flex flex-wrap items-center gap-cms-related">{children}</div>
+    {error && <Typography id={errorId} variant="caption" color="error" className="mt-cms-detail block">{error}</Typography>}
   </fieldset>;
 }

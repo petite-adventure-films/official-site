@@ -5,9 +5,9 @@ import type { EventDraft } from '../draft';
 import type { Tags } from '../../../lib/api-client';
 import { SlugField } from '../../content/components/SlugField';
 import { dateIssues } from '../date-issues';
-type Props = { value: EventDraft; change: (value: EventDraft) => void };
-export function EventForm({ value, change, contentId }: Props & { contentId?: string }) {
-  const issues = dateIssues(value);
+type Props = { value: EventDraft; change: (value: EventDraft) => void; errors?: Partial<Record<keyof EventDraft, string>> };
+export function EventForm({ value, change, contentId, errors = {} }: Props & { contentId?: string }) {
+  const issues = { ...dateIssues(value), ...errors };
   function text(key: keyof EventDraft, label: string, multiline = false) {
     const publicationRequired = ['title', 'startDate', 'endDate', 'venue'].includes(key);
     return <TextField required={publicationRequired} key={key} label={label} value={value[key]} onChange={(e) => change({ ...value, [key]: e.target.value })}
@@ -16,14 +16,14 @@ export function EventForm({ value, change, contentId }: Props & { contentId?: st
   }
   return <>
     <Section label="記事情報">{text('title', 'タイトル')}
-      <SlugField value={value.slug} contentId={contentId} onChange={(slug) => change({ ...value, slug })} />
+      <SlugField value={value.slug} contentId={contentId} error={errors.slug} onChange={(slug) => change({ ...value, slug })} />
     </Section>
     <Section label="日時"><div className="flex flex-wrap items-start gap-cms-content">
       <div className="w-cms-date">{text('startDate', '開催日')}</div>
       {value.multiDay && <div className="w-cms-date">{text('endDate', '終了日')}</div>}
       <label className="flex items-center gap-cms-related h-cms-input-height"><Typography variant="body2">複数日にわたる</Typography><Switch checked={value.multiDay} onChange={(_, checked) => change({ ...value, multiDay: checked })} /></label>
     </div>{text('timeDescription', '時間の案内')}</Section>
-    <Section label="開催場所"><Field label="開催形式 *" outlined>
+    <Section label="開催場所"><Field label="開催形式 *" outlined error={errors.formats}>
       {(['offline', 'online'] as const).map((format) => <Chip key={format} label={format === 'offline' ? 'オフライン' : 'オンライン'}
         variant={value.formats.includes(format) ? 'filled' : 'outlined'} aria-pressed={value.formats.includes(format)}
         onClick={() => change({ ...value, formats: value.formats.includes(format) ? value.formats.filter((v) => v !== format) : [...value.formats, format] })} />)}
@@ -33,13 +33,13 @@ export function EventForm({ value, change, contentId }: Props & { contentId?: st
     <Section label="参加案内">{text('fee', '料金')}{text('organizer', '主催者・問い合わせ', true)}{text('notes', '備考', true)}</Section>
   </>;
 }
-export function EventSettings({ value, change, tags }: Props & { tags: Tags }) {
+export function EventSettings({ value, change, tags, errors = {} }: Props & { tags: Tags }) {
   return <>
     <Section label="開催状況"><Field label="開催状況">{(['postponed', 'cancelled'] as const).map((status) =>
       <Chip key={status} label={status === 'postponed' ? '延期' : '中止'} variant={value.status === status ? 'filled' : 'outlined'} aria-pressed={value.status === status}
         onClick={() => change({ ...value, status: value.status === status ? 'normal' : status })} />)}</Field></Section>
     <div className="border-t border-cms-divider pt-cms-content"><Section label="タグ">
-      {(['film', 'event'] as const).map((kind) => { const key = kind === 'film' ? 'filmTagIds' : 'eventTagIds'; return <Field key={kind} label={kind === 'film' ? '映画タグ' : 'イベントタグ'}>
+      {(['film', 'event'] as const).map((kind) => { const key = kind === 'film' ? 'filmTagIds' : 'eventTagIds'; return <Field key={kind} label={kind === 'film' ? '映画タグ' : 'イベントタグ'} error={errors[key]}>
         {tags[kind === 'film' ? 'filmTags' : 'eventTags'].map((tag) => <Chip key={tag.id} label={tag.name} variant={value[key].includes(tag.id) ? 'filled' : 'outlined'} aria-pressed={value[key].includes(tag.id)}
           onClick={() => change({ ...value, [key]: value[key].includes(tag.id) ? value[key].filter((id) => id !== tag.id) : [...value[key], tag.id] })} />)}
       </Field>; })}

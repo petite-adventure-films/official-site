@@ -41,3 +41,9 @@ Access JWTはJWKS署名・issuer・audience・期限を検証し、2人の許可
 ## 公開・公開停止APIの設計状況
 
 API、非同期状態、再送、配信確認、機械認証は [公開接続の設計案](publication.md) に整理した。利用者・配備運用の確認前であり、未実装。202の受付と公開成功を区別し、外部デプロイとD1更新を単一トランザクションとして扱わない。
+
+## 公開前チェック（配信しない）
+
+`POST /api/contents/:id/check-publication` は `{expectedVersion}` を受け、認証・同一Origin・JSON要求を検査する。保存済み下書きとversionを照合し、現在のDBのタグ集合で公開候補を検証する。検証後にも記事versionを再確認し、変更されていれば409。対象なし404、不正な要求422、認証・通信失敗は既存エラー契約に従う。
+
+入力上の問題はHTTP 200で `{ok:false,version,issues:[{field,code,message}]}`、項目検証成功は `{ok:true,version}` を返す。これは公開要求の422とは別の検査用APIで、公開用payloadを返さず、DB・公開状態・履歴・操作記録を変更しない。slugの所有権・旧URL予約・実配信可否は未検証であり、okは確認した版の入力項目に対する結果に限る。

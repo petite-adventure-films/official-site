@@ -58,3 +58,28 @@ test('optional slug preserves old drafts and incomplete custom values verbatim',
   expect(response.status).toBe(200);
   expect((await (await request(`/api/contents/${old.id}`)).json() as any).payload.slug).toBe(payload.slug);
 });
+
+test('publication check reports fields without writing drafts or operation records', async () => {
+  const saved = await (await create()).json() as any;
+  const operations = await fixture.db.prepare('SELECT count(*) AS count FROM draft_operations').first('count');
+  const path = `/api/contents/${saved.id}/check-publication`;
+  const response = await request(path, 'POST', { expectedVersion: saved.version });
+  expect(response.status).toBe(200); expect(response.headers.get('Cache-Control')).toBe('no-store');
+  expect(await response.json()).toMatchObject({ ok: false, version: 1, issues: [
+    { field: 'title' }, { field: 'startDate' }, { field: 'venue' },
+  ] });
+  expect(await (await request(`/api/contents/${saved.id}`)).json()).toEqual(saved);
+  expect(await fixture.db.prepare('SELECT count(*) AS count FROM draft_operations').first('count')).toBe(operations);
+  expect((await request(path, 'POST', { expectedVersion: 2 })).status).toBe(409);
+  expect((await request(path, 'POST', { expectedVersion: 1, payload: saved.payload })).status).toBe(422);
+  expect((await request(`/api/contents/${crypto.randomUUID()}/check-publication`, 'POST', { expectedVersion: 1 })).status).toBe(404);
+});
+test('publication check uses current tags and returns no publishable payload', async () => {
+  const available = await (await request('/api/tags')).json() as any;
+  const saved = await (await create({ ...emptyDraft(), title: '上映会', startDate: '2026-12-30', formats: ['online'], filmTagIds: [available.filmTags[0].id] })).json() as any;
+  const path = `/api/contents/${saved.id}/check-publication`;
+  expect(await (await request(path, 'POST', { expectedVersion: 1 })).json()).toEqual({ ok: true, version: 1 });
+  await fixture.db.prepare("DELETE FROM tags WHERE kind = 'film' AND id = ?").bind(available.filmTags[0].id).run();
+  expect(await (await request(path, 'POST', { expectedVersion: 1 })).json()).toMatchObject({ ok: false, issues: [{ field: 'filmTagIds', code: 'unknown_tag' }] });
+  expect((await fixture.runtime.dispatchFetch('http://localhost'+path, { method: 'POST', headers: { Origin: 'https://other.test', 'Content-Type': 'application/json' }, body: JSON.stringify({ expectedVersion: 1 }) })).status).toBe(403);
+});
