@@ -13,7 +13,7 @@
 | 直近のPreview配備 | deployment `7629460391`、2026-11-08、vercel[bot]作成、success、配信URLはvercel.app |
 | Astro | `output: static`。`astro/wrangler.jsonc` はofficial-site/distの設定。`astro/vercel.json` にはVercel Bot Protection向けrewrite等がある |
 | CMS | `cms/wrangler.jsonc` に本番D1 binding・Access設定は未設定。workers.devとpreview URLは無効。ローカル設定は開発専用 |
-| Cloudflare接続 | `wrangler whoami` が認証期限切れで失敗。アカウント内のWorker・D1・Access・ドメインは未確認 |
+| Cloudflare接続 | OAuth再認証済み。account `923176c9ca0b65c526be853b018ea36a`、workers.dev subdomain `restard653`。既存Workerはpulse-backend、既存D1・zoneは0件。Access APIは403、管理画面ではZero Trust未設定を確認 |
 
 GitHubの配備記録はAstroの確認用配信がVercelにある根拠であり、正式ドメインが同じサービスに切り替わっている根拠ではない。旧NuxtのFTPワークフローも残る。Cloudflare用secretがGitHubにないことも、Cloudflare側のGit連携が存在しない証拠にはならない。
 
@@ -27,11 +27,11 @@ GitHubの配備記録はAstroの確認用配信がVercelにある根拠であり
 
 ## 配信先決定後に確認・設定する内容
 
-テスト用CMS・テスト用DB・テスト配信先を本番から分ける。既存GitHubのPreview環境を名前だけで流用せず、用途がわかる専用環境を用意する案。名称・ホストはまだ仮定しない。
+テスト用CMS・テスト用DB・テスト配信先を本番から分ける。既存GitHubのPreview環境を名前だけで流用せず、用途がわかる専用環境を用意する案。CMS・サイトのホストはAccess設定後に有効化する。
 
 共通で必要なのは、対象アカウントとプロジェクト、テストホスト、未公開候補のアクセス制御、配信要求の資格情報、配信結果を照合するAPI、固定releaseを受け渡す機械認証、コード配備とCMS公開を直列化する実行経路。公開リポジトリのログ・cache・artifactへ候補payloadを出さない。実行は信頼するコードrefに限定し、PR由来コードへ配備資格情報を渡さない。
 
-Cloudflareの再ログイン後に既存リソースを読み取り確認し、Worker・D1・Accessのテスト環境を具体化する。名称は `paf-cms-staging`（CMS）、`paf-cms-staging-db`（DB）、`paf-site-staging`（サイト）の候補とし、衝突とアカウントを確認してから作成する。実ホスト名、許可する2人のメールアドレス・表示名は確認済み情報を使い、推測で設定しない。CMSとテストサイトの認証範囲は個別に設定する。
+Cloudflareの既存リソースを確認済み。Worker・D1・Accessのテスト環境を具体化する。名称は `paf-cms-staging`（CMS）、`paf-cms-staging-db`（DB）、`paf-site-staging`（サイト）の候補とし、衝突とアカウントを確認してから作成する。実ホスト名、許可する2人のメールアドレス・表示名は確認済み情報を使い、推測で設定しない。CMSとテストサイトの認証範囲は個別に設定する。
 
 テストサイトもアクセス制限を有効にしてから候補本文を渡す。CMSは認証を行う本番用Worker入口を使い、ローカルの認証省略入口は配備しない。テスト用D1は空で開始し、既存WordPressやローカル下書きを自動で投入しない。旧サイトを動かしたまま、テスト記事による公開・更新・失敗後の復旧・履歴確定を検証する。
 
@@ -51,4 +51,8 @@ Cloudflareの再ログイン後に既存リソースを読み取り確認し、W
 
 ## 接続準備の状況
 
-2026-11-14の再確認でもWranglerのOAuth認証が期限切れで、アカウント一覧を取得できなかった。再ログインを開始し、利用者のブラウザーでの認証待ち。クラウドのWorker・D1・Access設定や本番配備はこの確認時点では変更していない。
+2026-11-14にOAuth再認証を完了。専用D1 `paf-cms-staging-db`（ID `ba08fb39-5da0-49bf-9b33-0b84d35a4fe9`）を作成し、0001〜0007のmigrationを適用した。未適用migrationが0件であることを確認。記事は投入していない。
+
+`cms/wrangler.staging.jsonc` は対象アカウント・専用DB・認証を行うWorker入口を固定し、workers.devとpreview URLは無効のままにする。CMSビルドと配備dry-runを確認。Workerとサイトはまだ配備していない。
+
+Zero Trustは未設定。管理画面のFree有効化に利用規約および無料枠超過分のカード請求への同意が必要で、利用者の操作待ち。許可する2人のメールアドレス・表示名も確認待ち。Access設定、CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSの設定、認証付き配備と実公開接続は未完了。個人メールアドレス・認証情報はリポジトリへ記録しない。

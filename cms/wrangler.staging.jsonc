@@ -1,0 +1,27 @@
+// Enable a staging hostname only after configuring Cloudflare Access and its auth variables.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "paf-cms-staging",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-07-02",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "paf-cms-staging-db",
+      "database_id": "ba08fb39-5da0-49bf-9b33-0b84d35a4fe9",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "account_id": "923176c9ca0b65c526be853b018ea36a",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": true
+  }
+}
