@@ -65,6 +65,36 @@ export class ContentDraftRepository {
     return JSON.parse(operation.response);
   }
 
+  async duplicate(input: { actor: string; operationId: string; sourceId: string; expectedVersion: number }): Promise<Draft> {
+    const { actor, operationId, sourceId, expectedVersion } = input;
+    const hash = await fingerprint({ kind: 'duplicate', sourceId, expectedVersion });
+    const prior = await this.replay(actor, operationId, hash);
+    if (prior) return prior;
+    const source = await this.get(sourceId);
+    if (!source) throw new DraftNotFound();
+    if (source.version !== expectedVersion) throw new DraftConflict();
+    const now = new Date().toISOString();
+    const response: Draft = {
+      id: crypto.randomUUID(), version: 1, type: source.type, payloadSchemaVersion: source.payloadSchemaVersion,
+      payload: source.payload, createdAt: now, updatedAt: now, createdBy: actor, updatedBy: actor,
+    };
+    try {
+      await this.db.prepare(`INSERT INTO draft_operations
+        (actor_id, operation_id, fingerprint, kind, content_id, expected_version, response, created_at, source_id)
+        VALUES (?, ?, ?, 'create', ?, ?, ?, ?, ?)`).bind(
+        actor, operationId, hash, response.id, expectedVersion, JSON.stringify(response), now, sourceId,
+      ).run();
+      return response;
+    } catch (error) {
+      const replay = await this.replay(actor, operationId, hash);
+      if (replay) return replay;
+      const latest = await this.get(sourceId);
+      if (!latest) throw new DraftNotFound();
+      if (latest.version !== expectedVersion) throw new DraftConflict();
+      throw error;
+    }
+  }
+
   async save(input: {
     actor: string; operationId: string; payload: Record<string, unknown>;
     target?: { id: string; expectedVersion: number };

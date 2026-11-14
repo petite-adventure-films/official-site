@@ -1,3 +1,4 @@
+import { DuplicateAction } from '../features/content/components/DuplicateAction';
 import { ContentList } from '../features/content/components/ContentList';
 import { loadSession } from '../features/auth/session';
 import { useEffect, useState } from 'react';
@@ -11,12 +12,16 @@ import { useDraftSave } from '../features/content/hooks/useDraftSave';
 
 function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; tags: Tags }) {
   const draft = useDraftSave(existing?.payload ?? emptyDraft(), existing);
+  const [duplicating, setDuplicating] = useState(false);
   const conflict = draft.error instanceof ApiError && draft.error.status === 409;
-  return <EditorLayout aside={<>
+  return <>
+    {duplicating && <Typography role="status" variant="body2">複製中…</Typography>}
+    <div inert={duplicating || undefined} aria-busy={duplicating}><EditorLayout aside={<>
     <Section label="公開管理"><Chip size="small" label="下書き" className="self-start" />
       {draft.saved && <div className="flex flex-col gap-cms-detail"><Typography variant="caption">作成日時 {new Date(draft.saved.createdAt).toLocaleString('ja-JP')}</Typography><Typography variant="caption">最終編集日時 {new Date(draft.saved.updatedAt).toLocaleString('ja-JP')}</Typography></div>}
     </Section>
     <div className="border-t border-cms-divider pt-cms-content flex flex-col gap-cms-section"><EventSettings value={draft.value} change={draft.change} tags={tags} /></div>
+    <div className="border-t border-cms-divider pt-cms-content"><Section label="複製"><DuplicateAction flush={draft.flush} disabled={draft.blocked} busy={duplicating} onBusy={setDuplicating} /></Section></div>
   </>}>
     <div className="flex flex-wrap items-center gap-cms-actions">
       <Button href="/cms/events" startIcon={<ChevronLeft />}>イベント一覧</Button><div className="flex-1" />
@@ -28,7 +33,7 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
       {conflict ? '別の画面で更新されています。入力内容はこの画面に残っています。内容を控えてから再読み込みしてください。' : draft.error instanceof ApiError && draft.error.status === 401 ? '認証が切れました。別のタブでログインしてから再試行してください。' : '保存できませんでした。入力内容はこの画面に残っています。文字数や通信状態を確認してください。'}
     </Alert>}
     <EventForm value={draft.value} change={draft.change} />
-  </EditorLayout>;
+  </EditorLayout></div></>;
 }
 export function App() {
   const [state, setState] = useState<{ user: string; tags: Tags; existing: SavedDraft<EventDraft> | null } | null>(null);
