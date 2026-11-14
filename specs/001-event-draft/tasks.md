@@ -82,7 +82,7 @@
 独立確認: テスト配信先で公開／停止、履歴生成、過去版の下書き復元を一巡する。
 
 - [ ] T033 [US6] 既存の公開データ・デプロイ経路を読み、公開API、成功確定点、非同期配信失敗・再送、公開停止、公開用必須項目、下書きと公開版の関係を `specs/002-cms-foundation/contracts/api.md`、`specs/002-cms-foundation/data-model.md`、`specs/001-event-draft/plan.md` に設計する。配信成功とDB更新を根拠なく単一トランザクションと扱わない。公開・削除ルールに新判断があれば確認してからT034以降へ進む。
-T033の現状: [公開接続の設計案](../002-cms-foundation/contracts/publication.md) を作成。必須項目は利用者確認済み。公開URL・配備運用などの確認待ちで未完了。
+T033の現状: [公開接続の設計案](../002-cms-foundation/contracts/publication.md) を作成。必須項目は利用者確認済み。slug方針は合意済み。公開サイトの配信先は未決定で、[配信環境調査](../002-cms-foundation/contracts/deployment-environments.md)と残る配備運用の確認待ちで未完了。
 
 - [ ] T034 [US6] 公開成功・失敗・再送・競合・停止、同内容連続公開、4件目の整理を `cms/worker/publication.test.ts` に定義する。公開失敗は履歴を作らず、現在公開中の版を含む直近3件・期限なしを検証する。
 - [ ] T035 [US6] 公開版・履歴・保護枠・処理記録を `cms/migrations/0004_publication_history.sql` と `cms/worker/services/publication.ts` に実装する。公開要求だけが配信に接続し、保存・複製・復元は公開を起動しない。

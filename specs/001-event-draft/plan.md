@@ -85,3 +85,7 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 公開必須項目は利用者確認済み。配備運用・slugの公開反映・既存URL保護・同内容再公開時の履歴表示が未決のためT033は未完了。設計案を実装開始や本番配備の合意として扱わない。
 
 既存URLは維持し、新規公開URLは `/events/{slug}/` とする。初期slugは記事ID（UUID）、手動変更可、公開後の変更には旧URLからの転送を伴う。既存のURL用WordPress IDと表示用イベント番号 `no` は別物であり、[調査結果](../002-cms-foundation/contracts/publication.md#公開urlとイベント番号の調査結果)に根拠と現在のslug方針を記載した。
+
+## 配信先の確認状況
+
+[配信環境の確認結果](../002-cms-foundation/contracts/deployment-environments.md) を参照。GitHubの直近Preview・ProductionはVercelの配備記録。Cloudflareは設定ファイルがあるが、ローカル認証期限切れでリソース未確認。利用者は公開サイトの配信先をまだ決めていない。CMSのCloudflare＋D1とは別判断とし、公開adapter・実配信の確定は保留する。公開用データ形式・検証・固定snapshotからの生成は配信先に依存させず進める。実配信テストの完了は配信先の決定後。
