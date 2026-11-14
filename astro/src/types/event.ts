@@ -3,7 +3,7 @@ import type { Tag } from './tag';
 export type EventStatus = '' | '1' | '2';
 
 type EventBase = {
-  id: number;
+  id: number | string;
   title: string;
   no: string | number;
   status: EventStatus;

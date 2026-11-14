@@ -1,0 +1,52 @@
+import { expect, test } from '@playwright/test';
+
+test('calendar selection, multiline access and online notes survive saving', async ({ page }) => {
+  await page.goto('/cms/events/new');
+  await page.getByRole('textbox', { name: 'タイトル', exact: true }).fill('入力改善の確認');
+  await page.getByRole('textbox', { name: '開催日', exact: true }).fill('2026/12/30');
+  await page.getByRole('button', { name: '開催日をカレンダーで選択' }).click();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('textbox', { name: '開催日', exact: true })).toHaveValue('2026/12/31');
+  await page.getByLabel('複数日にわたる').check();
+  await page.getByRole('textbox', { name: '終了日', exact: true }).fill('2027/01/02');
+  await page.getByRole('button', { name: '終了日をカレンダーで選択' }).click();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('textbox', { name: '終了日', exact: true })).toHaveValue('2027/01/03');
+  const access = page.getByRole('textbox', { name: 'アクセス', exact: true });
+  await expect(access).toHaveJSProperty('tagName', 'TEXTAREA');
+  await access.fill('駅から徒歩5分\n北口からお越しください');
+  const notes = page.getByRole('textbox', { name: '開催場所の備考・配信URLなど', exact: true });
+  await notes.fill('オンライン参加はこちら\nhttps://example.com/stream');
+  await expect(page.getByRole('button', { name: 'ゴミ箱へ移動' })).toBeDisabled();
+  await page.getByRole('button', { name: '保存', exact: true }).click();
+  await expect(page.getByRole('status')).toHaveText('保存済み');
+  await page.reload();
+  await expect(access).toHaveValue('駅から徒歩5分\n北口からお越しください');
+  await expect(notes).toHaveValue('オンライン参加はこちら\nhttps://example.com/stream');
+  await page.getByRole('button', { name: 'オンライン', exact: true }).click();
+  await page.getByRole('button', { name: 'オフライン', exact: true }).click();
+  await expect(notes).toBeVisible();
+  await expect(access).toHaveCount(0);
+  await expect(notes).toHaveValue('オンライン参加はこちら\nhttps://example.com/stream');
+});
+
+test('left navigation remains fixed while the editor and right sidebar scroll', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.goto('/cms/events/new');
+  const nav = page.getByRole('navigation', { name: '管理メニュー' });
+  await expect(nav).toBeVisible();
+  const aside = page.locator('aside');
+  const before = await aside.boundingBox();
+  await page.evaluate(() => scrollTo(0, 600));
+  await expect.poll(async () => (await nav.boundingBox())?.y).toBe(0);
+  expect((await aside.boundingBox())!.y).toBeLessThan(before!.y);
+  await expect(nav.getByText('👤 開発用ユーザー')).toBeInViewport();
+  await page.screenshot({ path: 'test-results/editor-fixed-nav.png' });
+  await page.setViewportSize({ width: 1000, height: 600 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(nav.getByText('👤 開発用ユーザー')).toBeInViewport();
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({ path: 'test-results/editor-usability-1000.png' });
+});

@@ -10,7 +10,7 @@ export function parseEventDate(value: string): Date {
 
 export function getLatestEvents(groupedEvents: EventList, today = new Date()): EventSummary[] {
   const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  const uniqueEvents = new Map<number, EventSummary>();
+  const uniqueEvents = new Map<number | string, EventSummary>();
 
   for (const months of Object.values(groupedEvents)) {
     for (const events of Object.values(months)) {

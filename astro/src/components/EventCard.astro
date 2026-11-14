@@ -12,7 +12,7 @@ const { event } = Astro.props;
 ---
 
 <a
-  href={`/events/${event.id}/`}
+  href={`/events/${encodeURIComponent(String(event.id))}/`}
   class="event-card gap-paf-8 border-paf-border-default bg-paf-bg-page p-paf-16 text-paf-text-primary hover:bg-paf-bg-subtle flex min-w-0 flex-col border-[length:var(--paf-border-width)] border-solid wrap-anywhere no-underline [--article-tags-margin:0] [--attached-info-margin:0]"
 >
   <ArticleHeaderTags

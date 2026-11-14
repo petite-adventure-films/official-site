@@ -1,3 +1,4 @@
+import { releasedEventSummaries } from './released-cms-events';
 import snapshotData from '../../data/wordpress-export.json';
 
 export const WP_API_BASE = 'local-wordpress-snapshot';
@@ -129,8 +130,8 @@ function getCurrentEvents() {
   );
 }
 
-function groupEventsByMonth(events: LegacyRecord[]) {
-  const grouped: Record<string, Record<string, LegacyRecord[]>> = {};
+function groupEventsByMonth<T extends { date_from?: string; date_to?: string }>(events: T[]) {
+  const grouped: Record<string, Record<string, T[]>> = {};
 
   for (const event of events) {
     const start = new Date(eventTimestamp(event.date_from));
@@ -176,7 +177,13 @@ export async function wpGetList<T>(
       records = snapshot.content.events.filter((event) =>
         event.date_from?.startsWith(query?.year ?? ''),
       );
-      return { data: records as T[], total_pages: records.length > 0 ? 1 : 0 };
+      const released = (await releasedEventSummaries()).filter((event) =>
+        event.date_from.startsWith(query?.year ?? ''),
+      );
+      return {
+        data: [...records, ...released] as T[],
+        total_pages: records.length + released.length > 0 ? 1 : 0,
+      };
     case 'dvd':
       records = [];
       break;
@@ -187,10 +194,7 @@ export async function wpGetList<T>(
   return paginate(records, query) as WpListResponse<T>;
 }
 
-export async function wpGetDetail<T>(
-  endpoint: WpEndpoint,
-  query: WpDetailQuery,
-): Promise<T | null> {
+export function wpGetDetail<T>(endpoint: WpEndpoint, query: WpDetailQuery): Promise<T | null> {
   const pageId = Number(query.pageId);
   let record: LegacyRecord | undefined;
 
@@ -211,10 +215,13 @@ export async function wpGetDetail<T>(
       record = undefined;
   }
 
-  return (record as T | undefined) ?? null;
+  return Promise.resolve((record as T | undefined) ?? null);
 }
 
 export async function wpGetCustom<T>(endpoint: WpEndpoint): Promise<T | null> {
   if (endpoint !== 'events') return null;
-  return groupEventsByMonth(getCurrentEvents()) as T;
+  const released = (await releasedEventSummaries()).filter(
+    (event) => Number(event.date_from.slice(0, 4)) >= new Date().getFullYear(),
+  );
+  return groupEventsByMonth([...getCurrentEvents(), ...released]) as T;
 }

@@ -33,3 +33,6 @@ pnpm-debug.log*
 .e2e-dist/
 playwright-report/
 test-results/
+
+/playwright-report-cms/
+/test-results-cms/

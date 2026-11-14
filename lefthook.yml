@@ -8,5 +8,5 @@ pre-commit:
 
 pre-push:
   jobs:
-    - name: e2e
+    - name: affected-app-e2e
       run: node scripts/e2e-scope.mjs --files {push_files}

@@ -1,0 +1,132 @@
+---
+// Uses the existing event PostLayout and ArticleHeaderTags; no separate preview design.
+// Tags: https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=20-57
+import PostLayout from '@layouts/PostLayout.astro';
+import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
+import PlainText from '@components/PlainText.astro';
+import ExternalLink from '@components/ExternalLink.astro';
+import PublishedDate from '@components/PublishedDate.astro';
+import JsonLd from '@components/JsonLd.astro';
+import { cmsEventStructuredData, type CmsEventView } from '@/lib/cms-events';
+interface Props {
+  event: CmsEventView;
+}
+const { event } = Astro.props;
+const p = event.payload;
+const date = (value: string) => value.replaceAll('-', '/');
+const status = { normal: '', postponed: '1', cancelled: '2' } as const;
+const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).href;
+---
+
+<PostLayout
+  title={`${p.title} - イベント・上映会`}
+  heading={p.title}
+  ogType="article"
+  noIndex
+  description={[p.title, p.timeDescription, p.venue ?? 'オンライン開催'].join(' ')}
+  crumbs={[{ to: '/events/', name: 'イベント・上映会' }]}
+>
+  <JsonLd data={cmsEventStructuredData(event, eventUrl)} />
+  <ArticleHeaderTags
+    status={status[p.status]}
+    filmTags={event.filmTags}
+    eventTags={event.eventTags}
+    no={event.no}
+  />
+  <dl class="link-text-children [&_dt]:font-bold">
+    <div>
+      <dt>開催期間</dt><dd>
+        {date(p.startDate)}{p.endDate && ` 〜 ${date(p.endDate)}`}
+        {
+          p.timeDescription && (
+            <div>
+              <PlainText value={p.timeDescription} />
+            </div>
+          )
+        }
+      </dd>
+    </div>
+    <div class="mt-4">
+      <dt>開催場所</dt><dd>
+        <div>
+          {
+            p.formats.length === 2
+              ? '会場・オンライン開催'
+              : p.formats[0] === 'online'
+                ? 'オンライン開催'
+                : null
+          }
+        </div>
+        {
+          p.venue && (
+            <div>
+              <PlainText value={p.venue} />
+            </div>
+          )
+        }
+        {p.address && <PlainText value={p.address} />}
+        {p.mapUrl && <ExternalLink href={p.mapUrl}>MAP</ExternalLink>}
+        {
+          p.access && (
+            <div>
+              <PlainText value={p.access} />
+            </div>
+          )
+        }
+        {
+          p.venueNotes && (
+            <div>
+              <PlainText value={p.venueNotes} />
+            </div>
+          )
+        }
+      </dd>
+    </div>
+    {
+      p.fee && (
+        <div class="mt-4">
+          <>
+            <dt>入場料</dt>
+            <dd>
+              <PlainText value={p.fee} />
+            </dd>
+          </>
+        </div>
+      )
+    }
+    {
+      p.organizer && (
+        <div class="mt-4">
+          <>
+            <dt>主催者・問い合わせ</dt>
+            <dd>
+              <PlainText value={p.organizer} />
+            </dd>
+          </>
+        </div>
+      )
+    }
+    {
+      p.notes && (
+        <div class="mt-4">
+          <>
+            <dt>備考</dt>
+            <dd>
+              <PlainText value={p.notes} />
+            </dd>
+          </>
+        </div>
+      )
+    }
+  </dl>
+  <PublishedDate
+    date={event.publishedAt}
+    label={new Intl.DateTimeFormat('ja-JP', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date(event.publishedAt))}
+    class="mt-8"
+  />
+</PostLayout>

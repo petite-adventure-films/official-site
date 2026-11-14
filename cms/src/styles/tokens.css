@@ -1,0 +1,44 @@
+/* Figma https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=92-149
+   CMS-specific mapping, isolated from the public site's theme. */
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
+@theme {
+  --spacing-cms-section: 32px;
+  --spacing-cms-content: 24px;
+  --spacing-cms-heading: 8px;
+  --spacing-cms-related: 8px;
+  --spacing-cms-detail: 4px;
+  --spacing-cms-icon: 8px;
+  --spacing-cms-actions: 8px;
+  --spacing-cms-list-y: 16px;
+  --spacing-cms-list-x: 16px;
+  --spacing-cms-nav: 240px;
+  --spacing-cms-aside: 288px;
+  --spacing-cms-page-x: 48px;
+  --spacing-cms-page-top: 40px;
+  --spacing-cms-page-bottom: 64px;
+  --spacing-cms-date: 180px;
+  --spacing-cms-input-height: 56px;
+  --spacing-cms-input-x: 14px;
+  --spacing-cms-input-y: 12px;
+  --spacing-cms-film-column: 184px;
+  --spacing-cms-event-column: 200px;
+  --spacing-cms-status-column: 144px;
+  --spacing-cms-list-min: 800px;
+  --color-cms-navigation: #f7f7f5;
+  --color-cms-divider: rgb(0 0 0 / 12%);
+  --color-cms-primary: #1976d2;
+  --color-cms-text: rgb(0 0 0 / 87%);
+}
+@layer base {
+  body { margin: 0; font-family: Roboto, sans-serif; color: var(--color-cms-text); }
+  fieldset { min-width: 0; }
+}
+/* Figma HistoryListItem 59:743: selection and focus are independent. */
+@theme { --color-cms-history-selected: rgb(25 118 210 / 8%); }
+@layer components {
+  .cms-history-item.Mui-selected { background: var(--color-cms-history-selected); }
+  .cms-history-item:focus-visible { outline: 2px solid var(--color-cms-primary); outline-offset: -2px; }
+}
+/* Figma StatusDialog 66:388 */
+@theme { --spacing-cms-dialog: 480px; }
