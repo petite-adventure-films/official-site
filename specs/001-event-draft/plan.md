@@ -82,7 +82,7 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 
 接続予定箇所は、CMSの `worker/routes/publication.ts`・`worker/services/publication.ts`・`worker/adapters/publication.ts`、新規の公開runner workflow、Astroの `src/pages/events/[id].astro` とイベント一覧・タグ一覧・サイトマップ。既存 `src/lib/wp-api.ts` は旧snapshotの読み取りを保持し、新規CMS公開データの読取境界を別に設ける。新規ファイル名・公開スキーマ・URL識別子は #394との照合後に確定する。
 
-公開必須項目は利用者確認済み。配備運用・slugの公開反映・既存URL保護・同内容再公開時の履歴表示が未決のためT033は未完了。設計案を実装開始や本番配備の合意として扱わない。
+公開必須項目は利用者確認済み。配備運用・slugの公開反映・既存URL保護が未決のためT033は未完了。設計案を実装開始や本番配備の合意として扱わない。
 
 既存URLは維持し、新規公開URLは `/events/{slug}/` とする。初期slugは記事ID（UUID）、手動変更可、公開後の変更には旧URLからの転送を伴う。既存のURL用WordPress IDと表示用イベント番号 `no` は別物であり、[調査結果](../002-cms-foundation/contracts/publication.md#公開urlとイベント番号の調査結果)に根拠と現在のslug方針を記載した。
 
@@ -95,3 +95,5 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 配信先に依存しない `prepareEventPublication` と `event-publication/v1` を追加。新規CMSのプレーンテキスト入力から公開候補だけを組み立てる。詳細契約は [データ設計](data-model.md#公開候補データの生成配信前)。現在は純粋な検証・変換処理で、公開ボタン・API・Astroのビルド入力・配信サービスへの接続は未実装。
 
 公開候補の入力検査は、配信しない `POST /api/contents/:id/check-publication` と編集画面の「公開前チェック」に接続済み。保存済み版・現在のタグを確認し、項目別エラーを表示する。公開API・URL予約・Astroへの接続・外部配信は別作業として残る。
+
+固定候補・配信結果照合・成功時の履歴確定は、配信先に接続しない内部サービスとして実装済み。過去内容への再公開は新規履歴、現在公開中と同内容の場合だけ省略する。API・画面・実配信との接続、公開停止・復元は未実装。範囲と制約は[公開接続契約](../002-cms-foundation/contracts/publication.md#ローカルで検証する公開確定処理)を参照。
