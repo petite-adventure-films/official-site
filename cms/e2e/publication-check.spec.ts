@@ -42,3 +42,25 @@ test('failed saving does not check; network failure can be retried without losin
   await expect(page.getByText('有効な開催日を入力してください。', { exact: true })).toBeVisible();
   await page.screenshot({ path: 'test-results/publication-check-1440.png', fullPage: true });
 });
+test('reserved URL is saved but shows a focused slug error; editing and rechecking clears it', async ({ page, request }) => {
+  await page.goto('/cms/events/new');
+  await page.getByRole('textbox', { name: 'タイトル', exact: true }).fill('URLの重複を確認');
+  await page.getByRole('textbox', { name: '開催日', exact: true }).fill('2026-12-30');
+  await page.getByRole('textbox', { name: '会場名', exact: true }).fill('会場');
+  const slug = page.getByRole('textbox', { name: 'slug', exact: true });
+  await slug.fill('18010');
+  await page.getByRole('button', { name: '公開前チェック', exact: true }).click();
+  await expect(slug).toHaveAttribute('aria-invalid', 'true'); await expect(slug).toBeFocused();
+  await expect(slug).toHaveAccessibleDescription('このURLは使用されています。別のslugを入力してください。 入力途中でも下書き保存できます。');
+  const id = page.url().split('/').at(-2)!;
+  expect((await (await request.get(`/api/contents/${id}`)).json()).payload.slug).toBe('18010');
+  await page.screenshot({ path: 'test-results/slug-conflict-1440.png', fullPage: true });
+  await page.reload(); await expect(slug).toHaveValue('18010');
+  await page.getByRole('button', { name: '公開前チェック', exact: true }).click();
+  await expect(slug).toHaveAttribute('aria-invalid', 'true');
+  await slug.fill(`free-${id}`);
+  await expect(slug).toHaveAttribute('aria-invalid', 'false');
+  await page.getByRole('button', { name: '公開前チェック', exact: true }).click();
+  await expect(page.getByText('入力内容に問題は見つかりませんでした。公開は行っていません。')).toBeVisible();
+  expect((await (await request.get(`/api/contents/${id}`)).json()).payload.slug).toBe(`free-${id}`);
+});

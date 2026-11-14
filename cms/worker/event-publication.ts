@@ -13,7 +13,7 @@ export type EventPublication = {
   filmTagIds: string[]; eventTagIds: string[];
 };
 export type PublicationIssue = {
-  field: keyof EventDraft | '_schema'; code: 'invalid_shape' | 'required' | 'invalid_date' | 'date_order' | 'invalid_url' | 'invalid_slug' | 'unknown_tag'; message: string;
+  field: keyof EventDraft | '_schema'; code: 'invalid_shape' | 'required' | 'invalid_date' | 'date_order' | 'invalid_url' | 'invalid_slug' | 'unknown_tag' | 'url_reserved'; message: string;
 };
 export type PublicationResult = { ok: true; payload: EventPublication } | { ok: false; issues: PublicationIssue[] };
 export function prepareEventPublication(input: unknown, context: {

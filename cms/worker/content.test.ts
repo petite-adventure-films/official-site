@@ -6,7 +6,7 @@ import { emptyDraft } from '../src/features/events/draft';
 let fixture: Awaited<ReturnType<typeof createWorkerFixture>>;
 beforeEach(async () => {
   fixture = await createWorkerFixture('local');
-  for (const file of ['0001_content_drafts.sql', '0002_tags.sql']) {
+  for (const file of ['0001_content_drafts.sql', '0002_tags.sql', '0003_duplicate.sql', '0004_publication_history.sql', '0005_restore.sql', '0006_history_names.sql', '0007_publication_urls.sql']) {
     const sql = await readFile(new URL(`../migrations/${file}`, import.meta.url), 'utf8');
     await fixture.db.batch(unstable_splitSqlQuery(sql).map((statement) => fixture.db.prepare(statement)));
   }
@@ -82,4 +82,43 @@ test('publication check uses current tags and returns no publishable payload', a
   await fixture.db.prepare("DELETE FROM tags WHERE kind = 'film' AND id = ?").bind(available.filmTags[0].id).run();
   expect(await (await request(path, 'POST', { expectedVersion: 1 })).json()).toMatchObject({ ok: false, issues: [{ field: 'filmTagIds', code: 'unknown_tag' }] });
   expect((await fixture.runtime.dispatchFetch('http://localhost'+path, { method: 'POST', headers: { Origin: 'https://other.test', 'Content-Type': 'application/json' }, body: JSON.stringify({ expectedVersion: 1 }) })).status).toBe(403);
+});
+
+test('URL conflict joins other field errors, preserves the saved draft and never reserves URLs', async () => {
+  const saved = await (await create({ ...emptyDraft(), slug: '18010' })).json() as any;
+  const before = await fixture.db.prepare('SELECT * FROM event_url_owners ORDER BY slug').all();
+  const response = await request(`/api/contents/${saved.id}/check-publication`, 'POST', { expectedVersion: 1 });
+  expect(response.status).toBe(200);
+  expect(await response.json()).toMatchObject({ ok: false, issues: expect.arrayContaining([
+    { field: 'title', code: 'required', message: expect.any(String) },
+    { field: 'slug', code: 'url_reserved', message: 'このURLは使用されています。別のslugを入力してください。' },
+  ]) });
+  expect(await (await request(`/api/contents/${saved.id}`)).json()).toEqual(saved);
+  expect((await fixture.db.prepare('SELECT * FROM event_url_owners ORDER BY slug').all()).results).toEqual(before.results);
+  expect(await fixture.db.prepare('SELECT count(*) AS count FROM publication_operations').first('count')).toBe(0);
+});
+test('URL check allows this article’s current and past URLs but rejects another owner and does not lock a free URL', async () => {
+  const valid = { ...emptyDraft(), title: '上映会', startDate: '2026-12-30', formats: ['online'] as ('online')[], slug: 'current' };
+  const saved = await (await create(valid)).json() as any;
+  await fixture.db.prepare("INSERT INTO event_url_owners(slug, content_id, origin) VALUES ('current', ?, 'cms'), ('past', ?, 'cms'), ('other', 'another-article', 'cms')")
+    .bind(saved.id, saved.id).run();
+  let version = 1;
+  for (const [slug, ok] of [['current', true], ['past', true], ['other', false], ['free', true]] as const) {
+    if (slug !== 'current') {
+      await request(`/api/contents/${saved.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: version, payload: { ...valid, slug } });
+      version++;
+    }
+    const checked = await (await request(`/api/contents/${saved.id}/check-publication`, 'POST', { expectedVersion: version })).json() as any;
+    expect(checked.ok).toBe(ok);
+    if (!ok) expect(checked.issues).toEqual([{ field: 'slug', code: 'url_reserved', message: expect.any(String) }]);
+  }
+  expect(await fixture.db.prepare("SELECT * FROM event_url_owners WHERE slug = 'free'").first()).toBeNull();
+});
+test('URL storage failure is not reported as a duplicate or a successful check', async () => {
+  const saved = await (await create({ ...emptyDraft(), title: '上映会', startDate: '2026-12-30', formats: ['online'] })).json() as any;
+  await fixture.db.exec('DROP TABLE event_canonical_urls');
+  await fixture.db.exec('DROP TABLE event_url_owners');
+  const response = await request(`/api/contents/${saved.id}/check-publication`, 'POST', { expectedVersion: 1 });
+  expect(response.status).toBe(503);
+  expect(await response.json()).toEqual({ error: 'unavailable' });
 });
