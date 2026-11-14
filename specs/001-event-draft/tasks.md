@@ -49,13 +49,15 @@
 - [ ] T022 [US2] 保存状態・再試行・競合・再認証・離脱警告を `cms/src/features/content/components/SaveStatus.tsx` と `cms/src/features/content/hooks/useUnsavedChanges.ts` に実装する。最新入力まで保存成功するまで警告を解除せず、端末内復旧バックアップは設けない。残る状態のFigmaと `specs/002-cms-foundation/contracts/screens.md` を揃える。
 - [ ] T023 [US2] `cms/e2e/save-recovery.spec.ts` で自動保存・手動保存・複数タブ競合・離脱取消・再読込を検証する。保存前の強制終了からの復旧は保証しない。
 
-## Phase 5: US3 — 未保存内容のプレビュー（段階①、P1）
+## Phase 5: US3 — 未保存内容のプレビュー（表示実装は後続、P1）
 
 独立確認: 未保存・保存失敗の入力を表示し、編集へ戻って内容・スクロール・フォーカスを維持する。
 
+現在は編集操作行に非活性のプレビューボタンを配置するところまで。以下は後続実装とし、この段階では完了にしない。
+
 - [ ] T024 [US3] 表示モデルのテストを `packages/event-presentation/src/event-preview.test.ts` に定義する。空欄・不正日付の無補正、非表示値除外、改行保持、HTML無効化、安全なhttp/httpsリンクを確認する。
 - [ ] T025 [US3] 表示モデルと本文レンダラーを `packages/event-presentation/src/event-preview.ts` と `packages/event-presentation/src/EventBody.tsx` に実装する。既存HTMLを上書きせず、公開側との共有境界を `specs/001-event-draft/plan.md` に記録する。
-- [ ] T026 [US3] 画面内プレビュー切り替えを `cms/src/features/content/components/PreviewPanel.tsx` に実装し、既存のFigma共通部品で代表状態を整える。別の公開プレビューURLを設けない。
+- [ ] T026 [US3] 公開ページと同じレイアウト・見た目のプレビューを別タブで開く。URL・未保存データの受け渡し・認証方式を先に設計し、公開ページとの共有方法と代表状態を確認してから実装する。
 - [ ] T027 [US3] `cms/e2e/preview.spec.ts` で未保存表示・保存失敗中の表示・編集復帰・公開への副作用なしを検証する。
 
 ## Phase 6: US4 — 複数日・オンライン・併催（段階①、P1）

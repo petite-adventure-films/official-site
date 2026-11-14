@@ -22,6 +22,7 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
       <Button href="/cms/events" startIcon={<ChevronLeft />}>イベント一覧</Button><div className="flex-1" />
       <Typography variant="body2" role="status">{draft.status}</Typography>
       <Button disabled>公開履歴</Button><Button variant="contained" disabled={draft.blocked || draft.status === '保存中'} onClick={() => void draft.save()}>保存</Button>
+      <Button variant="outlined" disabled>プレビュー</Button>
     </div>
     {draft.error && <Alert severity="error" action={!draft.blocked && <Button color="inherit" onClick={() => void draft.save()}>再試行</Button>}>
       {conflict ? '別の画面で更新されています。入力内容はこの画面に残っています。内容を控えてから再読み込みしてください。' : draft.error instanceof ApiError && draft.error.status === 401 ? '認証が切れました。別のタブでログインしてから再試行してください。' : '保存できませんでした。入力内容はこの画面に残っています。文字数や通信状態を確認してください。'}
