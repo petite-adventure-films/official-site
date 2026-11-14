@@ -1,14 +1,17 @@
 import { enforceMutationRequest, HttpError, type Actor } from './auth';
 import type { Database } from './repositories/content-drafts';
 import { publicationCheck } from './routes/publication-check';
+import { publication } from './routes/publication';
+import type { PublicationDelivery } from './services/publication';
 import { contents } from './routes/contents';
 import { history } from './routes/history';
 import { duplicate } from './routes/duplicate';
 import { tags } from './routes/tags';
-export type AppEnvironment = { DB?: Database; ASSETS?: { fetch(request: Request): Promise<Response> } };
+export type AppEnvironment = { DB?: Database; PUBLICATION?: PublicationDelivery; ASSETS?: { fetch(request: Request): Promise<Response> } };
 export async function handleAuthenticated(request: Request, env: AppEnvironment, actor: Actor, origin: string) {
   enforceMutationRequest(request, origin);
   const path = new URL(request.url).pathname;
+  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: Boolean(env.PUBLICATION) });
   if (path === '/api/session' && request.method === 'GET') return Response.json({ user: actor });
   if (path === '/api/tags' && request.method === 'GET') {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
@@ -16,6 +19,8 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
   }
   if (path.startsWith('/api/contents')) {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    const publish = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/publication$/i);
+    if (publish) return publication(request, env.DB, actor, publish[1], env.PUBLICATION);
     const check = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/check-publication$/i);
     if (check) return publicationCheck(request, env.DB, check[1]);
     const historyRoute = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(history|restore)$/i);

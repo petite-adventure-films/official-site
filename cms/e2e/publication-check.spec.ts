@@ -1,16 +1,70 @@
 import { expect, test } from '@playwright/test';
 
-test('editing saves drafts without exposing an interim publication workflow', async ({ page, request }) => {
-  const checks: string[] = [];
-  page.on('request', req => { if (req.url().includes('/check-publication')) checks.push(req.url()); });
+test('publication validates input and the confirmation cancels without publishing', async ({ page }) => {
   await page.goto('/cms/events/new');
-  await expect(page.getByRole('button', { name: '公開', exact: true })).toBeDisabled();
-  await page.getByRole('textbox', { name: 'タイトル', exact: true }).fill('下書きとして保存');
-  await page.getByRole('button', { name: '保存', exact: true }).click();
-  await expect(page).toHaveURL(/\/cms\/events\/[0-9a-f-]+\/edit$/);
+  const publish = page.getByRole('button', { name: '公開', exact: true });
+  await publish.click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog.getByRole('button', { name: 'キャンセル' })).toBeFocused();
+  await page.screenshot({ path: 'test-results/publication-dialog-1440.png', fullPage: true });
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveCount(0); await expect(publish).toBeFocused();
+  await publish.click(); await dialog.getByRole('button', { name: '公開する', exact: true }).click();
+  await expect(page.getByText('入力内容を確認してください。', { exact: true })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'タイトル', exact: true })).toBeFocused();
+  await expect(page.getByText(/公開処理は準備中|まだ公開されていません/)).toHaveCount(0);
+});
+
+test('publishes a real static page, preserves it while drafting, and republishes with a redirect', async ({ page, request }) => {
+  test.setTimeout(180_000);
+  const title = `公開接続 ${Date.now()}`;
+  await page.goto('/cms/events/new');
+  await page.getByRole('textbox', { name: 'タイトル', exact: true }).fill(title);
+  await page.getByRole('textbox', { name: '開催日', exact: true }).fill('2027/12/30');
+  await page.getByRole('textbox', { name: '会場名', exact: true }).fill('公開接続テスト会場');
+  await page.getByRole('button', { name: '公開', exact: true }).click();
+  await page.getByRole('dialog').getByRole('button', { name: '公開する', exact: true }).click();
+  const link = page.getByRole('link', { name: '公開ページを見る', exact: true });
+  await expect(link).toBeVisible({ timeout: 90_000 });
+  const oldUrl = (await link.getAttribute('href'))!;
+  expect((await request.get(oldUrl)).status()).toBe(200);
+  expect(await (await request.get(oldUrl)).text()).toContain(title);
+  expect(await (await request.get('http://127.0.0.1:4327/events/')).text()).toContain(title);
+  const publicPage = await page.context().newPage(); await publicPage.goto(oldUrl);
+  await expect(publicPage.getByRole('heading', { name: title, exact: true })).toBeVisible();
+  await publicPage.screenshot({ path: 'test-results/published-event-1440.png', fullPage: true });
+  await publicPage.close();
   const id = page.url().split('/').at(-2)!;
-  expect((await (await request.get(`/api/contents/${id}`)).json()).payload.title).toBe('下書きとして保存');
-  await expect(page.getByText(/公開処理は準備中|まだ公開されていません|入力内容に問題は見つかりません/)).toHaveCount(0);
-  expect(checks).toEqual([]);
-  await page.screenshot({ path: 'test-results/draft-editor-1440.png', fullPage: true });
+  await expect(page.getByRole('button', { name: '公開履歴', exact: true })).toBeEnabled();
+  const history = async () => (await (await request.get(`/api/contents/${id}/history`)).json()).items.filter((item: { kind: string }) => item.kind === 'publication');
+  expect(await history()).toHaveLength(1);
+  await page.getByRole('textbox', { name: 'タイトル', exact: true }).fill(`${title} 更新`);
+  await page.getByRole('button', { name: '保存', exact: true }).click();
+  await expect(page.getByText('保存済み', { exact: true })).toBeVisible();
+  expect(await (await request.get(oldUrl)).text()).not.toContain(`${title} 更新`);
+  await page.getByRole('textbox', { name: 'slug', exact: true }).fill(`updated-${id}`);
+  await page.getByRole('button', { name: '公開', exact: true }).click();
+  await page.getByRole('dialog').getByRole('button', { name: '公開する', exact: true }).click();
+  await expect(link).toHaveAttribute('href', `http://127.0.0.1:4327/events/updated-${id}/`, { timeout: 90_000 });
+  const redirect = await request.get(oldUrl, { maxRedirects: 0 });
+  expect(redirect.status()).toBe(301); expect(redirect.headers().location).toBe(`/events/updated-${id}/`);
+  expect(await history()).toHaveLength(2);
+  await page.reload(); await expect(page.getByText('公開済', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: '公開', exact: true }).click();
+  await page.getByRole('dialog').getByRole('button', { name: '公開する', exact: true }).click();
+  await expect(page.getByRole('button', { name: '公開', exact: true })).toBeEnabled();
+  expect(await history()).toHaveLength(2);
+});
+
+test('retrying a publication status read never submits a publication', async ({ page }) => {
+  let posts = 0;
+  page.on('request', req => { if (req.method() === 'POST' && req.url().endsWith('/publication')) posts++; });
+  await page.route('**/api/publication', route => route.abort());
+  await page.goto('/cms/events/new');
+  await expect(page.getByText('公開状態を取得できませんでした。', { exact: true })).toBeVisible();
+  await page.unroute('**/api/publication');
+  await page.getByRole('button', { name: '再試行', exact: true }).click();
+  await expect(page.getByRole('button', { name: '公開', exact: true })).toBeEnabled();
+  await expect(page.getByText('公開状態を取得できませんでした。', { exact: true })).toHaveCount(0);
+  expect(posts).toBe(0);
 });

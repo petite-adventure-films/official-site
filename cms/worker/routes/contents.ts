@@ -11,7 +11,9 @@ export async function contents(request: Request, db: Database, actor: Actor) {
     const page = Number(url.searchParams.get('page') ?? 1);
     const keyword = url.searchParams.get('q') ?? '';
     if (!Number.isSafeInteger(page) || page < 1 || page > 1_000_000 || keyword.length > 200) throw new HttpError(422, 'invalid_query');
-    return Response.json(await repository.list(page, keyword));
+    const result = await repository.list(page, keyword);
+    const items = await Promise.all(result.items.map(async item => item ? { ...item, published: Boolean(await db.prepare('SELECT content_id FROM publication_state WHERE content_id = ?').bind(item.id).first()) } : item));
+    return Response.json({ ...result, items });
   }
   const match = url.pathname.match(/^\/api\/contents\/([0-9a-f-]{36})$/i);
   if (match && request.method === 'GET') {

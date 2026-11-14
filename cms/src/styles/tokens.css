@@ -40,3 +40,5 @@
   .cms-history-item.Mui-selected { background: var(--color-cms-history-selected); }
   .cms-history-item:focus-visible { outline: 2px solid var(--color-cms-primary); outline-offset: -2px; }
 }
+/* Figma StatusDialog 66:388 */
+@theme { --spacing-cms-dialog: 480px; }

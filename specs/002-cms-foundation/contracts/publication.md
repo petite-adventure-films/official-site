@@ -152,3 +152,11 @@ Astro側の `cms-events/v1` は表示検証用の入力形式で、配信用rele
 `GET /api/local/published-events` はloopback限定の `worker/local.ts` にだけ存在し、no-store/noindexを返す。本番Workerの認証済み経路にも追加しない。`pnpm --dir astro export:cms` は127.0.0.1:8787のこの経路だけを読み、リダイレクトを拒否する。`.local/cms-published-events.json` に一時ファイルから原子的に置換し、取得失敗時は以前のファイルを保持する。出力はGit管理外で、読み書き権限を所有者に限定する。
 
 これは現在の確定データの読み取りであり、新しい公開候補のrelease manifestや配信処理ではない。公開状態・履歴・下書きは変更しない。タグ名は取得時点の名称を使う。将来のタグ編集と配信の関係、転送・公開停止・配信アダプター・機械認証は引き続き未接続。
+
+## ローカル環境の実配信接続
+
+`GET /api/publication` は利用環境の公開可否を返す。`GET /api/contents/:id/publication` は公開世代・確定URL・直近操作を返し、未確定の配信結果を照合する。`POST /api/contents/:id/publication` はoperationId・expectedVersion・expectedPublicationVersionを受け取り、検証→候補固定→配信開始を行う。項目不正は422とissues、版競合・他の公開処理中は409。未接続環境は503で処理を作らない。
+
+ローカルentryだけが配信adapterを設定する。通常Workerは環境変数を受け取っただけでローカルadapterを有効にしない。loopback制御サーバーはOrigin付き要求と専用ヘッダーのない要求を拒否し、ブラウザーからの操作を受け付けない。これはローカル開発専用の隔離で、外部配信runnerの機械認証を代替しない。
+
+配信runnerは操作ID・attempt別に候補集合・転送・結果を保存し、同じattemptを重複起動しない。生成失敗は前の配信を保持し、成功時だけ配信先を切り替える。再起動後もactiveポインタと結果記録から照合する。生成途中で終了した記録は未反映の失敗として扱う。制御要求の到達を確認できない状態は結果不明のまま後続公開を止める。Cloudflare公開接続、複数要求の永続キュー、本番バックアップ・保持期間は本実装の対象外。

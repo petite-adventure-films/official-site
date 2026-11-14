@@ -1,6 +1,7 @@
 ---
 import LegacyEventPage from '@components/events/LegacyEventPage.astro';
 import CmsEventPage from '@components/events/CmsEventPage.astro';
+import { releasedCmsEvents } from '@/lib/released-cms-events';
 import { loadLocalCmsEvents } from '@/lib/local-cms-events';
 import { wpGetCustom, wpGetList } from '@/lib/wp-api';
 import type { EventList, EventSummary } from '@/types/event';
@@ -15,9 +16,16 @@ export async function getStaticPaths() {
     archiveYears.map((year) => wpGetList<EventSummary>('events_archive', { year })),
   );
   const events = [...currentEvents, ...archives.flatMap((archive) => archive.data)];
-  const uniqueEvents = Array.from(new Map(events.map((event) => [event.id, event])).values());
+  const uniqueEvents = Array.from(
+    new Map(
+      events.filter((event) => typeof event.id === 'number').map((event) => [event.id, event]),
+    ).values(),
+  );
 
-  const localEvents = await loadLocalCmsEvents(import.meta.env.DEV, process.env.CMS_EVENT_SNAPSHOT);
+  const localEvents = [
+    ...(await releasedCmsEvents()),
+    ...(await loadLocalCmsEvents(import.meta.env.DEV, process.env.CMS_EVENT_SNAPSHOT)),
+  ];
   return [
     ...localEvents.map((event) => ({
       params: { id: event.payload.slug },

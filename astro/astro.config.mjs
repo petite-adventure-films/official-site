@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   output: 'static',
-  site: 'https://www.petiteadventurefilms.com',
+  site: process.env.CMS_SITE_ORIGIN || 'https://www.petiteadventurefilms.com',
   integrations: [
     react(),
     sitemap({
