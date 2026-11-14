@@ -35,3 +35,19 @@
 ## slug（下書きの追加項目）
 
 `slug?: string` をevent-draft/v1に後方互換の任意項目として追加する。未指定は記事IDを利用する意味で、保存時にタイトルから生成しない。明示的な空文字は入力途中として保存し、公開時は拒否する。下書き文字数上限は他の自由入力と同じ20000文字。画面では公開向けの200文字以内・パス区切りなどの不正・予約語archiveを案内するが、下書き保存は止めない。公開時の一意性・既存URL保護は公開処理側で検証する。複製ではslugを除いてコピーし、複製先IDを初期値にする。
+
+## 公開候補データの生成（配信前）
+
+`cms/worker/event-publication.ts` の `prepareEventPublication` が保存形式を確認し、項目ごとの公開要件を検証する。成功は `{ok: true, payload}`、失敗は `{ok: false, issues: [{field, code, message}]}`。失敗時に部分的なpayloadを返さない。関数は下書きやDBを変更せず、公開状態・履歴・配信要求を作らない。
+
+形式は `packages/content-schema/schemas/content/event-publication.schema.json`、識別子は `event-publication/v1`。既存rich text向けevent/v1とは別契約で、既存スキーマ・公開WordPressデータを変更しない。現在は候補データの生成までで、汎用content envelopeやAstroへの接続は後続作業。
+
+公開候補にはtype・payloadSchemaVersion・title・slug・startDate・formats・status・文章項目・タグID配列を明示的に含める。複数日のときだけendDate、オフラインを含むときだけvenue/address/mapUrl/accessを含める。multiDayや非表示値、操作者などの管理情報は渡さない。配列も新しく作り、候補の編集が元の下書きへ影響しない。
+
+日付は区切りを統一したYYYY/MM/DDまたはYYYY-MM-DDを受け、実在日を検証してYYYY-MM-DDへ変換する。混在区切り・年0000・時刻付き入力・不成立日・終了日逆転は拒否する。タイムゾーンによる日ずれを起こさない暦日として扱い、フォームの日付案内も同じ関数を使う。
+
+空白だけのタイトル・会場名は必須不足。地図URLは絶対http/https、ホストあり、資格情報なしとし、空白・制御文字・バックスラッシュを拒否する。空欄の地図URLは許可する。slugは未指定時のみ記事IDを使い、不正文字や不正Unicodeは問題として返す。画面と公開候補のslug形式検証を共有する。
+
+タグは呼出元が種別別の有効ID集合を渡して照合する。呼出元は公開要求時に現在のDBから取得する必要がある。slugの一意性・既存URL予約・タグ変更との競合を含む公開確定処理は未接続であり、`ok: true` を公開成功やURL取得済みと解釈しない。
+
+文章はプレーンテキストとして文字列・改行をそのまま保持する。この処理でHTMLをレンダリングしたりエスケープ済みHTMLへ変換したりしない。後続の公開レンダラーで文字列としてエスケープし、安全なリンクだけを組み立てる必要がある。

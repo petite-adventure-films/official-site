@@ -89,3 +89,7 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 ## 配信先の確認状況
 
 [配信環境の確認結果](../002-cms-foundation/contracts/deployment-environments.md) を参照。GitHubの直近Preview・ProductionはVercelの配備記録。Cloudflareは設定ファイルがあるが、ローカル認証期限切れでリソース未確認。利用者は公開サイトの配信先をまだ決めていない。CMSのCloudflare＋D1とは別判断とし、公開adapter・実配信の確定は保留する。公開用データ形式・検証・固定snapshotからの生成は配信先に依存させず進める。実配信テストの完了は配信先の決定後。
+
+## 公開候補の生成実装
+
+配信先に依存しない `prepareEventPublication` と `event-publication/v1` を追加。新規CMSのプレーンテキスト入力から公開候補だけを組み立てる。詳細契約は [データ設計](data-model.md#公開候補データの生成配信前)。現在は純粋な検証・変換処理で、公開ボタン・API・Astroのビルド入力・配信サービスへの接続は未実装。
