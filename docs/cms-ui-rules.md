@@ -25,6 +25,8 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 | [ListRow](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-301) | タイトルと任意の映画タグ・イベントタグ・公開ステータス・種別・ユーザー・日時の列。内容は標準Slotに配置 |
 | [Pagination](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-304) | 全件数・表示範囲と、先頭・現在ページ周辺・末尾へのページ送り |
 
+件数は1ページに収まる場合「全N件」のみ表示し、複数ページの場合だけ表示範囲とページ送りを添える。検索時は検索結果の件数と全件数を示す。
+
 ListRowは `Show film tags` / `Show event tags` / `Show status` / `Show type` / `Show user` / `Show date` で列の有無を切り替える。既定はタイトル＋公開ステータス。組合せごとのvariantは作らない。ユーザー・日時の意味は利用場面の列見出しで示す。[通常一覧・ゴミ箱の行見本](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=67-60)は利用者確認済み。
 
 履歴選択用の共通部品：[HistoryListItem](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=59-743)。日時・ユーザー表示名を1段目、MUI Chipの「編集中」「公開済」を2段目に表示し、行全体で選択する。選択背景とキーボードフォーカスを独立して定義する。保護した下書きがあれば先頭、公開済は新しい順に最大3件で合計最大4行。別の確認ボタンは置かない。詳細は [公開履歴の画面契約](../specs/002-cms-foundation/contracts/screens.md#保護した下書きと公開履歴の統合リスト) を参照する。
@@ -68,6 +70,8 @@ ListRowは `Show film tags` / `Show event tags` / `Show status` / `Show type` / 
 - 操作や状態の表示場所をページごとに変更しない。右側の管理サイドバーは固定せず、本文とともにスクロールする。
 
 ## 入力・選択UI
+
+- 公開時の必須項目は赤い `*` で示す。MUIの `palette.error.main` を共通で使い、Figmaの `CMS semantic / color/required`（128:350）と対応させる。ラベル本体は通常色のまま。下書き保存には必須制約をかけない。
 
 - 入力幅は基本的に主領域いっぱい。日付など長さが決まるものは、内容に合った幅を使う。
 - 一つのFieldは入力要素を1つ以上持てる。複数要素はインラインで並べる。狭い画面の並びはSP設計時に決める。

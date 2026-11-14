@@ -24,7 +24,7 @@ export function EventForm({ value, change, contentId, errors = {} }: Props & { c
       {value.multiDay && <div className="w-cms-date"><DateField label="終了日" value={value.endDate} error={issues.endDate} onChange={endDate => change({ ...value, endDate })} /></div>}
       <label className="flex items-center gap-cms-related h-cms-input-height"><Typography variant="body2">複数日にわたる</Typography><Switch checked={value.multiDay} onChange={(_, checked) => change({ ...value, multiDay: checked })} /></label>
     </div>{text('timeDescription', '時間の案内')}</Section>
-    <Section label="開催場所"><Field label="開催形式 *" outlined error={errors.formats}>
+    <Section label="開催場所"><Field label="開催形式" required outlined error={errors.formats}>
       {(['offline', 'online'] as const).map((format) => <Chip key={format} label={format === 'offline' ? 'オフライン' : 'オンライン'}
         variant={value.formats.includes(format) ? 'filled' : 'outlined'} aria-pressed={value.formats.includes(format)}
         onClick={() => change({ ...value, formats: value.formats.includes(format) ? value.formats.filter((v) => v !== format) : [...value.formats, format] })} />)}

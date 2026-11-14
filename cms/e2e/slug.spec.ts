@@ -34,6 +34,10 @@ test('publication requirements are announced while blank drafts remain saveable'
     await expect(page.getByRole('textbox', { name: label, exact: true })).not.toHaveAttribute('required');
   }
   await expect(page.getByLabel('住所', { exact: true })).not.toHaveAttribute('aria-required');
+  for (const marker of await page.locator('.MuiFormLabel-asterisk').all()) {
+    await expect(marker).toHaveCSS('color', 'rgb(211, 47, 47)');
+  }
+  await expect(page.getByRole('group', { name: '開催形式 *', exact: true }).locator('legend span')).toHaveCSS('color', 'rgb(211, 47, 47)');
   await page.getByLabel('複数日にわたる').check();
   await expect(page.getByRole('textbox', { name: '終了日', exact: true })).toHaveAttribute('aria-required', 'true');
   await page.getByLabel('複数日にわたる').uncheck();

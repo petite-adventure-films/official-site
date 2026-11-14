@@ -17,6 +17,10 @@ test('keyword search, page reset and table-only horizontal scrolling', async ({ 
   await expect(page.locator('tbody tr')).toHaveCount(20);
   await page.getByRole('button', { name: '2ページへ', exact: true }).click();
   await expect(page.locator('tbody tr')).toHaveCount(1);
+  await expect(page.getByText(/検索結果 21件.*中 21〜21件/)).toBeVisible();
+  await search.fill(`${keyword} 20 `); await search.press('Enter');
+  await expect(page.getByText(/検索結果 1件/)).toBeVisible();
+  await expect(page.getByText(/検索結果 1件.*中/)).toHaveCount(0);
   await search.fill('見つからないキーワード'); await search.press('Enter');
   await expect(page.getByText(/検索結果 0件/)).toBeVisible();
   await search.fill(''); await search.press('Enter');

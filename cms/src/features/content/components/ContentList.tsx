@@ -25,8 +25,8 @@ export function ContentList<T>({ tags, summarize }: { tags: Tags; summarize: (pa
             eventTags={<div className="flex flex-wrap gap-cms-related">{names(summarize(item.payload).eventTagIds, 'eventTags')}</div>}
             status={<Chip size="small" label="下書き" />} />)}</tbody></table>
       </div>
-      <div className="flex flex-wrap justify-between items-center gap-cms-content"><Typography variant="body2">{keyword ? `検索結果 ${data.count}件（全${data.total}件）` : `全${data.count}件`}{data.count > 0 && `中 ${(page - 1) * 20 + 1}〜${Math.min(page * 20, data.count)}件`}</Typography>
-        {data.count > 0 && <Pagination count={Math.ceil(data.count / 20)} page={page} onChange={setPage} />}</div>
+      <div className="flex flex-wrap justify-between items-center gap-cms-content"><Typography variant="body2">{keyword ? `検索結果 ${data.count}件（全${data.total}件）` : `全${data.count}件`}{data.count > 20 && `中 ${(page - 1) * 20 + 1}〜${Math.min(page * 20, data.count)}件`}</Typography>
+        {data.count > 20 && <Pagination count={Math.ceil(data.count / 20)} page={page} onChange={setPage} />}</div>
     </>}
   </ListLayout>;
 }

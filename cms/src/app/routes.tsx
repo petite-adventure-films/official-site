@@ -32,9 +32,9 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
   useEffect(() => { if (restored) { try { sessionStorage.removeItem('cms-restored'); } catch { /* Optional notification only. */ } } }, [restored]);
   const conflict = draft.error instanceof ApiError && draft.error.status === 409;
   return <>
-    {(duplicating || check.checking || openingHistory) && <Typography role="status" variant="body2">{openingHistory ? '公開履歴を開いています…' : check.checking ? '公開前チェック中…' : '複製中…'}</Typography>}
+    {(duplicating || check.checking || openingHistory) && <Typography role="status" variant="body2">{openingHistory ? '公開履歴を開いています…' : check.checking ? '入力内容を確認中…' : '複製中…'}</Typography>}
     <div ref={fields} inert={duplicating || check.checking || openingHistory || undefined} aria-busy={duplicating || check.checking || openingHistory}><EditorLayout aside={<>
-    <Section label="公開管理"><div className="flex flex-wrap items-center gap-cms-actions"><Chip size="small" label="下書き" /><Button variant="outlined" color="success" disabled={draft.blocked || check.checking} onClick={() => void check.check()}>公開前チェック</Button></div>
+    <Section label="公開管理"><div className="flex flex-wrap items-center gap-cms-actions"><Chip size="small" label="下書き" /><Button variant="outlined" color="success" disabled={draft.blocked || check.checking} onClick={() => void check.check()}>公開</Button></div>
       {draft.saved && <div className="flex flex-col gap-cms-detail"><Typography variant="caption">作成日時 {new Date(draft.saved.createdAt).toLocaleString('ja-JP')}</Typography><Typography variant="caption">最終編集日時 {new Date(draft.saved.updatedAt).toLocaleString('ja-JP')}</Typography></div>}
     </Section>
     <div className="border-t border-cms-divider pt-cms-content flex flex-col gap-cms-section"><EventSettings value={draft.value} change={change} tags={tags} errors={errors} /></div>

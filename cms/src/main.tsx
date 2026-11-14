@@ -6,5 +6,5 @@ import '@fontsource/roboto/500.css';
 import './styles/tokens.css';
 import { App } from './app/routes';
 import { ErrorBoundary } from './components/ErrorBoundary';
-const theme = createTheme({ palette: { primary: { main: '#1976d2' }, error: { main: '#d32f2f' }, success: { main: '#2e7d32' } }, typography: { fontFamily: 'Roboto, sans-serif' }, components: { MuiButton: { styleOverrides: { root: { textTransform: 'none' } } } } });
+const theme = createTheme({ palette: { primary: { main: '#1976d2' }, error: { main: '#d32f2f' }, success: { main: '#2e7d32' } }, typography: { fontFamily: 'Roboto, sans-serif' }, components: { MuiFormLabel: { styleOverrides: { asterisk: ({ theme }) => ({ color: theme.palette.error.main }) } }, MuiButton: { styleOverrides: { root: { textTransform: 'none' } } } } });
 createRoot(document.getElementById('root')!).render(<StrictMode><StyledEngineProvider enableCssLayer><GlobalStyles styles="@layer theme, base, mui, components, utilities;" /><ThemeProvider theme={theme}><CssBaseline /><ErrorBoundary><App /></ErrorBoundary></ThemeProvider></StyledEngineProvider></StrictMode>);
