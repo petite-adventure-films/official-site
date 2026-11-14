@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Event draft v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "startDate",
+    "endDate",
+    "timeDescription",
+    "venue",
+    "address",
+    "mapUrl",
+    "access",
+    "venueNotes",
+    "fee",
+    "organizer",
+    "notes",
+    "multiDay",
+    "formats",
+    "status",
+    "filmTagIds",
+    "eventTagIds"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "startDate": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "endDate": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "timeDescription": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "venue": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "mapUrl": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "access": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "venueNotes": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "fee": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "organizer": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "multiDay": {
+      "type": "boolean"
+    },
+    "formats": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 2,
+      "items": {
+        "enum": [
+          "offline",
+          "online"
+        ]
+      }
+    },
+    "status": {
+      "enum": [
+        "normal",
+        "postponed",
+        "cancelled"
+      ]
+    },
+    "filmTagIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "maxLength": 100
+      }
+    },
+    "eventTagIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "maxLength": 100
+      }
+    }
+  },
+  "$id": "https://www.petiteadventurefilms.com/schemas/content/event-draft/v1"
+}
