@@ -80,3 +80,12 @@ test('source changes between read and insert are rejected atomically', async () 
   expect(await fixture.db.prepare('SELECT count(*) AS count FROM content_drafts').first('count')).toBe(1);
   expect(await fixture.db.prepare('SELECT count(*) AS count FROM draft_operations').first('count')).toBe(1);
 });
+
+test('does not inherit a custom slug when duplicating', async () => {
+  const original = await source();
+  await request(`/api/contents/${original.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: 1, payload: { ...original.payload, slug: 'custom-event' } });
+  const result = await request(`/api/contents/${original.id}/duplicate`, 'POST', { operationId: crypto.randomUUID(), expectedVersion: 2 });
+  expect(result.status).toBe(201);
+  expect((await result.json() as any).payload).not.toHaveProperty('slug');
+  expect((await (await request(`/api/contents/${original.id}`)).json() as any).payload.slug).toBe('custom-event');
+});

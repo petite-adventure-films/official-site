@@ -32,7 +32,7 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
     {draft.error && <Alert severity="error" action={!draft.blocked && <Button color="inherit" onClick={() => void draft.save()}>再試行</Button>}>
       {conflict ? '別の画面で更新されています。入力内容はこの画面に残っています。内容を控えてから再読み込みしてください。' : draft.error instanceof ApiError && draft.error.status === 401 ? '認証が切れました。別のタブでログインしてから再試行してください。' : '保存できませんでした。入力内容はこの画面に残っています。文字数や通信状態を確認してください。'}
     </Alert>}
-    <EventForm value={draft.value} change={draft.change} />
+    <EventForm value={draft.value} change={draft.change} contentId={draft.saved?.id} />
   </EditorLayout></div></>;
 }
 export function App() {

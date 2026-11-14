@@ -109,6 +109,10 @@
         "type": "string",
         "maxLength": 100
       }
+    },
+    "slug": {
+      "type": "string",
+      "maxLength": 20000
     }
   },
   "$id": "https://www.petiteadventurefilms.com/schemas/content/event-draft/v1"

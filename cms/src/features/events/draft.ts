@@ -1,5 +1,7 @@
 export type EventDraft = {
   title: string;
+  // Omitted means the immutable content ID is used as the initial slug.
+  slug?: string;
   startDate: string;
   endDate: string;
   timeDescription: string;

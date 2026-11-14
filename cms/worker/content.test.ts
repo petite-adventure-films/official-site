@@ -49,3 +49,12 @@ test('identical creation retry returns same id and changed replay is rejected', 
   expect(await (await create(emptyDraft(), id)).json()).toEqual(a);
   expect((await create({ ...emptyDraft(), title: 'different' }, id)).status).toBe(409);
 });
+
+test('optional slug preserves old drafts and incomplete custom values verbatim', async () => {
+  const old = await (await create()).json() as any;
+  expect(old.payload).not.toHaveProperty('slug');
+  const payload = { ...old.payload, slug: '途中 / 入力' };
+  const response = await request(`/api/contents/${old.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: 1, payload });
+  expect(response.status).toBe(200);
+  expect((await (await request(`/api/contents/${old.id}`)).json() as any).payload.slug).toBe(payload.slug);
+});

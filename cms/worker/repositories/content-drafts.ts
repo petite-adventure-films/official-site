@@ -74,9 +74,11 @@ export class ContentDraftRepository {
     if (!source) throw new DraftNotFound();
     if (source.version !== expectedVersion) throw new DraftConflict();
     const now = new Date().toISOString();
+    const payload = { ...source.payload };
+    delete payload.slug; // Copies receive their own initial URL.
     const response: Draft = {
       id: crypto.randomUUID(), version: 1, type: source.type, payloadSchemaVersion: source.payloadSchemaVersion,
-      payload: source.payload, createdAt: now, updatedAt: now, createdBy: actor, updatedBy: actor,
+      payload, createdAt: now, updatedAt: now, createdBy: actor, updatedBy: actor,
     };
     try {
       await this.db.prepare(`INSERT INTO draft_operations

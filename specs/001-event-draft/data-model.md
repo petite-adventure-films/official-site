@@ -31,3 +31,7 @@
 - `multiDay`: boolean。`formats`: offline/onlineの重複しない配列。`status`: normal/postponed/cancelled。
 - `filmTagIds` / `eventTagIds`: 重複なしの文字列ID配列。各最大100件。タグはD1の種別＋IDで参照を検証する。
 - 初期タグ一覧はGit管理されている `astro/data/wordpress-export.json` のイベントに現れるtaxonomyから取り込み、元のterm_idを文字列として保持する。`0002_tags.sql` はタグのみを登録し、既存記事やHTMLを下書きへ移行しない。タグ管理画面は今回設けない。
+
+## slug（下書きの追加項目）
+
+`slug?: string` をevent-draft/v1に後方互換の任意項目として追加する。未指定は記事IDを利用する意味で、保存時にタイトルから生成しない。明示的な空文字は入力途中として保存し、公開時は拒否する。下書き文字数上限は他の自由入力と同じ20000文字。画面では公開向けの200文字以内・パス区切りなどの不正・予約語archiveを案内するが、下書き保存は止めない。公開時の一意性・既存URL保護は公開処理側で検証する。複製ではslugを除いてコピーし、複製先IDを初期値にする。

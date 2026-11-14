@@ -82,6 +82,6 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 
 接続予定箇所は、CMSの `worker/routes/publication.ts`・`worker/services/publication.ts`・`worker/adapters/publication.ts`、新規の公開runner workflow、Astroの `src/pages/events/[id].astro` とイベント一覧・タグ一覧・サイトマップ。既存 `src/lib/wp-api.ts` は旧snapshotの読み取りを保持し、新規CMS公開データの読取境界を別に設ける。新規ファイル名・公開スキーマ・URL識別子は #394との照合後に確定する。
 
-公開必須項目は利用者確認済み。配備運用・数字URLの採番方法・表示用イベント番号・同内容再公開時の履歴表示が未決のためT033は未完了。設計案を実装開始や本番配備の合意として扱わない。
+公開必須項目は利用者確認済み。配備運用・slugの公開反映・既存URL保護・同内容再公開時の履歴表示が未決のためT033は未完了。設計案を実装開始や本番配備の合意として扱わない。
 
-公開URLは `/events/{数字}/` を継続する合意。既存のURL用WordPress IDと表示用イベント番号 `no` は別物であり、[調査結果](../002-cms-foundation/contracts/publication.md#公開urlとイベント番号の調査結果)に根拠と残る採番判断を記載した。
+既存URLは維持し、新規公開URLは `/events/{slug}/` とする。初期slugは記事ID（UUID）、手動変更可、公開後の変更には旧URLからの転送を伴う。既存のURL用WordPress IDと表示用イベント番号 `no` は別物であり、[調査結果](../002-cms-foundation/contracts/publication.md#公開urlとイベント番号の調査結果)に根拠と現在のslug方針を記載した。
