@@ -37,3 +37,7 @@ Access JWTはJWKS署名・issuer・audience・期限を検証し、2人の許可
 キーワード `q` はtitle/timeDescription/venue/address/access/venueNotes/fee/organizer/notesのいずれかに文字列として部分一致する条件。英字は大文字小文字を区別しない。タグ名・地図URL・日付・状態は検索に含めない。SQLのパラメータとして渡し、`%`や`_`もワイルドカードに解釈しない。q未指定または空文字列なら全件。
 
 複製は保存済みのコピー元とexpectedVersionを照合し、入力payloadとpayloadSchemaVersionだけを新IDの下書きへ引き継ぐ。新しい作成・編集日時と操作者を記録し、versionは1、copied_from_idにコピー元IDを記録する。0003_duplicate.sqlでコピー元の版検査・新規下書き・操作結果の記録を同一INSERTのトリガー内で原子的に確定する。同一操作IDの再送はコピー元の現状より先に保存済み結果を返す。
+
+## 公開・公開停止APIの設計状況
+
+API、非同期状態、再送、配信確認、機械認証は [公開接続の設計案](publication.md) に整理した。利用者・配備運用の確認前であり、未実装。202の受付と公開成功を区別し、外部デプロイとD1更新を単一トランザクションとして扱わない。

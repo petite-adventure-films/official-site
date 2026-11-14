@@ -75,3 +75,11 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 延期・中止は元の開催日と状態を保持して表示する案。延期日未定や最新一覧の掲載期限は公開表示のレビュー事項。今回の設計では削除・非表示へ自動変換しない。
 
 プレビューは今回、編集画面の非活性ボタンによる動線の確保までとする。本文レンダラー・表示モデル・別タブへのデータ受け渡しは後続実装とし、公開ページと見た目を共有する方式を先に設計する。
+
+## 公開接続の設計案（T033）
+
+[公開接続の設計案](../002-cms-foundation/contracts/publication.md) を参照する。現状のAstro静的生成とCloudflare配信設定を起点に、固定した公開候補から全サイトを生成し、配信確認後に公開ポインタ・履歴を確定する案。CMSのD1と外部配信は別の確定処理とし、結果不明時は照合してから後続処理へ進む。
+
+接続予定箇所は、CMSの `worker/routes/publication.ts`・`worker/services/publication.ts`・`worker/adapters/publication.ts`、新規の公開runner workflow、Astroの `src/pages/events/[id].astro` とイベント一覧・タグ一覧・サイトマップ。既存 `src/lib/wp-api.ts` は旧snapshotの読み取りを保持し、新規CMS公開データの読取境界を別に設ける。新規ファイル名・公開スキーマ・URL識別子は #394との照合後に確定する。
+
+公開必須項目は利用者確認済み。配備運用・URL・同内容再公開時の履歴表示が未決のためT033は未完了。設計案を実装開始や本番配備の合意として扱わない。
