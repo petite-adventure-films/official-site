@@ -4,7 +4,7 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 
 ## 基準と参照先
 
-編集はPC・1440px・ライトモードを基準にする。文字と余白で整理し、左右の領域は薄い背景と細い境界線で区切る。強調は文字サイズを大きくせず、通常サイズの太字を基本とする。SPの対応範囲、ダークモード、一覧固有のレイアウトは未決定。
+編集はPC・1440px・ライトモードを確認の基準にし、画面の固定幅とはしない。文字と余白で整理し、左右の領域は薄い背景と細い境界線で区切る。強調は文字サイズを大きくせず、通常サイズの太字を基本とする。SP全体の対応範囲とダークモードは未決定。一覧の幅・省略・横スクロールは [イベント一覧の画面契約](../specs/001-event-draft/contracts/screens.md#画面幅と長いタイトル) に従う。
 
 - [代表編集画面](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=17-2247)
 - [共通部品](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=20-1095)
@@ -22,16 +22,18 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 | 共通定義 | 役割 |
 | --- | --- |
 | [ListLayout](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-297) | 上部の検索・操作、一覧本体、下部のページ送りを標準Slotで配置 |
-| [ListRow](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-301) | タイトルと任意の公開ステータス・種別・ユーザー・日時の列。内容は標準Slotに配置 |
+| [ListRow](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-301) | タイトルと任意の映画タグ・イベントタグ・公開ステータス・種別・ユーザー・日時の列。内容は標準Slotに配置 |
 | [Pagination](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=33-304) | 全件数・表示範囲と、先頭・現在ページ周辺・末尾へのページ送り |
 
-ListRowは `Show status` / `Show type` / `Show user` / `Show date` で列の有無を切り替える。既定はタイトル＋公開ステータス。組合せごとのvariantは作らない。ユーザー・日時の意味は利用場面の列見出しで示す。[通常一覧・ゴミ箱の行見本](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=67-60)は利用者確認済み。
+ListRowは `Show film tags` / `Show event tags` / `Show status` / `Show type` / `Show user` / `Show date` で列の有無を切り替える。既定はタイトル＋公開ステータス。組合せごとのvariantは作らない。ユーザー・日時の意味は利用場面の列見出しで示す。[通常一覧・ゴミ箱の行見本](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=67-60)は利用者確認済み。
 
-履歴選択用の共通部品：[HistoryListItem](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=59-743)。年を含む保存日時とユーザー表示名を一行にまとめ、行全体で選択する。選択は背景色で示し、選択中・最新・並び順・件数の補足文字は置かない。選択中とキーボードフォーカスを独立して定義する。MUI ListItemButtonに対応づけるローカル部品で、代表画面は利用者確認済み。詳細は [保存履歴の画面契約](../specs/002-cms-foundation/contracts/screens.md#保存履歴の代表画面利用者確認済み) を参照する。
+履歴選択用の共通部品：[HistoryListItem](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=59-743)。日時・ユーザー表示名を1段目、MUI Chipの「編集中」「公開済」を2段目に表示し、行全体で選択する。選択背景とキーボードフォーカスを独立して定義する。保護した下書きがあれば先頭、公開済は新しい順に最大3件で合計最大4行。別の確認ボタンは置かない。詳細は [公開履歴の画面契約](../specs/002-cms-foundation/contracts/screens.md#保護した下書きと公開履歴の統合リスト) を参照する。
 
-ステータス変更の共通ダイアログ：[StatusDialog](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=66-388)。公開・下書き・ゴミ箱で同じ構造を使い、タイトル・記事名・影響説明・確定ボタンの文言と色を切り替える。確定色はSuccess / Primary / Error。代表案は利用者確認待ち。操作契約は [共通画面契約](../specs/002-cms-foundation/contracts/screens.md#ステータス変更の確認ダイアログ) を参照する。
+ステータス変更の共通ダイアログ：[StatusDialog](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=66-388)。公開・下書き・ゴミ箱で同じ構造を使い、タイトル・記事名・影響説明・確定ボタンの文言と色を切り替える。確定色はSuccess / Primary / Error。代表案と開閉・フォーカスの操作契約は利用者確認済み。操作契約は [共通画面契約](../specs/002-cms-foundation/contracts/screens.md#ステータス変更の確認ダイアログ) を参照する。
 
 ## コンポーネントの境界
+
+ダイアログの背景・表示位置は、ModalBackdropを含め利用者確認済みの [編集画面に重ねた代表案](../specs/002-cms-foundation/contracts/screens.md#編集画面に重ねた代表案利用者確認済み) に従う。操作・読み上げの実装検証は別途行う。
 
 - HTML上の意味的な区切りがあり、構造が反復するものを共通コンポーネントにする。
 - 共通Layout・Section・Fieldはインスタンスとして使う。名前やAuto Layoutを付けただけのフレームを共通化済みと扱わない。
@@ -39,11 +41,24 @@ ListRowは `Show status` / `Show type` / `Show user` / `Show date` で列の有�
 - Sectionは枠で囲まず、余白で区切る。見出しは原則非表示とし、識別に必要な場合のみFieldラベルと同じ文字スタイルで表示する。実装の意味構造は内容に応じてsectionと見出し、fieldsetとlegendなどで表す。
 - Fieldはラベルを含めたまとまり。TextFieldだけでなく、Chip群やSwitchも入力・選択要素として扱う。構造と見た目の双方を共通定義へ対応づける。
 
+## スペーシング
+
+余白は用途別の共通定義を使う。[CMSスペーシング用途一覧](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=92-149) と spacing コレクションの `cms/*` 変数を数値の正本とする。既存の共通部品と編集・一覧・公開履歴・ダイアログ表示画面に適用済み。
+
+- セクション間は `cms/section`、セクション内の入力項目間は `cms/content`。
+- 横並びでも独立した入力項目同士は `cms/content` を使う。例えば開催日・終了日・複数日の切り替えは項目間、切り替えのラベルとSwitchは `cms/related`。部品内部の透明な余白も含めた見た目で、項目内が項目間より近く見えることを確認する。
+- 見出しと内容は `cms/heading`、同じ項目の関連情報は `cms/related`、主情報と補足情報は `cms/detail`。
+- アイコンとテキストは `cms/icon`、ボタン同士は `cms/actions`。
+- リスト項目の内側は `cms/list-padding-y` と `cms/list-padding-x`。項目内の情報間隔と別の用途として管理する。
+- 値が同じでも用途を分けて参照する。画面ごとに数値を選び直さず、不足する用途は共通定義へ追加する。Figmaでは基礎値へのエイリアス、実装では対応するテーマ変数を使う。MUI部品内部の既定寸法と、部品を配置する間隔を混同しない。
+- 用途の定義は既存画面・部品で必要なものに限る。将来のためだけに変数や一覧項目を追加せず、新しい用途が必要になった時点で使用箇所とともに定義する。
+- 画面外周の余白・領域内のパディングはLayoutの定義、MUI入力欄やボタン内部はMUI部品の定義に従う。用途の異なる `cms/*` 変数へ一律に置き換えない。
+
 ## 編集画面の配置
 
 - 共通ナビは左。項目名は通常サイズとし、現在地を太字で示す。絵文字と項目名を使える。アカウントが領域外へはみ出さないようナビの高さをレイアウトに合わせる。未確定のナビ項目は追加しない。
 - 独立したヘッダー行は設けず、本文上部の操作行に一覧へ戻る導線を左、編集操作を右にまとめる。次に記事タイトルの入力を置く。
-- 本文側の上部、タイトル入力の前に編集操作を置く。保存状態・保存履歴・保存・プレビューの順に1行で右揃えにする。保存は塗りつぶし、プレビューは枠線、保存履歴はテキストボタン。
+- 本文側の上部、タイトル入力の前に編集操作を置く。保存状態・公開履歴・保存・プレビューの順に1行で右揃えにする。保存は塗りつぶし、プレビューは枠線、公開履歴はテキストボタン。
 - 右側は公開管理、type固有の設定、タグの順に独立したSectionとして配置し、余白と薄い横線で区切る。
   - 公開管理：公開ステータスと緑（MUI Success）の枠線の公開ボタンを左揃えで配置し、その下に作成・最終編集日時をまとめる。公開前に確認を挟む。
   - type固有の設定：イベントでは開催状況。タグとは別Section。
@@ -72,6 +87,7 @@ ListRowは `Show status` / `Show type` / `Show user` / `Show date` で列の有�
 提出前確認：
 
 - 外観：基準幅、領域の区切り、余白、ラベル、入力幅、操作の位置、文字切れ・重なり。
+- スペーシング：各余白が用途別の共通変数を参照していること。インスタンスの高さ・余白の上書きが共通定義を妨げていないこと。数値だけでなく通常表示でまとまりも確認する。
 - 構造：Layout・Section・Fieldの実際の参照元、標準Slotへの直接配置、参照切れと不要な補助部品の有無。
 - 状態：合意した切り替えで必要な入力欄が表示され、内容の保持を含む未確認の動作が明示されていること。
 - 提出：静的な外観・構造の確認と、実装での操作・保存・アクセシビリティ確認を区別する。
