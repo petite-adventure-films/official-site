@@ -1,15 +1,15 @@
 import Ajv from 'ajv/dist/2020';
 import eventSchema from '../../../packages/content-schema/schemas/content/event-publication.schema.json';
-import type { EventPublication } from '../../../packages/content-schema/types/event-publication';
 import { slugIssue } from '../../../cms/src/features/content/slug';
-export type CmsEventRecord = { id: string; publishedAt: string; payload: EventPublication };
-type Tag = { id: string; name: string };
-export type CmsEventSnapshot = {
-  schemaVersion: 'cms-events/v1';
-  events: CmsEventRecord[];
-  filmTags: Tag[];
-  eventTags: Tag[];
-};
+import type {
+  CmsEventRecord,
+  CmsEventTag as Tag,
+  CmsEventSnapshot,
+} from '../../../packages/content-schema/types/cms-events';
+export type {
+  CmsEventRecord,
+  CmsEventSnapshot,
+} from '../../../packages/content-schema/types/cms-events';
 export type CmsEventView = CmsEventRecord & { no: number; filmTags: Tag[]; eventTags: Tag[] };
 const tagSchema = {
   type: 'array',

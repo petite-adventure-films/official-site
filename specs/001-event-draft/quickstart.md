@@ -61,3 +61,10 @@ slugはタイトル直下で編集する。初回保存後に記事IDが初期�
 - オンラインのみ: http://127.0.0.1:4326/events/cms-sample-online/
 
 通常のCMS下書き・公開履歴を読む機能ではなく、`astro/fixtures/cms-events.json` を使う表示検証。終了はCtrl+C。既存の公開サイト開発サーバーとは独立して起動する。`pnpm --dir astro test:e2e` は既存サイトに続いてこの表示検証も実行し、専用結果を `astro/playwright-report-cms/` と `astro/test-results-cms/` に保存する。
+
+
+### CMSの公開確定データを使う
+
+通常のCMSローカルサーバーを起動した状態で、`pnpm --dir astro export:cms` を実行する。現在公開中として確定した版の全件が `.local/cms-published-events.json` に保存される。公開確定記録がなければ0件であり、下書きを代わりに出力しない。
+
+4326の検証サーバーを停止してから `pnpm --dir astro dev:cms ../.local/cms-published-events.json` で起動する。確認先は各記事の `/events/{slug}/`。公開確定内容が変わったら再度書き出し、表示サーバーも再起動する。このコマンドは公開処理・履歴追加・配信を行わず、本番ビルドへの入力も引き続き禁止する。実際の公開操作はまだ未接続なので、通常DBに公開記録を作るための仮の成功処理は行わない。

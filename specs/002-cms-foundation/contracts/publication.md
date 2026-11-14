@@ -136,8 +136,19 @@ migrationは保持中の既存公開履歴と現行公開ポインタからURL�
 
 ## 公開イベント表示のローカル検証
 
-Astro側の `cms-events/v1` は表示検証用の入力形式で、配信用release manifestではない。ルートに `schemaVersion`、`events`、`filmTags`、`eventTags` を持つ。イベントは `id`、UTCの `publishedAt`、`event-publication/v1` の `payload`、タグは `id` と `name`。許可しないフィールド・不正日付・タグ参照切れ・予約slug・既存WordPressイベントURLとの重複は拒否する。現時点ではD1からの書き出しや公開成功との接続はない。
+Astro側の `cms-events/v1` は表示検証用の入力形式で、配信用release manifestではない。ルートに `schemaVersion`、`events`、`filmTags`、`eventTags` を持つ。イベントは `id`、UTCの `publishedAt`、`event-publication/v1` の `payload`、タグは `id` と `name`。許可しないフィールド・不正日付・タグ参照切れ・予約slug・既存WordPressイベントURLとの重複は拒否する。D1の公開確定版からのローカル書き出しは下記のとおり接続済み。公開操作・実配信との接続は未完了。
 
 `pnpm --dir astro dev:cms` は明示的に検証fixtureを読み、127.0.0.1:4326で既存の公開レイアウトを使って表示する。独自入力は `pnpm --dir astro dev:cms /absolute/path/events.json`。開発中の表示はnoindexで、通常ビルドへの `CMS_EVENT_SNAPSHOT` 指定はエラーにする。既存WordPressデータの生成は変えない。CMS詳細の記事番号は検証入力と既存イベント全件の公開日時順から算出する。既存記事の番号はこの段階では変更しない。
 
 この入力を本番配信や下書きプレビューへ流用する際は、公開確定データの抽出・全公開集合・認証・URL転送・一覧と番号の整合性・release検証を別途接続する必要がある。
+
+
+## 公開確定データの受け渡し（ローカル）
+
+`cms/worker/services/publication-export.ts` は `publication_state` が指す現在の `publication_revisions` だけを読み、`cms-events/v1` を生成する。記事一覧APIのページ分割は使わず全件を取得する。版・記事ID・hash・現行slugの整合性、payload schema、参照タグを検査し、欠損や不整合は記事を省略せず全体のエラーにする。本文hashは保存された本文から再計算する。
+
+公開ポインタ・本文・タグは1つのSQLで同じDB時点から読む。下書き、公開処理中・失敗・結果不明の候補、過去の履歴は出力しない。操作者・内部処理情報・内容hashを出力せず、参照中のタグだけをid/nameで渡す。公開日時は現在の確定版のpublished_at。既存の表示番号・並び順方針の全画面適用は別途必要。
+
+`GET /api/local/published-events` はloopback限定の `worker/local.ts` にだけ存在し、no-store/noindexを返す。本番Workerの認証済み経路にも追加しない。`pnpm --dir astro export:cms` は127.0.0.1:8787のこの経路だけを読み、リダイレクトを拒否する。`.local/cms-published-events.json` に一時ファイルから原子的に置換し、取得失敗時は以前のファイルを保持する。出力はGit管理外で、読み書き権限を所有者に限定する。
+
+これは現在の確定データの読み取りであり、新しい公開候補のrelease manifestや配信処理ではない。公開状態・履歴・下書きは変更しない。タグ名は取得時点の名称を使う。将来のタグ編集と配信の関係、転送・公開停止・配信アダプター・機械認証は引き続き未接続。

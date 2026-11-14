@@ -21,6 +21,7 @@
     "test:e2e": "playwright test && pnpm run test:e2e:cms",
     "test:e2e:report": "playwright show-report",
     "test:e2e:serve": "node --import ./e2e/fixed-date.mjs ./node_modules/astro/bin/astro.mjs build --outDir .e2e-dist && astro preview --outDir .e2e-dist --host 127.0.0.1 --port 4325",
+    "export:cms": "node scripts/export-cms.mjs",
     "dev:cms": "node scripts/dev-cms.mjs",
     "test:e2e:cms": "playwright test --config playwright.cms.config.ts"
   },
