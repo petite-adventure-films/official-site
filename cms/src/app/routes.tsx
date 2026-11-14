@@ -38,7 +38,7 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
       {draft.saved && <div className="flex flex-col gap-cms-detail"><Typography variant="caption">作成日時 {new Date(draft.saved.createdAt).toLocaleString('ja-JP')}</Typography><Typography variant="caption">最終編集日時 {new Date(draft.saved.updatedAt).toLocaleString('ja-JP')}</Typography></div>}
     </Section>
     <div className="border-t border-cms-divider pt-cms-content flex flex-col gap-cms-section"><EventSettings value={draft.value} change={change} tags={tags} errors={errors} /></div>
-    <div className="border-t border-cms-divider pt-cms-content"><Section label="複製"><DuplicateAction flush={draft.flush} disabled={draft.blocked} busy={duplicating} onBusy={setDuplicating} /></Section></div>
+    <div className="border-t border-cms-divider pt-cms-content"><Section label="記事の管理"><div className="flex flex-wrap items-start gap-cms-actions"><DuplicateAction flush={draft.flush} disabled={draft.blocked} busy={duplicating} onBusy={setDuplicating} /><Button color="error" disabled>ゴミ箱へ移動</Button></div></Section></div>
   </>}>
     <div className="flex flex-wrap items-center gap-cms-actions">
       <Button href="/cms/events" startIcon={<ChevronLeft />}>イベント一覧</Button><div className="flex-1" />

@@ -4,6 +4,7 @@ import { Field, Section } from '../../../components/Layout';
 import type { EventDraft } from '../draft';
 import type { Tags } from '../../../lib/api-client';
 import { SlugField } from '../../content/components/SlugField';
+import { DateField } from '../../../components/DateField';
 import { dateIssues } from '../date-issues';
 type Props = { value: EventDraft; change: (value: EventDraft) => void; errors?: Partial<Record<keyof EventDraft, string>> };
 export function EventForm({ value, change, contentId, errors = {} }: Props & { contentId?: string }) {
@@ -19,8 +20,8 @@ export function EventForm({ value, change, contentId, errors = {} }: Props & { c
       <SlugField value={value.slug} contentId={contentId} error={errors.slug} onChange={(slug) => change({ ...value, slug })} />
     </Section>
     <Section label="日時"><div className="flex flex-wrap items-start gap-cms-content">
-      <div className="w-cms-date">{text('startDate', '開催日')}</div>
-      {value.multiDay && <div className="w-cms-date">{text('endDate', '終了日')}</div>}
+      <div className="w-cms-date"><DateField label="開催日" value={value.startDate} error={issues.startDate} onChange={startDate => change({ ...value, startDate })} /></div>
+      {value.multiDay && <div className="w-cms-date"><DateField label="終了日" value={value.endDate} error={issues.endDate} onChange={endDate => change({ ...value, endDate })} /></div>}
       <label className="flex items-center gap-cms-related h-cms-input-height"><Typography variant="body2">複数日にわたる</Typography><Switch checked={value.multiDay} onChange={(_, checked) => change({ ...value, multiDay: checked })} /></label>
     </div>{text('timeDescription', '時間の案内')}</Section>
     <Section label="開催場所"><Field label="開催形式 *" outlined error={errors.formats}>
@@ -28,8 +29,8 @@ export function EventForm({ value, change, contentId, errors = {} }: Props & { c
         variant={value.formats.includes(format) ? 'filled' : 'outlined'} aria-pressed={value.formats.includes(format)}
         onClick={() => change({ ...value, formats: value.formats.includes(format) ? value.formats.filter((v) => v !== format) : [...value.formats, format] })} />)}
     </Field>
-    {value.formats.includes('offline') && <>{text('venue', '会場名')}{text('address', '住所')}{text('mapUrl', '地図URL')}{text('access', 'アクセス')}</>}
-    {text('venueNotes', '開催場所の備考', true)}</Section>
+    {value.formats.includes('offline') && <>{text('venue', '会場名')}{text('address', '住所')}{text('mapUrl', '地図URL')}{text('access', 'アクセス', true)}</>}
+    {text('venueNotes', '開催場所の備考・配信URLなど', true)}</Section>
     <Section label="参加案内">{text('fee', '料金')}{text('organizer', '主催者・問い合わせ', true)}{text('notes', '備考', true)}</Section>
   </>;
 }
