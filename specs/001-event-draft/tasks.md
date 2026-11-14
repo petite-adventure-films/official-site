@@ -85,7 +85,7 @@
 T033の現状: [公開接続の設計案](../002-cms-foundation/contracts/publication.md) を作成。必須項目は利用者確認済み。slug方針は合意済み。公開サイトの配信先は未決定で、[配信環境調査](../002-cms-foundation/contracts/deployment-environments.md)と残る配備運用の確認待ちで未完了。
 
 - [ ] T034 [US6] 公開成功・失敗・再送・競合・停止、同内容連続公開、4件目の整理を `cms/worker/publication.test.ts` に定義する。公開失敗は履歴を作らず、現在公開中の版を含む直近3件・期限なしを検証する。
-- [ ] T035 [US6] 公開版・履歴・保護枠・処理記録を `cms/migrations/0004_publication_history.sql` と `cms/worker/services/publication.ts` に実装する。公開要求だけが配信に接続し、保存・複製・復元は公開を起動しない。
+- [ ] T035 [US6] 公開版・履歴・保護枠・処理記録を `cms/migrations/0004_publication_history.sql`・`cms/migrations/0005_restore.sql` と `cms/worker/services/publication.ts` に実装する。公開要求だけが配信に接続し、保存・複製・復元は公開を起動しない。
 - [ ] T036 [US6] T033の接続設計に従って `cms/worker/adapters/publication.ts` と `cms/worker/routes/publication.ts` を実装する。公開用検証は開催形式1つ以上必須、非表示値を除外し、不正時に現在の公開内容を変更しない。公開側の必要な変更先はT033で実在経路に確定する。
 - [ ] T037 [US6] 復元の原子的更新・保護1件の入れ替え・再送・競合・スキーマ互換性・他記事拒否を `cms/worker/restore.test.ts` に定義し、`cms/worker/routes/history.ts` と `cms/worker/services/restore.ts` に実装する。保護した下書きを戻すときも交換し、失敗時は両方を維持する。
 - [ ] T038 [US6] 公開／停止の確認ダイアログと履歴画面を `cms/src/features/content/components/PublicationActions.tsx` と `cms/src/features/content/components/HistoryView.tsx` に実装する。編集中1件＋公開済最大3件、0件時の非活性と直接URLの編集への置き換え、取得失敗時の再試行、復元成功後の編集復帰を守る。
@@ -97,7 +97,7 @@ T033の現状: [公開接続の設計案](../002-cms-foundation/contracts/public
 
 - [ ] T040 [US7] ゴミ箱一覧とAPI、移動時の公開停止失敗、30日境界・実行時刻・再試行、復元と削除の競合、履歴・保護枠・共有タグ等の関連データ境界を `specs/002-cms-foundation/contracts/api.md` と `specs/002-cms-foundation/data-model.md` に設計する。未合意の削除対象を自動で広げず、判断が必要なら確認する。
 - [ ] T041 [US7] 移動・復元・公開停止失敗・再送・期限境界・競合・他記事保持を `cms/worker/trash.test.ts` に定義する。時刻を制御して30日を検証し、実時間の待機や本番データを使わない。
-- [ ] T042 [US7] ゴミ箱状態・削除期限を `cms/migrations/0005_trash.sql` に追加し、`cms/worker/services/trash.ts` と `cms/worker/routes/trash.ts` に移動・復元を実装する。元の種別へ下書きとして戻し、再公開しない。
+- [ ] T042 [US7] ゴミ箱状態・削除期限を `cms/migrations/0006_trash.sql` に追加し、`cms/worker/services/trash.ts` と `cms/worker/routes/trash.ts` に移動・復元を実装する。元の種別へ下書きとして戻し、再公開しない。
 - [ ] T043 [US7] 定期削除と再試行可能な処理記録を `cms/worker/jobs/purge-trash.ts` と `cms/wrangler.jsonc` に実装する。T040の関連データ範囲を守り、二重実行・部分失敗・復元との競合を安全に処理する。
 - [ ] T044 [US7] 共通一覧の通常／ゴミ箱切り替えと移動・復元導線を `cms/src/features/content/components/TrashActions.tsx` と `cms/src/features/content/components/ContentList.tsx` に実装する。削除した人・日時を見出しで区別し、復元後もゴミ箱一覧に留まる。Figmaと `specs/002-cms-foundation/contracts/screens.md` を揃える。
 - [ ] T045 [US7] `cms/e2e/trash.spec.ts` で移動確認・キャンセル・公開停止・復元後非公開・期限経過後の取得不可を検証する。
@@ -140,3 +140,5 @@ US4の入力状態はT013でデータモデルに含め、T029で切り替えを
 - [x] T053 配信しない公開前チェックAPIと画面操作を実装し、保存完了待ち・項目別エラー・フォーカス・編集時の結果解除・失敗後の再試行・DB無変更を検証する。T052の実公開・URL予約は未完了のままとする。
 
 - [x] T054 配信先に接続しない内部処理として、固定公開候補・操作再送・配信attempt・結果照合・成功時の原子的な履歴確定と最新3件保持を実装する。テスト用配信処理で成功・失敗・再試行・DB失敗・競合・過去内容再公開を検証する。T034〜T039の実配信・公開停止・復元・画面は未完了のままとする。
+
+- [x] T055 公開履歴と復元前保護枠を内部サービスで取得・復元する。復元前下書きの保護、保護枠との交換、原子的な更新、再送・同時操作・他記事・削除済み履歴・スキーマ互換性・DB失敗を検証する。APIと履歴画面への接続はT037/T038に残す。保護枠は追加migration `0005_restore.sql` とし、後続ゴミ箱migrationは `0006_trash.sql` とする。

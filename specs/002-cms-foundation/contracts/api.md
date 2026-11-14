@@ -47,3 +47,5 @@ API、非同期状態、再送、配信確認、機械認証は [公開接続の
 `POST /api/contents/:id/check-publication` は `{expectedVersion}` を受け、認証・同一Origin・JSON要求を検査する。保存済み下書きとversionを照合し、現在のDBのタグ集合で公開候補を検証する。検証後にも記事versionを再確認し、変更されていれば409。対象なし404、不正な要求422、認証・通信失敗は既存エラー契約に従う。
 
 入力上の問題はHTTP 200で `{ok:false,version,issues:[{field,code,message}]}`、項目検証成功は `{ok:true,version}` を返す。これは公開要求の422とは別の検査用APIで、公開用payloadを返さず、DB・公開状態・履歴・操作記録を変更しない。slugの所有権・旧URL予約・実配信可否は未検証であり、okは確認した版の入力項目に対する結果に限る。
+
+履歴の統合取得と下書き復元は、現在 `worker/services/restore.ts` の内部サービスまで実装済み。上記のhistory/restore HTTPルートは未接続。本人確認・Origin制限・要求検証・画面の保存完了待ちはAPI/画面接続時に既存の保存契約に揃えて検証する。
