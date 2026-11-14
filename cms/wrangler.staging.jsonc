@@ -1,4 +1,5 @@
-// Enable a staging hostname only after configuring Cloudflare Access and its auth variables.
+// Protected by the PAF CMS staging Access application; keep preview URLs disabled.
+// Auth variables and allowed users are Worker secrets, never repository values.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "paf-cms-staging",
@@ -7,7 +8,7 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "workers_dev": false,
+  "workers_dev": true,
   "preview_urls": false,
   "d1_databases": [
     {

@@ -53,6 +53,10 @@ Cloudflareの既存リソースを確認済み。Worker・D1・Accessのテス�
 
 2026-11-14にOAuth再認証を完了。専用D1 `paf-cms-staging-db`（ID `ba08fb39-5da0-49bf-9b33-0b84d35a4fe9`）を作成し、0001〜0007のmigrationを適用した。未適用migrationが0件であることを確認。記事は投入していない。
 
-`cms/wrangler.staging.jsonc` は対象アカウント・専用DB・認証を行うWorker入口を固定し、workers.devとpreview URLは無効のままにする。CMSビルドと配備dry-runを確認。CMS Workerを配備済み（version `7e778958-f5d7-4ba2-b465-15d1c650daae`）。URLは無効で、サイトは未配備。認証テスト15件成功、リモートDBの下書き0件を確認した。
+`cms/wrangler.staging.jsonc` は対象アカウント・専用DB・認証を行うWorker入口を固定する。CMS Worker配備版は `04937f2d-5f67-4b6c-be10-a63c3e9ee9d8`。CMSビルド・dry-run・認証テスト15件成功、リモートDBの下書き0件を確認した。サイトは未配備。
 
-利用者によるZero Trust Free有効化を管理画面で確認済み。許可する2人のメールアドレス・表示名を利用者から受領済み。CMS専用Accessの許可ルールを画面に入力し、権限付与の最終確認待ちで未保存。Access設定、CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSの設定、認証付き配備と実公開接続は未完了。個人メールアドレス・認証情報はリポジトリへ記録しない。
+利用者によるZero Trust Free有効化を確認し、承認された2人の個別メールアドレスを許可する `PAF staging editors` ポリシー（`3e1170be-8795-443e-bf64-e2c0ee9c81e2`）を保存した。Access application `PAF CMS staging`（`1b667f1c-6ed0-4b37-803a-3b90b3e58a1c`）はCMS Worker全体を保護し、他のWorkerは対象にしない。メールのOne-time PIN認証を追加し、アプリへ選択・保存済み。
+
+CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSをWorker secretsに登録済み。個人メールアドレス・認証情報はリポジトリへ記録しない。認証設定後にworkers.devを有効化し、preview URLは無効を維持する。テストURLは https://paf-cms-staging.restard653.workers.dev/cms/events 。
+
+未認証の画面・API・JS・ローカル専用API相当の4経路について、通常のHTTP要求は403、HTML要求はAccessログインへの302を確認。ブラウザーでメール入力と「Send login code」が表示された。ログイン成功後のCMS画面・保存は利用者のメール認証待ちで未確認。テストサイト配備と実公開接続も未完了。
