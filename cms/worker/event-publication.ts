@@ -4,14 +4,8 @@ import { calendarDate } from '../src/lib/calendar-date';
 import { slugIssue } from '../src/features/content/slug';
 
 // This is a public-data candidate, not a published record or deployment result.
-export type EventPublication = {
-  type: 'event'; payloadSchemaVersion: 'event-publication/v1';
-  title: string; slug: string; startDate: string; endDate?: string;
-  formats: EventDraft['formats']; status: EventDraft['status'];
-  timeDescription: string; venueNotes: string; fee: string; organizer: string; notes: string;
-  venue?: string; address?: string; mapUrl?: string; access?: string;
-  filmTagIds: string[]; eventTagIds: string[];
-};
+export type { EventPublication } from '../../packages/content-schema/types/event-publication';
+import type { EventPublication } from '../../packages/content-schema/types/event-publication';
 export type PublicationIssue = {
   field: keyof EventDraft | '_schema'; code: 'invalid_shape' | 'required' | 'invalid_date' | 'date_order' | 'invalid_url' | 'invalid_slug' | 'unknown_tag' | 'url_reserved'; message: string;
 };

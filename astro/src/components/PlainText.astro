@@ -1,0 +1,16 @@
+---
+import { plainTextLinks } from '@/lib/cms-events';
+import ExternalLink from './ExternalLink.astro';
+interface Props {
+  value: string;
+}
+const { value } = Astro.props;
+---
+
+<span class="wrap-anywhere whitespace-pre-wrap"
+  >{
+    plainTextLinks(value).map((part) =>
+      part.href ? <ExternalLink href={part.href}>{part.text}</ExternalLink> : part.text,
+    )
+  }</span
+>

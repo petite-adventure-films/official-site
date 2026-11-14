@@ -74,6 +74,8 @@ jobs:
           path: |
             astro/playwright-report/
             astro/test-results/
+            astro/playwright-report-cms/
+            astro/test-results-cms/
             cms/playwright-report/
             cms/test-results/
           retention-days: 7

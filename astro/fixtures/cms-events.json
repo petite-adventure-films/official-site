@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "cms-events/v1",
+  "filmTags": [
+    {
+      "id": "film-demo",
+      "name": "検証用作品"
+    }
+  ],
+  "eventTags": [
+    {
+      "id": "event-demo",
+      "name": "上映会"
+    }
+  ],
+  "events": [
+    {
+      "id": "local-example-1",
+      "publishedAt": "2026-11-14T00:00:00.000Z",
+      "payload": {
+        "type": "event",
+        "payloadSchemaVersion": "event-publication/v1",
+        "title": "CMS検証用・会場とオンラインの上映会",
+        "slug": "cms-sample-screening",
+        "startDate": "2026-12-30",
+        "endDate": "2027-01-03",
+        "formats": [
+          "offline",
+          "online"
+        ],
+        "status": "normal",
+        "timeDescription": "各日 14:00 開場\n14:30 開演",
+        "venue": "まちの交流室",
+        "address": "東京都内（検証用）",
+        "mapUrl": "https://example.com/map",
+        "access": "駅から徒歩5分",
+        "venueNotes": "オンライン参加の案内は申込後にお知らせします。",
+        "fee": "参加費 1,000円",
+        "organizer": "検証用の上映会実行委員会\nhttps://example.com/contact",
+        "notes": "この内容はローカル表示の検証データです。\n<script>alert(1)</script> は文字として表示されます。",
+        "filmTagIds": [
+          "film-demo"
+        ],
+        "eventTagIds": [
+          "event-demo"
+        ]
+      }
+    },
+    {
+      "id": "local-example-2",
+      "publishedAt": "2026-11-14T00:01:00.000Z",
+      "payload": {
+        "type": "event",
+        "payloadSchemaVersion": "event-publication/v1",
+        "title": "CMS検証用・オンライン上映会",
+        "slug": "cms-sample-online",
+        "startDate": "2026-12-30",
+        "formats": [
+          "online"
+        ],
+        "status": "postponed",
+        "timeDescription": "各日 14:00 開場\n14:30 開演",
+        "venueNotes": "オンライン参加の案内は申込後にお知らせします。",
+        "fee": "参加費 1,000円",
+        "organizer": "検証用の上映会実行委員会\nhttps://example.com/contact",
+        "notes": "この内容はローカル表示の検証データです。\n<script>alert(1)</script> は文字として表示されます。",
+        "filmTagIds": [
+          "film-demo"
+        ],
+        "eventTagIds": [
+          "event-demo"
+        ]
+      }
+    }
+  ]
+}
