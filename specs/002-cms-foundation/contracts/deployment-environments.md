@@ -53,6 +53,6 @@ Cloudflareの既存リソースを確認済み。Worker・D1・Accessのテス�
 
 2026-11-14にOAuth再認証を完了。専用D1 `paf-cms-staging-db`（ID `ba08fb39-5da0-49bf-9b33-0b84d35a4fe9`）を作成し、0001〜0007のmigrationを適用した。未適用migrationが0件であることを確認。記事は投入していない。
 
-`cms/wrangler.staging.jsonc` は対象アカウント・専用DB・認証を行うWorker入口を固定し、workers.devとpreview URLは無効のままにする。CMSビルドと配備dry-runを確認。Workerとサイトはまだ配備していない。
+`cms/wrangler.staging.jsonc` は対象アカウント・専用DB・認証を行うWorker入口を固定し、workers.devとpreview URLは無効のままにする。CMSビルドと配備dry-runを確認。CMS Workerを配備済み（version `7e778958-f5d7-4ba2-b465-15d1c650daae`）。URLは無効で、サイトは未配備。認証テスト15件成功、リモートDBの下書き0件を確認した。
 
-Zero Trustは未設定。管理画面のFree有効化に利用規約および無料枠超過分のカード請求への同意が必要で、利用者の操作待ち。許可する2人のメールアドレス・表示名も確認待ち。Access設定、CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSの設定、認証付き配備と実公開接続は未完了。個人メールアドレス・認証情報はリポジトリへ記録しない。
+利用者によるZero Trust Free有効化を管理画面で確認済み。許可する2人のメールアドレス・表示名を利用者から受領済み。CMS専用Accessの許可ルールを画面に入力し、権限付与の最終確認待ちで未保存。Access設定、CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSの設定、認証付き配備と実公開接続は未完了。個人メールアドレス・認証情報はリポジトリへ記録しない。
