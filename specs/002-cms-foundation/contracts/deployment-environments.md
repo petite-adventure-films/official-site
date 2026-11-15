@@ -60,3 +60,11 @@ Cloudflareの既存リソースを確認済み。Worker・D1・Accessのテス�
 CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSをWorker secretsに登録済み。個人メールアドレス・認証情報はリポジトリへ記録しない。認証設定後にworkers.devを有効化し、preview URLは無効を維持する。テストURLは https://paf-cms-staging.restard653.workers.dev/cms/events 。
 
 未認証の画面・API・JS・ローカル専用API相当の4経路について、通常のHTTP要求は403、HTML要求はAccessログインへの302を確認。ブラウザーでメール入力と「Send login code」が表示された。利用者のメール認証後、Safariで許可利用者の表示、テスト下書きの手動保存・自動保存、再読込でタイトルと複数行アクセス案内の保持、一覧の下書き表示を確認した。必須項目未入力でも保存され、公開前チェックで開催日・会場名の不足が表示される。リモートDBでもテスト記事のversion 2、公開履歴0件・公開操作0件を確認。テスト下書き「接続確認用テスト記事（公開しません）」（`e05e641b-866b-478e-8563-c1c2c437a414`）は確認用に残す。2人目の実ログインは未確認。テストサイト配備と実公開接続は未完了。
+
+## PAF管理アカウントでの検証環境（#423）
+
+2026-11-15にPAF管理のCloudflareアカウントへ開発担当者の個別ログインで接続し、検証用D1を新規作成した。既存の移行スクリプト0001〜0007を適用し、検証用Worker `paf-cms-staging` をデプロイした（配備版 `eafc0009-1a84-4537-8ee4-e428f5ebf5fa`）。既存データは投入していない。
+
+Zero Trust Free有効化後、検証Workerに専用のAccessアプリを設定し、監督と開発担当者の2人を許可した。開発担当者のログイン先はCloudflareの管理に使用するアドレスと揃えた。Worker側のJWT検証設定を登録してからworkers.devを有効化した（配備版 `1dce3c45-9bcf-458a-b619-1aa6593ae8eb`）。プレビューURLは無効。
+
+検証URLは https://paf-cms-staging.petiteadventurefilms2.workers.dev/cms/events 。未認証のCMS画面とAPIへの要求がHTTP 302を返すことを確認した。開発担当者がログインし、テスト下書きの作成・保存・再読み込み・再編集・再保存を確認した。D1は適用待ちマイグレーション0件、下書き1件、公開記事・公開操作とも0件。監督本人のログインは未確認。
