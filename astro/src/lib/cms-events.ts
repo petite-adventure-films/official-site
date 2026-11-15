@@ -1,4 +1,5 @@
 import Ajv from 'ajv/dist/2020';
+import snapshotSchema from '../../../packages/content-schema/schemas/cms-events.schema.json';
 import eventSchema from '../../../packages/content-schema/schemas/content/event-publication.schema.json';
 import { slugIssue } from '../../../cms/src/features/content/slug';
 import type {
@@ -11,43 +12,9 @@ export type {
   CmsEventSnapshot,
 } from '../../../packages/content-schema/types/cms-events';
 export type CmsEventView = CmsEventRecord & { no: number; filmTags: Tag[]; eventTags: Tag[] };
-const tagSchema = {
-  type: 'array',
-  items: {
-    type: 'object',
-    additionalProperties: false,
-    required: ['id', 'name'],
-    properties: { id: { type: 'string', minLength: 1 }, name: { type: 'string', minLength: 1 } },
-  },
-};
 const ajv = new Ajv({ strictTypes: false });
 ajv.addSchema(eventSchema);
-const validate = ajv.compile<CmsEventSnapshot>({
-  type: 'object',
-  additionalProperties: false,
-  required: ['schemaVersion', 'events', 'filmTags', 'eventTags'],
-  properties: {
-    schemaVersion: { const: 'cms-events/v1' },
-    filmTags: tagSchema,
-    eventTags: tagSchema,
-    events: {
-      type: 'array',
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['id', 'publishedAt', 'payload'],
-        properties: {
-          id: { type: 'string', minLength: 1 },
-          publishedAt: {
-            type: 'string',
-            pattern: '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$',
-          },
-          payload: { $ref: eventSchema.$id },
-        },
-      },
-    },
-  },
-});
+const validate = ajv.compile<CmsEventSnapshot>(snapshotSchema);
 export function safeHttpUrl(value: string): boolean {
   try {
     const url = new URL(value);

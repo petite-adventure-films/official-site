@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./cms-events.schema.json": "./schemas/cms-events.schema.json",
     "./asset.schema.json": "./schemas/asset.schema.json",
     "./content.schema.json": "./schemas/content.schema.json",
     "./content-record.schema.json": "./schemas/content-record.schema.json",
