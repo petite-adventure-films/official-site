@@ -104,7 +104,7 @@ T033の現状: [公開接続の設計案](../002-cms-foundation/contracts/public
 
 ## Phase 10: 横断検証と引き継ぎ
 
-- [ ] T046 `cms/e2e/accessibility.spec.ts` にキーボード主経路、ダイアログの初期／復帰フォーカス・Escape・背景操作抑止、表見出し、保存通知、自動アクセシビリティ検査を追加する。`specs/001-event-draft/verification.md` に自動／手動／本人確認の結果と未確認事項を分けて記録する。
+- [ ] T046 PCでの編集・保存・再試行と、既存ダイアログの開閉操作を確認し、検証結果と未確認事項を記録する。
 - [ ] T047 開発用DBのエクスポート・別DBへの復元を `cms/scripts/backup.mjs`、`cms/scripts/restore.mjs` に実装してテストし、`specs/002-cms-foundation/quickstart.md` に実行手順を記録する。本番バックアップ先・保持期間・失敗検知・復旧責任は導入前に確認する。
 - [ ] T048 両機能のquickstartに従いVitest・Worker/D1・Playwrightと必要な公開側回帰を実行し、`specs/001-event-draft/verification.md` にコマンド・結果・成果物を記録する。本人の操作確認は後日欄へ残し、テスト成功と混同しない。
 - [ ] T049 `specs/001-event-draft/checklists/requirements.md`、`specs/002-cms-foundation/checklists/requirements.md`、両機能のspec/plan/contractsを実装と照合する。公開・削除契約の未決、配信接続未確認、品質未確認を残したまま全体完了としない。

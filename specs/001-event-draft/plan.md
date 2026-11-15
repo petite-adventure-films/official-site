@@ -17,7 +17,7 @@
 - Target Platform: ブラウザ、Cloudflare Workers。開発用データと本番データを分離。
 - Project Type: 公開サイトと独立した管理用Webアプリ。
 - Performance Goals: 入力が止まって1秒後に自動保存。保存要求は1件ずつ送信し、応答待ちの追加入力は次回へまとめる。保存遅延中も編集・プレビューを継続できる。
-- Constraints: 保存・複製・プレビューから公開ビルドを起動しない。WCAG 2.2 AAを評価する。
+- Constraints: 保存・複製・プレビューから公開ビルドを起動しない。CMSの管理画面はPCで受け入れ確認する。
 - Scale/Scope: 利用者2人、イベントのみ。再編集・複製元を選ぶ最小の一覧、編集、別タブの公開ページプレビューを対象とする。
 
 ## Constitution Check
