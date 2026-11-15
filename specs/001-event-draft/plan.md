@@ -88,7 +88,7 @@ CMSは独立した `cms/package.json` とlockfileを持つ。Node 24、pnpm 10.2
 
 ## 配信先の確認状況
 
-[配信環境の確認結果](../002-cms-foundation/contracts/deployment-environments.md) を参照。GitHubの直近Preview・ProductionはVercelの配備記録。Cloudflareは設定ファイルがあるが、ローカル認証期限切れでリソース未確認。利用者は公開サイトの配信先をまだ決めていない。CMSのCloudflare＋D1とは別判断とし、公開adapter・実配信の確定は保留する。公開用データ形式・検証・固定snapshotからの生成は配信先に依存させず進める。実配信テストの完了は配信先の決定後。
+[配信環境の確認結果](../002-cms-foundation/contracts/deployment-environments.md) に従い、CMSと公開サイトをCloudflareへ集約する。PAF管理アカウントのCMS検証環境は構築・確認済み（#423）。公開サイト側の配信接続と本番切り替えは #390・#394・#389 で進める。公開用データ形式・検証・固定スナップショットからの生成を基礎とする。
 
 ## 公開候補の生成実装
 
