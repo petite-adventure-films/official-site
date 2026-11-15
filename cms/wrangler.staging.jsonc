@@ -14,11 +14,11 @@
     {
       "binding": "DB",
       "database_name": "paf-cms-staging-db",
-      "database_id": "ba08fb39-5da0-49bf-9b33-0b84d35a4fe9",
+      "database_id": "c73eceed-49c3-4d32-839f-31bd41207115",
       "migrations_dir": "migrations"
     }
   ],
-  "account_id": "923176c9ca0b65c526be853b018ea36a",
+  "account_id": "53b7ac20e59cefa91e5b88831768a248",
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
