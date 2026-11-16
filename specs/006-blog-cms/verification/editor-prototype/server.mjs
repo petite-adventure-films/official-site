@@ -1,0 +1,14 @@
+import { createRequire } from 'node:module';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { resolve, dirname } from 'node:path';
+import { readFileSync } from 'node:fs';
+const root=dirname(fileURLToPath(import.meta.url));
+const repo=resolve(root,'../../../..');
+const cms=createRequire(resolve(repo,'cms/package.json'));
+const deps=createRequire(resolve(process.env.TIPTAP_AUDIT_DEPS ?? '/tmp/paf-tiptap-audit','package.json'));
+const {createServer}=await import(pathToFileURL(cms.resolve('vite')));
+const {default:tailwind}=await import(pathToFileURL(cms.resolve('@tailwindcss/vite')));
+const posts=JSON.parse(readFileSync(resolve(repo,'astro/data/wordpress-export.json'))).content.blogs;
+const fixtures=[{id:'sample',title:'操作確認用の記事',content:'<p>日本語の本文を編集できます。</p><p><strong>強調</strong>と<a href="https://example.com/guide.pdf">PDF資料</a></p><p><img src="https://example.com/photo.jpg" alt="保存確認用画像" width="640" height="480"></p><iframe src="https://player.vimeo.com/video/50026595?h=11edb75887" width="640" height="360" title="保存確認用動画"></iframe>'},...posts.filter(p=>[18050,17696,15682,4318,14975].includes(p.id)),{id:'unsupported',title:'未対応要素の確認',content:'<p>消してはいけない本文</p><details><summary>補足</summary>原文</details>'}];
+const server=await createServer({root,configFile:false,plugins:[tailwind(),{name:'fixtures',configureServer(s){s.middlewares.use('/fixtures.json',(_req,res)=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(fixtures));});}}],resolve:{alias:[{find:/^@tiptap\/(.+)$/,replacement:resolve(dirname(deps.resolve('@tiptap/core')),'../..','$1')},...['react','react-dom','@mui/material','@emotion/react','@emotion/styled','@fontsource/roboto','tailwindcss'].map(name=>({find:name,replacement:dirname(cms.resolve(name+'/package.json'))}))]},server:{host:'127.0.0.1',port:4390,strictPort:true,fs:{allow:[repo,dirname(deps.resolve('jsdom/package.json'))+'/../..','/tmp/paf-tiptap-audit']}}});
+await server.listen();server.printUrls();
