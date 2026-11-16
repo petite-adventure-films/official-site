@@ -51,7 +51,7 @@
 
 ## 容量
 
-現行の変更APIは要求全体を256KiBで制限する。今回の標準Tiptap＋旧YouTube読込規則の本文JSONは最大195,962 bytes（記事14975）で、310件とも本文JSON単体は256KiB未満だった。正式なv2ノードと記事エンベロープを含めたサイズは再測定が必要であり、全記事を保存可能と断定しない。
+現行の変更APIは要求全体を256KiBで制限する。[現行試作のChromium全件検証](../verification/editor-prototype/all-articles.md)では、通過264件の本文JSONは最大210,204 bytes（記事14975）、旧分類値を使った暫定要求は210,892 bytes。上限まで51,252 bytesの余裕がある。確認待ち46件は保存可能と扱わない。正式v2・CMS ID解決後の最終要求は再測定が必要。初期の標準Tiptap構成で測った195,962 bytesとはノード構成が異なる。
 
 [容量の測定結果](../verification/body-size-summary.json)。動画試作の再実行は、互換性検証と同じ隔離依存を用意し、Node 24で `TIPTAP_AUDIT_DEPS=/tmp/paf-tiptap-recheck node specs/006-blog-cms/verification/video-node-probe.mjs` を実行する。動画試作は期待値不一致なら終了コードを非0にする。
 
@@ -70,3 +70,8 @@ Figmaの通常状態は[画面契約](screens.md)に記録。独立試作で入�
 [操作試作](../verification/editor-prototype/README.md#旧書式言語属性の保持)で、対応するtextStyle属性だけをCSS解析で正規化し、paragraphのlangを保持した。原文の属性・書式/リンクの対象の照合と、正規化後のJSON往復安定性を別々に検証する。原文は上書きしない。
 
 比較用DOMで統合できるのは全属性が同じ隣接リンクと、重複指定のない書式を持つ単一子spanの入れ子に限定する。一般的な差分許容には広げない。17696/4318の保存・追記・再読込、lang31箇所と添付参照保持を確認。色/書体や適用対象が異なる負例、lang欠落、不正CSS・未対応langの拒否も検証した。正式ノード・全記事移行の受け入れ確認は別途必要。
+
+
+### 全310件の検証と残件
+
+現行試作をChromiumで全件実行し、264件は原文照合・JSON往復・localStorage書込/読出しを通過。46件は停止し、[記事IDと理由の一覧](../verification/editor-prototype/all-articles.md)を残した。最初の停止理由は書式構造差15件、wbr13件、class9件、div7件、data属性2件。複数の要因を持つ記事もある。変換規則を緩めず、書式の適用範囲、改行候補、旧アンカー、コピー元属性の扱いを個別に詰める。画面操作・API保存・公開・正式v2移行の全件確認は含まない。

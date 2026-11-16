@@ -45,4 +45,10 @@ node specs/006-blog-cms/verification/editor-prototype/check.mjs
 
 `legacy-check.js` は同義の色/書体の正規化、異なる色/書体の区別、不正CSS・未対応lang・langを落とす構成の拒否、リンク/装飾の対象変更の検知、2回以上の往復安定を検証。`check.mjs` で旧記事5件の保存・再読込と、17696/4318への追記・再保存・再読込を確認した。4318のlang31箇所と画像/PDF/動画参照は保持される。スクリーンショットは `legacy-4318-1440.png`。
 
-以前の試作で保存したJSONが新しい属性定義と一致しない場合も、自動上書きせず停止する。試作の保存データは正式CMSへの移行対象ではない。正式v2、全310件、OS IMEの検証は残る。
+以前の試作で保存したJSONが新しい属性定義と一致しない場合も、自動上書きせず停止する。試作の保存データは正式CMSへの移行対象ではない。正式v2での全件検証とOS IMEの検証は残る。
+
+## 全310件の一括検証
+
+[全件レポートと確認待ち一覧](all-articles.md)。264件が原文照合・2回のJSON往復・localStorageシリアライズを通過し、46件は確認待ち。正式API保存や全記事の画面操作を検証したものではない。
+
+サーバー起動中に `node specs/006-blog-cms/verification/editor-prototype/audit-all.mjs` を実行する。結果は `all-articles-result.json` と `all-articles.md`。スナップショットのハッシュ、記事ごとの容量・添付件数・停止理由・変換差・追加の旧属性を記録する。ガードは変更していない。書式構造差15件、wbr、div/lang/id、コピー元class/data属性の順に対応を検討する。
