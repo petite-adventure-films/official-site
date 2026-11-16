@@ -18,16 +18,31 @@ try{
  await page.getByRole('button',{name:'やり直す',exact:true}).click();await expect(body).toContainText('日本語の追加入力。');results.push('日本語文字列の入力・Undo・Redo（OS IME変換は対象外）');
  await paste('<p><strong>貼り付けた文章</strong></p>');await expect(body.locator('strong').filter({hasText:'貼り付けた文章'})).toBeVisible();
  await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('paf-body-prototype:sample')).body);
- function media(n){return [...(['image','externalVideo'].includes(n.type)?[n]:[]),...(n.marks??[]).filter(m=>m.type==='link'),...(n.content??[]).flatMap(media)];}
+ function media(n){return [...(['image','externalVideo','wordBreak'].includes(n.type)?[n]:[]),...(n.marks??[]).filter(m=>m.type==='link'),...(n.content??[]).flatMap(media)];}
  assert.deepEqual(media(stored),media(baseline));await page.reload();await expect(body).toContainText('貼り付けた文章');await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('paf-body-prototype:sample')).body),stored);results.push('書式付き貼り付け・保存・再読込で本文JSONと画像/PDF/Vimeo属性を保持');
  const before=await body.innerText();await body.click();await paste('<p>危険な貼付<img src="https://example.com/a.jpg" onerror="alert(1)"></p>');await expect(page.getByText(/貼り付けを中止しました/)).toBeVisible();assert.equal(await body.innerText(),before);results.push('未対応属性の貼り付けを本文変更前に拒否');
  await page.evaluate(()=>{Storage.prototype.setItem=function(){throw new Error('quota test');};});await body.click();await page.keyboard.insertText('保存失敗時の入力');await save.click();await expect(page.getByText(/保存できませんでした/)).toBeVisible();await expect(page.getByRole('status')).toHaveText('未保存');await expect(body).toContainText('保存失敗時の入力');results.push('保存失敗で未保存と入力内容を保持');
  await page.goto('http://127.0.0.1:4390/?article=unsupported');await expect(page.getByText(/変換確認待ち:/)).toBeVisible();await expect(save).toBeDisabled();assert.equal(await page.evaluate(()=>localStorage.getItem('paf-body-prototype:unsupported')),null);await expect(page.locator('pre')).toContainText('<details>');results.push('未対応HTMLの原文保持と保存禁止');
+ await page.goto('http://127.0.0.1:4390/?article=wbr');await expect(body).toBeVisible();await expect(body.locator('wbr')).toHaveCount(1);
+ async function breakGeometry(width){return body.evaluate((el,width)=>{
+  el.style.width=`${width}px`;el.style.padding='0';el.style.fontFamily='monospace';el.style.fontSize='16px';
+  const paragraph=el.querySelector('p'),wordBreak=paragraph.querySelector('wbr');
+  const before=wordBreak.previousSibling,after=wordBreak.nextSibling;
+  const y=node=>{const r=document.createRange();r.setStart(node,0);r.setEnd(node,1);return r.getBoundingClientRect().top;};
+  return {before:y(before),after:y(after)};
+ },width);}
+ const wide=await breakGeometry(400),narrow=await breakGeometry(120);
+ assert.equal(wide.before,wide.after,'wbr must not force a line break with sufficient width');
+ assert(narrow.after>narrow.before,'wbr must allow wrapping when width is insufficient');
+ await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');await page.reload();await expect(body.locator('wbr')).toHaveCount(1);
+ const reopened=await breakGeometry(120);assert(reopened.after>reopened.before);
+ await page.screenshot({path:'/tmp/paf-word-break.png'});
+ results.push('実エディターのwbrは広い幅で改行せず、狭い幅で折り返し、保存・ページ再読込後も保持');
  const articles=[];
- for(const id of [18050,17696,15682,4318,14975,18053,18043,17709,16892,16186,14812,14382,14354,13787,12609,12146,5853,5742,5456,4670]){
+ for(const id of [18050,17696,15682,4318,14975,18053,18043,17709,16892,16186,14812,14382,14354,13787,12609,12146,5853,5742,5456,4670,17147,16192,13033,11154,10631,9848,5566,4664,4270,4264]){
   await page.goto(`http://127.0.0.1:4390/?article=${id}`);await expect(page.getByRole('status')).toHaveText(/未保存|変換確認待ち/);
   const status=await page.getByRole('status').innerText();assert.equal(status,'未保存',`article ${id} must be editable`);if(status==='未保存'){await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');await page.reload();await expect(page.getByRole('status')).toHaveText('保存済み');}
-  if([17696,4318,18053,18043,17709,16892,16186,14812,14382,14354,13787,12609,12146,5853,5742,5456,4670].includes(id)){
+  if([17696,4318,18053,18043,17709,16892,16186,14812,14382,14354,13787,12609,12146,5853,5742,5456,4670,17147,16192,13033,11154,10631,9848,5566,4664,4270,4264].includes(id)){
    const original=await page.evaluate(id=>JSON.parse(localStorage.getItem(`paf-body-prototype:${id}`)).body,id);
    await body.evaluate(el=>{el.focus();const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){if(node.textContent.trim()&&!node.parentElement.closest('.media-placeholder'))break;}if(!node)throw Error('No editable text');const range=document.createRange();range.setStart(node,0);range.collapse(true);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);});await page.keyboard.insertText('旧記事の追記確認。');await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');
    const edited=await page.evaluate(id=>JSON.parse(localStorage.getItem(`paf-body-prototype:${id}`)).body,id);assert.deepEqual(media(edited),media(original));

@@ -4,11 +4,11 @@ import Image from '@tiptap/extension-image';
 import {TextStyleKit} from '@tiptap/extension-text-style';
 import TextAlign from '@tiptap/extension-text-align';
 import {ExternalVideo} from './video';
-import {LegacyLanguage,normalizeStyles} from './legacy';
+import {LegacyLanguage,WordBreak,normalizeStyles} from './legacy';
 import {checkedImport,checkedSave,signature} from './guard';
 export async function checkLegacy(){
  const base=[StarterKit,Image.configure({inline:true}),TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
- const extensions=[LegacyLanguage,...base];const results=[];
+ const extensions=[WordBreak,LegacyLanguage,...base];const results=[];
  const assert=(condition,message)=>{if(!condition)throw Error(message);};
  const rejects=(fn,message)=>{let rejected=false;try{fn();}catch{rejected=true;}assert(rejected,message);};
  const sample=value=>({type:'textStyle',attrs:value});
@@ -39,8 +39,16 @@ export async function checkLegacy(){
  different('<p><span style="color:black">甲<span style="color:red">乙</span></span></p>','<p><span style="color:black">甲乙</span></p>');
  different('<p><a href="https://example.com/a"><img src="https://example.com/i.jpg"></a></p>','<p><img src="https://example.com/i.jpg"></p>');
  // A disabled bold parser must not pass the source guard merely because plain text matches.
- rejects(()=>checkedImport('<p><strong>強調</strong></p>',[LegacyLanguage,StarterKit.configure({bold:false})]),'lost bold');
+ rejects(()=>checkedImport('<p><strong>強調</strong></p>',[WordBreak,LegacyLanguage,StarterKit.configure({bold:false})]),'lost bold');
  results.push('太字/色の順序・同義分割・入れ子を許容し、太字/斜体/下線の欠落・対象変更、改行欠落、色上書き・画像リンク欠落を検知');
+ const breakSource='<p><strong>ABC<wbr>DEF</strong><a href="https://example.com/">G<wbr>H</a></p>';
+ const breaks=checkedImport(breakSource,extensions);
+ assert(signature(generateHTML(checkedSave(breaks,extensions),extensions))===signature(breakSource),'wordBreak position');
+ different('<p>AB<wbr>CD</p>','<p>ABCD</p>');
+ different('<p>AB<wbr>CD</p>','<p>AB<br>CD</p>');
+ different('<p>AB<wbr>CD</p>','<p>A<wbr>BCD</p>');
+ rejects(()=>checkedImport('<p>AB<wbr>CD</p>',[LegacyLanguage,...base]),'lost wordBreak');
+ results.push('wbrの位置・個数・前後の書式/リンクを保持し、欠落・強制改行化・位置変更を検知');
  const posts=await(await fetch('/fixtures.json')).json();
  for(const id of [17696,4318]){
   const post=posts.find(p=>p.id===id);const json=checkedImport(post.content,extensions);

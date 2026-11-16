@@ -1,4 +1,10 @@
-import {Extension} from '@tiptap/core';
+import {Extension,Node} from '@tiptap/core';
+// A discretionary break, not a hardBreak and not a zero-width text replacement.
+export const WordBreak=Node.create({
+ name:'wordBreak',group:'inline',inline:true,atom:true,selectable:false,
+ parseHTML(){return [{tag:'wbr'}];},
+ renderHTML(){return ['wbr'];},
+});
 export const LegacyLanguage=Extension.create({
  name:'legacyLanguage',
  addGlobalAttributes(){return [{types:['paragraph'],attributes:{lang:{default:null,parseHTML:el=>el.getAttribute('lang'),renderHTML:attrs=>attrs.lang===null?{}:{lang:attrs.lang}}}}];},

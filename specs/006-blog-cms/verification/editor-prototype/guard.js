@@ -2,7 +2,7 @@ import { generateHTML, generateJSON } from '@tiptap/core';
 import { fromElement } from './video';
 import {normalizeStyles} from './legacy';
 const parse=html=>new DOMParser().parseFromString(html,'text/html');
-const allowed=new Set('p br strong b em i u s strike a img iframe span blockquote hr h1 h2 h3 h4 h5 h6 ul ol li'.split(' '));
+const allowed=new Set('p br wbr strong b em i u s strike a img iframe span blockquote hr h1 h2 h3 h4 h5 h6 ul ol li'.split(' '));
 const attributes={p:['lang'],a:['href','target','rel','title'],img:['src','alt','title','width','height'],iframe:['src','title','width','height','allow','allowfullscreen','frameborder','loading','referrerpolicy'],ol:['start']};
 export function preflight(html){
  const document=parse(html);const body=document.body;
@@ -49,7 +49,7 @@ export function signature(html){
   if(node.hasAttribute('lang'))format.lang=node.getAttribute('lang');
   if(tag==='a')format.link=attrs(node);
   // Breaks have no glyph to color/bolden; their count/order is still significant.
-  if(tag==='br'){emit({kind:'br'});return;}
+  if(tag==='br'||tag==='wbr'){emit({kind:tag});return;}
   if(['img','iframe','hr'].includes(tag)){emit({kind:tag,attrs:attrs(node),format:canonical(format)});return;}
   const block=!['p','span','a',...Object.keys(marks)].includes(tag);
   if(block)emit({kind:'open',tag,attrs:attrs(node),format:canonical(format)});

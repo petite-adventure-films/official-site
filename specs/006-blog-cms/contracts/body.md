@@ -51,7 +51,7 @@
 
 ## 容量
 
-現行の変更APIは要求全体を256KiBで制限する。[現行試作のChromium全件検証](../verification/editor-prototype/all-articles.md)では、通過279件の本文JSONは最大210,204 bytes（記事14975）、旧分類値を使った暫定要求は210,892 bytes。上限まで51,252 bytesの余裕がある。確認待ち31件は保存可能と扱わない。正式v2・CMS ID解決後の最終要求は再測定が必要。初期の標準Tiptap構成で測った195,962 bytesとはノード構成が異なる。
+現行の変更APIは要求全体を256KiBで制限する。[現行試作のChromium全件検証](../verification/editor-prototype/all-articles.md)では、通過289件の本文JSONは最大210,204 bytes（記事14975）、旧分類値を使った暫定要求は210,892 bytes。上限まで51,252 bytesの余裕がある。確認待ち21件は保存可能と扱わない。正式v2・CMS ID解決後の最終要求は再測定が必要。初期の標準Tiptap構成で測った195,962 bytesとはノード構成が異なる。
 
 [容量の測定結果](../verification/body-size-summary.json)。動画試作の再実行は、互換性検証と同じ隔離依存を用意し、Node 24で `TIPTAP_AUDIT_DEPS=/tmp/paf-tiptap-recheck node specs/006-blog-cms/verification/video-node-probe.mjs` を実行する。動画試作は期待値不一致なら終了コードを非0にする。
 
@@ -74,4 +74,9 @@ Figmaの通常状態は[画面契約](screens.md)に記録。独立試作で入�
 
 ### 全310件の検証と残件
 
-現行試作をChromiumで全件実行し、279件は原文照合・JSON往復・localStorage書込/読出しを通過。31件は停止し、[記事IDと理由の一覧](../verification/editor-prototype/all-articles.md)を残した。書式構造差15件は対応し、それぞれで追記・保存・ページ再読込も確認。残りの最初の停止理由はwbr13件、class9件、div7件、data属性2件。複数の要因を持つ記事もある。変換規則を緩めず、書式の適用範囲、改行候補、旧アンカー、コピー元属性の扱いを個別に詰める。画面操作・API保存・公開・正式v2移行の全件確認は含まない。
+現行試作をChromiumで全件実行し、289件は原文照合・JSON往復・localStorage書込/読出しを通過。21件は停止し、[記事IDと理由の一覧](../verification/editor-prototype/all-articles.md)を残した。書式構造差15件は対応し、それぞれで追記・保存・ページ再読込も確認。wbrを改行候補の専用ノードで保持し、さらに10件が通過。残りの最初の停止理由はclass9件、div8件、data属性3件、mailtoのURL制限1件。複数の要因を持つ記事もある。変換規則を緩めず、書式の適用範囲、改行候補、旧アンカー、コピー元属性の扱いを個別に詰める。画面操作・API保存・公開・正式v2移行の全件確認は含まない。
+
+
+### 改行候補の試作検証
+
+wbrはwordBreakノードとして位置・個数を保持し、HTML出力もwbrとする。brや改行文字へ変換しない。全件監査で通過記事内の219箇所を保持し、対象10記事の追記・保存・再読込も確認した。実エディターで広い幅では改行せず、狭い幅では候補位置で折り返すことを確認。欠落・位置変更・強制改行化は署名比較で拒否する。正式v2・公開レンダラー・OS IMEと不可視ノードの編集操作全般は未確認。
