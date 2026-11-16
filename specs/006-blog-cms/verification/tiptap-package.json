@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@tiptap/core": "^3.34.0",
+    "@tiptap/extension-image": "^3.34.0",
+    "@tiptap/extension-table": "^3.34.0",
+    "@tiptap/extension-text-align": "^3.34.0",
+    "@tiptap/extension-text-style": "^3.34.0",
+    "@tiptap/extension-youtube": "^3.34.0",
+    "@tiptap/html": "^3.34.0",
+    "@tiptap/starter-kit": "^3.34.0",
+    "ajv": "^8.20.0",
+    "jsdom": "^26.1.0"
+  }
+}
