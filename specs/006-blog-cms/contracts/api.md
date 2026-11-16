@@ -32,4 +32,6 @@
 
 新規blogの一覧/可読本文検索/件数、カテゴリ取得、POST/GET/PUTを実装。categoryIdはWordPress既存term_id文字列の下書き台帳、nullは保存可、未知IDは422。ブログ本文は新規テキスト編集のv2部分集合のみ受理し、未接続の保全参照/添付ノードを新規要求から拒否する。公開用blog/v1は変更しない。既存eventのoperation fingerprintを変更せず、blogではtypeを追加して別種別の操作ID再利用を409にする。
 
-blogのpublication GETはenabled:false。他の公開/チェック/履歴/復元/複製はblog_operation_unavailableで422とし、event専用処理へ流さない。これらをブログ実装済みAPIと扱わない。
+blogのpublication GETはenabled:false。他の公開/チェック/履歴/復元はblog_operation_unavailableで422とし、event専用処理へ流さない。これらをブログ実装済みAPIと扱わない。
+
+ブログのduplicateを共通経路へ接続。保存flush後のexpectedVersionで原子的に複製し、同一operationIdの再送は同じ応答を返す。本文/分類/フラグを保持し、slugは除去、新ID/version=1/新日時/公開状態なしで生成する。元記事が後から変わっても成功済み操作の再送で新しい複製は作らない。

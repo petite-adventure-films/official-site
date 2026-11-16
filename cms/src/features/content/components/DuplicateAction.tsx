@@ -2,7 +2,8 @@
 import { useRef, useState } from 'react';
 import { Alert, Button } from '@mui/material';
 import { api, ApiError, type SavedDraft } from '../../../lib/api-client';
-export function DuplicateAction<T>({ flush, disabled, busy, onBusy }: {
+export function DuplicateAction<T>({ flush, disabled, busy, onBusy, type = 'event' }: {
+  type?: 'event' | 'blog';
   flush: () => Promise<SavedDraft<T> | null>; disabled: boolean; busy: boolean; onBusy: (busy: boolean) => void;
 }) {
   const pending = useRef<null | { sourceId: string; operationId: string; expectedVersion: number }>(null);
@@ -18,7 +19,7 @@ export function DuplicateAction<T>({ flush, disabled, busy, onBusy }: {
       pending.current ??= { sourceId: saved.id, operationId: crypto.randomUUID(), expectedVersion: saved.version };
       const { sourceId, ...body } = pending.current;
       const result = await api<SavedDraft<T>>(`/api/contents/${sourceId}/duplicate`, { method: 'POST', body: JSON.stringify(body) });
-      window.location.assign(`/cms/events/${result.id}/edit`);
+      window.location.assign(`/cms/${type === 'blog' ? 'blog' : 'events'}/${result.id}/edit`);
     } catch (error) {
       const status = error instanceof ApiError ? error.status : 0;
       if ([403, 404, 409].includes(status)) setBlocked(true);

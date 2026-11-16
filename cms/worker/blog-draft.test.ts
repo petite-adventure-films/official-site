@@ -27,7 +27,7 @@ test('blog saves empty/unclassified content, edits, replays and rejects stale up
   expect((await request(`/api/contents/${saved.id}`, 'PUT', { expectedVersion: 1, operationId: crypto.randomUUID(), payload: next })).status).toBe(409);
   expect((await request(`/api/contents/${saved.id}`, 'PUT', { expectedVersion: 2, operationId: crypto.randomUUID(), payload: emptyDraft() })).status).toBe(422);
   expect((await (await request(`/api/contents/${saved.id}`)).json() as any).payload).toEqual(next);
-  for (const action of ['publication', 'check-publication', 'restore', 'duplicate']) expect((await request(`/api/contents/${saved.id}/${action}`, 'POST', {})).status).toBe(422);
+  for (const action of ['publication', 'check-publication', 'restore']) expect((await request(`/api/contents/${saved.id}/${action}`, 'POST', {})).status).toBe(422);
   expect(await (await request(`/api/contents/${saved.id}/publication`)).json()).toMatchObject({ enabled: false, published: false });
 });
 test('type isolates counts and readable text search, excluding link attributes', async () => {
@@ -64,4 +64,26 @@ test('migration retains existing event operations, publication/history rows and 
     expect((await old.db.prepare('PRAGMA foreign_key_check').all()).results).toEqual([]);
     expect(await (await post()).json()).toEqual(original);
   } finally { await old.dispose(); }
+});
+
+test('blog duplication preserves body/settings, resets slug, isolates edits and replays one copy', async () => {
+  const payload = { ...emptyBlogDraft(), title: 'ブログ原本', slug: 'original-blog', categoryId: '2879', isRecommended: true, isWorkshopReport: true,
+    body: { schemaVersion: 2, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '太字本文', marks: [{ type: 'bold' }] }] }] } } };
+  const source = await (await create('blog', payload)).json() as any;
+  const body = { expectedVersion: source.version, operationId: crypto.randomUUID() };
+  const path = `/api/contents/${source.id}/duplicate`;
+  const responses = await Promise.all([request(path, 'POST', body), request(path, 'POST', body)]);
+  expect(responses.map(r => r.status)).toEqual([201, 201]);
+  const [copy, replay] = await Promise.all(responses.map(r => r.json())) as any[];
+  expect(copy).toEqual(replay);expect(copy.id).not.toBe(source.id);
+  expect(copy).toMatchObject({ type: 'blog', payloadSchemaVersion: 'blog-draft/v1', version: 1 });
+  const { slug, ...copiedPayload } = payload;expect(copy.payload).toEqual(copiedPayload);
+  expect(await fixture.db.prepare('SELECT copied_from_id FROM content_drafts WHERE id = ?').bind(copy.id).first('copied_from_id')).toBe(source.id);
+  expect((await request(`/api/contents/${copy.id}`, 'PUT', { expectedVersion: 1, operationId: crypto.randomUUID(), payload: { ...copy.payload, title: '複製だけ変更' } })).status).toBe(200);
+  expect(await (await request(`/api/contents/${source.id}`)).json()).toEqual(source);
+  expect((await request(`/api/contents/${source.id}`, 'PUT', { expectedVersion: 1, operationId: crypto.randomUUID(), payload: { ...payload, title: '原本の新しい版' } })).status).toBe(200);
+  expect(await (await request(path, 'POST', body)).json()).toEqual(copy);
+  expect((await request(path, 'POST', { ...body, operationId: crypto.randomUUID() })).status).toBe(409);
+  expect(await fixture.db.prepare("SELECT count(*) AS n FROM content_drafts WHERE type = 'blog'").first('n')).toBe(2);
+  expect(await fixture.db.prepare('SELECT count(*) AS n FROM publication_state').first('n')).toBe(0);
 });

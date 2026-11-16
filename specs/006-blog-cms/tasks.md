@@ -31,3 +31,12 @@ blogとeventが混在しても一覧/検索/件数が混ざらず、ブログ再
 - [X] T009 cms/ の型検査・既存テスト・対象E2E・1440px画面確認を実施し specs/006-blog-cms/quickstart.md に結果と未確認事項を記録する。
 
 依存: T001→T002/T004→T003/T005→T006/T007→T008→T009。基盤完成後はフォームと一覧の作業が独立可能だが、今回単一作業として進める。まず新規テキスト本文の保存を一巡し、添付登録/旧記事保全/公開は別の受け入れ単位へ残す。
+
+## US3（P2）ブログ下書きを複製する
+
+2026-11-16、続行依頼に基づき既存共通複製をブログへ接続。保存中の変更をflushし、本文/分類を保ち、新ID・新slugの独立した下書きとして開く。公開・旧記事取り込みは引き続き対象外。
+
+- [X] T010 [US3] cms/src/features/content/components/DuplicateAction.tsx と cms/src/features/blog/components/BlogEditor.tsx をブログ経路に対応し、cms/worker/app.ts の複製制限を解除する。
+- [X] T011 [US3] cms/worker/blog-draft.test.ts と cms/e2e/blog.spec.ts で本文保持・slugリセット・原本独立・同一要求再送・保存失敗時の停止を確認する。
+
+T009→T010→T011。既存の原子的複製triggerを再利用し、新たなDB変更は行わない。
