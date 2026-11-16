@@ -6,6 +6,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
   "preview_urls": false,
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "paf-cms-local-media" }],
   "d1_databases": [{
     "binding": "DB",
     "database_name": "paf-cms-local",

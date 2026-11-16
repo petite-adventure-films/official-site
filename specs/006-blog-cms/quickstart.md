@@ -61,3 +61,7 @@ PCで共通操作位置、保存状態、必須エラーへの移動、Chip単�
 [検証記録と画面](verification/cms-draft/README.md)。型検査/build、既存111件＋ブログ4件のVitest、公開runnerの回帰1件、ブログ2件＋イベント保存/slug6件のE2Eを確認。旧記事移行・添付登録・公開接続は後続。
 
 ブログ編集画面の「複製」は、保存中の変更をflushして新しいブログ下書きを開く。slugは新記事IDへ戻り、元記事の本文・分類はそのまま残る。複製のAPI/画面検証は[検証記録](verification/cms-draft/README.md#ブログ複製の接続)を参照。
+
+## 新規画像・PDFの接続
+
+ローカルCMSで登録・一覧/検索・本文挿入・保存/再編集を実装。画像/PDFボタンは有効、動画・公開・プレビューは未接続。登録仕様は [登録契約](contracts/media-upload.md)、[確認結果](verification/cms-media/README.md)。

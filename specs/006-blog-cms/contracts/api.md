@@ -35,3 +35,7 @@
 blogのpublication GETはenabled:false。他の公開/チェック/履歴/復元はblog_operation_unavailableで422とし、event専用処理へ流さない。これらをブログ実装済みAPIと扱わない。
 
 ブログのduplicateを共通経路へ接続。保存flush後のexpectedVersionで原子的に複製し、同一operationIdの再送は同じ応答を返す。本文/分類/フラグを保持し、slugは除去、新ID/version=1/新日時/公開状態なしで生成する。元記事が後から変わっても成功済み操作の再送で新しい複製は作らない。
+
+## 新規画像・PDFの接続
+
+ローカルCMSで登録・一覧/検索・本文挿入・保存/再編集を実装。画像/PDFボタンは有効、動画・公開・プレビューは未接続。登録仕様は [登録契約](media-upload.md)、[確認結果](../verification/cms-media/README.md)。

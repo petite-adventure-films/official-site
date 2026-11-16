@@ -7,10 +7,15 @@ import { contents } from './routes/contents';
 import { history } from './routes/history';
 import { duplicate } from './routes/duplicate';
 import { tags } from './routes/tags';
-export type AppEnvironment = { DB?: Database; PUBLICATION?: PublicationDelivery; ASSETS?: { fetch(request: Request): Promise<Response> } };
+import { media, type MediaEnvironment } from './routes/media';
+export type AppEnvironment = MediaEnvironment & { DB?: Database; PUBLICATION?: PublicationDelivery; ASSETS?: { fetch(request: Request): Promise<Response> } };
 export async function handleAuthenticated(request: Request, env: AppEnvironment, actor: Actor, origin: string) {
   enforceMutationRequest(request, origin);
   const path = new URL(request.url).pathname;
+  if (path === '/api/media' || path.startsWith('/api/media/')) {
+    if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    return media(request, env.DB, env, actor);
+  }
   if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: Boolean(env.PUBLICATION) });
   if (path === '/api/session' && request.method === 'GET') return Response.json({ user: actor });
   if (path === '/api/tags' && request.method === 'GET') {

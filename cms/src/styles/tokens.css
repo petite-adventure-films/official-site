@@ -52,4 +52,6 @@
   .cms-body-editor ol { list-style: decimal; padding-left: var(--spacing-cms-content); }
   .cms-body-editor blockquote { border-left: 2px solid var(--color-cms-divider); padding-left: var(--spacing-cms-content); }
   .cms-body-editor a { color: var(--color-cms-primary); text-decoration: underline; }
+  .cms-body-editor img { max-width: 100%; height: auto; }
+  .cms-body-editor img.ProseMirror-selectednode { outline: 2px solid var(--color-cms-primary); }
 }

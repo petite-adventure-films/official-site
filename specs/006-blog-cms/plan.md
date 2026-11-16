@@ -1,7 +1,7 @@
 # ブログCMSの設計案
 
 対象 #418。ブランチ `codex/issue-418-blog-design`。分岐元・統合先 `version-4`。
-入力は[合意済み要件](spec.md)。基本設計方針は利用者確認済み。本文はTiptapを第一候補として[互換性検証](tiptap-compatibility.md)を行い、採用条件を具体化中。独立試作と保存/公開契約の設計検証は実施済み。2026-11-16の利用者レビューで新規ブログの下書き保存→再編集までのCMS実装を承認。下書き複製も共通処理へ接続。今回の本文はTiptapの新規テキスト・見出し・リスト・引用・リンクを対象とする。添付登録・旧記事取り込み・公開接続・本番配信は後続。
+入力は[合意済み要件](spec.md)。基本設計方針は利用者確認済み。本文はTiptapを第一候補として[互換性検証](tiptap-compatibility.md)を行い、採用条件を具体化中。独立試作と保存/公開契約の設計検証は実施済み。2026-11-16の利用者レビューで新規ブログの下書き保存→再編集までのCMS実装を承認。下書き複製も共通処理へ接続。今回の本文はTiptapの新規テキスト・見出し・リスト・引用・リンクを対象とする。新規画像・PDFの登録/挿入をローカルCMSへ追加。旧記事取り込み・公開接続・本番配信は後続。プレビューはCMSとAstro接続の完了後に扱う。
 
 ## 方針
 
@@ -55,3 +55,5 @@
 [調査](research.md)、[データ設計](data-model.md)、[API](contracts/api.md)、[本文契約](contracts/body.md)、[保存/公開境界とschema候補](contracts/body-storage.md)、[画面とFigma対応](contracts/screens.md)、[実装後検証](quickstart.md)。
 
 設計文書・隔離検証に加え、合意済み範囲のCMS新規ブログ下書きとローカルD1 migrationを実装。本番DB・配信環境は変更していない。
+
+新規添付の実装境界は[登録契約](contracts/media-upload.md)、結果と未確認事項は[確認資料](verification/cms-media/README.md)。

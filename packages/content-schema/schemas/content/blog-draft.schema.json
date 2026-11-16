@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Blog draft v1 — new text editing subset",
+  "title": "Blog draft v1 — new editing subset",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -405,6 +405,9 @@
         },
         {
           "$ref": "#/$defs/link"
+        },
+        {
+          "$ref": "#/$defs/assetLink"
         }
       ]
     },
@@ -437,6 +440,9 @@
         },
         {
           "$ref": "#/$defs/orderedList"
+        },
+        {
+          "$ref": "#/$defs/assetImage"
         }
       ]
     },
@@ -456,6 +462,67 @@
       "required": [
         "type",
         "content"
+      ],
+      "additionalProperties": false
+    },
+    "assetImage": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "assetImage"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[a-f0-9]{32}$"
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "assetId",
+            "alt"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "assetLink": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "assetLink"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[a-f0-9]{32}$"
+            },
+            "assetKind": {
+              "const": "document"
+            }
+          },
+          "required": [
+            "assetId",
+            "assetKind"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
       ],
       "additionalProperties": false
     }

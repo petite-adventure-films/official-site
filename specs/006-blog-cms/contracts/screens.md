@@ -48,3 +48,7 @@ BodyEditorはcms/content、heading、actions、背景paper、divider、borderRad
 `/cms/blog`、`/cms/blog/new`、`/cms/blog/:id/edit`を実装。Figma 155:1483/153:166をMCPで再確認し、既存CMSLayout/EditorLayout/Section/Field・MUIボタン/Chip/Switchを使用。新規テキスト本文をTiptapで編集し、保存状態と日時を共通位置へ表示。公開・プレビュー・履歴・添付挿入は未接続として非活性。複製は共通DuplicateActionを使用し、新しいブログ編集画面へ移動。複製中は編集領域をinertにして二重操作を防ぐ。本文の操作は段落/見出し2–4・太字・箇条書き/番号付き・引用・リンク・その他の書式・Undo/Redo。
 
 1440px画面で外観を確認。入力/再読込の自動検証と利用者による実装画面の最終確認は区別する。OS日本語IME、旧記事取り込み、添付編集、公開の検証は後続。
+
+## 新規画像・PDFの接続
+
+ローカルCMSで登録・一覧/検索・本文挿入・保存/再編集を実装。画像/PDFボタンは有効、動画・公開・プレビューは未接続。登録仕様は [登録契約](media-upload.md)、[確認結果](../verification/cms-media/README.md)。
