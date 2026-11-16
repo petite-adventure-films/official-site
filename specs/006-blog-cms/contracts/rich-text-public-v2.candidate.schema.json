@@ -1,0 +1,945 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.petiteadventurefilms.com/proposals/rich-text-public/v2",
+  "title": "Rich text public v2 review candidate — projection only",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "doc": {
+      "$ref": "#/$defs/doc"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "doc"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "text": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "text"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "paragraph": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "paragraph"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "lang": {
+              "enum": [
+                "ja",
+                "ja-JP"
+              ]
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            },
+            "textAlign": {
+              "enum": [
+                "left",
+                "right",
+                "center",
+                "justify"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/inline"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "heading": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "heading"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "enum": [
+                2,
+                3,
+                4
+              ]
+            },
+            "textAlign": {
+              "enum": [
+                "left",
+                "right",
+                "center",
+                "justify"
+              ]
+            },
+            "lang": {
+              "enum": [
+                "ja",
+                "ja-JP"
+              ]
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            }
+          },
+          "required": [
+            "level"
+          ],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/inline"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "hardBreak": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "hardBreak"
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "wordBreak": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "wordBreak"
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "horizontalRule": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "horizontalRule"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "blockquote": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "blockquote"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "bulletList": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "bulletList"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/listItem"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "orderedList": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "orderedList"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/listItem"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "listItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "listItem"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          },
+          "minItems": 1,
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/paragraph"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "plainText": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "text"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "codeBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "codeBlock"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/plainText"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "table": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "table"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tableRow"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "tableRow": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "tableRow"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cell"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "tableCell": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "tableCell"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "rowspan": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "tableHeader": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "tableHeader"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "rowspan": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "cell": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/tableCell"
+        },
+        {
+          "$ref": "#/$defs/tableHeader"
+        }
+      ]
+    },
+    "assetImage": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "assetImage"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+              "minLength": 3,
+              "maxLength": 100
+            },
+            "alt": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "caption": {
+              "type": "string"
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            }
+          },
+          "required": [
+            "assetId",
+            "alt"
+          ],
+          "additionalProperties": false
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "externalVideo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "externalVideo"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "enum": [
+                "youtube",
+                "vimeo"
+              ]
+            },
+            "videoId": {
+              "type": "string"
+            },
+            "sourceUrl": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            }
+          },
+          "required": [
+            "provider",
+            "videoId",
+            "sourceUrl"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "preservedBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "preservedBlock"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "enum": [
+                "ja",
+                "ja-JP"
+              ]
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "preservedInline": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "preservedInline"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "enum": [
+                "ja",
+                "ja-JP"
+              ]
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/inline"
+          }
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "bold": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "bold"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "italic": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "italic"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "underline": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "underline"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strike": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "strike"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "code": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "code"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "link": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "link"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "target": {
+              "enum": [
+                "_blank",
+                "_self"
+              ]
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "assetLink": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "assetLink"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+              "minLength": 3,
+              "maxLength": 100
+            },
+            "title": {
+              "type": "string"
+            },
+            "target": {
+              "enum": [
+                "_blank",
+                "_self"
+              ]
+            }
+          },
+          "required": [
+            "assetId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "textStyle": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "textStyle"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "^rgb\\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}\\)$"
+            },
+            "backgroundColor": {
+              "type": "string",
+              "pattern": "^rgb\\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}\\)$"
+            },
+            "fontFamily": {
+              "enum": [
+                "\"Times New Roman\", serif",
+                "\"ＭＳ Ｐ明朝\", serif"
+              ]
+            },
+            "fontSize": {
+              "const": "medium"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "mark": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/bold"
+        },
+        {
+          "$ref": "#/$defs/italic"
+        },
+        {
+          "$ref": "#/$defs/underline"
+        },
+        {
+          "$ref": "#/$defs/strike"
+        },
+        {
+          "$ref": "#/$defs/code"
+        },
+        {
+          "$ref": "#/$defs/link"
+        },
+        {
+          "$ref": "#/$defs/assetLink"
+        },
+        {
+          "$ref": "#/$defs/textStyle"
+        }
+      ]
+    },
+    "inline": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/text"
+        },
+        {
+          "$ref": "#/$defs/hardBreak"
+        },
+        {
+          "$ref": "#/$defs/wordBreak"
+        },
+        {
+          "$ref": "#/$defs/assetImage"
+        },
+        {
+          "$ref": "#/$defs/preservedInline"
+        }
+      ]
+    },
+    "block": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/paragraph"
+        },
+        {
+          "$ref": "#/$defs/heading"
+        },
+        {
+          "$ref": "#/$defs/horizontalRule"
+        },
+        {
+          "$ref": "#/$defs/blockquote"
+        },
+        {
+          "$ref": "#/$defs/bulletList"
+        },
+        {
+          "$ref": "#/$defs/orderedList"
+        },
+        {
+          "$ref": "#/$defs/codeBlock"
+        },
+        {
+          "$ref": "#/$defs/table"
+        },
+        {
+          "$ref": "#/$defs/externalVideo"
+        },
+        {
+          "$ref": "#/$defs/preservedBlock"
+        }
+      ]
+    },
+    "doc": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "doc"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

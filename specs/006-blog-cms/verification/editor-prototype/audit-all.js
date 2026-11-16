@@ -7,7 +7,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import {ExternalVideo} from './video';
 import {LegacyLanguage,WordBreak,normalizeStyles} from './legacy';
 import {checkedImport,checkedSave,signature} from './guard';
-const extensions=[...legacyContainers,WordBreak,LegacyLanguage,StarterKit.configure({link:{openOnClick:false}}),Image.configure({inline:true}),TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
+export const extensions=[...legacyContainers,WordBreak,LegacyLanguage,StarterKit.configure({link:{openOnClick:false}}),Image.configure({inline:true}),TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
 const bytes=value=>new TextEncoder().encode(typeof value==='string'?value:JSON.stringify(value)).length;
 const parse=html=>new DOMParser().parseFromString(html,'text/html').body;
 function inventory(body){return {wordBreaks:body.querySelectorAll('wbr').length,images:body.querySelectorAll('img').length,links:body.querySelectorAll('a[href]').length,pdfs:[...body.querySelectorAll('a[href]')].filter(a=>/\.pdf(?:[?#]|$)/i.test(a.getAttribute('href'))).length,videos:body.querySelectorAll('iframe').length,languages:body.querySelectorAll('[lang]').length,styles:body.querySelectorAll('[style]').length};}

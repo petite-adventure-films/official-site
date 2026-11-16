@@ -43,3 +43,13 @@ GitHub #334を確認し、WordPress由来HTMLを保持して基本編集・貼�
 ## Figma
 
 共通node・Slot・代表イベント画面からの参照・cms/*変数をMCPで確認。本文部品と代表ブログ画面を作成し、通常状態の外観・構造を検査した。[画面契約](contracts/screens.md)にnodeと結果を記録。利用者レビュー・実際の操作は未確認。
+
+
+## 保存・公開形式の設計検証
+
+- 方針案: 編集本文・不変の保全記録・公開本文を分ける。旧class/data/tabindex/aria等は保全し、公開ASTには明示allowlistだけを出す。未解決添付は専用の下書きノードで表し、仮assetIdを使わない。
+- 根拠: event固定の保存route/repository/publication/export/restoreはschema追加だけではブログへ接続されない。assetは実ファイルhash/storageKeyを要求し、source-referenceも解決済みtargetIdを要求するため、未解決URLを既存assetとして扱えない。公開用データだけでは保全属性を履歴復元できない。
+- 比較: 試作のattrsをそのまま正式schemaへ許可する案は、コピー元属性が公開へ混入するため採らない。公開ASTだけを履歴の復元元にする案も、編集情報が失われるため採らない。
+- 証拠: 候補schemaで310件通過、既定値省略を正規化した編集JSONへ310件逆変換。添付未解決254件を公開AST生成で停止。残る56件も本文単体の条件であり記事公開可能数ではない。
+
+[保存/公開契約](contracts/body-storage.md)と[再現コード](verification/body-contract/README.md)を参照。正式schema登録、実ID台帳、公開HTML、重複IDの解決方針、利用者レビューは残る。
