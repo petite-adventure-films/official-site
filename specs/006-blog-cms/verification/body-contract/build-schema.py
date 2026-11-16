@@ -43,8 +43,8 @@ for name,child in [('preservedBlock','block'),('preservedInline','inline')]:d[na
 for mark in ['bold','italic','underline','strike','code']:d[mark]=obj({'type':{'const':mark}},['type'])
 link={'href':string,'title':string,'target':{'enum':['_blank','_self']}}
 d['link']=node('link',link,requiredAttrs=['href'])
-d['assetLink']=node('assetLink',{'assetId':asset,'title':string,'target':{'enum':['_blank','_self']}},requiredAttrs=['assetId'])
-d['unresolvedAssetLink']=node('unresolvedAssetLink',{'title':string,'target':{'enum':['_blank','_self']}},requiredAttrs=['sourceRef'])
+d['assetLink']=node('assetLink',{'assetKind':{'enum':['image','document']},'assetId':asset,'title':string,'target':{'enum':['_blank','_self']}},requiredAttrs=['assetId','assetKind'])
+d['unresolvedAssetLink']=node('unresolvedAssetLink',{'assetKind':{'enum':['image','document']},'title':string,'target':{'enum':['_blank','_self']}},requiredAttrs=['sourceRef','assetKind'])
 d['textStyle']=node('textStyle',{'color':{'type':'string','pattern':r'^rgb\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}\)$'},'backgroundColor':{'type':'string','pattern':r'^rgb\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}\)$'},'fontFamily':{'enum':['"Times New Roman", serif','"ＭＳ Ｐ明朝", serif']},'fontSize':{'const':'medium'}})
 d['mark']={'oneOf':[ref(n) for n in ['bold','italic','underline','strike','code','link','assetLink','unresolvedAssetLink','textStyle']]}
 d['inline']={'oneOf':[ref(n) for n in ['text','hardBreak','wordBreak','assetImage','unresolvedImage','preservedInline']]}

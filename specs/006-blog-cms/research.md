@@ -50,6 +50,13 @@ GitHub #334を確認し、WordPress由来HTMLを保持して基本編集・貼�
 - 方針案: 編集本文・不変の保全記録・公開本文を分ける。旧class/data/tabindex/aria等は保全し、公開ASTには明示allowlistだけを出す。未解決添付は専用の下書きノードで表し、仮assetIdを使わない。
 - 根拠: event固定の保存route/repository/publication/export/restoreはschema追加だけではブログへ接続されない。assetは実ファイルhash/storageKeyを要求し、source-referenceも解決済みtargetIdを要求するため、未解決URLを既存assetとして扱えない。公開用データだけでは保全属性を履歴復元できない。
 - 比較: 試作のattrsをそのまま正式schemaへ許可する案は、コピー元属性が公開へ混入するため採らない。公開ASTだけを履歴の復元元にする案も、編集情報が失われるため採らない。
-- 証拠: 候補schemaで310件通過、既定値省略を正規化した編集JSONへ310件逆変換。添付未解決254件を公開AST生成で停止。残る56件も本文単体の条件であり記事公開可能数ではない。
+- 証拠: 候補schemaで310件通過、既定値省略を正規化した編集JSONへ310件逆変換。添付未解決252件を公開AST生成で停止。残る58件も本文単体の条件であり記事公開可能数ではない。
 
 [保存/公開契約](contracts/body-storage.md)と[再現コード](verification/body-contract/README.md)を参照。正式schema登録、実ID台帳、公開HTML、重複IDの解決方針、利用者レビューは残る。
+
+
+## 添付所有区分と実体確認
+
+- 方針: 外部PDFは元URLのlinkを保持し、自サイト画像/PDF hrefをasset参照として追跡。末尾拡張子だけで全PDFを自サイトasset扱いにしない。
+- 根拠: ブログのPDF5箇所は全て外部4URL。自サイト画像等6,033 URLは既存台帳5,895パスへ照合できたが、パス/HEAD結果はバイト同一性やasset ID登録の証明ではない。代表2画像の実体/hash/寸法を確認。欠損8URLは現在も404、元サイズ候補7件はHEAD 200、1件は候補なし。
+- 未実施: 全ファイル取得・R2登録・URL差替え・復旧候補の承認。詳細は[添付解決](contracts/asset-resolution.md)。

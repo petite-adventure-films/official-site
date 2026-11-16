@@ -909,6 +909,12 @@
               "type": "string",
               "pattern": "^legacy_[a-f0-9]{32}$"
             },
+            "assetKind": {
+              "enum": [
+                "image",
+                "document"
+              ]
+            },
             "assetId": {
               "type": "string",
               "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
@@ -926,7 +932,8 @@
             }
           },
           "required": [
-            "assetId"
+            "assetId",
+            "assetKind"
           ],
           "additionalProperties": false
         }
@@ -950,6 +957,12 @@
               "type": "string",
               "pattern": "^legacy_[a-f0-9]{32}$"
             },
+            "assetKind": {
+              "enum": [
+                "image",
+                "document"
+              ]
+            },
             "title": {
               "type": "string"
             },
@@ -961,7 +974,8 @@
             }
           },
           "required": [
-            "sourceRef"
+            "sourceRef",
+            "assetKind"
           ],
           "additionalProperties": false
         }

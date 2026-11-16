@@ -1,0 +1,194 @@
+{
+  "checkedAt": "2026-11-16T10:41:34.684Z",
+  "missing": [
+    {
+      "articleIds": [
+        7277
+      ],
+      "original": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+        "checkedAt": "2026-11-16T10:41:19.755Z",
+        "status": 404,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      }
+    },
+    {
+      "articleIds": [
+        7161
+      ],
+      "original": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+        "checkedAt": "2026-11-16T10:41:30.423Z",
+        "status": 404,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+        "checkedAt": "2026-11-16T10:41:30.603Z",
+        "status": 200,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "73632"
+      }
+    },
+    {
+      "articleIds": [
+        4708
+      ],
+      "original": {
+        "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+        "checkedAt": "2026-11-16T10:41:30.658Z",
+        "status": 404,
+        "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+        "checkedAt": "2026-11-16T10:41:32.792Z",
+        "status": 200,
+        "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "872696"
+      }
+    },
+    {
+      "articleIds": [
+        4708
+      ],
+      "original": {
+        "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+        "checkedAt": "2026-11-16T10:41:32.883Z",
+        "status": 404,
+        "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+        "checkedAt": "2026-11-16T10:41:33.039Z",
+        "status": 200,
+        "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "932764"
+      }
+    },
+    {
+      "articleIds": [
+        4641
+      ],
+      "original": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+        "checkedAt": "2026-11-16T10:41:33.138Z",
+        "status": 404,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+        "checkedAt": "2026-11-16T10:41:33.519Z",
+        "status": 200,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "1073725"
+      }
+    },
+    {
+      "articleIds": [
+        4641
+      ],
+      "original": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+        "checkedAt": "2026-11-16T10:41:33.596Z",
+        "status": 404,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+        "checkedAt": "2026-11-16T10:41:33.719Z",
+        "status": 200,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "861086"
+      }
+    },
+    {
+      "articleIds": [
+        4641
+      ],
+      "original": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+        "checkedAt": "2026-11-16T10:41:33.776Z",
+        "status": 404,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+        "checkedAt": "2026-11-16T10:41:33.906Z",
+        "status": 200,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "958077"
+      }
+    },
+    {
+      "articleIds": [
+        4641
+      ],
+      "original": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+        "checkedAt": "2026-11-16T10:41:33.959Z",
+        "status": 404,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+        "contentType": "text/html; charset=UTF-8",
+        "sizeHeader": null
+      },
+      "candidate": {
+        "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+        "checkedAt": "2026-11-16T10:41:34.108Z",
+        "status": 200,
+        "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+        "contentType": "image/jpeg",
+        "sizeHeader": "987985"
+      }
+    }
+  ],
+  "samples": [
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2024/04/GMATo2ea8AAlNoN-scaled.jpg",
+      "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2024/04/GMATo2ea8AAlNoN-scaled.jpg",
+      "checkedAt": "2026-11-16T10:41:34.566Z",
+      "sizeBytes": 917751,
+      "sha256": "92a131c489a60268d2f985461782288793eaeddbc3ccf3360c0abb11241ff1d4",
+      "format": "jpeg",
+      "width": 2560,
+      "height": 2396,
+      "localPath": "/tmp/paf-verified-media/92a131c489a60268d2f985461782288793eaeddbc3ccf3360c0abb11241ff1d4.jpg",
+      "proposedStorageKey": "originals/92/92a131c489a60268d2f985461782288793eaeddbc3ccf3360c0abb11241ff1d4.jpg",
+      "status": "verified-local-only"
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "checkedAt": "2026-11-16T10:41:34.684Z",
+      "sizeBytes": 73632,
+      "sha256": "a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb",
+      "format": "jpeg",
+      "width": 532,
+      "height": 531,
+      "localPath": "/tmp/paf-verified-media/a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb.jpg",
+      "proposedStorageKey": "originals/a7/a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb.jpg",
+      "status": "verified-local-only"
+    }
+  ],
+  "scope": "Read-only remote probes and local sample bytes. No R2 upload, asset registration, URL replacement or recovery substitution performed. HEAD success does not prove content identity."
+}

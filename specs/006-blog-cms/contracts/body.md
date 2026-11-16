@@ -11,7 +11,7 @@
 | 段落・見出し・リスト・引用・改行・罫線 | ノード名と子要素を限定。見出しはh2〜h4を新規入力の候補とし、記事タイトルのh1と分離。移行で範囲外を見つけたら黙って変更しない |
 | 基本文字装飾 | bold/italic/underline/strike/link。装飾解除は選択範囲に限る |
 | 画像 | assetImage。assetId、記事ごとのalt/caption、表示寸法・配置。元ファイル・派生画像の実URLはassetから解決する |
-| PDFへのリンク | assetLink mark。assetIdとリンクの表示文字列を保持。通常リンクと別の参照として利用箇所を追跡する |
+| 添付へのリンク | 自サイト画像/PDFはassetKind付きassetLink mark。assetIdと表示文字列を保持する。外部PDFは通常linkとして元URLを保持し、自動移管しない |
 | 通常リンク | link mark。内部相対URL、http/https/mailto/telの検証済みhref。イベントハンドラー・任意HTML属性を持たせない |
 | 動画 | externalVideo。provider（youtube/vimeo）、videoId、検証済みsourceUrl、title、width/height。provider/IDとURLの整合をサーバーで再検査する |
 | 旧記事の書式 | 必要な色、fontFamily、fontSize、lang/dir、アンカー、wbrの意味を限定されたノード/属性に対応。汎用style文字列を実行しない |
@@ -92,3 +92,8 @@ wbrはwordBreakノードとして位置・個数を保持し、HTML出力もwbr�
 ### 保存・公開境界の候補
 
 [body-storage.md](body-storage.md)で編集本文・不変保全・公開ASTを分離する案を具体化した。旧属性は保全に残し公開ASTへ出さず、未解決添付と重複anchorは公開を止める。候補schemaで310件の保存形式と逆変換を検証。最大の候補本文は148,935 bytes、暫定要求149,338 bytesで、原本/保全情報は別保存となる。正式API・ID解決・公開HTML・履歴接続は未実装。
+
+
+### 添付URLと実ファイルの照合
+
+[添付解決の契約](asset-resolution.md)で画像src・画像へのhref・PDFを分類した。自サイト参照は既存台帳5,895パスに対応候補があり、外部PDF5箇所は元URLの通常リンクとして保持する。代表画像2点の実体/hash/寸法と欠損候補8URLを確認。全取得・R2登録・実assetId対応は未実施で、公開停止の対象は252記事。

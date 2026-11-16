@@ -21,6 +21,12 @@ for(const p of posts){
  records.push({id:p.id,bodyBytes:bytes(body),provisionalRequestBytes:bytes(request),archiveBytes:bytes(archive),archiveRecords:Object.keys(archive).length,issues:[...new Set(issues.map(x=>x.code))],unresolvedAssets:issues.filter(i=>i.code==='unresolved_asset').length});
 }
 const tests=[];
+const documentFixture=href=>({type:'doc',content:[{type:'paragraph',content:[{type:'text',text:'PDF',marks:[{type:'link',attrs:{href}}]}]}]});
+const externalDocument=convert(documentFixture('https://external.example/report.pdf'),'fixture-article',sourceHash);assert(valid(externalDocument.body));assert.equal(externalDocument.body.doc.content[0].content[0].marks[0].type,'link');assert(publicValid(publicProjection(externalDocument.body,externalDocument.archive,'fixture-article')));
+const ownedDocument=convert(documentFixture('https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/fixture.pdf'),'fixture-article',sourceHash);assert(valid(ownedDocument.body));assert.equal(ownedDocument.body.doc.content[0].content[0].marks[0].type,'unresolvedAssetLink');assert.throws(()=>publicProjection(ownedDocument.body,ownedDocument.archive,'fixture-article'));
+const ownedImageLink=convert(documentFixture('https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/fixture.jpg'),'fixture-article',sourceHash);assert(valid(ownedImageLink.body));assert.equal(ownedImageLink.body.doc.content[0].content[0].marks[0].attrs.assetKind,'image');assert.throws(()=>publicProjection(ownedImageLink.body,ownedImageLink.archive,'fixture-article'));
+tests.push('自サイト画像へのクリック先もimage種別の添付参照として追跡');
+tests.push('外部PDFは元URLの通常リンクとして保持し、自サイト添付PDFのみ実asset対応まで公開停止');
 const rejectSchema=body=>assert(!valid(body));
 rejectSchema({schemaVersion:2,doc:{type:'doc',content:[{type:'paragraph',attrs:{onclick:'alert(1)'}}]}});
 rejectSchema({schemaVersion:2,doc:{type:'doc',content:[{type:'image',attrs:{src:'https://example.com/i.jpg'}}]}});

@@ -3,8 +3,8 @@
   "nodeVersion": "v24.22.3",
   "draftSchemaValid": 310,
   "losslessNormalizedRestore": 310,
-  "bodyProjectionEligible": 56,
-  "blockedByUnresolvedAssets": 254,
+  "bodyProjectionEligible": 58,
+  "blockedByUnresolvedAssets": 252,
   "duplicateAnchors": [
     10297
   ],
@@ -32,6 +32,8 @@
   },
   "over256KiB": [],
   "tests": [
+    "自サイト画像へのクリック先もimage種別の添付参照として追跡",
+    "外部PDFは元URLの通常リンクとして保持し、自サイト添付PDFのみ実asset対応まで公開停止",
     "未知ノード/属性/mark・不正な子要素の拒否（listItemは段落を先頭に要求）",
     "原本参照の存在/記事所属確認・class/data/tabindexの公開データ混入防止・anchor保持",
     "重複アンカー・未解決画像の公開停止（旧データへ仮assetIdを発行しない）",
@@ -204,14 +206,12 @@
     },
     {
       "id": 17696,
-      "bodyBytes": 13462,
-      "provisionalRequestBytes": 13828,
+      "bodyBytes": 13517,
+      "provisionalRequestBytes": 13883,
       "archiveBytes": 2133,
       "archiveRecords": 5,
-      "issues": [
-        "unresolved_asset"
-      ],
-      "unresolvedAssets": 1
+      "issues": [],
+      "unresolvedAssets": 0
     },
     {
       "id": 17564,
@@ -422,14 +422,14 @@
     },
     {
       "id": 16482,
-      "bodyBytes": 38103,
-      "provisionalRequestBytes": 38516,
+      "bodyBytes": 38165,
+      "provisionalRequestBytes": 38578,
       "archiveBytes": 29404,
       "archiveRecords": 73,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 68
+      "unresolvedAssets": 67
     },
     {
       "id": 16444,
@@ -812,14 +812,14 @@
     },
     {
       "id": 14950,
-      "bodyBytes": 10945,
-      "provisionalRequestBytes": 11365,
+      "bodyBytes": 10997,
+      "provisionalRequestBytes": 11417,
       "archiveBytes": 3026,
       "archiveRecords": 7,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 5
+      "unresolvedAssets": 4
     },
     {
       "id": 14946,
@@ -967,14 +967,12 @@
     },
     {
       "id": 14366,
-      "bodyBytes": 16874,
-      "provisionalRequestBytes": 17205,
+      "bodyBytes": 16926,
+      "provisionalRequestBytes": 17257,
       "archiveBytes": 21382,
       "archiveRecords": 46,
-      "issues": [
-        "unresolved_asset"
-      ],
-      "unresolvedAssets": 1
+      "issues": [],
+      "unresolvedAssets": 0
     },
     {
       "id": 14354,
@@ -2918,14 +2916,14 @@
     },
     {
       "id": 5631,
-      "bodyBytes": 40064,
-      "provisionalRequestBytes": 40384,
+      "bodyBytes": 40238,
+      "provisionalRequestBytes": 40558,
       "archiveBytes": 30760,
       "archiveRecords": 77,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 75
+      "unresolvedAssets": 74
     },
     {
       "id": 5595,
@@ -3057,36 +3055,36 @@
     },
     {
       "id": 4937,
-      "bodyBytes": 21676,
-      "provisionalRequestBytes": 21994,
+      "bodyBytes": 20987,
+      "provisionalRequestBytes": 21305,
       "archiveBytes": 12324,
       "archiveRecords": 29,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 14
+      "unresolvedAssets": 28
     },
     {
       "id": 4810,
-      "bodyBytes": 74679,
-      "provisionalRequestBytes": 74992,
+      "bodyBytes": 70596,
+      "provisionalRequestBytes": 70909,
       "archiveBytes": 72496,
       "archiveRecords": 171,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 85
+      "unresolvedAssets": 170
     },
     {
       "id": 4794,
-      "bodyBytes": 9147,
-      "provisionalRequestBytes": 9445,
+      "bodyBytes": 9080,
+      "provisionalRequestBytes": 9378,
       "archiveBytes": 887,
       "archiveRecords": 2,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 1
+      "unresolvedAssets": 2
     },
     {
       "id": 4772,
@@ -3110,14 +3108,14 @@
     },
     {
       "id": 4708,
-      "bodyBytes": 10190,
-      "provisionalRequestBytes": 10496,
+      "bodyBytes": 10002,
+      "provisionalRequestBytes": 10308,
       "archiveBytes": 2650,
       "archiveRecords": 6,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 3
+      "unresolvedAssets": 6
     },
     {
       "id": 4683,
@@ -3139,14 +3137,14 @@
     },
     {
       "id": 4664,
-      "bodyBytes": 3498,
-      "provisionalRequestBytes": 3819,
+      "bodyBytes": 3427,
+      "provisionalRequestBytes": 3748,
       "archiveBytes": 1772,
       "archiveRecords": 4,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 1
+      "unresolvedAssets": 2
     },
     {
       "id": 4659,
@@ -3159,25 +3157,25 @@
     },
     {
       "id": 4641,
-      "bodyBytes": 7287,
-      "provisionalRequestBytes": 7651,
+      "bodyBytes": 6915,
+      "provisionalRequestBytes": 7279,
       "archiveBytes": 5499,
       "archiveRecords": 12,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 5
+      "unresolvedAssets": 10
     },
     {
       "id": 4631,
-      "bodyBytes": 5633,
-      "provisionalRequestBytes": 5987,
+      "bodyBytes": 5489,
+      "provisionalRequestBytes": 5843,
       "archiveBytes": 2350,
       "archiveRecords": 5,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 2
+      "unresolvedAssets": 4
     },
     {
       "id": 4623,
@@ -3190,25 +3188,25 @@
     },
     {
       "id": 4562,
-      "bodyBytes": 6082,
-      "provisionalRequestBytes": 6406,
+      "bodyBytes": 6020,
+      "provisionalRequestBytes": 6344,
       "archiveBytes": 1312,
       "archiveRecords": 3,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 1
+      "unresolvedAssets": 2
     },
     {
       "id": 4318,
-      "bodyBytes": 47736,
-      "provisionalRequestBytes": 48083,
+      "bodyBytes": 44292,
+      "provisionalRequestBytes": 44639,
       "archiveBytes": 53378,
       "archiveRecords": 121,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 53
+      "unresolvedAssets": 114
     },
     {
       "id": 4557,
@@ -3223,14 +3221,14 @@
     },
     {
       "id": 4305,
-      "bodyBytes": 5328,
-      "provisionalRequestBytes": 5672,
+      "bodyBytes": 4998,
+      "provisionalRequestBytes": 5342,
       "archiveBytes": 6130,
       "archiveRecords": 14,
       "issues": [
         "unresolved_asset"
       ],
-      "unresolvedAssets": 6
+      "unresolvedAssets": 12
     },
     {
       "id": 4299,

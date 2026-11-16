@@ -14,7 +14,7 @@ TIPTAP_AUDIT_DEPS=/tmp/paf-tiptap-prototype node specs/006-blog-cms/verification
 exportはChromiumで310件を旧HTMLから検証済み編集JSONに変換し、`/tmp/paf-body-contract-documents.json` へ出力。build-schemaはcontractsの2つの候補schemaを生成する。checkはエクスポートの原本hash一致を検査してから、候補形式への変換、AJV2020検証、記事所属/URL等の意味検証、逆変換、公開用AST、負例と容量を検査し `result.json` を更新する。
 
 - 310件で編集候補schema通過・正規化した編集JSONへの逆変換成功。
-- 添付未解決254件を公開停止。本文のみの公開AST条件を満たす56件は、記事公開の受け入れ完了を示さない。
+- 添付未解決252件を公開停止。本文のみの公開AST条件を満たす58件は、記事公開の受け入れ完了を示さない。
 - 元からある重複アンカーは保全し、公開を停止。生class/data/tabindex等を公開ASTへ出さない。
 - schema通過後も原本参照の存在・記事所属・種別、URL、assetのサーバー解決結果を検証する。公開用schemaは未解決ノード/sourceRefを許可しない。
 - 旧URLに仮assetIdを与えていない。許可assetの正例は明示した合成fixtureのみ。
