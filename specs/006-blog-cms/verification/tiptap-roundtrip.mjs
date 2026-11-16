@@ -82,4 +82,3 @@ const report={node:process.version,versions,sourceSHA256:createHash('sha256').up
 writeFileSync(process.env.TIPTAP_AUDIT_OUTPUT??'/tmp/paf-tiptap-audit-result.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({count:report.count,versions,aggregate},null,2));
 dom.window.close();
-
