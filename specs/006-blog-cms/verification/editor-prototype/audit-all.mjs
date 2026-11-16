@@ -5,13 +5,14 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 const root=dirname(fileURLToPath(import.meta.url));const require=createRequire(resolve('cms/package.json'));
-const {chromium}=require('@playwright/test');const raw=readFileSync('astro/data/wordpress-export.json');const source=JSON.parse(raw);const posts=source.content.blogs;
+const {chromium}=require('@playwright/test');const raw=readFileSync('astro/data/wordpress-export.json');const prior=JSON.parse(readFileSync(resolve(root,'all-articles-result.json')));const source=JSON.parse(raw);const posts=source.content.blogs;
 assert.equal(posts.length,310);assert.equal(new Set(posts.map(p=>p.id)).size,310);
 const browser=await chromium.launch();const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
 try{
  await page.goto('http://127.0.0.1:4390');const records=[];
  for(let i=0;i<posts.length;i+=20){records.push(...await page.evaluate(async batch=>(await import('/audit-all.js')).audit(batch),posts.slice(i,i+20)));console.log(`${records.length}/${posts.length}`);}
  assert.deepEqual(errors,[]);assert.equal(records.length,310);
+ for(const old of prior.records.filter(r=>r.status==='passed'))assert.equal(records.find(r=>r.id===old.id).status,'passed',`regression ${old.id}`);
  const passed=records.filter(r=>r.status==='passed'),blocked=records.filter(r=>r.status==='blocked');
  const reasons=Object.fromEntries([...new Set(blocked.map(r=>r.reason))].map(reason=>[reason,blocked.filter(r=>r.reason===reason).map(r=>r.id)]));
  const maximum=field=>records.filter(r=>Number.isFinite(r[field])).reduce((a,b)=>a[field]>b[field]?a:b);
@@ -33,11 +34,11 @@ try{
  '## 確認待ち記事','', '| ID | タイトル | 最初の停止理由 | その他の旧要素・属性 |','| --- | --- | --- | --- |',
  ...blocked.map(r=>`| ${r.id} | ${r.title.replaceAll('|','／')} | ${r.reason} | ${r.legacyFeatures.join(', ').replaceAll('|','／')||'書式・要素の変換差をJSONのdifferencesで確認'} |`),'',
  '## 次の対応順（提案）','',
- '1. 書式構造差15件。12件は最初の差がstrong/spanの並び、残る3件（18053・18043・12146）は書式の統合・分割や入れ子を含む。文字ごとの有効な書式と適用範囲を確認し、見た目が同じと推定してガードを外さない。',
- '2. wbrを含む記事の改行候補位置を保持するノード。最初の停止理由は13件だが、他の理由で停止した記事にも存在する。',
- '3. divとlang、旧idを含む構造の保全。段落へ無条件置換せず、旧アンカーと文章のまとまりを確認する。',
- '4. コピー元のclass/data属性。メール・SNS由来の付加情報と公開内容の意味を分け、採用する除去規則を明示する。外部リンクのhrefは保持する。','',
- 'この検証では変換ルールを変更せず、確認待ち記事の原文と公開内容も変更していない。全件の詳細・差分・添付件数はall-articles-result.json。再現: 試作サーバー起動中に `node specs/006-blog-cms/verification/editor-prototype/audit-all.mjs`。',''];
+ '書式構造差15件は文字・画像ごとの有効書式を照合する方式で通過。太字/色の順序、同義の分割・統合、入れ子の上書きを扱い、異なる書式・対象・改行・リンクの欠落は拒否する。',
+ '1. wbrを含む記事の改行候補位置を保持するノード。最初の停止理由は13件だが、他の理由で停止した記事にも存在する。',
+ '2. divとlang、旧idを含む構造の保全。段落へ無条件置換せず、旧アンカーと文章のまとまりを確認する。',
+ '3. コピー元のclass/data属性。メール・SNS由来の付加情報と公開内容の意味を分け、採用する除去規則を明示する。外部リンクのhrefは保持する。','',
+ '確認待ち記事の原文と公開内容は変更していない。全件の詳細・差分・添付件数はall-articles-result.json。再現: 試作サーバー起動中に `node specs/006-blog-cms/verification/editor-prototype/audit-all.mjs`。',''];
  writeFileSync(resolve(root,'all-articles.md'),md.join('\n'));
  console.log(JSON.stringify({passed:report.passed,blocked:report.blocked,reasons,maxima},null,2));
 }finally{await browser.close();}

@@ -27,6 +27,20 @@ export async function checkLegacy(){
  assert(signature('<p><span style="color:red">甲</span>乙</p>')!==signature('<p><span style="color:blue">甲</span>乙</p>'),'style change must differ');
  assert(signature('<p><span style="color:red">甲</span>乙</p>')!==signature('<p>甲<span style="color:red">乙</span></p>'),'style scope must differ');
  results.push('lang欠落・未対応langとリンクの対象変更・色変更を検知');
+ const same=(a,b)=>assert(signature(a)===signature(b),'equivalent inline formats');
+ const different=(a,b)=>assert(signature(a)!==signature(b),'different inline formats');
+ same('<p><strong><span style="color:blue">甲</span></strong></p>','<p><span style="color:blue"><strong>甲</strong></span></p>');
+ same('<p><strong>甲</strong><strong>乙</strong></p>','<p><strong>甲乙</strong></p>');
+ same('<p><span style="color:black">甲<span style="color:red">乙</span>丙</span></p>','<p><span style="color:black">甲</span><span style="color:red">乙</span><span style="color:black">丙</span></p>');
+ different('<p><strong>甲</strong>乙</p>','<p>甲<strong>乙</strong></p>');
+ different('<p><strong>甲</strong></p>','<p>甲</p>');
+ different('<p><em>甲</em></p>','<p><u>甲</u></p>');
+ different('<p>甲<br>乙</p>','<p>甲乙</p>');
+ different('<p><span style="color:black">甲<span style="color:red">乙</span></span></p>','<p><span style="color:black">甲乙</span></p>');
+ different('<p><a href="https://example.com/a"><img src="https://example.com/i.jpg"></a></p>','<p><img src="https://example.com/i.jpg"></p>');
+ // A disabled bold parser must not pass the source guard merely because plain text matches.
+ rejects(()=>checkedImport('<p><strong>強調</strong></p>',[LegacyLanguage,StarterKit.configure({bold:false})]),'lost bold');
+ results.push('太字/色の順序・同義分割・入れ子を許容し、太字/斜体/下線の欠落・対象変更、改行欠落、色上書き・画像リンク欠落を検知');
  const posts=await(await fetch('/fixtures.json')).json();
  for(const id of [17696,4318]){
   const post=posts.find(p=>p.id===id);const json=checkedImport(post.content,extensions);

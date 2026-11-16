@@ -28,28 +28,38 @@ export function preflight(html){
  }
  return body;
 }
+// Compare inline meaning at its target, not the order of equivalent wrappers.
+// Whitespace and plain paragraph boundaries retain the existing probe's limited scope.
 export function signature(html){
- const body=preflight(html);
- // ProseMirror merges adjacent links carrying exactly the same attributes.
- const attrs=e=>JSON.stringify([...e.attributes].map(a=>[a.name,a.value]).sort());
- for(const link of body.querySelectorAll('a')){
-  while(link.nextSibling?.nodeName==='A' && attrs(link)===attrs(link.nextSibling)){
-   const next=link.nextSibling;link.append(...next.childNodes);next.remove();
-  }
+ const body=preflight(html);const tokens=[];
+ const marks={strong:'bold',b:'bold',em:'italic',i:'italic',u:'underline',s:'strike',strike:'strike'};
+ const attrs=el=>Object.fromEntries([...el.attributes].filter(a=>!['class','rel','target','allow','allowfullscreen','frameborder','loading','referrerpolicy','style','lang'].includes(a.name)).filter(a=>a.value!=='').map(a=>[a.name,a.value]).sort());
+ const canonical=value=>Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b)));
+ function emit(token){
+  const last=tokens.at(-1);
+  if(token.kind==='text'&&last?.kind==='text'&&JSON.stringify(last.format)===JSON.stringify(token.format))last.text+=token.text;
+  else tokens.push(token);
  }
- // A sole nested span with disjoint styles has the same scope as a single span.
- for(const span of [...body.querySelectorAll('span')].reverse()){
-  const child=span.firstChild;
-  if(span.childNodes.length===1 && child?.nodeName==='SPAN' &&
-     [...span.attributes,...child.attributes].every(a=>a.name==='style') &&
-     [...child.style].every(key=>!span.style.getPropertyValue(key))){
-   for(const key of child.style)span.style.setProperty(key,child.style.getPropertyValue(key),child.style.getPropertyPriority(key));
-   span.replaceChildren(...child.childNodes);
-  }
+ function walk(node,inherited={}){
+  if(node.nodeType===3){const text=node.textContent.replace(/\s/g,'');if(text)emit({kind:'text',text,format:canonical(inherited)});return;}
+  if(node.nodeType!==1)return;
+  const tag=node.localName;const format={...inherited};
+  if(marks[tag])format[marks[tag]]=true;
+  for(const key of node.style)format[key]=node.style.getPropertyValue(key);
+  if(node.hasAttribute('lang'))format.lang=node.getAttribute('lang');
+  if(tag==='a')format.link=attrs(node);
+  // Breaks have no glyph to color/bolden; their count/order is still significant.
+  if(tag==='br'){emit({kind:'br'});return;}
+  if(['img','iframe','hr'].includes(tag)){emit({kind:tag,attrs:attrs(node),format:canonical(format)});return;}
+  const block=!['p','span','a',...Object.keys(marks)].includes(tag);
+  if(block)emit({kind:'open',tag,attrs:attrs(node),format:canonical(format)});
+  if(tag==='p'&&node.hasAttribute('lang'))emit({kind:'language',value:node.lang});
+  for(const child of node.childNodes)walk(child,format);
+  if(tag==='a'&&!node.textContent.trim()&&!node.querySelector('img,br'))emit({kind:'empty-link',attrs:attrs(node)});
+  if(block)emit({kind:'close',tag});
  }
- const links=[...body.querySelectorAll('a')].map(e=>({href:e.getAttribute('href'),title:e.getAttribute('title'),text:e.textContent.replace(/\s/g,''),images:[...e.querySelectorAll('img')].map(i=>i.getAttribute('src'))}));
- const formatting=[...body.querySelectorAll('[style],[lang]')].map(e=>({style:e.style.cssText,lang:e.getAttribute('lang'),text:e.textContent.replace(/\s/g,''),images:[...e.querySelectorAll('img')].map(i=>i.getAttribute('src'))}));
- return JSON.stringify({formatting,links,text:body.textContent.replace(/\s/g,''),elements:[...body.querySelectorAll('*')].filter(e=>!['p','span'].includes(e.localName)||e.getAttribute('style')||e.hasAttribute('lang')).map(e=>({tag:({b:'strong',i:'em',strike:'s'})[e.localName]??e.localName,attrs:[...e.attributes].filter(a=>!['class','rel','target','allow','allowfullscreen','frameborder','loading','referrerpolicy'].includes(a.name)).filter(a=>a.value!=='').map(a=>[a.name,a.name==='style'?e.style.cssText:a.value]).sort()}))});
+ for(const node of body.childNodes)walk(node);
+ return JSON.stringify({tokens});
 }
 export function checkedImport(html,extensions){
  preflight(html); const json=normalizeStyles(generateJSON(html,extensions));

@@ -24,16 +24,17 @@ try{
  await page.evaluate(()=>{Storage.prototype.setItem=function(){throw new Error('quota test');};});await body.click();await page.keyboard.insertText('保存失敗時の入力');await save.click();await expect(page.getByText(/保存できませんでした/)).toBeVisible();await expect(page.getByRole('status')).toHaveText('未保存');await expect(body).toContainText('保存失敗時の入力');results.push('保存失敗で未保存と入力内容を保持');
  await page.goto('http://127.0.0.1:4390/?article=unsupported');await expect(page.getByText(/変換確認待ち:/)).toBeVisible();await expect(save).toBeDisabled();assert.equal(await page.evaluate(()=>localStorage.getItem('paf-body-prototype:unsupported')),null);await expect(page.locator('pre')).toContainText('<details>');results.push('未対応HTMLの原文保持と保存禁止');
  const articles=[];
- for(const id of [18050,17696,15682,4318,14975]){
+ for(const id of [18050,17696,15682,4318,14975,18053,18043,17709,16892,16186,14812,14382,14354,13787,12609,12146,5853,5742,5456,4670]){
   await page.goto(`http://127.0.0.1:4390/?article=${id}`);await expect(page.getByRole('status')).toHaveText(/未保存|変換確認待ち/);
   const status=await page.getByRole('status').innerText();assert.equal(status,'未保存',`article ${id} must be editable`);if(status==='未保存'){await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');await page.reload();await expect(page.getByRole('status')).toHaveText('保存済み');}
-  if([17696,4318].includes(id)){
+  if([17696,4318,18053,18043,17709,16892,16186,14812,14382,14354,13787,12609,12146,5853,5742,5456,4670].includes(id)){
    const original=await page.evaluate(id=>JSON.parse(localStorage.getItem(`paf-body-prototype:${id}`)).body,id);
-   await body.click();await page.keyboard.press('ControlOrMeta+Home');await page.keyboard.insertText('旧記事の追記確認。');await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');
+   await body.evaluate(el=>{el.focus();const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){if(node.textContent.trim()&&!node.parentElement.closest('.media-placeholder'))break;}if(!node)throw Error('No editable text');const range=document.createRange();range.setStart(node,0);range.collapse(true);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);});await page.keyboard.insertText('旧記事の追記確認。');await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');
    const edited=await page.evaluate(id=>JSON.parse(localStorage.getItem(`paf-body-prototype:${id}`)).body,id);assert.deepEqual(media(edited),media(original));
    await page.reload();await expect(body).toContainText('旧記事の追記確認。');await save.click();await expect(page.getByRole('status')).toHaveText('保存済み');assert.deepEqual(await page.evaluate(id=>JSON.parse(localStorage.getItem(`paf-body-prototype:${id}`)).body,id),edited);
    if(id===4318){await expect(body.locator('p[lang="ja-JP"]')).toHaveCount(31);await page.screenshot({path:'/tmp/paf-body-legacy-4318.png'});}
   }
+  if([18053,12146].includes(id))await page.screenshot({path:`/tmp/paf-format-${id}.png`});
   articles.push({id,result:status==='未保存'?'保存・再読込成功':await page.getByText(/変換確認待ち:/).innerText()});
  }
  await page.goto('http://127.0.0.1:4390');await expect(body).toBeVisible();await expect(save).toBeEnabled();await page.screenshot({path:'/tmp/paf-body-prototype.png',fullPage:true});
