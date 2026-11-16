@@ -31,6 +31,7 @@ try{
  }
  await page.goto('http://127.0.0.1:4390');await expect(body).toBeVisible();await expect(save).toBeEnabled();await page.screenshot({path:'/tmp/paf-body-prototype.png',fullPage:true});
  assert.deepEqual(errors,[]);
- const report={results,articles,limitations:['OSの日本語IMEによる変換・確定は未確認','画像表示・動画再生・アップロード・本番API保存は試作の対象外','貼り付けはClipboardEventで検証。OSクリップボード経由は未確認'],screenshot:'/tmp/paf-body-prototype.png'};
+ const diagnostics=await page.evaluate(async()=>await(await import('/diagnose.js')).diagnose());
+ const report={results,articles,diagnostics,limitations:['OSの日本語IMEによる変換・確定は未確認','画像表示・動画再生・アップロード・本番API保存は試作の対象外','貼り付けはClipboardEventで検証。OSクリップボード経由は未確認'],screenshot:'/tmp/paf-body-prototype.png'};
  writeFileSync(resolve('specs/006-blog-cms/verification/editor-prototype/result.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
 }finally{await browser.close();}

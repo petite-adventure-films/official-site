@@ -28,6 +28,184 @@
       "result": "保存・再読込成功"
     }
   ],
+  "diagnostics": [
+    {
+      "id": 17696,
+      "differences": [
+        {
+          "path": "/content/59/content/0/marks/0/attrs/color",
+          "before": "#0000ff",
+          "after": "rgb(0, 0, 255)"
+        }
+      ],
+      "languageAttributes": [],
+      "styles": [
+        "color: #0000ff;"
+      ]
+    },
+    {
+      "id": 4318,
+      "differences": [
+        {
+          "path": "/content/0/content/0/marks/0/attrs/color",
+          "before": "#0000ff",
+          "after": "rgb(0, 0, 255)"
+        },
+        {
+          "path": "/content/0/content/2/marks/0/attrs/color",
+          "before": "#0000ff",
+          "after": "rgb(0, 0, 255)"
+        },
+        {
+          "path": "/content/0/content/4/marks/0/attrs/color",
+          "before": "#0000ff",
+          "after": "rgb(0, 0, 255)"
+        },
+        {
+          "path": "/content/100/content/0/marks/0/attrs/fontFamily",
+          "before": "Times New Roman,serif",
+          "after": "\"Times New Roman\", serif"
+        },
+        {
+          "path": "/content/175/content/1/marks/0/attrs/fontFamily",
+          "before": "ＭＳ Ｐ明朝,serif",
+          "after": "\"ＭＳ Ｐ明朝\", serif"
+        }
+      ],
+      "languageAttributes": [
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        },
+        {
+          "tag": "p",
+          "lang": "ja-JP"
+        }
+      ],
+      "styles": [
+        "color: #0000ff;",
+        "font-family: Times New Roman,serif;",
+        "font-family: ＭＳ Ｐ明朝,serif;",
+        "font-size: medium;"
+      ]
+    }
+  ],
   "limitations": [
     "OSの日本語IMEによる変換・確定は未確認",
     "画像表示・動画再生・アップロード・本番API保存は試作の対象外",
