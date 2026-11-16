@@ -35,7 +35,7 @@
 | 7161 | 1 | 1件が取得可能。代表として実体取得・hash/寸法確認 |
 | 7277 | 1 | 候補なし。WordPressメディア原本/バックアップ等の確認が必要 |
 
-通常画像1点と復旧候補1点、計2点を取得して画像デコード・実寸・byte数・SHA-256・ローカル再読出し一致を確認した。保存先は `/tmp/paf-verified-media/`、移行先キーは提案値のみ。全5,895候補のダウンロードは未実施。
+初回は通常画像1点と復旧候補1点、計2点を取得して画像デコード・実寸・byte数・SHA-256・ローカル再読出し一致を確認した。後続の[小規模取得・目視レビュー](../verification/asset-mapping/recovery-review.md)では復旧候補7点すべてを検証済み。保存先は `/tmp/paf-verified-media/`、移行先キーは提案値のみ。全5,895候補のダウンロードは未実施。
 
 [probe-result.json](../verification/asset-mapping/probe-result.json) に現在のHTTP結果と取得証拠を記録。欠損候補、URL/記事の対応と元台帳の照合は [inventory-result.json](../verification/asset-mapping/inventory-result.json) を参照。
 

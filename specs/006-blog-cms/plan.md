@@ -38,7 +38,7 @@
 | ブログ項目・日時 | spec.mdに合意済み。日時は表示のみ |
 | 保存・データ・API境界 | 基本方針は利用者確認済み。本文・公開形式に依存する詳細は継続設計 |
 | 本文形式・操作・旧HTML変換 | [本文契約案](contracts/body.md)と[保存/公開境界](contracts/body-storage.md)、2つの候補schemaを具体化。独立試作で310件の照合、51記事の操作、候補schema310件の検証・逆変換を確認。正式validator/renderer・OS IME・公開接続は未実装/未検証 |
-| 添付の参照 | [照合結果](contracts/asset-resolution.md)あり。台帳5,895パス、外部PDF、欠損8URLを分類。代表実体2点を検証。[全件取得・復旧計画](contracts/asset-acquisition.md)を具体化。全取得・R2登録・実ID対応は#395/#391で未完了 |
+| 添付の参照 | [照合結果](contracts/asset-resolution.md)あり。台帳5,895パス、外部PDF、欠損8URLを分類。[小規模試験](verification/asset-mapping/recovery-review.md)で20 URL中12実体取得/8欠損、復旧候補7点の外観を確認。[全件取得・復旧計画](contracts/asset-acquisition.md)を具体化。全取得・R2登録・実ID対応は#395/#391で未完了 |
 | 代表ブログ画面 | 本文部品・代表画面を作成し通常状態の構造/外観を検査済み。利用者レビュー・CMS本体の状態差分は未確認。独立した本文試作の操作は検証済み |
 | URL・正式公開形式・配信 | #333・#390・#394・#413との合意と検証環境での反映確認が必要 |
 

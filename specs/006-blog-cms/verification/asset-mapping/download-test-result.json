@@ -1,0 +1,19 @@
+{
+  "tests": [
+    "batch interruption/resume",
+    "verified cache skips fetch",
+    "corrupt cache quarantined and reacquired",
+    "input hash mismatch rejected",
+    "interrupted fetching retried",
+    "URL aliases independently fetched then hash compared",
+    "404 retained as missing",
+    "HTML response rejected",
+    "byte limit rejected",
+    "external redirect blocked before fetch",
+    "503 retried",
+    "429 cooldown survives restart",
+    "broken stream never verified"
+  ],
+  "passed": 13,
+  "scope": "Injected HTTP responses and temporary files; not full migration acceptance"
+}
