@@ -1,6 +1,6 @@
 # ブログCMS画面契約案
 
-対象 #418。docs/cms-ui-rules.mdに従う。本文を含む代表画面は未作成・未確認。この文書だけを画面実装の開始条件にしない。
+対象 #418。docs/cms-ui-rules.mdに従う。本文を含む代表画面を作成し、構造・外観を検査済み。利用者レビューと実装後の操作確認は未実施。
 
 ## 経路と配置
 
@@ -27,10 +27,18 @@
 | 選択・オンオフ | [Chip](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=8-199)、[Switch](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=8-904) | 代表画面からFilled/Outlined ChipとSwitchの参照 |
 | 余白 | [CMSスペーシング](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=92-149) | cms/section/content/heading/related/detail/icon/actions/list-padding-x/y、基礎値alias |
 | 代表編集 | [イベント編集](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=17-2247) | CMSLayout・入力の参照。ブログ検査を代替しない |
-| 本文編集 | 未確定 | 共通部品ページに専用エディター定義を確認できず。#334で操作・部品を定める |
+| 本文編集 | [BodyEditor案](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=153-166) | 既存MUI Button/TypographyとContent標準Slotで構成。本文操作は[本文契約](body.md) |
 
-## 代表画面の開始・提出条件
+## 代表画面と検査結果
 
-#334で本文操作・形式を確認し、必要な共通部品を定義して代表ブログ編集画面1枚を組む。本文を直接配置テキストや図形で代用して完成としない。標準Slotに部品インスタンスを置き、不要な補助部品を増やさない。
+[ブログ編集の代表案](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=155-1483)は1440px・ライトモード。記事内容は設計用の例。カテゴリ5件、映画タグ9件、イベントタグ10件は既存スナップショットの名称を使い、折り返しとサイドバーの高さを確認した。本文が短い場合もサイドバーと独立して高さが取れ、実装ではページ全体をスクロールする。
 
-提出時は1440pxの外観、長いタイトル・カテゴリ名、スクロール、必須エラー、全インスタンス参照元、インスタンス外の表示要素、トークン対応を確認しnodeと結果を記録する。現在はブログ画面のスクリーンショット検査・構造検査・利用者確認は未実施。実装後の操作/保存確認とは区別する。
+2026-11-16にMCPとスクリーンショットで検査した。画面内238ノード、80インスタンス、16 Slot。インスタンスの参照切れ0、Slot違反0、インスタンス外に直接配置した表示要素0、全テキストは既存Roboto。CMSLayout（26:477）、EditorLayout（26:339）、Section（23:611）、Field（23:663）、BodyEditor（153:166）の参照を維持している。
+
+[検査記録](../verification/figma-review.json)を保存した。
+
+BodyEditorはcms/content、heading、actions、背景paper、divider、borderRadiusへバインド。表示用の画像・画面全体のラスター化は使っていない。本文ツールバー、カテゴリ・タグ、Switch、下部の記事操作について、文字切れ・重なりのない通常状態を確認した。
+
+共通CMSLayoutに `Show blog`（既定false）を追加し、この代表案だけtrue。既存イベント画面は既定でブログ項目を表示しない。ブログ画面ではイベントを通常文字、ブログを太字にして現在地を示す。
+
+未確認: 利用者レビュー、長いタイトル/本文の限界表示、本文の空・エラー・変換確認待ち状態、キーボード・フォーカス・メニュー/挿入ダイアログ、入力・Undo・保存・公開・実スクロール。Figma上の通常状態の検査をこれらの確認で代替しない。

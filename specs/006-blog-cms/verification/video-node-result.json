@@ -1,0 +1,708 @@
+{
+  "youtube": 149,
+  "vimeo": 2,
+  "articles": 90,
+  "invalidURLsRejected": 12,
+  "preserved": [
+    "provider",
+    "videoId",
+    "sourceUrl including si/start/h",
+    "title",
+    "width",
+    "height"
+  ],
+  "scope": "Video nodes only; other content is deliberately not assessed by this probe.",
+  "videos": [
+    {
+      "articleId": 18050,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17898,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17756,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17724,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17709,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17564,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17465,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17372,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17338,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17147,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 17129,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16917,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16849,
+      "count": 6,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16621,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16592,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16482,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16444,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16421,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16395,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16332,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16192,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16181,
+      "count": 3,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16072,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 16057,
+      "count": 4,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15959,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15939,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15858,
+      "count": 4,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15699,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15689,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15682,
+      "count": 2,
+      "providers": [
+        "vimeo",
+        "vimeo"
+      ]
+    },
+    {
+      "articleId": 15641,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15604,
+      "count": 7,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15504,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15462,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15432,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 15358,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14950,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14946,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14834,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14829,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14806,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14393,
+      "count": 3,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14354,
+      "count": 4,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14157,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 14079,
+      "count": 3,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 13660,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 13272,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12858,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12789,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12713,
+      "count": 6,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12653,
+      "count": 4,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12646,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12584,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12409,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 12395,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 11657,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 11624,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 11575,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 11542,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 11480,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 11354,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10759,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10631,
+      "count": 3,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10406,
+      "count": 3,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10326,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10205,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10190,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10145,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 10121,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 9739,
+      "count": 2,
+      "providers": [
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 9708,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 9435,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 9413,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 9118,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8824,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8677,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8502,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8380,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8192,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8133,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 8051,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 7810,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 7703,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 7509,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 7317,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 6775,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 6218,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 6004,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 5802,
+      "count": 3,
+      "providers": [
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    {
+      "articleId": 4318,
+      "count": 1,
+      "providers": [
+        "youtube"
+      ]
+    }
+  ]
+}

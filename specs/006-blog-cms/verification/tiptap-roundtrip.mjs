@@ -59,7 +59,7 @@ for(const p of posts){
  edited.content.push({type:'paragraph',content:[{type:'text',text:'PAF互換性検証の追記'}]});
  const reopened=generateJSON(generateHTML(edited,extensions),extensions);
  const editText=features(parse(generateHTML(reopened,extensions))).text;
- const row={id:p.id,slug:p.name, textChanged:before.text!==after.text,
+ const row={id:p.id,slug:p.name, jsonBytes:Buffer.byteLength(JSON.stringify({schemaVersion:1,doc})),textChanged:before.text!==after.text,
  linksLost:diff(before.links,after.links), linkDestinationsLost:diff(before.links,after.links).filter(x=>!after.links[x.value]), imagesLost:diff(before.images,after.images),
  imageAltsLost:diff(before.imageAlts,after.imageAlts),
  framesChanged:diff(before.frames,after.frames),videosLost:diff(before.videos,after.videos),anchorsLost:diff(before.anchors,after.anchors),
