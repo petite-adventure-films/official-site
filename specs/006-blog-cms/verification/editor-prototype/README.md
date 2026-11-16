@@ -37,7 +37,7 @@ node specs/006-blog-cms/verification/editor-prototype/check.mjs
 
 ## 旧書式・言語属性の保持
 
-`legacy.js` はtextStyleのcolor/backgroundColor/fontFamily/fontSizeだけをブラウザのCSS解析で正規化する。未指定値・他の属性は保持し、任意のJSON差分を無視しない。paragraphの `lang="ja-JP"` を保存・再描画する。その他のlang値・要素は引き続き確認待ち。
+`legacy.js` はtextStyleのcolor/backgroundColor/fontFamily/fontSizeだけをブラウザのCSS解析で正規化する。未指定値・他の属性は保持し、任意のJSON差分を無視しない。paragraphの `lang="ja-JP"` を保存・再描画する。旧divのlang="ja"も保持する。未確認のlang値・要素は引き続き確認待ち。
 
 原文と変換後HTMLを、文字・画像・動画ごとの有効書式（太字、斜体、下線、取消線、対象CSS属性、lang、リンク）へ展開して比較する。書式が同じ隣接文字列だけを統合し、ラッパーの順序・同義の分割と入れ子の違いを許容する。改行は個数と順序を保持し、文字を持たないbr自体の太字・色は比較しない。元HTMLは変更せず、異なる書式や対象は拒否。空白と通常段落境界の完全比較、一般的なHTML/CSSの意味的等価判定は対象外。
 
@@ -49,9 +49,9 @@ node specs/006-blog-cms/verification/editor-prototype/check.mjs
 
 ## 全310件の一括検証
 
-[全件レポートと確認待ち一覧](all-articles.md)。289件が原文照合・2回のJSON往復・localStorageシリアライズを通過し、21件は確認待ち。正式API保存や全記事の画面操作を検証したものではない。
+[全件レポートと確認待ち一覧](all-articles.md)。310件すべてが原文照合・2回のJSON往復・localStorageシリアライズを通過。正式API保存や全記事の画面操作を検証したものではない。
 
-サーバー起動中に `node specs/006-blog-cms/verification/editor-prototype/audit-all.mjs` を実行する。結果は `all-articles-result.json` と `all-articles.md`。スナップショットのハッシュ、記事ごとの容量・添付件数・停止理由・変換差・追加の旧属性を記録する。書式構造差15件は対応済み。wbrも対応済み。次はdiv/lang/id、コピー元class/data属性、mailtoリンクの対応を検討する。
+サーバー起動中に `node specs/006-blog-cms/verification/editor-prototype/audit-all.mjs` を実行する。結果は `all-articles-result.json` と `all-articles.md`。スナップショットのハッシュ、記事ごとの容量・添付件数・停止理由・変換差・追加の旧属性を記録する。書式構造差15件は対応済み。wbrも対応済み。旧コンテナー/属性とmailtoも試作で保持する。次は正式schema・API保存・公開レンダラーへの落とし込みと利用者レビューが必要。
 
 ## 書式構造差15件
 
@@ -65,6 +65,18 @@ node specs/006-blog-cms/verification/editor-prototype/check.mjs
 
 `WordBreak` はinlineのwordBreakノードとしてHTMLのwbrを読み込み、そのままwbrへ書き出す。改行文字やbrに置換しない。署名はwbrの位置と数を独立したトークンとして照合する。欠落・強制改行化・位置変更と、wbrパーサーのない構成を拒否するテストを追加した。
 
-全件監査は289件通過/21件確認待ち。新たに17147, 16192, 13033, 11154, 10631, 9848, 5566, 4664, 4270, 4264の10件が通過し、それぞれの追記・保存・ページ再読込も確認。既存279件に退行なし。元データには17記事279箇所のwbrがあり、通過記事内の219箇所を保持した。残りの記事はdiv/class/data属性やmailto（4720）で停止する。
+wbrの操作対象として17147, 16192, 13033, 11154, 10631, 9848, 5566, 4664, 4270, 4264の10件が通過し、それぞれの追記・保存・ページ再読込も確認。元データの17記事279箇所すべてのwbrを全件監査で保持した。
 
 実エディターに `ABCDEFGHIJ<wbr>KLMNOPQRST` を表示し、400pxでは同じ行、120pxでは候補位置から次行へ移ることを文字の座標で検証した。保存・ページ再読込後も確認。`word-break-1440.png` は狭幅の検証状態。OS IMEや不可視ノード付近のカーソル/削除操作全般は未確認。正式v2への採用と公開レンダラーは別途対応する。
+
+## 旧コンテナー・アンカー・補助属性とメールリンク
+
+`legacy-containers.js` はdivをlegacyBlock、属性を持つspanをlegacyInlineとして保持する。id/class/lang/dir、観測済みのtabindex/aria-live/data属性を保存し、コピー元の外部CSS・スクリプトは読み込まない。許可するclassは確認した名前に限定する。画像classも保存する。これらは正式公開レンダラーの採用済み仕様ではなく、意味が未確定の属性を捨てないための試作。
+
+リンクの転送補助属性を保持するが、クリック先hrefを置換しない。mailtoは単一ASCIIメールアドレスだけを許可し、追加ヘッダー・複数宛先・改行エンコードは対象外。strongに直接指定された色は、変換用コピーでstrongとtextStyleに分ける。原文は変更せず、HTML貼り付けも同じ処理を通す。
+
+全310件を再検証して通過。今回の21記事（16849, 14569, 14197, 12409, 12362, 6748, 6218, 4772, 4299, 14366, 5793, 12629, 12217, 11538, 10968, 10297, 10285, 8502, 5416, 10326, 4720）すべてで追記・保存・ページ再読込・再保存を行い、コンテナー属性・添付・リンクと保存JSONを保持した。操作試験は合計51記事。未知class、イベント属性、危険なhref、mailtoヘッダー付加、コンテナー/id/lang/dirの欠落は拒否テストで確認した。
+
+10297には `fbPhotoSnowliftCaption` が2回存在する。試作では元の個数と順序を保ち、勝手に改名しない。正式公開時の重複ID/アンカーの扱い、class/data/tabindex/aria属性の適用範囲は未決定で、完全な見た目の互換性は保証していない。空白・通常段落境界の完全な意味比較も引き続き対象外。
+
+現在の最大本文は226,122 bytes、暫定要求は226,810 bytes（記事14975、256KiBまで35,334 bytes）。正式v2と解決済みCMS IDによる容量は未測定。旧属性を追加した分も含め、最終形式で再検証する。

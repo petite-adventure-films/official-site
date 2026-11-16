@@ -7,41 +7,9 @@
   "sha256": "926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7",
   "browser": "158.0.8127.18",
   "total": 310,
-  "passed": 289,
-  "blocked": 21,
-  "reasons": {
-    "未対応のクラス": [
-      16849,
-      14569,
-      14197,
-      12409,
-      12362,
-      6748,
-      6218,
-      4772,
-      4299
-    ],
-    "未対応の属性: a.data-saferedirecturl": [
-      14366,
-      5793
-    ],
-    "未対応の要素: div": [
-      12629,
-      12217,
-      11538,
-      10968,
-      10297,
-      10285,
-      8502,
-      5416
-    ],
-    "未対応の属性: a.data-lynx-mode": [
-      10326
-    ],
-    "未対応のURL": [
-      4720
-    ]
-  },
+  "passed": 310,
+  "blocked": 0,
+  "reasons": {},
   "sourceTotals": {
     "wordBreaks": 279,
     "images": 5923,
@@ -52,13 +20,13 @@
     "styles": 161
   },
   "passedSourceTotals": {
-    "wordBreaks": 219,
-    "images": 5360,
-    "links": 756,
-    "pdfs": 4,
-    "videos": 141,
-    "languages": 31,
-    "styles": 155
+    "wordBreaks": 279,
+    "images": 5923,
+    "links": 829,
+    "pdfs": 5,
+    "videos": 151,
+    "languages": 35,
+    "styles": 161
   },
   "maxima": {
     "sourceHTMLBytes": {
@@ -68,18 +36,18 @@
     },
     "candidateBodyBytes": {
       "id": 14975,
-      "bytes": 210204,
-      "headroom": 51940
+      "bytes": 226122,
+      "headroom": 36022
     },
     "bodyBytes": {
       "id": 14975,
-      "bytes": 210204,
-      "headroom": 51940
+      "bytes": 226122,
+      "headroom": 36022
     },
     "provisionalRequestBytes": {
       "id": 14975,
-      "bytes": 210892,
-      "headroom": 51252
+      "bytes": 226810,
+      "headroom": 35334
     }
   },
   "bodyOverLimit": [],
@@ -101,9 +69,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15291,
+      "candidateBodyBytes": 15433,
       "status": "passed",
-      "bodyBytes": 15291,
+      "bodyBytes": 15433,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -113,7 +81,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 16104
+      "provisionalRequestBytes": 16246
     },
     {
       "id": 18050,
@@ -130,9 +98,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7501,
+      "candidateBodyBytes": 7714,
       "status": "passed",
-      "bodyBytes": 7501,
+      "bodyBytes": 7714,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -142,7 +110,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 8301
+      "provisionalRequestBytes": 8514
     },
     {
       "id": 18043,
@@ -159,9 +127,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8288,
+      "candidateBodyBytes": 8404,
       "status": "passed",
-      "bodyBytes": 8288,
+      "bodyBytes": 8404,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -171,7 +139,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 9288
+      "provisionalRequestBytes": 9404
     },
     {
       "id": 18013,
@@ -188,9 +156,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13966,
+      "candidateBodyBytes": 14423,
       "status": "passed",
-      "bodyBytes": 13966,
+      "bodyBytes": 14423,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -200,7 +168,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14958
+      "provisionalRequestBytes": 15415
     },
     {
       "id": 17946,
@@ -217,9 +185,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 11447,
+      "candidateBodyBytes": 11930,
       "status": "passed",
-      "bodyBytes": 11447,
+      "bodyBytes": 11930,
       "rendered": {
         "wordBreaks": 0,
         "images": 6,
@@ -229,7 +197,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 11988
+      "provisionalRequestBytes": 12471
     },
     {
       "id": 17931,
@@ -246,9 +214,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8003,
+      "candidateBodyBytes": 8074,
       "status": "passed",
-      "bodyBytes": 8003,
+      "bodyBytes": 8074,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -258,7 +226,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 8538
+      "provisionalRequestBytes": 8609
     },
     {
       "id": 17910,
@@ -275,9 +243,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 10394,
+      "candidateBodyBytes": 10465,
       "status": "passed",
-      "bodyBytes": 10394,
+      "bodyBytes": 10465,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -287,7 +255,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 10929
+      "provisionalRequestBytes": 11000
     },
     {
       "id": 17898,
@@ -304,9 +272,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7028,
+      "candidateBodyBytes": 7189,
       "status": "passed",
-      "bodyBytes": 7028,
+      "bodyBytes": 7189,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -316,7 +284,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 7970
+      "provisionalRequestBytes": 8131
     },
     {
       "id": 17876,
@@ -333,9 +301,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13913,
+      "candidateBodyBytes": 14055,
       "status": "passed",
-      "bodyBytes": 13913,
+      "bodyBytes": 14055,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -345,7 +313,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14448
+      "provisionalRequestBytes": 14590
     },
     {
       "id": 17856,
@@ -362,9 +330,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7883,
+      "candidateBodyBytes": 8070,
       "status": "passed",
-      "bodyBytes": 7883,
+      "bodyBytes": 8070,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -374,7 +342,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 8418
+      "provisionalRequestBytes": 8605
     },
     {
       "id": 17843,
@@ -391,9 +359,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12008,
+      "candidateBodyBytes": 12079,
       "status": "passed",
-      "bodyBytes": 12008,
+      "bodyBytes": 12079,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -403,7 +371,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 12543
+      "provisionalRequestBytes": 12614
     },
     {
       "id": 17756,
@@ -420,9 +388,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14586,
+      "candidateBodyBytes": 15313,
       "status": "passed",
-      "bodyBytes": 14586,
+      "bodyBytes": 15313,
       "rendered": {
         "wordBreaks": 0,
         "images": 13,
@@ -432,7 +400,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15430
+      "provisionalRequestBytes": 16157
     },
     {
       "id": 17728,
@@ -449,9 +417,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 22795,
+      "candidateBodyBytes": 23522,
       "status": "passed",
-      "bodyBytes": 22795,
+      "bodyBytes": 23522,
       "rendered": {
         "wordBreaks": 0,
         "images": 13,
@@ -461,7 +429,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 23692
+      "provisionalRequestBytes": 24419
     },
     {
       "id": 17724,
@@ -478,9 +446,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3161,
+      "candidateBodyBytes": 3303,
       "status": "passed",
-      "bodyBytes": 3161,
+      "bodyBytes": 3303,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -490,7 +458,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 3812
+      "provisionalRequestBytes": 3954
     },
     {
       "id": 17718,
@@ -507,9 +475,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4785,
+      "candidateBodyBytes": 4972,
       "status": "passed",
-      "bodyBytes": 4785,
+      "bodyBytes": 4972,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -519,7 +487,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 5386
+      "provisionalRequestBytes": 5573
     },
     {
       "id": 17709,
@@ -536,9 +504,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6343,
+      "candidateBodyBytes": 6459,
       "status": "passed",
-      "bodyBytes": 6343,
+      "bodyBytes": 6459,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -548,7 +516,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 6993
+      "provisionalRequestBytes": 7109
     },
     {
       "id": 17696,
@@ -565,9 +533,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16216,
+      "candidateBodyBytes": 16571,
       "status": "passed",
-      "bodyBytes": 16216,
+      "bodyBytes": 16571,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -577,7 +545,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 16807
+      "provisionalRequestBytes": 17162
     },
     {
       "id": 17564,
@@ -594,9 +562,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 61753,
+      "candidateBodyBytes": 66196,
       "status": "passed",
-      "bodyBytes": 61753,
+      "bodyBytes": 66196,
       "rendered": {
         "wordBreaks": 0,
         "images": 94,
@@ -606,7 +574,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 62645
+      "provisionalRequestBytes": 67088
     },
     {
       "id": 17465,
@@ -623,9 +591,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 39170,
+      "candidateBodyBytes": 41221,
       "status": "passed",
-      "bodyBytes": 39170,
+      "bodyBytes": 41221,
       "rendered": {
         "wordBreaks": 0,
         "images": 44,
@@ -635,7 +603,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 40083
+      "provisionalRequestBytes": 42134
     },
     {
       "id": 17372,
@@ -652,9 +620,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 53156,
+      "candidateBodyBytes": 55922,
       "status": "passed",
-      "bodyBytes": 53156,
+      "bodyBytes": 55922,
       "rendered": {
         "wordBreaks": 0,
         "images": 52,
@@ -664,7 +632,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 54218
+      "provisionalRequestBytes": 56984
     },
     {
       "id": 17338,
@@ -681,9 +649,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16785,
+      "candidateBodyBytes": 17628,
       "status": "passed",
-      "bodyBytes": 16785,
+      "bodyBytes": 17628,
       "rendered": {
         "wordBreaks": 0,
         "images": 14,
@@ -693,7 +661,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17440
+      "provisionalRequestBytes": 18283
     },
     {
       "id": 17147,
@@ -712,9 +680,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 30890,
+      "candidateBodyBytes": 32910,
       "status": "passed",
-      "bodyBytes": 30890,
+      "bodyBytes": 32910,
       "rendered": {
         "wordBreaks": 2,
         "images": 37,
@@ -724,7 +692,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 32076
+      "provisionalRequestBytes": 34096
     },
     {
       "id": 17135,
@@ -770,9 +738,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3956,
+      "candidateBodyBytes": 4072,
       "status": "passed",
-      "bodyBytes": 3956,
+      "bodyBytes": 4072,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -782,7 +750,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4666
+      "provisionalRequestBytes": 4782
     },
     {
       "id": 16986,
@@ -799,9 +767,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 66930,
+      "candidateBodyBytes": 70248,
       "status": "passed",
-      "bodyBytes": 66930,
+      "bodyBytes": 70248,
       "rendered": {
         "wordBreaks": 0,
         "images": 69,
@@ -811,7 +779,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 67505
+      "provisionalRequestBytes": 70823
     },
     {
       "id": 16979,
@@ -828,9 +796,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4580,
+      "candidateBodyBytes": 4670,
       "status": "passed",
-      "bodyBytes": 4580,
+      "bodyBytes": 4670,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -840,7 +808,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 5186
+      "provisionalRequestBytes": 5276
     },
     {
       "id": 16917,
@@ -857,9 +825,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 24330,
+      "candidateBodyBytes": 25455,
       "status": "passed",
-      "bodyBytes": 24330,
+      "bodyBytes": 25455,
       "rendered": {
         "wordBreaks": 0,
         "images": 25,
@@ -869,7 +837,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 24995
+      "provisionalRequestBytes": 26120
     },
     {
       "id": 16892,
@@ -886,9 +854,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 22950,
+      "candidateBodyBytes": 22995,
       "status": "passed",
-      "bodyBytes": 22950,
+      "bodyBytes": 22995,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -898,7 +866,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 23610
+      "provisionalRequestBytes": 23655
     },
     {
       "id": 16849,
@@ -917,10 +885,19 @@
       "legacyFeatures": [
         "class:yt-core-attributed-string--link-inherit-color"
       ],
-      "candidateBodyBytes": 17293,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 18050,
+      "status": "passed",
+      "bodyBytes": 18050,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 7,
+        "links": 3,
+        "pdfs": 0,
+        "videos": 6,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 18711
     },
     {
       "id": 16786,
@@ -937,9 +914,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 39213,
+      "candidateBodyBytes": 40641,
       "status": "passed",
-      "bodyBytes": 39213,
+      "bodyBytes": 40641,
       "rendered": {
         "wordBreaks": 0,
         "images": 27,
@@ -949,7 +926,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 39861
+      "provisionalRequestBytes": 41289
     },
     {
       "id": 16751,
@@ -966,9 +943,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14912,
+      "candidateBodyBytes": 15478,
       "status": "passed",
-      "bodyBytes": 14912,
+      "bodyBytes": 15478,
       "rendered": {
         "wordBreaks": 0,
         "images": 11,
@@ -978,7 +955,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15569
+      "provisionalRequestBytes": 16135
     },
     {
       "id": 16710,
@@ -995,9 +972,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 21257,
+      "candidateBodyBytes": 21894,
       "status": "passed",
-      "bodyBytes": 21257,
+      "bodyBytes": 21894,
       "rendered": {
         "wordBreaks": 0,
         "images": 11,
@@ -1007,7 +984,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 21923
+      "provisionalRequestBytes": 22560
     },
     {
       "id": 16683,
@@ -1024,9 +1001,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8481,
+      "candidateBodyBytes": 8803,
       "status": "passed",
-      "bodyBytes": 8481,
+      "bodyBytes": 8803,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -1036,7 +1013,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9189
+      "provisionalRequestBytes": 9511
     },
     {
       "id": 16654,
@@ -1053,9 +1030,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13300,
+      "candidateBodyBytes": 13745,
       "status": "passed",
-      "bodyBytes": 13300,
+      "bodyBytes": 13745,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1065,7 +1042,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13933
+      "provisionalRequestBytes": 14378
     },
     {
       "id": 16621,
@@ -1082,9 +1059,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 21255,
+      "candidateBodyBytes": 22022,
       "status": "passed",
-      "bodyBytes": 21255,
+      "bodyBytes": 22022,
       "rendered": {
         "wordBreaks": 0,
         "images": 6,
@@ -1094,7 +1071,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 21912
+      "provisionalRequestBytes": 22679
     },
     {
       "id": 16592,
@@ -1111,9 +1088,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14318,
+      "candidateBodyBytes": 15128,
       "status": "passed",
-      "bodyBytes": 14318,
+      "bodyBytes": 15128,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -1123,7 +1100,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14983
+      "provisionalRequestBytes": 15793
     },
     {
       "id": 16482,
@@ -1140,9 +1117,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 52231,
+      "candidateBodyBytes": 55672,
       "status": "passed",
-      "bodyBytes": 52231,
+      "bodyBytes": 55672,
       "rendered": {
         "wordBreaks": 0,
         "images": 67,
@@ -1152,7 +1129,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 52941
+      "provisionalRequestBytes": 56382
     },
     {
       "id": 16444,
@@ -1169,9 +1146,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 21859,
+      "candidateBodyBytes": 22837,
       "status": "passed",
-      "bodyBytes": 21859,
+      "bodyBytes": 22837,
       "rendered": {
         "wordBreaks": 0,
         "images": 17,
@@ -1181,7 +1158,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 22434
+      "provisionalRequestBytes": 23412
     },
     {
       "id": 16421,
@@ -1198,9 +1175,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8907,
+      "candidateBodyBytes": 9222,
       "status": "passed",
-      "bodyBytes": 8907,
+      "bodyBytes": 9222,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -1210,7 +1187,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9656
+      "provisionalRequestBytes": 9971
     },
     {
       "id": 16395,
@@ -1227,9 +1204,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12592,
+      "candidateBodyBytes": 13563,
       "status": "passed",
-      "bodyBytes": 12592,
+      "bodyBytes": 13563,
       "rendered": {
         "wordBreaks": 0,
         "images": 20,
@@ -1239,7 +1216,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13266
+      "provisionalRequestBytes": 14237
     },
     {
       "id": 16332,
@@ -1256,9 +1233,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 30721,
+      "candidateBodyBytes": 32251,
       "status": "passed",
-      "bodyBytes": 30721,
+      "bodyBytes": 32251,
       "rendered": {
         "wordBreaks": 0,
         "images": 34,
@@ -1268,7 +1245,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 31395
+      "provisionalRequestBytes": 32925
     },
     {
       "id": 16259,
@@ -1285,9 +1262,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 38848,
+      "candidateBodyBytes": 40778,
       "status": "passed",
-      "bodyBytes": 38848,
+      "bodyBytes": 40778,
       "rendered": {
         "wordBreaks": 0,
         "images": 35,
@@ -1297,7 +1274,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 39395
+      "provisionalRequestBytes": 41325
     },
     {
       "id": 16242,
@@ -1314,9 +1291,9 @@
         "styles": 5
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12712,
+      "candidateBodyBytes": 13027,
       "status": "passed",
-      "bodyBytes": 12712,
+      "bodyBytes": 13027,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -1326,7 +1303,7 @@
         "languages": 0,
         "styles": 5
       },
-      "provisionalRequestBytes": 13336
+      "provisionalRequestBytes": 13651
     },
     {
       "id": 16233,
@@ -1343,9 +1320,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5849,
+      "candidateBodyBytes": 6036,
       "status": "passed",
-      "bodyBytes": 5849,
+      "bodyBytes": 6036,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -1355,7 +1332,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 6450
+      "provisionalRequestBytes": 6637
     },
     {
       "id": 16192,
@@ -1374,9 +1351,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 38702,
+      "candidateBodyBytes": 39422,
       "status": "passed",
-      "bodyBytes": 38702,
+      "bodyBytes": 39422,
       "rendered": {
         "wordBreaks": 1,
         "images": 16,
@@ -1386,7 +1363,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 39331
+      "provisionalRequestBytes": 40051
     },
     {
       "id": 16186,
@@ -1403,9 +1380,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13844,
+      "candidateBodyBytes": 14031,
       "status": "passed",
-      "bodyBytes": 13844,
+      "bodyBytes": 14031,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -1415,7 +1392,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 14407
+      "provisionalRequestBytes": 14594
     },
     {
       "id": 16181,
@@ -1432,9 +1409,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4296,
+      "candidateBodyBytes": 4431,
       "status": "passed",
-      "bodyBytes": 4296,
+      "bodyBytes": 4431,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -1444,7 +1421,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4966
+      "provisionalRequestBytes": 5101
     },
     {
       "id": 16177,
@@ -1461,9 +1438,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7547,
+      "candidateBodyBytes": 7921,
       "status": "passed",
-      "bodyBytes": 7547,
+      "bodyBytes": 7921,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1473,7 +1450,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 8195
+      "provisionalRequestBytes": 8569
     },
     {
       "id": 16072,
@@ -1490,9 +1467,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 57580,
+      "candidateBodyBytes": 61291,
       "status": "passed",
-      "bodyBytes": 57580,
+      "bodyBytes": 61291,
       "rendered": {
         "wordBreaks": 0,
         "images": 73,
@@ -1502,7 +1479,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 58229
+      "provisionalRequestBytes": 61940
     },
     {
       "id": 16057,
@@ -1519,9 +1496,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4802,
+      "candidateBodyBytes": 4892,
       "status": "passed",
-      "bodyBytes": 4802,
+      "bodyBytes": 4892,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1531,7 +1508,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5466
+      "provisionalRequestBytes": 5556
     },
     {
       "id": 16009,
@@ -1548,9 +1525,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 51221,
+      "candidateBodyBytes": 52327,
       "status": "passed",
-      "bodyBytes": 51221,
+      "bodyBytes": 52327,
       "rendered": {
         "wordBreaks": 0,
         "images": 23,
@@ -1560,7 +1537,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 51800
+      "provisionalRequestBytes": 52906
     },
     {
       "id": 15959,
@@ -1577,9 +1554,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 26073,
+      "candidateBodyBytes": 27243,
       "status": "passed",
-      "bodyBytes": 26073,
+      "bodyBytes": 27243,
       "rendered": {
         "wordBreaks": 0,
         "images": 26,
@@ -1589,7 +1566,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26723
+      "provisionalRequestBytes": 27893
     },
     {
       "id": 15939,
@@ -1606,9 +1583,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8288,
+      "candidateBodyBytes": 8854,
       "status": "passed",
-      "bodyBytes": 8288,
+      "bodyBytes": 8854,
       "rendered": {
         "wordBreaks": 0,
         "images": 11,
@@ -1618,7 +1595,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 8955
+      "provisionalRequestBytes": 9521
     },
     {
       "id": 15931,
@@ -1635,9 +1612,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4527,
+      "candidateBodyBytes": 4617,
       "status": "passed",
-      "bodyBytes": 4527,
+      "bodyBytes": 4617,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1647,7 +1624,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5111
+      "provisionalRequestBytes": 5201
     },
     {
       "id": 15858,
@@ -1664,9 +1641,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 51186,
+      "candidateBodyBytes": 53398,
       "status": "passed",
-      "bodyBytes": 51186,
+      "bodyBytes": 53398,
       "rendered": {
         "wordBreaks": 0,
         "images": 46,
@@ -1676,7 +1653,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 51819
+      "provisionalRequestBytes": 54031
     },
     {
       "id": 15847,
@@ -1693,9 +1670,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14671,
+      "candidateBodyBytes": 14955,
       "status": "passed",
-      "bodyBytes": 14671,
+      "bodyBytes": 14955,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -1705,7 +1682,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15747
+      "provisionalRequestBytes": 16031
     },
     {
       "id": 15661,
@@ -1722,9 +1699,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 114429,
+      "candidateBodyBytes": 118399,
       "status": "passed",
-      "bodyBytes": 114429,
+      "bodyBytes": 118399,
       "rendered": {
         "wordBreaks": 0,
         "images": 74,
@@ -1734,7 +1711,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 114999
+      "provisionalRequestBytes": 118969
     },
     {
       "id": 15699,
@@ -1751,9 +1728,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14344,
+      "candidateBodyBytes": 14460,
       "status": "passed",
-      "bodyBytes": 14344,
+      "bodyBytes": 14460,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -1763,7 +1740,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15001
+      "provisionalRequestBytes": 15117
     },
     {
       "id": 15689,
@@ -1780,9 +1757,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4277,
+      "candidateBodyBytes": 4528,
       "status": "passed",
-      "bodyBytes": 4277,
+      "bodyBytes": 4528,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -1792,7 +1769,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5107
+      "provisionalRequestBytes": 5358
     },
     {
       "id": 15682,
@@ -1809,9 +1786,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3494,
+      "candidateBodyBytes": 3565,
       "status": "passed",
-      "bodyBytes": 3494,
+      "bodyBytes": 3565,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -1821,7 +1798,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4364
+      "provisionalRequestBytes": 4435
     },
     {
       "id": 15641,
@@ -1838,9 +1815,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6886,
+      "candidateBodyBytes": 7272,
       "status": "passed",
-      "bodyBytes": 6886,
+      "bodyBytes": 7272,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -1850,7 +1827,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7535
+      "provisionalRequestBytes": 7921
     },
     {
       "id": 15632,
@@ -1867,9 +1844,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7844,
+      "candidateBodyBytes": 8005,
       "status": "passed",
-      "bodyBytes": 7844,
+      "bodyBytes": 8005,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1879,7 +1856,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 8620
+      "provisionalRequestBytes": 8781
     },
     {
       "id": 15624,
@@ -1896,9 +1873,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3351,
+      "candidateBodyBytes": 3512,
       "status": "passed",
-      "bodyBytes": 3351,
+      "bodyBytes": 3512,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1908,7 +1885,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 3946
+      "provisionalRequestBytes": 4107
     },
     {
       "id": 15610,
@@ -1925,9 +1902,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6939,
+      "candidateBodyBytes": 7242,
       "status": "passed",
-      "bodyBytes": 6939,
+      "bodyBytes": 7242,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -1937,7 +1914,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 7598
+      "provisionalRequestBytes": 7901
     },
     {
       "id": 15604,
@@ -1954,9 +1931,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16916,
+      "candidateBodyBytes": 17058,
       "status": "passed",
-      "bodyBytes": 16916,
+      "bodyBytes": 17058,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -1966,7 +1943,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17839
+      "provisionalRequestBytes": 17981
     },
     {
       "id": 15504,
@@ -1983,9 +1960,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 52766,
+      "candidateBodyBytes": 55700,
       "status": "passed",
-      "bodyBytes": 52766,
+      "bodyBytes": 55700,
       "rendered": {
         "wordBreaks": 0,
         "images": 51,
@@ -1995,7 +1972,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 53688
+      "provisionalRequestBytes": 56622
     },
     {
       "id": 15462,
@@ -2012,9 +1989,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18419,
+      "candidateBodyBytes": 19750,
       "status": "passed",
-      "bodyBytes": 18419,
+      "bodyBytes": 19750,
       "rendered": {
         "wordBreaks": 0,
         "images": 28,
@@ -2024,7 +2001,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19061
+      "provisionalRequestBytes": 20392
     },
     {
       "id": 15432,
@@ -2041,9 +2018,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17109,
+      "candidateBodyBytes": 18080,
       "status": "passed",
-      "bodyBytes": 17109,
+      "bodyBytes": 18080,
       "rendered": {
         "wordBreaks": 0,
         "images": 20,
@@ -2053,7 +2030,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17718
+      "provisionalRequestBytes": 18689
     },
     {
       "id": 15396,
@@ -2070,9 +2047,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 21837,
+      "candidateBodyBytes": 23149,
       "status": "passed",
-      "bodyBytes": 21837,
+      "bodyBytes": 23149,
       "rendered": {
         "wordBreaks": 0,
         "images": 26,
@@ -2082,7 +2059,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 22406
+      "provisionalRequestBytes": 23718
     },
     {
       "id": 15368,
@@ -2099,9 +2076,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 19418,
+      "candidateBodyBytes": 20152,
       "status": "passed",
-      "bodyBytes": 19418,
+      "bodyBytes": 20152,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -2111,7 +2088,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 20192
+      "provisionalRequestBytes": 20926
     },
     {
       "id": 15358,
@@ -2128,9 +2105,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 11722,
+      "candidateBodyBytes": 11999,
       "status": "passed",
-      "bodyBytes": 11722,
+      "bodyBytes": 11999,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -2140,7 +2117,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 12606
+      "provisionalRequestBytes": 12883
     },
     {
       "id": 14975,
@@ -2157,9 +2134,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 210204,
+      "candidateBodyBytes": 226122,
       "status": "passed",
-      "bodyBytes": 210204,
+      "bodyBytes": 226122,
       "rendered": {
         "wordBreaks": 0,
         "images": 349,
@@ -2169,7 +2146,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 210892
+      "provisionalRequestBytes": 226810
     },
     {
       "id": 14950,
@@ -2186,9 +2163,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13735,
+      "candidateBodyBytes": 14128,
       "status": "passed",
-      "bodyBytes": 13735,
+      "bodyBytes": 14128,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -2198,7 +2175,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 14452
+      "provisionalRequestBytes": 14845
     },
     {
       "id": 14946,
@@ -2215,9 +2192,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 2230,
+      "candidateBodyBytes": 2301,
       "status": "passed",
-      "bodyBytes": 2230,
+      "bodyBytes": 2301,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -2227,7 +2204,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 2924
+      "provisionalRequestBytes": 2995
     },
     {
       "id": 14929,
@@ -2244,9 +2221,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 2155,
+      "candidateBodyBytes": 2245,
       "status": "passed",
-      "bodyBytes": 2155,
+      "bodyBytes": 2245,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -2256,7 +2233,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 2717
+      "provisionalRequestBytes": 2807
     },
     {
       "id": 14921,
@@ -2273,9 +2250,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13268,
+      "candidateBodyBytes": 13374,
       "status": "passed",
-      "bodyBytes": 13268,
+      "bodyBytes": 13374,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -2285,7 +2262,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 13815
+      "provisionalRequestBytes": 13921
     },
     {
       "id": 14822,
@@ -2302,9 +2279,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 43163,
+      "candidateBodyBytes": 44989,
       "status": "passed",
-      "bodyBytes": 43163,
+      "bodyBytes": 44989,
       "rendered": {
         "wordBreaks": 0,
         "images": 39,
@@ -2314,7 +2291,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 43810
+      "provisionalRequestBytes": 45636
     },
     {
       "id": 14834,
@@ -2331,9 +2308,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16988,
+      "candidateBodyBytes": 17824,
       "status": "passed",
-      "bodyBytes": 16988,
+      "bodyBytes": 17824,
       "rendered": {
         "wordBreaks": 0,
         "images": 17,
@@ -2343,7 +2320,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17665
+      "provisionalRequestBytes": 18501
     },
     {
       "id": 14829,
@@ -2389,9 +2366,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3915,
+      "candidateBodyBytes": 4076,
       "status": "passed",
-      "bodyBytes": 3915,
+      "bodyBytes": 4076,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -2401,7 +2378,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 4479
+      "provisionalRequestBytes": 4640
     },
     {
       "id": 14806,
@@ -2418,9 +2395,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15763,
+      "candidateBodyBytes": 16047,
       "status": "passed",
-      "bodyBytes": 15763,
+      "bodyBytes": 16047,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -2430,7 +2407,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16342
+      "provisionalRequestBytes": 16626
     },
     {
       "id": 14569,
@@ -2453,10 +2430,19 @@
         "class:r-bcqeeo",
         "class:r-qvutc0"
       ],
-      "candidateBodyBytes": 118818,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 129039,
+      "status": "passed",
+      "bodyBytes": 129039,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 211,
+        "links": 4,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 129631
     },
     {
       "id": 14436,
@@ -2473,9 +2459,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 73052,
+      "candidateBodyBytes": 76543,
       "status": "passed",
-      "bodyBytes": 73052,
+      "bodyBytes": 76543,
       "rendered": {
         "wordBreaks": 0,
         "images": 76,
@@ -2485,7 +2471,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 73670
+      "provisionalRequestBytes": 77161
     },
     {
       "id": 14426,
@@ -2502,9 +2488,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 11105,
+      "candidateBodyBytes": 11957,
       "status": "passed",
-      "bodyBytes": 11105,
+      "bodyBytes": 11957,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -2514,7 +2500,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 11686
+      "provisionalRequestBytes": 12538
     },
     {
       "id": 14403,
@@ -2531,9 +2517,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13303,
+      "candidateBodyBytes": 13850,
       "status": "passed",
-      "bodyBytes": 13303,
+      "bodyBytes": 13850,
       "rendered": {
         "wordBreaks": 0,
         "images": 9,
@@ -2543,7 +2529,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13837
+      "provisionalRequestBytes": 14384
     },
     {
       "id": 14393,
@@ -2560,9 +2546,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 59029,
+      "candidateBodyBytes": 59100,
       "status": "passed",
-      "bodyBytes": 59029,
+      "bodyBytes": 59100,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -2572,7 +2558,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 59601
+      "provisionalRequestBytes": 59672
     },
     {
       "id": 14382,
@@ -2589,9 +2575,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 9690,
+      "candidateBodyBytes": 10090,
       "status": "passed",
-      "bodyBytes": 9690,
+      "bodyBytes": 10090,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -2601,7 +2587,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 10579
+      "provisionalRequestBytes": 10979
     },
     {
       "id": 14366,
@@ -2622,10 +2608,19 @@
         "element:wbr",
         "element:div"
       ],
-      "candidateBodyBytes": 16546,
-      "status": "blocked",
-      "reason": "未対応の属性: a.data-saferedirecturl",
-      "differences": []
+      "candidateBodyBytes": 25336,
+      "status": "passed",
+      "bodyBytes": 25459,
+      "rendered": {
+        "wordBreaks": 10,
+        "images": 0,
+        "links": 5,
+        "pdfs": 1,
+        "videos": 0,
+        "languages": 0,
+        "styles": 4
+      },
+      "provisionalRequestBytes": 26016
     },
     {
       "id": 14354,
@@ -2642,9 +2637,9 @@
         "styles": 11
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 27574,
+      "candidateBodyBytes": 27851,
       "status": "passed",
-      "bodyBytes": 27574,
+      "bodyBytes": 27851,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -2654,7 +2649,7 @@
         "languages": 0,
         "styles": 11
       },
-      "provisionalRequestBytes": 28268
+      "provisionalRequestBytes": 28545
     },
     {
       "id": 14197,
@@ -2677,10 +2672,19 @@
         "class:r-bcqeeo",
         "class:r-qvutc0"
       ],
-      "candidateBodyBytes": 79852,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 91214,
+      "status": "passed",
+      "bodyBytes": 91214,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 103,
+        "links": 1,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 91819
     },
     {
       "id": 14187,
@@ -2697,9 +2701,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7249,
+      "candidateBodyBytes": 7365,
       "status": "passed",
-      "bodyBytes": 7249,
+      "bodyBytes": 7365,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -2709,7 +2713,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 7833
+      "provisionalRequestBytes": 7949
     },
     {
       "id": 14157,
@@ -2726,9 +2730,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16678,
+      "candidateBodyBytes": 17270,
       "status": "passed",
-      "bodyBytes": 16678,
+      "bodyBytes": 17270,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -2738,7 +2742,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17301
+      "provisionalRequestBytes": 17893
     },
     {
       "id": 14079,
@@ -2755,9 +2759,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 34973,
+      "candidateBodyBytes": 37365,
       "status": "passed",
-      "bodyBytes": 34973,
+      "bodyBytes": 37365,
       "rendered": {
         "wordBreaks": 0,
         "images": 50,
@@ -2767,7 +2771,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 35632
+      "provisionalRequestBytes": 38024
     },
     {
       "id": 13977,
@@ -2784,9 +2788,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 61704,
+      "candidateBodyBytes": 64522,
       "status": "passed",
-      "bodyBytes": 61704,
+      "bodyBytes": 64522,
       "rendered": {
         "wordBreaks": 0,
         "images": 50,
@@ -2796,7 +2800,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 62701
+      "provisionalRequestBytes": 65519
     },
     {
       "id": 13837,
@@ -2813,9 +2817,9 @@
         "styles": 10
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 68058,
+      "candidateBodyBytes": 68858,
       "status": "passed",
-      "bodyBytes": 68058,
+      "bodyBytes": 68858,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -2825,7 +2829,7 @@
         "languages": 0,
         "styles": 10
       },
-      "provisionalRequestBytes": 68732
+      "provisionalRequestBytes": 69532
     },
     {
       "id": 13811,
@@ -2842,9 +2846,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13986,
+      "candidateBodyBytes": 14282,
       "status": "passed",
-      "bodyBytes": 13986,
+      "bodyBytes": 14282,
       "rendered": {
         "wordBreaks": 0,
         "images": 5,
@@ -2854,7 +2858,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14854
+      "provisionalRequestBytes": 15150
     },
     {
       "id": 13787,
@@ -2871,9 +2875,9 @@
         "styles": 13
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 37364,
+      "candidateBodyBytes": 37776,
       "status": "passed",
-      "bodyBytes": 37364,
+      "bodyBytes": 37776,
       "rendered": {
         "wordBreaks": 0,
         "images": 6,
@@ -2883,7 +2887,7 @@
         "languages": 0,
         "styles": 13
       },
-      "provisionalRequestBytes": 38013
+      "provisionalRequestBytes": 38425
     },
     {
       "id": 13680,
@@ -2900,9 +2904,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 57077,
+      "candidateBodyBytes": 59533,
       "status": "passed",
-      "bodyBytes": 57077,
+      "bodyBytes": 59533,
       "rendered": {
         "wordBreaks": 0,
         "images": 53,
@@ -2912,7 +2916,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 57648
+      "provisionalRequestBytes": 60104
     },
     {
       "id": 13660,
@@ -2929,9 +2933,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7565,
+      "candidateBodyBytes": 8240,
       "status": "passed",
-      "bodyBytes": 7565,
+      "bodyBytes": 8240,
       "rendered": {
         "wordBreaks": 0,
         "images": 15,
@@ -2941,7 +2945,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 8316
+      "provisionalRequestBytes": 8991
     },
     {
       "id": 13631,
@@ -2958,9 +2962,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15493,
+      "candidateBodyBytes": 15853,
       "status": "passed",
-      "bodyBytes": 15493,
+      "bodyBytes": 15853,
       "rendered": {
         "wordBreaks": 0,
         "images": 8,
@@ -2970,7 +2974,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16359
+      "provisionalRequestBytes": 16719
     },
     {
       "id": 13623,
@@ -2987,9 +2991,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6096,
+      "candidateBodyBytes": 6167,
       "status": "passed",
-      "bodyBytes": 6096,
+      "bodyBytes": 6167,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -2999,7 +3003,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 6669
+      "provisionalRequestBytes": 6740
     },
     {
       "id": 13527,
@@ -3016,9 +3020,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 41765,
+      "candidateBodyBytes": 43745,
       "status": "passed",
-      "bodyBytes": 41765,
+      "bodyBytes": 43745,
       "rendered": {
         "wordBreaks": 0,
         "images": 44,
@@ -3028,7 +3032,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 42455
+      "provisionalRequestBytes": 44435
     },
     {
       "id": 13417,
@@ -3045,9 +3049,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 92272,
+      "candidateBodyBytes": 95483,
       "status": "passed",
-      "bodyBytes": 92272,
+      "bodyBytes": 95483,
       "rendered": {
         "wordBreaks": 0,
         "images": 54,
@@ -3057,7 +3061,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 92834
+      "provisionalRequestBytes": 96045
     },
     {
       "id": 13414,
@@ -3074,9 +3078,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6156,
+      "candidateBodyBytes": 6272,
       "status": "passed",
-      "bodyBytes": 6156,
+      "bodyBytes": 6272,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -3086,7 +3090,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 6760
+      "provisionalRequestBytes": 6876
     },
     {
       "id": 13314,
@@ -3103,9 +3107,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 26910,
+      "candidateBodyBytes": 28016,
       "status": "passed",
-      "bodyBytes": 26910,
+      "bodyBytes": 28016,
       "rendered": {
         "wordBreaks": 0,
         "images": 23,
@@ -3115,7 +3119,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 27614
+      "provisionalRequestBytes": 28720
     },
     {
       "id": 13272,
@@ -3132,9 +3136,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 32675,
+      "candidateBodyBytes": 33743,
       "status": "passed",
-      "bodyBytes": 32675,
+      "bodyBytes": 33743,
       "rendered": {
         "wordBreaks": 0,
         "images": 19,
@@ -3144,7 +3148,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 33310
+      "provisionalRequestBytes": 34378
     },
     {
       "id": 13033,
@@ -3163,9 +3167,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 140429,
+      "candidateBodyBytes": 146561,
       "status": "passed",
-      "bodyBytes": 140429,
+      "bodyBytes": 146561,
       "rendered": {
         "wordBreaks": 2,
         "images": 127,
@@ -3175,7 +3179,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 140952
+      "provisionalRequestBytes": 147084
     },
     {
       "id": 13000,
@@ -3192,9 +3196,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15851,
+      "candidateBodyBytes": 16732,
       "status": "passed",
-      "bodyBytes": 15851,
+      "bodyBytes": 16732,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -3204,7 +3208,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16413
+      "provisionalRequestBytes": 17294
     },
     {
       "id": 12858,
@@ -3221,9 +3225,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 59377,
+      "candidateBodyBytes": 64398,
       "status": "passed",
-      "bodyBytes": 59377,
+      "bodyBytes": 64398,
       "rendered": {
         "wordBreaks": 0,
         "images": 110,
@@ -3233,7 +3237,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 60052
+      "provisionalRequestBytes": 65073
     },
     {
       "id": 12817,
@@ -3250,9 +3254,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 20348,
+      "candidateBodyBytes": 21615,
       "status": "passed",
-      "bodyBytes": 20348,
+      "bodyBytes": 21615,
       "rendered": {
         "wordBreaks": 0,
         "images": 25,
@@ -3262,7 +3266,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 20972
+      "provisionalRequestBytes": 22239
     },
     {
       "id": 12802,
@@ -3279,9 +3283,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12807,
+      "candidateBodyBytes": 13020,
       "status": "passed",
-      "bodyBytes": 12807,
+      "bodyBytes": 13020,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3291,7 +3295,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13460
+      "provisionalRequestBytes": 13673
     },
     {
       "id": 12789,
@@ -3308,9 +3312,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4359,
+      "candidateBodyBytes": 4546,
       "status": "passed",
-      "bodyBytes": 4359,
+      "bodyBytes": 4546,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -3320,7 +3324,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4934
+      "provisionalRequestBytes": 5121
     },
     {
       "id": 12795,
@@ -3337,9 +3341,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4611,
+      "candidateBodyBytes": 4907,
       "status": "passed",
-      "bodyBytes": 4611,
+      "bodyBytes": 4907,
       "rendered": {
         "wordBreaks": 0,
         "images": 5,
@@ -3349,7 +3353,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5405
+      "provisionalRequestBytes": 5701
     },
     {
       "id": 12787,
@@ -3366,9 +3370,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4158,
+      "candidateBodyBytes": 4229,
       "status": "passed",
-      "bodyBytes": 4158,
+      "bodyBytes": 4229,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3378,7 +3382,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4726
+      "provisionalRequestBytes": 4797
     },
     {
       "id": 12758,
@@ -3395,9 +3399,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 25460,
+      "candidateBodyBytes": 26156,
       "status": "passed",
-      "bodyBytes": 25460,
+      "bodyBytes": 26156,
       "rendered": {
         "wordBreaks": 0,
         "images": 6,
@@ -3407,7 +3411,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26024
+      "provisionalRequestBytes": 26720
     },
     {
       "id": 12713,
@@ -3424,9 +3428,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 19191,
+      "candidateBodyBytes": 20185,
       "status": "passed",
-      "bodyBytes": 19191,
+      "bodyBytes": 20185,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3436,7 +3440,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19873
+      "provisionalRequestBytes": 20867
     },
     {
       "id": 12653,
@@ -3453,9 +3457,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13013,
+      "candidateBodyBytes": 13534,
       "status": "passed",
-      "bodyBytes": 13013,
+      "bodyBytes": 13534,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -3465,7 +3469,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13658
+      "provisionalRequestBytes": 14179
     },
     {
       "id": 12646,
@@ -3482,9 +3486,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 2707,
+      "candidateBodyBytes": 2778,
       "status": "passed",
-      "bodyBytes": 2707,
+      "bodyBytes": 2778,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3494,7 +3498,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 3477
+      "provisionalRequestBytes": 3548
     },
     {
       "id": 12629,
@@ -3513,10 +3517,19 @@
       "legacyFeatures": [
         "element:div"
       ],
-      "candidateBodyBytes": 10453,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 16506,
+      "status": "passed",
+      "bodyBytes": 16506,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 7,
+        "links": 1,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 17045
     },
     {
       "id": 12609,
@@ -3533,9 +3546,9 @@
         "styles": 10
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14606,
+      "candidateBodyBytes": 15310,
       "status": "passed",
-      "bodyBytes": 14606,
+      "bodyBytes": 15310,
       "rendered": {
         "wordBreaks": 0,
         "images": 6,
@@ -3545,7 +3558,7 @@
         "languages": 0,
         "styles": 10
       },
-      "provisionalRequestBytes": 15370
+      "provisionalRequestBytes": 16074
     },
     {
       "id": 12584,
@@ -3562,9 +3575,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 10527,
+      "candidateBodyBytes": 10977,
       "status": "passed",
-      "bodyBytes": 10527,
+      "bodyBytes": 10977,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -3574,7 +3587,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 11286
+      "provisionalRequestBytes": 11736
     },
     {
       "id": 12563,
@@ -3591,9 +3604,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 2995,
+      "candidateBodyBytes": 3156,
       "status": "passed",
-      "bodyBytes": 2995,
+      "bodyBytes": 3156,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -3603,7 +3616,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 3790
+      "provisionalRequestBytes": 3951
     },
     {
       "id": 12409,
@@ -3622,10 +3635,19 @@
       "legacyFeatures": [
         "class:st"
       ],
-      "candidateBodyBytes": 79269,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 84703,
+      "status": "passed",
+      "bodyBytes": 84703,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 104,
+        "links": 8,
+        "pdfs": 0,
+        "videos": 1,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 85667
     },
     {
       "id": 12395,
@@ -3642,9 +3664,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8616,
+      "candidateBodyBytes": 8900,
       "status": "passed",
-      "bodyBytes": 8616,
+      "bodyBytes": 8900,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3654,7 +3676,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9296
+      "provisionalRequestBytes": 9580
     },
     {
       "id": 12362,
@@ -3673,10 +3695,19 @@
       "legacyFeatures": [
         "class:st"
       ],
-      "candidateBodyBytes": 8763,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 9329,
+      "status": "passed",
+      "bodyBytes": 9329,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 0,
+        "links": 2,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 9937
     },
     {
       "id": 12237,
@@ -3693,9 +3724,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 33303,
+      "candidateBodyBytes": 33374,
       "status": "passed",
-      "bodyBytes": 33303,
+      "bodyBytes": 33374,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3705,7 +3736,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 33935
+      "provisionalRequestBytes": 34006
     },
     {
       "id": 12217,
@@ -3732,10 +3763,19 @@
         "class:r-bcqeeo",
         "class:r-qvutc0"
       ],
-      "candidateBodyBytes": 4220,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 6168,
+      "status": "passed",
+      "bodyBytes": 6168,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 1,
+        "links": 2,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 4,
+        "styles": 2
+      },
+      "provisionalRequestBytes": 6795
     },
     {
       "id": 12211,
@@ -3752,9 +3792,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3459,
+      "candidateBodyBytes": 3575,
       "status": "passed",
-      "bodyBytes": 3459,
+      "bodyBytes": 3575,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -3764,7 +3804,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4223
+      "provisionalRequestBytes": 4339
     },
     {
       "id": 12192,
@@ -3781,9 +3821,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 2690,
+      "candidateBodyBytes": 2806,
       "status": "passed",
-      "bodyBytes": 2690,
+      "bodyBytes": 2806,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -3793,7 +3833,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 3289
+      "provisionalRequestBytes": 3405
     },
     {
       "id": 12146,
@@ -3810,9 +3850,9 @@
         "styles": 11
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 19637,
+      "candidateBodyBytes": 19888,
       "status": "passed",
-      "bodyBytes": 19637,
+      "bodyBytes": 19888,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -3822,7 +3862,7 @@
         "languages": 0,
         "styles": 12
       },
-      "provisionalRequestBytes": 20313
+      "provisionalRequestBytes": 20564
     },
     {
       "id": 12102,
@@ -3839,9 +3879,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17891,
+      "candidateBodyBytes": 19596,
       "status": "passed",
-      "bodyBytes": 17891,
+      "bodyBytes": 19596,
       "rendered": {
         "wordBreaks": 0,
         "images": 30,
@@ -3851,7 +3891,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 18464
+      "provisionalRequestBytes": 20169
     },
     {
       "id": 12076,
@@ -3868,9 +3908,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15442,
+      "candidateBodyBytes": 15809,
       "status": "passed",
-      "bodyBytes": 15442,
+      "bodyBytes": 15809,
       "rendered": {
         "wordBreaks": 0,
         "images": 5,
@@ -3880,7 +3920,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16287
+      "provisionalRequestBytes": 16654
     },
     {
       "id": 12074,
@@ -3926,9 +3966,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 22437,
+      "candidateBodyBytes": 23360,
       "status": "passed",
-      "bodyBytes": 22437,
+      "bodyBytes": 23360,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -3938,7 +3978,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 23249
+      "provisionalRequestBytes": 24172
     },
     {
       "id": 11717,
@@ -3955,9 +3995,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 31028,
+      "candidateBodyBytes": 32444,
       "status": "passed",
-      "bodyBytes": 31028,
+      "bodyBytes": 32444,
       "rendered": {
         "wordBreaks": 0,
         "images": 22,
@@ -3967,7 +4007,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 31936
+      "provisionalRequestBytes": 33352
     },
     {
       "id": 11657,
@@ -3984,9 +4024,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 28688,
+      "candidateBodyBytes": 30270,
       "status": "passed",
-      "bodyBytes": 28688,
+      "bodyBytes": 30270,
       "rendered": {
         "wordBreaks": 0,
         "images": 32,
@@ -3996,7 +4036,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 29360
+      "provisionalRequestBytes": 30942
     },
     {
       "id": 11624,
@@ -4013,9 +4053,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14412,
+      "candidateBodyBytes": 15236,
       "status": "passed",
-      "bodyBytes": 14412,
+      "bodyBytes": 15236,
       "rendered": {
         "wordBreaks": 0,
         "images": 12,
@@ -4025,7 +4065,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15184
+      "provisionalRequestBytes": 16008
     },
     {
       "id": 11575,
@@ -4042,9 +4082,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 24830,
+      "candidateBodyBytes": 26540,
       "status": "passed",
-      "bodyBytes": 24830,
+      "bodyBytes": 26540,
       "rendered": {
         "wordBreaks": 0,
         "images": 38,
@@ -4054,7 +4094,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 25482
+      "provisionalRequestBytes": 27192
     },
     {
       "id": 11542,
@@ -4071,9 +4111,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 24757,
+      "candidateBodyBytes": 25157,
       "status": "passed",
-      "bodyBytes": 24757,
+      "bodyBytes": 25157,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -4083,7 +4123,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 25517
+      "provisionalRequestBytes": 25917
     },
     {
       "id": 11538,
@@ -4103,10 +4143,19 @@
         "element:div",
         "class:text_exposed_show"
       ],
-      "candidateBodyBytes": 11038,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 12277,
+      "status": "passed",
+      "bodyBytes": 12277,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 0,
+        "links": 15,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 12892
     },
     {
       "id": 11502,
@@ -4123,9 +4172,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14667,
+      "candidateBodyBytes": 15716,
       "status": "passed",
-      "bodyBytes": 14667,
+      "bodyBytes": 15716,
       "rendered": {
         "wordBreaks": 0,
         "images": 17,
@@ -4135,7 +4184,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15196
+      "provisionalRequestBytes": 16245
     },
     {
       "id": 11388,
@@ -4152,9 +4201,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 35630,
+      "candidateBodyBytes": 38220,
       "status": "passed",
-      "bodyBytes": 35630,
+      "bodyBytes": 38220,
       "rendered": {
         "wordBreaks": 0,
         "images": 26,
@@ -4164,7 +4213,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 36182
+      "provisionalRequestBytes": 38772
     },
     {
       "id": 11480,
@@ -4181,9 +4230,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13810,
+      "candidateBodyBytes": 14044,
       "status": "passed",
-      "bodyBytes": 13810,
+      "bodyBytes": 14044,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -4193,7 +4242,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14637
+      "provisionalRequestBytes": 14871
     },
     {
       "id": 11154,
@@ -4212,9 +4261,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 84125,
+      "candidateBodyBytes": 90341,
       "status": "passed",
-      "bodyBytes": 84125,
+      "bodyBytes": 90341,
       "rendered": {
         "wordBreaks": 42,
         "images": 105,
@@ -4224,7 +4273,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 84786
+      "provisionalRequestBytes": 91002
     },
     {
       "id": 11354,
@@ -4241,9 +4290,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 10798,
+      "candidateBodyBytes": 11127,
       "status": "passed",
-      "bodyBytes": 10798,
+      "bodyBytes": 11127,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -4253,7 +4302,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 11650
+      "provisionalRequestBytes": 11979
     },
     {
       "id": 11348,
@@ -4270,9 +4319,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5954,
+      "candidateBodyBytes": 6115,
       "status": "passed",
-      "bodyBytes": 5954,
+      "bodyBytes": 6115,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -4282,7 +4331,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 6552
+      "provisionalRequestBytes": 6713
     },
     {
       "id": 11232,
@@ -4299,9 +4348,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5289,
+      "candidateBodyBytes": 5476,
       "status": "passed",
-      "bodyBytes": 5289,
+      "bodyBytes": 5476,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -4311,7 +4360,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5911
+      "provisionalRequestBytes": 6098
     },
     {
       "id": 11146,
@@ -4328,9 +4377,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 11222,
+      "candidateBodyBytes": 11293,
       "status": "passed",
-      "bodyBytes": 11222,
+      "bodyBytes": 11293,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -4340,7 +4389,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 11800
+      "provisionalRequestBytes": 11871
     },
     {
       "id": 11103,
@@ -4357,9 +4406,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 40941,
+      "candidateBodyBytes": 43861,
       "status": "passed",
-      "bodyBytes": 40941,
+      "bodyBytes": 43861,
       "rendered": {
         "wordBreaks": 0,
         "images": 57,
@@ -4369,7 +4418,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 41651
+      "provisionalRequestBytes": 44571
     },
     {
       "id": 10968,
@@ -4389,10 +4438,19 @@
         "element:div",
         "class:text_exposed_show"
       ],
-      "candidateBodyBytes": 57969,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 61925,
+      "status": "passed",
+      "bodyBytes": 61925,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 70,
+        "links": 4,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 62601
     },
     {
       "id": 10923,
@@ -4409,9 +4467,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15423,
+      "candidateBodyBytes": 16576,
       "status": "passed",
-      "bodyBytes": 15423,
+      "bodyBytes": 16576,
       "rendered": {
         "wordBreaks": 0,
         "images": 13,
@@ -4421,7 +4479,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16085
+      "provisionalRequestBytes": 17238
     },
     {
       "id": 10853,
@@ -4438,9 +4496,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 33556,
+      "candidateBodyBytes": 35640,
       "status": "passed",
-      "bodyBytes": 33556,
+      "bodyBytes": 35640,
       "rendered": {
         "wordBreaks": 0,
         "images": 40,
@@ -4450,7 +4508,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 34175
+      "provisionalRequestBytes": 36259
     },
     {
       "id": 10759,
@@ -4467,9 +4525,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 41599,
+      "candidateBodyBytes": 44256,
       "status": "passed",
-      "bodyBytes": 41599,
+      "bodyBytes": 44256,
       "rendered": {
         "wordBreaks": 0,
         "images": 48,
@@ -4479,7 +4537,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 42438
+      "provisionalRequestBytes": 45095
     },
     {
       "id": 10723,
@@ -4496,9 +4554,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16590,
+      "candidateBodyBytes": 17407,
       "status": "passed",
-      "bodyBytes": 16590,
+      "bodyBytes": 17407,
       "rendered": {
         "wordBreaks": 0,
         "images": 15,
@@ -4508,7 +4566,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17434
+      "provisionalRequestBytes": 18251
     },
     {
       "id": 10631,
@@ -4527,9 +4585,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 53690,
+      "candidateBodyBytes": 55532,
       "status": "passed",
-      "bodyBytes": 53690,
+      "bodyBytes": 55532,
       "rendered": {
         "wordBreaks": 3,
         "images": 22,
@@ -4539,7 +4597,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 54517
+      "provisionalRequestBytes": 56359
     },
     {
       "id": 10485,
@@ -4556,9 +4614,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 34923,
+      "candidateBodyBytes": 37151,
       "status": "passed",
-      "bodyBytes": 34923,
+      "bodyBytes": 37151,
       "rendered": {
         "wordBreaks": 0,
         "images": 29,
@@ -4568,7 +4626,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 36016
+      "provisionalRequestBytes": 38244
     },
     {
       "id": 10501,
@@ -4585,9 +4643,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 37746,
+      "candidateBodyBytes": 37978,
       "status": "passed",
-      "bodyBytes": 37746,
+      "bodyBytes": 37978,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -4597,7 +4655,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 38545
+      "provisionalRequestBytes": 38777
     },
     {
       "id": 10406,
@@ -4614,9 +4672,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 31957,
+      "candidateBodyBytes": 33953,
       "status": "passed",
-      "bodyBytes": 31957,
+      "bodyBytes": 33953,
       "rendered": {
         "wordBreaks": 0,
         "images": 27,
@@ -4626,7 +4684,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 32628
+      "provisionalRequestBytes": 34624
     },
     {
       "id": 10372,
@@ -4643,9 +4701,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13730,
+      "candidateBodyBytes": 14611,
       "status": "passed",
-      "bodyBytes": 13730,
+      "bodyBytes": 14611,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -4655,7 +4713,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14263
+      "provisionalRequestBytes": 15144
     },
     {
       "id": 10326,
@@ -4675,10 +4733,19 @@
         "a.data-lynx-mode",
         "a.data-lynx-uri"
       ],
-      "candidateBodyBytes": 17283,
-      "status": "blocked",
-      "reason": "未対応の属性: a.data-lynx-mode",
-      "differences": []
+      "candidateBodyBytes": 18624,
+      "status": "passed",
+      "bodyBytes": 18624,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 12,
+        "links": 3,
+        "pdfs": 0,
+        "videos": 1,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 19185
     },
     {
       "id": 10322,
@@ -4695,9 +4762,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8939,
+      "candidateBodyBytes": 9010,
       "status": "passed",
-      "bodyBytes": 8939,
+      "bodyBytes": 9010,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -4707,7 +4774,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9579
+      "provisionalRequestBytes": 9650
     },
     {
       "id": 10297,
@@ -4726,16 +4793,26 @@
       "legacyFeatures": [
         "element:div",
         "class:text_exposed_show",
+        "duplicate-id:fbPhotoSnowliftCaption",
         "span.id=fbPhotoSnowliftCaption",
         "class:fbPhotosPhotoCaption",
         "span.data-ft",
         "class:hasCaption",
         "element:wbr"
       ],
-      "candidateBodyBytes": 17773,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 20618,
+      "status": "passed",
+      "bodyBytes": 20618,
+      "rendered": {
+        "wordBreaks": 1,
+        "images": 10,
+        "links": 1,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 21264
     },
     {
       "id": 10285,
@@ -4758,10 +4835,19 @@
         "class:mcafee_OK",
         "div.id={0DE9E47C-871A-4F90-8440-B190C216800A}_9"
       ],
-      "candidateBodyBytes": 16601,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 19217,
+      "status": "passed",
+      "bodyBytes": 19217,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 4,
+        "links": 6,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 19989
     },
     {
       "id": 10205,
@@ -4778,9 +4864,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 20155,
+      "candidateBodyBytes": 21242,
       "status": "passed",
-      "bodyBytes": 20155,
+      "bodyBytes": 21242,
       "rendered": {
         "wordBreaks": 0,
         "images": 21,
@@ -4790,7 +4876,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 21033
+      "provisionalRequestBytes": 22120
     },
     {
       "id": 10190,
@@ -4807,9 +4893,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 10607,
+      "candidateBodyBytes": 10858,
       "status": "passed",
-      "bodyBytes": 10607,
+      "bodyBytes": 10858,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -4819,7 +4905,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 11398
+      "provisionalRequestBytes": 11649
     },
     {
       "id": 10145,
@@ -4836,9 +4922,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18833,
+      "candidateBodyBytes": 19354,
       "status": "passed",
-      "bodyBytes": 18833,
+      "bodyBytes": 19354,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -4848,7 +4934,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19639
+      "provisionalRequestBytes": 20160
     },
     {
       "id": 10121,
@@ -4865,9 +4951,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7166,
+      "candidateBodyBytes": 7469,
       "status": "passed",
-      "bodyBytes": 7166,
+      "bodyBytes": 7469,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -4877,7 +4963,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7921
+      "provisionalRequestBytes": 8224
     },
     {
       "id": 10114,
@@ -4894,9 +4980,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6866,
+      "candidateBodyBytes": 7046,
       "status": "passed",
-      "bodyBytes": 6866,
+      "bodyBytes": 7046,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -4906,7 +4992,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7703
+      "provisionalRequestBytes": 7883
     },
     {
       "id": 10029,
@@ -4923,9 +5009,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 44724,
+      "candidateBodyBytes": 47159,
       "status": "passed",
-      "bodyBytes": 44724,
+      "bodyBytes": 47159,
       "rendered": {
         "wordBreaks": 0,
         "images": 51,
@@ -4935,7 +5021,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 45423
+      "provisionalRequestBytes": 47858
     },
     {
       "id": 9919,
@@ -4952,9 +5038,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 66028,
+      "candidateBodyBytes": 69930,
       "status": "passed",
-      "bodyBytes": 66028,
+      "bodyBytes": 69930,
       "rendered": {
         "wordBreaks": 0,
         "images": 82,
@@ -4964,7 +5050,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 66727
+      "provisionalRequestBytes": 70629
     },
     {
       "id": 9880,
@@ -4981,9 +5067,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18904,
+      "candidateBodyBytes": 20146,
       "status": "passed",
-      "bodyBytes": 18904,
+      "bodyBytes": 20146,
       "rendered": {
         "wordBreaks": 0,
         "images": 25,
@@ -4993,7 +5079,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19564
+      "provisionalRequestBytes": 20806
     },
     {
       "id": 9848,
@@ -5012,9 +5098,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 22538,
+      "candidateBodyBytes": 22697,
       "status": "passed",
-      "bodyBytes": 22538,
+      "bodyBytes": 22697,
       "rendered": {
         "wordBreaks": 13,
         "images": 2,
@@ -5024,7 +5110,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 23302
+      "provisionalRequestBytes": 23461
     },
     {
       "id": 9817,
@@ -5041,9 +5127,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 24794,
+      "candidateBodyBytes": 25464,
       "status": "passed",
-      "bodyBytes": 24794,
+      "bodyBytes": 25464,
       "rendered": {
         "wordBreaks": 0,
         "images": 12,
@@ -5053,7 +5139,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 25558
+      "provisionalRequestBytes": 26228
     },
     {
       "id": 9739,
@@ -5070,9 +5156,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 48403,
+      "candidateBodyBytes": 50129,
       "status": "passed",
-      "bodyBytes": 48403,
+      "bodyBytes": 50129,
       "rendered": {
         "wordBreaks": 0,
         "images": 36,
@@ -5082,7 +5168,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 49200
+      "provisionalRequestBytes": 50926
     },
     {
       "id": 9708,
@@ -5099,9 +5185,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16926,
+      "candidateBodyBytes": 17234,
       "status": "passed",
-      "bodyBytes": 16926,
+      "bodyBytes": 17234,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -5111,7 +5197,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17772
+      "provisionalRequestBytes": 18080
     },
     {
       "id": 9646,
@@ -5128,9 +5214,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 34075,
+      "candidateBodyBytes": 36205,
       "status": "passed",
-      "bodyBytes": 34075,
+      "bodyBytes": 36205,
       "rendered": {
         "wordBreaks": 0,
         "images": 47,
@@ -5140,7 +5226,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 34751
+      "provisionalRequestBytes": 36881
     },
     {
       "id": 9569,
@@ -5157,9 +5243,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 45960,
+      "candidateBodyBytes": 48864,
       "status": "passed",
-      "bodyBytes": 45960,
+      "bodyBytes": 48864,
       "rendered": {
         "wordBreaks": 0,
         "images": 66,
@@ -5169,7 +5255,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 46614
+      "provisionalRequestBytes": 49518
     },
     {
       "id": 9547,
@@ -5186,9 +5272,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14449,
+      "candidateBodyBytes": 14845,
       "status": "passed",
-      "bodyBytes": 14449,
+      "bodyBytes": 14845,
       "rendered": {
         "wordBreaks": 0,
         "images": 9,
@@ -5198,7 +5284,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15049
+      "provisionalRequestBytes": 15445
     },
     {
       "id": 9486,
@@ -5215,9 +5301,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18930,
+      "candidateBodyBytes": 19678,
       "status": "passed",
-      "bodyBytes": 18930,
+      "bodyBytes": 19678,
       "rendered": {
         "wordBreaks": 0,
         "images": 17,
@@ -5227,7 +5313,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19536
+      "provisionalRequestBytes": 20284
     },
     {
       "id": 9435,
@@ -5244,9 +5330,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15369,
+      "candidateBodyBytes": 15880,
       "status": "passed",
-      "bodyBytes": 15369,
+      "bodyBytes": 15880,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -5256,7 +5342,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16109
+      "provisionalRequestBytes": 16620
     },
     {
       "id": 9413,
@@ -5302,9 +5388,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 31699,
+      "candidateBodyBytes": 33565,
       "status": "passed",
-      "bodyBytes": 31699,
+      "bodyBytes": 33565,
       "rendered": {
         "wordBreaks": 0,
         "images": 41,
@@ -5314,7 +5400,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 32526
+      "provisionalRequestBytes": 34392
     },
     {
       "id": 9176,
@@ -5331,9 +5417,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 49873,
+      "candidateBodyBytes": 50665,
       "status": "passed",
-      "bodyBytes": 49873,
+      "bodyBytes": 50665,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -5343,7 +5429,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 50737
+      "provisionalRequestBytes": 51529
     },
     {
       "id": 9133,
@@ -5360,9 +5446,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 22231,
+      "candidateBodyBytes": 23578,
       "status": "passed",
-      "bodyBytes": 22231,
+      "bodyBytes": 23578,
       "rendered": {
         "wordBreaks": 0,
         "images": 29,
@@ -5372,7 +5458,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 22843
+      "provisionalRequestBytes": 24190
     },
     {
       "id": 9118,
@@ -5389,9 +5475,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4674,
+      "candidateBodyBytes": 4745,
       "status": "passed",
-      "bodyBytes": 4674,
+      "bodyBytes": 4745,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -5401,7 +5487,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5426
+      "provisionalRequestBytes": 5497
     },
     {
       "id": 9057,
@@ -5418,9 +5504,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 37846,
+      "candidateBodyBytes": 39105,
       "status": "passed",
-      "bodyBytes": 37846,
+      "bodyBytes": 39105,
       "rendered": {
         "wordBreaks": 0,
         "images": 27,
@@ -5430,7 +5516,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 38589
+      "provisionalRequestBytes": 39848
     },
     {
       "id": 9013,
@@ -5447,9 +5533,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 35743,
+      "candidateBodyBytes": 37154,
       "status": "passed",
-      "bodyBytes": 35743,
+      "bodyBytes": 37154,
       "rendered": {
         "wordBreaks": 0,
         "images": 24,
@@ -5459,7 +5545,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 36411
+      "provisionalRequestBytes": 37822
     },
     {
       "id": 8973,
@@ -5476,9 +5562,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 21162,
+      "candidateBodyBytes": 22438,
       "status": "passed",
-      "bodyBytes": 21162,
+      "bodyBytes": 22438,
       "rendered": {
         "wordBreaks": 0,
         "images": 29,
@@ -5488,7 +5574,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 21792
+      "provisionalRequestBytes": 23068
     },
     {
       "id": 8935,
@@ -5505,9 +5591,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16733,
+      "candidateBodyBytes": 17745,
       "status": "passed",
-      "bodyBytes": 16733,
+      "bodyBytes": 17745,
       "rendered": {
         "wordBreaks": 0,
         "images": 23,
@@ -5517,7 +5603,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17364
+      "provisionalRequestBytes": 18376
     },
     {
       "id": 8905,
@@ -5534,9 +5620,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8804,
+      "candidateBodyBytes": 9156,
       "status": "passed",
-      "bodyBytes": 8804,
+      "bodyBytes": 9156,
       "rendered": {
         "wordBreaks": 0,
         "images": 8,
@@ -5546,7 +5632,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9425
+      "provisionalRequestBytes": 9777
     },
     {
       "id": 8846,
@@ -5563,9 +5649,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 31614,
+      "candidateBodyBytes": 33656,
       "status": "passed",
-      "bodyBytes": 31614,
+      "bodyBytes": 33656,
       "rendered": {
         "wordBreaks": 0,
         "images": 45,
@@ -5575,7 +5661,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 32232
+      "provisionalRequestBytes": 34274
     },
     {
       "id": 8824,
@@ -5621,9 +5707,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 65407,
+      "candidateBodyBytes": 68375,
       "status": "passed",
-      "bodyBytes": 65407,
+      "bodyBytes": 68375,
       "rendered": {
         "wordBreaks": 0,
         "images": 61,
@@ -5633,7 +5719,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 66028
+      "provisionalRequestBytes": 68996
     },
     {
       "id": 8677,
@@ -5650,9 +5736,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 9646,
+      "candidateBodyBytes": 9805,
       "status": "passed",
-      "bodyBytes": 9646,
+      "bodyBytes": 9805,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -5662,7 +5748,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 10393
+      "provisionalRequestBytes": 10552
     },
     {
       "id": 8653,
@@ -5679,9 +5765,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 9006,
+      "candidateBodyBytes": 9094,
       "status": "passed",
-      "bodyBytes": 9006,
+      "bodyBytes": 9094,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -5691,7 +5777,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9745
+      "provisionalRequestBytes": 9833
     },
     {
       "id": 8547,
@@ -5708,9 +5794,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 42313,
+      "candidateBodyBytes": 43951,
       "status": "passed",
-      "bodyBytes": 42313,
+      "bodyBytes": 43951,
       "rendered": {
         "wordBreaks": 0,
         "images": 34,
@@ -5720,7 +5806,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 43219
+      "provisionalRequestBytes": 44857
     },
     {
       "id": 8523,
@@ -5737,9 +5823,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 19735,
+      "candidateBodyBytes": 20273,
       "status": "passed",
-      "bodyBytes": 19735,
+      "bodyBytes": 20273,
       "rendered": {
         "wordBreaks": 0,
         "images": 9,
@@ -5749,7 +5835,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 20615
+      "provisionalRequestBytes": 21153
     },
     {
       "id": 8502,
@@ -5768,10 +5854,19 @@
       "legacyFeatures": [
         "element:div"
       ],
-      "candidateBodyBytes": 14060,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 16200,
+      "status": "passed",
+      "bodyBytes": 16200,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 0,
+        "links": 1,
+        "pdfs": 0,
+        "videos": 1,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 16784
     },
     {
       "id": 8476,
@@ -5788,9 +5883,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 19260,
+      "candidateBodyBytes": 19876,
       "status": "passed",
-      "bodyBytes": 19260,
+      "bodyBytes": 19876,
       "rendered": {
         "wordBreaks": 0,
         "images": 14,
@@ -5800,7 +5895,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19890
+      "provisionalRequestBytes": 20506
     },
     {
       "id": 8426,
@@ -5817,9 +5912,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 20914,
+      "candidateBodyBytes": 22305,
       "status": "passed",
-      "bodyBytes": 20914,
+      "bodyBytes": 22305,
       "rendered": {
         "wordBreaks": 0,
         "images": 30,
@@ -5829,7 +5924,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 21562
+      "provisionalRequestBytes": 22953
     },
     {
       "id": 8380,
@@ -5846,9 +5941,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17738,
+      "candidateBodyBytes": 18706,
       "status": "passed",
-      "bodyBytes": 17738,
+      "bodyBytes": 18706,
       "rendered": {
         "wordBreaks": 0,
         "images": 22,
@@ -5858,7 +5953,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 18496
+      "provisionalRequestBytes": 19464
     },
     {
       "id": 8322,
@@ -5875,9 +5970,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 37914,
+      "candidateBodyBytes": 39745,
       "status": "passed",
-      "bodyBytes": 37914,
+      "bodyBytes": 39745,
       "rendered": {
         "wordBreaks": 0,
         "images": 40,
@@ -5887,7 +5982,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 38648
+      "provisionalRequestBytes": 40479
     },
     {
       "id": 8272,
@@ -5904,9 +5999,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 20114,
+      "candidateBodyBytes": 21126,
       "status": "passed",
-      "bodyBytes": 20114,
+      "bodyBytes": 21126,
       "rendered": {
         "wordBreaks": 0,
         "images": 23,
@@ -5916,7 +6011,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 20732
+      "provisionalRequestBytes": 21744
     },
     {
       "id": 8210,
@@ -5933,9 +6028,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 34807,
+      "candidateBodyBytes": 36787,
       "status": "passed",
-      "bodyBytes": 34807,
+      "bodyBytes": 36787,
       "rendered": {
         "wordBreaks": 0,
         "images": 45,
@@ -5945,7 +6040,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 35404
+      "provisionalRequestBytes": 37384
     },
     {
       "id": 8192,
@@ -5962,9 +6057,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14411,
+      "candidateBodyBytes": 14800,
       "status": "passed",
-      "bodyBytes": 14411,
+      "bodyBytes": 14800,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -5974,7 +6069,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 14982
+      "provisionalRequestBytes": 15371
     },
     {
       "id": 8151,
@@ -5991,9 +6086,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 25947,
+      "candidateBodyBytes": 26651,
       "status": "passed",
-      "bodyBytes": 25947,
+      "bodyBytes": 26651,
       "rendered": {
         "wordBreaks": 0,
         "images": 16,
@@ -6003,7 +6098,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26677
+      "provisionalRequestBytes": 27381
     },
     {
       "id": 8133,
@@ -6020,9 +6115,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17734,
+      "candidateBodyBytes": 17822,
       "status": "passed",
-      "bodyBytes": 17734,
+      "bodyBytes": 17822,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -6032,7 +6127,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 18496
+      "provisionalRequestBytes": 18584
     },
     {
       "id": 8070,
@@ -6049,9 +6144,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 27024,
+      "candidateBodyBytes": 28654,
       "status": "passed",
-      "bodyBytes": 27024,
+      "bodyBytes": 28654,
       "rendered": {
         "wordBreaks": 0,
         "images": 37,
@@ -6061,7 +6156,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 27693
+      "provisionalRequestBytes": 29323
     },
     {
       "id": 8051,
@@ -6107,9 +6202,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14996,
+      "candidateBodyBytes": 15876,
       "status": "passed",
-      "bodyBytes": 14996,
+      "bodyBytes": 15876,
       "rendered": {
         "wordBreaks": 0,
         "images": 20,
@@ -6119,7 +6214,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15594
+      "provisionalRequestBytes": 16474
     },
     {
       "id": 7980,
@@ -6136,9 +6231,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18386,
+      "candidateBodyBytes": 19486,
       "status": "passed",
-      "bodyBytes": 18386,
+      "bodyBytes": 19486,
       "rendered": {
         "wordBreaks": 0,
         "images": 25,
@@ -6148,7 +6243,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 18986
+      "provisionalRequestBytes": 20086
     },
     {
       "id": 7900,
@@ -6165,9 +6260,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 43697,
+      "candidateBodyBytes": 46452,
       "status": "passed",
-      "bodyBytes": 43697,
+      "bodyBytes": 46452,
       "rendered": {
         "wordBreaks": 0,
         "images": 61,
@@ -6177,7 +6272,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 44339
+      "provisionalRequestBytes": 47094
     },
     {
       "id": 7863,
@@ -6194,9 +6289,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 15660,
+      "candidateBodyBytes": 16452,
       "status": "passed",
-      "bodyBytes": 15660,
+      "bodyBytes": 16452,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -6206,7 +6301,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 16278
+      "provisionalRequestBytes": 17070
     },
     {
       "id": 7837,
@@ -6223,9 +6318,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12587,
+      "candidateBodyBytes": 13027,
       "status": "passed",
-      "bodyBytes": 12587,
+      "bodyBytes": 13027,
       "rendered": {
         "wordBreaks": 0,
         "images": 10,
@@ -6235,7 +6330,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13211
+      "provisionalRequestBytes": 13651
     },
     {
       "id": 7810,
@@ -6252,9 +6347,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16415,
+      "candidateBodyBytes": 16882,
       "status": "passed",
-      "bodyBytes": 16415,
+      "bodyBytes": 16882,
       "rendered": {
         "wordBreaks": 0,
         "images": 9,
@@ -6264,7 +6359,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17152
+      "provisionalRequestBytes": 17619
     },
     {
       "id": 7732,
@@ -6281,9 +6376,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 38411,
+      "candidateBodyBytes": 40690,
       "status": "passed",
-      "bodyBytes": 38411,
+      "bodyBytes": 40690,
       "rendered": {
         "wordBreaks": 0,
         "images": 52,
@@ -6293,7 +6388,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 39030
+      "provisionalRequestBytes": 41309
     },
     {
       "id": 7703,
@@ -6310,9 +6405,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14958,
+      "candidateBodyBytes": 15574,
       "status": "passed",
-      "bodyBytes": 14958,
+      "bodyBytes": 15574,
       "rendered": {
         "wordBreaks": 0,
         "images": 14,
@@ -6322,7 +6417,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15725
+      "provisionalRequestBytes": 16341
     },
     {
       "id": 7668,
@@ -6339,9 +6434,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18355,
+      "candidateBodyBytes": 19367,
       "status": "passed",
-      "bodyBytes": 18355,
+      "bodyBytes": 19367,
       "rendered": {
         "wordBreaks": 0,
         "images": 23,
@@ -6351,7 +6446,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 18967
+      "provisionalRequestBytes": 19979
     },
     {
       "id": 7652,
@@ -6397,9 +6492,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 11198,
+      "candidateBodyBytes": 11286,
       "status": "passed",
-      "bodyBytes": 11198,
+      "bodyBytes": 11286,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -6409,7 +6504,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 11801
+      "provisionalRequestBytes": 11889
     },
     {
       "id": 7581,
@@ -6426,9 +6521,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 33596,
+      "candidateBodyBytes": 35312,
       "status": "passed",
-      "bodyBytes": 33596,
+      "bodyBytes": 35312,
       "rendered": {
         "wordBreaks": 0,
         "images": 39,
@@ -6438,7 +6533,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 34211
+      "provisionalRequestBytes": 35927
     },
     {
       "id": 7540,
@@ -6455,9 +6550,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17676,
+      "candidateBodyBytes": 18160,
       "status": "passed",
-      "bodyBytes": 17676,
+      "bodyBytes": 18160,
       "rendered": {
         "wordBreaks": 0,
         "images": 11,
@@ -6467,7 +6562,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 18405
+      "provisionalRequestBytes": 18889
     },
     {
       "id": 7509,
@@ -6484,9 +6579,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17265,
+      "candidateBodyBytes": 17309,
       "status": "passed",
-      "bodyBytes": 17265,
+      "bodyBytes": 17309,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -6496,7 +6591,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17973
+      "provisionalRequestBytes": 18017
     },
     {
       "id": 7491,
@@ -6513,9 +6608,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 9977,
+      "candidateBodyBytes": 10637,
       "status": "passed",
-      "bodyBytes": 9977,
+      "bodyBytes": 10637,
       "rendered": {
         "wordBreaks": 0,
         "images": 15,
@@ -6525,7 +6620,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 10571
+      "provisionalRequestBytes": 11231
     },
     {
       "id": 7479,
@@ -6542,9 +6637,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6086,
+      "candidateBodyBytes": 6394,
       "status": "passed",
-      "bodyBytes": 6086,
+      "bodyBytes": 6394,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -6554,7 +6649,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 6677
+      "provisionalRequestBytes": 6985
     },
     {
       "id": 7422,
@@ -6571,9 +6666,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 21740,
+      "candidateBodyBytes": 22576,
       "status": "passed",
-      "bodyBytes": 21740,
+      "bodyBytes": 22576,
       "rendered": {
         "wordBreaks": 0,
         "images": 19,
@@ -6583,7 +6678,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 22358
+      "provisionalRequestBytes": 23194
     },
     {
       "id": 7396,
@@ -6600,9 +6695,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 23924,
+      "candidateBodyBytes": 24496,
       "status": "passed",
-      "bodyBytes": 23924,
+      "bodyBytes": 24496,
       "rendered": {
         "wordBreaks": 0,
         "images": 13,
@@ -6612,7 +6707,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 24669
+      "provisionalRequestBytes": 25241
     },
     {
       "id": 7374,
@@ -6629,9 +6724,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 7298,
+      "candidateBodyBytes": 7677,
       "status": "passed",
-      "bodyBytes": 7298,
+      "bodyBytes": 7677,
       "rendered": {
         "wordBreaks": 0,
         "images": 7,
@@ -6641,7 +6736,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7922
+      "provisionalRequestBytes": 8301
     },
     {
       "id": 7331,
@@ -6658,9 +6753,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 22012,
+      "candidateBodyBytes": 23332,
       "status": "passed",
-      "bodyBytes": 22012,
+      "bodyBytes": 23332,
       "rendered": {
         "wordBreaks": 0,
         "images": 30,
@@ -6670,7 +6765,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 22648
+      "provisionalRequestBytes": 23968
     },
     {
       "id": 7317,
@@ -6687,9 +6782,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5108,
+      "candidateBodyBytes": 5152,
       "status": "passed",
-      "bodyBytes": 5108,
+      "bodyBytes": 5152,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -6699,7 +6794,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5840
+      "provisionalRequestBytes": 5884
     },
     {
       "id": 7277,
@@ -6716,9 +6811,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 24001,
+      "candidateBodyBytes": 25277,
       "status": "passed",
-      "bodyBytes": 24001,
+      "bodyBytes": 25277,
       "rendered": {
         "wordBreaks": 0,
         "images": 29,
@@ -6728,7 +6823,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 24613
+      "provisionalRequestBytes": 25889
     },
     {
       "id": 7237,
@@ -6745,9 +6840,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 26269,
+      "candidateBodyBytes": 27633,
       "status": "passed",
-      "bodyBytes": 26269,
+      "bodyBytes": 27633,
       "rendered": {
         "wordBreaks": 0,
         "images": 31,
@@ -6757,7 +6852,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26905
+      "provisionalRequestBytes": 28269
     },
     {
       "id": 7205,
@@ -6774,9 +6869,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14506,
+      "candidateBodyBytes": 15386,
       "status": "passed",
-      "bodyBytes": 14506,
+      "bodyBytes": 15386,
       "rendered": {
         "wordBreaks": 0,
         "images": 20,
@@ -6786,7 +6881,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 15112
+      "provisionalRequestBytes": 15992
     },
     {
       "id": 7161,
@@ -6803,9 +6898,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 19464,
+      "candidateBodyBytes": 19818,
       "status": "passed",
-      "bodyBytes": 19464,
+      "bodyBytes": 19818,
       "rendered": {
         "wordBreaks": 0,
         "images": 8,
@@ -6815,7 +6910,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 20205
+      "provisionalRequestBytes": 20559
     },
     {
       "id": 7137,
@@ -6832,9 +6927,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 9503,
+      "candidateBodyBytes": 9855,
       "status": "passed",
-      "bodyBytes": 9503,
+      "bodyBytes": 9855,
       "rendered": {
         "wordBreaks": 0,
         "images": 8,
@@ -6844,7 +6939,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 10217
+      "provisionalRequestBytes": 10569
     },
     {
       "id": 7083,
@@ -6861,9 +6956,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 27333,
+      "candidateBodyBytes": 29049,
       "status": "passed",
-      "bodyBytes": 27333,
+      "bodyBytes": 29049,
       "rendered": {
         "wordBreaks": 0,
         "images": 39,
@@ -6873,7 +6968,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 27969
+      "provisionalRequestBytes": 29685
     },
     {
       "id": 7056,
@@ -6890,9 +6985,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16402,
+      "candidateBodyBytes": 17194,
       "status": "passed",
-      "bodyBytes": 16402,
+      "bodyBytes": 17194,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -6902,7 +6997,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17011
+      "provisionalRequestBytes": 17803
     },
     {
       "id": 7046,
@@ -6919,9 +7014,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4733,
+      "candidateBodyBytes": 4865,
       "status": "passed",
-      "bodyBytes": 4733,
+      "bodyBytes": 4865,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -6931,7 +7026,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5447
+      "provisionalRequestBytes": 5579
     },
     {
       "id": 6985,
@@ -6948,9 +7043,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 33154,
+      "candidateBodyBytes": 35108,
       "status": "passed",
-      "bodyBytes": 33154,
+      "bodyBytes": 35108,
       "rendered": {
         "wordBreaks": 0,
         "images": 43,
@@ -6960,7 +7055,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 33784
+      "provisionalRequestBytes": 35738
     },
     {
       "id": 6969,
@@ -6977,9 +7072,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8677,
+      "candidateBodyBytes": 8951,
       "status": "passed",
-      "bodyBytes": 8677,
+      "bodyBytes": 8951,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -6989,7 +7084,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9219
+      "provisionalRequestBytes": 9493
     },
     {
       "id": 6958,
@@ -7035,9 +7130,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 23479,
+      "candidateBodyBytes": 24579,
       "status": "passed",
-      "bodyBytes": 23479,
+      "bodyBytes": 24579,
       "rendered": {
         "wordBreaks": 0,
         "images": 25,
@@ -7047,7 +7142,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 24082
+      "provisionalRequestBytes": 25182
     },
     {
       "id": 6838,
@@ -7064,9 +7159,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 17259,
+      "candidateBodyBytes": 17858,
       "status": "passed",
-      "bodyBytes": 17259,
+      "bodyBytes": 17858,
       "rendered": {
         "wordBreaks": 0,
         "images": 12,
@@ -7076,7 +7171,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17847
+      "provisionalRequestBytes": 18446
     },
     {
       "id": 6828,
@@ -7093,9 +7188,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4894,
+      "candidateBodyBytes": 4982,
       "status": "passed",
-      "bodyBytes": 4894,
+      "bodyBytes": 4982,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -7105,7 +7200,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5427
+      "provisionalRequestBytes": 5515
     },
     {
       "id": 6704,
@@ -7122,9 +7217,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 50257,
+      "candidateBodyBytes": 53381,
       "status": "passed",
-      "bodyBytes": 50257,
+      "bodyBytes": 53381,
       "rendered": {
         "wordBreaks": 0,
         "images": 71,
@@ -7134,7 +7229,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 50898
+      "provisionalRequestBytes": 54022
     },
     {
       "id": 6775,
@@ -7180,9 +7275,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 11744,
+      "candidateBodyBytes": 12360,
       "status": "passed",
-      "bodyBytes": 11744,
+      "bodyBytes": 12360,
       "rendered": {
         "wordBreaks": 0,
         "images": 14,
@@ -7192,7 +7287,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 12347
+      "provisionalRequestBytes": 12963
     },
     {
       "id": 6748,
@@ -7214,10 +7309,19 @@
         "class:UFICommentBody",
         "class:_1n4g"
       ],
-      "candidateBodyBytes": 8293,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 8895,
+      "status": "passed",
+      "bodyBytes": 8895,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 0,
+        "links": 1,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 9434
     },
     {
       "id": 6675,
@@ -7234,9 +7338,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 13254,
+      "candidateBodyBytes": 14046,
       "status": "passed",
-      "bodyBytes": 13254,
+      "bodyBytes": 14046,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -7246,7 +7350,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 13878
+      "provisionalRequestBytes": 14670
     },
     {
       "id": 6639,
@@ -7263,9 +7367,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 25206,
+      "candidateBodyBytes": 26438,
       "status": "passed",
-      "bodyBytes": 25206,
+      "bodyBytes": 26438,
       "rendered": {
         "wordBreaks": 0,
         "images": 28,
@@ -7275,7 +7379,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 25818
+      "provisionalRequestBytes": 27050
     },
     {
       "id": 6599,
@@ -7292,9 +7396,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 20652,
+      "candidateBodyBytes": 21928,
       "status": "passed",
-      "bodyBytes": 20652,
+      "bodyBytes": 21928,
       "rendered": {
         "wordBreaks": 0,
         "images": 29,
@@ -7304,7 +7408,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 21258
+      "provisionalRequestBytes": 22534
     },
     {
       "id": 6593,
@@ -7321,9 +7425,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4358,
+      "candidateBodyBytes": 4402,
       "status": "passed",
-      "bodyBytes": 4358,
+      "bodyBytes": 4402,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -7333,7 +7437,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4888
+      "provisionalRequestBytes": 4932
     },
     {
       "id": 6218,
@@ -7353,10 +7457,19 @@
         "class:smrArt",
         "element:wbr"
       ],
-      "candidateBodyBytes": 49382,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 50948,
+      "status": "passed",
+      "bodyBytes": 50948,
+      "rendered": {
+        "wordBreaks": 5,
+        "images": 21,
+        "links": 6,
+        "pdfs": 0,
+        "videos": 1,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 51581
     },
     {
       "id": 6135,
@@ -7373,9 +7486,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 36314,
+      "candidateBodyBytes": 36984,
       "status": "passed",
-      "bodyBytes": 36314,
+      "bodyBytes": 36984,
       "rendered": {
         "wordBreaks": 0,
         "images": 12,
@@ -7385,7 +7498,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 36946
+      "provisionalRequestBytes": 37616
     },
     {
       "id": 6571,
@@ -7402,9 +7515,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5352,
+      "candidateBodyBytes": 5528,
       "status": "passed",
-      "bodyBytes": 5352,
+      "bodyBytes": 5528,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -7414,7 +7527,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5900
+      "provisionalRequestBytes": 6076
     },
     {
       "id": 6563,
@@ -7431,9 +7544,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6656,
+      "candidateBodyBytes": 6788,
       "status": "passed",
-      "bodyBytes": 6656,
+      "bodyBytes": 6788,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -7443,7 +7556,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7198
+      "provisionalRequestBytes": 7330
     },
     {
       "id": 6495,
@@ -7460,9 +7573,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 30588,
+      "candidateBodyBytes": 32297,
       "status": "passed",
-      "bodyBytes": 30588,
+      "bodyBytes": 32297,
       "rendered": {
         "wordBreaks": 0,
         "images": 34,
@@ -7472,7 +7585,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 31215
+      "provisionalRequestBytes": 32924
     },
     {
       "id": 6306,
@@ -7489,9 +7602,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 80638,
+      "candidateBodyBytes": 85874,
       "status": "passed",
-      "bodyBytes": 80638,
+      "bodyBytes": 85874,
       "rendered": {
         "wordBreaks": 0,
         "images": 119,
@@ -7501,7 +7614,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 81256
+      "provisionalRequestBytes": 86492
     },
     {
       "id": 6067,
@@ -7518,9 +7631,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 16858,
+      "candidateBodyBytes": 17078,
       "status": "passed",
-      "bodyBytes": 16858,
+      "bodyBytes": 17078,
       "rendered": {
         "wordBreaks": 0,
         "images": 5,
@@ -7530,7 +7643,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 17472
+      "provisionalRequestBytes": 17692
     },
     {
       "id": 6004,
@@ -7547,9 +7660,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 20205,
+      "candidateBodyBytes": 20560,
       "status": "passed",
-      "bodyBytes": 20205,
+      "bodyBytes": 20560,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -7559,7 +7672,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 20864
+      "provisionalRequestBytes": 21219
     },
     {
       "id": 5959,
@@ -7576,9 +7689,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 22547,
+      "candidateBodyBytes": 23650,
       "status": "passed",
-      "bodyBytes": 22547,
+      "bodyBytes": 23650,
       "rendered": {
         "wordBreaks": 0,
         "images": 17,
@@ -7588,7 +7701,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 23542
+      "provisionalRequestBytes": 24645
     },
     {
       "id": 5876,
@@ -7605,9 +7718,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 23302,
+      "candidateBodyBytes": 24703,
       "status": "passed",
-      "bodyBytes": 23302,
+      "bodyBytes": 24703,
       "rendered": {
         "wordBreaks": 0,
         "images": 27,
@@ -7617,7 +7730,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 23911
+      "provisionalRequestBytes": 25312
     },
     {
       "id": 5861,
@@ -7634,9 +7747,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6131,
+      "candidateBodyBytes": 6263,
       "status": "passed",
-      "bodyBytes": 6131,
+      "bodyBytes": 6263,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -7646,7 +7759,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 6715
+      "provisionalRequestBytes": 6847
     },
     {
       "id": 5858,
@@ -7663,9 +7776,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5021,
+      "candidateBodyBytes": 5092,
       "status": "passed",
-      "bodyBytes": 5021,
+      "bodyBytes": 5092,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -7675,7 +7788,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 5533
+      "provisionalRequestBytes": 5604
     },
     {
       "id": 5853,
@@ -7721,9 +7834,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 24459,
+      "candidateBodyBytes": 25305,
       "status": "passed",
-      "bodyBytes": 24459,
+      "bodyBytes": 25305,
       "rendered": {
         "wordBreaks": 0,
         "images": 16,
@@ -7733,7 +7846,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 25099
+      "provisionalRequestBytes": 25945
     },
     {
       "id": 5793,
@@ -7753,10 +7866,19 @@
         "element:wbr",
         "a.data-saferedirecturl"
       ],
-      "candidateBodyBytes": 11116,
-      "status": "blocked",
-      "reason": "未対応の属性: a.data-saferedirecturl",
-      "differences": []
+      "candidateBodyBytes": 12007,
+      "status": "passed",
+      "bodyBytes": 12007,
+      "rendered": {
+        "wordBreaks": 24,
+        "images": 1,
+        "links": 2,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 12535
     },
     {
       "id": 5748,
@@ -7773,9 +7895,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 25946,
+      "candidateBodyBytes": 26511,
       "status": "passed",
-      "bodyBytes": 25946,
+      "bodyBytes": 26511,
       "rendered": {
         "wordBreaks": 0,
         "images": 8,
@@ -7785,7 +7907,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26581
+      "provisionalRequestBytes": 27146
     },
     {
       "id": 5742,
@@ -7802,9 +7924,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 9365,
+      "candidateBodyBytes": 9507,
       "status": "passed",
-      "bodyBytes": 9365,
+      "bodyBytes": 9507,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -7814,7 +7936,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 9930
+      "provisionalRequestBytes": 10072
     },
     {
       "id": 5631,
@@ -7831,9 +7953,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 54573,
+      "candidateBodyBytes": 58042,
       "status": "passed",
-      "bodyBytes": 54573,
+      "bodyBytes": 58042,
       "rendered": {
         "wordBreaks": 0,
         "images": 74,
@@ -7843,7 +7965,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 55178
+      "provisionalRequestBytes": 58647
     },
     {
       "id": 5595,
@@ -7860,9 +7982,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 18524,
+      "candidateBodyBytes": 19211,
       "status": "passed",
-      "bodyBytes": 18524,
+      "bodyBytes": 19211,
       "rendered": {
         "wordBreaks": 0,
         "images": 14,
@@ -7872,7 +7994,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 19197
+      "provisionalRequestBytes": 19884
     },
     {
       "id": 5566,
@@ -7891,9 +8013,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 24404,
+      "candidateBodyBytes": 25064,
       "status": "passed",
-      "bodyBytes": 24404,
+      "bodyBytes": 25064,
       "rendered": {
         "wordBreaks": 93,
         "images": 15,
@@ -7903,7 +8025,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 24956
+      "provisionalRequestBytes": 25616
     },
     {
       "id": 5521,
@@ -7920,9 +8042,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 26084,
+      "candidateBodyBytes": 26947,
       "status": "passed",
-      "bodyBytes": 26084,
+      "bodyBytes": 26947,
       "rendered": {
         "wordBreaks": 0,
         "images": 18,
@@ -7932,7 +8054,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26768
+      "provisionalRequestBytes": 27631
     },
     {
       "id": 5465,
@@ -7949,9 +8071,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 33855,
+      "candidateBodyBytes": 35466,
       "status": "passed",
-      "bodyBytes": 33855,
+      "bodyBytes": 35466,
       "rendered": {
         "wordBreaks": 0,
         "images": 35,
@@ -7961,7 +8083,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 34477
+      "provisionalRequestBytes": 36088
     },
     {
       "id": 5456,
@@ -7978,9 +8100,9 @@
         "styles": 4
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5664,
+      "candidateBodyBytes": 5779,
       "status": "passed",
-      "bodyBytes": 5664,
+      "bodyBytes": 5779,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -7990,7 +8112,7 @@
         "languages": 0,
         "styles": 4
       },
-      "provisionalRequestBytes": 6170
+      "provisionalRequestBytes": 6285
     },
     {
       "id": 5445,
@@ -8039,10 +8161,19 @@
         "element:wbr",
         "element:div"
       ],
-      "candidateBodyBytes": 23325,
-      "status": "blocked",
-      "reason": "未対応の要素: div",
-      "differences": []
+      "candidateBodyBytes": 24720,
+      "status": "passed",
+      "bodyBytes": 24720,
+      "rendered": {
+        "wordBreaks": 8,
+        "images": 11,
+        "links": 2,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 25518
     },
     {
       "id": 5406,
@@ -8059,9 +8190,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 4053,
+      "candidateBodyBytes": 4521,
       "status": "passed",
-      "bodyBytes": 4053,
+      "bodyBytes": 4521,
       "rendered": {
         "wordBreaks": 0,
         "images": 4,
@@ -8071,7 +8202,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 4562
+      "provisionalRequestBytes": 5030
     },
     {
       "id": 5274,
@@ -8117,9 +8248,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 48999,
+      "candidateBodyBytes": 51815,
       "status": "passed",
-      "bodyBytes": 48999,
+      "bodyBytes": 51815,
       "rendered": {
         "wordBreaks": 0,
         "images": 64,
@@ -8129,7 +8260,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 49600
+      "provisionalRequestBytes": 52416
     },
     {
       "id": 5071,
@@ -8146,9 +8277,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 23139,
+      "candidateBodyBytes": 24574,
       "status": "passed",
-      "bodyBytes": 23139,
+      "bodyBytes": 24574,
       "rendered": {
         "wordBreaks": 0,
         "images": 31,
@@ -8158,7 +8289,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 23740
+      "provisionalRequestBytes": 25175
     },
     {
       "id": 4991,
@@ -8175,9 +8306,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 33226,
+      "candidateBodyBytes": 35541,
       "status": "passed",
-      "bodyBytes": 33226,
+      "bodyBytes": 35541,
       "rendered": {
         "wordBreaks": 0,
         "images": 51,
@@ -8187,7 +8318,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 33827
+      "provisionalRequestBytes": 36142
     },
     {
       "id": 4937,
@@ -8204,9 +8335,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 25707,
+      "candidateBodyBytes": 27388,
       "status": "passed",
-      "bodyBytes": 25707,
+      "bodyBytes": 27388,
       "rendered": {
         "wordBreaks": 0,
         "images": 14,
@@ -8216,7 +8347,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 26310
+      "provisionalRequestBytes": 27991
     },
     {
       "id": 4810,
@@ -8233,9 +8364,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 92449,
+      "candidateBodyBytes": 102295,
       "status": "passed",
-      "bodyBytes": 92449,
+      "bodyBytes": 102295,
       "rendered": {
         "wordBreaks": 0,
         "images": 85,
@@ -8245,7 +8376,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 93046
+      "provisionalRequestBytes": 102892
     },
     {
       "id": 4794,
@@ -8262,9 +8393,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 10310,
+      "candidateBodyBytes": 10425,
       "status": "passed",
-      "bodyBytes": 10310,
+      "bodyBytes": 10425,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -8274,7 +8405,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 10893
+      "provisionalRequestBytes": 11008
     },
     {
       "id": 4772,
@@ -8304,10 +8435,19 @@
         "class:adL",
         "a.data-saferedirecturl"
       ],
-      "candidateBodyBytes": 6013,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 7671,
+      "status": "passed",
+      "bodyBytes": 7671,
+      "rendered": {
+        "wordBreaks": 7,
+        "images": 1,
+        "links": 3,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 8156
     },
     {
       "id": 4720,
@@ -8326,10 +8466,19 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 9305,
-      "status": "blocked",
-      "reason": "未対応のURL",
-      "differences": []
+      "candidateBodyBytes": 9518,
+      "status": "passed",
+      "bodyBytes": 9518,
+      "rendered": {
+        "wordBreaks": 5,
+        "images": 0,
+        "links": 3,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 10028
     },
     {
       "id": 4708,
@@ -8346,9 +8495,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12116,
+      "candidateBodyBytes": 12465,
       "status": "passed",
-      "bodyBytes": 12116,
+      "bodyBytes": 12465,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -8358,7 +8507,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 12854
+      "provisionalRequestBytes": 13203
     },
     {
       "id": 4683,
@@ -8375,9 +8524,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 1489,
+      "candidateBodyBytes": 1631,
       "status": "passed",
-      "bodyBytes": 1489,
+      "bodyBytes": 1631,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -8387,7 +8536,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 2205
+      "provisionalRequestBytes": 2347
     },
     {
       "id": 4670,
@@ -8404,9 +8553,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 3476,
+      "candidateBodyBytes": 3547,
       "status": "passed",
-      "bodyBytes": 3476,
+      "bodyBytes": 3547,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -8416,7 +8565,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 3949
+      "provisionalRequestBytes": 4020
     },
     {
       "id": 4664,
@@ -8435,9 +8584,9 @@
       "legacyFeatures": [
         "element:wbr"
       ],
-      "candidateBodyBytes": 4205,
+      "candidateBodyBytes": 4462,
       "status": "passed",
-      "bodyBytes": 4205,
+      "bodyBytes": 4462,
       "rendered": {
         "wordBreaks": 3,
         "images": 1,
@@ -8447,7 +8596,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 4699
+      "provisionalRequestBytes": 4956
     },
     {
       "id": 4659,
@@ -8464,9 +8613,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8914,
+      "candidateBodyBytes": 9056,
       "status": "passed",
-      "bodyBytes": 8914,
+      "bodyBytes": 9056,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -8476,7 +8625,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 9417
+      "provisionalRequestBytes": 9559
     },
     {
       "id": 4641,
@@ -8493,9 +8642,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 8869,
+      "candidateBodyBytes": 9594,
       "status": "passed",
-      "bodyBytes": 8869,
+      "bodyBytes": 9594,
       "rendered": {
         "wordBreaks": 0,
         "images": 5,
@@ -8505,7 +8654,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 9459
+      "provisionalRequestBytes": 10184
     },
     {
       "id": 4631,
@@ -8522,9 +8671,9 @@
         "styles": 3
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6917,
+      "candidateBodyBytes": 7220,
       "status": "passed",
-      "bodyBytes": 6917,
+      "bodyBytes": 7220,
       "rendered": {
         "wordBreaks": 0,
         "images": 2,
@@ -8534,7 +8683,7 @@
         "languages": 0,
         "styles": 3
       },
-      "provisionalRequestBytes": 7444
+      "provisionalRequestBytes": 7747
     },
     {
       "id": 4623,
@@ -8551,9 +8700,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6599,
+      "candidateBodyBytes": 6883,
       "status": "passed",
-      "bodyBytes": 6599,
+      "bodyBytes": 6883,
       "rendered": {
         "wordBreaks": 0,
         "images": 0,
@@ -8563,7 +8712,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7124
+      "provisionalRequestBytes": 7408
     },
     {
       "id": 4562,
@@ -8580,9 +8729,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6899,
+      "candidateBodyBytes": 7085,
       "status": "passed",
-      "bodyBytes": 6899,
+      "bodyBytes": 7085,
       "rendered": {
         "wordBreaks": 0,
         "images": 1,
@@ -8592,7 +8741,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 7655
+      "provisionalRequestBytes": 7841
     },
     {
       "id": 4318,
@@ -8611,9 +8760,9 @@
       "legacyFeatures": [
         "p.lang=ja-JP"
       ],
-      "candidateBodyBytes": 58621,
+      "candidateBodyBytes": 65782,
       "status": "passed",
-      "bodyBytes": 58621,
+      "bodyBytes": 65782,
       "rendered": {
         "wordBreaks": 0,
         "images": 53,
@@ -8623,7 +8772,7 @@
         "languages": 31,
         "styles": 5
       },
-      "provisionalRequestBytes": 59141
+      "provisionalRequestBytes": 66302
     },
     {
       "id": 4557,
@@ -8640,9 +8789,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 5411,
+      "candidateBodyBytes": 5816,
       "status": "passed",
-      "bodyBytes": 5411,
+      "bodyBytes": 5816,
       "rendered": {
         "wordBreaks": 0,
         "images": 9,
@@ -8652,7 +8801,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 5978
+      "provisionalRequestBytes": 6383
     },
     {
       "id": 4305,
@@ -8669,9 +8818,9 @@
         "styles": 0
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 6187,
+      "candidateBodyBytes": 7019,
       "status": "passed",
-      "bodyBytes": 6187,
+      "bodyBytes": 7019,
       "rendered": {
         "wordBreaks": 0,
         "images": 6,
@@ -8681,7 +8830,7 @@
         "languages": 0,
         "styles": 0
       },
-      "provisionalRequestBytes": 6704
+      "provisionalRequestBytes": 7536
     },
     {
       "id": 4299,
@@ -8701,10 +8850,19 @@
         "class:text_exposed_show",
         "element:div"
       ],
-      "candidateBodyBytes": 2889,
-      "status": "blocked",
-      "reason": "未対応のクラス",
-      "differences": []
+      "candidateBodyBytes": 3264,
+      "status": "passed",
+      "bodyBytes": 3264,
+      "rendered": {
+        "wordBreaks": 0,
+        "images": 0,
+        "links": 0,
+        "pdfs": 0,
+        "videos": 0,
+        "languages": 0,
+        "styles": 0
+      },
+      "provisionalRequestBytes": 3758
     },
     {
       "id": 4292,
@@ -8899,9 +9057,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12405,
+      "candidateBodyBytes": 13146,
       "status": "passed",
-      "bodyBytes": 12405,
+      "bodyBytes": 13146,
       "rendered": {
         "wordBreaks": 0,
         "images": 12,
@@ -8911,7 +9069,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 12902
+      "provisionalRequestBytes": 13643
     },
     {
       "id": 5359,
@@ -8928,9 +9086,9 @@
         "styles": 2
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 12747,
+      "candidateBodyBytes": 13498,
       "status": "passed",
-      "bodyBytes": 12747,
+      "bodyBytes": 13498,
       "rendered": {
         "wordBreaks": 0,
         "images": 9,
@@ -8940,7 +9098,7 @@
         "languages": 0,
         "styles": 2
       },
-      "provisionalRequestBytes": 13226
+      "provisionalRequestBytes": 13977
     },
     {
       "id": 5372,
@@ -8957,9 +9115,9 @@
         "styles": 4
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 10590,
+      "candidateBodyBytes": 10935,
       "status": "passed",
-      "bodyBytes": 10590,
+      "bodyBytes": 10935,
       "rendered": {
         "wordBreaks": 0,
         "images": 3,
@@ -8969,7 +9127,7 @@
         "languages": 0,
         "styles": 4
       },
-      "provisionalRequestBytes": 11079
+      "provisionalRequestBytes": 11424
     },
     {
       "id": 5377,
@@ -8986,9 +9144,9 @@
         "styles": 1
       },
       "legacyFeatures": [],
-      "candidateBodyBytes": 14647,
+      "candidateBodyBytes": 15344,
       "status": "passed",
-      "bodyBytes": 14647,
+      "bodyBytes": 15344,
       "rendered": {
         "wordBreaks": 0,
         "images": 11,
@@ -8998,7 +9156,7 @@
         "languages": 0,
         "styles": 1
       },
-      "provisionalRequestBytes": 15113
+      "provisionalRequestBytes": 15810
     }
   ]
 }

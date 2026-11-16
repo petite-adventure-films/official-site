@@ -1,3 +1,4 @@
+import {legacyContainers} from './legacy-containers';
 // Read-only diagnosis of rejected source articles using the browser's HTML parser.
 import {generateHTML,generateJSON} from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
@@ -19,7 +20,7 @@ export async function diagnose(){
   }
   walk(first,second);
   const source=new DOMParser().parseFromString(post.content,'text/html');
-  const fixed=generateHTML(normalizeStyles(generateJSON(post.content,[WordBreak,LegacyLanguage,...extensions])),[WordBreak,LegacyLanguage,...extensions]);
+  const fixed=generateHTML(normalizeStyles(generateJSON(post.content,[...legacyContainers,WordBreak,LegacyLanguage,...extensions])),[...legacyContainers,WordBreak,LegacyLanguage,...extensions]);
   const a=JSON.parse(signature(post.content)),b=JSON.parse(signature(fixed));
   const index=a.tokens.findIndex((x,i)=>JSON.stringify(x)!==JSON.stringify(b.tokens[i]));
   return {id:post.id,signatureDifference:{index,before:a.tokens.slice(Math.max(0,index-1),index+4),after:b.tokens.slice(Math.max(0,index-1),index+4)},differences,languageAttributes:[...source.querySelectorAll('[lang]')].map(e=>({tag:e.localName,lang:e.lang})),styles:[...new Set([...source.querySelectorAll('[style]')].map(e=>e.getAttribute('style')))]};

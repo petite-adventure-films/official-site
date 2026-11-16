@@ -1,3 +1,4 @@
+import {legacyContainers} from './legacy-containers';
 import {generateHTML} from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -8,7 +9,7 @@ import {LegacyLanguage,WordBreak,normalizeStyles} from './legacy';
 import {checkedImport,checkedSave,signature} from './guard';
 export async function checkLegacy(){
  const base=[StarterKit,Image.configure({inline:true}),TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
- const extensions=[WordBreak,LegacyLanguage,...base];const results=[];
+ const extensions=[...legacyContainers,WordBreak,LegacyLanguage,...base];const results=[];
  const assert=(condition,message)=>{if(!condition)throw Error(message);};
  const rejects=(fn,message)=>{let rejected=false;try{fn();}catch{rejected=true;}assert(rejected,message);};
  const sample=value=>({type:'textStyle',attrs:value});
@@ -39,7 +40,7 @@ export async function checkLegacy(){
  different('<p><span style="color:black">甲<span style="color:red">乙</span></span></p>','<p><span style="color:black">甲乙</span></p>');
  different('<p><a href="https://example.com/a"><img src="https://example.com/i.jpg"></a></p>','<p><img src="https://example.com/i.jpg"></p>');
  // A disabled bold parser must not pass the source guard merely because plain text matches.
- rejects(()=>checkedImport('<p><strong>強調</strong></p>',[WordBreak,LegacyLanguage,StarterKit.configure({bold:false})]),'lost bold');
+ rejects(()=>checkedImport('<p><strong>強調</strong></p>',[...legacyContainers,WordBreak,LegacyLanguage,StarterKit.configure({bold:false})]),'lost bold');
  results.push('太字/色の順序・同義分割・入れ子を許容し、太字/斜体/下線の欠落・対象変更、改行欠落、色上書き・画像リンク欠落を検知');
  const breakSource='<p><strong>ABC<wbr>DEF</strong><a href="https://example.com/">G<wbr>H</a></p>';
  const breaks=checkedImport(breakSource,extensions);
@@ -49,6 +50,23 @@ export async function checkLegacy(){
  different('<p>AB<wbr>CD</p>','<p>A<wbr>BCD</p>');
  rejects(()=>checkedImport('<p>AB<wbr>CD</p>',[LegacyLanguage,...base]),'lost wordBreak');
  results.push('wbrの位置・個数・前後の書式/リンクを保持し、欠落・強制改行化・位置変更を検知');
+ const container='<div id="anchor" dir="auto" lang="ja" class="text_exposed_show"><p><span class="st">本文</span></p><div id="empty"></div></div>';
+ const containerJSON=checkedImport(container,extensions);
+ assert(signature(generateHTML(checkedSave(containerJSON,extensions),extensions))===signature(container),'container identity');
+ const mail='<p><a href="mailto:reader@example.com">メール</a></p>';
+ assert(signature(generateHTML(checkedImport(mail,extensions),extensions))===signature(mail),'mailto');
+ const redirected='<p><a href="https://example.com/original" data-saferedirecturl="https://www.google.com/url?q=x">参照</a></p>';
+ const link=generateHTML(checkedImport(redirected,extensions),extensions);
+ assert(link.includes('href="https://example.com/original"'),'href must not become redirect metadata');
+ const duplicate='<div id="same">甲</div><div id="same">乙</div>';
+ assert(signature(generateHTML(checkedImport(duplicate,extensions),extensions))===signature(duplicate),'retain original repeated IDs without renaming');
+ rejects(()=>checkedImport('<span class="unknown-widget">本文</span>',extensions),'unknown classes');
+ rejects(()=>checkedImport('<div onclick="alert(1)">本文</div>',extensions),'event handler');
+ for(const href of ['javascript:alert(1)','data:text/html,test','mailto:reader@example.com?bcc=other@example.com','mailto:reader%0d%0a@example.com','mailto:reader?cc=x@example.com'])rejects(()=>checkedImport(`<p><a href="${href}">リンク</a></p>`,extensions),'unsupported URL');
+ different('<div id="one">本文</div>','<div id="two">本文</div>');
+ different('<div dir="auto" lang="ja">本文</div>','<div>本文</div>');
+ rejects(()=>checkedImport('<div id="anchor">本文</div>',[WordBreak,LegacyLanguage,...base]),'lost container/anchor');
+ results.push('旧div/span・空アンカー・lang/dir・補助属性とmailtoを保持し、未知class・イベント属性・危険URL・mailtoヘッダー付加を拒否');
  const posts=await(await fetch('/fixtures.json')).json();
  for(const id of [17696,4318]){
   const post=posts.find(p=>p.id===id);const json=checkedImport(post.content,extensions);

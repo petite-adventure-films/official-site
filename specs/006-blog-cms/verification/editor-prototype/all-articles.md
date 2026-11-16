@@ -4,7 +4,7 @@
 
 - SHA-256: 926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7
 - Chromium: 158.0.8127.18
-- 通過: 289件 / 確認待ち: 21件
+- 通過: 310件 / 確認待ち: 0件
 - 検証: 原文の比較用署名、2回のJSON→HTML→JSON往復、localStorage書込・読出し。記事ごとの画面入力操作・ページ再読込・API保存は対象外。
 - 本文文字列は空白を除いて照合。段落の完全な意味比較、CSS全般、外部URLの到達・動画再生は未検証。通過件数を全内容の完全保証と扱わない。
 
@@ -13,21 +13,16 @@
 | 対象 | 記事ID | UTF-8 bytes | 256KiBまでの余裕 |
 | --- | --- | ---: | ---: |
 | sourceHTMLBytes | 14975 | 116146 | 145998 |
-| candidateBodyBytes | 14975 | 210204 | 51940 |
-| bodyBytes | 14975 | 210204 | 51940 |
-| provisionalRequestBytes | 14975 | 210892 | 51252 |
+| candidateBodyBytes | 14975 | 226122 | 36022 |
+| bodyBytes | 14975 | 226122 | 36022 |
+| provisionalRequestBytes | 14975 | 226810 | 35334 |
 
-candidateBodyBytesには確認待ち記事の変換候補も含む。欠落の可能性があるため保存可能とは扱わない。bodyBytesは通過記事のみ。provisionalRequestBytesは旧分類値と暫定エンベロープを使った概算で、正式CMS ID・rich-text/v2・最終API要求ではない。原本HTMLは要求に含めない。現行制限はcms/worker/routes/json.tsの262,144 bytes。今回の通過記事では本文・概算要求とも超過0件。
+candidateBodyBytesには確認待ち記事の変換候補も含む。欠落の可能性があるため保存可能とは扱わない。bodyBytesは通過記事のみ。provisionalRequestBytesは旧分類値と暫定エンベロープを使った概算で、正式CMS ID・rich-text/v2・最終API要求ではない。原本HTMLは要求に含めない。現行制限はcms/worker/routes/json.tsの262,144 bytes。今回の通過記事では本文・概算要求とも超過0件。旧属性保持で容量は増えており、正式ノードへの変更時は再測定する。
 
 ## 最初に停止した理由（重複なし）
 
 | 理由 | 件数 | 記事ID |
 | --- | ---: | --- |
-| 未対応のクラス | 9 | 16849, 14569, 14197, 12409, 12362, 6748, 6218, 4772, 4299 |
-| 未対応の属性: a.data-saferedirecturl | 2 | 14366, 5793 |
-| 未対応の要素: div | 8 | 12629, 12217, 11538, 10968, 10297, 10285, 8502, 5416 |
-| 未対応の属性: a.data-lynx-mode | 1 | 10326 |
-| 未対応のURL | 1 | 4720 |
 
 同じ記事に複数の未対応要素がある。下の一覧とJSONのlegacyFeaturesは最初の停止理由に隠れた属性も記録する。
 
@@ -35,33 +30,13 @@ candidateBodyBytesには確認待ち記事の変換候補も含む。欠落の�
 
 | ID | タイトル | 最初の停止理由 | その他の旧要素・属性 |
 | --- | --- | --- | --- |
-| 16849 | 2023年映像ワークショップ振り返り#7：4時間に及んだ完成披露上映会＆公開作品紹介 | 未対応のクラス | class:yt-core-attributed-string--link-inherit-color |
-| 14569 | コロナ禍の農業研修レポート～後半の折り返しまで～ | 未対応のクラス | class:css-901oao, class:css-16my406, class:r-1tl8opc, class:r-bcqeeo, class:r-qvutc0 |
-| 14366 | 「保険」を通じて社会のあり方を考える～本間照光さんのコラム紹介～ | 未対応の属性: a.data-saferedirecturl | a.data-saferedirecturl, element:wbr, element:div |
-| 14197 | 週イチでも癒される～(^^)　コロナ禍の農業研修・前半まとめ！ | 未対応のクラス | class:css-901oao, class:css-16my406, class:r-1tl8opc, class:r-bcqeeo, class:r-qvutc0 |
-| 12629 | 【一審判決報告書】森の映画社・沖縄県議会取材拒否事件 | 未対応の要素: div | element:div |
-| 12409 | 【バンクシー展・天才か反逆者か】イギリスの平和活動家、ブライアン・ホウに寄贈したバンクシー作品の末路は？ | 未対応のクラス | class:st |
-| 12362 | 「シビルは門を閉じません」～私たち市民の武器は、集まること、話し合うこと、スクラムを組むこと | 未対応のクラス | class:st |
-| 12217 | ※中止・延期⇒【イベントのご案内】2月28日（金）夜「ピースフルエナジー杉並・新春の集い」に参加します！ | 未対応の要素: div | element:div, class:list_post_contents, div.lang=ja, class:css-901oao, class:css-16my406, class:r-gwet1z, class:r-ad9z0x, class:r-bcqeeo, class:r-qvutc0 |
-| 11538 | あの原一男監督も注目？！　国政にガチンコ勝負をかける10人！（2019/07/12 れいわ新選組・れいわ祭）全動画！ | 未対応の要素: div | element:div, class:text_exposed_show |
-| 10968 | 反原発美術館、ふたたび静岡・ひまわり集会へ！（2018/11/18：事前準備という名の「干し柿づくり」編♪） | 未対応の要素: div | element:div, class:text_exposed_show |
-| 10326 | 【集会動画公開】12.15 労働組合つぶしの大弾圧を許さない！ 東京緊急集会 | 未対応の属性: a.data-lynx-mode | a.data-lynx-mode, a.data-lynx-uri |
-| 10297 | 【ご案内】11月18日（日）静岡「ひまわり集会」にて、経産省前テントひろば・反原発美術館（テント実物）展示＆特別企画の詳細！ | 未対応の要素: div | element:div, class:text_exposed_show, span.id=fbPhotoSnowliftCaption, class:fbPhotosPhotoCaption, span.data-ft, class:hasCaption, element:wbr |
-| 10285 | 【ご案内】11月10日（土）名古屋「シャチホコ映画祭2018」の詳細ご案内！ | 未対応の要素: div | element:div, class:text_exposed_show, div.id={0DE9E47C-871A-4F90-8440-B190C216800A}_7, class:mcafee_OK, div.id={0DE9E47C-871A-4F90-8440-B190C216800A}_9 |
-| 8502 | 【雑木林コラム】介護の日常 ー 「公開」は創作のモチベーションに！（動画あり♪） | 未対応の要素: div | element:div |
-| 6748 | 【制作日誌】撮影素材のダウングレードとは（2017.12.15 革命前夜） | 未対応のクラス | class:UFICommentActorAndBody, span.data-ft, class:UFICommentBody, class:_1n4g |
-| 6218 | 【映画監督、日々の暮らし⑪】「タネの神様」に会いに行く！（後編） | 未対応のクラス | class:smrArt, element:wbr |
-| 5793 | 【展覧会のお知らせ】戸山灰さん個展「小さな抵抗」（9/25～10/1＠外苑前） | 未対応の属性: a.data-saferedirecturl | element:wbr, a.data-saferedirecturl |
-| 5416 | 音声ガイドって面白い！ モニター上映会報告 | 未対応の要素: div | element:wbr, element:div |
-| 4772 | 政治を身近に！政治家と話そう！イベントのご案内 | 未対応のクラス | class:im, element:wbr, element:div, class:yj6qo, class:ajU, div.id=:t3, class:ajR, div.data-tooltip, class:ajT, class:HOEnZb, class:adL, a.data-saferedirecturl |
-| 4720 | 2017年5月より、映像ワークショップを開催します！（於：立川シビル） | 未対応のURL | element:wbr |
-| 4299 | 9/11（日）テント設置5周年、怒りのフェスティバル開催！ | 未対応のクラス | class:text_exposed_show, element:div |
 
-## 次の対応順（提案）
+## 正式実装へ残る確認
 
-書式構造差15件は文字・画像ごとの有効書式を照合する方式で通過。太字/色の順序、同義の分割・統合、入れ子の上書きを扱い、異なる書式・対象・改行・リンクの欠落は拒否する。
-wbrは専用wordBreakノードで保持。新たに10件が通過し、通過記事内の219箇所を保持。元データ全体では17記事279箇所あり、残る記事は別の未対応要素で停止している。
-1. divとlang、旧idを含む構造の保全。段落へ無条件置換せず、旧アンカーと文章のまとまりを確認する。
-2. コピー元のclass/data属性。メール・SNS由来の付加情報と公開内容の意味を分け、採用する除去規則を明示する。外部リンクのhrefは保持する。4720のmailtoリンクも別途対応を検討し、現在のURL制限を無条件に緩めない。
+全310件が試作の照合を通過。原文保持・意味照合・JSON往復・localStorage検証であり、正式移行の承認ではない。
+1. 正式rich-text/v2とAPI要求のschema・容量、保存・公開経路を実装して検証する。
+2. 旧class/data/tabindex/aria属性は試作ノードで保存する。公開レンダラーで適用する属性と保全専用にする属性を決める。コピー元の外部CSS・スクリプトは読み込まない。
+3. 記事10297には同じfbPhotoSnowliftCaption IDが2回ある。試作は元の順序・個数を保ち自動改名しない。正式公開時の重複ID/アンカー方針を決める。
+4. OS IME、不可視ノード・入れ子コンテナー付近の編集操作、全記事の見た目、動画実再生・外部リンク到達を確認する。
 
 確認待ち記事の原文と公開内容は変更していない。全件の詳細・差分・添付件数はall-articles-result.json。再現: 試作サーバー起動中に `node specs/006-blog-cms/verification/editor-prototype/audit-all.mjs`。

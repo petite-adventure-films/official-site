@@ -1,3 +1,4 @@
+import {legacyContainers} from './legacy-containers';
 // Figma BodyEditor proposal: https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=153-166
 // Isolated operation probe. Production schema, uploads and persistence are not implemented here.
 import React,{useState} from 'react';
@@ -10,19 +11,19 @@ import {TextStyleKit} from '@tiptap/extension-text-style';
 import TextAlign from '@tiptap/extension-text-align';
 import {ExternalVideo} from './video';
 import {LegacyLanguage,WordBreak} from './legacy';
-import {checkedImport,checkedSave} from './guard';
+import {checkedImport,checkedSave,prepareInlineStyles} from './guard';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '../../../../cms/src/styles/tokens.css';
 import './style.css';
 const SafeImage=Image.extend({addNodeView(){return ({node})=>{const dom=document.createElement('span');dom.className='media-placeholder';dom.contentEditable='false';dom.textContent=`画像: ${node.attrs.alt||'代替テキストなし'} — ${node.attrs.src}`;return {dom};};}}).configure({inline:true});
-const extensions=[WordBreak,LegacyLanguage,StarterKit.configure({link:{openOnClick:false}}),SafeImage,TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
+const extensions=[...legacyContainers,WordBreak,LegacyLanguage,StarterKit.configure({link:{openOnClick:false}}),SafeImage,TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
 const theme=createTheme({palette:{primary:{main:'#1976d2'}},typography:{fontFamily:'Roboto, sans-serif'},components:{MuiButton:{styleOverrides:{root:{textTransform:'none'}}}}});
 const fixtures=await (await fetch('/fixtures.json')).json();
 const key=id=>`paf-body-prototype:${id}`;
 function Body({post}){
  const [status,setStatus]=useState('読込中');const [warning,setWarning]=useState('');const [blocked,setBlocked]=useState('');const [more,setMore]=useState(false);
- const editor=useEditor({extensions,content:'',editorProps:{attributes:{'aria-label':'本文',role:'textbox','aria-multiline':'true'},handlePaste(view,event){
+ const editor=useEditor({extensions,content:'',editorProps:{transformPastedHTML:html=>{try{return prepareInlineStyles(html);}catch{return html;}},attributes:{'aria-label':'本文',role:'textbox','aria-multiline':'true'},handlePaste(view,event){
   const html=event.clipboardData?.getData('text/html');if(!html)return false;
   try{checkedImport(html,extensions);return false;}catch(e){setWarning(`貼り付けを中止しました: ${e.message}。プレーンテキストで貼り付け直せます`);return true;}
  }},onCreate({editor}){
