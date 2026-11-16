@@ -42,3 +42,14 @@
 }
 /* Figma StatusDialog 66:388 */
 @theme { --spacing-cms-dialog: 480px; }
+/* Figma BodyEditor 153:166: editor text follows body2 and cms/content spacing. */
+@layer components {
+  .cms-body-editor { min-height: calc(var(--spacing-cms-content) * 10); font-size: 0.875rem; line-height: 1.43; overflow-wrap: anywhere; }
+  .cms-body-editor:focus { outline: 2px solid var(--color-cms-primary); outline-offset: var(--spacing-cms-detail); }
+  .cms-body-editor > * + * { margin-top: var(--spacing-cms-content); }
+  .cms-body-editor h2, .cms-body-editor h3, .cms-body-editor h4 { font-size: inherit; font-weight: 500; line-height: 1.57; }
+  .cms-body-editor ul { list-style: disc; padding-left: var(--spacing-cms-content); }
+  .cms-body-editor ol { list-style: decimal; padding-left: var(--spacing-cms-content); }
+  .cms-body-editor blockquote { border-left: 2px solid var(--color-cms-divider); padding-left: var(--spacing-cms-content); }
+  .cms-body-editor a { color: var(--color-cms-primary); text-decoration: underline; }
+}

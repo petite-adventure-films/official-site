@@ -6,6 +6,6 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   if (!response.ok) throw new ApiError(response.status, result.error ?? 'unavailable', result.issues);
   return result;
 }
-export type SavedDraft<T> = { id: string; published?: boolean; version: number; payload: T; createdAt: string; updatedAt: string };
+export type SavedDraft<T> = { id: string; type?: 'event' | 'blog'; payloadSchemaVersion?: string; published?: boolean; version: number; payload: T; createdAt: string; updatedAt: string };
 export type Tag = { id: string; name: string };
 export type Tags = { filmTags: Tag[]; eventTags: Tag[] };

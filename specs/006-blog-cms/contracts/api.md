@@ -27,3 +27,9 @@
 検索はタイトルと本文の可読テキストを対象とする案。[本文契約](body.md)のtextノード・リンク表示文字列から抽出し、JSON全体・HTML属性・保全原本を検索しない。タグ名・URL等の追加検索は対象外。すべての検索・count・totalにtype条件を付け、SQLはパラメータ化。
 
 ルート直下の予約・転送、正式snapshot、年別一覧、差分生成は#333・#390・#394・#413に従う。eventローカル配信成功をblog公開完了にしない。公開停止は共通設計確定後に接続し、この案だけで新エンドポイントを増やさない。
+
+## 今回接続した範囲
+
+新規blogの一覧/可読本文検索/件数、カテゴリ取得、POST/GET/PUTを実装。categoryIdはWordPress既存term_id文字列の下書き台帳、nullは保存可、未知IDは422。ブログ本文は新規テキスト編集のv2部分集合のみ受理し、未接続の保全参照/添付ノードを新規要求から拒否する。公開用blog/v1は変更しない。既存eventのoperation fingerprintを変更せず、blogではtypeを追加して別種別の操作ID再利用を409にする。
+
+blogのpublication GETはenabled:false。他の公開/チェック/履歴/復元/複製はblog_operation_unavailableで422とし、event専用処理へ流さない。これらをブログ実装済みAPIと扱わない。

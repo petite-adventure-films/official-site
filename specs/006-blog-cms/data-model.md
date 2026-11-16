@@ -52,3 +52,9 @@ URL所有権は正規化した公開パスをキーとする案。固定ペー�
 ## 添付取得の保全台帳（案）
 
 原本hashとexactURLで取得ジョブを識別し、記事/用途、試行結果、実体hashとローカル保存の確認状態を保持する。URL→blobとblob→正式assetの対応を分離し、復旧判断は元URLと候補hashを結ぶ別レコードとして残す。状態・記録項目・再開規則は[取得計画](contracts/asset-acquisition.md)を正本とし、D1への実装済みentityとは扱わない。
+
+## 新規下書きの実装境界
+
+`blog-draft/v1`を保存。bodyはschemaVersion:2＋docで、新規テキスト本文の許可ノードのみ。`packages/content-schema/schemas/content/blog-draft.schema.json`にこの部分集合を定義する。未接続の旧保全情報・画像・PDF・動画は受理しない。候補schema全体の採用や旧記事の保存接続を意味しない。本文URLは構造検証に加えhttp/https・単一mailtoを検証する。
+
+0008 migrationは既存content_draftsと依存triggerを再構成し、event/blogを許可。既存操作/公開履歴への参照を保持する。既存カテゴリ5件はblog_categoriesに元term_idで登録し、公開用の正式category IDへの変換は別工程とする。

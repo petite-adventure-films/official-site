@@ -1,5 +1,5 @@
 import { enforceMutationRequest, HttpError, type Actor } from './auth';
-import type { Database } from './repositories/content-drafts';
+import { ContentDraftRepository, type Database } from './repositories/content-drafts';
 import { publicationCheck } from './routes/publication-check';
 import { publication } from './routes/publication';
 import type { PublicationDelivery } from './services/publication';
@@ -17,8 +17,17 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     return Response.json(await tags(env.DB));
   }
+  if (path === '/api/categories' && request.method === 'GET') {
+    if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    return Response.json({ items: (await env.DB.prepare('SELECT id, name FROM blog_categories ORDER BY rowid').all()).results });
+  }
   if (path.startsWith('/api/contents')) {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    const action = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(publication|check-publication|history|restore|duplicate)$/i);
+    if (action && (await new ContentDraftRepository(env.DB).get(action[1]))?.type === 'blog') {
+      if (action[2] === 'publication' && request.method === 'GET') return Response.json({ enabled: false, version: 0, published: false, url: null, operation: null });
+      throw new HttpError(422, 'blog_operation_unavailable');
+    }
     const publish = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/publication$/i);
     if (publish) return publication(request, env.DB, actor, publish[1], env.PUBLICATION);
     const check = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/check-publication$/i);
