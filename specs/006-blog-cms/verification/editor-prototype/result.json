@@ -13,7 +13,7 @@
     },
     {
       "id": 17696,
-      "result": "変換確認待ち: 再読込で本文が変化するため保存を中止しました。本文の編集・保存を止めています。"
+      "result": "保存・再読込成功"
     },
     {
       "id": 15682,
@@ -21,16 +21,62 @@
     },
     {
       "id": 4318,
-      "result": "変換確認待ち: 未対応の属性: p.lang。本文の編集・保存を止めています。"
+      "result": "保存・再読込成功"
     },
     {
       "id": 14975,
       "result": "保存・再読込成功"
     }
   ],
+  "legacyChecks": [
+    "同じ色・書体表記のみ正規化し、異なる色・書体と不正CSSを区別",
+    "lang欠落・未対応langとリンクの対象変更・色変更を検知",
+    "旧記事2件の原文照合と2回の往復安定、4318のlang31箇所を保持"
+  ],
   "diagnostics": [
     {
       "id": 17696,
+      "signatureDifference": {
+        "index": -1,
+        "before": [
+          {
+            "tag": "br",
+            "attrs": []
+          },
+          {
+            "tag": "a",
+            "attrs": [
+              [
+                "href",
+                "https://www.gender.go.jp/kaigi/senmon/wg-nwec/pdf/honbun.pdf"
+              ]
+            ]
+          },
+          {
+            "tag": "br",
+            "attrs": []
+          }
+        ],
+        "after": [
+          {
+            "tag": "br",
+            "attrs": []
+          },
+          {
+            "tag": "a",
+            "attrs": [
+              [
+                "href",
+                "https://www.gender.go.jp/kaigi/senmon/wg-nwec/pdf/honbun.pdf"
+              ]
+            ]
+          },
+          {
+            "tag": "br",
+            "attrs": []
+          }
+        ]
+      },
       "differences": [
         {
           "path": "/content/59/content/0/marks/0/attrs/color",
@@ -45,6 +91,47 @@
     },
     {
       "id": 4318,
+      "signatureDifference": {
+        "index": -1,
+        "before": [
+          {
+            "tag": "span",
+            "attrs": [
+              [
+                "style",
+                "color: rgb(0, 0, 255);"
+              ]
+            ]
+          },
+          {
+            "tag": "strong",
+            "attrs": []
+          },
+          {
+            "tag": "br",
+            "attrs": []
+          }
+        ],
+        "after": [
+          {
+            "tag": "span",
+            "attrs": [
+              [
+                "style",
+                "color: rgb(0, 0, 255);"
+              ]
+            ]
+          },
+          {
+            "tag": "strong",
+            "attrs": []
+          },
+          {
+            "tag": "br",
+            "attrs": []
+          }
+        ]
+      },
       "differences": [
         {
           "path": "/content/0/content/0/marks/0/attrs/color",

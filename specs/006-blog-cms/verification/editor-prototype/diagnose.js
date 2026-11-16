@@ -5,6 +5,8 @@ import Image from '@tiptap/extension-image';
 import {TextStyleKit} from '@tiptap/extension-text-style';
 import TextAlign from '@tiptap/extension-text-align';
 import {ExternalVideo} from './video';
+import {LegacyLanguage,normalizeStyles} from './legacy';
+import {signature} from './guard';
 const extensions=[StarterKit.configure({link:{openOnClick:false}}),Image.configure({inline:true}),TextStyleKit,TextAlign.configure({types:['heading','paragraph']}),ExternalVideo];
 export async function diagnose(){
  const posts=await(await fetch('/fixtures.json')).json();
@@ -17,6 +19,9 @@ export async function diagnose(){
   }
   walk(first,second);
   const source=new DOMParser().parseFromString(post.content,'text/html');
-  return {id:post.id,differences,languageAttributes:[...source.querySelectorAll('[lang]')].map(e=>({tag:e.localName,lang:e.lang})),styles:[...new Set([...source.querySelectorAll('[style]')].map(e=>e.getAttribute('style')))]};
+  const fixed=generateHTML(normalizeStyles(generateJSON(post.content,[LegacyLanguage,...extensions])),[LegacyLanguage,...extensions]);
+  const a=JSON.parse(signature(post.content)),b=JSON.parse(signature(fixed));
+  const index=a.elements.findIndex((x,i)=>JSON.stringify(x)!==JSON.stringify(b.elements[i]));
+  return {id:post.id,signatureDifference:{index,before:a.elements.slice(Math.max(0,index-1),index+4),after:b.elements.slice(Math.max(0,index-1),index+4)},differences,languageAttributes:[...source.querySelectorAll('[lang]')].map(e=>({tag:e.localName,lang:e.lang})),styles:[...new Set([...source.querySelectorAll('[style]')].map(e=>e.getAttribute('style')))]};
  });
 }
