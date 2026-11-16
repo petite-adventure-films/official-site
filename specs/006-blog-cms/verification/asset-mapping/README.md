@@ -17,3 +17,5 @@ probeはネットワーク接続が必要。既知の自サイトホストだけ
 checkは原本hash・参照数・台帳照合・ホスト偽装等の分類負例・実ファイルの再読出しhashを検証する。ローカルファイルが消えている場合はprobeを再実行する。別環境での取得結果は更新日時やサーバー側変更で変わり得る。
 
 保存契約の分類変更は `verification/body-contract/check.mjs` でも検証する。外部PDFの通常リンク保持、自サイト画像/PDF hrefのassetKind分類、asset未解決時の公開停止を合成fixtureと310件の実データで確認する。
+
+全件取得のオフライン計画は `python3 specs/006-blog-cms/verification/asset-mapping/plan-download.py` で再生成する。入力hashを検査し、容量と欠損8件の復旧キューをdownload-plan-result.jsonへ出力する。ネットワークアクセス・画像取得・ID発行は行わない。[実行計画](../../contracts/asset-acquisition.md)を参照。

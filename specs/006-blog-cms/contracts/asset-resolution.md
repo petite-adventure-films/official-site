@@ -54,4 +54,4 @@
 
 外部PDFを通常リンクへ戻し、自サイト画像へのリンクをassetKind:imageの未解決参照として追跡した。310件の候補schema検証・逆変換は引き続き成功。実画像参照が未解決な252記事を公開停止する。本文単体の公開AST条件を満たす58記事も、サイト全体の公開準備完了ではない。
 
-再現手順と検証範囲は [asset-mapping/README.md](../verification/asset-mapping/README.md) を参照。次の作業は全対象ファイル取得の実行計画、欠損8件の原本/復旧判断、R2/asset登録経路とURL台帳の永続化である。
+再現手順と検証範囲は [asset-mapping/README.md](../verification/asset-mapping/README.md) を参照。[全件取得・復旧計画](asset-acquisition.md)に容量・再開・欠損8件の作業順序を具体化した。取得実行、復旧判断、R2/asset登録経路とURL台帳の永続化は未完了。

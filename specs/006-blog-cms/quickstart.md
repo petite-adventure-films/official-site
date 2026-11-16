@@ -51,3 +51,7 @@ PCで共通操作位置、保存状態、必須エラーへの移動、Chip単�
 ## 保存・公開契約の設計検証
 
 [候補schemaの検証手順](verification/body-contract/README.md)では、編集試作310件を候補形式へ変換し、編集schema・公開schema・参照所属・URL・asset未解決・重複anchor・逆変換・容量を検証する。原本保全情報を公開ASTへ出さない負例も含む。これはD1/API/HTMLレンダラー/配信を通す本番実装後検証とは別である。
+
+## 添付取得計画の確認
+
+`python3 specs/006-blog-cms/verification/asset-mapping/plan-download.py` は実装前に実行可能なオフライン集計。6,033 URL・5,895パス・欠損8件/候補7件を照合する。実取得器の実装後は[取得計画](contracts/asset-acquisition.md)の小バッチで、中断再開・破損キャッシュ・404・429・リダイレクト・本文途中切断を検査してから全件へ進む。全件の理由付き集計と復旧判断を確認するまで取得完了としない。
