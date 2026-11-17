@@ -3,10 +3,12 @@
 import { useId, type ReactNode } from 'react';
 import { Typography, Link } from '@mui/material';
 export function CMSLayout({ children, user }: { children: ReactNode; user: string }) {
+  const blog = location.pathname.startsWith('/cms/blog');
   return <div className="flex min-h-screen">
     <nav aria-label="管理メニュー" className="fixed inset-y-0 left-0 overflow-y-auto w-cms-nav shrink-0 bg-cms-navigation border-r border-cms-divider px-cms-content py-cms-section flex flex-col gap-cms-section">
       <Typography variant="body2">Petite Adventure Films<br />CMS</Typography>
-      <Link href="/cms/events" underline="none" color="inherit" aria-current="page"><Typography variant="subtitle2">📅 イベント</Typography></Link>
+      <Link href="/cms/events" underline="none" color="inherit" aria-current={!blog ? 'page' : undefined}><Typography variant={!blog ? 'subtitle2' : 'body2'}>📅 イベント</Typography></Link>
+      <Link href="/cms/blog" underline="none" color="inherit" aria-current={blog ? 'page' : undefined}><Typography variant={blog ? 'subtitle2' : 'body2'}>📝 ブログ</Typography></Link>
       <Typography variant="body2" className="mt-auto">👤 {user}</Typography>
     </nav>
     <main className="ml-cms-nav min-w-0 flex-1 px-cms-page-x pt-cms-page-top pb-cms-page-bottom">{children}</main>

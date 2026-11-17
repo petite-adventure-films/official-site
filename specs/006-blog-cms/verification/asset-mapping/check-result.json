@@ -1,0 +1,19 @@
+{
+  "mappingRecords": 6038,
+  "ownedInventoryPaths": 5895,
+  "unmatchedOwned": 0,
+  "verifiedLocalSamples": 2,
+  "tests": [
+    "原本・台帳hash一致",
+    "5923画像/5PDFの参照数照合・URLレコード重複なし",
+    "ホスト偽装/資格情報/他ホスト/異常ポートを自サイト判定しない",
+    "取得済み実ファイルのディスク再読出し・byte数・SHA256・提案保存キーを照合"
+  ],
+  "notPerformed": [
+    "全5895候補ファイルの取得",
+    "R2アップロード",
+    "asset ID登録",
+    "復旧候補への置換",
+    "外部PDFの移管"
+  ]
+}

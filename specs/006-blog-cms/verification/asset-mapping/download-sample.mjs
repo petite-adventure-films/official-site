@@ -1,0 +1,21 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {resolve} from 'node:path';
+import {runBatch,sha} from './download-core.mjs';
+const root=new URL('./',import.meta.url);
+const raw=await readFile(new URL('inventory-result.json',root));const inv=JSON.parse(raw);
+const sourceRaw=await readFile('astro/data/wordpress-export.json');if(sha(sourceRaw)!==inv.sourceHash)throw Error('source_changed');
+const blogs=JSON.parse(sourceRaw).content.blogs;
+const {JSDOM}=createRequire(resolve(process.env.TIPTAP_AUDIT_DEPS??'/tmp/paf-tiptap-audit','package.json'))('jsdom');
+const jobs=inv.historicalMissing.map(r=>({url:r.url,role:'missing-original',articleIds:r.articleIds}));
+for(const r of inv.historicalMissing)if(r.inventory.originalCandidate)jobs.push({url:r.inventory.originalCandidate.sourceUrl,role:'recovery-candidate',originalURL:r.url,articleIds:r.articleIds});
+const groups=new Map();for(const r of inv.records.filter(r=>r.ownership==='owned-upload'&&r.inventory.historicalCheck?.ok)){const key=r.inventory.relativePath;groups.set(key,[...(groups.get(key)??[]),r]);}
+const aliases=[...groups.values()].find(rows=>rows.length===2);for(const r of aliases)jobs.push({url:r.url,role:'alias-comparison',articleIds:r.articleIds});
+for(const r of inv.records)if(jobs.length<20&&r.ownership==='owned-upload'&&r.inventory.historicalCheck?.ok&&!jobs.some(j=>j.url===r.url))jobs.push({url:r.url,role:'ordinary',articleIds:r.articleIds});
+const inputHash=sha(raw);const cache='/tmp/paf-download-sample-'+inputHash.slice(0,12);
+const result=await runBatch({jobs,inputHash,cache,...(process.argv.includes('--offline')?{fetcher:async()=>{throw Error('offline_network_forbidden')}}:{})});
+const recovery=result.jobs.filter(j=>j.role==='recovery-candidate').map(j=>({...j,context:j.articleIds.map(id=>{const p=blogs.find(p=>p.id===id);const dom=new JSDOM(p.content);const img=[...dom.window.document.querySelectorAll('img')].find(el=>el.getAttribute('src')===j.originalURL);const before=dom.window.document.createRange();const after=dom.window.document.createRange();before.selectNodeContents(dom.window.document.body);after.selectNodeContents(dom.window.document.body);if(img){before.setEndBefore(img);after.setStartAfter(img);}const ctx={articleId:id,title:p.title,slug:p.name,attributes:img?Object.fromEntries([...img.attributes].map(a=>[a.name,a.value])):null,linkTarget:img?.closest('a')?.getAttribute('href')??null,precedingText:img?before.toString().trim().slice(-400):'',followingText:img?after.toString().trim().slice(0,400):''};dom.window.close();return ctx;})}));
+const summary={inputHash,generatedAt:new Date().toISOString(),cache,receivedBytes:result.receivedBytes,counts:Object.fromEntries(['verified-local','missing','rejected','retryable','pending'].map(s=>[s,result.jobs.filter(j=>j.state===s).length])),jobs:result.jobs,recovery,scope:'20-URL read-only sample. Recovery candidates are separate from missing originals; no substitution or asset registration.'};
+await writeFile(new URL('download-sample-result.json',root),JSON.stringify(summary,null,2)+'\n');
+console.log(JSON.stringify({cache,counts:summary.counts,bytes:result.receivedBytes,recovery:recovery.map(j=>({url:j.url,file:j.file,context:j.context}))},null,2));
+if(result.jobs.some(j=>!['verified-local','missing'].includes(j.state)))process.exitCode=1;

@@ -9,6 +9,8 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 - [代表編集画面](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=17-2247)
 - [共通部品](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=20-1095)
 
+ブログ本文エディターのレビュー案は [BodyEditor](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=153-166)。Content標準Slotと既存MUI部品を使う。利用者確認前のため、採用済みの基準とは区別する。[対象仕様と検査結果](../specs/006-blog-cms/contracts/screens.md)を参照する。CMSLayoutの `Show blog` は既定falseで、ブログの代表案のみtrueにしている。
+
 | 共通定義 | 役割 |
 | --- | --- |
 | [CMSLayout](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=26-477) | 共通サイドナビとページ領域 |

@@ -8,12 +8,12 @@ interface Statement {
   all<T = Record<string, unknown>>(): Promise<{ results: T[] }>;
 }
 export type Draft = {
-  id: string; version: number; type: 'event'; payloadSchemaVersion: string;
+  id: string; version: number; type: 'event' | 'blog'; payloadSchemaVersion: string;
   payload: Record<string, unknown>; createdAt: string; updatedAt: string;
   createdBy: string; updatedBy: string;
 };
 type Row = {
-  id: string; version: number; type: 'event'; payload_schema_version: string;
+  id: string; version: number; type: 'event' | 'blog'; payload_schema_version: string;
   payload: string; created_at: string; updated_at: string; created_by: string; updated_by: string;
 };
 export class DraftConflict extends Error {}
@@ -36,12 +36,14 @@ async function fingerprint(value: unknown) {
 export class ContentDraftRepository {
   constructor(private db: Database) {}
 
-  async list(page: number, keyword: string) {
+  async list(page: number, keyword: string, type: 'event' | 'blog' = 'event') {
     const fields = ['title', 'timeDescription', 'venue', 'address', 'access', 'venueNotes', 'fee', 'organizer', 'notes'];
-    const where = fields.map((field) => `instr(lower(COALESCE(json_extract(payload, '$.${field}'), '')), lower(?)) > 0`).join(' OR ');
-    const params = fields.map(() => keyword);
+    const eventWhere = fields.map((field) => `instr(lower(COALESCE(json_extract(payload, '$.${field}'), '')), lower(?)) > 0`).join(' OR ');
+    const blogWhere = "instr(lower(COALESCE(json_extract(payload, '$.title'), '')), lower(?)) > 0 OR instr(lower(COALESCE((SELECT group_concat(value, '') FROM json_tree(content_drafts.payload, '$.body.doc') WHERE key = 'text' AND type = 'text'), '')), lower(?)) > 0";
+    const where = `type = ? AND (${type === 'blog' ? blogWhere : eventWhere})`;
+    const params = [type, ...(type === 'blog' ? [keyword, keyword] : fields.map(() => keyword))];
     const count = await this.db.prepare(`SELECT count(*) AS count FROM content_drafts WHERE ${where}`).bind(...params).first<{ count: number }>();
-    const total = await this.db.prepare('SELECT count(*) AS count FROM content_drafts').first<{ count: number }>();
+    const total = await this.db.prepare('SELECT count(*) AS count FROM content_drafts WHERE type = ?').bind(type).first<{ count: number }>();
     const rows = await this.db.prepare(`SELECT id FROM content_drafts WHERE ${where} ORDER BY created_at DESC, id DESC LIMIT 20 OFFSET ?`)
       .bind(...params, (page - 1) * 20).all<{ id: string }>();
     const items = await Promise.all(rows.results.map((row) => this.get(row.id)));
@@ -98,12 +100,14 @@ export class ContentDraftRepository {
   }
 
   async save(input: {
-    actor: string; operationId: string; payload: Record<string, unknown>;
+    actor: string; operationId: string; payload: Record<string, unknown>; type?: 'event' | 'blog';
     target?: { id: string; expectedVersion: number };
   }): Promise<Draft> {
     const { actor, operationId, payload, target } = input;
     const kind = target ? 'update' : 'create';
-    const hash = await fingerprint({ kind, payload, target: target ?? null });
+    // Keep the original event fingerprint so pre-migration retries remain valid.
+    const requestType = target ? (await this.get(target.id))?.type ?? 'event' : input.type ?? 'event';
+    const hash = await fingerprint({ kind, payload, target: target ?? null, ...(requestType === 'blog' ? { type: requestType } : {}) });
     const prior = await this.replay(actor, operationId, hash);
     if (prior) return prior;
     const current = target ? await this.get(target.id) : null;
@@ -112,7 +116,7 @@ export class ContentDraftRepository {
     const now = new Date().toISOString();
     const response: Draft = {
       id: current?.id ?? crypto.randomUUID(), version: (current?.version ?? 0) + 1,
-      type: 'event', payloadSchemaVersion: current?.payloadSchemaVersion ?? 'event-draft/v1',
+      type: current?.type ?? requestType, payloadSchemaVersion: current?.payloadSchemaVersion ?? `${requestType}-draft/v1`,
       payload, createdAt: current?.createdAt ?? now, updatedAt: now,
       createdBy: current?.createdBy ?? actor, updatedBy: actor,
     };

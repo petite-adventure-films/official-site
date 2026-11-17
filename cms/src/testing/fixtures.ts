@@ -17,6 +17,7 @@ export async function createWorkerFixture(entry = 'index') {
     script: result.outputFiles[0].text,
     compatibilityDate: '2026-07-02',
     d1Databases: { DB: 'cms-test' },
+    r2Buckets: ['MEDIA'],
   });
   return { runtime, db: await runtime.getD1Database('DB'), dispose: () => runtime.dispose() };
 }
