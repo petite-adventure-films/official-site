@@ -8,6 +8,8 @@ const siteUrl = 'https://www.petiteadventurefilms.com/';
 export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
+  // Nuxt 4 resolves public assets from rootDir; preserve the existing URLs.
+  dir: { public: 'src/public' },
 
   app: {
     head: {
@@ -93,6 +95,7 @@ export default defineNuxtConfig({
 
   veeValidate: {
     autoImports: true,
+    typedSchemaPackage: 'none',
   },
 
   runtimeConfig: {
@@ -109,7 +112,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      failOnError: false,
+      concurrency: 1,
+      interval: 250,
+      failOnError: true,
     },
   },
 
