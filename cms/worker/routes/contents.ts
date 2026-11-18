@@ -1,8 +1,9 @@
 import { HttpError, type Actor } from '../auth';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
+import { validateDraftReferences } from '../services/draft-references';
 import { readJson } from './json';
 import { validateDraft } from '../event-draft';
-import { validateBlogDraft, validateBlogAssets } from '../blog-draft';
+import { validateBlogDraft } from '../blog-draft';
 
 export async function contents(request: Request, db: Database, actor: Actor) {
   const url = new URL(request.url);
@@ -34,13 +35,7 @@ export async function contents(request: Request, db: Database, actor: Actor) {
   if (!create && !existing) throw new HttpError(404, 'not_found');
   const type = create ? body.type : existing!.type;
   if (!(type === 'blog' ? validateBlogDraft(body.payload) : validateDraft(body.payload))) throw new HttpError(422, 'invalid_payload');
-  if (type === 'blog') await validateBlogAssets(db, body.payload.body.doc);
-  if (type === 'blog' && body.payload.categoryId !== null && !await db.prepare('SELECT id FROM blog_categories WHERE id = ?').bind(body.payload.categoryId).first()) throw new HttpError(422, 'unknown_category');
-  for (const [kind, ids] of [['film', body.payload.filmTagIds], ['event', body.payload.eventTagIds]] as const) {
-    for (const id of ids) {
-      if (!await db.prepare('SELECT id FROM tags WHERE kind = ? AND id = ?').bind(kind, id).first()) throw new HttpError(422, 'unknown_tag');
-    }
-  }
+  await validateDraftReferences(db, type, body.payload);
   try {
     const draft = await repository.save({ actor: actor.id, operationId: body.operationId, payload: body.payload, type,
       ...(create ? {} : { target: { id: match![1], expectedVersion: body.expectedVersion } }),
