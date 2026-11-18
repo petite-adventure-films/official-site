@@ -8,29 +8,37 @@ const astro = fileURLToPath(new URL('../../astro/', import.meta.url));
 const digest = value => createHash('sha256').update(value).digest('hex');
 const readJson = async path => JSON.parse(await readFile(path, 'utf8'));
 async function atomic(path, value) { await writeFile(`${path}.tmp`, JSON.stringify(value), { mode: 0o600 }); await rename(`${path}.tmp`, path); }
-const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2', '.xml': 'application/xml' };
-const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
-  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-})[character]);
-function localBlogBody(node) {
-  if (node.type === 'text') return escapeHtml(node.text);
-  if (node.type === 'hardBreak') return '<br>';
-  const children = (node.content ?? []).map(localBlogBody).join('');
-  const tag = { paragraph: 'p', heading: 'h2', bulletList: 'ul', orderedList: 'ol', listItem: 'li', blockquote: 'blockquote' }[node.type];
-  return tag ? `<${tag}>${children}</${tag}>` : children;
+const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2', '.xml': 'application/xml', '.pdf': 'application/pdf', '.gif': 'image/gif' };
+async function writeBlogAssets(out, assets) {
+  if (!assets.length) return;
+  const dir = join(out, '__cms-media');
+  await mkdir(dir);
+  for (const { id, extension, bytes } of assets) {
+    if (!/^asset_[a-f0-9]{32}$/.test(id) || !['png', 'jpg', 'gif', 'webp', 'pdf'].includes(extension)) throw new Error('invalid_blog_asset');
+    await writeFile(join(dir, `${id}.${extension}`), Buffer.from(bytes, 'base64'), { flag: 'wx' });
+  }
 }
-async function writeLocalBlogs(out, blogs) {
-  for (const { path, content } of blogs) {
-    const dir = resolve(out, `.${decodeURIComponent(path)}`);
-    if (!dir.startsWith(join(out, '__cms-blog') + '/')) throw new Error('invalid_blog_path');
-    await mkdir(dir, { recursive: true });
-    const title = escapeHtml(content.title);
-    await writeFile(join(dir, 'index.html'), `<!doctype html><html lang="ja"><meta charset="utf-8"><title>${title}</title><main><h1>${title}</h1>${localBlogBody(content.body.doc)}</main></html>`, { flag: 'wx' });
+async function checkBlogPaths(out, blogs, redirects) {
+  for (const { path } of blogs) {
+    const slug = path.slice(1, -1);
+    const html = await readFile(join(out, decodeURIComponent(slug), 'index.html'), 'utf8');
+    const marker = Buffer.from(decodeURIComponent(slug)).toString('hex');
+    if (!html.includes(`data-cms-blog="${marker}"`)) throw new Error('blog_url_reserved');
+  }
+  for (const { from } of redirects) {
+    if (from.startsWith('/events/')) continue;
+    const path = resolve(out, `.${decodeURIComponent(from)}`);
+    if (!path.startsWith(out + '/')) throw new Error('invalid_blog_path');
+    const existing = await stat(path).catch(error => {
+      if (error.code !== 'ENOENT') throw error;
+      return null;
+    });
+    if (existing) throw new Error('blog_redirect_url_reserved');
   }
 }
 /** Local static hosting. Releases survive restart; incomplete builds never become visible. */
 export async function startPublicationRunner(root, { controlPort = 8789, sitePort = 4327 } = {}) {
-  const siteOrigin = `http://127.0.0.1:${sitePort}`;
+  let siteOrigin = `http://127.0.0.1:${sitePort}`;
   await mkdir(root, { recursive: true });
   let active = await readJson(join(root, 'active.json')).catch(() => null);
   let building = false;
@@ -55,13 +63,14 @@ export async function startPublicationRunner(root, { controlPort = 8789, sitePor
       const out = join(dir, 'site');
       await new Promise((res, rej) => {
         child = spawn(process.execPath, [join(astro, 'node_modules/astro/bin/astro.mjs'), 'build', '--outDir', out], {
-          cwd: astro, env: { ...process.env, CMS_EVENT_SNAPSHOT: '', CMS_RELEASE_SNAPSHOT: join(dir, 'snapshot.json'), CMS_SITE_ORIGIN: siteOrigin, TZ: 'Asia/Tokyo' },
+          cwd: astro, env: { ...process.env, CMS_EVENT_SNAPSHOT: '', CMS_RELEASE_SNAPSHOT: join(dir, 'snapshot.json'), CMS_BLOG_RELEASE_SNAPSHOT: join(dir, 'blogs.json'), CMS_SITE_ORIGIN: siteOrigin, TZ: 'Asia/Tokyo' },
           stdio: ['ignore', 'ignore', 'pipe'],
         });
         let error = ''; child.stderr.on('data', chunk => { error = (error + chunk).slice(-3000); });
         child.on('error', rej); child.on('exit', code => code === 0 ? res() : rej(new Error(`Astro build failed (${code}): ${error}`)));
       });
-      await writeLocalBlogs(out, body.blogs ?? []);
+      await checkBlogPaths(out, body.blogs ?? [], redirects);
+      await writeBlogAssets(out, body.assets ?? []);
       const target = resolve(out, `.${decodeURIComponent(d.routes.canonicalPath)}`, 'index.html');
       if (!target.startsWith(out + '/')) throw new Error('invalid_path');
       await stat(target);
@@ -79,7 +88,7 @@ export async function startPublicationRunner(root, { controlPort = 8789, sitePor
     try {
       // No browser or cross-origin calls: only the loopback Worker may submit JSON.
       if (req.method !== 'POST' || req.headers.origin || req.headers['x-cms-runner'] !== 'local-publication' || req.headers['content-type'] !== 'application/json') { res.writeHead(403).end(); return; }
-      let input = ''; for await (const chunk of req) { input += chunk; if (input.length > 10_000_000) throw new Error('too_large'); }
+      let input = ''; for await (const chunk of req) { input += chunk; if (input.length > 64 * 1024 * 1024) throw new Error('too_large'); }
       const body = JSON.parse(input); const d = body.delivery; const key = keyOf(d);
       if (req.url !== '/deploy' && req.url !== '/inspect') { res.writeHead(404).end(); return; }
       if (req.url === '/deploy') {
@@ -89,11 +98,18 @@ export async function startPublicationRunner(root, { controlPort = 8789, sitePor
           if (building) { res.writeHead(409).end(); return; }
           if (digest(JSON.stringify(d.payload)) !== d.hash || !Array.isArray(body.redirects)) throw new Error('invalid_payload');
           building = true; running.add(key);
-          await mkdir(dir, { recursive: true });
-          const releaseHash = digest(JSON.stringify({ snapshot: body.snapshot, redirects: body.redirects, blogs: body.blogs ?? [] }));
-          await atomic(join(dir, 'snapshot.json'), body.snapshot);
-          await atomic(join(dir, 'record.json'), { hash: d.hash, releaseHash, status: 'building' });
-          void build(body, key, dir, releaseHash);
+          try {
+            await mkdir(dir, { recursive: true });
+            const releaseHash = digest(JSON.stringify({ snapshot: body.snapshot, redirects: body.redirects, blogs: body.blogs ?? [], assets: body.assets ?? [] }));
+            await atomic(join(dir, 'snapshot.json'), body.snapshot);
+            await atomic(join(dir, 'blogs.json'), { blogs: body.blogs ?? [], assets: (body.assets ?? []).map(({ id, extension }) => ({ id, extension })) });
+            await atomic(join(dir, 'record.json'), { hash: d.hash, releaseHash, status: 'building' });
+            void build(body, key, dir, releaseHash);
+          } catch (error) {
+            running.delete(key);
+            building = false;
+            throw error;
+          }
         }
       }
       res.writeHead(200, { 'Content-Type': 'application/json' }).end(JSON.stringify(await inspect(d)));
@@ -113,11 +129,13 @@ export async function startPublicationRunner(root, { controlPort = 8789, sitePor
       if (!path.startsWith(base + '/') && path !== base) throw new Error('invalid_path');
       if ((await stat(path)).isDirectory()) path = join(path, 'index.html');
       const bytes = await readFile(path);
-      res.writeHead(200, { 'Content-Type': mime[extname(path)] ?? 'application/octet-stream', 'X-Publication-Release': release.key });
+      res.writeHead(200, { 'X-Content-Type-Options': 'nosniff', 'Content-Type': mime[extname(path)] ?? 'application/octet-stream', 'X-Publication-Release': release.key });
       res.end(req.method === 'HEAD' ? undefined : bytes);
     } catch { res.writeHead(404).end(); }
   });
   await Promise.all([new Promise((res, rej) => control.once('error', rej).listen(controlPort, '127.0.0.1', res)), new Promise((res, rej) => site.once('error', rej).listen(sitePort, '127.0.0.1', res))]);
+  siteOrigin = `http://127.0.0.1:${site.address().port}`;
+  const controlOrigin = `http://127.0.0.1:${control.address().port}`;
   console.log(`Published site: ${siteOrigin}`);
-  return { async close() { child?.kill('SIGTERM'); await Promise.all([new Promise(resolve => control.close(resolve)), new Promise(resolve => site.close(resolve))]); } };
+  return { siteOrigin, controlOrigin, async close() { child?.kill('SIGTERM'); await Promise.all([new Promise(resolve => control.close(resolve)), new Promise(resolve => site.close(resolve))]); } };
 }

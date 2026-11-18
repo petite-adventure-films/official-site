@@ -16,7 +16,7 @@ export default {
         if (!env.DB) return secureResponse(new Response(null, { status: 503 }));
         return secureResponse(Response.json(await exportPublishedEvents(env.DB)));
       }
-      return secureResponse(await handleAuthenticated(request, { ...env, LOCAL_MEDIA: true, PUBLICATION: env.DB && env.LOCAL_PUBLICATION ? new LocalPublicationDelivery(env.DB, Number(env.LOCAL_PUBLICATION_PORT ?? 8789), `http://127.0.0.1:${Number(env.LOCAL_SITE_PORT ?? 4327)}`) : undefined },
+      return secureResponse(await handleAuthenticated(request, { ...env, LOCAL_MEDIA: true, PUBLICATION: env.DB && env.LOCAL_PUBLICATION ? new LocalPublicationDelivery(env.DB, Number(env.LOCAL_PUBLICATION_PORT ?? 8789), `http://127.0.0.1:${Number(env.LOCAL_SITE_PORT ?? 4327)}`, env.MEDIA) : undefined },
         { id: 'local-editor', email: 'editor@localhost', name: '開発用ユーザー' }, 'http://127.0.0.1:5174'));
     } catch (error) { return secureResponse(errorResponse(error)); }
   },
