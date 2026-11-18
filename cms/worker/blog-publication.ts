@@ -30,6 +30,6 @@ export function blogDraftFromPublication(payload: unknown): BlogDraft | null {
 
 export const localBlogSlugPrefix = 'local-blog/';
 
-export function localBlogPath(slug: string) {
-  return `/__cms-blog/${encodeURIComponent(slug)}/`;
+export function blogPath(slug: string) {
+  return `/${encodeURIComponent(slug)}/`;
 }

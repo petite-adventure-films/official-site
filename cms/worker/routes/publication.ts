@@ -1,4 +1,4 @@
-import { localBlogPath, localBlogSlugPrefix } from '../blog-publication';
+import { blogPath, localBlogSlugPrefix } from '../blog-publication';
 import { HttpError, type Actor } from '../auth';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
 import { PublicationService, PublicationConflict, PublicationInvalid, type PublicationDelivery } from '../services/publication';
@@ -15,7 +15,7 @@ export async function publication(request: Request, db: Database, actor: Actor, 
       const current = await service.current(id);
       const url = await db.prepare('SELECT slug FROM event_canonical_urls WHERE content_id = ?').bind(id).first<{ slug: string }>();
       return Response.json({ enabled: Boolean(adapter), version: current?.version ?? 0, published: Boolean(current),
-        url: url && adapter ? `${adapter.localSiteOrigin ?? 'http://127.0.0.1:4327'}${(url.slug.startsWith(localBlogSlugPrefix) ? localBlogPath(url.slug.slice(localBlogSlugPrefix.length)) : eventPath(url.slug))}` : null,
+        url: url && adapter ? `${adapter.localSiteOrigin ?? 'http://127.0.0.1:4327'}${(url.slug.startsWith(localBlogSlugPrefix) ? blogPath(url.slug.slice(localBlogSlugPrefix.length)) : eventPath(url.slug))}` : null,
         operation: op ? { id: op.id, state: op.state } : null });
     }
     if (request.method !== 'POST') throw new HttpError(405, 'method_not_allowed');

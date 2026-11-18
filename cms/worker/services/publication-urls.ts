@@ -1,4 +1,4 @@
-import { localBlogPath, localBlogSlugPrefix } from '../blog-publication';
+import { blogPath, localBlogSlugPrefix } from '../blog-publication';
 import type { Database } from '../repositories/content-drafts';
 import { slugIssue } from '../../src/features/content/slug';
 export class PublicationUrlConflict extends Error {}
@@ -11,7 +11,7 @@ export class PublicationUrls {
   constructor(private db: Database) {}
   async plan(contentId: string, slug: string): Promise<EventRoutes> {
     const path = slug.startsWith(localBlogSlugPrefix)
-      ? (value: string) => localBlogPath(value.slice(localBlogSlugPrefix.length))
+      ? (value: string) => blogPath(value.slice(localBlogSlugPrefix.length))
       : eventPath;
     const canonicalPath = path(slug);
     const owner = await this.db.prepare('SELECT content_id FROM event_url_owners WHERE slug = ?').bind(slug).first<{ content_id: string | null }>();
