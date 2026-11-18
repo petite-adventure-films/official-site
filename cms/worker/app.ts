@@ -28,7 +28,7 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
   }
   if (path.startsWith('/api/contents')) {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
-    const action = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(publication|check-publication|history|restore)$/i);
+    const action = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(publication|check-publication)$/i);
     if (action && (await new ContentDraftRepository(env.DB).get(action[1]))?.type === 'blog') {
       if (action[2] === 'publication' && request.method === 'GET') return Response.json({ enabled: false, version: 0, published: false, url: null, operation: null });
       throw new HttpError(422, 'blog_operation_unavailable');
