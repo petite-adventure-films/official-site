@@ -1,3 +1,4 @@
+import { blogDraftFromPublication, blogPublicationVersion } from '../blog-publication';
 import type { BlogDraft } from '../../src/features/blog/draft';
 import { validateBlogDraft } from '../blog-draft';
 import { validateDraftReferences } from './draft-references';
@@ -26,7 +27,13 @@ async function restorePayload(db: Database, type: Draft['type'], source: History
     if (type === 'blog') await validateDraftReferences(db, type, payload);
     return payload;
   }
-  if (type !== 'event' || source.payloadSchemaVersion !== 'event-publication/v1' || !validatePublication(source.payload)) throw new RestoreInvalid('unsupported_snapshot');
+  if (type === 'blog') {
+    const payload = source.payloadSchemaVersion === blogPublicationVersion ? blogDraftFromPublication(source.payload) : null;
+    if (!payload) throw new RestoreInvalid('unsupported_snapshot');
+    await validateDraftReferences(db, type, payload);
+    return payload;
+  }
+  if (source.payloadSchemaVersion !== 'event-publication/v1' || !validatePublication(source.payload)) throw new RestoreInvalid('unsupported_snapshot');
   const { type: _type, payloadSchemaVersion: _schema, ...published } = source.payload as EventPublication;
   // Only published fields are restored; hidden draft values were never in this history.
   const result = { ...emptyDraft(), ...published, multiDay: published.endDate !== undefined };

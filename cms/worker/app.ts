@@ -29,14 +29,14 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
   if (path.startsWith('/api/contents')) {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     const action = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(publication|check-publication)$/i);
-    if (action && (await new ContentDraftRepository(env.DB).get(action[1]))?.type === 'blog') {
+    if (action && !env.PUBLICATION?.supportsLocalBlog && (await new ContentDraftRepository(env.DB).get(action[1]))?.type === 'blog') {
       if (action[2] === 'publication' && request.method === 'GET') return Response.json({ enabled: false, version: 0, published: false, url: null, operation: null });
       throw new HttpError(422, 'blog_operation_unavailable');
     }
     const publish = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/publication$/i);
     if (publish) return publication(request, env.DB, actor, publish[1], env.PUBLICATION);
     const check = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/check-publication$/i);
-    if (check) return publicationCheck(request, env.DB, check[1]);
+    if (check) return publicationCheck(request, env.DB, check[1], env.PUBLICATION?.supportsLocalBlog);
     const historyRoute = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(history|restore)$/i);
     if (historyRoute) return history(request, env.DB, actor, historyRoute[1], historyRoute[2]);
     const copy = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/duplicate$/i);

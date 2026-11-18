@@ -1,3 +1,4 @@
+import { localBlogPath, localBlogSlugPrefix } from '../blog-publication';
 import type { Database } from '../repositories/content-drafts';
 import { slugIssue } from '../../src/features/content/slug';
 export class PublicationUrlConflict extends Error {}
@@ -9,12 +10,15 @@ export function eventPath(slug: string) {
 export class PublicationUrls {
   constructor(private db: Database) {}
   async plan(contentId: string, slug: string): Promise<EventRoutes> {
-    const canonicalPath = eventPath(slug);
+    const path = slug.startsWith(localBlogSlugPrefix)
+      ? (value: string) => localBlogPath(value.slice(localBlogSlugPrefix.length))
+      : eventPath;
+    const canonicalPath = path(slug);
     const owner = await this.db.prepare('SELECT content_id FROM event_url_owners WHERE slug = ?').bind(slug).first<{ content_id: string | null }>();
     if (owner && owner.content_id !== contentId) throw new PublicationUrlConflict('url_reserved');
     const previous = await this.db.prepare('SELECT slug FROM event_url_owners WHERE content_id = ? ORDER BY slug').bind(contentId).all<{ slug: string }>();
     return { canonicalPath, redirects: previous.results.filter(row => row.slug !== slug)
-      .map(row => ({ from: eventPath(row.slug), to: canonicalPath })) };
+      .map(row => ({ from: path(row.slug), to: canonicalPath })) };
   }
   async resolve(slug: string): Promise<{ kind: 'page' | 'redirect'; path: string; contentId: string } | null> {
     eventPath(slug);
