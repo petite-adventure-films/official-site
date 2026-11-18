@@ -1,3 +1,4 @@
+import { prepareBlogPublication } from './blog-publication';
 import { readFile } from 'node:fs/promises';
 import { unstable_splitSqlQuery } from 'wrangler';
 import { beforeEach, afterEach, expect, test } from 'vitest';
@@ -79,5 +80,25 @@ test('blog history validates protected snapshots and restores without enabling p
   expect(result).toMatchObject({ version: 2, payload: snapshot });
   expect(await (await call('restore', input)).json()).toEqual(result);
   expect(await (await call('history')).json()).toMatchObject({ version: 2, items: [{ payload: current }] });
-  expect(await (await call('publication')).json()).toMatchObject({ enabled: false, published: false });
+  const publishedDraft = { ...snapshot, title: '公開したブログ', slug: 'published-blog' };
+  const candidate = await prepareBlogPublication(fixture.db, publishedDraft);
+  publishedDraft.title = '候補固定後の入力';
+  const revisionId = crypto.randomUUID();
+  const json = JSON.stringify(candidate);
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(json));
+  const hash = Buffer.from(digest).toString('hex');
+  await fixture.db.batch([
+    fixture.db.prepare(`INSERT INTO publication_revisions (id, content_id, version, payload, content_hash, published_at, published_by)
+      VALUES (?, ?, 1, ?, ?, ?, ?)`).bind(revisionId, blog.id, json, hash, new Date().toISOString(), 'fixture'),
+    fixture.db.prepare('INSERT INTO publication_state (content_id, version, revision_id, content_hash) VALUES (?, 1, ?, ?)')
+      .bind(blog.id, revisionId, hash),
+  ]);
+  const listing = await (await call('history')).json();
+  expect(listing).toMatchObject({ items: [{ kind: 'protectedDraft' }, { id: revisionId, payload: { title: '公開したブログ' } }] });
+  const fromPublication = await call('restore', {
+    operationId: crypto.randomUUID(), expectedVersion: 2, sourceKind: 'publication', sourceId: revisionId,
+  });
+  expect(await fromPublication.json()).toMatchObject({ version: 3, payload: candidate.content });
+  expect(await fixture.db.prepare('SELECT version, revision_id FROM publication_state WHERE content_id = ?')
+    .bind(blog.id).first()).toEqual({ version: 1, revision_id: revisionId });
 });
