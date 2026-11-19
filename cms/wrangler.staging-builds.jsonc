@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "paf-publication-staging",
+  "account_id": "53b7ac20e59cefa91e5b88831768a248",
+  "main": "worker/staging-builds.ts",
+  "compatibility_date": "2026-07-02",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [{"binding":"DB","database_name":"paf-cms-staging-db","database_id":"c73eceed-49c3-4d32-839f-31bd41207115","migrations_dir":"migrations"}],
+  "r2_buckets": [{"binding":"MEDIA","bucket_name":"paf-cms-staging-media"}],
+  "triggers": {"crons":["* * * * *"]}
+}
