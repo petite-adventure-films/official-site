@@ -1,14 +1,14 @@
 // Figma: https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=54-970
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Alert, Button, CircularProgress, Typography } from '@mui/material';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import { EditorLayout, Section } from '../../../components/Layout';
 import { HistoryListItem } from '../../../components/HistoryListItem';
 import { api, ApiError, type Tags } from '../../../lib/api-client';
 import type { EventDraft } from '../../events/draft';
-export type HistoryData = { version: number; items: { id: string; kind: 'publication' | 'protectedDraft'; at: string; actorName: string; payload: EventDraft }[] };
+export type HistoryData<T = EventDraft> = { version: number; items: { id: string; kind: 'publication' | 'protectedDraft'; at: string; actorName: string; payload: T }[] };
 const text = (value: string) => value.trim() ? value : '-';
-function Content({ value, tags }: { value: EventDraft; tags: Tags }) {
+export function EventHistoryContent({ value, tags }: { value: EventDraft; tags: Tags }) {
   const groups: [string, [string, string][]][] = [
     ['日時', [['開催日', value.startDate + (value.multiDay ? ` 〜 ${text(value.endDate)}` : '')], ['時間の案内', value.timeDescription]]],
     ['開催場所', [['開催形式', value.formats.map(f => f === 'offline' ? 'オフライン' : 'オンライン').join('・')],
@@ -23,19 +23,19 @@ function Content({ value, tags }: { value: EventDraft; tags: Tags }) {
       <Typography component="h2" variant="subtitle2">{heading}</Typography><div>{fields.map(([label, value]) => <Typography key={label} variant="body2" className="whitespace-pre-wrap break-words">{label}：{text(value)}</Typography>)}</div>
     </div></Section>)}</>;
 }
-export function HistoryView({ id, tags }: { id: string; tags: Tags }) {
-  const [data, setData] = useState<HistoryData | null>(null);
+export function HistoryView<T>({ id, section, renderContent }: { id: string; section: 'events' | 'blog'; renderContent(value: T): ReactNode }) {
+  const [data, setData] = useState<HistoryData<T> | null>(null);
   const [selected, setSelected] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [blocked, setBlocked] = useState(false);
   const pending = useRef<string | null>(null);
   const running = useRef(false);
-  const editUrl = `/cms/events/${id}/edit`;
+  const editUrl = `/cms/${section}/${id}/edit`;
   async function load() {
     setError('');
     try {
-      const result = await api<HistoryData>(`/api/contents/${id}/history`);
+      const result = await api<HistoryData<T>>(`/api/contents/${id}/history`);
       if (!result.items.length) { location.replace(editUrl); return; }
       setData(result); setSelected(result.items[0].id); setBlocked(false); pending.current = null;
     } catch (e) { setError(e instanceof ApiError && e.status === 404 ? 'この記事は見つかりませんでした。' : '公開履歴を取得できませんでした。ログイン状態と通信を確認して再試行してください。'); }
@@ -68,7 +68,7 @@ export function HistoryView({ id, tags }: { id: string; tags: Tags }) {
       <div className="flex flex-wrap items-center justify-between gap-cms-actions"><Button href={editUrl} startIcon={<ChevronLeft />}>編集へ戻る</Button>
         <Button variant="contained" disabled={blocked} onClick={() => void restore()}>{pending.current ? '復元を再試行' : 'この内容を下書きに戻す'}</Button></div>
       {error && <Alert severity="error" action={blocked ? <Button onClick={() => void load()}>再読み込み</Button> : undefined}>{error}</Alert>}
-      <Content value={source.payload} tags={tags} />
+      {renderContent(source.payload)}
     </EditorLayout></div>
   </>;
 }

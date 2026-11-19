@@ -12,7 +12,7 @@ function stored(n: JSONContent): BodyNode {
   const attrs = Object.fromEntries(Object.entries(n.attrs ?? {}).filter(([k, v]) => keys.includes(k) && v != null));
   return { type: n.type!, ...(n.text !== undefined ? { text: n.text } : {}), ...(Object.keys(attrs).length ? { attrs } : {}), ...(n.content ? { content: n.content.map(stored) } : {}), ...(n.marks ? { marks: n.marks.map(stored) } : {}) };
 }
-export function BodyEditor({ value, change }: { value: BodyNode; change: (doc: BodyNode) => void }) {
+export function BodyEditor({ value, change }: { value: BodyNode; change?: (doc: BodyNode) => void }) {
   const latest = useRef(change); latest.current = change;
   const [menu, setMenu] = useState<HTMLElement | null>(null);
   const [more, setMore] = useState<HTMLElement | null>(null);
@@ -20,10 +20,11 @@ export function BodyEditor({ value, change }: { value: BodyNode; change: (doc: B
   const [mediaKind, setMediaKind] = useState<'image' | 'document' | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
   const editor = useEditor({ extensions: [AssetImage, AssetLink, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
-    content: value, shouldRerenderOnTransaction: true,
-    editorProps: { attributes: { role: 'textbox', 'aria-label': '本文', 'aria-multiline': 'true', class: 'cms-body-editor' } },
-    onUpdate: ({ editor }) => latest.current(stored(editor.getJSON())),
+    content: value, editable: Boolean(change), shouldRerenderOnTransaction: true,
+    editorProps: { attributes: change ? { role: 'textbox', 'aria-label': '本文', 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
+    onUpdate: ({ editor }) => latest.current?.(stored(editor.getJSON())),
   });
+  if (!change) return <EditorContent editor={editor} />;
   const badLink = link !== null && link !== '' && !validLink(link);
   return <div className="rounded border border-cms-divider flex flex-col gap-cms-content">
     <div className="p-cms-heading flex flex-col gap-cms-actions">

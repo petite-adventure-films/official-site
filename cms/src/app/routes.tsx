@@ -1,9 +1,10 @@
+import { BlogHistoryContent } from '../features/blog/components/BlogHistoryContent';
 import { BlogEditor } from '../features/blog/components/BlogEditor';
 import type { BlogDraft } from '../features/blog/draft';
 import type { Tag } from '../lib/api-client';
 import { usePublication } from '../features/content/hooks/usePublication';
 import { StatusDialog } from '../components/StatusDialog';
-import { HistoryView } from '../features/content/components/HistoryView';
+import { HistoryView, EventHistoryContent } from '../features/content/components/HistoryView';
 import { HistoryEntry } from '../features/content/components/HistoryEntry';
 import { DuplicateAction } from '../features/content/components/DuplicateAction';
 import { ContentList } from '../features/content/components/ContentList';
@@ -66,13 +67,17 @@ export function App() {
   const [error, setError] = useState(false);
   const path = window.location.pathname;
   const isBlog = path.startsWith('/cms/blog');
-  const history = path.match(/^\/cms\/events\/([0-9a-f-]{36})\/history$/i);
+  const history = path.match(/^\/cms\/(?:events|blog)\/([0-9a-f-]{36})\/history$/i);
   const edit = path.match(/^\/cms\/(?:events|blog)\/([0-9a-f-]{36})\/edit$/i);
   useEffect(() => { Promise.all([
-    loadSession(), api<Tags>('/api/tags'), edit ? api<SavedDraft<EventDraft | BlogDraft>>(`/api/contents/${edit[1]}`) : Promise.resolve(null),
+    loadSession(), api<Tags>('/api/tags'), (edit ?? history) ? api<SavedDraft<EventDraft | BlogDraft>>(`/api/contents/${(edit ?? history)![1]}`) : Promise.resolve(null),
     isBlog ? api<{ items: Tag[] }>('/api/categories') : Promise.resolve({ items: [] }),
   ]).then(([session, tags, existing, categories]) => { if (existing && (existing.type !== (isBlog ? 'blog' : 'event') || existing.payloadSchemaVersion !== `${isBlog ? 'blog' : 'event'}-draft/v1`)) throw new Error('content_type_mismatch'); setState({ user: session.user.name, tags, existing, categories: categories.items }); }).catch(() => setError(true)); }, []);
   if (error) return <Alert severity="error" action={<Button onClick={() => location.reload()}>再試行</Button>}>読み込めませんでした。ログイン状態と通信を確認してください。</Alert>;
   if (!state) return <CircularProgress aria-label="読み込み中" />;
-  return <CMSLayout user={state.user}>{isBlog ? (edit || path === '/cms/blog/new' ? <BlogEditor existing={state.existing as SavedDraft<BlogDraft> | null} tags={state.tags} categories={state.categories} /> : <ContentList<BlogDraft> type="blog" tags={state.tags} summarize={payload => payload} />) : history ? <HistoryView id={history[1]} tags={state.tags} /> : edit || path === '/cms/events/new' ? <Editor existing={state.existing as SavedDraft<EventDraft> | null} tags={state.tags} /> : <ContentList<EventDraft> tags={state.tags} summarize={(payload) => payload} />}</CMSLayout>;
+  if (history) return <CMSLayout user={state.user}>{isBlog ?
+    <HistoryView<BlogDraft> id={history[1]} section="blog" renderContent={value => <BlogHistoryContent value={value} tags={state.tags} categories={state.categories} />} /> :
+    <HistoryView<EventDraft> id={history[1]} section="events" renderContent={value => <EventHistoryContent value={value} tags={state.tags} />} />}
+  </CMSLayout>;
+  return <CMSLayout user={state.user}>{isBlog ? (edit || path === '/cms/blog/new' ? <BlogEditor existing={state.existing as SavedDraft<BlogDraft> | null} tags={state.tags} categories={state.categories} /> : <ContentList<BlogDraft> type="blog" tags={state.tags} summarize={payload => payload} />) : edit || path === '/cms/events/new' ? <Editor existing={state.existing as SavedDraft<EventDraft> | null} tags={state.tags} /> : <ContentList<EventDraft> tags={state.tags} summarize={(payload) => payload} />}</CMSLayout>;
 }

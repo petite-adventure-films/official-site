@@ -9,7 +9,7 @@ const digest = value => createHash('sha256').update(value).digest('hex');
 const readJson = async path => JSON.parse(await readFile(path, 'utf8'));
 async function atomic(path, value) { await writeFile(`${path}.tmp`, JSON.stringify(value), { mode: 0o600 }); await rename(`${path}.tmp`, path); }
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2', '.xml': 'application/xml', '.pdf': 'application/pdf', '.gif': 'image/gif' };
-async function writeBlogAssets(out, assets) {
+export async function writeBlogAssets(out, assets) {
   if (!assets.length) return;
   const dir = join(out, '__cms-media');
   await mkdir(dir);
@@ -18,11 +18,13 @@ async function writeBlogAssets(out, assets) {
     await writeFile(join(dir, `${id}.${extension}`), Buffer.from(bytes, 'base64'), { flag: 'wx' });
   }
 }
-async function checkBlogPaths(out, blogs, redirects) {
+export async function checkBlogPaths(out, blogs, redirects) {
   for (const { path } of blogs) {
     const slug = path.slice(1, -1);
-    const html = await readFile(join(out, decodeURIComponent(slug), 'index.html'), 'utf8');
-    const marker = Buffer.from(decodeURIComponent(slug)).toString('hex');
+    const decoded = decodeURIComponent(slug);
+    if (!path.startsWith('/') || !path.endsWith('/') || !decoded || decoded === '.' || decoded === '..' || /[/\\]/.test(decoded)) throw new Error('invalid_blog_path');
+    const html = await readFile(join(out, decoded, 'index.html'), 'utf8');
+    const marker = Buffer.from(decoded).toString('hex');
     if (!html.includes(`data-cms-blog="${marker}"`)) throw new Error('blog_url_reserved');
   }
   for (const { from } of redirects) {

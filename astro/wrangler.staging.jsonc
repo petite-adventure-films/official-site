@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "paf-site-staging",
+  "account_id": "53b7ac20e59cefa91e5b88831768a248",
+  "compatibility_date": "2026-07-02",
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./.wrangler/deploy/staging-site",
+    "not_found_handling": "404-page"
+  }
+}
