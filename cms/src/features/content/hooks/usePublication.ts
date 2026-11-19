@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, type SavedDraft } from '../../../lib/api-client';
 type State = { enabled: boolean; version: number; published: boolean; url: string | null; operation: { id: string; state: string } | null };
-export function usePublication<T>(id: string | undefined, flush: () => Promise<SavedDraft<T> | null>) {
+export function usePublication<T>(id: string | undefined, flush: () => Promise<SavedDraft<T> | null>, type: 'event' | 'blog' = 'event') {
   const [state, setState] = useState<State | null>(null);
   const [busy, setBusy] = useState(false);
   const [issues, setIssues] = useState<{ field: string; message: string }[]>([]);
@@ -13,7 +13,7 @@ export function usePublication<T>(id: string | undefined, flush: () => Promise<S
   const processing = state?.operation && ['ready', 'delivering', 'unknown'].includes(state.operation.state);
   useEffect(() => {
     let current = true; let timer: ReturnType<typeof setTimeout>;
-    if (!id) { void api<{ enabled: boolean }>('/api/publication').then(config => { if (current) { setStatusError(''); setState({ enabled: config.enabled, version: 0, published: false, url: null, operation: null }); } }).catch(() => { if (current) setStatusError('公開状態を取得できませんでした。'); }); return () => { current = false; }; }
+    if (!id) { void api<{ enabled: boolean }>(type === 'blog' ? '/api/publication?type=blog' : '/api/publication').then(config => { if (current) { setStatusError(''); setState({ enabled: config.enabled, version: 0, published: false, url: null, operation: null }); } }).catch(() => { if (current) setStatusError('公開状態を取得できませんでした。'); }); return () => { current = false; }; }
     async function poll() {
       try {
         const next = await api<State>(`/api/contents/${id}/publication`);
@@ -24,7 +24,7 @@ export function usePublication<T>(id: string | undefined, flush: () => Promise<S
       } catch { if (current) { setStatusError('公開状態を取得できませんでした。'); timer = setTimeout(poll, 3000); } }
     }
     void poll(); return () => { current = false; clearTimeout(timer); };
-  }, [id, refresh]);
+  }, [id, refresh, type]);
   async function publish() {
     if (active.current) return;
     active.current = true; setBusy(true); setError(''); setIssues([]);

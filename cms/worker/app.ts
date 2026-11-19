@@ -16,7 +16,7 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     return media(request, env.DB, env, actor);
   }
-  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: Boolean(env.PUBLICATION) });
+  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: new URL(request.url).searchParams.get('type') === 'blog' ? Boolean(env.PUBLICATION?.supportsLocalBlog) : Boolean(env.PUBLICATION) });
   if (path === '/api/session' && request.method === 'GET') return Response.json({ user: actor });
   if (path === '/api/tags' && request.method === 'GET') {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
