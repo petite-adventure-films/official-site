@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runHostedStagingJob } from './hosted-staging-job.mjs';
+import { stagingDiagnostic } from './staging-diagnostics.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const coordinator = 'https://paf-publication-staging.petiteadventurefilms2.workers.dev';
@@ -23,7 +24,7 @@ async function call(action, input = {}) {
   const response = await fetch(`${coordinator}/${action}`, { method: 'POST', redirect: 'manual',
     headers: { Authorization: `Bearer ${STAGING_BUILD_SECRET}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(input), signal: AbortSignal.timeout(60_000) });
-  if (!response.ok) throw new Error('Coordinator rejected request');
+  if (!response.ok) throw Object.assign(new Error('Coordinator rejected request'), { httpStatus: response.status });
   return response.json();
 }
 const identity = c => ({ operationId: c.operationId, attempt: c.attempt, hash: c.hash, token: c.token });
@@ -31,6 +32,8 @@ const uuid = v => typeof v === 'string' && /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f
 let scratch;
 try {
   const result = await runHostedStagingJob({
+    observe: event => console.log(JSON.stringify(event)),
+    diagnose: stagingDiagnostic,
     claim: () => call('claim'),
     async checkProtection() {
       const options = { redirect: 'manual', cache: 'no-store', signal: AbortSignal.timeout(15_000) };

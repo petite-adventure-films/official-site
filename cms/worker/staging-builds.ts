@@ -24,7 +24,9 @@ export default {
       const input = JSON.parse(Buffer.concat(chunks).toString('utf8'));
       if (!input || typeof input !== 'object' || Array.isArray(input)) return reply(400);
       const accepted = await coordinator.report(action, input);
-      if (accepted) await coordinator.reconcile();
+      // Activation has no terminal result to reconcile. A later unrelated
+      // reconciliation error must not hide an already-issued single-use permit.
+      if (accepted && action !== 'activate') await coordinator.reconcile();
       return reply(accepted ? 200 : 409);
     } catch { return reply(503); }
   },
