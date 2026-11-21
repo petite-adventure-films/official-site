@@ -1,4 +1,6 @@
 ---
+import { toIsoDate } from '@/lib/structured-data';
+
 interface Props {
   date: string;
   label?: string;
@@ -6,8 +8,10 @@ interface Props {
 }
 
 const { date, label = date, class: className } = Astro.props;
+// CMSのISO日時は時刻・タイムゾーンを保持し、旧記事の日付だけ正規化する。
+const datetime = date.includes('T') ? date : toIsoDate(date);
 ---
 
 <div class:list={['mt-2 text-xs text-gray-500', className]}>
-  <time datetime={date}>{label}</time>
+  <time datetime={datetime}>{label}</time>
 </div>
