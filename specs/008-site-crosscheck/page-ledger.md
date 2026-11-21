@@ -132,6 +132,8 @@ Astroパスは `astro/src/pages/` 基準。動的記事の全URL照合は未実�
 - 今回の差分にPRを妨げるコード上の問題は検出していない。既存のフォーカス可視性不足と未確認範囲は本Issueの残件であり、今回修正済みとは扱わない。
 - リモートversion-4は引き続きc701b8df、当該ブランチの既存PRなしを確認。
 - 本番Worker official-siteの有効Deploymentは08498b1f-2ce8-4da4-bf92-5142f229feb3（2026-10-21）を読み取り確認。
-- 利用者による11/21の設定確認：official-siteは `previews_enabled = false`、既存Previewは0件で、今回を含む非本番ブランチはビルド対象外。`path_excludes` は空で、ファイルパスのフィルタでありブランチ除外ではない。この確認結果に基づき、Cloudflare設定を変更せずpush・version-4向けPR作成を進める。エージェントのビルド設定GETは権限不足（403）であり、設定値の確認主体は利用者。個別ブランチの除外リストへの追加を前提とした案内は撤回する。
+- 非本番ビルド設定は未解決：利用者は `previews_enabled = false`・既存Preview 0件を確認したが、PRのコミット12d165f2に対して `Workers Builds: official-site` が実際に起動し失敗した。従って「非本番ブランチのビルドは起動しない」とは扱わない。`path_excludes` はファイルパスのフィルタであり、個別ブランチの除外リストへ追加する案内も撤回。エージェントのビルド設定・ログGETは403であり、設定と起動実績の食い違いは本番切替前の残件。Cloudflare設定は変更していない。
+- 利用者提供の失敗ログ：ビルド875d3a7c-ad7d-439f-a1c5-c084ee70bf27は `astro/dist/assets/video/home.mp4`（29.9 MiB）が25 MiB上限を超えて配備段階で失敗。version-4とPRの元動画は同じGit blob `d3bef266aff3514c4099a8f548b7fda98eb4822b`、31,388,267バイト。今回のコード差分による回帰ではない。検証用 `astro/scripts/build-staging.mjs` は生成先動画のみ再圧縮する既存経路。今回、本番用動画や配備設定は変更しない。
+- 本番Deploymentは失敗後も08498b1f-2ce8-4da4-bf92-5142f229feb3のままとAPIで再確認。Vercel成功、今回のローカル検証成功を踏まえ、既存のWorkers配備失敗は今回の修正のマージを妨げないと判断。全チェック成功や本番利用可能とは扱わない。
 
 - PR前にAstro本番ビルドを実行し、733ページの生成成功。配備はしていない。
