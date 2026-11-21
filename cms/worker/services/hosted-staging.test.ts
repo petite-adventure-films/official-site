@@ -74,3 +74,32 @@ test('confirmed pre-activation failure settles without changing public history',
   expect((await service.get(delivery.operationId)).state).toBe('failed');
   expect(await service.history(delivery.contentId)).toHaveLength(0);
 });
+
+test('event candidate is queued and confirmed through the hosted route without publishing later edits', async () => {
+  const { emptyDraft } = await import('../../src/features/events/draft');
+  // Release the fixture's blog attempt before starting a different publication.
+  await enqueue(); const first = (await coordinator.claim())!;
+  await coordinator.report('fail', first); await coordinator.reconcile();
+  const drafts = new ContentDraftRepository(fixture.db);
+  await fixture.db.prepare("INSERT INTO tags (id, kind, name) VALUES ('event-film-test', 'film', '作品'), ('event-category-test', 'event', '上映会')").run();
+  const saved = await drafts.save({ actor: 'test', operationId: crypto.randomUUID(), type: 'event', payload: { ...emptyDraft(), filmTagIds: ['event-film-test'], eventTagIds: ['event-category-test'], title: 'イベント候補', startDate: '2026-11-22', venue: '会場', slug: 'hosted-event' } });
+  const op = await service.prepare({ actor: 'test', operationId: crypto.randomUUID(), contentId: saved.id, expectedVersion: 1, expectedPublicationVersion: 0 });
+  let eventDelivery: any;
+  await service.deliver(op.id, { deploy: async d => { eventDelivery = d; return { status: 'unknown' }; }, inspect: async () => ({ status: 'unknown' }) });
+  const media = await fixture.runtime.getR2Bucket('MEDIA') as unknown as MediaBucket;
+  const eventManifest = await buildPublicationManifest(fixture.db, media, eventDelivery);
+  expect(eventManifest.snapshot.filmTags).toEqual([{ id: 'event-film-test', name: '作品' }]);
+  expect(eventManifest.snapshot.eventTags).toEqual([{ id: 'event-category-test', name: '上映会' }]);
+  expect((await coordinator.fetch(new Request('https://internal/deploy', { method: 'POST', body: JSON.stringify(eventManifest) }))).ok).toBe(true);
+  await drafts.save({ actor: 'test', operationId: crypto.randomUUID(), target: { id: saved.id, expectedVersion: 1 }, payload: { ...saved.payload, title: '配信中の編集' } });
+  const claim = (await coordinator.claim())!;
+  expect(claim.manifest.snapshot.events[0].payload.title).toBe('イベント候補');
+  expect(await service.history(saved.id)).toHaveLength(0);
+  expect(await coordinator.report('activate', { ...claim, versionId, releaseHash })).toBe(true);
+  fetcher.mockImplementation(async () => Response.json({ releaseId: `${op.id}-1`, hash: releaseHash }));
+  expect(await coordinator.report('succeed', { ...claim, versionId, releaseHash, deploymentId })).toBe(true);
+  await coordinator.reconcile();
+  expect((await service.get(op.id)).state).toBe('succeeded');
+  expect(await service.history(saved.id)).toHaveLength(1);
+  expect((await drafts.get(saved.id))?.payload.title).toBe('配信中の編集');
+});

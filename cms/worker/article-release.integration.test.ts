@@ -1,3 +1,4 @@
+import { emptyDraft } from '../src/features/events/draft';
 import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -68,6 +69,18 @@ test('real local release: blog and all article types, assets, history, restore, 
       expect((await json(`/api/contents/${saved.id}`)).payload).toEqual(changed);
       expect((await json(`/api/contents/${saved.id}/publication`)).version).toBe(1);
     }
+    const eventPayload = { ...emptyDraft(), title: '常設イベント公開確認', startDate: '2026-11-22', venue: '公開会場', slug: 'hosted-event-review' };
+    const event = await json('/api/contents', 'POST', { type: 'event', operationId: crypto.randomUUID(), payload: eventPayload });
+    const eventState = await publish(event);
+    expect(await (await fetch(eventState.url)).text()).toContain('公開会場');
+    const eventHistory = await json(`/api/contents/${event.id}/history`);
+    const eventEdited = await json(`/api/contents/${event.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: event.version, payload: { ...eventPayload, title: '復元前' } });
+    const eventRestored = await json(`/api/contents/${event.id}/restore`, 'POST', { operationId: crypto.randomUUID(), expectedVersion: eventEdited.version, sourceKind: 'publication', sourceId: eventHistory.items[0].id });
+    expect(eventRestored.payload.title).toBe(eventPayload.title);
+    await json(`/api/contents/${event.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: eventRestored.version, payload: { ...eventRestored.payload, title: '復元後に保存' } });
+    expect((await json(`/api/contents/${event.id}`)).payload.title).toBe('復元後に保存');
+    expect((await json(`/api/contents/${event.id}/publication`)).version).toBe(1);
+    publicUrls.push(eventState.url);
     for (const url of publicUrls) expect((await fetch(url)).status).toBe(200);
     expect(Buffer.from(await (await fetch(`${runner.siteOrigin}/__cms-media/${image.id}.png`)).arrayBuffer())).toEqual(imageBytes);
     expect(Buffer.from(await (await fetch(`${runner.siteOrigin}/__cms-media/${pdf.id}.pdf`)).arrayBuffer())).toEqual(pdfBytes);

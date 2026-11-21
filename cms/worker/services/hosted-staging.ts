@@ -23,7 +23,7 @@ export class HostedStaging {
       // Only the internal CMS adapter invokes this method; there is no public deploy route.
       const op = await this.env.DB.prepare("SELECT id FROM publication_operations WHERE id = ? AND attempt = ? AND content_hash = ? AND state IN ('delivering','unknown')")
         .bind(d.operationId, d.attempt, d.hash).first();
-      if (!op || !['blog', 'news', 'pressCoverage', 'video'].includes(d.payload.type)) return new Response(null, { status: 409 });
+      if (!op || !['event', 'blog', 'news', 'pressCoverage', 'video'].includes(d.payload.type)) return new Response(null, { status: 409 });
       if (!await this.job(d.operationId, d.attempt)) {
         const key = `staging-publication/${d.operationId}/${d.attempt}/${crypto.randomUUID()}.json`;
         const inserted = await this.env.DB.prepare(`INSERT OR IGNORE INTO hosted_staging_jobs

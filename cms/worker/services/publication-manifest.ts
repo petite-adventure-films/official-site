@@ -19,8 +19,8 @@ export async function buildPublicationManifest(db: Database, media: MediaBucket 
     snapshot.events = [...snapshot.events.filter(event => event.id !== delivery.contentId),
       { id: delivery.contentId, publishedAt: operation!.created_at, payload: delivery.payload }];
   }
-  snapshot.filmTags = available.filmTags.filter(tag => snapshot.events.some(e => e.payload.filmTagIds.includes(tag.id)));
-  snapshot.eventTags = available.eventTags.filter(tag => snapshot.events.some(e => e.payload.eventTagIds.includes(tag.id)));
+  snapshot.filmTags = available.filmTags.filter(tag => snapshot.events.some(e => e.payload.filmTagIds.includes(tag.id))).map(({ id, name }) => ({ id, name }));
+  snapshot.eventTags = available.eventTags.filter(tag => snapshot.events.some(e => e.payload.eventTagIds.includes(tag.id))).map(({ id, name }) => ({ id, name }));
   const redirects = [];
   for (const event of snapshot.events) redirects.push(...(event.id === delivery.contentId ? delivery.routes :
     await new PublicationUrls(db).plan(event.id, event.payload.slug)).redirects);
