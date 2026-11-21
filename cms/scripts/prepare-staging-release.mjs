@@ -1,3 +1,4 @@
+import { validateStagingManifest } from './staging-manifest.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -13,16 +14,9 @@ const hash = value => createHash('sha256').update(JSON.stringify(value)).digest(
 const manifestPath = process.argv[2];
 if (!manifestPath || process.argv.length !== 3) throw new Error('Usage: node cms/scripts/prepare-staging-release.mjs <manifest.json>');
 
-const { delivery, snapshot, blogs, articles = [], assets, redirects } = JSON.parse(await readFile(manifestPath, 'utf8'));
-if (!/^[a-f0-9-]{36}$/i.test(delivery?.operationId) || !Number.isSafeInteger(delivery.attempt) ||
-    delivery.attempt < 1 || hash(delivery.payload) !== delivery.hash || ![blogs, articles, assets, redirects].every(Array.isArray)) {
-  throw new Error('Invalid publication manifest');
-}
-const validPath = value => typeof value === 'string' && /^\/(?!\/)[^\s\\?#*]+\/$/.test(value);
-const candidatePath = delivery.routes?.canonicalPath;
-const validCandidate = delivery.payload.type === 'news' ? /^\/news\/#cms-[a-f0-9-]{36}$/i.test(candidatePath) : validPath(candidatePath);
-if (!validCandidate || ![...blogs, ...articles].some(entry => entry.path === candidatePath) ||
-    redirects.some(({ from, to }) => !validPath(from) || !validPath(to))) throw new Error('Invalid staging site routes');
+const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+validateStagingManifest(manifest);
+const { delivery, snapshot, blogs, articles = [], assets, redirects } = manifest;
 
 await mkdir(join(output, '..'), { recursive: true });
 const lock = output + '.lock';
