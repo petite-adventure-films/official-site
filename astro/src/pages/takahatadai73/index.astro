@@ -68,6 +68,9 @@ const materialHref = (material: {
     ? `/assets/documents/takahatadai73/${material.path ?? material.name}`
     : material.url;
 
+const isPdfMaterial = (material: { type: string; path?: string; name: string }) =>
+  material.type === 'document' && /\.pdf$/i.test(material.path ?? material.name);
+
 const goodbyeGalleryEntries = Object.entries(goodbyeGallery).flatMap(([year, months]) =>
   Object.entries(months).flatMap(([month, days]) =>
     Object.entries(days).map(([day, count]) => {
@@ -120,7 +123,7 @@ const movementGalleryEntries = movements.map((flyers) => {
       <Image
         src={bgImage}
         alt=""
-        class="fixed inset-0 -z-10 h-full w-full object-cover"
+        class="fixed inset-0 -z-10 object-cover size-full"
         loading="eager"
       />
     )
@@ -269,7 +272,7 @@ const movementGalleryEntries = movements.map((flyers) => {
                 const logo = takahatadaiImage(timeline.logo);
                 return (
                   <li class="relative">
-                    <span class="bg-tkhd73-ur absolute top-0 -left-5 block h-2 w-2 rounded" />
+                    <span class="bg-tkhd73-ur absolute top-0 -left-5 block rounded size-2" />
                     <span class="text-tkhd73-ur block font-bold">{timeline.year}年</span>
                     <p class="flex">
                       {logo && <Image src={logo} alt="" class="h-6 w-auto" />}
@@ -289,13 +292,13 @@ const movementGalleryEntries = movements.map((flyers) => {
         <p class="mt-4 text-center text-xs">※2020年10月現在</p>
 
         <div class="relative mt-8 border-t border-white">
-          <div class="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-gray-100"></div>
+          <div class="absolute left-1/2 w-px -translate-x-1/2 bg-gray-100 inset-y-0"></div>
           <div class="sticky top-12 z-10 flex h-20 items-center justify-evenly py-8">
             <span class="hidden w-1/2 text-center sm:block">UR</span>
             <button
               type="button"
               data-tkhd73-toggle-timeline
-              class="bg-tkhd73-green-shadow text-tkhd73-green absolute top-1/2 left-1/2 block h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white text-xs leading-none sm:hover:bg-white"
+              class="bg-tkhd73-green-shadow text-tkhd73-green absolute top-1/2 left-1/2 block rounded-full border-2 border-white text-xs leading-none sm:hover:bg-white size-16 -translate-1/2"
             >
               詳細を<br />全部<br /><span data-tkhd73-toggle-label>開く</span>
             </button>
@@ -309,7 +312,7 @@ const movementGalleryEntries = movements.map((flyers) => {
                   <ol>
                     {Object.entries(years).map(([year, months]) => (
                       <li>
-                        <div class="bg-tkhd73-green mx-auto mt-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-xs text-white">
+                        <div class="bg-tkhd73-green mx-auto mt-4 flex items-center justify-center rounded-full border-2 border-white text-xs text-white size-10">
                           {year}
                         </div>
                         <ol>
@@ -320,7 +323,7 @@ const movementGalleryEntries = movements.map((flyers) => {
                                 class="group"
                                 open={data.display_default}
                               >
-                                <summary class="bg-tkhd73-green-shadow text-tkhd73-green relative mx-auto flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-full border-2 border-white text-xs group-open:bg-white marker:hidden sm:hover:bg-white [&::-webkit-details-marker]:hidden">
+                                <summary class="bg-tkhd73-green-shadow text-tkhd73-green relative mx-auto flex cursor-pointer list-none items-center justify-center rounded-full border-2 border-white text-xs group-open:bg-white marker:hidden sm:hover:bg-white [&::-webkit-details-marker]:hidden size-8">
                                   {month}
                                   {hasPartyEvents('ur', data) && (
                                     <span class="bg-tkhd73-green absolute top-1/2 -left-3 block h-3 w-2 -translate-y-1/2 [clip-path:polygon(0%_50%,100%_0%,100%_100%)] group-open:bg-white" />
@@ -373,20 +376,20 @@ const movementGalleryEntries = movements.map((flyers) => {
                                                     : undefined
                                                 }
                                                 data-pdf-viewer={
-                                                  material.type === 'document' ? true : undefined
+                                                  isPdfMaterial(material) ? true : undefined
                                                 }
                                                 data-pdf-viewer-title={
-                                                  material.type === 'document'
+                                                  isPdfMaterial(material)
                                                     ? material.name
                                                     : undefined
                                                 }
                                                 class={
-                                                  material.type === 'document'
+                                                  isPdfMaterial(material)
                                                     ? 'group inline-flex items-center gap-1'
                                                     : 'link-text inline-flex items-center'
                                                 }
                                               >
-                                                {material.type === 'document' ? (
+                                                {isPdfMaterial(material) ? (
                                                   <>
                                                     <span class="link-text">{material.name}</span>
                                                     <ModalOpenIcon />
