@@ -69,12 +69,14 @@ const articleData = {
   <AttachedInfo info={[media.media_name, media.media_volume, media.media_contents]} />
   <ArticleContents contents={media.content} />
   {
-    media.article_title && media.article_contents && (
+    media.article_contents && (
       <article class="relative mt-8 border border-black px-4 py-8 before:absolute before:top-0 before:right-0 before:bg-gray-100 before:px-2 before:py-1 before:text-xs before:content-['記事本文']">
-        <H3 class="mb-8">
-          {media.article_title}
-          {media.article_subtitle && <Fragment slot="sub">{media.article_subtitle}</Fragment>}
-        </H3>
+        {(media.article_title || media.article_subtitle) && (
+          <H3 class="mb-8">
+            {media.article_title}
+            {media.article_subtitle && <Fragment slot="sub">{media.article_subtitle}</Fragment>}
+          </H3>
+        )}
         <div class="link-text-children mt-8 [&_p]:mt-2" set:html={media.article_contents} />
       </article>
     )

@@ -49,13 +49,13 @@ test('real local release: blog and all article types, assets, history, restore, 
     const publicUrls: string[] = [];
     for (const type of ['blog', 'news', 'pressCoverage', 'video'] as const) {
       const payload = { ...(type === 'blog' ? emptyBlogDraft() : emptyArticleDraft(type)), title: `${type} 公開確認`, slug: `release-${type.toLowerCase()}`, body,
-        ...(type === 'pressCoverage' ? { sourceName: '掲載元の確認', attachmentAssetIds: [pdf.id] } : {}),
+        ...(type === 'pressCoverage' ? { sourceName: '掲載元の確認', attachmentAssetIds: [pdf.id], articleBody: { schemaVersion: 2, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '見出しなしの掲載本文' }] }] } } } : {}),
         ...(type === 'video' ? { youtubeId: 'kwHsbFrH2EA', productionYear: '2025', productionCountry: '日本', duration: '62:32' } : {}) };
       const saved = await json('/api/contents', 'POST', { type, operationId: crypto.randomUUID(), payload });
       const state = await publish(saved);
       const html = await (await fetch(state.url)).text();
       expect(html).toContain('公開本文の照合'); expect(html).toContain(`/__cms-media/${image.id}.png`);
-      if (type === 'pressCoverage') { expect(html).toContain('掲載元の確認'); expect(html).toContain(`/__cms-media/${pdf.id}.pdf`); mediaId = saved.id; }
+      if (type === 'pressCoverage') { expect(html).toContain('掲載元の確認'); expect(html).toContain('見出しなしの掲載本文'); expect(html).toContain(`/__cms-media/${pdf.id}.pdf`); mediaId = saved.id; }
       if (type === 'video') { expect(html).toContain('kwHsbFrH2EA'); expect(html).toContain('62:32'); }
       publicUrls.push(state.url);
       const history = await json(`/api/contents/${saved.id}/history`);
