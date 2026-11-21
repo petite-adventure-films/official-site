@@ -10,20 +10,20 @@
 
 ## US1 お知らせ
 - [x] T005 [US1] cms/src/features/articles/ と cms/src/app/routes.tsx に一覧・編集・保存・公開・履歴の共通画面を接続する。
-- [ ] T006 [US1] astro/src/pages/news/ と cms/scripts/prepare-director-samples.py に表示・代表記事18059を接続し、検証環境で一巡する。
+- [x] T006 [US1] astro/src/pages/news/ と cms/scripts/prepare-director-samples.py に表示・代表記事18059を接続し、検証環境で一巡する。
 
 ## US2 メディア掲載
 - [x] T007 [US2] cms/src/features/articles/ に出典・PDF・記事抜粋項目を接続する。
-- [ ] T008 [US2] astro/src/pages/media/ と cms/scripts/prepare-director-samples.py に代表17839を接続し、PDF込みで一巡する。
+- [x] T008 [US2] astro/src/pages/media/ と cms/scripts/prepare-director-samples.py に代表17839を接続し、PDF込みで一巡する。
 
 ## US3 チャンネル
 - [x] T009 [US3] cms/src/features/articles/ に動画・制作情報を接続する。
-- [ ] T010 [US3] astro/src/pages/channel/ と cms/scripts/prepare-director-samples.py に代表17837を接続し、動画込みで一巡する。
+- [x] T010 [US3] astro/src/pages/channel/ と cms/scripts/prepare-director-samples.py に代表17837を接続し、動画込みで一巡する。
 
 ## 全体確認
-- [ ] T011 specs/007-cms-remaining-types/contracts/screens.md にFigma対応・PC操作・未確認事項を記録する。
-- [ ] T012 specs/002-cms-foundation/contracts/director-review-20261122.md とIssue/Projectへ結果と明日の説明・相談事項を反映する。
+- [x] T011 specs/007-cms-remaining-types/contracts/screens.md にFigma対応・PC操作・未確認事項を記録する。
+- [x] T012 specs/002-cms-foundation/contracts/director-review-20261122.md とIssue/Projectへ結果と明日の説明・相談事項を反映する。
 
 依存: T001→T002/T003→T004→各US→T011/T012。基盤後は種別固有表示を独立して確認できる。作業は逐次実施し、一種別の成功を他種別の完了と扱わない。
 
-ローカル確認: Node 24でCMS全体23ファイル144件、配信スクリプト14件成功。追加のお知らせ11件によるページ送り・公開URL整合テストを含む種別テスト11件成功。実配信ランナーによるブログ・3種別の公開、履歴、復元、再編集、画像/PDF、301転送を確認。検証環境の画面操作・動画再生は未確認。
+ローカル確認: Node 24でCMS全体23ファイル144件、配信スクリプト14件成功。追加のお知らせ11件によるページ送り・公開URL整合テストを含む種別テスト11件成功。実配信ランナーによるブログ・3種別の公開、履歴、復元、再編集、画像/PDF、301転送を確認。検証環境の公開と履歴生成を照合済み。本文・PDF閲覧・動画再生、履歴参照・復元・再編集保存・再読み込みは利用者確認済み。復元記録は各種別1回をDB照合。Figma日本語ラベル外観と監督本人の操作確認は残件。
