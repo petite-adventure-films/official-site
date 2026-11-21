@@ -7,12 +7,21 @@ export function eventPath(slug: string) {
   if (slugIssue(slug)) throw new PublicationUrlConflict('invalid_slug');
   return `/events/${encodeURIComponent(slug)}/`;
 }
+export function publicationPath(slug: string) {
+  if (slug.startsWith(localBlogSlugPrefix)) return blogPath(slug.slice(localBlogSlugPrefix.length));
+  for (const [prefix, section] of [['cms-media/', 'media'], ['cms-channel/', 'channel'], ['cms-news/', 'news']] as const) {
+    if (slug.startsWith(prefix)) {
+      const value = slug.slice(prefix.length);
+      if (slugIssue(value)) throw new PublicationUrlConflict('invalid_slug');
+      return section === 'news' ? `/news/#cms-${encodeURIComponent(value)}` : `/${section}/${encodeURIComponent(value)}/`;
+    }
+  }
+  return eventPath(slug);
+}
 export class PublicationUrls {
   constructor(private db: Database) {}
   async plan(contentId: string, slug: string): Promise<EventRoutes> {
-    const path = slug.startsWith(localBlogSlugPrefix)
-      ? (value: string) => blogPath(value.slice(localBlogSlugPrefix.length))
-      : eventPath;
+    const path = publicationPath;
     const canonicalPath = path(slug);
     const owner = await this.db.prepare('SELECT content_id FROM event_url_owners WHERE slug = ?').bind(slug).first<{ content_id: string | null }>();
     if (owner && owner.content_id !== contentId) throw new PublicationUrlConflict('url_reserved');

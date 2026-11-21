@@ -16,7 +16,7 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     return media(request, env.DB, env, actor);
   }
-  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: new URL(request.url).searchParams.get('type') === 'blog' ? Boolean(env.PUBLICATION?.supportsLocalBlog) : Boolean(env.PUBLICATION) });
+  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: ['blog', 'news', 'pressCoverage', 'video'].includes(new URL(request.url).searchParams.get('type') ?? '') ? Boolean(env.PUBLICATION?.supportsLocalBlog) : Boolean(env.PUBLICATION) });
   if (path === '/api/session' && request.method === 'GET') return Response.json({ user: actor });
   if (path === '/api/tags' && request.method === 'GET') {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
@@ -29,7 +29,7 @@ export async function handleAuthenticated(request: Request, env: AppEnvironment,
   if (path.startsWith('/api/contents')) {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     const action = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(publication|check-publication)$/i);
-    if (action && !env.PUBLICATION?.supportsLocalBlog && (await new ContentDraftRepository(env.DB).get(action[1]))?.type === 'blog') {
+    if (action && !env.PUBLICATION?.supportsLocalBlog && ['blog', 'news', 'pressCoverage', 'video'].includes((await new ContentDraftRepository(env.DB).get(action[1]))?.type ?? '')) {
       if (action[2] === 'publication' && request.method === 'GET') return Response.json({ enabled: false, version: 0, published: false, url: null, operation: null });
       throw new HttpError(422, 'blog_operation_unavailable');
     }

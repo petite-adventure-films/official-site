@@ -1,3 +1,5 @@
+import { isArticleType } from '../../src/features/articles/draft';
+import { prepareArticlePublication, articleTarget, type ArticlePublication } from '../article-publication';
 import { localBlogSlugPrefix, prepareBlogPublication, type BlogPublication } from '../blog-publication';
 import { HttpError } from '../auth';
 import { PublicationUrls, type EventRoutes } from './publication-urls';
@@ -16,7 +18,7 @@ type Operation = {
   content_hash: string; state: 'ready' | 'delivering' | 'unknown' | 'failed' | 'succeeded' | 'noop';
   target_slug: string; routes: string | null; attempt: number; revision_id: string | null; receipt: string | null; completed_at: string | null;
 };
-export type Delivery = { operationId: string; attempt: number; contentId: string; hash: string; payload: EventPublication | BlogPublication; routes: EventRoutes };
+export type Delivery = { operationId: string; attempt: number; contentId: string; hash: string; payload: EventPublication | BlogPublication | ArticlePublication; routes: EventRoutes };
 export type DeliveryResult = { status: 'unknown' } | {
   status: 'succeeded' | 'failed'; operationId: string; attempt: number; hash: string; receipt: string;
 };
@@ -66,7 +68,15 @@ export class PublicationService {
     if ((current?.version ?? 0) !== input.expectedPublicationVersion) throw new PublicationConflict('publication_version_conflict');
     let payload: Delivery['payload'];
     let targetSlug: string;
-    if (draft.type === 'blog') {
+    if (isArticleType(draft.type)) {
+      if (!supportsLocalBlog) throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: '配信は利用できません。' }]);
+      try { payload = await prepareArticlePublication(this.db, draft.type, draft.payload, draft.id); }
+      catch (error) {
+        if (!(error instanceof HttpError) && !(error instanceof Error && error.message === 'invalid_article_publication')) throw error;
+        throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'タイトル、URL、動画ID、添付と作品関連を確認してください。' }]);
+      }
+      targetSlug = articleTarget(draft.type, payload.content, draft.id);
+    } else if (draft.type === 'blog') {
       if (!supportsLocalBlog) throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'ブログ配信は利用できません。' }]);
       try {
         payload = await prepareBlogPublication(this.db, draft.payload);

@@ -34,11 +34,24 @@ const blocks = new Map(
     underline: 'u',
   }),
 );
-export async function releasedCmsBlogs() {
+export async function readCmsRelease() {
   const file = process.env.CMS_BLOG_RELEASE_SNAPSHOT;
-  if (!file) return [];
-  const { blogs, assets } = JSON.parse(await readFile(file, 'utf8')) as {
+  if (!file)
+    return {
+      blogs: [],
+      articles: [],
+      render: (): string => '',
+      assetPath: (): string => {
+        throw new Error('missing_release');
+      },
+    };
+  const {
+    blogs,
+    articles = [],
+    assets,
+  } = JSON.parse(await readFile(file, 'utf8')) as {
     blogs: Entry[];
+    articles?: import('./released-cms-articles').ArticleEntry[];
     assets: { id: string; extension: string }[];
   };
   const files = new Map(
@@ -85,6 +98,10 @@ export async function releasedCmsBlogs() {
         : '';
     return tag ? `<${tag}${attribute}>${value}</${tag}>` : value;
   }
+  return { blogs, articles, render, assetPath };
+}
+export async function releasedCmsBlogs() {
+  const { blogs, render } = await readCmsRelease();
   return blogs.map(({ content, publishedAt }) => ({
     slug: content.slug,
     content: render(content.body.doc),

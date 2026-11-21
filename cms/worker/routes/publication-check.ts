@@ -1,3 +1,5 @@
+import { isArticleType } from '../../src/features/articles/draft';
+import { prepareArticlePublication, articleTarget } from '../article-publication';
 import { localBlogSlugPrefix, prepareBlogPublication } from '../blog-publication';
 import { HttpError } from '../auth';
 import { ContentDraftRepository, type Database } from '../repositories/content-drafts';
@@ -14,6 +16,18 @@ export async function publicationCheck(request: Request, db: Database, id: strin
   const saved = await repository.get(id);
   if (!saved) throw new HttpError(404, 'not_found');
   if (saved.version !== body.expectedVersion) throw new HttpError(409, 'conflict');
+  if (isArticleType(saved.type)) {
+    if (!supportsLocalBlog) throw new HttpError(422, 'article_operation_unavailable');
+    try {
+      const candidate = await prepareArticlePublication(db, saved.type, saved.payload, id);
+      await new PublicationUrls(db).plan(id, articleTarget(saved.type, candidate.content, id));
+    } catch (error) {
+      if (!(error instanceof HttpError) && !(error instanceof PublicationUrlConflict) && !(error instanceof Error && error.message === 'invalid_article_publication')) throw error;
+      return Response.json({ ok: false, version: saved.version, issues: [{ field: '_schema', code: 'invalid_shape', message: 'タイトル、URL、動画ID、添付と作品関連を確認してください。' }] });
+    }
+    if ((await repository.get(id))?.version !== saved.version) throw new HttpError(409, 'conflict');
+    return Response.json({ ok: true, version: saved.version });
+  }
   if (saved.type === 'blog') {
     if (!supportsLocalBlog) throw new HttpError(422, 'blog_operation_unavailable');
     try {

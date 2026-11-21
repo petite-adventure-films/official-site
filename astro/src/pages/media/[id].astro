@@ -53,17 +53,18 @@ const articleData = {
   ogType="article"
   crumbs={[{ to: '/media/', name: 'メディア紹介' }]}
 >
+  <span data-cms-article={media.cmsMarker}></span>
   <JsonLd data={articleData} />
   <Fragment slot="headerTags">
     <ArticleHeaderTags filmTags={media.film_tags} />
   </Fragment>
   {media.media_video && <Video youtubeId={getYouTubeId(media.media_video)} />}
   {
-    media.media_pdf_url && (
+    (media.cmsPdfUrls ?? (media.media_pdf_url ? [media.media_pdf_url] : [])).map((pdf) => (
       <div class="mt-4">
-        <PdfViewer src={media.media_pdf_url} title={media.title} />
+        <PdfViewer src={pdf} title={media.title} />
       </div>
-    )
+    ))
   }
   <AttachedInfo info={[media.media_name, media.media_volume, media.media_contents]} />
   <ArticleContents contents={media.content} />

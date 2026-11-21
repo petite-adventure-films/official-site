@@ -23,7 +23,7 @@ export function EventHistoryContent({ value, tags }: { value: EventDraft; tags: 
       <Typography component="h2" variant="subtitle2">{heading}</Typography><div>{fields.map(([label, value]) => <Typography key={label} variant="body2" className="whitespace-pre-wrap break-words">{label}：{text(value)}</Typography>)}</div>
     </div></Section>)}</>;
 }
-export function HistoryView<T>({ id, section, renderContent }: { id: string; section: 'events' | 'blog'; renderContent(value: T): ReactNode }) {
+export function HistoryView<T>({ id, section, renderContent }: { id: string; section: string; renderContent(value: T): ReactNode }) {
   const [data, setData] = useState<HistoryData<T> | null>(null);
   const [selected, setSelected] = useState('');
   const [error, setError] = useState('');

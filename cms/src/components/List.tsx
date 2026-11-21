@@ -5,11 +5,11 @@ import { Pagination as MuiPagination } from '@mui/material';
 export function ListLayout({ children }: { children: ReactNode }) {
   return <div className="flex flex-col gap-cms-section">{children}</div>;
 }
-export function ListRow({ title, filmTags, eventTags, status, header = false }: { title: ReactNode; filmTags: ReactNode; eventTags: ReactNode; status: ReactNode; header?: boolean }) {
+export function ListRow({ title, filmTags, eventTags, status, header = false }: { title: ReactNode; filmTags?: ReactNode; eventTags?: ReactNode; status: ReactNode; header?: boolean }) {
   const Cell = header ? 'th' : 'td';
-  return <tr>{[title, filmTags, eventTags, status].map((content, index) => <Cell key={index} scope={header ? 'col' : undefined}
+  return <tr>{[{content: title, width: ''}, ...(filmTags === undefined ? [] : [{content: filmTags, width: 'w-cms-film-column'}]), ...(eventTags === undefined ? [] : [{content: eventTags, width: 'w-cms-event-column'}]), {content: status, width: 'w-cms-status-column'}].map(({content, width}, index) => <Cell key={index} scope={header ? 'col' : undefined}
     className={'text-left pr-cms-related first:pl-cms-list-x last:pr-cms-list-x py-cms-list-y border-b border-cms-divider ' +
-      (index === 1 ? 'w-cms-film-column' : index === 2 ? 'w-cms-event-column' : index === 3 ? 'w-cms-status-column' : '')}>{content}</Cell>)}</tr>;
+      width}>{content}</Cell>)}</tr>;
 }
 export function Pagination({ count, page, onChange }: { count: number; page: number; onChange: (page: number) => void }) {
   return <MuiPagination count={count} page={page} onChange={(_, next) => onChange(next)} getItemAriaLabel={(type, number, selected) =>

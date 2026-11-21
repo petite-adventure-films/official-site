@@ -54,14 +54,16 @@ CMSの公開操作から固定候補を生成・配備し、公開状態と履�
 
 対象はPAFアカウントの `paf-site-staging` のみ。本番Workerには設定しない。
 
-1. この作業ブランチ `codex/issue-390-hosted-staging-publication` をGitHubへpushする。
-2. 検証サイトのBuildsで対象ブランチを上記に設定し、ルートは `/` とする。
+1. 配信コードはレビュー後に `version-4` へ統合する。
+2. 検証サイトのBuildsで対象ブランチを `version-4` に設定し、ルートは `/` とする。
 3. ビルドコマンドは `pnpm --dir cms install --frozen-lockfile && pnpm --dir astro install --frozen-lockfile && npm install --prefix /tmp/paf-staging-build-tools --no-audit --no-fund ffmpeg-static@5.3.0 && /tmp/paf-staging-build-tools/node_modules/ffmpeg-static/ffmpeg -version`。ホストにはsudoがなくapt-getの書き込み権限もないため、作業領域に固定バージョンのffmpeg-staticを導入する。
 4. デプロイコマンドは `PATH="/tmp/paf-staging-build-tools/node_modules/ffmpeg-static:$PATH" node cms/scripts/run-hosted-staging.mjs` とする。デフォルトの `npx wrangler deploy` は使わない。
 5. ビルド変数 `NODE_VERSION=24`、`PNPM_VERSION=10.28.2`、`SKIP_DEPENDENCY_INSTALL=1` を設定する。ビルドシークレットに `STAGING_BUILD_SECRET`、`STAGING_SITE_ACCESS_ID`、`STAGING_SITE_ACCESS_SECRET` を設定する。値の正本はGit管理対象外の `cms/.env.staging-publication`。チャットや文書へ値を貼らない。
 6. ビルド用APIトークンはPAFの検証配備用のものを用いる。本番用資格情報を持ち込まない。Workers Buildsのトークン注入と検証Workerへの配備権限を初回実行で確認する。
 7. 自動pushビルドは無効、プレビュービルドも無効にし、対象ブランチのDeploy Hookを作成する。Hook URLは認証情報のため同じローカル秘密ファイルの `STAGING_DEPLOY_HOOK` に保存する。
 8. Hookと専用キーを検証Workerへ登録し、CMSを常設アダプターへ切り替える。旧ランナー・Tunnel停止後、CMSからテスト公開する。
+
+2026-11-21、PR #444の統合後にビルドと検証CMS/受付WorkerのHook参照先を `version-4` へ切り替えた。候補なしの接続ビルドは成功。切替後の新しい公開操作による確認は #445 で継続する。詳細は [監督操作確認の準備](director-review-20261122.md)。
 
 ### 実施済み
 

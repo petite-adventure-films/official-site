@@ -38,6 +38,20 @@ export async function checkBlogPaths(out, blogs, redirects) {
     if (existing) throw new Error('blog_redirect_url_reserved');
   }
 }
+export async function checkArticlePaths(out, articles) {
+  for (const { type, path } of articles) {
+    const newsMatch = type === 'news' && typeof path === 'string' ? path.match(/^(\/news\/(?:page\/[1-9][0-9]*\/)?)#cms-([a-f0-9-]{36})$/i) : null;
+    if (type === 'news' && !newsMatch) throw new Error('invalid_article_path');
+    const prefix = type === 'news' ? newsMatch?.[1] + '#cms-' : { pressCoverage: '/media/', video: '/channel/' }[type];
+    if (!prefix || typeof path !== 'string' || !path.startsWith(prefix)) throw new Error('invalid_article_path');
+    const part = type === 'news' ? path.slice(prefix.length) : path.slice(prefix.length, -1);
+    const decoded = decodeURIComponent(part);
+    if (!decoded || /[/\\?#\s]/.test(decoded) || decoded === '.' || decoded === '..' || (type !== 'news' && !path.endsWith('/'))) throw new Error('invalid_article_path');
+    const pathname = type === 'news' ? newsMatch[1].slice(1) : prefix.slice(1) + decoded;
+    const html = await readFile(join(out, pathname, 'index.html'), 'utf8');
+    if (!html.includes(`data-cms-article="${Buffer.from(path).toString('hex')}"`)) throw new Error('article_url_reserved');
+  }
+}
 /** Local static hosting. Releases survive restart; incomplete builds never become visible. */
 export async function startPublicationRunner(root, { controlPort = 8789, sitePort = 4327 } = {}) {
   let siteOrigin = `http://127.0.0.1:${sitePort}`;
@@ -72,8 +86,9 @@ export async function startPublicationRunner(root, { controlPort = 8789, sitePor
         child.on('error', rej); child.on('exit', code => code === 0 ? res() : rej(new Error(`Astro build failed (${code}): ${error}`)));
       });
       await checkBlogPaths(out, body.blogs ?? [], redirects);
+      await checkArticlePaths(out, body.articles ?? []);
       await writeBlogAssets(out, body.assets ?? []);
-      const target = resolve(out, `.${decodeURIComponent(d.routes.canonicalPath)}`, 'index.html');
+      const target = resolve(out, `.${decodeURIComponent(d.routes.canonicalPath.split('#')[0])}`, 'index.html');
       if (!target.startsWith(out + '/')) throw new Error('invalid_path');
       await stat(target);
       await atomic(join(out, '__release.json'), { releaseId: key, hash: releaseHash });
@@ -102,9 +117,9 @@ export async function startPublicationRunner(root, { controlPort = 8789, sitePor
           building = true; running.add(key);
           try {
             await mkdir(dir, { recursive: true });
-            const releaseHash = digest(JSON.stringify({ snapshot: body.snapshot, redirects: body.redirects, blogs: body.blogs ?? [], assets: body.assets ?? [] }));
+            const releaseHash = digest(JSON.stringify({ snapshot: body.snapshot, redirects: body.redirects, blogs: body.blogs ?? [], articles: body.articles ?? [], assets: body.assets ?? [] }));
             await atomic(join(dir, 'snapshot.json'), body.snapshot);
-            await atomic(join(dir, 'blogs.json'), { blogs: body.blogs ?? [], assets: (body.assets ?? []).map(({ id, extension }) => ({ id, extension })) });
+            await atomic(join(dir, 'blogs.json'), { blogs: body.blogs ?? [], articles: body.articles ?? [], assets: (body.assets ?? []).map(({ id, extension }) => ({ id, extension })) });
             await atomic(join(dir, 'record.json'), { hash: d.hash, releaseHash, status: 'building' });
             void build(body, key, dir, releaseHash);
           } catch (error) {

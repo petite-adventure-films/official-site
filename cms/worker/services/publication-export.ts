@@ -20,7 +20,7 @@ export async function exportPublishedEvents(db: Database): Promise<CmsEventSnaps
       FROM publication_state s
       LEFT JOIN publication_revisions r ON r.id = s.revision_id
       LEFT JOIN event_canonical_urls u ON u.content_id = s.content_id
-      WHERE NOT EXISTS (SELECT 1 FROM content_drafts d WHERE d.id = s.content_id AND d.type = 'blog')) AS events,
+      WHERE NOT EXISTS (SELECT 1 FROM content_drafts d WHERE d.id = s.content_id AND d.type <> 'event')) AS events,
     (SELECT json_group_array(json_object('id', id, 'name', name, 'kind', kind)) FROM tags) AS tags
   `).first<{ events: string; tags: string }>();
   if (!result) throw new Error('publication_export_unavailable');
