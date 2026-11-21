@@ -1,8 +1,8 @@
-import { blogPath, localBlogSlugPrefix } from '../blog-publication';
+import { newsArticlePath } from '../../../packages/content-schema/publication-paths';
 import { HttpError, type Actor } from '../auth';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
 import { PublicationService, PublicationConflict, PublicationInvalid, type PublicationDelivery } from '../services/publication';
-import { PublicationUrlConflict, eventPath } from '../services/publication-urls';
+import { PublicationUrlConflict, publicationPath } from '../services/publication-urls';
 import { readJson } from './json';
 export async function publication(request: Request, db: Database, actor: Actor, id: string, adapter?: PublicationDelivery) {
   const service = new PublicationService(db);
@@ -14,8 +14,15 @@ export async function publication(request: Request, db: Database, actor: Actor, 
       if (op && adapter) op = op.state === 'ready' ? await service.deliver(op.id, adapter) : await service.reconcile(op.id, adapter);
       const current = await service.current(id);
       const url = await db.prepare('SELECT slug FROM event_canonical_urls WHERE content_id = ?').bind(id).first<{ slug: string }>();
+      let currentPath = url ? publicationPath(url.slug) : null;
+      if (url?.slug.startsWith('cms-news/')) {
+        const news = await db.prepare(`SELECT s.content_id FROM publication_state s JOIN content_drafts d ON d.id = s.content_id AND d.type = 'news'
+          JOIN publication_revisions r ON r.id = s.revision_id ORDER BY r.published_at DESC, s.content_id`).all<{ content_id: string }>();
+        const index = news.results.findIndex(item => item.content_id === id);
+        if (index >= 0) currentPath = newsArticlePath(id, index);
+      }
       return Response.json({ enabled: Boolean(adapter), version: current?.version ?? 0, published: Boolean(current),
-        url: url && adapter ? `${adapter.localSiteOrigin ?? 'http://127.0.0.1:4327'}${(url.slug.startsWith(localBlogSlugPrefix) ? blogPath(url.slug.slice(localBlogSlugPrefix.length)) : eventPath(url.slug))}` : null,
+        url: url && adapter ? `${adapter.localSiteOrigin ?? 'http://127.0.0.1:4327'}${currentPath}` : null,
         operation: op ? { id: op.id, state: op.state } : null });
     }
     if (request.method !== 'POST') throw new HttpError(405, 'method_not_allowed');

@@ -1,7 +1,9 @@
 import type { Tag } from './tag';
 
 type ChannelBase = {
-  id: number;
+  id: number | string;
+  cmsPath?: string;
+  cmsMarker?: string;
   title: string;
   published: string;
   youtube_id: string;

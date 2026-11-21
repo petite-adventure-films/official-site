@@ -1,3 +1,5 @@
+import { ArticleEditor, ArticleHistoryContent } from '../features/articles/ArticleEditor';
+import { contentSections, isArticleType, type ArticleDraft, type ContentType } from '../features/articles/draft';
 import { BlogHistoryContent } from '../features/blog/components/BlogHistoryContent';
 import { BlogEditor } from '../features/blog/components/BlogEditor';
 import type { BlogDraft } from '../features/blog/draft';
@@ -63,18 +65,23 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
   </>;
 }
 export function App() {
-  const [state, setState] = useState<{ user: string; tags: Tags; categories: Tag[]; existing: SavedDraft<EventDraft | BlogDraft> | null } | null>(null);
+  const [state, setState] = useState<{ user: string; tags: Tags; categories: Tag[]; existing: SavedDraft<EventDraft | BlogDraft | ArticleDraft> | null } | null>(null);
   const [error, setError] = useState(false);
   const path = window.location.pathname;
-  const isBlog = path.startsWith('/cms/blog');
-  const history = path.match(/^\/cms\/(?:events|blog)\/([0-9a-f-]{36})\/history$/i);
-  const edit = path.match(/^\/cms\/(?:events|blog)\/([0-9a-f-]{36})\/edit$/i);
+  const type = (Object.entries(contentSections).find(([, section]) => path === `/cms/${section}` || path.startsWith(`/cms/${section}/`))?.[0] ?? 'event') as ContentType;
+  const isBlog = type === 'blog';
+  const history = path.match(/^\/cms\/(?:events|blog|news|media|channel)\/([0-9a-f-]{36})\/history$/i);
+  const edit = path.match(/^\/cms\/(?:events|blog|news|media|channel)\/([0-9a-f-]{36})\/edit$/i);
   useEffect(() => { Promise.all([
-    loadSession(), api<Tags>('/api/tags'), (edit ?? history) ? api<SavedDraft<EventDraft | BlogDraft>>(`/api/contents/${(edit ?? history)![1]}`) : Promise.resolve(null),
+    loadSession(), api<Tags>('/api/tags'), (edit ?? history) ? api<SavedDraft<EventDraft | BlogDraft | ArticleDraft>>(`/api/contents/${(edit ?? history)![1]}`) : Promise.resolve(null),
     isBlog ? api<{ items: Tag[] }>('/api/categories') : Promise.resolve({ items: [] }),
-  ]).then(([session, tags, existing, categories]) => { if (existing && (existing.type !== (isBlog ? 'blog' : 'event') || existing.payloadSchemaVersion !== `${isBlog ? 'blog' : 'event'}-draft/v1`)) throw new Error('content_type_mismatch'); setState({ user: session.user.name, tags, existing, categories: categories.items }); }).catch(() => setError(true)); }, []);
+  ]).then(([session, tags, existing, categories]) => { if (existing && (existing.type !== type || existing.payloadSchemaVersion !== `${type}-draft/v1`)) throw new Error('content_type_mismatch'); setState({ user: session.user.name, tags, existing, categories: categories.items }); }).catch(() => setError(true)); }, []);
   if (error) return <Alert severity="error" action={<Button onClick={() => location.reload()}>再試行</Button>}>読み込めませんでした。ログイン状態と通信を確認してください。</Alert>;
   if (!state) return <CircularProgress aria-label="読み込み中" />;
+  if (isArticleType(type)) return <CMSLayout user={state.user}>{history ?
+    <HistoryView<ArticleDraft> id={history[1]} section={contentSections[type]} renderContent={value => <ArticleHistoryContent type={type} value={value} tags={state.tags} />} /> :
+    edit || path === `/cms/${contentSections[type]}/new` ? <ArticleEditor type={type} existing={state.existing as SavedDraft<ArticleDraft> | null} tags={state.tags} /> :
+    <ContentList<ArticleDraft> type={type} tags={state.tags} summarize={value => ({ ...value, eventTagIds: [] })} />}</CMSLayout>;
   if (history) return <CMSLayout user={state.user}>{isBlog ?
     <HistoryView<BlogDraft> id={history[1]} section="blog" renderContent={value => <BlogHistoryContent value={value} tags={state.tags} categories={state.categories} />} /> :
     <HistoryView<EventDraft> id={history[1]} section="events" renderContent={value => <EventHistoryContent value={value} tags={state.tags} />} />}

@@ -1,3 +1,4 @@
+import { releasedCmsArticles } from './released-cms-articles';
 import { releasedEventSummaries } from './released-cms-events';
 import snapshotData from '../../data/wordpress-export.json';
 
@@ -12,7 +13,7 @@ type LegacyTerm = {
 };
 
 type LegacyRecord = {
-  id: number;
+  id: number | string;
   name?: string;
   published?: string;
   recommended?: string;
@@ -165,13 +166,13 @@ export async function wpGetList<T>(
       records = filterBlogs(query);
       break;
     case 'news':
-      records = snapshot.content.news;
+      records = [...(await releasedCmsArticles('news')), ...snapshot.content.news];
       break;
     case 'media':
-      records = snapshot.content.media;
+      records = [...(await releasedCmsArticles('pressCoverage')), ...snapshot.content.media];
       break;
     case 'channel':
-      records = snapshot.content.channels;
+      records = [...(await releasedCmsArticles('video')), ...snapshot.content.channels];
       break;
     case 'events_archive':
       records = snapshot.content.events.filter((event) =>
@@ -194,7 +195,10 @@ export async function wpGetList<T>(
   return paginate(records, query) as WpListResponse<T>;
 }
 
-export function wpGetDetail<T>(endpoint: WpEndpoint, query: WpDetailQuery): Promise<T | null> {
+export async function wpGetDetail<T>(
+  endpoint: WpEndpoint,
+  query: WpDetailQuery,
+): Promise<T | null> {
   const pageId = Number(query.pageId);
   let record: LegacyRecord | undefined;
 
@@ -206,10 +210,14 @@ export function wpGetDetail<T>(endpoint: WpEndpoint, query: WpDetailQuery): Prom
       record = snapshot.content.events.find((event) => event.id === pageId);
       break;
     case 'media_detail':
-      record = snapshot.content.media.find((media) => media.id === pageId);
+      record =
+        (await releasedCmsArticles('pressCoverage')).find((item) => item.id === query.pageId) ??
+        snapshot.content.media.find((media) => media.id === pageId);
       break;
     case 'channel_detail':
-      record = snapshot.content.channels.find((channel) => channel.id === pageId);
+      record =
+        (await releasedCmsArticles('video')).find((item) => item.id === query.pageId) ??
+        snapshot.content.channels.find((channel) => channel.id === pageId);
       break;
     default:
       record = undefined;

@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { api, type SavedDraft } from '../../../lib/api-client';
 import type { HistoryData } from './HistoryView';
 export function HistoryEntry<T>({ id, flush, blocked, onBusy, onError, section = 'events' }: {
-  section?: 'events' | 'blog'; id?: string; flush(): Promise<SavedDraft<T> | null>; blocked: boolean; onBusy(value: boolean): void; onError(value: string): void;
+  section?: string; id?: string; flush(): Promise<SavedDraft<T> | null>; blocked: boolean; onBusy(value: boolean): void; onError(value: string): void;
 }) {
   const [available, setAvailable] = useState<boolean | null>(null);
   const running = useRef(false);

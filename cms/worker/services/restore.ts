@@ -1,3 +1,6 @@
+import { isArticleType, type ArticleDraft } from '../../src/features/articles/draft';
+import { validateArticleDraft } from '../article-draft';
+import { articleDraftFromPublication } from '../article-publication';
 import { blogDraftFromPublication, blogPublicationVersion } from '../blog-publication';
 import type { BlogDraft } from '../../src/features/blog/draft';
 import { validateBlogDraft } from '../blog-draft';
@@ -16,15 +19,21 @@ type Input = { actor: string; actorName?: string; operationId: string; contentId
 export type HistoryItem = { kind: SourceKind; id: string; payloadSchemaVersion: string; payload: unknown; at: string; actor: string; actorName: string | null };
 
 function validateSnapshotDraft(type: Draft['type'], schema: string, payload: unknown) {
-  const valid = type === 'blog' ? validateBlogDraft(payload) : validateDraft(payload);
+  const valid = isArticleType(type) ? validateArticleDraft(type, payload) : type === 'blog' ? validateBlogDraft(payload) : validateDraft(payload);
   if (schema !== `${type}-draft/v1` || !valid) throw new RestoreInvalid('unsupported_snapshot');
-  return payload as EventDraft | BlogDraft;
+  return payload as EventDraft | BlogDraft | ArticleDraft;
 }
 
 async function restorePayload(db: Database, type: Draft['type'], source: HistoryItem) {
   if (source.kind === 'protectedDraft') {
     const payload = validateSnapshotDraft(type, source.payloadSchemaVersion, source.payload);
-    if (type === 'blog') await validateDraftReferences(db, type, payload);
+    if (type !== 'event') await validateDraftReferences(db, type, payload);
+    return payload;
+  }
+  if (isArticleType(type)) {
+    const payload = source.payloadSchemaVersion === `${type}-publication/v1` ? articleDraftFromPublication(type, source.payload) : null;
+    if (!payload) throw new RestoreInvalid('unsupported_snapshot');
+    await validateDraftReferences(db, type, payload);
     return payload;
   }
   if (type === 'blog') {

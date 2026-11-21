@@ -54,6 +54,7 @@ const videoData = youtubeId
   ogType="video.other"
   crumbs={[{ to: '/channel/', name: 'チャンネル' }]}
 >
+  <span data-cms-article={channel.cmsMarker}></span>
   {videoData && <JsonLd data={videoData} />}
   <Fragment slot="headerTags">
     <ArticleHeaderTags filmTags={channel.film_tags} />

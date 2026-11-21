@@ -1,3 +1,5 @@
+import { isContentType, isArticleType } from '../../src/features/articles/draft';
+import { validateArticleDraft } from '../article-draft';
 import { HttpError, type Actor } from '../auth';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
 import { validateDraftReferences } from '../services/draft-references';
@@ -10,7 +12,7 @@ export async function contents(request: Request, db: Database, actor: Actor) {
   const repository = new ContentDraftRepository(db);
   if (url.pathname === '/api/contents' && request.method === 'GET') {
     const type = url.searchParams.get('type');
-    if (type !== 'event' && type !== 'blog') throw new HttpError(422, 'unsupported_type');
+    if (!isContentType(type)) throw new HttpError(422, 'unsupported_type');
     const page = Number(url.searchParams.get('page') ?? 1);
     const keyword = url.searchParams.get('q') ?? '';
     if (!Number.isSafeInteger(page) || page < 1 || page > 1_000_000 || keyword.length > 200) throw new HttpError(422, 'invalid_query');
@@ -30,11 +32,11 @@ export async function contents(request: Request, db: Database, actor: Actor) {
   const allowed = create ? ['operationId', 'type', 'payload'] : ['operationId', 'expectedVersion', 'payload'];
   if (!body || typeof body !== 'object' || Object.keys(body).some((key) => !allowed.includes(key)) ||
     typeof body.operationId !== 'string' || !/^[0-9a-f-]{36}$/i.test(body.operationId) ||
-    (create && !['event', 'blog'].includes(body.type)) || (!create && (!Number.isSafeInteger(body.expectedVersion) || body.expectedVersion < 1))) throw new HttpError(422, 'invalid_payload');
+    (create && !isContentType(body.type)) || (!create && (!Number.isSafeInteger(body.expectedVersion) || body.expectedVersion < 1))) throw new HttpError(422, 'invalid_payload');
   const existing = create ? null : await repository.get(match![1]);
   if (!create && !existing) throw new HttpError(404, 'not_found');
   const type = create ? body.type : existing!.type;
-  if (!(type === 'blog' ? validateBlogDraft(body.payload) : validateDraft(body.payload))) throw new HttpError(422, 'invalid_payload');
+  if (!(isArticleType(type) ? validateArticleDraft(type, body.payload) : type === 'blog' ? validateBlogDraft(body.payload) : validateDraft(body.payload))) throw new HttpError(422, 'invalid_payload');
   await validateDraftReferences(db, type, body.payload);
   try {
     const draft = await repository.save({ actor: actor.id, operationId: body.operationId, payload: body.payload, type,
