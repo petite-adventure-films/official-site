@@ -284,5 +284,15 @@ F5: 同日にMCPで確認したFigmaファイルの構造とF1の文字基盤を
 - 新動画SHA-256: a817b5cf7f0de6be5a2a8e9799e0e42aa08b2130af5e36f0ea5102d1f674a8dd。
 - 全ストリームのffmpegデコード検査でエラーなし。通常dev＋Chromiumの390/1280pxでOP終了、ヒーロー自動再生の時間進行、PC背景動画再生、全編モーダルの再生・5/30/65秒シーク・終端・Escape終了を確認。両幅の30秒画面を目視。実機Safari/iOS、通信速度別、全編の実時間目視・音声実聴は未確認。
 - Astroビルド733ページ成功。dist動画のSHA-256が元の圧縮済み資産と一致し、dist全体に25 MiB以上のファイルがないことを検査。検証用build-stagingは上限以下なら再圧縮しない既存処理で、変更なし。
-- push前の本番Deploymentは08498b1f-2ce8-4da4-bf92-5142f229feb3で変更なし。ビルド設定/トリガーのGETは403。これまでの非本番ブランチでもWorkers Buildsが起動しており、今回は配備を止めていた容量問題が解消するため、本番へ反映されないことの確認前にはpushしない。本番設定は変更していない。
+- push前の本番Deploymentは08498b1f-2ce8-4da4-bf92-5142f229feb3で変更なし。ビルド設定/トリガーのGETは403。これまでの非本番ブランチでもWorkers Buildsが起動しており、今回は配備を止めていた容量問題が解消するため、下記の利用者確認を得るまでpushを保留した。本番設定は変更していない。
 - 他の相談事項・未確認項目と#390/#394/#433の継続を維持。この動画修正だけで本番利用可能とは判定しない。
+
+### 動画修正のpush前・トリガー確認
+
+11/21、利用者がCloudflare側で読み取り確認した結果を提供。エージェントの設定APIは403のままであり、以下は利用者提供の実設定・ログを根拠とする。
+
+- 本番ブランチはmain、rootはastro、buildは `pnpm install && pnpm build`。main専用トリガーは `npx wrangler deploy`。
+- `previews_enabled: false` とは別に旧非本番トリガーが残り、対象は `*`、mainと過去に許可された3ブランチを除外。実行コマンドは `npx wrangler versions upload`。本作業ブランチとversion-4は対象で、ビルドは起動する。
+- 直近ビルドcb538444-6469-4102-9d01-45d812599d80はversion-4の3e0d232、push_event起動、ログに `Executing user deploy command: npx wrangler versions upload`。容量エラーを確認。利用者報告では直近27件とも同じ非本番トリガー・容量エラー。
+- 以前の「Preview OFFなら非本番ビルドなし」「除外設定は存在しない」という説明は、今回判明した旧トリガーの実態に合わない。新Preview機能の表示と旧トリガーを区別する。今回、除外リストの変更は不要で、設定変更は行わない。
+- `versions upload` はバージョンを作成するが、稼働Deploymentへ昇格させない（[Cloudflare公式](https://developers.cloudflare.com/workers/ci-cd/builds/)）。この確認に基づき作業ブランチのpushとversion-4向けPR作成を進める。mainへのpush・マージや `versions deploy` は行わない。
