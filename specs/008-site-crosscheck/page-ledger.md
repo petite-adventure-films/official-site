@@ -1,7 +1,7 @@
 # 公開サイト横断照合台帳
 
 対象: [#449](https://github.com/petite-adventure-films/official-site/issues/449)。2026-11-21、監督協議は11/22 20時。
-分岐元・統合先: version-4 `c701b8df`（#446・#447統合済み）。作業ブランチ: `codex/issue-449-site-crosscheck`。
+統合先: version-4。主要ページの一次照合はPR #450で統合済み。固定ページ照合は `eef34f33` から分岐した `codex/issue-449-fixed-pages-crosscheck` で進める。
 
 ## 判定と対象
 
@@ -31,15 +31,15 @@ Astroパスは `astro/src/pages/` 基準。動的記事の全URL照合は未実�
 | 11/22 | `/contact/error/` | 未確認 | `contact/error/index.astro` | 未確認 |
 | 11/22 | `/contact/` | 未確認 | `contact/index.astro` | 未確認 |
 | 11/22 | `/contact/thanks/` | 未確認 | `contact/thanks/index.astro` | 未確認 |
-| 11/22 | `/copyrights-disclaimers/` | 未確認 | `copyrights-disclaimers/index.astro` | 未確認 |
+| 11/22 | `/copyrights-disclaimers/` | F4（共通基盤のみ） | `copyrights-disclaimers/index.astro` | 11/21一次照合済み・固定ページ節参照 |
 | 11/21 | `/director/` | F1（画面全体未確認） | `director/index.astro` | 一次照合済み・詳細は下記 |
 | 11/22 | `/events/[id]/` | F3（部品参照、ページ適合は未確認） | `events/[id].astro` | 未確認 |
 | 11/22 | `/events/archive/[year]/` | F3（部品参照、ページ適合は未確認） | `events/archive/[year].astro` | 未確認 |
 | 11/22 | `/events/` | F3（部品参照、ページ適合は未確認） | `events/index.astro` | 未確認 |
 | 11/21 | `/films/[id]/` | F1（画面全体未確認） | `films/[id].astro` | 一次照合済み・詳細は下記 |
 | 11/21 | `/films/` | F1（画面全体未確認） | `films/index.astro` | 一次照合済み・詳細は下記 |
-| 11/22 | `/four-walling/` | 未確認 | `four-walling/index.astro` | 未確認 |
-| 11/22 | `/gathering-the-personal-information/` | 未確認 | `gathering-the-personal-information/index.astro` | 未確認 |
+| 11/22 | `/four-walling/` | F4（共通基盤のみ） | `four-walling/index.astro` | 11/21一次照合済み・固定ページ節参照 |
+| 11/22 | `/gathering-the-personal-information/` | F4（共通基盤のみ） | `gathering-the-personal-information/index.astro` | 11/21一次照合済み・固定ページ節参照 |
 | 11/21 | `/` | F1（画面全体未確認） | `index.astro` | 一次照合済み・詳細は下記 |
 | 11/22 | `/media/[id]/` | F3（部品参照、ページ適合は未確認） | `media/[id].astro` | 未確認 |
 | 11/22 | `/media/` | F3（部品参照、ページ適合は未確認） | `media/index.astro` | 未確認 |
@@ -52,11 +52,11 @@ Astroパスは `astro/src/pages/` 基準。動的記事の全URL照合は未実�
 | 11/22 | `/pafshop/faq/` | 未確認 | `pafshop/faq/index.astro` | 未確認 |
 | 11/22 | `/pafshop/` | 未確認 | `pafshop/index.astro` | 未確認 |
 | 11/22 | `/pafshop/thanks/` | 未確認 | `pafshop/thanks/index.astro` | 未確認 |
-| 11/22 | `/privacy-policy/` | 未確認 | `privacy-policy/index.astro` | 未確認 |
-| 11/22 | `/specified-commercial-transaction-law/` | 未確認 | `specified-commercial-transaction-law/index.astro` | 未確認 |
-| 11/22 | `/system-requirements/` | 未確認 | `system-requirements/index.astro` | 未確認 |
+| 11/22 | `/privacy-policy/` | F4（共通基盤のみ） | `privacy-policy/index.astro` | 11/21一次照合済み・固定ページ節参照 |
+| 11/22 | `/specified-commercial-transaction-law/` | F4（共通基盤のみ） | `specified-commercial-transaction-law/index.astro` | 11/21一次照合済み・固定ページ節参照 |
+| 11/22 | `/system-requirements/` | F4（共通基盤のみ） | `system-requirements/index.astro` | 11/21一次照合済み・固定ページ節参照 |
 | 11/21 | `/takahatadai73/` | F2（固有文字基盤のみ） | `takahatadai73/index.astro` | 一次照合済み・詳細は下記 |
-| 11/22 | `/workshop/` | 未確認 | `workshop/index.astro` | 未確認 |
+| 11/22 | `/workshop/` | F4（共通基盤のみ） | `workshop/index.astro` | 11/21一次照合済み・固定ページ節参照 |
 
 共通部品は通常ページで `Layout.astro` → `AppHeader.astro` / `SiteName.astro` / `AppNav.astro` / `AppFooter.astro` を確認対象とする。SHOPは専用レイアウト・ヘッダーも翌日確認。
 `robots.txt.ts` と生成sitemapは画面外の確認対象（未確認）。
@@ -126,7 +126,7 @@ Astroパスは `astro/src/pages/` 基準。動的記事の全URL照合は未実�
 - 公開サイトのローカル操作のみ実施。CMSの画面操作は行っていない。検証環境への反映・本番変更は行っていない。開発サーバーの表示確認は配備後の確認とは分ける。
 - 一時検査資料は `/tmp/paf-449/`（取得HTML、Playwrightスクリプト、リンク結果、スクリーンショット）。一時資料の消去後も本台帳の結果・未確認事項を引き継ぐ。
 
-## PR前レビュー
+## 主要ページのPR #450レビュー
 
 - 変更3ファイルを呼び出し元と合わせてレビュー。PDF対象は現在の添付のpath/nameに対する拡張子で判定し、YouTube等の外部リンクには影響しない。ナビのEscapeは開いている時だけ処理し、メニュー外のフォーカスを奪わない。SNSリンク名は既存リンク先を説明する。
 - 今回の差分にPRを妨げるコード上の問題は検出していない。既存のフォーカス可視性不足と未確認範囲は本Issueの残件であり、今回修正済みとは扱わない。
@@ -137,3 +137,51 @@ Astroパスは `astro/src/pages/` 基準。動的記事の全URL照合は未実�
 - 本番Deploymentは失敗後も08498b1f-2ce8-4da4-bf92-5142f229feb3のままとAPIで再確認。Vercel成功、今回のローカル検証成功を踏まえ、既存のWorkers配備失敗は今回の修正のマージを妨げないと判断。全チェック成功や本番利用可能とは扱わない。
 
 - PR前にAstro本番ビルドを実行し、733ページの生成成功。配備はしていない。
+
+## 固定ページ照合（11/21、PR #450統合後）
+
+対象の既存7 URLを11/21に直接GETし、通常のAstro開発サーバーと比較した。ブラウザーが構築したmain本文の空白を除去して照合。規約の法的適合性、料金・個人情報の扱いの現在の運用まで保証する検査ではない。
+
+F4: 共通文字基盤はF1の [8:4](https://www.figma.com/design/KOXqODf4v4aBYzNOyFipMO?node-id=8-4) を参照。今回の7ページはPostLayout / Section / H3 / DefinitionList / ButtonLink等を使用。自主上映・ワークショップのGalleryImage、レポートのPostCardも照合対象。同日のFigma構造読み取りでは、これらのページ全体・ギャラリー・規約本文の部品構成に対応する採用済み定義は特定できていない。画面全体のFigma適合とは扱わず、確認案の色・文字・余白は適用していない。
+
+| ページ | 内容・機能照合 | 差分の分類・判断 |
+| --- | --- | --- |
+| 自主上映 | 本文一致。上映条件、チラシ6点・ポスター3点、ギャラリー4点、お問い合わせ2導線を保持 | 本文・画像の移植差分なし。ギャラリーの読み上げ状態を下記のとおり修正 |
+| ワークショップ | 固定本文・開催実績は一致。ギャラリー7点、お問い合わせ、講座例への導線を保持 | 判断が必要：最近の記事5件の抽出条件が旧実装と異なる。詳細は下記 |
+| サイト利用条件 | main本文一致、お問い合わせリンク200 | 差分なし。本文の法的見直しは実施していない |
+| 個人情報の取り扱い | main本文一致、1〜5項・管理者・お問い合わせを保持 | 差分なし。現在のデータ提供・委託の運用との整合は別確認 |
+| プライバシーポリシー | main本文一致、運用開始日・4項・お問い合わせを保持 | 差分なし。本文内のHTTP表記も原文を維持 |
+| 特定商取引法表記 | main本文一致、販売者・連絡先・支払方法・引渡時期・返品条件を保持 | 差分なし。SHOPの決済・通知や販売条件の運用確認とは分ける |
+| 推奨環境 | main本文一致、ブラウザ案内とJavaScriptの説明を保持 | 現行リンク3件はHTTPから公式HTTPSへ転送して200。明確なリンク切れなし。推奨端末の実機検証は未確認 |
+
+### 修正した明確な実装不具合
+
+GalleryImageは画像を透明にして切り替えていたが、非表示画像の代替テキストも支援技術に公開され、選択中の番号も色だけで示していた。
+初期表示・前後移動・番号選択で `aria-hidden` と `aria-pressed` を表示状態に同期する。見た目、画像、順番、トークンは変更しない。
+共通部品なので、自主上映・ワークショップに加え、作品とSHOPの商品詳細も影響範囲。今回の商品確認はギャラリーだけであり、SHOP全体の点検完了ではない。
+
+### ワークショップの相談事項
+
+- 現行本番の先頭は募集記事 `/2026_civil_video_ws/`（旧ID18053）。同記事はローカルスナップショットにも存在するため、単なる取得日差や記事そのものの移植漏れではない。
+- 旧Vueは `tag: '映像ワークショップ'` で最新5件を取得。Astroは `filterWorkshopReportBlog` により旧タグ5026「映像ワークショップレポート」由来の `isWorkshopReport` で抽出する。募集記事の旧タグは3318/255/254/3299で、5026は含まない。
+- 新CMSの採用仕様 `specs/006-blog-cms/spec.md` は報告分類を5026から引き継ぐため、分類全体を255に置換する修正は行わない。「最近の映像ワークショップレポート」に募集告知も含めるか、報告だけを載せるかを相談する。現行の5件では募集記事の代わりに振り返り#5が末尾へ入る。
+- 旧本文の `/contact` はAstroで `/contact/` に正規化され、リンク先は保持されている。
+
+### 未確認・相談事項
+
+- 自主上映のJASRACリンク `https://www.jasrac.or.jp/users/` は直接GETが接続拒否、Web取得も502。サイト廃止・リンク切れとは断定しない。別環境での到達確認と、案内先が上映手続きとして適切かの確認を残す。
+- 自主上映料・宣伝資材価格・楽曲使用料の案内、特商法の連絡先・発送/返品条件が現在の運用と合うかは監督との確認事項。今回、原稿・契約条件を変更していない。
+- ワークショップ講座例 `https://civiltachikawa.sakura.ne.jp/shimin-koza-n49.html` は200。ブラウザ案内3件も転送先200。外部リンクの到達を外部サービス全体の品質保証とは扱わない。
+- 共通フォーカス表示不足、ギャラリーの小さい番号ボタンの操作領域、本文のコントラストなどは全WCAG評価を完了していない。今回の状態通知の修正だけで適合とはしない。
+- 記事一覧/詳細、SHOP全体、お問い合わせの入力・完了/エラーは引き続き未確認。既存データの正式移行、新CMSでの全件編集、決済・通知・実送信は別評価。
+
+### 検証
+
+- 固定7ページ×390/1280pxの14表示で画像読込失敗・横はみ出しなし。スクリーンショットを取得し、主要な固定本文・画像・連絡導線を目視。全内容の拡大表示・実機読み上げは未確認。
+- 自主上映13点・ワークショップ7点の画像は旧Vue資産とSHA-256一致。最新本番の画像バイナリとの全件比較は未実施。
+- 固定ページからの内部リンク24 URLがローカルGETですべて200。外部リンク確認は上記。
+- `pnpm --dir astro exec playwright test e2e/gallery.spec.ts --workers=2` で8件成功（デスクトップと360pxモバイル）。実ビルド＋preview上で自主上映・ワークショップ・さようならUR作品詳細/商品詳細の初期状態、前後の循環、番号ボタンのEnter操作と支援技術向けの画像・選択状態を検査。実機スクリーンリーダーによる確認とは分ける。
+- 変更コンポーネントと追加テストのPrettier成功、ESLintエラー0（既存の省略形警告4は同値のsize指定へ整形済み）、git diff --check成功。
+- 作業資料は `/tmp/paf-449-fixed/`。配備は実施していない。Cloudflare非本番ビルド設定の食い違いは未解決であり、以前の「非本番ビルドは起動しない」という案内を今回のpush判断に流用しない。
+- PR前レビュー：画像内にはフォーカス可能要素がなく、非表示画像へのaria-hidden追加がフォーカスを隠す問題はない。前後・番号・スワイプは同じ切替処理を使い、表示状態と選択状態を同期する。今回の差分にPRを妨げる問題は検出していない。相談事項・未確認範囲は維持する。
+- push前に本番Deploymentが08498b1f-2ce8-4da4-bf92-5142f229feb3のままであることを再確認。ビルド設定GETは引き続き403。前PRで確認した動画容量超過によるWorkers Builds失敗は別課題としてPRにも明記し、動画・本番配信設定は変更しない。
