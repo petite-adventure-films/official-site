@@ -1,12 +1,13 @@
 // Protected by the PAF CMS staging Access application; keep preview URLs disabled.
-// Auth variables and allowed users are Worker secrets, never repository values.
+// Access settings and media signing keys are Worker secrets.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "paf-cms-staging",
   "main": "worker/index.ts",
   "compatibility_date": "2026-07-02",
   "compatibility_flags": [
-    "nodejs_compat"
+    "nodejs_compat",
+    "global_fetch_strictly_public"
   ],
   "workers_dev": true,
   "preview_urls": false,
@@ -19,6 +20,16 @@
     }
   ],
   "account_id": "53b7ac20e59cefa91e5b88831768a248",
+  "vars": {
+    "MEDIA_ACCOUNT_ID": "53b7ac20e59cefa91e5b88831768a248",
+    "MEDIA_BUCKET_NAME": "paf-cms-staging-media"
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "paf-cms-staging-media"
+    }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

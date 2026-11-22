@@ -1,3 +1,10 @@
+import { isArticleType, type ArticleDraft } from '../../src/features/articles/draft';
+import { validateArticleDraft } from '../article-draft';
+import { articleDraftFromPublication } from '../article-publication';
+import { blogDraftFromPublication, blogPublicationVersion } from '../blog-publication';
+import type { BlogDraft } from '../../src/features/blog/draft';
+import { validateBlogDraft } from '../blog-draft';
+import { validateDraftReferences } from './draft-references';
 import Ajv from 'ajv/dist/2020';
 import publicationSchema from '../../../packages/content-schema/schemas/content/event-publication.schema.json';
 import { emptyDraft, type EventDraft } from '../../src/features/events/draft';
@@ -11,10 +18,29 @@ type SourceKind = 'publication' | 'protectedDraft';
 type Input = { actor: string; actorName?: string; operationId: string; contentId: string; expectedVersion: number; sourceKind: SourceKind; sourceId: string };
 export type HistoryItem = { kind: SourceKind; id: string; payloadSchemaVersion: string; payload: unknown; at: string; actor: string; actorName: string | null };
 
-export function restorePayload(source: HistoryItem): EventDraft {
+function validateSnapshotDraft(type: Draft['type'], schema: string, payload: unknown) {
+  const valid = isArticleType(type) ? validateArticleDraft(type, payload) : type === 'blog' ? validateBlogDraft(payload) : validateDraft(payload);
+  if (schema !== `${type}-draft/v1` || !valid) throw new RestoreInvalid('unsupported_snapshot');
+  return payload as EventDraft | BlogDraft | ArticleDraft;
+}
+
+async function restorePayload(db: Database, type: Draft['type'], source: HistoryItem) {
   if (source.kind === 'protectedDraft') {
-    if (source.payloadSchemaVersion !== 'event-draft/v1' || !validateDraft(source.payload)) throw new RestoreInvalid('unsupported_snapshot');
-    return source.payload as EventDraft;
+    const payload = validateSnapshotDraft(type, source.payloadSchemaVersion, source.payload);
+    if (type !== 'event') await validateDraftReferences(db, type, payload);
+    return payload;
+  }
+  if (isArticleType(type)) {
+    const payload = source.payloadSchemaVersion === `${type}-publication/v1` ? articleDraftFromPublication(type, source.payload) : null;
+    if (!payload) throw new RestoreInvalid('unsupported_snapshot');
+    await validateDraftReferences(db, type, payload);
+    return payload;
+  }
+  if (type === 'blog') {
+    const payload = source.payloadSchemaVersion === blogPublicationVersion ? blogDraftFromPublication(source.payload) : null;
+    if (!payload) throw new RestoreInvalid('unsupported_snapshot');
+    await validateDraftReferences(db, type, payload);
+    return payload;
   }
   if (source.payloadSchemaVersion !== 'event-publication/v1' || !validatePublication(source.payload)) throw new RestoreInvalid('unsupported_snapshot');
   const { type: _type, payloadSchemaVersion: _schema, ...published } = source.payload as EventPublication;
@@ -27,6 +53,10 @@ export function restorePayload(source: HistoryItem): EventDraft {
 /** Draft restoration shared by the authenticated history API; never dispatches a deployment. */
 export class RestoreService {
   constructor(private db: Database) {}
+  payload(type: Draft['type'], source: HistoryItem) {
+    return restorePayload(this.db, type, source);
+  }
+
   async history(contentId: string): Promise<HistoryItem[]> {
     if (!await new ContentDraftRepository(this.db).get(contentId)) throw new DraftNotFound();
     const rows = await this.db.prepare(`SELECT 'protectedDraft' AS kind, id, payload_schema_version AS schema,
@@ -53,10 +83,10 @@ export class RestoreService {
     const current = await repository.get(input.contentId);
     if (!current) throw new DraftNotFound();
     if (current.version !== input.expectedVersion) throw new DraftConflict('draft_version_conflict');
-    if (current.payloadSchemaVersion !== 'event-draft/v1') throw new RestoreInvalid('unsupported_snapshot');
+    validateSnapshotDraft(current.type, current.payloadSchemaVersion, current.payload);
     const source = (await this.history(input.contentId)).find(item => item.kind === input.sourceKind && item.id === input.sourceId);
     if (!source) throw new DraftNotFound();
-    const payload = restorePayload(source);
+    const payload = await this.payload(current.type, source);
     const now = new Date().toISOString();
     const response: Draft = { ...current, payload, version: current.version + 1, updatedAt: now, updatedBy: input.actor };
     try {

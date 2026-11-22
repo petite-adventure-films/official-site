@@ -1,1 +1,1 @@
-export const NEWS_PER_PAGE = 10;
+export { NEWS_PER_PAGE } from '../../../packages/content-schema/publication-paths';

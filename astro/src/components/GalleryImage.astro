@@ -16,6 +16,7 @@ const { images, class: className } = Astro.props;
       images.map((img, i) => (
         <div
           data-gallery-item
+          aria-hidden={i !== 0}
           class:list={[
             i === 0 ? 'relative opacity-100' : 'pointer-events-none absolute inset-0 opacity-0',
             'transition-opacity duration-300',
@@ -33,7 +34,7 @@ const { images, class: className } = Astro.props;
             aria-label="前の画像"
             class="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r sm:hover:from-purple-100/25"
           >
-            <div class="mr-auto flex h-8 w-8 items-center justify-center bg-black/25 text-white">
+            <div class="mr-auto flex size-8 items-center justify-center bg-black/25 text-white">
               ←
             </div>
           </button>
@@ -42,7 +43,7 @@ const { images, class: className } = Astro.props;
             aria-label="次の画像"
             class="absolute top-0 right-0 h-full w-1/4 bg-gradient-to-l sm:hover:from-purple-100/25"
           >
-            <div class="ml-auto flex h-8 w-8 items-center justify-center bg-black/25 text-white">
+            <div class="ml-auto flex size-8 items-center justify-center bg-black/25 text-white">
               →
             </div>
           </button>
@@ -57,6 +58,7 @@ const { images, class: className } = Astro.props;
           <button
             data-bullet={i}
             aria-label={`画像${i + 1}`}
+            aria-pressed={i === 0}
             class:list={[i === 0 ? 'bg-black' : 'bg-gray-100', 'h-2 w-2']}
           />
         ))}
@@ -74,11 +76,15 @@ const { images, class: className } = Astro.props;
     const go = (n: number) => {
       items[current].classList.remove('relative', 'opacity-100');
       items[current].classList.add('absolute', 'inset-0', 'opacity-0', 'pointer-events-none');
+      items[current].setAttribute('aria-hidden', 'true');
       bullets[current]?.classList.replace('bg-black', 'bg-gray-100');
+      bullets[current]?.setAttribute('aria-pressed', 'false');
       current = ((n % items.length) + items.length) % items.length;
       items[current].classList.remove('absolute', 'inset-0', 'opacity-0', 'pointer-events-none');
       items[current].classList.add('relative', 'opacity-100');
+      items[current].setAttribute('aria-hidden', 'false');
       bullets[current]?.classList.replace('bg-gray-100', 'bg-black');
+      bullets[current]?.setAttribute('aria-pressed', 'true');
     };
 
     widget.querySelector('[data-prev]')?.addEventListener('click', () => go(current - 1));

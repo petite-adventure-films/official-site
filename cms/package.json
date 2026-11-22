@@ -12,20 +12,24 @@
     "dev:api": "wrangler dev --config wrangler.local.jsonc --local --ip 127.0.0.1 --port 8787",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run && node --test scripts/publication-runner.test.mjs",
+    "test": "vitest run && node --test scripts/publication-runner.test.mjs scripts/hosted-staging-job.test.mjs scripts/staging-manifest.test.mjs",
     "test:e2e": "playwright test",
     "db:migrate:local": "wrangler d1 migrations apply DB --local --config wrangler.local.jsonc"
   },
   "dependencies": {
-    "jose": "6.2.17",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
-    "@mui/material": "9.5.0",
-    "@mui/icons-material": "9.5.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fontsource/roboto": "^5.2.0",
-    "ajv": "8.20.0"
+    "@mui/icons-material": "9.5.0",
+    "@mui/material": "9.5.0",
+    "@tiptap/pm": "3.34.0",
+    "@tiptap/react": "3.34.0",
+    "@tiptap/starter-kit": "3.34.0",
+    "ajv": "8.20.0",
+    "aws4fetch": "1.0.20",
+    "jose": "6.2.17",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
     "@playwright/test": "1.65.0",

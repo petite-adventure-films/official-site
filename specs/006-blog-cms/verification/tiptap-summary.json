@@ -1,0 +1,1667 @@
+{
+  "standard": {
+    "node": "v24.22.3",
+    "versions": {
+      "@tiptap/core": "3.34.0",
+      "@tiptap/html": "3.34.0",
+      "@tiptap/starter-kit": "3.34.0",
+      "@tiptap/extension-image": "3.34.0",
+      "@tiptap/extension-youtube": "3.34.0",
+      "@tiptap/extension-table": "3.34.0",
+      "@tiptap/extension-text-style": "3.34.0",
+      "@tiptap/extension-text-align": "3.34.0",
+      "jsdom": "26.1.0",
+      "ajv": "8.20.0"
+    },
+    "sourceSHA256": "926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7",
+    "count": 310,
+    "legacyYoutubeParser": false,
+    "configuration": "StarterKit + inline Image + Youtube + TableKit + TextStyleKit + TextAlign(heading,paragraph)",
+    "aggregate": {
+      "tags": {
+        "p": 35055,
+        "a": 829,
+        "strong": 265,
+        "br": 1583,
+        "span": 211,
+        "iframe": 151,
+        "img": 5923,
+        "em": 2,
+        "wbr": 279,
+        "blockquote": 3,
+        "div": 113,
+        "hr": 2,
+        "u": 1
+      },
+      "attrs": {
+        "a@href": 829,
+        "span@style": 160,
+        "iframe@title": 82,
+        "iframe@src": 151,
+        "iframe@width": 151,
+        "iframe@height": 151,
+        "iframe@frameborder": 151,
+        "iframe@allowfullscreen": 151,
+        "img@class": 5923,
+        "img@src": 5923,
+        "img@alt": 5922,
+        "img@width": 5922,
+        "img@height": 5922,
+        "span@class": 50,
+        "a@target": 10,
+        "a@rel": 11,
+        "a@data-saferedirecturl": 7,
+        "strong@style": 1,
+        "div@class": 23,
+        "div@dir": 22,
+        "div@lang": 4,
+        "a@data-lynx-mode": 2,
+        "a@data-lynx-uri": 2,
+        "span@id": 2,
+        "span@tabindex": 2,
+        "span@aria-live": 2,
+        "span@data-ft": 3,
+        "div@id": 3,
+        "div@tabindex": 1,
+        "div@data-tooltip": 1,
+        "p@lang": 31
+      },
+      "postsWith": {
+        "p": 310,
+        "a": 215,
+        "strong": 52,
+        "br": 156,
+        "span": 60,
+        "iframe": 90,
+        "img": 252,
+        "em": 2,
+        "wbr": 17,
+        "blockquote": 2,
+        "div": 11,
+        "hr": 1,
+        "u": 1
+      },
+      "failures": 0,
+      "textChanged": 0,
+      "linksLost": 1,
+      "imagesLost": 0,
+      "imageAltsLost": 0,
+      "framesChanged": 90,
+      "videosLost": 90,
+      "anchorsLost": 3,
+      "schemaRejected": 264,
+      "unstable": 1,
+      "editLostText": 0
+    },
+    "fixtures": [
+      {
+        "name": "table",
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "table",
+              "content": [
+                {
+                  "type": "tableRow",
+                  "content": [
+                    {
+                      "type": "tableHeader",
+                      "attrs": {
+                        "colspan": 2,
+                        "rowspan": 1,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "見出し"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableRow",
+                  "content": [
+                    {
+                      "type": "tableCell",
+                      "attrs": {
+                        "colspan": 1,
+                        "rowspan": 2,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "A"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tableCell",
+                      "attrs": {
+                        "colspan": 1,
+                        "rowspan": 1,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "B"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableRow",
+                  "content": [
+                    {
+                      "type": "tableCell",
+                      "attrs": {
+                        "colspan": 1,
+                        "rowspan": 1,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "C"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "output": "<table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><th colspan=\"2\"><p>見出し</p></th></tr><tr><td rowspan=\"2\"><p>A</p></td><td><p>B</p></td></tr><tr><td><p>C</p></td></tr></tbody></table>",
+        "textEqual": true,
+        "linksLost": [],
+        "imagesLost": [],
+        "schemaOk": true,
+        "stable": true
+      },
+      {
+        "name": "basic",
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "textAlign": null,
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "見出し"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "太字"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "italic"
+                    }
+                  ],
+                  "text": "斜体"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "underline"
+                    }
+                  ],
+                  "text": "下線"
+                },
+                {
+                  "type": "hardBreak"
+                },
+                {
+                  "type": "text",
+                  "text": "改行"
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "textAlign": null
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "箇条書き"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "orderedList",
+              "attrs": {
+                "start": 3,
+                "type": null
+              },
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "textAlign": null
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "番号"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "blockquote",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "引用"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "output": "<h2>見出し</h2><p><strong>太字</strong><em>斜体</em><u>下線</u><br>改行</p><ul><li><p>箇条書き</p></li></ul><ol start=\"3\"><li><p>番号</p></li></ol><blockquote><p>引用</p></blockquote>",
+        "textEqual": true,
+        "linksLost": [],
+        "imagesLost": [],
+        "schemaOk": true,
+        "stable": true
+      },
+      {
+        "name": "links",
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "/existing-post/",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ],
+                  "text": "内部リンク"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "https://example.org/document.pdf",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ],
+                  "text": "PDF"
+                },
+                {
+                  "type": "image",
+                  "attrs": {
+                    "src": "https://example.org/thumb.jpg",
+                    "alt": "画像の説明",
+                    "title": null,
+                    "width": null,
+                    "height": null
+                  },
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "https://example.org/full.jpg",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "output": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/existing-post/\">内部リンク</a><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://example.org/document.pdf\">PDF</a><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://example.org/full.jpg\"><img src=\"https://example.org/thumb.jpg\" alt=\"画像の説明\"></a></p>",
+        "textEqual": true,
+        "linksLost": [],
+        "imagesLost": [],
+        "schemaOk": false,
+        "stable": true
+      }
+    ],
+    "postsLosingLinkDestinations": 0,
+    "lostVideoOccurrences": 151,
+    "pdfLinkOccurrences": 5,
+    "examples": [
+      {
+        "id": 18050,
+        "slug": "2026_brian_memory_year",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [
+          {
+            "value": "https://www.youtube.com/embed/3ZlV3jyz94A?si=_R2xYBoHq84KmkT0",
+            "count": 1
+          }
+        ],
+        "videosLost": [
+          {
+            "value": "youtube.com/embed/3ZlV3jyz94A",
+            "count": 1
+          }
+        ],
+        "anchorsLost": [],
+        "tagsReduced": [
+          {
+            "value": "iframe",
+            "count": 1
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "iframe@title",
+            "count": 1
+          },
+          {
+            "value": "iframe@src",
+            "count": 1
+          },
+          {
+            "value": "iframe@width",
+            "count": 1
+          },
+          {
+            "value": "iframe@height",
+            "count": 1
+          },
+          {
+            "value": "iframe@frameborder",
+            "count": 1
+          },
+          {
+            "value": "iframe@allowfullscreen",
+            "count": 1
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": true,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 17696,
+        "slug": "20241226_nwec",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [],
+        "tagsReduced": [],
+        "attrsReduced": [],
+        "pdfLinks": 1,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 15682,
+        "slug": "brian_international_archives_week",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [
+          {
+            "value": "https://player.vimeo.com/video/50026595?h=11edb75887",
+            "count": 1
+          },
+          {
+            "value": "https://player.vimeo.com/video/49421458?h=c68d75dfc7",
+            "count": 1
+          }
+        ],
+        "videosLost": [
+          {
+            "value": "player.vimeo.com/video/50026595",
+            "count": 1
+          },
+          {
+            "value": "player.vimeo.com/video/49421458",
+            "count": 1
+          }
+        ],
+        "anchorsLost": [],
+        "tagsReduced": [
+          {
+            "value": "iframe",
+            "count": 2
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "iframe@src",
+            "count": 2
+          },
+          {
+            "value": "iframe@width",
+            "count": 2
+          },
+          {
+            "value": "iframe@height",
+            "count": 2
+          },
+          {
+            "value": "iframe@frameborder",
+            "count": 2
+          },
+          {
+            "value": "iframe@allowfullscreen",
+            "count": 2
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": true,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 10297,
+        "slug": "column_20181031",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [
+          {
+            "value": "fbPhotoSnowliftCaption",
+            "count": 2
+          }
+        ],
+        "tagsReduced": [
+          {
+            "value": "div",
+            "count": 9
+          },
+          {
+            "value": "span",
+            "count": 4
+          },
+          {
+            "value": "wbr",
+            "count": 1
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "div@class",
+            "count": 9
+          },
+          {
+            "value": "img@class",
+            "count": 10
+          },
+          {
+            "value": "span@id",
+            "count": 2
+          },
+          {
+            "value": "span@class",
+            "count": 4
+          },
+          {
+            "value": "span@tabindex",
+            "count": 2
+          },
+          {
+            "value": "span@aria-live",
+            "count": 2
+          },
+          {
+            "value": "span@data-ft",
+            "count": 2
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 10285,
+        "slug": "column_20181030",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [
+          {
+            "value": "{0DE9E47C-871A-4F90-8440-B190C216800A}_7",
+            "count": 1
+          },
+          {
+            "value": "{0DE9E47C-871A-4F90-8440-B190C216800A}_9",
+            "count": 1
+          }
+        ],
+        "tagsReduced": [
+          {
+            "value": "div",
+            "count": 12
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "img@class",
+            "count": 4
+          },
+          {
+            "value": "div@class",
+            "count": 6
+          },
+          {
+            "value": "div@id",
+            "count": 2
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 4772,
+        "slug": "20170430_kosaten",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [
+          {
+            "value": ":t3",
+            "count": 1
+          }
+        ],
+        "tagsReduced": [
+          {
+            "value": "span",
+            "count": 3
+          },
+          {
+            "value": "wbr",
+            "count": 7
+          },
+          {
+            "value": "div",
+            "count": 2
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "span@class",
+            "count": 3
+          },
+          {
+            "value": "div@class",
+            "count": 2
+          },
+          {
+            "value": "div@id",
+            "count": 1
+          },
+          {
+            "value": "div@tabindex",
+            "count": 1
+          },
+          {
+            "value": "div@data-tooltip",
+            "count": 1
+          },
+          {
+            "value": "img@class",
+            "count": 1
+          },
+          {
+            "value": "a@data-saferedirecturl",
+            "count": 1
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 4318,
+        "slug": "my_indian_diary_details_jp",
+        "textChanged": false,
+        "linksLost": [
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_11.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_0452_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_26_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_1753_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_1873_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_65_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_0851_re.jpg",
+            "count": 1
+          }
+        ],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [
+          {
+            "value": "https://www.youtube.com/embed/S4Wk5xYLO5M",
+            "count": 1
+          }
+        ],
+        "videosLost": [
+          {
+            "value": "youtube.com/embed/S4Wk5xYLO5M",
+            "count": 1
+          }
+        ],
+        "anchorsLost": [],
+        "tagsReduced": [
+          {
+            "value": "span",
+            "count": 1
+          },
+          {
+            "value": "a",
+            "count": 7
+          },
+          {
+            "value": "iframe",
+            "count": 1
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "span@style",
+            "count": 1
+          },
+          {
+            "value": "a@href",
+            "count": 7
+          },
+          {
+            "value": "img@class",
+            "count": 53
+          },
+          {
+            "value": "iframe@src",
+            "count": 1
+          },
+          {
+            "value": "iframe@width",
+            "count": 1
+          },
+          {
+            "value": "iframe@height",
+            "count": 1
+          },
+          {
+            "value": "iframe@frameborder",
+            "count": 1
+          },
+          {
+            "value": "iframe@allowfullscreen",
+            "count": 1
+          },
+          {
+            "value": "p@lang",
+            "count": 31
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": false,
+        "editLostText": false
+      }
+    ]
+  },
+  "legacyYoutube": {
+    "node": "v24.22.3",
+    "versions": {
+      "@tiptap/core": "3.34.0",
+      "@tiptap/html": "3.34.0",
+      "@tiptap/starter-kit": "3.34.0",
+      "@tiptap/extension-image": "3.34.0",
+      "@tiptap/extension-youtube": "3.34.0",
+      "@tiptap/extension-table": "3.34.0",
+      "@tiptap/extension-text-style": "3.34.0",
+      "@tiptap/extension-text-align": "3.34.0",
+      "jsdom": "26.1.0",
+      "ajv": "8.20.0"
+    },
+    "sourceSHA256": "926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7",
+    "count": 310,
+    "legacyYoutubeParser": true,
+    "configuration": "StarterKit + inline Image + Youtube + TableKit + TextStyleKit + TextAlign(heading,paragraph)",
+    "aggregate": {
+      "tags": {
+        "p": 35055,
+        "a": 829,
+        "strong": 265,
+        "br": 1583,
+        "span": 211,
+        "iframe": 151,
+        "img": 5923,
+        "em": 2,
+        "wbr": 279,
+        "blockquote": 3,
+        "div": 113,
+        "hr": 2,
+        "u": 1
+      },
+      "attrs": {
+        "a@href": 829,
+        "span@style": 160,
+        "iframe@title": 82,
+        "iframe@src": 151,
+        "iframe@width": 151,
+        "iframe@height": 151,
+        "iframe@frameborder": 151,
+        "iframe@allowfullscreen": 151,
+        "img@class": 5923,
+        "img@src": 5923,
+        "img@alt": 5922,
+        "img@width": 5922,
+        "img@height": 5922,
+        "span@class": 50,
+        "a@target": 10,
+        "a@rel": 11,
+        "a@data-saferedirecturl": 7,
+        "strong@style": 1,
+        "div@class": 23,
+        "div@dir": 22,
+        "div@lang": 4,
+        "a@data-lynx-mode": 2,
+        "a@data-lynx-uri": 2,
+        "span@id": 2,
+        "span@tabindex": 2,
+        "span@aria-live": 2,
+        "span@data-ft": 3,
+        "div@id": 3,
+        "div@tabindex": 1,
+        "div@data-tooltip": 1,
+        "p@lang": 31
+      },
+      "postsWith": {
+        "p": 310,
+        "a": 215,
+        "strong": 52,
+        "br": 156,
+        "span": 60,
+        "iframe": 90,
+        "img": 252,
+        "em": 2,
+        "wbr": 17,
+        "blockquote": 2,
+        "div": 11,
+        "hr": 1,
+        "u": 1
+      },
+      "failures": 0,
+      "textChanged": 0,
+      "linksLost": 1,
+      "imagesLost": 0,
+      "imageAltsLost": 0,
+      "framesChanged": 90,
+      "videosLost": 1,
+      "anchorsLost": 3,
+      "schemaRejected": 280,
+      "unstable": 1,
+      "editLostText": 0
+    },
+    "fixtures": [
+      {
+        "name": "table",
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "table",
+              "content": [
+                {
+                  "type": "tableRow",
+                  "content": [
+                    {
+                      "type": "tableHeader",
+                      "attrs": {
+                        "colspan": 2,
+                        "rowspan": 1,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "見出し"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableRow",
+                  "content": [
+                    {
+                      "type": "tableCell",
+                      "attrs": {
+                        "colspan": 1,
+                        "rowspan": 2,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "A"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "tableCell",
+                      "attrs": {
+                        "colspan": 1,
+                        "rowspan": 1,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "B"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableRow",
+                  "content": [
+                    {
+                      "type": "tableCell",
+                      "attrs": {
+                        "colspan": 1,
+                        "rowspan": 1,
+                        "colwidth": null,
+                        "align": null
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "textAlign": null
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "C"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "output": "<table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><th colspan=\"2\"><p>見出し</p></th></tr><tr><td rowspan=\"2\"><p>A</p></td><td><p>B</p></td></tr><tr><td><p>C</p></td></tr></tbody></table>",
+        "textEqual": true,
+        "linksLost": [],
+        "imagesLost": [],
+        "schemaOk": true,
+        "stable": true
+      },
+      {
+        "name": "basic",
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "textAlign": null,
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "見出し"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "太字"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "italic"
+                    }
+                  ],
+                  "text": "斜体"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "underline"
+                    }
+                  ],
+                  "text": "下線"
+                },
+                {
+                  "type": "hardBreak"
+                },
+                {
+                  "type": "text",
+                  "text": "改行"
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "textAlign": null
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "箇条書き"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "orderedList",
+              "attrs": {
+                "start": 3,
+                "type": null
+              },
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "textAlign": null
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "番号"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "blockquote",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "引用"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "output": "<h2>見出し</h2><p><strong>太字</strong><em>斜体</em><u>下線</u><br>改行</p><ul><li><p>箇条書き</p></li></ul><ol start=\"3\"><li><p>番号</p></li></ol><blockquote><p>引用</p></blockquote>",
+        "textEqual": true,
+        "linksLost": [],
+        "imagesLost": [],
+        "schemaOk": true,
+        "stable": true
+      },
+      {
+        "name": "links",
+        "doc": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "/existing-post/",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ],
+                  "text": "内部リンク"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "https://example.org/document.pdf",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ],
+                  "text": "PDF"
+                },
+                {
+                  "type": "image",
+                  "attrs": {
+                    "src": "https://example.org/thumb.jpg",
+                    "alt": "画像の説明",
+                    "title": null,
+                    "width": null,
+                    "height": null
+                  },
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "https://example.org/full.jpg",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "output": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/existing-post/\">内部リンク</a><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://example.org/document.pdf\">PDF</a><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://example.org/full.jpg\"><img src=\"https://example.org/thumb.jpg\" alt=\"画像の説明\"></a></p>",
+        "textEqual": true,
+        "linksLost": [],
+        "imagesLost": [],
+        "schemaOk": false,
+        "stable": true
+      }
+    ],
+    "postsLosingLinkDestinations": 0,
+    "lostVideoOccurrences": 2,
+    "pdfLinkOccurrences": 5,
+    "examples": [
+      {
+        "id": 18050,
+        "slug": "2026_brian_memory_year",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [
+          {
+            "value": "https://www.youtube.com/embed/3ZlV3jyz94A?si=_R2xYBoHq84KmkT0",
+            "count": 1
+          }
+        ],
+        "videosLost": [],
+        "anchorsLost": [],
+        "tagsReduced": [],
+        "attrsReduced": [
+          {
+            "value": "iframe@title",
+            "count": 1
+          },
+          {
+            "value": "iframe@frameborder",
+            "count": 1
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 17696,
+        "slug": "20241226_nwec",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [],
+        "tagsReduced": [],
+        "attrsReduced": [],
+        "pdfLinks": 1,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 15682,
+        "slug": "brian_international_archives_week",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [
+          {
+            "value": "https://player.vimeo.com/video/50026595?h=11edb75887",
+            "count": 1
+          },
+          {
+            "value": "https://player.vimeo.com/video/49421458?h=c68d75dfc7",
+            "count": 1
+          }
+        ],
+        "videosLost": [
+          {
+            "value": "player.vimeo.com/video/50026595",
+            "count": 1
+          },
+          {
+            "value": "player.vimeo.com/video/49421458",
+            "count": 1
+          }
+        ],
+        "anchorsLost": [],
+        "tagsReduced": [
+          {
+            "value": "iframe",
+            "count": 2
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "iframe@src",
+            "count": 2
+          },
+          {
+            "value": "iframe@width",
+            "count": 2
+          },
+          {
+            "value": "iframe@height",
+            "count": 2
+          },
+          {
+            "value": "iframe@frameborder",
+            "count": 2
+          },
+          {
+            "value": "iframe@allowfullscreen",
+            "count": 2
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": true,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 10297,
+        "slug": "column_20181031",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [
+          {
+            "value": "fbPhotoSnowliftCaption",
+            "count": 2
+          }
+        ],
+        "tagsReduced": [
+          {
+            "value": "div",
+            "count": 9
+          },
+          {
+            "value": "span",
+            "count": 4
+          },
+          {
+            "value": "wbr",
+            "count": 1
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "div@class",
+            "count": 9
+          },
+          {
+            "value": "img@class",
+            "count": 10
+          },
+          {
+            "value": "span@id",
+            "count": 2
+          },
+          {
+            "value": "span@class",
+            "count": 4
+          },
+          {
+            "value": "span@tabindex",
+            "count": 2
+          },
+          {
+            "value": "span@aria-live",
+            "count": 2
+          },
+          {
+            "value": "span@data-ft",
+            "count": 2
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 10285,
+        "slug": "column_20181030",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [
+          {
+            "value": "{0DE9E47C-871A-4F90-8440-B190C216800A}_7",
+            "count": 1
+          },
+          {
+            "value": "{0DE9E47C-871A-4F90-8440-B190C216800A}_9",
+            "count": 1
+          }
+        ],
+        "tagsReduced": [
+          {
+            "value": "div",
+            "count": 12
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "img@class",
+            "count": 4
+          },
+          {
+            "value": "div@class",
+            "count": 6
+          },
+          {
+            "value": "div@id",
+            "count": 2
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 4772,
+        "slug": "20170430_kosaten",
+        "textChanged": false,
+        "linksLost": [],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [],
+        "videosLost": [],
+        "anchorsLost": [
+          {
+            "value": ":t3",
+            "count": 1
+          }
+        ],
+        "tagsReduced": [
+          {
+            "value": "span",
+            "count": 3
+          },
+          {
+            "value": "wbr",
+            "count": 7
+          },
+          {
+            "value": "div",
+            "count": 2
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "span@class",
+            "count": 3
+          },
+          {
+            "value": "div@class",
+            "count": 2
+          },
+          {
+            "value": "div@id",
+            "count": 1
+          },
+          {
+            "value": "div@tabindex",
+            "count": 1
+          },
+          {
+            "value": "div@data-tooltip",
+            "count": 1
+          },
+          {
+            "value": "img@class",
+            "count": 1
+          },
+          {
+            "value": "a@data-saferedirecturl",
+            "count": 1
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": true,
+        "editLostText": false
+      },
+      {
+        "id": 4318,
+        "slug": "my_indian_diary_details_jp",
+        "textChanged": false,
+        "linksLost": [
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_11.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_0452_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_26_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_1753_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_1873_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_65_re.jpg",
+            "count": 1
+          },
+          {
+            "value": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/DSC_0851_re.jpg",
+            "count": 1
+          }
+        ],
+        "linkDestinationsLost": [],
+        "imagesLost": [],
+        "imageAltsLost": [],
+        "framesChanged": [
+          {
+            "value": "https://www.youtube.com/embed/S4Wk5xYLO5M",
+            "count": 1
+          }
+        ],
+        "videosLost": [],
+        "anchorsLost": [],
+        "tagsReduced": [
+          {
+            "value": "span",
+            "count": 1
+          },
+          {
+            "value": "a",
+            "count": 7
+          }
+        ],
+        "attrsReduced": [
+          {
+            "value": "span@style",
+            "count": 1
+          },
+          {
+            "value": "a@href",
+            "count": 7
+          },
+          {
+            "value": "img@class",
+            "count": 53
+          },
+          {
+            "value": "iframe@frameborder",
+            "count": 1
+          },
+          {
+            "value": "p@lang",
+            "count": 31
+          }
+        ],
+        "pdfLinks": 0,
+        "schemaOk": false,
+        "stable": false,
+        "editLostText": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "allowed": {
+        "origins": ["https://paf-cms-staging.petiteadventurefilms2.workers.dev"],
+        "methods": ["PUT"],
+        "headers": ["Content-Type"]
+      }
+    }
+  ]
+}

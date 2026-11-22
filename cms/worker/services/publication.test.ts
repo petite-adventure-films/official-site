@@ -83,7 +83,7 @@ test('confirmed failure preserves current publication and retry uses the same sn
   await update(draft.id, 'さらに編集');
   await service.retry(op.id);
   expect((await service.deliver(op.id, delivery)).attempt).toBe(2);
-  expect(delivery.deploy.mock.calls[1][0].payload.title).toBe('更新');
+  expect(delivery.deploy.mock.calls[1][0].payload).toMatchObject({ type: 'event', title: '更新' });
   expect(await service.history(draft.id)).toHaveLength(2);
 });
 test('unknown result blocks subsequent publication and reconciles without another deploy', async () => {

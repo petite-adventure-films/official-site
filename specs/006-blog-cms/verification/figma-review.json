@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-11-16",
+  "fileKey": "hk5yiH5HW5Es7RMSzzJIIa",
+  "screenId": "155:1483",
+  "bodyEditorId": "153:166",
+  "width": 1440,
+  "height": 1500,
+  "nodeCount": 238,
+  "instanceCount": 80,
+  "slotCount": 16,
+  "missingMainComponents": 0,
+  "slotViolations": 0,
+  "displayNodesOutsideInstances": 0,
+  "fontFamilies": [
+    "Roboto"
+  ],
+  "imageFilledNodes": 0,
+  "visualCheck": "Normal light-mode screen inspected; no observed clipping or overlaps. Category and tag wrapping checked.",
+  "bodyTokenBindings": [
+    "cms/content",
+    "cms/heading",
+    "cms/actions",
+    "background/paper",
+    "divider",
+    "borderRadius"
+  ],
+  "cmsLayoutShowBlogDefault": false,
+  "unverified": [
+    "user review",
+    "long title and long body extremes",
+    "empty/error/pending-conversion states",
+    "menus/dialogs",
+    "keyboard and focus",
+    "actual text editing/undo/save/publication"
+  ]
+}

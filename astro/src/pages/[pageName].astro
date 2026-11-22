@@ -8,10 +8,14 @@ import PostLayout from '@layouts/PostLayout.astro';
 import { decodeWordPressSlug, getAllBlogDetails } from '@/lib/blog-data';
 import { createMetaDescription, toPlainText } from '@/lib/seo';
 import { toIsoDate } from '@/lib/structured-data';
+import { releasedCmsBlogs } from '@/lib/released-cms-blogs';
 import type { Blog } from '@/types/blog';
 
 export async function getStaticPaths() {
   const reservedRootRoutes = new Set([
+    '__cms-media',
+    '__release.json',
+    '404',
     'channel',
     'contact',
     'copyrights-disclaimers',
@@ -31,19 +35,39 @@ export async function getStaticPaths() {
     'blog',
   ]);
   const details = await getAllBlogDetails();
-  return details
+  const released = await releasedCmsBlogs();
+  const occupied = new Set([
+    ...reservedRootRoutes,
+    ...details.map((detail) => decodeWordPressSlug(detail.name)),
+  ]);
+  for (const { slug } of released) {
+    if (occupied.has(slug)) throw new Error(`blog_url_reserved: ${slug}`);
+    occupied.add(slug);
+  }
+  const legacy = details
     .filter((detail) => !reservedRootRoutes.has(decodeWordPressSlug(detail.name)))
     .map((detail) => ({
       params: { pageName: decodeWordPressSlug(detail.name) },
-      props: { detail },
+      props: { detail, cmsSlug: undefined },
     }));
+  return [
+    ...legacy,
+    ...released.map((blog) => ({
+      params: { pageName: blog.slug },
+      props: {
+        cmsSlug: blog.slug,
+        detail: { ...blog } satisfies Blog,
+      },
+    })),
+  ];
 }
 
 interface Props {
   detail: Blog;
+  cmsSlug?: string;
 }
 
-const { detail } = Astro.props;
+const { detail, cmsSlug } = Astro.props;
 const description = createMetaDescription(detail.content);
 const articleUrl = new URL(Astro.url.pathname, Astro.site).href;
 const articleData = {
@@ -77,6 +101,7 @@ const articleData = {
   ogType="article"
   crumbs={[{ to: '/blog/', name: 'BLOG' }]}
 >
+  {cmsSlug && <span hidden data-cms-blog={Buffer.from(cmsSlug).toString('hex')} />}
   <JsonLd data={articleData} />
   <div slot="headerTags">
     {detail.isRecommended && <span class="mb-1 block">⭐️</span>}

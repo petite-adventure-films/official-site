@@ -1,3 +1,4 @@
+import { blogPath, localBlogSlugPrefix } from '../blog-publication';
 import type { Database } from '../repositories/content-drafts';
 import { slugIssue } from '../../src/features/content/slug';
 export class PublicationUrlConflict extends Error {}
@@ -6,15 +7,27 @@ export function eventPath(slug: string) {
   if (slugIssue(slug)) throw new PublicationUrlConflict('invalid_slug');
   return `/events/${encodeURIComponent(slug)}/`;
 }
+export function publicationPath(slug: string) {
+  if (slug.startsWith(localBlogSlugPrefix)) return blogPath(slug.slice(localBlogSlugPrefix.length));
+  for (const [prefix, section] of [['cms-media/', 'media'], ['cms-channel/', 'channel'], ['cms-news/', 'news']] as const) {
+    if (slug.startsWith(prefix)) {
+      const value = slug.slice(prefix.length);
+      if (slugIssue(value)) throw new PublicationUrlConflict('invalid_slug');
+      return section === 'news' ? `/news/#cms-${encodeURIComponent(value)}` : `/${section}/${encodeURIComponent(value)}/`;
+    }
+  }
+  return eventPath(slug);
+}
 export class PublicationUrls {
   constructor(private db: Database) {}
   async plan(contentId: string, slug: string): Promise<EventRoutes> {
-    const canonicalPath = eventPath(slug);
+    const path = publicationPath;
+    const canonicalPath = path(slug);
     const owner = await this.db.prepare('SELECT content_id FROM event_url_owners WHERE slug = ?').bind(slug).first<{ content_id: string | null }>();
     if (owner && owner.content_id !== contentId) throw new PublicationUrlConflict('url_reserved');
     const previous = await this.db.prepare('SELECT slug FROM event_url_owners WHERE content_id = ? ORDER BY slug').bind(contentId).all<{ slug: string }>();
     return { canonicalPath, redirects: previous.results.filter(row => row.slug !== slug)
-      .map(row => ({ from: eventPath(row.slug), to: canonicalPath })) };
+      .map(row => ({ from: path(row.slug), to: canonicalPath })) };
   }
   async resolve(slug: string): Promise<{ kind: 'page' | 'redirect'; path: string; contentId: string } | null> {
     eventPath(slug);

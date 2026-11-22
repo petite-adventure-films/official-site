@@ -1,0 +1,117 @@
+{
+  "scope": "Offline planning, not an executed download manifest",
+  "mappingSha256": "19492630005cb3b7c1edab2088c886a665424b5deec83a2348664cf928535d93",
+  "sourceHash": "926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7",
+  "inventoryHash": "2db71445a9cbaf07357dcc945e6ae9df7db80b529995c94d1efc6f82640fa618",
+  "pathGroups": 5895,
+  "exactURLJobs": 6033,
+  "additionalAliasJobs": 138,
+  "historicalSizing": {
+    "date": "2026-08-11T06:02:31.550Z",
+    "knownPathCount": 5887,
+    "unknownPathCount": 8,
+    "pathBytes": 2032517682,
+    "exactURLBytes": 2100160697,
+    "unknownURLCount": 8,
+    "largestKnownFileBytes": 3430208,
+    "caveat": "Historical HEAD values only; missing files, recovery candidates, changed responses and retries are additional."
+  },
+  "recoveryQueue": [
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+      "articles": [
+        {
+          "id": 7277,
+          "title": "【映画監督、日々の暮らし㉔】堆肥（たいひ）を作る！"
+        }
+      ],
+      "candidateURL": null,
+      "state": "needs-original-or-backup",
+      "decision": null
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "articles": [
+        {
+          "id": 7161,
+          "title": "【制作日誌】ドキュメンタリーかフィクションか（2018.01.20 革命前夜）"
+        }
+      ],
+      "candidateURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "articles": [
+        {
+          "id": 4708,
+          "title": "女性情報「Woman Director Now!」に執筆しました♪"
+        }
+      ],
+      "candidateURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "articles": [
+        {
+          "id": 4708,
+          "title": "女性情報「Woman Director Now!」に執筆しました♪"
+        }
+      ],
+      "candidateURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "articles": [
+        {
+          "id": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！"
+        }
+      ],
+      "candidateURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "articles": [
+        {
+          "id": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！"
+        }
+      ],
+      "candidateURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "articles": [
+        {
+          "id": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！"
+        }
+      ],
+      "candidateURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "articles": [
+        {
+          "id": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！"
+        }
+      ],
+      "candidateURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+      "state": "needs-content-and-crop-review",
+      "decision": null
+    }
+  ]
+}

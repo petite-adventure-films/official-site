@@ -1,0 +1,858 @@
+{
+  "inputHash": "19492630005cb3b7c1edab2088c886a665424b5deec83a2348664cf928535d93",
+  "generatedAt": "2026-11-16T11:33:30.632Z",
+  "cache": "/tmp/paf-download-sample-19492630005c",
+  "receivedBytes": 7130889,
+  "counts": {
+    "verified-local": 12,
+    "missing": 8,
+    "rejected": 0,
+    "retryable": 0,
+    "pending": 0
+  },
+  "jobs": [
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        7277
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:09.634Z",
+          "redirects": [],
+          "error": "fetch failed"
+        },
+        {
+          "at": "2026-11-16T11:32:11.241Z",
+          "redirects": [],
+          "error": "fetch failed"
+        },
+        {
+          "at": "2026-11-16T11:32:13.994Z",
+          "redirects": [],
+          "error": "fetch failed"
+        },
+        {
+          "at": "2026-11-16T11:32:41.015Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        7161
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:44.743Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        4708
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:45.599Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        4708
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:48.530Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        4641
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:49.149Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        4641
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:50.071Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        4641
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:50.768Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "role": "missing-original",
+      "articleIds": [
+        4641
+      ],
+      "state": "missing",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:51.442Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+          "status": 404,
+          "contentType": "text/html; charset=UTF-8",
+          "contentLength": "0",
+          "etag": null,
+          "lastModified": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "articleIds": [
+        7161
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:52.156Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "73632",
+          "etag": null,
+          "lastModified": "Sat, 20 Jan 2018 10:43:07 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb.jpg",
+        "sha256": "a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb",
+        "bytes": 73632,
+        "width": 532,
+        "height": 531,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "articleIds": [
+        4708
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:52.842Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "872696",
+          "etag": null,
+          "lastModified": "Sun, 02 Apr 2017 06:25:40 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df.jpg",
+        "sha256": "8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df",
+        "bytes": 872696,
+        "width": 1751,
+        "height": 1067,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "articleIds": [
+        4708
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:53.905Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "932764",
+          "etag": null,
+          "lastModified": "Sun, 02 Apr 2017 06:28:58 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d.jpg",
+        "sha256": "c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d",
+        "bytes": 932764,
+        "width": 1920,
+        "height": 1080,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:54.875Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "1073725",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:03 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae.jpg",
+        "sha256": "1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae",
+        "bytes": 1073725,
+        "width": 2149,
+        "height": 1214,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:55.799Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "861086",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:08 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1.jpg",
+        "sha256": "3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1",
+        "bytes": 861086,
+        "width": 1959,
+        "height": 1469,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:56.749Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "958077",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:13 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a.jpg",
+        "sha256": "66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a",
+        "bytes": 958077,
+        "width": 1959,
+        "height": 1469,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:57.815Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "987985",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:18 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01.jpg",
+        "sha256": "b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01",
+        "bytes": 987985,
+        "width": 1959,
+        "height": 1469,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/4.jpg",
+      "role": "alias-comparison",
+      "articleIds": [
+        4810
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:58.861Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/4.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "96432",
+          "etag": null,
+          "lastModified": "Thu, 06 Apr 2017 05:17:22 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/cd1a4b2d106436351e72654b97f9fd53b25e8634e071c39c8ab837725d826fc1.jpg",
+        "sha256": "cd1a4b2d106436351e72654b97f9fd53b25e8634e071c39c8ab837725d826fc1",
+        "bytes": 96432,
+        "width": 794,
+        "height": 447,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/4.jpg",
+      "role": "alias-comparison",
+      "articleIds": [
+        4810
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:59.634Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/4.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "96432",
+          "etag": null,
+          "lastModified": "Thu, 06 Apr 2017 05:17:22 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/cd1a4b2d106436351e72654b97f9fd53b25e8634e071c39c8ab837725d826fc1.jpg",
+        "sha256": "cd1a4b2d106436351e72654b97f9fd53b25e8634e071c39c8ab837725d826fc1",
+        "bytes": 96432,
+        "width": 794,
+        "height": 447,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/05/fc79a758d78a2a40b267fe38ca6f9c95.jpg",
+      "role": "ordinary",
+      "articleIds": [
+        18043
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:33:00.302Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/05/fc79a758d78a2a40b267fe38ca6f9c95.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "418838",
+          "etag": null,
+          "lastModified": "Mon, 18 May 2026 10:47:24 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/48035654fa530a4ce4f5b56e8b4d07c44172013df5d3bc25e7fdffcb339a6282.jpg",
+        "sha256": "48035654fa530a4ce4f5b56e8b4d07c44172013df5d3bc25e7fdffcb339a6282",
+        "bytes": 418838,
+        "width": 1892,
+        "height": 1234,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/04/DSC05185_re.jpg",
+      "role": "ordinary",
+      "articleIds": [
+        18013
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:33:01.090Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/04/DSC05185_re.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "313076",
+          "etag": null,
+          "lastModified": "Sun, 19 Apr 2026 05:21:27 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/c033d86d1ec9f2dc16bef63722454d697f88f2dcc9ea152711ebf022fd9cb947.jpg",
+        "sha256": "c033d86d1ec9f2dc16bef63722454d697f88f2dcc9ea152711ebf022fd9cb947",
+        "bytes": 313076,
+        "width": 1094,
+        "height": 616,
+        "format": "jpeg"
+      }
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/04/E65230C2-B1EF-46B6-93BB-F321B2B8C496_re.jpg",
+      "role": "ordinary",
+      "articleIds": [
+        18013
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:33:01.742Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2026/04/E65230C2-B1EF-46B6-93BB-F321B2B8C496_re.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "446146",
+          "etag": null,
+          "lastModified": "Sun, 19 Apr 2026 05:24:14 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/1c6887df04b84170f17d02b54e3e1cfdc47173833cb12b885c50d30feaeb3c18.jpg",
+        "sha256": "1c6887df04b84170f17d02b54e3e1cfdc47173833cb12b885c50d30feaeb3c18",
+        "bytes": 446146,
+        "width": 1428,
+        "height": 1071,
+        "format": "jpeg"
+      }
+    }
+  ],
+  "recovery": [
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "articleIds": [
+        7161
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:52.156Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "73632",
+          "etag": null,
+          "lastModified": "Sat, 20 Jan 2018 10:43:07 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb.jpg",
+        "sha256": "a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb",
+        "bytes": 73632,
+        "width": 532,
+        "height": 531,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 7161,
+          "title": "【制作日誌】ドキュメンタリーかフィクションか（2018.01.20 革命前夜）",
+          "slug": "editing_diary_20180120",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-7180",
+            "src": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+            "alt": "",
+            "width": "300",
+            "height": "300"
+          },
+          "linkTarget": null,
+          "precedingText": "うファッション・コーディネートは思いつかないでしょう！！！　でも現実には、宴会の成り行きでこのファッション（？）が生み出され、隣の菅谷さんの泣きそうな表情と相まって、「りべるたんの投開票日」という絶妙な光景を作り出しているのです。こんなの自分じゃ作り出せないよーーー(^^;)\n \nもうひとつ、私が「完璧な役作り！」と思った写真があります。もちろん、本人は「役作り」なんかじゃなく、普通に写真を撮っただけだと思いますが、映画的な視点から見れば、まるで役作りであるかのように、その人を構成する様々な要素がすべて調和している！と思えるような写真だったのです。\n \nその写真はこちら。今田さんとインタビューの日程をラインでやり取りしていた際、プロフィール画像に（これ決まりすぎでしょ！）と驚いて、「この写真を映画に使わせてほしいので、高解像度の元画像を送ってください！」とお願いして送ってもらったものです。",
+          "followingText": "髪形、表情、中指を立てたポーズ、指輪やネックレスなどのアクセサリーのチョイス、洋服、使い捨てマスク、タバコのくわえ方、さらには眉毛やヒゲの整え方といった細部まで、劇映画や役者という観点から見たら、「こんな完璧な役作りはない！」というレベルではないでしょうか(^^)\n \nいやはや、こういうの、自分で考えて役柄の設定をするなんて、私には到底無理だわ…と思うのですが、劇映画を作る人たちは、きっとこういう所に苦心したり、ひそかなこだわりを込めたりするのも、フィクションならではの苦労と楽しみなのでしょうね(^^)\n \n以上、本日の制作日誌でした(^^)/"
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "articleIds": [
+        4708
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:52.842Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "872696",
+          "etag": null,
+          "lastModified": "Sun, 02 Apr 2017 06:25:40 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df.jpg",
+        "sha256": "8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df",
+        "bytes": 872696,
+        "width": 1751,
+        "height": 1067,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 4708,
+          "title": "女性情報「Woman Director Now!」に執筆しました♪",
+          "slug": "woman_director_now",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-4788",
+            "src": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+            "alt": "",
+            "width": "300",
+            "height": "183"
+          },
+          "linkTarget": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+          "precedingText": "している。アーメダバードという都市を中心に、会員はインド全土で約200万人。世界にも支部があるという。\n \n私はSEWAについて初めて知ったのだが、これはもう、アーメダバードに彼女たちを訪ねに行くしかない！と考え、デリーの映画祭スタッフに連絡をお願いし、インド滞在中、アーメダバードにSEWAを訪ねた。\n \n私が訪問したのは、SEWAの教育部門で、映像制作を協同組合事業として行っている、ビデオSEWA。フルタイム8名、パートタイム20名のスタッフが、各地を取材し、映像を制作している。作品のテーマは、女性の権利、雇用、教育、貯蓄、健康、保健衛生など、暮らしに密着した内容。作成したビデオプログラムは、各地で上映し、啓蒙・教育活動に貢献している。電気が通っていない村には、モニターと発電機を搭載した車で出かけ、上映を行う。教材としてビデオを使うのは、読み書きのできない人も理解できるという利点がある。",
+          "followingText": "ビデオSEWAの写真ワークショップに参加　(C) Petite Adventure Films\n \nビデオSEWAメンバーたちに、インタビューをさせてもらった。どのようなきっかけでビデオSEWAに加わったのか、映像制作を始めることで、どのような変化が自分の中に起こったか、どんなテーマに関心があるか、など。\n \n彼女たちにインタビューをしていて、頻繁に出てきた言葉が「Self confidence」だった。日本語では単に「自信」、「うぬぼれ」などと訳されてしまうことが多い言葉だが、彼女たちは「自分に自信・誇りを持つ」というような文脈で使っていた。\n \nカースト制が社会にいまだ色濃く残り、伝統的・社会的に女性の立場が弱いインドでは、「Self confidence」であることは、実際、非常に難しいことだ。女性は外出さえ許されず、家の外ではサリーで顔を覆う「グムタ」という風習も、地方では当たり前"
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "articleIds": [
+        4708
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:53.905Z",
+          "redirects": [],
+          "finalURL": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "932764",
+          "etag": null,
+          "lastModified": "Sun, 02 Apr 2017 06:28:58 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d.jpg",
+        "sha256": "c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d",
+        "bytes": 932764,
+        "width": 1920,
+        "height": 1080,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 4708,
+          "title": "女性情報「Woman Director Now!」に執筆しました♪",
+          "slug": "woman_director_now",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-4789",
+            "src": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+            "alt": "",
+            "width": "300",
+            "height": "169"
+          },
+          "linkTarget": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+          "precedingText": "たちにインタビューをしていて、頻繁に出てきた言葉が「Self confidence」だった。日本語では単に「自信」、「うぬぼれ」などと訳されてしまうことが多い言葉だが、彼女たちは「自分に自信・誇りを持つ」というような文脈で使っていた。\n \nカースト制が社会にいまだ色濃く残り、伝統的・社会的に女性の立場が弱いインドでは、「Self confidence」であることは、実際、非常に難しいことだ。女性は外出さえ許されず、家の外ではサリーで顔を覆う「グムタ」という風習も、地方では当たり前のように存在する。父兄が選んだ相手との結婚を拒否すれば、女性は殺されたり、塩酸を顔にかけられたりする事件も後を絶たない。\n \nそのような社会で、女性がビデオカメラを手に、いろんな場所へ出かけ取材をする、記録映像を武器に、違法な雇用主と法廷でたたかうなどという彼女たちの活動は、きっと「とんでもないこと」なのだろう！！",
+          "followingText": "農地の強制収用に反対する農民たちの抗議集会　(C) Petite Adventure Films\n \nしかし、目の前でインタビューに答えるビデオSEWAの女性たちは、とても気さくでフレンドリーだ。メンバー最高齢のリーラ・ダンターニさんは、野菜の露天商をしていた40歳の時にSEWAと出会い、ビデオSEWAのメンバーになったという。文字の読み書きができないので、カメラの扱いは「▶」（再生）など、シンボルマークで覚えた。\n \n当時、露天商の仕事は過酷で、路上での販売行為に対し、警察がショバ代を請求したり、命令に従わないとこん棒で殴るなどの嫌がらせを受けていた。リーラさんたちは、その様子を映像で記録し、証拠として裁判所に提出し、最高裁から路上販売の権利を認める判決を勝ち取った。現在76歳のリーラさんは、今も現役で、ビデオカメラを担いで取材に出かける。\n \n今日、この限られた紙面でお伝えしたエピソー"
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:54.875Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "1073725",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:03 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae.jpg",
+        "sha256": "1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae",
+        "bytes": 1073725,
+        "width": 2149,
+        "height": 1214,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "slug": "20161210_oka_sid",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-4645",
+            "src": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+            "alt": "%e2%91%a0tokyo-tribe_re",
+            "width": "300",
+            "height": "169"
+          },
+          "linkTarget": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+          "precedingText": "pomの卯城竜太が講師を務める美学校 天才ハイスクール!!!!にて学びつつ精力的に展示活動を行う。グラフィティチームREDICAcrew（レディカクルー）のリーダーを務める。アートとサブカルチャーを織り交ぜ、社会に働きかける様な作品を制作している。\nウェブサイト：http://okasid.web.fc2.com/okasid/oka_sid.html\n \n【作家メッセージ】\n今回制作する作品はスプレーによるグラフィティ制作です。オキュパイもグラフィティも公共空間で行われるアクションです。経産省前テントに描く事で、私のスプレーのストローク一つ一つに反原発の意がより良く付与されると素晴らしいし、政治的アクションがストリートに接し、また一つ違った意味で生活に根付く様なヴィジョンも面白くて重要な事だと思えます。\n \nこれまでの作品（画像提供：岡志憧さん）\n園子温監督「TOKYO TRIBE」より",
+          "followingText": "下記3点はEXILEの映画「HiGH & LOW THE MOVIE」より\n \n\n \n\n \n\n \n丸木美術館「今日の反核反戦展2016」\nテント展示期間：2016年11月27日（日） ～ 2017年1月14日（土）\n（反核反戦展自体の開催期間は、2016年11月16日～2017年1月14日です）\n所在地：埼玉県東松山市下唐子1401　電話：0493-22-3266\n交通：こちらをご覧ください。\n開館時間：9:00～17:00（12月～2月は9:30～16:30）入館料：大人900円（各種割引あり）\n月曜休館（祝日の場合は翌平日、12月29日～1月3日は休館）"
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:55.799Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "861086",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:08 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1.jpg",
+        "sha256": "3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1",
+        "bytes": 861086,
+        "width": 1959,
+        "height": 1469,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "slug": "20161210_oka_sid",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-4646",
+            "src": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+            "alt": "%e2%91%a1exile_re",
+            "width": "300",
+            "height": "225"
+          },
+          "linkTarget": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+          "precedingText": "活動を行う。グラフィティチームREDICAcrew（レディカクルー）のリーダーを務める。アートとサブカルチャーを織り交ぜ、社会に働きかける様な作品を制作している。\nウェブサイト：http://okasid.web.fc2.com/okasid/oka_sid.html\n \n【作家メッセージ】\n今回制作する作品はスプレーによるグラフィティ制作です。オキュパイもグラフィティも公共空間で行われるアクションです。経産省前テントに描く事で、私のスプレーのストローク一つ一つに反原発の意がより良く付与されると素晴らしいし、政治的アクションがストリートに接し、また一つ違った意味で生活に根付く様なヴィジョンも面白くて重要な事だと思えます。\n \nこれまでの作品（画像提供：岡志憧さん）\n園子温監督「TOKYO TRIBE」より\n \n\n \n下記3点はEXILEの映画「HiGH & LOW THE MOVIE」より",
+          "followingText": "丸木美術館「今日の反核反戦展2016」\nテント展示期間：2016年11月27日（日） ～ 2017年1月14日（土）\n（反核反戦展自体の開催期間は、2016年11月16日～2017年1月14日です）\n所在地：埼玉県東松山市下唐子1401　電話：0493-22-3266\n交通：こちらをご覧ください。\n開館時間：9:00～17:00（12月～2月は9:30～16:30）入館料：大人900円（各種割引あり）\n月曜休館（祝日の場合は翌平日、12月29日～1月3日は休館）"
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:56.749Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "958077",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:13 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a.jpg",
+        "sha256": "66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a",
+        "bytes": 958077,
+        "width": 1959,
+        "height": 1469,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "slug": "20161210_oka_sid",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-4647",
+            "src": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+            "alt": "%e2%91%a2exile_re",
+            "width": "300",
+            "height": "225"
+          },
+          "linkTarget": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+          "precedingText": "活動を行う。グラフィティチームREDICAcrew（レディカクルー）のリーダーを務める。アートとサブカルチャーを織り交ぜ、社会に働きかける様な作品を制作している。\nウェブサイト：http://okasid.web.fc2.com/okasid/oka_sid.html\n \n【作家メッセージ】\n今回制作する作品はスプレーによるグラフィティ制作です。オキュパイもグラフィティも公共空間で行われるアクションです。経産省前テントに描く事で、私のスプレーのストローク一つ一つに反原発の意がより良く付与されると素晴らしいし、政治的アクションがストリートに接し、また一つ違った意味で生活に根付く様なヴィジョンも面白くて重要な事だと思えます。\n \nこれまでの作品（画像提供：岡志憧さん）\n園子温監督「TOKYO TRIBE」より\n \n\n \n下記3点はEXILEの映画「HiGH & LOW THE MOVIE」より",
+          "followingText": "丸木美術館「今日の反核反戦展2016」\nテント展示期間：2016年11月27日（日） ～ 2017年1月14日（土）\n（反核反戦展自体の開催期間は、2016年11月16日～2017年1月14日です）\n所在地：埼玉県東松山市下唐子1401　電話：0493-22-3266\n交通：こちらをご覧ください。\n開館時間：9:00～17:00（12月～2月は9:30～16:30）入館料：大人900円（各種割引あり）\n月曜休館（祝日の場合は翌平日、12月29日～1月3日は休館）"
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+      "role": "recovery-candidate",
+      "originalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "state": "verified-local",
+      "attempts": [
+        {
+          "at": "2026-11-16T11:32:57.815Z",
+          "redirects": [],
+          "finalURL": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+          "status": 200,
+          "contentType": "image/jpeg",
+          "contentLength": "987985",
+          "etag": null,
+          "lastModified": "Fri, 02 Dec 2016 03:57:18 GMT"
+        }
+      ],
+      "file": {
+        "path": "/tmp/paf-download-sample-19492630005c/b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01.jpg",
+        "sha256": "b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01",
+        "bytes": 987985,
+        "width": 1959,
+        "height": 1469,
+        "format": "jpeg"
+      },
+      "context": [
+        {
+          "articleId": 4641,
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "slug": "20161210_oka_sid",
+          "attributes": {
+            "class": "alignnone size-medium wp-image-4648",
+            "src": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+            "alt": "%e2%91%a3exile_re",
+            "width": "300",
+            "height": "225"
+          },
+          "linkTarget": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+          "precedingText": "活動を行う。グラフィティチームREDICAcrew（レディカクルー）のリーダーを務める。アートとサブカルチャーを織り交ぜ、社会に働きかける様な作品を制作している。\nウェブサイト：http://okasid.web.fc2.com/okasid/oka_sid.html\n \n【作家メッセージ】\n今回制作する作品はスプレーによるグラフィティ制作です。オキュパイもグラフィティも公共空間で行われるアクションです。経産省前テントに描く事で、私のスプレーのストローク一つ一つに反原発の意がより良く付与されると素晴らしいし、政治的アクションがストリートに接し、また一つ違った意味で生活に根付く様なヴィジョンも面白くて重要な事だと思えます。\n \nこれまでの作品（画像提供：岡志憧さん）\n園子温監督「TOKYO TRIBE」より\n \n\n \n下記3点はEXILEの映画「HiGH & LOW THE MOVIE」より",
+          "followingText": "丸木美術館「今日の反核反戦展2016」\nテント展示期間：2016年11月27日（日） ～ 2017年1月14日（土）\n（反核反戦展自体の開催期間は、2016年11月16日～2017年1月14日です）\n所在地：埼玉県東松山市下唐子1401　電話：0493-22-3266\n交通：こちらをご覧ください。\n開館時間：9:00～17:00（12月～2月は9:30～16:30）入館料：大人900円（各種割引あり）\n月曜休館（祝日の場合は翌平日、12月29日～1月3日は休館）"
+        }
+      ]
+    }
+  ],
+  "scope": "20-URL read-only sample. Recovery candidates are separate from missing originals; no substitution or asset registration."
+}

@@ -42,3 +42,22 @@ describe('structured data helpers', () => {
     ]);
   });
 });
+
+describe('channel duration notation', () => {
+  it.each([
+    ['62:32', 'PT62M32S'],
+    ['1:10:17', 'PT1H10M17S'],
+    ['08:15', 'PT8M15S'],
+    ['00:00', 'PT0S'],
+    ['1:00:00', 'PT1H'],
+    ['20:00', 'PT20M'],
+  ])('converts %s without changing the displayed text', (input, output) => {
+    expect(minutesToIsoDuration(input)).toBe(output);
+  });
+  it.each(['1:60:00', '12:60', '未定', '1:2:3'])(
+    'omits ambiguous or invalid duration %s',
+    (input) => {
+      expect(minutesToIsoDuration(input)).toBeUndefined();
+    },
+  );
+});

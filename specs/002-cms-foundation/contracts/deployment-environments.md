@@ -68,3 +68,52 @@ CMS_ORIGIN・ACCESS_ISSUER・ACCESS_AUDIENCE・ALLOWED_USERSをWorker secretsに
 Zero Trust Free有効化後、検証Workerに専用のAccessアプリを設定し、監督と開発担当者の2人を許可した。開発担当者のログイン先はCloudflareの管理に使用するアドレスと揃えた。Worker側のJWT検証設定を登録してからworkers.devを有効化した（配備版 `1dce3c45-9bcf-458a-b619-1aa6593ae8eb`）。プレビューURLは無効。
 
 検証URLは https://paf-cms-staging.petiteadventurefilms2.workers.dev/cms/events 。未認証のCMS画面とAPIへの要求がHTTP 302を返すことを確認した。開発担当者がログインし、テスト下書きの作成・保存・再読み込み・再編集・再保存を確認した。D1は適用待ちマイグレーション0件、下書き1件、公開記事・公開操作とも0件。監督本人のログインは未確認。
+
+### ブログ公開接続の確認（2026-11-19、#390・#394・#433）
+
+検証環境だけで、CMS画面から公開 → 正式URLで本文・画像・PDFを確認 → 公開履歴参照 → 下書きへ復元 → 再編集・保存 → 再読込を通し確認した。本番Worker・DNS・既存配信先は変更していない。Issueはこの通し確認だけで完了扱いにしない。
+
+| 対象 | 現在の検証設定 |
+| --- | --- |
+| アカウント | PAF管理 `53b7ac20e59cefa91e5b88831768a248` |
+| CMS | `paf-cms-staging`、最終配備版 `cd0b6524-e1a1-4e43-b8ba-1a460c6e0156` |
+| サイト | `paf-site-staging`、有効版 `5aa2ebd2-312f-4f5b-bad3-7863536fdd53`、配備ID `acf43fb1-6d98-4eef-932b-92753d948bc7` |
+| R2 | `paf-cms-staging-media`。CMSのMEDIAバインディングとアップロード署名キー2件を設定済み |
+| サイトAccess | `PAF site staging`（`6afb5a13-3d8e-4e5a-8f7d-34cf33c7a09f`）。既存開発担当者のAllowと、`paf-staging-publication` だけを許可するService Auth |
+| URL | `https://paf-site-staging.petiteadventurefilms2.workers.dev`。workers.dev有効、preview URL無効 |
+| ランナー | 端末のループバック18789番と、検証中のみのQuick Tunnel。専用の256ビットランダムキーを必須とする |
+
+個人アカウント側の同名Workerは旧検証環境であり、使用しない。R2キーが個人側で発行・登録されていたことを利用者と照合し、PAF側で作成したキーをPAF側CMSへ登録した。旧環境は今回削除していない。
+
+#### 添付とトップ動画
+
+- `cms/r2.staging.cors.json` を検証バケットへ適用し、CMS検証オリジンからのPUTとContent-Typeのみを許可。画像・PDFのブラウザーアップロード成功により、署名とR2書き込みを確認した。
+- 検証専用ビルド `node astro/scripts/build-staging.mjs` は生成先のトップ動画だけを再圧縮する。元動画は維持し、配備ファイルは21,803,564バイトでStatic Assetsの1ファイル25 MiB制限内。全件ビルドと実配備を通過した。
+
+#### 公開処理と結果照合
+
+- 検証CMSオリジン、DB・R2、HTTPSの `STAGING_RUNNER_URL`、`STAGING_RUNNER_SECRET`、サイトAccessサービス資格情報が揃う場合だけ、検証配信アダプターを有効化する。
+- ランナーの `POST /deploy` は固定候補・既存公開版・添付のマニフェストを受け取り、操作ID・試行番号・候補ハッシュで重複排除する。信頼する作業ブランチのコードから、検証Workerだけへ生成・配備を直列実行する。
+- `POST /inspect` は同じ試行の配備ID・リリースハッシュを返す。ランナーは有効なCloudflare配備版と、Accessを通したサイトの `/__release.json` を照合する。CMSも同じマーカーを独立に取得し、試行とハッシュが一致した場合に公開状態・履歴を既存トランザクションで確定する。
+- 実環境で発見したfetchの呼び出しコンテキストの問題は、グローバルfetchをラッパー経由で呼び出して修正した。CMSからサイトのworkers.devを呼ぶ経路には `global_fetch_strictly_public` を指定し、Accessを通る公開経路で照合する。診断用ログは除去済み。
+- 配備結果が不明の試行は新規配備を止め、配備履歴とマーカーを照合する。プロセス中断で状態が残った場合は、旧プロセスと保留中の配備がないことを確認してから復旧する。
+
+#### 通し確認の記録
+
+- 記事ID `7ce968f9-e031-4c47-a9c8-3f479eb6233c`、正式パス `/staging-blog-check-20261119/`。以前の検証下書きは変更していない。
+- CMSの公開操作 `8536a309-94be-4889-9d72-a1155c456bce` は試行1回で配備し、照合修正後も同じ試行で成功確定。公開状態version 1、公開履歴ID `728fb712-91d0-478d-bd53-86d2a95a21ef` を確認した。DBの状態を手動で成功へ書き換えていない。
+- Safariで正式URLのタイトル・本文・青い検証画像を表示し、PDFリンクから実際のPDF描画を確認した。HTTP確認でも記事・画像・PDFは200。画像は126バイト、PDFは351,057バイトで、いずれも元ファイルとバイト単位で一致した。
+- 公開後に下書きタイトルを変更し、公開履歴で元の公開タイトル・本文・画像・PDFを参照した。「この内容を下書きに戻す」で復元メッセージと元タイトルへの復帰を確認した。
+- 復元後のタイトル変更・本文追記を保存し、再読込後も画像・PDFとともに保持されることを確認した。公開サイトは元のタイトル・本文のままで、再編集した下書きの内容が含まれないことを確認した。
+- サイトは匿名302・サービス認証200。一時ランナーは匿名401・不正キー401・正しいキー200。CMSビルド・型検査、配備照合・認証分離・fetch呼び出しのテスト4件成功。
+
+#### 一時接続の運用と残作業
+
+PAF側でCloudflare管理ドメインを確認できていないため、利用者承認により常設のAccess付きTunnel案から、検証限定のQuick Tunnelと専用キーへ切り替えた。本番DNSは変更しない。サイトのAccess保護は維持する。ランナーにはサイト用Access資格情報を送信せず、ランナー自身のキーだけを送る。
+
+- Git管理対象外・所有者のみ読み書き可能な `cms/.env.staging-publication` に、サイトAccess資格情報、ランナー専用キー、非公開状態ディレクトリ、現在の一時URLを置く。値は文書やログへ記録しない。
+- `node --env-file=cms/.env.staging-publication cms/scripts/cloudflare-staging-runner.mjs` で起動する。Wranglerの正規OAuthログインまたはランナー側だけに設定した配備用APIトークンを使う。アカウントと配備先は検証設定に固定する。
+- `pnpm --dir cms exec wrangler tunnel quick-start http://127.0.0.1:18789` のURLをCMSの `STAGING_RUNNER_URL` に登録する。再起動でURLが変わるため再登録が必要。端末・プロセス停止中はCMSからの公開が動作しない。公開済みサイトとCMSの下書き保存はCloudflare側に残る。
+- 常設ランナー、資格情報の継続管理・更新、端末に依存しない運用、Cloudflare上での失敗・応答紛失・切り戻しの網羅確認、差分生成、他種別の接続は残作業。今回の成功確認だけで #390・#394・#433 をクローズしない。
+
+参照: [Cloudflareのfetch互換フラグ](https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public)、[Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)。

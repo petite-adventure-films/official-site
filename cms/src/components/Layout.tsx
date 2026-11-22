@@ -1,12 +1,14 @@
+import { contentSections, contentLabels, type ContentType } from '../features/articles/draft';
 // Figma: https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=26-477
 // EditorLayout: node-id=26-339; Section: node-id=23-611; Field: node-id=23-663
 import { useId, type ReactNode } from 'react';
 import { Typography, Link } from '@mui/material';
 export function CMSLayout({ children, user }: { children: ReactNode; user: string }) {
+  const current = location.pathname.split('/')[2];
   return <div className="flex min-h-screen">
     <nav aria-label="管理メニュー" className="fixed inset-y-0 left-0 overflow-y-auto w-cms-nav shrink-0 bg-cms-navigation border-r border-cms-divider px-cms-content py-cms-section flex flex-col gap-cms-section">
       <Typography variant="body2">Petite Adventure Films<br />CMS</Typography>
-      <Link href="/cms/events" underline="none" color="inherit" aria-current="page"><Typography variant="subtitle2">📅 イベント</Typography></Link>
+      {(Object.keys(contentSections) as ContentType[]).map(type => <Link key={type} href={`/cms/${contentSections[type]}`} underline="none" color="inherit" aria-current={current === contentSections[type] ? 'page' : undefined}><Typography variant={current === contentSections[type] ? 'subtitle2' : 'body2'}>{type === 'event' ? '📅 ' : type === 'blog' ? '📝 ' : ''}{contentLabels[type]}</Typography></Link>)}
       <Typography variant="body2" className="mt-auto">👤 {user}</Typography>
     </nav>
     <main className="ml-cms-nav min-w-0 flex-1 px-cms-page-x pt-cms-page-top pb-cms-page-bottom">{children}</main>
