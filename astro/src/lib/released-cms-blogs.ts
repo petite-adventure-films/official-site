@@ -11,6 +11,7 @@ type Node = {
 };
 type Entry = {
   path: string;
+  legacy?: { id: number; slug: string; publishedAt: string };
   publishedAt: string;
   content: BlogDraft & { slug: string };
 };
@@ -116,7 +117,22 @@ export async function releasedCmsBlogs() {
         : [],
     ),
   );
-  return blogs.map(({ content, publishedAt }) => ({
+  const seen = new Set<number>();
+  for (const blog of blogs) {
+    if (!blog.legacy) continue;
+    const source = snapshot.content.blogs.find((post) => post.id === blog.legacy?.id);
+    if (
+      !source ||
+      decodeURIComponent(source.name) !== blog.legacy.slug ||
+      source.published !== blog.legacy.publishedAt ||
+      blog.publishedAt !== source.published ||
+      seen.has(source.id)
+    )
+      throw new Error('invalid_legacy_blog_release');
+    seen.add(source.id);
+  }
+  return blogs.map(({ content, publishedAt, legacy }) => ({
+    legacySourceId: legacy?.id,
     id: `cms:${content.slug}`,
     name: content.slug,
     cmsSlug: content.slug,
