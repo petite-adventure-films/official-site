@@ -69,8 +69,8 @@ test('accepts same-origin JSON mutations', () => {
   }), config.CMS_ORIGIN)).not.toThrow();
 });
 test('all production routes and assets require authentication', async () => {
-  for (const path of ['/api/session', '/api/contents', '/cms/events', '/assets/app.js']) {
-    const response = await worker.fetch(new Request(config.CMS_ORIGIN + path), config);
+  for (const path of ['/api/session', '/api/contents', '/api/contents/00000000-0000-4000-8000-000000000001/history', '/api/contents/00000000-0000-4000-8000-000000000001/restore', '/cms/events', '/assets/app.js']) {
+    const response = await worker.fetch(new Request(config.CMS_ORIGIN + path, { method: path.endsWith('/restore') ? 'POST' : 'GET' }), config);
     expect(response.status).toBe(401);
     expect(response.headers.get('cache-control')).toBe('no-store');
   }

@@ -80,7 +80,7 @@ test('blog history validates protected snapshots and restores without enabling p
   expect(result).toMatchObject({ version: 2, payload: snapshot });
   expect(await (await call('restore', input)).json()).toEqual(result);
   expect(await (await call('history')).json()).toMatchObject({ version: 2, items: [{ payload: current }] });
-  const publishedDraft = { ...snapshot, title: '公開したブログ', slug: 'published-blog' };
+  const publishedDraft = { ...snapshot, title: '公開したブログ', slug: 'published-blog', categoryId: '2879' };
   const candidate = await prepareBlogPublication(fixture.db, publishedDraft);
   publishedDraft.title = '候補固定後の入力';
   const revisionId = crypto.randomUUID();

@@ -37,6 +37,51 @@ test('real local release: blog and all article types, assets, history, restore, 
     }
     throw new Error('local_publication_timeout');
   }
+  let previousRevision = '';
+  async function checkRestore(saved: any, state: any) {
+    const path = `/api/contents/${saved.id}`;
+    const history = await json(path + '/history');
+    expect(history.items).toHaveLength(1);
+    const published = await fixture.db.prepare('SELECT * FROM publication_state WHERE content_id = ?').bind(saved.id).first();
+    const revisions = await fixture.db.prepare('SELECT * FROM publication_revisions WHERE content_id = ?').bind(saved.id).all();
+    const publicHtml = await (await fetch(state.url)).text();
+    const editedPayload = { ...saved.payload, title: '復元前の編集', filmTagIds: ['164'] };
+    const edited = await json(path, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: saved.version, payload: editedPayload });
+    const input = { operationId: crypto.randomUUID(), expectedVersion: edited.version, sourceKind: 'publication', sourceId: history.items[0].id };
+    if (previousRevision) expect((await req(path + '/restore', 'POST', { ...input, sourceId: previousRevision })).status).toBe(404);
+    previousRevision = history.items[0].id;
+    const [restored, replay] = await Promise.all([json(path + '/restore', 'POST', input), json(path + '/restore', 'POST', input)]);
+    expect(replay).toEqual(restored);
+    expect(restored.payload).toEqual(history.items[0].payload);
+    expect(restored.payload.title).toBe(saved.payload.title);
+    expect(restored.payload.filmTagIds).toEqual(saved.payload.filmTagIds);
+    if (saved.type !== 'event') expect(restored.payload).toEqual(saved.payload);
+    else expect(restored.payload.eventTagIds).toEqual(saved.payload.eventTagIds);
+    if (saved.type === 'blog') {
+      expect(restored.payload.categoryId).toBe(saved.payload.categoryId);
+      expect(restored.payload.isRecommended).toBe(true);
+      expect(restored.payload.isWorkshopReport).toBe(true);
+    }
+    if (saved.type === 'pressCoverage') {
+      expect(restored.payload.attachmentAssetIds).toEqual(saved.payload.attachmentAssetIds);
+      expect(restored.payload.articleBody).toEqual(saved.payload.articleBody);
+    }
+    expect((await req(path + '/restore', 'POST', { ...input, operationId: crypto.randomUUID() })).status).toBe(409);
+    expect((await req(path, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: edited.version, payload: editedPayload })).status).toBe(409);
+    const protection = (await json(path + '/history')).items[0];
+    expect(protection).toMatchObject({ kind: 'protectedDraft', payload: editedPayload });
+    const recovered = await json(path + '/restore', 'POST', { operationId: crypto.randomUUID(), expectedVersion: restored.version, sourceKind: 'protectedDraft', sourceId: protection.id });
+    expect(recovered.payload).toEqual(editedPayload);
+    expect((await json(path + '/history')).items[0].payload).toEqual(restored.payload);
+    expect(await json(path + '/restore', 'POST', input)).toEqual(restored);
+    expect((await json(path)).payload).toEqual(editedPayload);
+    const changed = { ...recovered.payload, title: '復元後に保存' };
+    await json(path, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: recovered.version, payload: changed });
+    expect((await json(path)).payload).toEqual(changed);
+    expect(await fixture.db.prepare('SELECT * FROM publication_state WHERE content_id = ?').bind(saved.id).first()).toEqual(published);
+    expect((await fixture.db.prepare('SELECT * FROM publication_revisions WHERE content_id = ?').bind(saved.id).all()).results).toEqual(revisions.results);
+    expect(await (await fetch(state.url)).text()).toBe(publicHtml);
+  }
   try {
     for (const name of (await readdir(new URL('../migrations/', import.meta.url))).filter(n => n.endsWith('.sql')).sort()) {
       await fixture.db.batch(unstable_splitSqlQuery(await readFile(new URL(`../migrations/${name}`, import.meta.url), 'utf8')).map(sql => fixture.db.prepare(sql)));
@@ -49,7 +94,7 @@ test('real local release: blog and all article types, assets, history, restore, 
     let mediaId = '';
     const publicUrls: string[] = [];
     for (const type of ['blog', 'news', 'pressCoverage', 'video'] as const) {
-      const payload = { ...(type === 'blog' ? { ...emptyBlogDraft(), categoryId: '2879' } : emptyArticleDraft(type)), title: `${type} 公開確認`, slug: `release-${type.toLowerCase()}`, body,
+      const payload = { ...(type === 'blog' ? { ...emptyBlogDraft(), categoryId: '2879', isRecommended: true, isWorkshopReport: true, eventTagIds: ['177'] } : emptyArticleDraft(type)), title: `${type} 公開確認`, slug: `release-${type.toLowerCase()}`, body, filmTagIds: ['153'],
         ...(type === 'pressCoverage' ? { sourceName: '掲載元の確認', attachmentAssetIds: [pdf.id], articleBody: { schemaVersion: 2, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '見出しなしの掲載本文' }] }] } } } : {}),
         ...(type === 'video' ? { youtubeId: 'kwHsbFrH2EA', productionYear: '2025', productionCountry: '日本', duration: '62:32' } : {}) };
       const saved = await json('/api/contents', 'POST', { type, operationId: crypto.randomUUID(), payload });
@@ -59,27 +104,13 @@ test('real local release: blog and all article types, assets, history, restore, 
       if (type === 'pressCoverage') { expect(html).toContain('掲載元の確認'); expect(html).toContain('見出しなしの掲載本文'); expect(html).toContain(`/__cms-media/${pdf.id}.pdf`); mediaId = saved.id; }
       if (type === 'video') { expect(html).toContain('kwHsbFrH2EA'); expect(html).toContain('62:32'); }
       publicUrls.push(state.url);
-      const history = await json(`/api/contents/${saved.id}/history`);
-      expect(history.items).toHaveLength(1);
-      const edited = await json(`/api/contents/${saved.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: saved.version, payload: { ...payload, title: '復元前の編集' } });
-      const restored = await json(`/api/contents/${saved.id}/restore`, 'POST', { operationId: crypto.randomUUID(), expectedVersion: edited.version, sourceKind: 'publication', sourceId: history.items[0].id });
-      expect(restored.payload.title).toBe(payload.title);
-      const changed = { ...restored.payload, title: '復元後に保存' };
-      await json(`/api/contents/${saved.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: restored.version, payload: changed });
-      expect((await json(`/api/contents/${saved.id}`)).payload).toEqual(changed);
-      expect((await json(`/api/contents/${saved.id}/publication`)).version).toBe(1);
+      await checkRestore(saved, state);
     }
-    const eventPayload = { ...emptyDraft(), title: '常設イベント公開確認', startDate: '2026-11-22', venue: '公開会場', slug: 'hosted-event-review' };
+    const eventPayload = { ...emptyDraft(), title: '常設イベント公開確認', startDate: '2026-11-22', venue: '公開会場', slug: 'hosted-event-review', filmTagIds: ['153'], eventTagIds: ['181'] };
     const event = await json('/api/contents', 'POST', { type: 'event', operationId: crypto.randomUUID(), payload: eventPayload });
     const eventState = await publish(event);
     expect(await (await fetch(eventState.url)).text()).toContain('公開会場');
-    const eventHistory = await json(`/api/contents/${event.id}/history`);
-    const eventEdited = await json(`/api/contents/${event.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: event.version, payload: { ...eventPayload, title: '復元前' } });
-    const eventRestored = await json(`/api/contents/${event.id}/restore`, 'POST', { operationId: crypto.randomUUID(), expectedVersion: eventEdited.version, sourceKind: 'publication', sourceId: eventHistory.items[0].id });
-    expect(eventRestored.payload.title).toBe(eventPayload.title);
-    await json(`/api/contents/${event.id}`, 'PUT', { operationId: crypto.randomUUID(), expectedVersion: eventRestored.version, payload: { ...eventRestored.payload, title: '復元後に保存' } });
-    expect((await json(`/api/contents/${event.id}`)).payload.title).toBe('復元後に保存');
-    expect((await json(`/api/contents/${event.id}/publication`)).version).toBe(1);
+    await checkRestore(event, eventState);
     publicUrls.push(eventState.url);
     for (const url of publicUrls) expect((await fetch(url)).status).toBe(200);
     expect(Buffer.from(await (await fetch(`${runner.siteOrigin}/__cms-media/${image.id}.png`)).arrayBuffer())).toEqual(imageBytes);
