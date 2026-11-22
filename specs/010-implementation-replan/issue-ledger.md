@@ -57,7 +57,7 @@
 |---|---|---|
 | [#412](https://github.com/petite-adventure-films/official-site/issues/412) 契約調査 | 手順・待ち時間はPR #465で調査済み | 監督協議で操作者・承認者・登録移管先を決め、手順への影響を記録。契約実行を追加しない |
 | [#427](https://github.com/petite-adventure-films/official-site/issues/427) 本人ログイン | 開発者・利用者は到達済み | 監督本人のコード受信→一覧到達を確認。編集・公開全体は#445 |
-| [#445](https://github.com/petite-adventure-films/official-site/issues/445) 監督操作会 | 代表記事・検証反映・紹介URL・保全・利用者実機再生済み | 当日前最終確認、本人操作、相談の決定/保留/担当を記録して終了。相談内容の全実装まで持たない。未統合PR #457を照合 |
+| [#445](https://github.com/petite-adventure-films/official-site/issues/445) 監督操作会 | 代表記事・検証反映・紹介URL・保全・利用者実機再生済み | 当日前最終確認、本人操作、相談の決定/保留/担当を記録して終了。相談内容の全実装まで持たない。PR #457は未収録記録とレビュー済み・統合待ち |
 | [#471](https://github.com/petite-adventure-films/official-site/issues/471) 正式CMS取込 | #338から実取込・代表再編集の責任を分離 | 正式取込環境・実行承認を確定後、ID/件数/状態/添付・再実行と代表再編集を照合し#391へ |
 | [#472](https://github.com/petite-adventure-films/official-site/issues/472) 問い合わせ移行 | #411/#389/#332から送信処理の責任を分離 | サービス・送信元/宛先合意後、送信/返信/失敗/迷惑送信対策を試験し#389へ |
 | [#473](https://github.com/petite-adventure-films/official-site/issues/473) メール移設 | #412の調査と実移設を分離 | 提供先・操作/承認担当を確定し、承認後に移設・受信/送信・切戻しを確認し#389へ |
