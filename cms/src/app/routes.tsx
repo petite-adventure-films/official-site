@@ -75,7 +75,7 @@ export function App() {
   useEffect(() => { Promise.all([
     loadSession(), api<Tags>('/api/tags'), (edit ?? history) ? api<SavedDraft<EventDraft | BlogDraft | ArticleDraft>>(`/api/contents/${(edit ?? history)![1]}`) : Promise.resolve(null),
     isBlog ? api<{ items: Tag[] }>('/api/categories') : Promise.resolve({ items: [] }),
-  ]).then(([session, tags, existing, categories]) => { if (existing && (existing.type !== type || existing.payloadSchemaVersion !== `${type}-draft/v1`)) throw new Error('content_type_mismatch'); setState({ user: session.user.name, tags, existing, categories: categories.items }); }).catch(() => setError(true)); }, []);
+  ]).then(([session, tags, existing, categories]) => { if (existing && (existing.type !== type || existing.payloadSchemaVersion !== `${type}-draft/v1`)) throw new Error('content_type_mismatch'); setState({ user: session.user.email, tags, existing, categories: categories.items }); }).catch(() => setError(true)); }, []);
   if (error) return <Alert severity="error" action={<Button onClick={() => location.reload()}>再試行</Button>}>読み込めませんでした。ログイン状態と通信を確認してください。</Alert>;
   if (!state) return <CircularProgress aria-label="読み込み中" />;
   if (isArticleType(type)) return <CMSLayout user={state.user}>{history ?
