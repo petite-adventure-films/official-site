@@ -1,3 +1,7 @@
+import {
+  videoFrameAttributes,
+  validExternalVideo,
+} from '../../../packages/content-schema/external-video';
 import { readFile } from 'node:fs/promises';
 import { validLink, type BlogDraft } from '../../../cms/src/features/blog/draft';
 import snapshot from '../../data/wordpress-export.json' with { type: 'json' };
@@ -66,6 +70,16 @@ export async function readCmsRelease() {
     return path;
   }
   function render(node: Node): string {
+    if (node.type === 'externalVideo') {
+      if (!validExternalVideo(node.attrs)) throw new Error('invalid_blog_release_video');
+      const attrs = videoFrameAttributes(node.attrs, true);
+      const width = node.attrs.width ?? 560,
+        height = node.attrs.height ?? 315;
+      const htmlAttrs = Object.entries(attrs)
+        .map(([key, value]) => `${key}="${escape(String(value))}"`)
+        .join(' ');
+      return `<div style="width:${String(width)}px;max-width:100%;aspect-ratio:${String(width)}/${String(height)}"><iframe ${htmlAttrs} loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%"></iframe></div>`;
+    }
     if (node.type === 'assetImage')
       return `<img src="${escape(assetPath(node.attrs?.assetId))}" alt="${escape(node.attrs?.alt)}">`;
     if (node.type === 'hardBreak') return '<br>';

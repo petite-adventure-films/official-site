@@ -446,6 +446,9 @@
         },
         {
           "$ref": "#/$defs/assetImage"
+        },
+        {
+          "$ref": "#/$defs/externalVideo"
         }
       ]
     },
@@ -544,6 +547,56 @@
       },
       "required": [
         "type"
+      ],
+      "additionalProperties": false
+    },
+    "externalVideo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "externalVideo"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "enum": [
+                "youtube",
+                "vimeo"
+              ]
+            },
+            "videoId": {
+              "type": "string"
+            },
+            "sourceUrl": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            }
+          },
+          "required": [
+            "provider",
+            "videoId",
+            "sourceUrl"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
       ],
       "additionalProperties": false
     }

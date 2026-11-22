@@ -6,10 +6,12 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Menu, MenuIt
 import { validLink, type BodyNode } from '../draft';
 import { AssetImage, AssetLink } from '../media-nodes';
 import { WordBreak } from '../word-break';
+import { ExternalVideoNode } from '../external-video';
+import { externalVideoKeys } from '../../../../../packages/content-schema/external-video';
 import { MediaPicker } from './MediaPicker';
 // Drop editor-generated null/default rendering attrs, not content or supported formatting.
 function stored(n: JSONContent): BodyNode {
-  const keys = n.type === 'assetImage' ? ['assetId', 'alt'] : n.type === 'assetLink' ? ['assetId', 'assetKind'] : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level'] : n.type === 'orderedList' ? ['start'] : [];
+  const keys = n.type === 'externalVideo' ? externalVideoKeys : n.type === 'assetImage' ? ['assetId', 'alt'] : n.type === 'assetLink' ? ['assetId', 'assetKind'] : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level'] : n.type === 'orderedList' ? ['start'] : [];
   const attrs = Object.fromEntries(Object.entries(n.attrs ?? {}).filter(([k, v]) => keys.includes(k) && v != null));
   return { type: n.type!, ...(n.text !== undefined ? { text: n.text } : {}), ...(Object.keys(attrs).length ? { attrs } : {}), ...(n.content ? { content: n.content.map(stored) } : {}), ...(n.marks ? { marks: n.marks.map(stored) } : {}) };
 }
@@ -20,7 +22,7 @@ export function BodyEditor({ value, change }: { value: BodyNode; change?: (doc: 
   const [link, setLink] = useState<string | null>(null);
   const [mediaKind, setMediaKind] = useState<'image' | 'document' | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
-  const editor = useEditor({ extensions: [AssetImage, AssetLink, WordBreak, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
+  const editor = useEditor({ extensions: [AssetImage, AssetLink, WordBreak, ExternalVideoNode, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
     content: value, editable: Boolean(change), shouldRerenderOnTransaction: true,
     editorProps: { attributes: change ? { role: 'textbox', 'aria-label': '本文', 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
     onUpdate: ({ editor }) => latest.current?.(stored(editor.getJSON())),
