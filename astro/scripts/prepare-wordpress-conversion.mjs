@@ -13,7 +13,12 @@ const { generateJSON, generateHTML, getSchema } = tiptap('@tiptap/core');
 const StarterKit = cms('@tiptap/starter-kit').default;
 const dom = new JSDOM(''); // No resource loading or script execution.
 const extensions = [
-  StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false }),
+  StarterKit.configure({
+    heading: { levels: [2, 3, 4] },
+    codeBlock: false,
+    trailingNode: false,
+    link: { HTMLAttributes: { target: '_self' } },
+  }),
 ];
 const pm = getSchema(extensions);
 const Ajv = require('ajv/dist/2020.js').default;
@@ -187,6 +192,15 @@ export function convertBody(html, field = 'content') {
     };
     const output = new dom.window.DOMParser().parseFromString(rendered, 'text/html');
     if (normalize(document.body) !== normalize(output.body)) throw Error('text_changed');
+    const links = (d) =>
+      [...d.body.querySelectorAll('a')].map((a) => ({
+        href: a.getAttribute('href'),
+        target: a.getAttribute('target') || '_self',
+        title: a.getAttribute('title'),
+        text: normalize(a),
+      }));
+    if (JSON.stringify(links(document)) !== JSON.stringify(links(output)))
+      throw Error('link_changed');
     // Do not silently lose links, breaks or supported formatting during parsing.
     const counts = (d) =>
       [

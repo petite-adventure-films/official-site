@@ -28,6 +28,20 @@ test('preserves text, formatting, link and line break in a schema-valid candidat
   assert.ok(JSON.stringify(row.candidate).includes('hardBreak'));
   assert.equal(row.references[0].url, 'https://example.com/');
 });
+test('preserves link destinations, titles and same-tab/new-tab behavior', () => {
+  for (const target of [null, '_self', '_blank']) {
+    const result = convertBody(
+      `<p><a href="https://example.com/?a=1&amp;b=2" title="説明"${target ? ` target="${target}"` : ''}>リンク</a></p>`,
+    );
+    assert.deepEqual(result.issues, []);
+    assert.deepEqual(result.body.doc.content[0].content[0].marks[0].attrs, {
+      href: 'https://example.com/?a=1&b=2',
+      target: target ?? '_self',
+      title: '説明',
+    });
+  }
+  assert.ok(convertBody('<a href="https://example.com/" target="named">リンク</a>').issues.length);
+});
 test('never drops images, embeds, styles, anchors, unknown elements or attachment links', () => {
   for (const html of [
     '<img src="https://example.com/a.png">',
