@@ -85,7 +85,7 @@ export default function ContactForm() {
       : 'cursor-not-allowed bg-gray-100 text-gray-500';
   const errorMessage = (key: keyof FormValues) =>
     touched[key] && errors[key] ? (
-      <p role="alert" className="mt-1 text-xs text-red-600">
+      <p id={`contact-${key}-error`} role="alert" className="mt-1 text-xs text-red-600">
         {errors[key]}
       </p>
     ) : null;
@@ -103,6 +103,8 @@ export default function ContactForm() {
       </label>
       <input
         id="contact-name"
+        aria-invalid={Boolean(touched.name && errors.name)}
+        aria-describedby={touched.name && errors.name ? 'contact-name-error' : undefined}
         name="name"
         type="text"
         className={inputClass}
@@ -125,6 +127,8 @@ export default function ContactForm() {
       </div>
       <input
         id="contact-email"
+        aria-invalid={Boolean(touched.email && errors.email)}
+        aria-describedby={touched.email && errors.email ? 'contact-email-error' : undefined}
         name="email"
         type="email"
         className={inputClass}
@@ -147,6 +151,10 @@ export default function ContactForm() {
       </div>
       <input
         id="contact-email-confirm"
+        aria-invalid={Boolean(touched.emailConfirm && errors.emailConfirm)}
+        aria-describedby={
+          touched.emailConfirm && errors.emailConfirm ? 'contact-emailConfirm-error' : undefined
+        }
         name="emailConfirm"
         type="email"
         className={inputClass}
@@ -169,6 +177,8 @@ export default function ContactForm() {
       </div>
       <textarea
         id="contact-message"
+        aria-invalid={Boolean(touched.message && errors.message)}
+        aria-describedby={touched.message && errors.message ? 'contact-message-error' : undefined}
         name="message"
         className="mt-2 block h-32 w-full rounded-none border border-black p-2 disabled:border-gray-100 disabled:bg-gray-50 disabled:opacity-100"
         value={values.message}

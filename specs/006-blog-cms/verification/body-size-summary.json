@@ -1,0 +1,31 @@
+{
+  "sourceSHA256": "926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7",
+  "configuration": "StarterKit + inline Image + Youtube + TableKit + TextStyleKit + TextAlign(heading,paragraph)",
+  "legacyYoutubeParser": true,
+  "articleCount": 310,
+  "requestLimitBytes": 262144,
+  "bodyOnlyOverLimit": 0,
+  "largestFive": [
+    {
+      "id": 14975,
+      "bodyJsonBytes": 195962
+    },
+    {
+      "id": 13033,
+      "bodyJsonBytes": 131829
+    },
+    {
+      "id": 14569,
+      "bodyJsonBytes": 110852
+    },
+    {
+      "id": 15661,
+      "bodyJsonBytes": 107891
+    },
+    {
+      "id": 4810,
+      "bodyJsonBytes": 88023
+    }
+  ],
+  "caveat": "Standard editor JSON body only, not final v2 or full request envelope."
+}

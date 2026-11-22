@@ -119,8 +119,19 @@ const productData = {
       }}
     />
 
-    <Tabs tabs={[{ label: '概要' }, { label: tabLabel2 }, { label: '制作クレジット' }]}>
-      <div data-panel="0" class="pt-8 [&_p+p]:mt-2">
+    <Tabs
+      id="product-details"
+      label="商品情報"
+      tabs={[{ label: '概要' }, { label: tabLabel2 }, { label: '制作クレジット' }]}
+    >
+      <div
+        id="product-details-panel-0"
+        role="tabpanel"
+        aria-labelledby="product-details-tab-0"
+        tabindex="0"
+        data-panel="0"
+        class="pt-8 [&_p+p]:mt-2"
+      >
         {
           filmInfo.map((info) => (
             <div class="not-first:mt-4">
@@ -138,6 +149,10 @@ const productData = {
       </div>
 
       <div
+        id="product-details-panel-1"
+        role="tabpanel"
+        aria-labelledby="product-details-tab-1"
+        tabindex="0"
         data-panel="1"
         hidden
         class="pt-8 [&_figcaption]:mt-1 [&_figcaption]:text-xs [&_figure]:mt-2 [&_figure]:block [&_h4]:mt-4 [&_img]:mt-2 [&_img]:block [&_img]:border [&_img]:border-black [&_p]:mt-2"
@@ -145,7 +160,15 @@ const productData = {
         {ArticleComponent && <ArticleComponent />}
       </div>
 
-      <div data-panel="2" hidden class="pt-8">
+      <div
+        id="product-details-panel-2"
+        role="tabpanel"
+        aria-labelledby="product-details-tab-2"
+        tabindex="0"
+        data-panel="2"
+        hidden
+        class="pt-8"
+      >
         {
           filmInfo.map((info) => (
             <div class="not-first:mt-4">

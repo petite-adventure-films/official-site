@@ -1,7 +1,8 @@
 import type { Tag } from './tag';
 
 export type Blog = {
-  id: number;
+  id: number | string;
+  cmsSlug?: string;
   name: string;
   title: string;
   content?: string;

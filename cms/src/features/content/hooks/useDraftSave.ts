@@ -1,6 +1,7 @@
+import { contentSections, type ContentType } from '../../articles/draft';
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, type SavedDraft } from '../../../lib/api-client';
-export function useDraftSave<T>(initial: T, existing: SavedDraft<T> | null) {
+export function useDraftSave<T>(initial: T, existing: SavedDraft<T> | null, type: ContentType = 'event') {
   const [value, setValue] = useState(initial);
   const [saved, setSaved] = useState(existing);
   const [status, setStatus] = useState(existing ? '保存済み' : '未保存');
@@ -21,14 +22,14 @@ export function useDraftSave<T>(initial: T, existing: SavedDraft<T> | null) {
     if (m.blocked) return null;
     if (m.saved && m.savedGeneration === m.generation && !m.pending) return m.saved;
     m.pending ??= { path: m.saved ? `/api/contents/${m.saved.id}` : '/api/contents', method: m.saved ? 'PUT' : 'POST', generation: m.generation,
-      body: JSON.stringify({ operationId: crypto.randomUUID(), ...(m.saved ? { expectedVersion: m.saved.version } : { type: 'event' }), payload: m.value }) };
+      body: JSON.stringify({ operationId: crypto.randomUUID(), ...(m.saved ? { expectedVersion: m.saved.version } : { type }), payload: m.value }) };
     m.running = true; setStatus('保存中'); setError(null);
     try {
       const response = await api<SavedDraft<T>>(m.pending.path, { method: m.pending.method, body: m.pending.body });
       m.saved = response; m.savedGeneration = m.pending.generation; m.pending = null;
       if (mounted.current) {
         setSaved(response);
-        window.history.replaceState(null, '', `/cms/events/${response.id}/edit`);
+        window.history.replaceState(null, '', `/cms/${contentSections[type]}/${response.id}/edit`);
         setStatus(m.generation === m.savedGeneration ? '保存済み' : '未保存');
       }
       return response;

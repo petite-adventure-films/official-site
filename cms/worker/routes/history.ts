@@ -1,6 +1,6 @@
 import { HttpError, type Actor } from '../auth';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
-import { RestoreService, RestoreInvalid, restorePayload } from '../services/restore';
+import { RestoreService, RestoreInvalid } from '../services/restore';
 import { readJson } from './json';
 export async function history(request: Request, db: Database, actor: Actor, id: string, action: string) {
   const service = new RestoreService(db);
@@ -8,11 +8,11 @@ export async function history(request: Request, db: Database, actor: Actor, id: 
     if (action === 'history' && request.method === 'GET') {
       const draft = await new ContentDraftRepository(db).get(id);
       if (!draft) throw new DraftNotFound();
-      const items = (await service.history(id)).map(item => ({
+      const items = await Promise.all((await service.history(id)).map(async item => ({
         id: item.id, kind: item.kind, at: item.at,
         actorName: item.actorName ?? (item.actor === actor.id ? actor.name : '表示名未登録'),
-        payload: restorePayload(item),
-      }));
+        payload: await service.payload(draft.type, item),
+      })));
       return Response.json({ version: draft.version, items });
     }
     if (action !== 'restore' || request.method !== 'POST') throw new HttpError(404, 'not_found');

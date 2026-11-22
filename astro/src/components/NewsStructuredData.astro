@@ -15,8 +15,10 @@ const data = {
   '@context': 'https://schema.org',
   '@graph': posts.map((post) => ({
     '@type': 'NewsArticle',
-    '@id': `${pageUrl}#news-${post.id}`,
-    mainEntityOfPage: `${pageUrl}#news-${post.id}`,
+    '@id': post.cmsPath ? new URL(post.cmsPath, Astro.site).href : `${pageUrl}#news-${post.id}`,
+    mainEntityOfPage: post.cmsPath
+      ? new URL(post.cmsPath, Astro.site).href
+      : `${pageUrl}#news-${post.id}`,
     headline: toPlainText(post.title),
     articleBody: toPlainText(post.content),
     datePublished: toIsoDate(post.published),

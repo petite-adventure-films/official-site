@@ -1,4 +1,5 @@
 ---
+import { toIsoDate } from '@/lib/structured-data';
 import { NEWS_PER_PAGE } from '@/constants/pagination';
 import { wpGetList } from '@/lib/wp-api';
 import ArticleContents from '@components/ArticleContents.astro';
@@ -46,11 +47,14 @@ const { data: posts } = await wpGetList<News>('news', {
     {
       posts.map((post) => (
         <li>
-          <article>
+          <article
+            id={post.cmsPath ? `cms-${post.id}` : `news-${post.id}`}
+            data-cms-article={post.cmsMarker}
+          >
             <h3 class="text-base font-bold">{post.title}</h3>
             <ArticleContents contents={post.content} marginTop="mt-2" />
             <div class="mt-2 text-sm text-gray-500">
-              <time datetime={post.published}>{post.published}</time>
+              <time datetime={toIsoDate(post.published)}>{post.published}</time>
             </div>
           </article>
         </li>

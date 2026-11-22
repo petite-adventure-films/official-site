@@ -1,0 +1,1160 @@
+{
+  "inputHash": "b187a5330e3aa45200270b26c1dd86243c895fb9529c8244fdadbf8ba20dedb2",
+  "checkedAt": "2026-11-22T03:44:55.966Z",
+  "counts": {
+    "missing": 9,
+    "verified-local": 6088
+  },
+  "stopReason": null,
+  "chargedBytes": 2177647460,
+  "knownReceivedBytes": 2135704420,
+  "unsettledReservationBytes": 41943040,
+  "verifiedURLBytes": 2135704420,
+  "uniqueBlobs": 5937,
+  "uniqueBlobBytes": 2062041115,
+  "formats": {
+    "jpeg": 6043,
+    "png": 32,
+    "pdf": 13
+  },
+  "referencedPaths": 5935,
+  "pathsWithAllURLsVerified": 5926,
+  "aliases": {
+    "groups": 138,
+    "allVerifiedAndSameHash": 138,
+    "differentHash": []
+  },
+  "unresolved": [
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2017/01/DSC_1096_re-300x183.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4708,
+              "slug": "woman_director_now",
+              "title": "女性情報「Woman Director Now!」に執筆しました♪",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2017/01/Stills_1-300x169.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4708,
+              "slug": "woman_director_now",
+              "title": "女性情報「Woman Director Now!」に執筆しました♪",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/03/DSCN8361-300x169.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2017/03/DSCN8361-300x169.jpg",
+          "references": [
+            {
+              "type": "news",
+              "legacyId": 4758,
+              "slug": null,
+              "title": "2017年4月12日（水）、NHK「ラジオ深夜便・明日へのことば」出演！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 7161,
+              "slug": "editing_diary_20180120",
+              "title": "【制作日誌】ドキュメンタリーかフィクションか（2018.01.20 革命前夜）",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+      "state": "missing",
+      "error": "http_404",
+      "references": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 7277,
+              "slug": "director_life_24_20180126",
+              "title": "【映画監督、日々の暮らし㉔】堆肥（たいひ）を作る！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "originalCandidates": [
+    {
+      "sourceStorageKey": "wordpress/2016/10/IMG_5719-212x300.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/10/IMG_5719.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "0e09086a9c1259fb474a3a846e0864ec5b49f009bf7a1d0bb0d2650a5d9e2a6a",
+        "bytes": 1066888,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 2480,
+        "height": 3508,
+        "pages": 1,
+        "path": "blobs/0e09086a9c1259fb474a3a846e0864ec5b49f009bf7a1d0bb0d2650a5d9e2a6a.jpg"
+      },
+      "references": [
+        {
+          "type": "news",
+          "legacyId": 4527,
+          "slug": null,
+          "title": "2016年10月18日、『ブライアンと仲間たち』ロンドン大学上映＆監督スカイプトーク！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2016/11/3e1064a2d63ae9ae27f90eb3caf93f29-250x300.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/11/3e1064a2d63ae9ae27f90eb3caf93f29.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "923e2a5ce7cc7c822499862195d9b7365661a769ab6d180e0929537835b710bb",
+        "bytes": 142921,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 605,
+        "height": 725,
+        "pages": 1,
+        "path": "blobs/923e2a5ce7cc7c822499862195d9b7365661a769ab6d180e0929537835b710bb.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4631,
+          "slug": "20161218_inoue_megumi",
+          "title": "12/18（日）井上めぐみさん講演「福島の涙はわたしたちの涙 〜あれから5年〜」",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a",
+        "bytes": 958077,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1959,
+        "height": 1469,
+        "pages": 1,
+        "path": "blobs/66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4641,
+          "slug": "20161210_oka_sid",
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1",
+        "bytes": 861086,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1959,
+        "height": 1469,
+        "pages": 1,
+        "path": "blobs/3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4641,
+          "slug": "20161210_oka_sid",
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae",
+        "bytes": 1073725,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 2149,
+        "height": 1214,
+        "pages": 1,
+        "path": "blobs/1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4641,
+          "slug": "20161210_oka_sid",
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01",
+        "bytes": 987985,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1959,
+        "height": 1469,
+        "pages": 1,
+        "path": "blobs/b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4641,
+          "slug": "20161210_oka_sid",
+          "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/01/DSC_1096_re-300x183.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df",
+        "bytes": 872696,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1751,
+        "height": 1067,
+        "pages": 1,
+        "path": "blobs/8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4708,
+          "slug": "woman_director_now",
+          "title": "女性情報「Woman Director Now!」に執筆しました♪",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/01/Stills_1-300x169.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d",
+        "bytes": 932764,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1920,
+        "height": 1080,
+        "pages": 1,
+        "path": "blobs/c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4708,
+          "slug": "woman_director_now",
+          "title": "女性情報「Woman Director Now!」に執筆しました♪",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/03/DSCN8361-300x169.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/03/DSCN8361.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "8762dff2feb8b1b1aafd9fc0dd6f4ee0b9ea3f366abb8eb71c1762f92181735f",
+        "bytes": 275864,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1191,
+        "height": 670,
+        "pages": 1,
+        "path": "blobs/8762dff2feb8b1b1aafd9fc0dd6f4ee0b9ea3f366abb8eb71c1762f92181735f.jpg"
+      },
+      "references": [
+        {
+          "type": "news",
+          "legacyId": 4758,
+          "slug": null,
+          "title": "2017年4月12日（水）、NHK「ラジオ深夜便・明日へのことば」出演！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2016/09/Stills_28_re-1024x576.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/Stills_28_re.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "fbbfb6cd5f02b432aa05ee3e5c29a760945f425c9dd1d7d0e6b6e975e84542a6",
+        "bytes": 315457,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1536,
+        "height": 864,
+        "pages": 1,
+        "path": "blobs/fbbfb6cd5f02b432aa05ee3e5c29a760945f425c9dd1d7d0e6b6e975e84542a6.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 4318,
+          "slug": "my_indian_diary_details_jp",
+          "title": "最新作『インド日記 ～ガジュマルの木の女たち～』発売＆作品詳細！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/a-300x225.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/a.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "25e5d970bfbe6c4472fd3bc0c5bf029914aad272fba98e63a54fa73e284b352f",
+        "bytes": 679100,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1200,
+        "pages": 1,
+        "path": "blobs/25e5d970bfbe6c4472fd3bc0c5bf029914aad272fba98e63a54fa73e284b352f.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/b-300x201.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/b.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "7c1d2b00b8b4ac9f6f43886fda8f9d7461acc75772c4df1b9c8883b559f7dde4",
+        "bytes": 462806,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1071,
+        "pages": 1,
+        "path": "blobs/7c1d2b00b8b4ac9f6f43886fda8f9d7461acc75772c4df1b9c8883b559f7dde4.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/c-300x225.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/c.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "8d0f6bb529665883b2d0acb49665021a7e559561a29276ffd8ff2680988f882e",
+        "bytes": 773447,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1200,
+        "pages": 1,
+        "path": "blobs/8d0f6bb529665883b2d0acb49665021a7e559561a29276ffd8ff2680988f882e.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/d-300x225.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/d.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "fa404e6c02b9847d857cbc432a770106c392f2816b18485055c77eca5ed37cfa",
+        "bytes": 569740,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1200,
+        "pages": 1,
+        "path": "blobs/fa404e6c02b9847d857cbc432a770106c392f2816b18485055c77eca5ed37cfa.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/e-300x201.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/e.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "257886194e7133f16b36634ade51ca63aaa6f4b89ea243f3dea37a4a9a98cc36",
+        "bytes": 366253,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1071,
+        "pages": 1,
+        "path": "blobs/257886194e7133f16b36634ade51ca63aaa6f4b89ea243f3dea37a4a9a98cc36.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/f-300x201.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/f.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "43a01fc001cc5f684951d7548bc115256e688bb57ff28ae7f65df602348a2070",
+        "bytes": 264441,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1071,
+        "pages": 1,
+        "path": "blobs/43a01fc001cc5f684951d7548bc115256e688bb57ff28ae7f65df602348a2070.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/g-300x201.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/g.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "fe4ae8c5579f2b859614c167e1b8e02203886d9d1ea2aa31840ed35b5980875c",
+        "bytes": 372316,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1071,
+        "pages": 1,
+        "path": "blobs/fe4ae8c5579f2b859614c167e1b8e02203886d9d1ea2aa31840ed35b5980875c.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/04/h-300x225.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/h.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "9018eb63cc357a26b5204f756de6558fb03efa62e562b33cf37fbf9d096e4efc",
+        "bytes": 527655,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1600,
+        "height": 1200,
+        "pages": 1,
+        "path": "blobs/9018eb63cc357a26b5204f756de6558fb03efa62e562b33cf37fbf9d096e4efc.jpg"
+      },
+      "references": [
+        {
+          "type": "media",
+          "legacyId": 5256,
+          "slug": null,
+          "title": "公園のベンチが人を排除する？　不便に進化するホームレス排除の仕掛け",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "type": "media",
+          "legacyId": 5266,
+          "slug": null,
+          "title": "【English article】 Public Benches Turn ‘Anti-Homeless’ – Tokyo’s spaces designed to keep people from staying",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/06/20170702_A_Woman_from_Fukushima_flyer_re-300x210.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/06/20170702_A_Woman_from_Fukushima_flyer_re.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "48512cfe8cf7cff40b0d471adb8448bc1df0ed17d0fb9b5b2536d6475d78a1b3",
+        "bytes": 615590,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 2117,
+        "height": 1483,
+        "pages": 1,
+        "path": "blobs/48512cfe8cf7cff40b0d471adb8448bc1df0ed17d0fb9b5b2536d6475d78a1b3.jpg"
+      },
+      "references": [
+        {
+          "type": "news",
+          "legacyId": 5304,
+          "slug": null,
+          "title": "2017年7月2日（日）、イギリス・ロンドンで『木田さんと原発、そして日本』上映＆木田節子さん+監督スカイプQ&A！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/06/66c19942ab4ba346fdb64ccc04cde373-300x164.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/06/66c19942ab4ba346fdb64ccc04cde373.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "2386ff1e121309873444ca21165e3c46d04da6fd403bf16b33938a774ff26c7a",
+        "bytes": 153970,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1612,
+        "height": 880,
+        "pages": 1,
+        "path": "blobs/2386ff1e121309873444ca21165e3c46d04da6fd403bf16b33938a774ff26c7a.jpg"
+      },
+      "references": [
+        {
+          "type": "news",
+          "legacyId": 5299,
+          "slug": null,
+          "title": "英語版サイトがオープンしました！",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/07/DSCN4372-300x169.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/DSCN4372.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "f8f6f813d5cdc95ef43ecca2cb3db4b4517b202b67888464d1ce55dc402d4c9d",
+        "bytes": 1993405,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 3968,
+        "height": 2232,
+        "pages": 1,
+        "path": "blobs/f8f6f813d5cdc95ef43ecca2cb3db4b4517b202b67888464d1ce55dc402d4c9d.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 5406,
+          "slug": "20170830_civil_screening",
+          "title": "あなたもできる！3分間映像講座～完成披露上映会のお知らせ～",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/07/DSCN4480-300x169.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/DSCN4480.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "9af989c9749b0b6084d1ecd224097cb30a9e0337f482f322f21ee685beb8f4a7",
+        "bytes": 1971828,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 3968,
+        "height": 2232,
+        "pages": 1,
+        "path": "blobs/9af989c9749b0b6084d1ecd224097cb30a9e0337f482f322f21ee685beb8f4a7.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 5406,
+          "slug": "20170830_civil_screening",
+          "title": "あなたもできる！3分間映像講座～完成披露上映会のお知らせ～",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/07/DSCN4656-300x169.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/DSCN4656.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "d1a7eb8083a44140947e41dbe9dc6121efa80b83d5d6c86784b7233cb47c17e3",
+        "bytes": 1971934,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 3968,
+        "height": 2232,
+        "pages": 1,
+        "path": "blobs/d1a7eb8083a44140947e41dbe9dc6121efa80b83d5d6c86784b7233cb47c17e3.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 5406,
+          "slug": "20170830_civil_screening",
+          "title": "あなたもできる！3分間映像講座～完成披露上映会のお知らせ～",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2017/07/WS_1-300x169.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/WS_1.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "dd95ad33dc9876171ff384308bfa4050464a2a9b89c3940b57c684d47ebfc0a8",
+        "bytes": 1982968,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 3968,
+        "height": 2232,
+        "pages": 1,
+        "path": "blobs/dd95ad33dc9876171ff384308bfa4050464a2a9b89c3940b57c684d47ebfc0a8.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 5406,
+          "slug": "20170830_civil_screening",
+          "title": "あなたもできる！3分間映像講座～完成披露上映会のお知らせ～",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb",
+        "bytes": 73632,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 532,
+        "height": 531,
+        "pages": 1,
+        "path": "blobs/a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 7161,
+          "slug": "editing_diary_20180120",
+          "title": "【制作日誌】ドキュメンタリーかフィクションか（2018.01.20 革命前夜）",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2018/03/IMG_20180331_143153-212x300.png",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/03/IMG_20180331_143153.png",
+      "state": "verified-local",
+      "file": {
+        "sha256": "a97526e2f4eea1355d2e59eded36df9a4d7e326affdff46137fe98f75d15cf91",
+        "bytes": 697083,
+        "format": "png",
+        "mime": "image/png",
+        "width": 648,
+        "height": 918,
+        "pages": 1,
+        "path": "blobs/a97526e2f4eea1355d2e59eded36df9a4d7e326affdff46137fe98f75d15cf91.png"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 8070,
+          "slug": "director_life_39_20180331",
+          "title": "【映画監督、日々の暮らし#39】シワシワ♡干し野菜の世界（キウイ・シイタケ・玉ねぎ・生姜編）",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2019/06/ad11fad40e65ce74f58c4c304324b890-e1561861112791-1024x723.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2019/06/ad11fad40e65ce74f58c4c304324b890-e1561861112791.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "5fd6c15f71afbd0a388b9e521de6819369a6e4a4dc34c94999e33d2a147370d8",
+        "bytes": 1255429,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 3485,
+        "height": 2459,
+        "pages": 1,
+        "path": "blobs/5fd6c15f71afbd0a388b9e521de6819369a6e4a4dc34c94999e33d2a147370d8.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 11480,
+          "slug": "20190628_rojyo_sake_demo",
+          "title": "公共の場所は誰のもの？ 渋谷区議会で可決された「路上飲酒禁止条例」を考える",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2019/06/b5e026c49cd48c55083ceccef425681d-e1561860689231-1024x723.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2019/06/b5e026c49cd48c55083ceccef425681d-e1561860689231.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "5cd32c7bad1e74a3d420221ba3180cffd3125ec7c446b2d8ca0ddde601c26fc8",
+        "bytes": 862793,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 3485,
+        "height": 2459,
+        "pages": 1,
+        "path": "blobs/5cd32c7bad1e74a3d420221ba3180cffd3125ec7c446b2d8ca0ddde601c26fc8.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 11480,
+          "slug": "20190628_rojyo_sake_demo",
+          "title": "公共の場所は誰のもの？ 渋谷区議会で可決された「路上飲酒禁止条例」を考える",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2020/09/7270917728b0234bf592bcf2263ae669-300x200.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/7270917728b0234bf592bcf2263ae669.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "b548b736ed54de03b324ee16c2e8300fcbb839e39a94aa6578b0927e8cffc49c",
+        "bytes": 32756,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 960,
+        "height": 639,
+        "pages": 1,
+        "path": "blobs/b548b736ed54de03b324ee16c2e8300fcbb839e39a94aa6578b0927e8cffc49c.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 12609,
+          "slug": "20200910",
+          "title": "新作ドキュメンタリー完成！『日々新～早春の日向新しき村』完成披露イベントのご案内",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2020/09/morisan_painting-226x300.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/morisan_painting.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "310622a3af153f0e1209d422b7406dcfb36a3fa8ce392358cbf16a9b1678d076",
+        "bytes": 1627762,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 2456,
+        "height": 3264,
+        "pages": 1,
+        "path": "blobs/310622a3af153f0e1209d422b7406dcfb36a3fa8ce392358cbf16a9b1678d076.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 12609,
+          "slug": "20200910",
+          "title": "新作ドキュメンタリー完成！『日々新～早春の日向新しき村』完成披露イベントのご案内",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2020/09/Morisan_profile-300x300.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/Morisan_profile.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "4769a1e1c1bce8ef9452ccba118fb70deaa951163688c753eb43f2ca777ce1d0",
+        "bytes": 690653,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 413,
+        "height": 413,
+        "pages": 1,
+        "path": "blobs/4769a1e1c1bce8ef9452ccba118fb70deaa951163688c753eb43f2ca777ce1d0.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 12609,
+          "slug": "20200910",
+          "title": "新作ドキュメンタリー完成！『日々新～早春の日向新しき村』完成披露イベントのご案内",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2020/09/Yumiko_Hayakawa-300x279.jpg",
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/Yumiko_Hayakawa.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "db9eaef44ec5ad6e56205e964d8bed6e8d8d59672974b958f9eed0ea550bcc5a",
+        "bytes": 88479,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 582,
+        "height": 542,
+        "pages": 1,
+        "path": "blobs/db9eaef44ec5ad6e56205e964d8bed6e8d8d59672974b958f9eed0ea550bcc5a.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 12609,
+          "slug": "20200910",
+          "title": "新作ドキュメンタリー完成！『日々新～早春の日向新しき村』完成披露イベントのご案内",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceStorageKey": "wordpress/2021/01/DSC03713_re-1024x577.jpg",
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2021/01/DSC03713_re.jpg",
+      "state": "verified-local",
+      "file": {
+        "sha256": "5d29bcf660bb745d50624457cfa4c4dc7f0c4d2cf55c7ac8893891e81ecfa214",
+        "bytes": 249115,
+        "format": "jpeg",
+        "mime": "image/jpeg",
+        "width": 1095,
+        "height": 617,
+        "pages": 1,
+        "path": "blobs/5d29bcf660bb745d50624457cfa4c4dc7f0c4d2cf55c7ac8893891e81ecfa214.jpg"
+      },
+      "references": [
+        {
+          "type": "blog",
+          "legacyId": 15661,
+          "slug": "20220817_archives_3",
+          "title": "続続・アーカイブを考える～長期保存に耐えうる素材選びとなるか？！～",
+          "fields": [
+            "content"
+          ]
+        }
+      ]
+    }
+  ],
+  "boundary": "Local acquisition only. Candidates are not approved replacements; CMS/R2 registration and final synchronization are separate."
+}

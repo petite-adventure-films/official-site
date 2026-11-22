@@ -4,22 +4,27 @@ interface Tab {
 }
 
 interface Props {
+  id: string;
+  label: string;
   tabs: Tab[];
   class?: string;
 }
 
-const { tabs, class: className } = Astro.props;
+const { id, label, tabs, class: className } = Astro.props;
 ---
 
 <div class:list={['tabs-widget', className]}>
-  <div role="tablist" class="mt-16 flex w-full">
+  <div role="tablist" aria-label={label} class="mt-16 flex w-full">
     {
       tabs.map((tab, i) => (
         <button
+          type="button"
+          id={`${id}-tab-${i}`}
+          tabindex={i === 0 ? 0 : -1}
           data-tab={i}
           role="tab"
           aria-selected={i === 0 ? 'true' : 'false'}
-          aria-controls={`panel-${i}`}
+          aria-controls={`${id}-panel-${i}`}
           class:list={[
             'w-1/3 min-w-fit rounded-none border-t border-l border-black p-2 last:border-r focus:outline-none sm:hover:bg-white sm:hover:text-black',
             i === 0 ? 'bg-white' : 'bg-gray-100 text-gray-500',
@@ -40,10 +45,11 @@ const { tabs, class: className } = Astro.props;
     const buttons = widget.querySelectorAll<HTMLButtonElement>('[data-tab]');
     const panels = widget.querySelectorAll<HTMLElement>('[data-panel]');
 
-    const go = (n: number) => {
+    const go = (n: number, moveFocus = false) => {
       buttons.forEach((btn, i) => {
         const active = i === n;
         btn.setAttribute('aria-selected', String(active));
+        btn.tabIndex = active ? 0 : -1;
         btn.classList.toggle('bg-white', active);
         btn.classList.toggle('bg-gray-100', !active);
         btn.classList.toggle('text-gray-500', !active);
@@ -51,10 +57,21 @@ const { tabs, class: className } = Astro.props;
       panels.forEach((panel, i) => {
         panel.hidden = i !== n;
       });
+      if (moveFocus) buttons[n]?.focus();
     };
 
     buttons.forEach((btn, i) => {
       btn.addEventListener('click', () => go(i));
+      btn.addEventListener('keydown', (event) => {
+        let next: number | undefined;
+        if (event.key === 'ArrowRight') next = (i + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (i - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        if (next === undefined) return;
+        event.preventDefault();
+        go(next, true);
+      });
     });
   });
 </script>

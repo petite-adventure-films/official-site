@@ -1,3 +1,7 @@
+import { isArticleType } from '../../src/features/articles/draft';
+import { prepareArticlePublication, articleTarget, type ArticlePublication } from '../article-publication';
+import { localBlogSlugPrefix, prepareBlogPublication, type BlogPublication } from '../blog-publication';
+import { HttpError } from '../auth';
 import { PublicationUrls, type EventRoutes } from './publication-urls';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database } from '../repositories/content-drafts';
 import { prepareEventPublication, type EventPublication, type PublicationIssue } from '../event-publication';
@@ -14,13 +18,15 @@ type Operation = {
   content_hash: string; state: 'ready' | 'delivering' | 'unknown' | 'failed' | 'succeeded' | 'noop';
   target_slug: string; routes: string | null; attempt: number; revision_id: string | null; receipt: string | null; completed_at: string | null;
 };
-export type Delivery = { operationId: string; attempt: number; contentId: string; hash: string; payload: EventPublication; routes: EventRoutes };
+export type Delivery = { operationId: string; attempt: number; contentId: string; hash: string; payload: EventPublication | BlogPublication | ArticlePublication; routes: EventRoutes };
 export type DeliveryResult = { status: 'unknown' } | {
   status: 'succeeded' | 'failed'; operationId: string; attempt: number; hash: string; receipt: string;
 };
 // A confirmed failure means that attempt has stopped and cannot activate later.
 // inspect must identify the exact attempt; it must never dispatch another deploy.
 export interface PublicationDelivery {
+  readonly supportsLocalBlog?: boolean;
+  readonly localSiteOrigin?: string;
   deploy(delivery: Delivery): Promise<DeliveryResult>;
   inspect(delivery: Delivery): Promise<DeliveryResult>;
 }
@@ -45,7 +51,7 @@ export class PublicationService {
     return (await this.db.prepare('SELECT * FROM publication_revisions WHERE content_id = ? ORDER BY version DESC').bind(contentId)
       .all<{ id: string; version: number; payload: string; published_at: string; published_by: string }>()).results;
   }
-  async prepare(input: Input): Promise<Operation> {
+  async prepare(input: Input, supportsLocalBlog = false): Promise<Operation> {
     const fingerprint = await hash([input.contentId, input.expectedVersion, input.expectedPublicationVersion]);
     const replay = async () => {
       const prior = await this.db.prepare('SELECT * FROM publication_operations WHERE actor_id = ? AND operation_id = ?')
@@ -60,12 +66,35 @@ export class PublicationService {
     if (draft.version !== input.expectedVersion) throw new DraftConflict();
     const current = await this.current(input.contentId);
     if ((current?.version ?? 0) !== input.expectedPublicationVersion) throw new PublicationConflict('publication_version_conflict');
-    const available = await tags(this.db);
-    const candidate = prepareEventPublication(draft.payload, { contentId: draft.id,
-      filmTagIds: new Set(available.filmTags.map(tag => tag.id)), eventTagIds: new Set(available.eventTags.map(tag => tag.id)) });
-    if (!candidate.ok) throw new PublicationInvalid(candidate.issues);
-    const routes = await new PublicationUrls(this.db).plan(draft.id, candidate.payload.slug);
-    const contentHash = await hash(candidate.payload);
+    let payload: Delivery['payload'];
+    let targetSlug: string;
+    if (isArticleType(draft.type)) {
+      if (!supportsLocalBlog) throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: '配信は利用できません。' }]);
+      try { payload = await prepareArticlePublication(this.db, draft.type, draft.payload, draft.id); }
+      catch (error) {
+        if (!(error instanceof HttpError) && !(error instanceof Error && error.message === 'invalid_article_publication')) throw error;
+        throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'タイトル、URL、動画ID、添付と作品関連を確認してください。' }]);
+      }
+      targetSlug = articleTarget(draft.type, payload.content, draft.id);
+    } else if (draft.type === 'blog') {
+      if (!supportsLocalBlog) throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'ブログ配信は利用できません。' }]);
+      try {
+        payload = await prepareBlogPublication(this.db, draft.payload, draft.id);
+      } catch (error) {
+        if (!(error instanceof HttpError) && !(error instanceof Error && error.message === 'invalid_blog_publication')) throw error;
+        throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'ブログのタイトル、slug、本文、分類、添付を確認してください。' }]);
+      }
+      targetSlug = localBlogSlugPrefix + payload.content.slug;
+    } else {
+      const available = await tags(this.db);
+      const candidate = prepareEventPublication(draft.payload, { contentId: draft.id,
+        filmTagIds: new Set(available.filmTags.map(tag => tag.id)), eventTagIds: new Set(available.eventTags.map(tag => tag.id)) });
+      if (!candidate.ok) throw new PublicationInvalid(candidate.issues);
+      payload = candidate.payload;
+      targetSlug = payload.slug;
+    }
+    const routes = await new PublicationUrls(this.db).plan(draft.id, targetSlug);
+    const contentHash = await hash(payload);
     const noop = current?.content_hash === contentHash;
     const id = crypto.randomUUID();
     const now = new Date().toISOString();
@@ -75,8 +104,8 @@ export class PublicationService {
          payload, draft_snapshot, content_hash, state, revision_id, created_at, completed_at, actor_name, target_slug, routes)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
         id, input.actor, input.operationId, fingerprint, draft.id, draft.version, input.expectedPublicationVersion,
-        noop ? null : JSON.stringify(candidate.payload), noop ? null : JSON.stringify(draft.payload), contentHash,
-        noop ? 'noop' : 'ready', noop ? current.revision_id : null, now, noop ? now : null, input.actorName ?? null, candidate.payload.slug, JSON.stringify(routes),
+        noop ? null : JSON.stringify(payload), noop ? null : JSON.stringify(draft.payload), contentHash,
+        noop ? 'noop' : 'ready', noop ? current.revision_id : null, now, noop ? now : null, input.actorName ?? null, targetSlug, JSON.stringify(routes),
       ).run();
     } catch (error) {
       const prior = await replay();

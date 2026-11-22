@@ -1,7 +1,9 @@
 import type { Tag } from './tag';
 
 type MediaBase = {
-  id: number;
+  id: number | string;
+  cmsPath?: string;
+  cmsMarker?: string;
   title: string;
   published: string;
   media_name: string;
@@ -14,6 +16,7 @@ export type MediaSummary = MediaBase;
 
 export type MediaDetail = MediaBase & {
   content: string;
+  cmsPdfUrls?: string[];
   media_video: string | false;
   media_pdf_url: string | false;
   article_title: string;

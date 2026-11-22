@@ -21,13 +21,14 @@ const isActive = (key: string) => {
 };
 ---
 
-<div class="sticky -top-[1px] z-50 mt-8 flex justify-center gap-2">
+<div class="sticky top-[-1px] z-50 mt-8 flex justify-center gap-2">
   <div class="relative">
     <button
       id="nav-toggle"
       aria-expanded="false"
+      aria-controls="nav-menu"
       aria-haspopup="true"
-      class="relative z-10 flex h-12 w-12 flex-col items-center justify-center bg-black text-white sm:hover:border sm:hover:border-black sm:hover:bg-white sm:hover:text-black"
+      class="relative z-10 flex flex-col items-center justify-center bg-black text-white sm:hover:border sm:hover:border-black sm:hover:bg-white sm:hover:text-black size-12"
     >
       <span class="text-xs">MENU</span>
     </button>
@@ -86,6 +87,10 @@ const isActive = (key: string) => {
   document.addEventListener('click', closeMenu);
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape' && !menu.hasAttribute('hidden')) {
+      const focusInMenu = menu.contains(document.activeElement);
+      closeMenu();
+      if (focusInMenu) toggle.focus();
+    }
   });
 </script>

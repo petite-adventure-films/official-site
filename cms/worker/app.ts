@@ -1,5 +1,5 @@
 import { enforceMutationRequest, HttpError, type Actor } from './auth';
-import type { Database } from './repositories/content-drafts';
+import { ContentDraftRepository, type Database } from './repositories/content-drafts';
 import { publicationCheck } from './routes/publication-check';
 import { publication } from './routes/publication';
 import type { PublicationDelivery } from './services/publication';
@@ -7,22 +7,36 @@ import { contents } from './routes/contents';
 import { history } from './routes/history';
 import { duplicate } from './routes/duplicate';
 import { tags } from './routes/tags';
-export type AppEnvironment = { DB?: Database; PUBLICATION?: PublicationDelivery; ASSETS?: { fetch(request: Request): Promise<Response> } };
+import { media, type MediaEnvironment } from './routes/media';
+export type AppEnvironment = MediaEnvironment & { DB?: Database; PUBLICATION?: PublicationDelivery; ASSETS?: { fetch(request: Request): Promise<Response> } };
 export async function handleAuthenticated(request: Request, env: AppEnvironment, actor: Actor, origin: string) {
   enforceMutationRequest(request, origin);
   const path = new URL(request.url).pathname;
-  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: Boolean(env.PUBLICATION) });
+  if (path === '/api/media' || path.startsWith('/api/media/')) {
+    if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    return media(request, env.DB, env, actor);
+  }
+  if (path === '/api/publication' && request.method === 'GET') return Response.json({ enabled: ['blog', 'news', 'pressCoverage', 'video'].includes(new URL(request.url).searchParams.get('type') ?? '') ? Boolean(env.PUBLICATION?.supportsLocalBlog) : Boolean(env.PUBLICATION) });
   if (path === '/api/session' && request.method === 'GET') return Response.json({ user: actor });
   if (path === '/api/tags' && request.method === 'GET') {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
     return Response.json(await tags(env.DB));
   }
+  if (path === '/api/categories' && request.method === 'GET') {
+    if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    return Response.json({ items: (await env.DB.prepare('SELECT id, name FROM blog_categories ORDER BY rowid').all()).results });
+  }
   if (path.startsWith('/api/contents')) {
     if (!env.DB) throw new HttpError(503, 'storage_unavailable');
+    const action = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(publication|check-publication)$/i);
+    if (action && !env.PUBLICATION?.supportsLocalBlog && ['blog', 'news', 'pressCoverage', 'video'].includes((await new ContentDraftRepository(env.DB).get(action[1]))?.type ?? '')) {
+      if (action[2] === 'publication' && request.method === 'GET') return Response.json({ enabled: false, version: 0, published: false, url: null, operation: null });
+      throw new HttpError(422, 'blog_operation_unavailable');
+    }
     const publish = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/publication$/i);
     if (publish) return publication(request, env.DB, actor, publish[1], env.PUBLICATION);
     const check = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/check-publication$/i);
-    if (check) return publicationCheck(request, env.DB, check[1]);
+    if (check) return publicationCheck(request, env.DB, check[1], env.PUBLICATION?.supportsLocalBlog);
     const historyRoute = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/(history|restore)$/i);
     if (historyRoute) return history(request, env.DB, actor, historyRoute[1], historyRoute[2]);
     const copy = path.match(/^\/api\/contents\/([0-9a-f-]{36})\/duplicate$/i);

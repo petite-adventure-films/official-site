@@ -1,0 +1,11 @@
+@source './main.jsx';
+@layer components {
+ .tiptap { min-height: 360px; padding: var(--spacing-cms-content); outline-color: var(--color-cms-primary); }
+ .tiptap p { margin-block: var(--spacing-cms-heading); }
+ .tiptap ul { list-style: disc; padding-left: var(--spacing-cms-content); }
+ .tiptap ol { list-style: decimal; padding-left: var(--spacing-cms-content); }
+ .tiptap h2 { font-size: inherit; font-weight: 500; margin-block: var(--spacing-cms-content); }
+ .tiptap a { color: var(--color-cms-primary); text-decoration: underline; }
+ .tiptap blockquote { border-left: 2px solid var(--color-cms-divider); padding-left: var(--spacing-cms-content); }
+ .media-placeholder { display: inline-block; max-width: 100%; overflow-wrap: anywhere; background: var(--color-cms-navigation); padding: var(--spacing-cms-heading); margin-block: var(--spacing-cms-heading); border: 1px solid var(--color-cms-divider); }
+}

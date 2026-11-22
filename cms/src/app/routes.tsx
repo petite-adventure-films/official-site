@@ -1,6 +1,12 @@
+import { ArticleEditor, ArticleHistoryContent } from '../features/articles/ArticleEditor';
+import { contentSections, isArticleType, type ArticleDraft, type ContentType } from '../features/articles/draft';
+import { BlogHistoryContent } from '../features/blog/components/BlogHistoryContent';
+import { BlogEditor } from '../features/blog/components/BlogEditor';
+import type { BlogDraft } from '../features/blog/draft';
+import type { Tag } from '../lib/api-client';
 import { usePublication } from '../features/content/hooks/usePublication';
 import { StatusDialog } from '../components/StatusDialog';
-import { HistoryView } from '../features/content/components/HistoryView';
+import { HistoryView, EventHistoryContent } from '../features/content/components/HistoryView';
 import { HistoryEntry } from '../features/content/components/HistoryEntry';
 import { DuplicateAction } from '../features/content/components/DuplicateAction';
 import { ContentList } from '../features/content/components/ContentList';
@@ -59,15 +65,26 @@ function Editor({ existing, tags }: { existing: SavedDraft<EventDraft> | null; t
   </>;
 }
 export function App() {
-  const [state, setState] = useState<{ user: string; tags: Tags; existing: SavedDraft<EventDraft> | null } | null>(null);
+  const [state, setState] = useState<{ user: string; tags: Tags; categories: Tag[]; existing: SavedDraft<EventDraft | BlogDraft | ArticleDraft> | null } | null>(null);
   const [error, setError] = useState(false);
   const path = window.location.pathname;
-  const history = path.match(/^\/cms\/events\/([0-9a-f-]{36})\/history$/i);
-  const edit = path.match(/^\/cms\/events\/([0-9a-f-]{36})\/edit$/i);
+  const type = (Object.entries(contentSections).find(([, section]) => path === `/cms/${section}` || path.startsWith(`/cms/${section}/`))?.[0] ?? 'event') as ContentType;
+  const isBlog = type === 'blog';
+  const history = path.match(/^\/cms\/(?:events|blog|news|media|channel)\/([0-9a-f-]{36})\/history$/i);
+  const edit = path.match(/^\/cms\/(?:events|blog|news|media|channel)\/([0-9a-f-]{36})\/edit$/i);
   useEffect(() => { Promise.all([
-    loadSession(), api<Tags>('/api/tags'), edit ? api<SavedDraft<EventDraft>>(`/api/contents/${edit[1]}`) : Promise.resolve(null),
-  ]).then(([session, tags, existing]) => setState({ user: session.user.name, tags, existing })).catch(() => setError(true)); }, []);
+    loadSession(), api<Tags>('/api/tags'), (edit ?? history) ? api<SavedDraft<EventDraft | BlogDraft | ArticleDraft>>(`/api/contents/${(edit ?? history)![1]}`) : Promise.resolve(null),
+    isBlog ? api<{ items: Tag[] }>('/api/categories') : Promise.resolve({ items: [] }),
+  ]).then(([session, tags, existing, categories]) => { if (existing && (existing.type !== type || existing.payloadSchemaVersion !== `${type}-draft/v1`)) throw new Error('content_type_mismatch'); setState({ user: session.user.name, tags, existing, categories: categories.items }); }).catch(() => setError(true)); }, []);
   if (error) return <Alert severity="error" action={<Button onClick={() => location.reload()}>再試行</Button>}>読み込めませんでした。ログイン状態と通信を確認してください。</Alert>;
   if (!state) return <CircularProgress aria-label="読み込み中" />;
-  return <CMSLayout user={state.user}>{history ? <HistoryView id={history[1]} tags={state.tags} /> : edit || path === '/cms/events/new' ? <Editor existing={state.existing} tags={state.tags} /> : <ContentList<EventDraft> tags={state.tags} summarize={(payload) => payload} />}</CMSLayout>;
+  if (isArticleType(type)) return <CMSLayout user={state.user}>{history ?
+    <HistoryView<ArticleDraft> id={history[1]} section={contentSections[type]} renderContent={value => <ArticleHistoryContent type={type} value={value} tags={state.tags} />} /> :
+    edit || path === `/cms/${contentSections[type]}/new` ? <ArticleEditor type={type} existing={state.existing as SavedDraft<ArticleDraft> | null} tags={state.tags} /> :
+    <ContentList<ArticleDraft> type={type} tags={state.tags} summarize={value => ({ ...value, eventTagIds: [] })} />}</CMSLayout>;
+  if (history) return <CMSLayout user={state.user}>{isBlog ?
+    <HistoryView<BlogDraft> id={history[1]} section="blog" renderContent={value => <BlogHistoryContent value={value} tags={state.tags} categories={state.categories} />} /> :
+    <HistoryView<EventDraft> id={history[1]} section="events" renderContent={value => <EventHistoryContent value={value} tags={state.tags} />} />}
+  </CMSLayout>;
+  return <CMSLayout user={state.user}>{isBlog ? (edit || path === '/cms/blog/new' ? <BlogEditor existing={state.existing as SavedDraft<BlogDraft> | null} tags={state.tags} categories={state.categories} /> : <ContentList<BlogDraft> type="blog" tags={state.tags} summarize={payload => payload} />) : edit || path === '/cms/events/new' ? <Editor existing={state.existing as SavedDraft<EventDraft> | null} tags={state.tags} /> : <ContentList<EventDraft> tags={state.tags} summarize={(payload) => payload} />}</CMSLayout>;
 }
