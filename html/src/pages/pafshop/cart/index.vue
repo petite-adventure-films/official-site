@@ -106,7 +106,7 @@ onMounted(() => {
       <NuxtLink
         :to="isPurchasing ? '' : '/pafshop/'"
         :aria-disabled="isPurchasing"
-        :role="isPurchasing ? 'button' : null"
+        :role="isPurchasing ? 'button' : undefined"
         class="inline-block link-text mt-4"
         >買い物を続ける</NuxtLink
       >

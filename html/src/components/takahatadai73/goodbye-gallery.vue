@@ -6,30 +6,32 @@ const currentMonth = ref(11);
 const currentDay = ref(13);
 
 const currentGallery = computed(
-  () => goodbyeGallery[currentYear.value][currentMonth.value],
+  () => goodbyeGallery[currentYear.value]?.[currentMonth.value] ?? {},
 );
 const currentGalleryNumber = computed(
-  () => goodbyeGallery[currentYear.value][currentMonth.value][currentDay.value],
+  () => currentGallery.value[currentDay.value] ?? 0,
 );
 
-const $gallery = ref();
+const $gallery = ref<{ setCurrentIndex: (index: number) => void } | null>(null);
 
-const setCurrentGallery = (year: number, month?: number) => {
-  const _year = year;
-  const _month = month
-    ? month
-    : Number(Object.keys(goodbyeGallery[year]).shift());
-  const _day = Number(Object.keys(goodbyeGallery[year][_month]).shift());
-  currentYear.value = _year;
-  currentMonth.value = _month;
-  currentDay.value = _day;
-
-  $gallery.value.setCurrentIndex(0);
+const setCurrentGallery = (year: number | string, month?: number) => {
+  const selectedYear = Number(year);
+  const months = goodbyeGallery[selectedYear];
+  if (!months) return;
+  const selectedMonth = month ?? Number(Object.keys(months)[0]);
+  const days = months[selectedMonth];
+  if (!days) return;
+  const firstDay = Object.keys(days)[0];
+  if (firstDay === undefined) return;
+  currentYear.value = selectedYear;
+  currentMonth.value = selectedMonth;
+  currentDay.value = Number(firstDay);
+  $gallery.value?.setCurrentIndex(0);
 };
 
 const setCurrentGalleryInit = (day: number) => {
   currentDay.value = day;
-  $gallery.value.setCurrentIndex(0);
+  $gallery.value?.setCurrentIndex(0);
 };
 
 const getImgSrc = (number: number) => {

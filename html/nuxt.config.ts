@@ -118,14 +118,6 @@ export default defineNuxtConfig({
     },
   },
 
-  vite: {
-    build: {
-      rollupOptions: {
-        external: ['@vue-pdf-viewer/viewer'],
-      },
-    },
-  },
-
   robots: {
     disallow: [
       '/404',

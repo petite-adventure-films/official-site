@@ -21,9 +21,9 @@ const { posts } = await useWpGetListCustom<EventList>('events');
 const latestEvents = computed(() => {
   const flattened = [];
   if (posts.value.data) {
-    for (const year in posts.value.data) {
-      for (const month in posts.value.data[year]) {
-        const filteredData = posts.value.data[year][month].filter((event) => {
+    for (const months of Object.values(posts.value.data)) {
+      for (const events of Object.values(months)) {
+        const filteredData = events.filter((event) => {
           const eventDate = new Date(event.date_to || event.date_from);
           return eventDate >= new Date();
         });

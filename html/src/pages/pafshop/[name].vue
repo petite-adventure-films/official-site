@@ -19,6 +19,7 @@ const { basket, updateBasket } = useBasketState();
 
 // dvd情報
 const dvd = PRODUCTS_DVD.find((f) => f.name === pageName);
+if (!dvd) throw createError({ statusCode: 404, statusMessage: 'Product not found' });
 const articleCompontent = `ShopArticle${dvd?.article_component}`;
 
 route.meta.title = `${dvd?.title}`;
@@ -46,8 +47,7 @@ const discSpec = computed(() => {
     const structure: string[] = [];
     const type: string[] = [];
     const content: string[] = [];
-    for (const key in dvd.disc) {
-      const item = dvd.disc[key];
+    for (const [key, item] of dvd.disc.entries()) {
       structure.push(`${item.index}${item.number}枚組`);
       type.push(`${item.index} ${item.type}`);
       if (content[Number(key) - 1] !== item.content) {

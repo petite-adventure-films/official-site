@@ -48,12 +48,16 @@ const startY = ref(0);
 const endX = ref(0);
 const endY = ref(0);
 const touchstart = (e: TouchEvent) => {
-  startX.value = e.touches[0].pageX;
-  startY.value = e.touches[0].pageY;
+  const touch = e.touches[0];
+  if (!touch) return;
+  startX.value = endX.value = touch.pageX;
+  startY.value = endY.value = touch.pageY;
 };
 const touchmove = (e: TouchEvent) => {
-  endX.value = e.changedTouches[0].pageX;
-  endY.value = e.changedTouches[0].pageY;
+  const touch = e.changedTouches[0];
+  if (!touch) return;
+  endX.value = touch.pageX;
+  endY.value = touch.pageY;
 };
 const touchend = () => {
   const distanceX = Math.abs(endX.value - startX.value);

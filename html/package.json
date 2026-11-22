@@ -4,10 +4,12 @@
   "type": "module",
   "scripts": {
     "build": "nuxi build",
+    "typecheck": "nuxi typecheck",
     "dev": "nuxi dev",
     "generate": "nuxi generate",
     "preview": "nuxi preview",
     "postinstall": "nuxi prepare",
+    "test:shop-state": "node --experimental-transform-types --test tests/shop-state.test.mjs",
     "test:forms": "node --experimental-strip-types --test tests/forms.test.ts",
     "test:dependency-overrides": "node --test tests/dependency-overrides.test.mjs"
   },

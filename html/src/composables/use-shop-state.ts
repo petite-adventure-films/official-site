@@ -20,7 +20,9 @@ export const deleteItem =
       );
       return index;
     };
-    basket.value.splice(getTheItemIndex(item), 1);
+    const index = getTheItemIndex(item);
+    if (index < 0) return;
+    basket.value.splice(index, 1);
     sessionStorage.setItem('basket', JSON.stringify(basket.value));
   };
 
@@ -28,14 +30,14 @@ export const update =
   (basket: Ref<itemInBasket[]>) => (items: itemInBasket[]) => {
     for (const item of items) {
       if (item.unit > 0) {
-        const alreadyInBasket = basket.value.findIndex(
+        const alreadyInBasket = basket.value.find(
           (i) =>
             i.name === item.name &&
             i.type === item.type &&
             i.disc === item.disc,
         );
-        if (alreadyInBasket > -1) {
-          basket.value[alreadyInBasket].unit = item.unit;
+        if (alreadyInBasket) {
+          alreadyInBasket.unit = item.unit;
         } else {
           basket.value.push(item);
         }
