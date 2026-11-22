@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.12.0"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "astro dev",
@@ -13,15 +13,12 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.5.1",
-    "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.3.3",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^4.3.0",
-    "wrangler": "^4.92.0"
-  },
-  "overrides": {
-    "vite": "^7"
+    "@astrojs/cloudflare": "^14.4.9",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.13",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.5",
+    "wrangler": "^4.166.0"
   },
   "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264",
   "lint-staged": {
@@ -35,17 +32,22 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.8.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.3",
-    "@typescript-eslint/parser": "^8.59.3",
+    "@types/node": "^25.9.9",
+    "@typescript-eslint/eslint-plugin": "^8.73.0",
+    "@typescript-eslint/parser": "^8.73.0",
     "astro-eslint-parser": "^1.4.0",
-    "eslint": "^10.4.0",
+    "eslint": "^10.15.0",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-tailwindcss": "^3.18.3",
-    "lefthook": "^2.1.6",
-    "lint-staged": "^17.0.5",
-    "prettier": "^3.8.3",
+    "lefthook": "^2.2.2",
+    "lint-staged": "^17.6.1",
+    "prettier": "^3.10.1",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.8.0"
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^8.3.8"
+    }
   }
 }
