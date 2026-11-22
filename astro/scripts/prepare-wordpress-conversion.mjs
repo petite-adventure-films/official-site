@@ -9,10 +9,25 @@ const require = createRequire(new URL('../package.json', import.meta.url));
 const cms = createRequire(new URL('../../cms/package.json', import.meta.url));
 const tiptap = createRequire(cms.resolve('@tiptap/starter-kit'));
 const { JSDOM } = require('jsdom');
-const { generateJSON, generateHTML, getSchema } = tiptap('@tiptap/core');
+const { generateJSON, generateHTML, getSchema, Node } = tiptap('@tiptap/core');
 const StarterKit = cms('@tiptap/starter-kit').default;
 const dom = new JSDOM(''); // No resource loading or script execution.
 const extensions = [
+  Node.create({
+    name: 'wordBreak',
+    group: 'inline',
+    inline: true,
+    selectable: false,
+    parseHTML() {
+      return [{ tag: 'wbr' }];
+    },
+    renderHTML() {
+      return ['wbr'];
+    },
+    renderText() {
+      return '';
+    },
+  }),
   StarterKit.configure({
     heading: { levels: [2, 3, 4] },
     codeBlock: false,
@@ -135,7 +150,7 @@ export function convertBody(html, field = 'content') {
   const issues = [],
     references = [];
   const allowed = new Set(
-    'p br strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
+    'p br wbr strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
   );
   // Inspect head too: parseFromString can move unsupported source elements there.
   for (const el of document.querySelectorAll('*')) {
@@ -183,6 +198,7 @@ export function convertBody(html, field = 'content') {
         if (node.nodeType === 3) return node.textContent;
         if (node.nodeType !== 1) return '';
         if (node.localName === 'br') return '\n';
+        if (node.localName === 'wbr') return '\u0000wbr\u0000';
         const text = [...node.childNodes].map(walk).join('');
         return ['p', 'blockquote', 'h2', 'h3', 'h4', 'li', 'ul', 'ol'].includes(node.localName)
           ? `\n${text}\n`
@@ -206,6 +222,7 @@ export function convertBody(html, field = 'content') {
       [
         'a',
         'br',
+        'wbr',
         'hr',
         'ul',
         'ol',
