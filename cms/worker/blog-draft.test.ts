@@ -120,3 +120,18 @@ test('word breaks survive API storage, duplication and publication snapshots', a
     expect((await create('blog', invalid)).status).toBe(422);
   }
 });
+
+test('embedded videos survive API storage, duplication and the publication/restore format', async () => {
+  const payload = { ...emptyBlogDraft(), title: '動画の保持', slug: 'retained-video', categoryId: '2879' };
+  payload.body.doc.content = [{ type: 'externalVideo', attrs: { provider: 'vimeo', videoId: '50026595', sourceUrl: 'https://player.vimeo.com/video/50026595?h=abcdef1234', width: 640, height: 512 } }];
+  const response = await create('blog', payload); expect(response.status).toBe(201);
+  const saved = await response.json() as any;
+  expect((await (await request(`/api/contents/${saved.id}`)).json() as any).payload.body).toEqual(payload.body);
+  const copy = await (await request(`/api/contents/${saved.id}/duplicate`, 'POST', { expectedVersion: saved.version, operationId: crypto.randomUUID() })).json() as any;
+  expect(copy.payload.body).toEqual(payload.body);
+  const publication = await prepareBlogPublication(fixture.db, payload);
+  const { blogDraftFromPublication } = await import('./blog-publication');
+  expect(blogDraftFromPublication(publication)?.body).toEqual(payload.body);
+  const invalid = structuredClone(payload); invalid.body.doc.content![0].attrs!.videoId = 'other';
+  expect((await create('blog', invalid)).status).toBe(422);
+});

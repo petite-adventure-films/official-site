@@ -170,3 +170,99 @@ test('retains discretionary breaks at their text positions and rejects their unk
   );
   assert.ok(convertBody('<p>a<wbr onclick="alert(1)">b</p>').issues.length);
 });
+
+test('retains validated YouTube/Vimeo nodes, parameters, dimensions and surrounding text', () => {
+  const result = convertBody(
+    '<p>前</p><p><iframe src="https://player.vimeo.com/video/50026595?h=abcdef1234" width="640" height="512" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p><p>後</p>',
+  );
+  assert.deepEqual(result.issues, []);
+  const nodes = result.body.doc.content;
+  assert.deepEqual(
+    nodes.map((n) => n.type),
+    ['paragraph', 'externalVideo', 'paragraph'],
+  );
+  const video = nodes.find((n) => n.type === 'externalVideo');
+  assert.deepEqual(video.attrs, {
+    provider: 'vimeo',
+    videoId: '50026595',
+    sourceUrl: 'https://player.vimeo.com/video/50026595?h=abcdef1234',
+    width: 640,
+    height: 512,
+  });
+  assert.ok(JSON.stringify(nodes).indexOf('前') < JSON.stringify(nodes).indexOf('externalVideo'));
+  assert.ok(JSON.stringify(nodes).indexOf('externalVideo') < JSON.stringify(nodes).indexOf('後'));
+});
+
+test('rejects unsafe or unrecognized video embeds without dropping them', () => {
+  for (const src of [
+    'https://www.youtube.com.evil.example/embed/abcdefghijk',
+    'https://www.youtube.com@evil.example/embed/abcdefghijk',
+    'https://user:pass@www.youtube.com/embed/abcdefghijk',
+    'javascript:alert(1)',
+    'http://www.youtube.com/embed/abcdefghijk',
+    'https://www.youtube.com:443/embed/abcdefghijk',
+    'https://www.youtube.com/embed/short',
+    'https://player.vimeo.com/video/not-a-number',
+    'https://player.vimeo.com/video/50026595?h=bad%22value',
+    'https://www.youtube.com/embed/abcdefghijk?start=1&start=2',
+    'https://www.youtube.com/embed/abcdefghijk?autoplay=1',
+    'https://www.youtube.com/embed/abcdefghijk#fragment',
+  ])
+    assert.ok(convertBody(`<iframe src="${src}"></iframe>`).issues.length, src);
+  for (const attr of [
+    'srcdoc="text"',
+    'onload="alert(1)"',
+    'width="100%"',
+    'frameborder="1"',
+    'allow="camera"',
+  ])
+    assert.ok(
+      convertBody(`<iframe src="https://www.youtube.com/embed/abcdefghijk" ${attr}></iframe>`)
+        .issues.length,
+      attr,
+    );
+});
+
+test('all 151 embedded videos from the 90 legacy blog articles retain their source attributes', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const { createRequire } = await import('node:module');
+  const { JSDOM } = createRequire(new URL('../package.json', import.meta.url))('jsdom');
+  const { videoFromElement } = await import('../../packages/content-schema/external-video.ts');
+  const source = JSON.parse(
+    await readFile(new URL('../data/wordpress-export.json', import.meta.url), 'utf8'),
+  );
+  const dom = new JSDOM('');
+  let count = 0,
+    articles = 0;
+  try {
+    for (const post of source.content.blogs) {
+      const document = new dom.window.DOMParser().parseFromString(post.content, 'text/html');
+      const frames = [...document.querySelectorAll('iframe')];
+      if (frames.length) articles++;
+      for (const frame of frames) {
+        const result = convertBody(frame.outerHTML);
+        assert.deepEqual(result.issues, [], String(post.id));
+        assert.deepEqual(
+          result.body.doc.content.find((n) => n.type === 'externalVideo').attrs,
+          videoFromElement(frame),
+        );
+        count++;
+      }
+    }
+    assert.equal(articles, 90);
+    assert.equal(count, 151);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('never invents empty paragraphs around videos or silently splits mixed video paragraphs', () => {
+  const frame = '<iframe src="https://www.youtube.com/embed/abcdefghijk"></iframe>';
+  const result = convertBody(`<p></p><p>${frame}</p><p></p>`);
+  assert.deepEqual(result.issues, []);
+  assert.deepEqual(
+    result.body.doc.content.map((n) => n.type),
+    ['paragraph', 'externalVideo', 'paragraph'],
+  );
+  assert.ok(convertBody(`<p>横の本文${frame}</p>`).issues.length);
+});

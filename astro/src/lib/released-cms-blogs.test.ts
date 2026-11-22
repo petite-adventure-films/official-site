@@ -181,3 +181,31 @@ test('blog and the three article types use the same preserved link output', asyn
     expect(articles[0].article_contents).toBe(expected);
   }
 });
+
+test('renders only validated video URLs and preserves Vimeo access parameters, dimensions and titles', async () => {
+  await release();
+  const { readCmsRelease } = await import('./released-cms-blogs');
+  const { render } = await readCmsRelease();
+  const attrs = {
+    provider: 'vimeo',
+    videoId: '50026595',
+    sourceUrl: 'https://player.vimeo.com/video/50026595?h=abcdef1234',
+    width: 640,
+    height: 512,
+    title: '資料 "動画"',
+  };
+  const html = render({ type: 'externalVideo', attrs });
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const iframe = doc.querySelector('iframe');
+  expect(iframe?.getAttribute('src')).toBe(attrs.sourceUrl);
+  expect(iframe?.getAttribute('width')).toBe('640');
+  expect(iframe?.getAttribute('height')).toBe('512');
+  expect(iframe?.getAttribute('title')).toBe(attrs.title);
+  expect(doc.querySelector('div')?.style.aspectRatio).toBe('640/512');
+  expect(() =>
+    render({ type: 'externalVideo', attrs: { ...attrs, videoId: 'different' } }),
+  ).toThrow('invalid_blog_release_video');
+  expect(() =>
+    render({ type: 'externalVideo', attrs: { ...attrs, sourceUrl: 'javascript:alert(1)' } }),
+  ).toThrow('invalid_blog_release_video');
+});

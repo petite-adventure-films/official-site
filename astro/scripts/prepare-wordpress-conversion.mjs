@@ -1,3 +1,8 @@
+import {
+  externalVideoKeys,
+  videoFromElement,
+  videoFrameAttributes,
+} from '../../packages/content-schema/external-video.ts';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
@@ -13,6 +18,36 @@ const { generateJSON, generateHTML, getSchema, Node } = tiptap('@tiptap/core');
 const StarterKit = cms('@tiptap/starter-kit').default;
 const dom = new JSDOM(''); // No resource loading or script execution.
 const extensions = [
+  Node.create({
+    name: 'externalVideo',
+    group: 'block',
+    atom: true,
+    addAttributes() {
+      return Object.fromEntries(externalVideoKeys.map((key) => [key, { default: null }]));
+    },
+    parseHTML() {
+      return [
+        {
+          tag: 'iframe[src]',
+          getAttrs: (element) => {
+            try {
+              return videoFromElement(element);
+            } catch {
+              return false;
+            }
+          },
+        },
+      ];
+    },
+    renderHTML({ node }) {
+      return [
+        'iframe',
+        videoFrameAttributes(
+          Object.fromEntries(Object.entries(node.attrs).filter(([, value]) => value !== null)),
+        ),
+      ];
+    },
+  }),
   Node.create({
     name: 'wordBreak',
     group: 'inline',
@@ -126,13 +161,15 @@ const validUrl = (value) => {
 };
 function stored(n) {
   const keys =
-    n.type === 'link'
-      ? ['href', 'target', 'title']
-      : n.type === 'heading'
-        ? ['level']
-        : n.type === 'orderedList'
-          ? ['start']
-          : [];
+    n.type === 'externalVideo'
+      ? externalVideoKeys
+      : n.type === 'link'
+        ? ['href', 'target', 'title']
+        : n.type === 'heading'
+          ? ['level']
+          : n.type === 'orderedList'
+            ? ['start']
+            : [];
   const attrs = Object.fromEntries(
     Object.entries(n.attrs ?? {}).filter(([k, v]) => keys.includes(k) && v != null),
   );
@@ -150,7 +187,7 @@ export function convertBody(html, field = 'content') {
   const issues = [],
     references = [];
   const allowed = new Set(
-    'p br wbr strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
+    'iframe p br wbr strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
   );
   // Inspect head too: parseFromString can move unsupported source elements there.
   for (const el of document.querySelectorAll('*')) {
@@ -172,9 +209,34 @@ export function convertBody(html, field = 'content') {
         references.push({ field, tag, attribute: attr.name, url: attr.value });
       if (
         !(tag === 'a' && ['href', 'target', 'rel', 'title'].includes(attr.name)) &&
-        !(tag === 'ol' && attr.name === 'start')
+        !(tag === 'ol' && attr.name === 'start') &&
+        !(
+          tag === 'iframe' &&
+          ['src', 'title', 'width', 'height', 'frameborder', 'allowfullscreen'].includes(attr.name)
+        )
       )
         issues.push(fail('unsupported_attribute', field, `${tag}.${attr.name}`));
+    }
+    if (tag === 'iframe') {
+      try {
+        videoFromElement(el);
+        if (
+          el.parentElement?.localName === 'p' &&
+          [...el.parentElement.childNodes].some(
+            (node) => node !== el && !(node.nodeType === 3 && !node.textContent.trim()),
+          )
+        )
+          throw Error('mixed_video_paragraph');
+        if (
+          el.innerHTML.trim() ||
+          (el.hasAttribute('frameborder') && el.getAttribute('frameborder') !== '0') ||
+          (el.hasAttribute('allowfullscreen') &&
+            !['', 'true', 'allowfullscreen'].includes(el.getAttribute('allowfullscreen')))
+        )
+          throw Error('unsupported_video_attributes');
+      } catch (error) {
+        issues.push(fail('invalid_video', field, error.message));
+      }
     }
     if (tag === 'a' && (!validUrl(el.getAttribute('href') ?? '') || !el.textContent))
       issues.push(fail('unsupported_link', field, el.getAttribute('href')));
@@ -188,7 +250,12 @@ export function convertBody(html, field = 'content') {
   try {
     globalThis.window = dom.window;
     globalThis.document = dom.window.document;
-    const doc = stored(generateJSON(html, extensions));
+    // Lift a video-only paragraph before parsing a block video, avoiding an invented empty paragraph.
+    // Work on a copy; the source DOM and preserved raw HTML remain unchanged.
+    const editable = document.body.cloneNode(true);
+    for (const frame of editable.querySelectorAll('p > iframe'))
+      frame.parentElement.replaceWith(frame);
+    const doc = stored(generateJSON(editable.innerHTML, extensions));
     pm.nodeFromJSON(doc).check();
     const rendered = generateHTML(doc, extensions);
     const roundtrip = stored(generateJSON(rendered, extensions));
@@ -198,6 +265,8 @@ export function convertBody(html, field = 'content') {
         if (node.nodeType === 3) return node.textContent;
         if (node.nodeType !== 1) return '';
         if (node.localName === 'br') return '\n';
+        if (node.localName === 'iframe')
+          return `\n\u0000video:${JSON.stringify(videoFromElement(node))}\u0000\n`;
         if (node.localName === 'wbr') return '\u0000wbr\u0000';
         const text = [...node.childNodes].map(walk).join('');
         return ['p', 'blockquote', 'h2', 'h3', 'h4', 'li', 'ul', 'ol'].includes(node.localName)
@@ -223,6 +292,7 @@ export function convertBody(html, field = 'content') {
         'a',
         'br',
         'wbr',
+        'iframe',
         'hr',
         'ul',
         'ol',

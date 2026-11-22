@@ -16,8 +16,8 @@
     "byType": {
       "blog": {
         "total": 310,
-        "candidates": 25,
-        "blocked": 285
+        "candidates": 42,
+        "blocked": 268
       },
       "news": {
         "total": 245,
@@ -42,8 +42,9 @@
     },
     "byCode": {
       "unsupported_element": 78,
-      "unsupported_attribute": 321,
-      "unresolved_asset_or_embed": 290,
+      "unsupported_attribute": 304,
+      "unresolved_asset_or_embed": 272,
+      "invalid_video": 1,
       "unsupported_link": 12,
       "unresolved_attachment_link": 12,
       "event_rich_text_requires_contract": 132,
@@ -52,6 +53,11 @@
     }
   },
   "candidates": [
+    {
+      "type": "blog",
+      "legacyId": 18050,
+      "recordHash": "7c84140a2f7d5b3b3feddc316b08ee6e1378b52c014f46c773501e595858b17b"
+    },
     {
       "type": "blog",
       "legacyId": 17931,
@@ -74,8 +80,43 @@
     },
     {
       "type": "blog",
+      "legacyId": 17724,
+      "recordHash": "ecbccdde9e5ac89d4a471ae8041cffd5c9edffdd3042b08e2c026c9af89c4121"
+    },
+    {
+      "type": "blog",
       "legacyId": 15847,
       "recordHash": "80b1bf4e6bbe876008b1f062fbcd558c39c58041b5d32612263fdf17ed9104f2"
+    },
+    {
+      "type": "blog",
+      "legacyId": 15682,
+      "recordHash": "fb50850a14bc6c39635117b97dbbd365d86eecd806f9b8c16ae704e0b00e116c"
+    },
+    {
+      "type": "blog",
+      "legacyId": 15604,
+      "recordHash": "d08ce96e2b6fae76795dab6a491a2b69d73b189b9a259cc1b4ad0f0a8af01635"
+    },
+    {
+      "type": "blog",
+      "legacyId": 14946,
+      "recordHash": "9785b3d93a1a68305f6a75eec477d87a20d8e54d416bca2df8194424384ab2b5"
+    },
+    {
+      "type": "blog",
+      "legacyId": 14829,
+      "recordHash": "4bf83536d5c0d99b62a933e98c1340d1b50d071ff4ff6f26b90a61fe930b768c"
+    },
+    {
+      "type": "blog",
+      "legacyId": 14806,
+      "recordHash": "01c7e2c7c7761da82ae6440ab685ceebca66b14af4d090d65668da1849f8745b"
+    },
+    {
+      "type": "blog",
+      "legacyId": 14393,
+      "recordHash": "c8fce3f712d30aca07797ae5dddbb64a250f4130b5b107247f7fa45290da0e40"
     },
     {
       "type": "blog",
@@ -86,6 +127,21 @@
       "type": "blog",
       "legacyId": 12787,
       "recordHash": "cbb99f7549136cb369ddb4e07bf96546e81e8851f5e9fe284865e6a7c989b60e"
+    },
+    {
+      "type": "blog",
+      "legacyId": 12713,
+      "recordHash": "e09c22796331ee69bc9aeb87c05ae69481a612a75de97672f443cd6c185fddc6"
+    },
+    {
+      "type": "blog",
+      "legacyId": 12646,
+      "recordHash": "0a48c3d9a49df178f157d970eeda81a6e03761a1eb3b9d640dc2bc984abaf4ad"
+    },
+    {
+      "type": "blog",
+      "legacyId": 12395,
+      "recordHash": "c09ae8644f2f840d0aa23d6e0fc7244a004574e926077e139c786b2dfb5231b6"
     },
     {
       "type": "blog",
@@ -109,6 +165,26 @@
     },
     {
       "type": "blog",
+      "legacyId": 9413,
+      "recordHash": "9c9ace7217102bfce1f106f72a4bc90e56c07998691486ab398ff13f5d64c008"
+    },
+    {
+      "type": "blog",
+      "legacyId": 9118,
+      "recordHash": "16d3885a4ee0eed3ec81dfafff70edde926ec73e53ba179aa96f52988b54dc5d"
+    },
+    {
+      "type": "blog",
+      "legacyId": 8824,
+      "recordHash": "33a64df22cbb4a89cc069c12c3047dff4c6f031457d38bd70397a82a4165a799"
+    },
+    {
+      "type": "blog",
+      "legacyId": 8051,
+      "recordHash": "e25f41bd2a1d869b7d992c0d5b965ad8e0c9c6256687f96ec3808c8c7ad5ccf0"
+    },
+    {
+      "type": "blog",
       "legacyId": 7652,
       "recordHash": "7668ea2dbc43fb1535bd863e829d1833e7f663ccfda030f4c8f70461996cb91a"
     },
@@ -116,6 +192,16 @@
       "type": "blog",
       "legacyId": 6958,
       "recordHash": "3189312c2f9043ae5d4f1bfaab19ec7313ba62786a86fdd043a497c29b942d3e"
+    },
+    {
+      "type": "blog",
+      "legacyId": 6775,
+      "recordHash": "3c5c7a2c979931747a92165b2f1b98b4f8fa012391215c2e81da35c1f86df4f4"
+    },
+    {
+      "type": "blog",
+      "legacyId": 6004,
+      "recordHash": "904570f9825459c7664ff0681fbc7d21281f9b399209d3a1dd0c013553dcda7f"
     },
     {
       "type": "blog",
@@ -1404,54 +1490,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 18050,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 18043,
       "issues": [
         {
@@ -1639,48 +1677,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -1765,48 +1761,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 13
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -1859,54 +1813,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "span.style",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 17724,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         }
@@ -2017,48 +1923,6 @@
           "detail": "span.style",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -2119,48 +1983,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 94
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -2203,48 +2025,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 44
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -2287,48 +2067,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 52
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -2371,48 +2109,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 14
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -2455,48 +2151,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 37
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -2557,48 +2211,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -2711,48 +2323,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "span.style",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         },
@@ -2887,48 +2457,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 7
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 6
         },
         {
           "code": "unsupported_element",
@@ -3160,48 +2688,6 @@
       "issues": [
         {
           "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
           "detail": "img",
           "field": "content",
           "occurrences": 6
@@ -3242,48 +2728,6 @@
       "type": "blog",
       "legacyId": 16592,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -3361,48 +2805,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 67
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -3445,48 +2847,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 17
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -3494,48 +2854,6 @@
       "type": "blog",
       "legacyId": 16421,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -3580,48 +2898,6 @@
       "issues": [
         {
           "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
           "detail": "img",
           "field": "content",
           "occurrences": 20
@@ -3662,48 +2938,6 @@
       "type": "blog",
       "legacyId": 16332,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -3931,48 +3165,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 16
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -4067,48 +3259,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "img.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 3
         }
@@ -4207,48 +3357,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 73
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -4256,48 +3364,6 @@
       "type": "blog",
       "legacyId": 16057,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 4
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -4417,48 +3483,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 26
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -4501,48 +3525,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 11
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -4639,48 +3621,6 @@
           "detail": "span.style",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 4
         }
       ]
     },
@@ -4765,48 +3705,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -4849,90 +3747,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 4
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 15682,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -4940,48 +3754,6 @@
       "type": "blog",
       "legacyId": 15641,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -5184,54 +3956,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 15604,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 7
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 15504,
       "issues": [
         {
@@ -5269,48 +3993,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 51
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -5353,48 +4035,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 28
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -5437,48 +4077,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 20
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -5617,48 +4215,6 @@
           "detail": "span.style",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -5709,48 +4265,6 @@
       "legacyId": 14950,
       "issues": [
         {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
           "code": "unsupported_element",
           "detail": "span",
           "field": "content",
@@ -5797,54 +4311,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 4
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 14946,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -6025,96 +4491,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 17
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 14829,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -6169,54 +4545,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 14806,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -6378,54 +4706,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 14393,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 3
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 14382,
       "issues": [
         {
@@ -6555,48 +4835,6 @@
           "occurrences": 3
         },
         {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
           "code": "unsupported_element",
           "detail": "span",
           "field": "content",
@@ -6607,6 +4845,12 @@
           "detail": "span.style",
           "field": "content",
           "occurrences": 11
+        },
+        {
+          "code": "invalid_video",
+          "detail": "mixed_video_paragraph",
+          "field": "content",
+          "occurrences": 2
         }
       ]
     },
@@ -6757,48 +5001,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 10
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -6841,48 +5043,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 50
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.title",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 3
         }
       ]
     },
@@ -7124,42 +5284,6 @@
       "type": "blog",
       "legacyId": 13660,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -7465,42 +5589,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 19
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -7627,42 +5715,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 110
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -7745,42 +5797,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "img.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         }
@@ -7872,48 +5888,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 12713,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 6
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 6
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 12653,
       "issues": [
         {
@@ -7951,84 +5925,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 10
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 4
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 4
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 12646,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -8138,42 +6034,6 @@
       "type": "blog",
       "legacyId": 12584,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -8295,42 +6155,6 @@
           "occurrences": 104
         },
         {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
           "code": "unsupported_element",
           "detail": "span",
           "field": "content",
@@ -8341,48 +6165,6 @@
           "detail": "span.class",
           "field": "content",
           "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 12395,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -8821,42 +6603,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 32
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -8899,42 +6645,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 12
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -8977,42 +6687,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 38
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -9020,42 +6694,6 @@
       "type": "blog",
       "legacyId": 11542,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -9235,42 +6873,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -9353,42 +6955,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "img.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         }
@@ -9697,42 +7263,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 48
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -9817,42 +7347,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 22
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 3
         }
       ]
     },
@@ -9979,42 +7473,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 27
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 3
         }
       ]
     },
@@ -10075,42 +7533,6 @@
           "detail": "a.data-lynx-uri",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         },
         {
           "code": "unresolved_asset_or_embed",
@@ -10339,42 +7761,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 21
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -10417,42 +7803,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 4
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -10495,42 +7845,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 10
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -10538,42 +7852,6 @@
       "type": "blog",
       "legacyId": 10121,
       "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
@@ -10903,42 +8181,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 36
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 2
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -10981,42 +8223,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 7
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -11227,84 +8433,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 10
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 9413,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -11431,48 +8559,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 29
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 9118,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -11730,48 +8816,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 8824,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 8703,
       "issues": [
         {
@@ -11851,42 +8895,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -12031,42 +9039,6 @@
           "detail": "div.dir",
           "field": "content",
           "occurrences": 13
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -12193,42 +9165,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 22
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -12397,42 +9333,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 4
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -12517,42 +9417,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -12595,48 +9459,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 37
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 8051,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -12889,42 +9711,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 9
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -13009,42 +9795,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 14
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -13253,42 +10003,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "img.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         }
@@ -13583,42 +10297,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "img.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         }
@@ -14214,48 +10892,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 6775,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 6752,
       "issues": [
         {
@@ -14539,42 +11175,6 @@
           "detail": "span.class",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -14832,48 +11432,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 6004,
-      "issues": [
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 5959,
       "issues": [
         {
@@ -15073,42 +11631,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 16
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 3
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
-          "field": "content",
-          "occurrences": 3
         }
       ]
     },
@@ -17597,42 +14119,6 @@
         {
           "code": "unresolved_attachment_link",
           "detail": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/09/India_JP_DVD_Back.jpg",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_asset_or_embed",
-          "detail": "iframe",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.src",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.width",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.height",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.frameborder",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unsupported_attribute",
-          "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
         },
