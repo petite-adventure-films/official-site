@@ -16,6 +16,7 @@
     "astro": "astro",
     "generate-types": "wrangler types",
     "test": "vitest run",
+    "test:wordpress-media-acquisition": "node --test scripts/acquire-wordpress-media.test.mjs",
     "test:wordpress-media-inventory": "node --test scripts/inventory-wordpress-media.test.mjs",
     "test:watch": "vitest",
     "test:e2e": "playwright test && pnpm run test:e2e:cms",
