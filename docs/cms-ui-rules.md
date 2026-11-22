@@ -9,7 +9,7 @@ CMSの画面設計・実装・レビュー時に参照する。公開サイト�
 - [代表編集画面](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=17-2247)
 - [共通部品](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=20-1095)
 
-ブログ本文エディターのレビュー案は [BodyEditor](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=153-166)。Content標準Slotと既存MUI部品を使う。利用者確認前のため、採用済みの基準とは区別する。[対象仕様と検査結果](../specs/006-blog-cms/contracts/screens.md)を参照する。CMSLayoutの `Show blog` は既定falseで、ブログの代表案のみtrueにしている。
+ブログ本文エディターのレビュー案は [BodyEditor](https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=153-166)。Content標準Slotと既存MUI部品を使う。利用者確認前のため、採用済みの基準とは区別する。[対象仕様と検査結果](../specs/006-blog-cms/contracts/screens.md)を参照する。CMSLayoutの `Show blog` / `Show news` / `Show media` / `Show channel` は既定trueで、現在の5タイプのナビを表示する。
 
 | 共通定義 | 役割 |
 | --- | --- |
@@ -60,7 +60,7 @@ ListRowは `Show film tags` / `Show event tags` / `Show status` / `Show type` / 
 
 ## 編集画面の配置
 
-- 共通ナビは左。項目名は通常サイズとし、現在地を太字で示す。絵文字と項目名を使える。左ナビは画面左端に固定し、画面高に合わせる。本文にはナビ幅の余白を確保し、低い画面ではナビ内をスクロールできるようにする。未確定のナビ項目は追加しない。
+- 共通ナビは左。項目名は通常サイズとし、現在地を太字で示す。項目名のみを表示し、絵文字は使わない。順序は「お知らせ・イベント・ブログ・メディア掲載・チャンネル」。サイドバー下部はログイン中のメールアドレスを表示し、長いアドレスは折り返す。左ナビは画面左端に固定し、画面高に合わせる。本文にはナビ幅の余白を確保し、低い画面ではナビ内をスクロールできるようにする。未確定のナビ項目は追加しない。
 - 独立したヘッダー行は設けず、本文上部の操作行に一覧へ戻る導線を左、編集操作を右にまとめる。次に記事タイトルの入力を置く。
 - 本文側の上部、タイトル入力の前に編集操作を置く。保存状態・公開履歴・保存・プレビューの順に1行で右揃えにする。保存は塗りつぶし、プレビューは枠線、公開履歴はテキストボタン。
 - 右側は公開管理、type固有の設定、タグの順に独立したSectionとして配置し、余白と薄い横線で区切る。
