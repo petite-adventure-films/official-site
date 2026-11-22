@@ -16,8 +16,8 @@
     "byType": {
       "blog": {
         "total": 310,
-        "candidates": 20,
-        "blocked": 290
+        "candidates": 22,
+        "blocked": 288
       },
       "news": {
         "total": 245,
@@ -44,9 +44,8 @@
       "unsupported_element": 90,
       "unsupported_attribute": 321,
       "unresolved_asset_or_embed": 290,
-      "unresolved_attachment_link": 17,
-      "unknown_catalog_id": 35,
       "unsupported_link": 12,
+      "unresolved_attachment_link": 12,
       "event_rich_text_requires_contract": 132,
       "event_format_mapping_required": 234,
       "unresolved_attachment": 13
@@ -95,6 +94,11 @@
     },
     {
       "type": "blog",
+      "legacyId": 11770,
+      "recordHash": "dbf6d2be7d9eb69be4465bddf5afe207cf299a92c21b7b112f0a2c2af6b44e6b"
+    },
+    {
+      "type": "blog",
       "legacyId": 11146,
       "recordHash": "1be0b2e9289adfe1cf2787725e5c9ee5d3d410c5da558c167b4525aa4cbaa411"
     },
@@ -102,6 +106,11 @@
       "type": "blog",
       "legacyId": 10322,
       "recordHash": "341ac02a769ff8ecd7a5c5ffe28ba9d2952947c8b69d89079cddb1f3a55b1f66"
+    },
+    {
+      "type": "blog",
+      "legacyId": 7652,
+      "recordHash": "7668ea2dbc43fb1535bd863e829d1833e7f663ccfda030f4c8f70461996cb91a"
     },
     {
       "type": "blog",
@@ -2038,12 +2047,6 @@
       "legacyId": 17696,
       "issues": [
         {
-          "code": "unresolved_attachment_link",
-          "detail": "https://www.gender.go.jp/kaigi/senmon/wg-nwec/pdf/honbun.pdf",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
           "code": "unsupported_element",
           "detail": "span",
           "field": "content",
@@ -3386,12 +3389,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unresolved_attachment_link",
-          "detail": "http://utagoe.gr.jp/SosakuCenter/Score/20210218HyakunindeYukeba.pdf",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -5792,12 +5789,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 4
-        },
-        {
-          "code": "unresolved_attachment_link",
-          "detail": "https://www.iwanami.co.jp/kagaku/eKagaku_202011_Honma.pdf",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -6516,12 +6507,6 @@
         {
           "code": "unsupported_attribute",
           "detail": "strong.style",
-          "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unresolved_attachment_link",
-          "detail": "https://www.iwanami.co.jp/kagaku/eKagaku_202011_Honma.pdf",
           "field": "content",
           "occurrences": 1
         }
@@ -8048,12 +8033,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -8234,12 +8213,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 10
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -8576,12 +8549,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -8774,18 +8741,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 5
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 11770,
-      "issues": [
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -8984,12 +8939,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -9145,12 +9094,6 @@
           "code": "unsupported_attribute",
           "detail": "img.height",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -10532,12 +10475,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -10616,12 +10553,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -10700,12 +10631,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -10922,12 +10847,6 @@
           "detail": "wbr",
           "field": "content",
           "occurrences": 13
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -10970,12 +10889,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 12
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -11054,12 +10967,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -11137,12 +11044,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -11390,12 +11291,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -11437,12 +11332,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -11486,12 +11375,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 41
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -11617,12 +11500,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -11918,12 +11795,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -12044,12 +11915,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -12092,12 +11957,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -12398,12 +12257,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -12650,12 +12503,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 16
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -12733,12 +12580,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -12823,12 +12664,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -13118,12 +12953,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -13291,18 +13120,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 7652,
-      "issues": [
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 7638,
       "issues": [
         {
@@ -13424,12 +13241,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 11
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -13507,12 +13318,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -13682,12 +13487,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 13
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -13849,12 +13648,6 @@
           "code": "unsupported_attribute",
           "detail": "iframe.allowfullscreen",
           "field": "content",
-          "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
           "occurrences": 1
         }
       ]
@@ -14024,12 +13817,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 8
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -14072,12 +13859,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 8
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -14204,12 +13985,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 3
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -15524,12 +15299,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 74
-        },
-        {
-          "code": "unresolved_attachment_link",
-          "detail": "http://www.city.tomakomai.hokkaido.jp/files/00002800/00002888/%E3%82%AB%E3%83%89%E3%82%BF%E5%BC%8F%E2%98%86%E6%A1%88%E5%86%85.pdf#search=%27%E3%82%AB%E3%83%89%E3%82%BF%E5%BC%8F%27",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -23570,12 +23339,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unknown_catalog_id",
-          "detail": "2727",
-          "field": "film_tags",
-          "occurrences": 1
         }
       ]
     },
@@ -23637,12 +23400,6 @@
       "type": "pressCoverage",
       "legacyId": 5231,
       "issues": [
-        {
-          "code": "unknown_catalog_id",
-          "detail": "160",
-          "field": "film_tags",
-          "occurrences": 1
-        },
         {
           "code": "unresolved_attachment",
           "detail": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2014/02/images.pdf",

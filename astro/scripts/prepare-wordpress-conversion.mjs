@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -29,7 +29,15 @@ const validateBlog = ajv.compile(blogSchema),
 const filmMappings = JSON.parse(
   await readFile(resolve(root, 'packages/content-schema/mappings/wordpress-film-tags.json')),
 ).mappings;
-const tagsSql = await readFile(resolve(root, 'cms/migrations/0002_tags.sql'), 'utf8');
+const migrationDirectory = resolve(root, 'cms/migrations');
+const tagsSql = (
+  await Promise.all(
+    (await readdir(migrationDirectory))
+      .filter((name) => name.endsWith('.sql'))
+      .sort()
+      .map((name) => readFile(resolve(migrationDirectory, name), 'utf8')),
+  )
+).join('\n');
 const categorySql = await readFile(resolve(root, 'cms/migrations/0008_blog_drafts.sql'), 'utf8');
 const catalogs = {
   film: new Set([...tagsSql.matchAll(/VALUES \('([^']+)', 'film'/g)].map((m) => m[1])),
@@ -67,6 +75,19 @@ const validDate = (value) => {
   const iso = value.replaceAll('/', '-'),
     date = new Date(iso);
   return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === iso;
+};
+const isOwnAttachment = (value) => {
+  try {
+    const url = new URL(value);
+    return (
+      ['petiteadventurefilms.com', 'www.petiteadventurefilms.com'].includes(
+        url.hostname.toLowerCase(),
+      ) &&
+      (/\/wp\/wp-content\/uploads\//i.test(url.pathname) || /\.pdf$/i.test(url.pathname))
+    );
+  } catch {
+    return false;
+  }
 };
 const validUrl = (value) => {
   if (/^mailto:[A-Za-z0-9.!#$%&'*+\-/=^_`{|}~]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value))
@@ -137,10 +158,7 @@ export function convertBody(html, field = 'content') {
     }
     if (tag === 'a' && (!validUrl(el.getAttribute('href') ?? '') || !el.textContent))
       issues.push(fail('unsupported_link', field, el.getAttribute('href')));
-    if (
-      tag === 'a' &&
-      /\/wp\/wp-content\/uploads\/|\.pdf(?:[?#]|$)/i.test(el.getAttribute('href') ?? '')
-    )
+    if (tag === 'a' && isOwnAttachment(el.getAttribute('href') ?? ''))
       issues.push(fail('unresolved_attachment_link', field, el.getAttribute('href')));
     if (tag === 'ol' && el.hasAttribute('start') && !/^[1-9]\d*$/.test(el.getAttribute('start')))
       issues.push(fail('invalid_list_start', field, el.getAttribute('start')));

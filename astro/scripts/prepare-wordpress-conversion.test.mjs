@@ -35,7 +35,7 @@ test('never drops images, embeds, styles, anchors, unknown elements or attachmen
     '<p style="color:red">text</p>',
     '<span id="old">text</span>',
     '<table><tr><td>text</td></tr></table>',
-    '<a href="https://example.com/a.pdf">PDF</a>',
+    '<a href="https://www.petiteadventurefilms.com/wp/wp-content/uploads/a.pdf">PDF</a>',
     '<script>alert(1)</script>',
   ]) {
     const row = prepare(snapshot([{ ...record(), content: html }]), 'hash').rows[0];
@@ -123,4 +123,25 @@ test('paragraph boundary whitespace is not confused with lost text', () => {
   const result = convertBody('<p>第一段落</p>\n<p>第二段落 <strong>強調</strong></p>');
   assert.deepEqual(result.issues, []);
   assert.equal(result.body.doc.content.length, 2);
+});
+
+test('retains external PDF links per the body contract and blocks only own unresolved attachments', () => {
+  for (const href of [
+    'https://example.com/a.pdf',
+    'https://example.com/wp/wp-content/uploads/a.pdf',
+  ]) {
+    const result = convertBody(`<p><a href="${href}">資料</a></p>`);
+    assert.deepEqual(result.issues, []);
+    assert.equal(result.body.doc.content[0].content[0].marks[0].attrs.href, href);
+  }
+  for (const href of [
+    'https://www.petiteadventurefilms.com/file.pdf',
+    'https://petiteadventurefilms.com/wp/wp-content/uploads/a.jpg',
+  ]) {
+    assert.ok(
+      convertBody(`<a href="${href}">資料</a>`).issues.some(
+        (issue) => issue.code === 'unresolved_attachment_link',
+      ),
+    );
+  }
 });
