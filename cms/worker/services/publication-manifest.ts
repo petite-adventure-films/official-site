@@ -1,3 +1,4 @@
+import { legacyBlogMetadata } from './legacy-blog';
 import { newsArticlePath } from '../../../packages/content-schema/publication-paths';
 import { isArticleType, type ArticleDraft, type ArticleType } from '../../src/features/articles/draft';
 import { articleDraftFromPublication, articleTarget } from '../article-publication';
@@ -35,11 +36,13 @@ export async function buildPublicationManifest(db: Database, media: MediaBucket 
     const content = blogDraftFromPublication(JSON.parse(row.payload));
     if (!content || row.slug !== localBlogSlugPrefix + content.slug) throw new Error('invalid_blog_release');
     const routes = await new PublicationUrls(db).plan(row.content_id, row.slug);
-    blogs.push({ path: routes.canonicalPath, content, publishedAt: row.published_at });
+    const legacy = await legacyBlogMetadata(db, row.content_id);
+    blogs.push({ path: routes.canonicalPath, content, publishedAt: legacy?.publishedAt ?? row.published_at, ...(legacy ? { legacy } : {}) });
     redirects.push(...routes.redirects);
   }
   if (delivery.payload.type === 'blog') {
-    blogs.push({ path: delivery.routes.canonicalPath, content: delivery.payload.content, publishedAt: operation!.created_at });
+    const legacy = await legacyBlogMetadata(db, delivery.contentId);
+    blogs.push({ path: delivery.routes.canonicalPath, content: delivery.payload.content, publishedAt: legacy?.publishedAt ?? operation!.created_at, ...(legacy ? { legacy } : {}) });
     redirects.push(...delivery.routes.redirects);
   }
   const articles: { type: ArticleType; path: string; content: ArticleDraft; publishedAt: string }[] = [];

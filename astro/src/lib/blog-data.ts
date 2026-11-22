@@ -42,7 +42,8 @@ export function getAllBlogPosts(): Promise<Blog[]> {
     }
     const released = await releasedCmsBlogs();
     if (!released.length) return pages.flat();
-    return [...released, ...pages.flat()].sort(
+    const replaced = new Set(released.map((post) => post.legacySourceId));
+    return [...released, ...pages.flat().filter((post) => !replaced.has(Number(post.id)))].sort(
       (a, b) => Date.parse(b.published) - Date.parse(a.published),
     );
   })();
