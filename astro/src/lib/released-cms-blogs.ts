@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import type { BlogDraft } from '../../../cms/src/features/blog/draft';
+import snapshot from '../../data/wordpress-export.json';
 
 type Node = {
   type: string;
@@ -10,7 +12,7 @@ type Node = {
 type Entry = {
   path: string;
   publishedAt: string;
-  content: { slug: string; title: string; isRecommended: boolean; body: { doc: Node } };
+  content: BlogDraft & { slug: string };
 };
 const escape = (text: unknown) =>
   (typeof text === 'string' ? text : '').replace(
@@ -102,7 +104,29 @@ export async function readCmsRelease() {
 }
 export async function releasedCmsBlogs() {
   const { blogs, render } = await readCmsRelease();
+  const categories = new Map(
+    snapshot.content.blogs.flatMap((post) =>
+      post.categories.map((tag) => [String(tag.term_id), tag.name] as const),
+    ),
+  );
+  const films = new Map(
+    snapshot.content.blogs.flatMap((post) =>
+      Array.isArray(post.film_tags)
+        ? post.film_tags.map((tag) => [String(tag.term_id), tag.name] as const)
+        : [],
+    ),
+  );
   return blogs.map(({ content, publishedAt }) => ({
+    id: `cms:${content.slug}`,
+    name: content.slug,
+    cmsSlug: content.slug,
+    published: publishedAt,
+    thumbnail: false as const,
+    categories: content.categoryId
+      ? [{ name: categories.get(content.categoryId) ?? content.categoryId }]
+      : [],
+    film_tags: content.filmTagIds.map((id) => ({ name: films.get(id) ?? id })),
+    isWorkshopReport: content.isWorkshopReport,
     slug: content.slug,
     content: render(content.body.doc),
     title: content.title,

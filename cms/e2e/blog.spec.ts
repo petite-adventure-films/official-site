@@ -15,7 +15,7 @@ test('blog draft retains rich text, classification and switches when reopened fr
   const saved = await (await request.get(`/api/contents/${id}`)).json();
   expect(saved.type).toBe('blog');expect(saved.payload.isRecommended).toBe(true);expect(saved.payload.categoryId).toBe('2879');
   expect(saved.payload.body.doc.content[0].content[0].marks).toContainEqual({ type: 'bold' });
-  await expect(page.getByRole('button', { name: '公開', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: '公開', exact: true })).toBeEnabled();
   await page.reload();await expect(body).toHaveText('本文だけの検索語');await expect(body.locator('strong')).toHaveText('本文だけの検索語');
   await expect(page.getByRole('switch', { name: 'おすすめ', exact: true })).toBeChecked();
   await expect(page.getByRole('button', { name: 'インド日記', exact: true })).toHaveAttribute('aria-pressed', 'true');

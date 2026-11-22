@@ -1,3 +1,4 @@
+import { releasedCmsBlogs } from './released-cms-blogs';
 import { BLOG_PER_PAGE } from '@/constants/blog';
 import { wpGetDetail, wpGetList } from '@/lib/wp-api';
 import type { Blog } from '@/types/blog';
@@ -39,7 +40,11 @@ export function getAllBlogPosts(): Promise<Blog[]> {
       const response = await wpGetList<Blog>('blog', { per_page: 100, page: String(page) });
       pages.push(response.data);
     }
-    return pages.flat();
+    const released = await releasedCmsBlogs();
+    if (!released.length) return pages.flat();
+    return [...released, ...pages.flat()].sort(
+      (a, b) => Date.parse(b.published) - Date.parse(a.published),
+    );
   })();
   return postsPromise;
 }
@@ -66,7 +71,7 @@ async function mapWithConcurrency<T, R>(
 
 export function getAllBlogDetails(): Promise<Blog[]> {
   detailsPromise ??= (async () => {
-    const posts = await getAllBlogPosts();
+    const posts = (await getAllBlogPosts()).filter((post) => !post.cmsSlug);
     const details = await mapWithConcurrency(posts, 5, async (post) => {
       const detail = await wpGetDetail<Blog>('blog_detail', { pageName: post.name });
       return detail ? { ...post, ...detail, name: post.name, thumbnail: post.thumbnail } : null;

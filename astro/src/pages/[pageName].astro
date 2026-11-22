@@ -56,18 +56,7 @@ export async function getStaticPaths() {
       params: { pageName: blog.slug },
       props: {
         cmsSlug: blog.slug,
-        detail: {
-          id: 0,
-          name: blog.slug,
-          title: blog.title,
-          content: blog.content,
-          published: blog.publishedAt,
-          isRecommended: blog.isRecommended,
-          isWorkshopReport: false,
-          thumbnail: false,
-          categories: [],
-          film_tags: false,
-        } satisfies Blog,
+        detail: { ...blog } satisfies Blog,
       },
     })),
   ];

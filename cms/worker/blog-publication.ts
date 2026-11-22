@@ -12,8 +12,9 @@ export type BlogPublication = {
   content: BlogDraft;
 };
 
-export async function prepareBlogPublication(db: Database, payload: unknown): Promise<BlogPublication> {
-  if (!validateBlogDraft(payload) || !payload.title.trim() || (!payload.slug || slugIssue(payload.slug))) {
+export async function prepareBlogPublication(db: Database, payload: unknown, contentId?: string): Promise<BlogPublication> {
+  if (contentId && validateBlogDraft(payload) && payload.slug === undefined) payload = { ...payload, slug: contentId };
+  if (!validateBlogDraft(payload) || !payload.title.trim() || !payload.categoryId || (!payload.slug || slugIssue(payload.slug))) {
     throw new Error('invalid_blog_publication');
   }
   await validateDraftReferences(db, 'blog', payload as BlogDraft);

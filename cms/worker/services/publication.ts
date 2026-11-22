@@ -79,7 +79,7 @@ export class PublicationService {
     } else if (draft.type === 'blog') {
       if (!supportsLocalBlog) throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'ブログ配信は利用できません。' }]);
       try {
-        payload = await prepareBlogPublication(this.db, draft.payload);
+        payload = await prepareBlogPublication(this.db, draft.payload, draft.id);
       } catch (error) {
         if (!(error instanceof HttpError) && !(error instanceof Error && error.message === 'invalid_blog_publication')) throw error;
         throw new PublicationInvalid([{ field: '_schema', code: 'invalid_shape', message: 'ブログのタイトル、slug、本文、分類、添付を確認してください。' }]);
