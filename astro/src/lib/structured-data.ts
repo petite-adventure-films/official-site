@@ -15,6 +15,16 @@ export function toIsoDate(value?: string) {
 
 export function minutesToIsoDuration(value?: string) {
   if (!value) return undefined;
+  const clock = value.trim().match(/^(?:(\d+):)?(\d+):([0-5]\d)$/);
+  if (clock) {
+    const hasHours = value.trim().split(':').length === 3;
+    const hours = hasHours ? Number(clock[1]) : 0;
+    const minutes = Number(clock[2]);
+    const seconds = Number(clock[3]);
+    if (hasHours && minutes > 59) return undefined;
+    if (![hours, minutes, seconds].every(Number.isSafeInteger)) return undefined;
+    return `PT${hours ? `${String(hours)}H` : ''}${minutes ? `${String(minutes)}M` : ''}${seconds || (!hours && !minutes) ? `${String(seconds)}S` : ''}`;
+  }
   const minutes = Number(value.match(/(\d+)\s*分/)?.[1]);
   if (!Number.isFinite(minutes) || minutes <= 0) return undefined;
   return `PT${String(minutes)}M`;
