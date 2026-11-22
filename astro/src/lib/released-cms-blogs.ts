@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
-import type { BlogDraft } from '../../../cms/src/features/blog/draft';
-import snapshot from '../../data/wordpress-export.json';
+import { validLink, type BlogDraft } from '../../../cms/src/features/blog/draft';
+import snapshot from '../../data/wordpress-export.json' with { type: 'json' };
 
 type Node = {
   type: string;
@@ -75,13 +75,19 @@ export async function readCmsRelease() {
       return (node.marks ?? []).reduce((value, mark) => {
         if (mark.type === 'assetLink')
           return `<a href="${escape(assetPath(mark.attrs?.assetId))}">${value}</a>`;
-        if (
-          mark.type === 'link' &&
-          /^(https?:\/\/|mailto:)/i.test(
-            typeof mark.attrs?.href === 'string' ? mark.attrs.href : '',
+        if (mark.type === 'link') {
+          const { href, target, title } = mark.attrs ?? {};
+          if (
+            typeof href !== 'string' ||
+            !validLink(href) ||
+            (target !== undefined && target !== '_self' && target !== '_blank') ||
+            (title !== undefined && typeof title !== 'string')
           )
-        ) {
-          return `<a href="${escape(mark.attrs?.href)}">${value}</a>`;
+            throw new Error('invalid_blog_release_link');
+          const targetAttr = target === undefined ? '' : ` target="${target}"`;
+          const rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
+          const titleAttr = title === undefined ? '' : ` title="${escape(title)}"`;
+          return `<a href="${escape(href)}"${targetAttr}${rel}${titleAttr}>${value}</a>`;
         }
         const tag = blocks.get(mark.type);
         return tag ? `<${tag}>${value}</${tag}>` : value;

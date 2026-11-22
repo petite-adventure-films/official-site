@@ -37,7 +37,7 @@
 呼出順はschema検証→意味/原本参照/asset検証→公開AST生成→公開schema検証とする。検証コードのprojection/restore単体はschema検証済み入力を前提にしており、正式APIで順序を省略しない。
 
 - `anchorId` は検証してDOMのidへ、lang/dirは許可値のみ、書式は固定のrendererへ対応させる。旧class/data/tabindex/aria属性は公開用データから外し、保全記録に残す。
-- linkは元のhrefを使う。コピー元の転送用data属性へ置換しない。targetは限定し、_blankのrelはrenderer側でnoopener/noreferrerを付ける。原本のrelをそのままHTMLへ展開しない。
+- linkは元のhrefを使う。コピー元の転送用data属性へ置換しない。targetは限定し、_blankのrelはrenderer側でnoopener/noreferrerを付ける。原本のrelをそのままHTMLへ展開しない。 現行CMSの通常リンクはtarget/titleを共通公開rendererでも保持する。[実装検証](../verification/published-links.md)。
 - URL構文・動画provider/ID/URLの一致、許可パラメータは意味検証で確認する。JSON Schemaだけで保証しない。現検証はhttp/httpsと単一ASCIIのmailtoを対象とし、相対URL・tel・新規動画URLの正規化は正式実装前に追加検証する。
 - 重複anchorIdは公開を止める。10297の `fbPhotoSnowliftCaption` は2回存在する。編集/保全には両方残し、自動的な削除・末尾番号付けはしない。本文外のページIDとの衝突も正式rendererで検査する。重複の解決方針は移行台帳で明示する。
 - 旧属性を公開から外すため、コピー元CSS等に依存していた表示は別途照合する。原文の保持を、公開外観の完全一致と混同しない。
