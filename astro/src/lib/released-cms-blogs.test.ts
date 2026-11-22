@@ -44,3 +44,24 @@ test('rejects two released articles claiming the same legacy source', async () =
   await release({}, true);
   await expect(releasedCmsBlogs()).rejects.toThrow('invalid_legacy_blog_release');
 });
+
+test('renders discretionary breaks in place without inserting forced breaks or spaces', async () => {
+  await release();
+  const { readCmsRelease } = await import('./released-cms-blogs');
+  const { render } = await readCmsRelease();
+  expect(
+    render({
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            { type: 'text', text: 'before' },
+            { type: 'wordBreak' },
+            { type: 'text', text: 'after' },
+          ],
+        },
+      ],
+    }),
+  ).toBe('<p>before<wbr>after</p>');
+});

@@ -418,6 +418,9 @@
         },
         {
           "$ref": "#/$defs/hardBreak"
+        },
+        {
+          "$ref": "#/$defs/wordBreak"
         }
       ]
     },
@@ -523,6 +526,24 @@
       "required": [
         "type",
         "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "wordBreak": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "wordBreak"
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type"
       ],
       "additionalProperties": false
     }

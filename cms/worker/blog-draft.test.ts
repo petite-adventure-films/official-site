@@ -103,3 +103,20 @@ test('blog publication requires a category and resolves only an untouched URL to
   expect(explicit.content.slug).toBe('existing-name');
   expect((await (await request(`/api/contents/${saved.id}`)).json() as any).payload).toEqual(payload);
 });
+
+test('word breaks survive API storage, duplication and publication snapshots', async () => {
+  const payload = { ...emptyBlogDraft(), title: '改行候補', slug: 'word-break', categoryId: '2879' };
+  payload.body.doc.content = [{ type: 'paragraph', content: [{ type: 'text', text: 'before' }, { type: 'wordBreak' }, { type: 'text', text: 'after' }] }];
+  const response = await create('blog', payload); expect(response.status).toBe(201);
+  const saved = await response.json() as any;
+  expect((await (await request(`/api/contents/${saved.id}`)).json() as any).payload.body).toEqual(payload.body);
+  const copy = await (await request(`/api/contents/${saved.id}/duplicate`, 'POST', { expectedVersion: saved.version, operationId: crypto.randomUUID() })).json() as any;
+  expect(copy.payload.body).toEqual(payload.body);
+  const publication = await prepareBlogPublication(fixture.db, payload);
+  expect(publication.content.body).toEqual(payload.body);
+  for (const bad of [{ type: 'wordBreak', attrs: { onclick: 'alert(1)' } }, { type: 'wordBreak', content: [{ type: 'text', text: 'hidden' }] }, { type: 'wordBreak', text: 'hidden' }]) {
+    const invalid = structuredClone(payload);
+    invalid.body.doc.content![0].content![1] = bad;
+    expect((await create('blog', invalid)).status).toBe(422);
+  }
+});

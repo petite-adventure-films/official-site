@@ -5,6 +5,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Menu, MenuItem, TextField } from '@mui/material';
 import { validLink, type BodyNode } from '../draft';
 import { AssetImage, AssetLink } from '../media-nodes';
+import { WordBreak } from '../word-break';
 import { MediaPicker } from './MediaPicker';
 // Drop editor-generated null/default rendering attrs, not content or supported formatting.
 function stored(n: JSONContent): BodyNode {
@@ -19,7 +20,7 @@ export function BodyEditor({ value, change }: { value: BodyNode; change?: (doc: 
   const [link, setLink] = useState<string | null>(null);
   const [mediaKind, setMediaKind] = useState<'image' | 'document' | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
-  const editor = useEditor({ extensions: [AssetImage, AssetLink, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
+  const editor = useEditor({ extensions: [AssetImage, AssetLink, WordBreak, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
     content: value, editable: Boolean(change), shouldRerenderOnTransaction: true,
     editorProps: { attributes: change ? { role: 'textbox', 'aria-label': '本文', 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
     onUpdate: ({ editor }) => latest.current?.(stored(editor.getJSON())),

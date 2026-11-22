@@ -16,13 +16,13 @@
     "byType": {
       "blog": {
         "total": 310,
-        "candidates": 22,
-        "blocked": 288
+        "candidates": 25,
+        "blocked": 285
       },
       "news": {
         "total": 245,
-        "candidates": 225,
-        "blocked": 20
+        "candidates": 226,
+        "blocked": 19
       },
       "event": {
         "total": 234,
@@ -41,7 +41,7 @@
       }
     },
     "byCode": {
-      "unsupported_element": 90,
+      "unsupported_element": 78,
       "unsupported_attribute": 321,
       "unresolved_asset_or_embed": 290,
       "unsupported_link": 12,
@@ -129,6 +129,11 @@
     },
     {
       "type": "blog",
+      "legacyId": 4720,
+      "recordHash": "d9c4bd271bad8a5370e5bc21dddd7b8714af866b2674925e531b6aee2ccfa72e"
+    },
+    {
+      "type": "blog",
       "legacyId": 4683,
       "recordHash": "1248d6e3c88e693409d3b1444ef08ee8a54c8450059518521a5d300168b136f9"
     },
@@ -156,6 +161,16 @@
       "type": "blog",
       "legacyId": 4277,
       "recordHash": "b607e3227d22678167fce172b8aedab42111671955e680550e829c4fabf38030"
+    },
+    {
+      "type": "blog",
+      "legacyId": 4270,
+      "recordHash": "8898c4b0ebe84745d9189699a805a2cb2bed55fa56aebac97776b6d9a3f4adc2"
+    },
+    {
+      "type": "blog",
+      "legacyId": 4264,
+      "recordHash": "659af07d7213ab653b50e8725387c580189a15ba201a094c37ce62ef7bfbc089"
     },
     {
       "type": "blog",
@@ -241,6 +256,11 @@
       "type": "news",
       "legacyId": 13595,
       "recordHash": "edae7228b5208442b261cbc8aa6f4ffa51648eaa955b7de79fec2cfaf48c158f"
+    },
+    {
+      "type": "news",
+      "legacyId": 12775,
+      "recordHash": "c0bbb114049e0f23801eed76e1dc3b3a55c5f77212927c093dbe2e47f68c1fd4"
     },
     {
       "type": "news",
@@ -2477,12 +2497,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 1
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -3917,12 +3931,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 16
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 1
         },
         {
           "code": "unresolved_asset_or_embed",
@@ -6494,12 +6502,6 @@
         },
         {
           "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 10
-        },
-        {
-          "code": "unsupported_element",
           "detail": "div",
           "field": "content",
           "occurrences": 25
@@ -7541,12 +7543,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 127
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },
@@ -9317,12 +9313,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 105
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 42
         }
       ]
     },
@@ -9863,12 +9853,6 @@
           "detail": "iframe.allowfullscreen",
           "field": "content",
           "occurrences": 3
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 3
         }
       ]
     },
@@ -10253,12 +10237,6 @@
           "detail": "span.data-ft",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 1
         }
       ]
     },
@@ -10841,12 +10819,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 2
-        },
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 13
         }
       ]
     },
@@ -14569,12 +14541,6 @@
           "occurrences": 1
         },
         {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 5
-        },
-        {
           "code": "unresolved_asset_or_embed",
           "detail": "iframe",
           "field": "content",
@@ -15151,12 +15117,6 @@
       "legacyId": 5793,
       "issues": [
         {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 24
-        },
-        {
           "code": "unsupported_attribute",
           "detail": "a.data-saferedirecturl",
           "field": "content",
@@ -15349,12 +15309,6 @@
       "legacyId": 5566,
       "issues": [
         {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 93
-        },
-        {
           "code": "unresolved_asset_or_embed",
           "detail": "img",
           "field": "content",
@@ -15534,12 +15488,6 @@
       "type": "blog",
       "legacyId": 5416,
       "issues": [
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 8
-        },
         {
           "code": "unsupported_element",
           "detail": "div",
@@ -17102,12 +17050,6 @@
         },
         {
           "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 7
-        },
-        {
-          "code": "unsupported_element",
           "detail": "div",
           "field": "content",
           "occurrences": 2
@@ -17159,18 +17101,6 @@
           "detail": "a.data-saferedirecturl",
           "field": "content",
           "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 4720,
-      "issues": [
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 5
         }
       ]
     },
@@ -17286,12 +17216,6 @@
       "type": "blog",
       "legacyId": 4664,
       "issues": [
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 3
-        },
         {
           "code": "unsupported_link",
           "detail": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/20161224_antinukemusium_re.jpg",
@@ -18520,30 +18444,6 @@
     },
     {
       "type": "blog",
-      "legacyId": 4270,
-      "issues": [
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 53
-        }
-      ]
-    },
-    {
-      "type": "blog",
-      "legacyId": 4264,
-      "issues": [
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 7
-        }
-      ]
-    },
-    {
-      "type": "blog",
       "legacyId": 5341,
       "issues": [
         {
@@ -19301,18 +19201,6 @@
           "detail": "img.height",
           "field": "content",
           "occurrences": 1
-        }
-      ]
-    },
-    {
-      "type": "news",
-      "legacyId": 12775,
-      "issues": [
-        {
-          "code": "unsupported_element",
-          "detail": "wbr",
-          "field": "content",
-          "occurrences": 2
         }
       ]
     },

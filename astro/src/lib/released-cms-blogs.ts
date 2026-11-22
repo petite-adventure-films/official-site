@@ -69,6 +69,7 @@ export async function readCmsRelease() {
     if (node.type === 'assetImage')
       return `<img src="${escape(assetPath(node.attrs?.assetId))}" alt="${escape(node.attrs?.alt)}">`;
     if (node.type === 'hardBreak') return '<br>';
+    if (node.type === 'wordBreak') return '<wbr>';
     if (node.type === 'horizontalRule') return '<hr>';
     if (node.type === 'text') {
       return (node.marks ?? []).reduce((value, mark) => {

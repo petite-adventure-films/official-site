@@ -159,3 +159,14 @@ test('retains external PDF links per the body contract and blocks only own unres
     );
   }
 });
+
+test('retains discretionary breaks at their text positions and rejects their unknown attributes', () => {
+  const result = convertBody('<p>alpha<wbr>beta<wbr><strong>gamma<wbr>delta</strong><br>end</p>');
+  assert.deepEqual(result.issues, []);
+  const children = result.body.doc.content[0].content;
+  assert.deepEqual(
+    children.map((n) => (n.type === 'text' ? n.text : n.type)),
+    ['alpha', 'wordBreak', 'beta', 'wordBreak', 'gamma', 'wordBreak', 'delta', 'hardBreak', 'end'],
+  );
+  assert.ok(convertBody('<p>a<wbr onclick="alert(1)">b</p>').issues.length);
+});
