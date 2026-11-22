@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-11-22T03:50:57.662Z",
+  "astro": "7.4.13",
+  "baselineHTML": 735,
+  "cases": [
+    {
+      "case": "title",
+      "fullHTML": 735,
+      "rendered": [
+        "/events/",
+        "/events/cms-sample-screening/"
+      ],
+      "changedHTML": [
+        "events/cms-sample-screening/index.html",
+        "events/index.html"
+      ],
+      "removedHTML": [],
+      "retainedUnchangedHTML": 733,
+      "combinedMatchesFull": true
+    },
+    {
+      "case": "add",
+      "fullHTML": 736,
+      "rendered": [
+        "/events/",
+        "/events/cms-sample-added/"
+      ],
+      "changedHTML": [
+        "events/cms-sample-added/index.html",
+        "events/index.html"
+      ],
+      "removedHTML": [],
+      "retainedUnchangedHTML": 734,
+      "combinedMatchesFull": true
+    },
+    {
+      "case": "slug",
+      "fullHTML": 735,
+      "rendered": [
+        "/events/",
+        "/events/cms-sample-renamed/"
+      ],
+      "changedHTML": [
+        "events/cms-sample-renamed/index.html",
+        "events/index.html"
+      ],
+      "removedHTML": [
+        "events/cms-sample-screening/index.html"
+      ],
+      "retainedUnchangedHTML": 733,
+      "combinedMatchesFull": true
+    },
+    {
+      "case": "unpublish",
+      "fullHTML": 734,
+      "rendered": [
+        "/events/",
+        "/events/cms-sample-online/"
+      ],
+      "changedHTML": [
+        "events/cms-sample-online/index.html",
+        "events/index.html"
+      ],
+      "removedHTML": [
+        "events/cms-sample-screening/index.html"
+      ],
+      "retainedUnchangedHTML": 732,
+      "combinedMatchesFull": true
+    }
+  ],
+  "scope": "Explicit event route selection and HTML composition only. No automatic impact planner, archive redesign, redirect/sitemap/asset composition or Cloudflare deployment tested."
+}
