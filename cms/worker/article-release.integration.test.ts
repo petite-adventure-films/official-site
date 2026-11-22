@@ -49,7 +49,7 @@ test('real local release: blog and all article types, assets, history, restore, 
     let mediaId = '';
     const publicUrls: string[] = [];
     for (const type of ['blog', 'news', 'pressCoverage', 'video'] as const) {
-      const payload = { ...(type === 'blog' ? emptyBlogDraft() : emptyArticleDraft(type)), title: `${type} 公開確認`, slug: `release-${type.toLowerCase()}`, body,
+      const payload = { ...(type === 'blog' ? { ...emptyBlogDraft(), categoryId: '2879' } : emptyArticleDraft(type)), title: `${type} 公開確認`, slug: `release-${type.toLowerCase()}`, body,
         ...(type === 'pressCoverage' ? { sourceName: '掲載元の確認', attachmentAssetIds: [pdf.id], articleBody: { schemaVersion: 2, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '見出しなしの掲載本文' }] }] } } } : {}),
         ...(type === 'video' ? { youtubeId: 'kwHsbFrH2EA', productionYear: '2025', productionCountry: '日本', duration: '62:32' } : {}) };
       const saved = await json('/api/contents', 'POST', { type, operationId: crypto.randomUUID(), payload });

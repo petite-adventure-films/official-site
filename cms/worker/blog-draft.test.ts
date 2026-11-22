@@ -5,6 +5,7 @@ import { createWorkerFixture } from '../src/testing/fixtures';
 import { emptyBlogDraft } from '../src/features/blog/draft';
 import { emptyDraft } from '../src/features/events/draft';
 import { validateBlogDraft } from './blog-draft';
+import { prepareBlogPublication } from './blog-publication';
 let fixture: Awaited<ReturnType<typeof createWorkerFixture>>;
 const request = (path: string, method = 'GET', body?: unknown) => fixture.runtime.dispatchFetch('http://localhost' + path, { method, headers: { Origin: 'http://127.0.0.1:5174', 'Content-Type': 'application/json' }, ...(body ? { body: JSON.stringify(body) } : {}) });
 const create = (type = 'blog', payload: unknown = emptyBlogDraft(), operationId = crypto.randomUUID()) => request('/api/contents', 'POST', { type, payload, operationId });
@@ -86,4 +87,19 @@ test('blog duplication preserves body/settings, resets slug, isolates edits and 
   expect((await request(path, 'POST', { ...body, operationId: crypto.randomUUID() })).status).toBe(409);
   expect(await fixture.db.prepare("SELECT count(*) AS n FROM content_drafts WHERE type = 'blog'").first('n')).toBe(2);
   expect(await fixture.db.prepare('SELECT count(*) AS n FROM publication_state').first('n')).toBe(0);
+});
+
+
+test('blog publication requires a category and resolves only an untouched URL to the content ID', async () => {
+  const payload = { ...emptyBlogDraft(), title: '分類必須の公開' };
+  const saved = await (await create('blog', payload)).json() as any;
+  await expect(prepareBlogPublication(fixture.db, payload, saved.id)).rejects.toThrow('invalid_blog_publication');
+  const classified = { ...payload, categoryId: '2879' };
+  const candidate = await prepareBlogPublication(fixture.db, classified, saved.id);
+  expect(candidate.content.slug).toBe(saved.id);
+  expect(candidate.content.categoryId).toBe('2879');
+  await expect(prepareBlogPublication(fixture.db, { ...classified, slug: '' }, saved.id)).rejects.toThrow('invalid_blog_publication');
+  const explicit = await prepareBlogPublication(fixture.db, { ...classified, slug: 'existing-name' }, saved.id);
+  expect(explicit.content.slug).toBe('existing-name');
+  expect((await (await request(`/api/contents/${saved.id}`)).json() as any).payload).toEqual(payload);
 });
