@@ -1,7 +1,7 @@
-const assets = import.meta.glob('~/assets/images/**/*', {
+const assets = import.meta.glob<string>('~/assets/images/**/*', {
   eager: true,
   import: 'default',
 });
 
-export const useAsset = (path: string): string =>
+export const useAsset = (path: string): string | undefined =>
   assets[`/assets/images/${path}`];

@@ -19,6 +19,12 @@ useSeoMeta({
 const { posts } = await useWpGetList<Channel>('channel', {
   query: { per_page: -1 },
 });
+const channels = computed(() =>
+  (posts.value?.data ?? []).map((channel) => ({
+    ...channel,
+    thumbnailSrc: `https://img.youtube.com/vi/${useGetYouTubeId(channel.youtube_id)}/maxresdefault.jpg`,
+  })),
+);
 </script>
 
 <template>
@@ -40,16 +46,16 @@ const { posts } = await useWpGetList<Channel>('channel', {
       </p>
     </template>
     <ArchiveList v-if="posts">
-      <li v-for="data in posts.data" :key="data.id">
+      <li v-for="channel in channels" :key="channel.id">
         <PostCard
-          :to="`/channel/${data.id}/`"
-          :film-tags="data.film_tags"
-          :title="data.title"
-          :thumbnail-src="`https://img.youtube.com/vi/${useGetYouTubeId(data.youtube_id)}/maxresdefault.jpg`"
+          :to="`/channel/${channel.id}/`"
+          :film-tags="channel.film_tags"
+          :title="channel.title"
+          :thumbnail-src="channel.thumbnailSrc"
           :attached-info="[
-            data.created_country,
-            data.created_year,
-            data.running_time,
+            channel.created_country,
+            channel.created_year,
+            channel.running_time,
           ]"
         />
       </li>

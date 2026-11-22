@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import type { AsyncDataRequestStatus } from '#app';
 const props = withDefaults(
   defineProps<{
-    status: ReturnType<typeof useFetch>['status'];
+    status?: AsyncDataRequestStatus;
     idle?: boolean;
     number?: number;
   }>(),
   {
-    status: '',
+    status: 'idle',
     idle: false,
     number: 1,
   },

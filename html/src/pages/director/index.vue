@@ -18,10 +18,8 @@ useSeoMeta({
 
 const tilmline: { [key: string]: { title: string; film_id: string }[] } = {};
 for (const film of FILMS) {
-  if (!tilmline[film.created_at]) {
-    tilmline[film.created_at] = [];
-  }
-  tilmline[film.created_at].push({
+  const filmsInYear = (tilmline[film.created_at] ??= []);
+  filmsInYear.push({
     title: film.title,
     film_id: film.film_id,
   });

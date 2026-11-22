@@ -12,8 +12,9 @@ useSeoMeta({
 });
 
 onMounted(() => {
-  if (sessionStorage.getItem('basket')) {
-    updateBasket(JSON.parse(sessionStorage.getItem('basket')));
+  const savedBasket = sessionStorage.getItem('basket');
+  if (savedBasket) {
+    updateBasket(JSON.parse(savedBasket));
   }
 });
 </script>

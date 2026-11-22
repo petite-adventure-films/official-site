@@ -1248,7 +1248,7 @@ export const movements: {
 export const residents: {
   key: number;
   name: string;
-  message: string;
+  message?: string;
   notice?: string;
   hobby: string;
   favouriteIndex: string;

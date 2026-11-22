@@ -5,11 +5,13 @@ const isModalOpen = ref(false);
 const imgPathToEnlarge = ref('');
 
 const enlargeImage = (year: number, month: number, num: number) => {
-  isModalOpen.value = true;
   const paddedMonth = month.toString().padStart(2, '0');
-  imgPathToEnlarge.value = useAsset(
+  const image = useAsset(
     `takahatadai73/movements_${year}${paddedMonth}_${num.toString()}.jpg`,
   );
+  if (!image) return;
+  imgPathToEnlarge.value = image;
+  isModalOpen.value = true;
 };
 </script>
 

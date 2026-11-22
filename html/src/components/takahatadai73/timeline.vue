@@ -3,19 +3,23 @@ import { takahatadai73Timeline } from '~/constants/takahatadai73';
 
 const isPC = useMediaQuery('(min-width: 768px)');
 
-const categories = {
+const categories: Record<string, string> = {
   1: '高幡台団地73号棟取り壊しが決まるまで',
   2: '73号棟取り壊し公表後の動き',
   3: '裁判が始まってから',
 };
 
-const status = ref({});
+type TimelineMonth = (typeof takahatadai73Timeline)[number][number][number];
+const monthKey = (
+  category: string | number,
+  year: string | number,
+  month: string | number,
+) => `${category}/${year}/${month}`;
+const status = ref<Record<string, boolean>>({});
 for (const [category, years] of Object.entries(takahatadai73Timeline)) {
-  status.value[category] = {};
   for (const [year, months] of Object.entries(years)) {
-    status.value[category][year] = {};
     for (const [month, data] of Object.entries(months)) {
-      status.value[category][year][month] = data.display_default;
+      status.value[monthKey(category, year, month)] = data.display_default;
     }
   }
 }
@@ -26,18 +30,24 @@ const showAllTimeline = () => {
   for (const [category, years] of Object.entries(takahatadai73Timeline)) {
     for (const [year, months] of Object.entries(years)) {
       for (const [month] of Object.entries(months)) {
-        status.value[category][year][month] = isShowwAllTimeline.value;
+        status.value[monthKey(category, year, month)] =
+          isShowwAllTimeline.value;
       }
     }
   }
 };
 
-const thisPartyHasEvents = (party, data) => {
+const thisPartyHasEvents = (party: 'ur' | 'residents', data: TimelineMonth) => {
   return data.events.some((event) => party in event && event[party]);
 };
 
-const isEventDisplayed = (category, year, month) => {
-  status.value[category][year][month] = !status.value[category][year][month];
+const isEventDisplayed = (
+  category: string | number,
+  year: string | number,
+  month: string | number,
+) => {
+  status.value[monthKey(category, year, month)] =
+    !status.value[monthKey(category, year, month)];
 };
 </script>
 
@@ -99,7 +109,7 @@ const isEventDisplayed = (category, year, month) => {
                   <div
                     class="flex justify-center items-center w-8 h-8 border-2 border-white mx-auto rounded-full text-tkhd73-green text-xs"
                     :class="[
-                      status[category][year][month]
+                      status[monthKey(category, year, month)]
                         ? 'bg-white'
                         : 'bg-tkhd73-green-shadow  sm:hover:bg-white',
                     ]"
@@ -113,7 +123,7 @@ const isEventDisplayed = (category, year, month) => {
                         v-if="thisPartyHasEvents('ur', data)"
                         class="absolute -left-3 block w-2 h-3 top-1/2 -translate-y-1/2 [clip-path:polygon(0%_50%,100%_0%,100%_100%)] bg-tkhd73-green"
                         :class="[
-                          status[category][year][month]
+                          status[monthKey(category, year, month)]
                             ? 'bg-white'
                             : 'bg-tkhd73-green',
                         ]"
@@ -122,14 +132,14 @@ const isEventDisplayed = (category, year, month) => {
                         v-if="thisPartyHasEvents('residents', data)"
                         class="absolute -right-3 block w-2 h-3 top-1/2 -translate-y-1/2 [clip-path:polygon(0%_0%,100%_50%,0%_100%)] bg-tkhd73-green"
                         :class="[
-                          status[category][year][month]
+                          status[monthKey(category, year, month)]
                             ? 'bg-white'
                             : 'bg-tkhd73-green',
                         ]"
                       />
                     </button>
                   </div>
-                  <ol v-if="status[category][year][month]">
+                  <ol v-if="status[monthKey(category, year, month)]">
                     <li
                       v-for="(event, key) in data.events"
                       :key="`tkhd73Timeline${month}Event${key}`"
