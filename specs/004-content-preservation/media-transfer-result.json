@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "wordpress-media-transfer-preflight/v1",
+  "inputHash": "b187a5330e3aa45200270b26c1dd86243c895fb9529c8244fdadbf8ba20dedb2",
+  "snapshotHash": "926a27a215192592cf0e3803a85bd459e5c9e7bf2985ae0e889dd219aaf10cd7",
+  "inventoryHash": "2db71445a9cbaf07357dcc945e6ae9df7db80b529995c94d1efc6f82640fa618",
+  "acquisitionReportHash": "75f04ad837bd500f1e9d70e52f314ec3b4423007fff7519bfb4d0d1f2fedb138",
+  "limitations": [
+    "local preparation only; no registered assetId or remote verification",
+    "missing sources and original-size candidates are not replacements",
+    "public snapshot only; final synchronization and private-media scope unverified"
+  ],
+  "summary": {
+    "urls": 6097,
+    "referencedUrls": 6073,
+    "missingUrls": 9,
+    "verifiedObjects": 5937,
+    "verifiedBytes": 2062041115,
+    "plannedObjects": 5915,
+    "plannedBytes": 2044007075,
+    "candidateOnlyObjects": 22,
+    "uploadLimitBlockedObjects": 0,
+    "legacyPaths": 5935,
+    "plannedPaths": 5926
+  },
+  "manifestSha256": "259a2b574ac7c01942eb4eee3b81739e054adfc7e5920a11169c771097556d3e",
+  "missing": [
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4641,
+              "slug": "20161210_oka_sid",
+              "title": "12/10（土）岡志憧さんライブ・ペインティング at 反原発美術館「今日の反核反戦展2016」！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2017/01/DSC_1096_re-300x183.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4708,
+              "slug": "woman_director_now",
+              "title": "女性情報「Woman Director Now!」に執筆しました♪",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2017/01/Stills_1-300x169.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 4708,
+              "slug": "woman_director_now",
+              "title": "女性情報「Woman Director Now!」に執筆しました♪",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/03/DSCN8361-300x169.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2017/03/DSCN8361-300x169.jpg",
+          "references": [
+            {
+              "type": "news",
+              "legacyId": 4758,
+              "slug": null,
+              "title": "2017年4月12日（水）、NHK「ラジオ深夜便・明日へのことば」出演！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 7161,
+              "slug": "editing_diary_20180120",
+              "title": "【制作日誌】ドキュメンタリーかフィクションか（2018.01.20 革命前夜）",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+      "state": "missing",
+      "reason": "http_404",
+      "sources": [
+        {
+          "role": "referenced",
+          "storageKey": "wordpress/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+          "references": [
+            {
+              "type": "blog",
+              "legacyId": 7277,
+              "slug": "director_life_24_20180126",
+              "title": "【映画監督、日々の暮らし㉔】堆肥（たいひ）を作る！",
+              "fields": [
+                "content"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "candidateOnlyObjects": [
+    {
+      "storageKey": "originals/25/25e5d970bfbe6c4472fd3bc0c5bf029914aad272fba98e63a54fa73e284b352f.jpg",
+      "sizeBytes": 679100,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/a.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/7c/7c1d2b00b8b4ac9f6f43886fda8f9d7461acc75772c4df1b9c8883b559f7dde4.jpg",
+      "sizeBytes": 462806,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/b.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/8d/8d0f6bb529665883b2d0acb49665021a7e559561a29276ffd8ff2680988f882e.jpg",
+      "sizeBytes": 773447,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/c.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/fa/fa404e6c02b9847d857cbc432a770106c392f2816b18485055c77eca5ed37cfa.jpg",
+      "sizeBytes": 569740,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/d.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/25/257886194e7133f16b36634ade51ca63aaa6f4b89ea243f3dea37a4a9a98cc36.jpg",
+      "sizeBytes": 366253,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/e.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/43/43a01fc001cc5f684951d7548bc115256e688bb57ff28ae7f65df602348a2070.jpg",
+      "sizeBytes": 264441,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/f.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/fe/fe4ae8c5579f2b859614c167e1b8e02203886d9d1ea2aa31840ed35b5980875c.jpg",
+      "sizeBytes": 372316,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/g.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/90/9018eb63cc357a26b5204f756de6558fb03efa62e562b33cf37fbf9d096e4efc.jpg",
+      "sizeBytes": 527655,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/04/h.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/48/48512cfe8cf7cff40b0d471adb8448bc1df0ed17d0fb9b5b2536d6475d78a1b3.jpg",
+      "sizeBytes": 615590,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/06/20170702_A_Woman_from_Fukushima_flyer_re.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/23/2386ff1e121309873444ca21165e3c46d04da6fd403bf16b33938a774ff26c7a.jpg",
+      "sizeBytes": 153970,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/06/66c19942ab4ba346fdb64ccc04cde373.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/f8/f8f6f813d5cdc95ef43ecca2cb3db4b4517b202b67888464d1ce55dc402d4c9d.jpg",
+      "sizeBytes": 1993405,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/DSCN4372.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/9a/9af989c9749b0b6084d1ecd224097cb30a9e0337f482f322f21ee685beb8f4a7.jpg",
+      "sizeBytes": 1971828,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/DSCN4480.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/d1/d1a7eb8083a44140947e41dbe9dc6121efa80b83d5d6c86784b7233cb47c17e3.jpg",
+      "sizeBytes": 1971934,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/DSCN4656.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/dd/dd95ad33dc9876171ff384308bfa4050464a2a9b89c3940b57c684d47ebfc0a8.jpg",
+      "sizeBytes": 1982968,
+      "urls": [
+        "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/07/WS_1.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/a7/a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb.jpg",
+      "sizeBytes": 73632,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/a9/a97526e2f4eea1355d2e59eded36df9a4d7e326affdff46137fe98f75d15cf91.png",
+      "sizeBytes": 697083,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/03/IMG_20180331_143153.png"
+      ]
+    },
+    {
+      "storageKey": "originals/5f/5fd6c15f71afbd0a388b9e521de6819369a6e4a4dc34c94999e33d2a147370d8.jpg",
+      "sizeBytes": 1255429,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2019/06/ad11fad40e65ce74f58c4c304324b890-e1561861112791.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/5c/5cd32c7bad1e74a3d420221ba3180cffd3125ec7c446b2d8ca0ddde601c26fc8.jpg",
+      "sizeBytes": 862793,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2019/06/b5e026c49cd48c55083ceccef425681d-e1561860689231.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/b5/b548b736ed54de03b324ee16c2e8300fcbb839e39a94aa6578b0927e8cffc49c.jpg",
+      "sizeBytes": 32756,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/7270917728b0234bf592bcf2263ae669.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/31/310622a3af153f0e1209d422b7406dcfb36a3fa8ce392358cbf16a9b1678d076.jpg",
+      "sizeBytes": 1627762,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/morisan_painting.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/47/4769a1e1c1bce8ef9452ccba118fb70deaa951163688c753eb43f2ca777ce1d0.jpg",
+      "sizeBytes": 690653,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/Morisan_profile.jpg"
+      ]
+    },
+    {
+      "storageKey": "originals/db/db9eaef44ec5ad6e56205e964d8bed6e8d8d59672974b958f9eed0ea550bcc5a.jpg",
+      "sizeBytes": 88479,
+      "urls": [
+        "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2020/09/Yumiko_Hayakawa.jpg"
+      ]
+    }
+  ]
+}
