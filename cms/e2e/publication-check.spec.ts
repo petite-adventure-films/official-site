@@ -59,10 +59,11 @@ test('publishes a real static page, preserves it while drafting, and republishes
 test('retrying a publication status read never submits a publication', async ({ page }) => {
   let posts = 0;
   page.on('request', req => { if (req.method() === 'POST' && req.url().endsWith('/publication')) posts++; });
-  await page.route('**/api/publication', route => route.abort());
+  const publicationConfig = (url: URL) => url.pathname === '/api/publication' && url.searchParams.get('type') === 'event';
+  await page.route(publicationConfig, route => route.abort());
   await page.goto('/cms/events/new');
   await expect(page.getByText('公開状態を取得できませんでした。', { exact: true })).toBeVisible();
-  await page.unroute('**/api/publication');
+  await page.unroute(publicationConfig);
   await page.getByRole('button', { name: '再試行', exact: true }).click();
   await expect(page.getByRole('button', { name: '公開', exact: true })).toBeEnabled();
   await expect(page.getByText('公開状態を取得できませんでした。', { exact: true })).toHaveCount(0);
