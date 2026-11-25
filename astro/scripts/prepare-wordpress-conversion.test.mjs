@@ -18,6 +18,27 @@ function snapshot(rows) {
   };
 }
 
+test('approved color correction changes stored content, preserves the raw backup and is idempotent', () => {
+  const luminance = (hex) => {
+    const rgb = hex.slice(1).match(/../g).map(v => parseInt(v, 16) / 255)
+      .map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+    return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+  };
+  for (const [from, to] of [['#ff0000', '#d90000'], ['rgb(13, 139, 212)', '#0b75b3']]) {
+    const raw = { ...record(), content: `<p><span style="color: ${from};">色付き<strong>本文</strong></span></p>` };
+    const row = prepare(snapshot([raw]), 'hash').rows[0];
+    assert.deepEqual(row.issues, []);
+    assert.deepEqual(row.source.raw, raw);
+    assert.ok(JSON.stringify(row.candidate).includes(to));
+    assert.equal(row.transformations[0].to, to);
+    assert.ok((1.05 / (luminance(to) + 0.05)) >= 4.5);
+    const again = convertBody(`<p><span style="color: ${to}">色付き<strong>本文</strong></span></p>`, 'content', { preserveLegacyContainers: true });
+    assert.deepEqual(again.issues, []);
+    assert.deepEqual(again.body, row.candidate.body);
+    assert.deepEqual(again.transformations, []);
+  }
+});
+
 test('legacy styles retain character-level color and fonts, rejecting arbitrary CSS', () => {
   for (const html of [
     '<p>前<span style="color: #0000ff;">青<strong>太字</strong></span>後</p>',

@@ -1,5 +1,5 @@
 import { semanticKeys, preservedTypes, semanticHtml, containerHtml, validBodyAnchors } from '../../packages/content-schema/legacy-containers.ts';
-import { legacyStyleKeys, legacyStyleFromElement, legacyStyleHtml } from '../../packages/content-schema/legacy-text-style.ts';
+import { legacyColorCorrections, legacyStyleKeys, legacyStyleFromElement, legacyStyleHtml } from '../../packages/content-schema/legacy-text-style.ts';
 import {
   externalVideoKeys,
   videoFromElement,
@@ -267,7 +267,14 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
         issues.push(fail('unsupported_attribute', field, `${tag}.${attr.name}`));
     }
     if (el.hasAttribute('style') && ['span', 'strong', 'b'].includes(tag)) {
-      try { legacyStyleFromElement(el); } catch (error) { issues.push(fail('unsupported_legacy_style', field, error.message)); }
+      try {
+        const attrs = legacyStyleFromElement(el);
+        const corrected = legacyColorCorrections[attrs.color];
+        if (corrected) {
+          transformations.push({ field, elementIndex, tag, attribute: 'style.color', from: attrs.color, to: corrected, reason: '#490 user-approved 2026-11-25; source.raw backup unchanged, stored and displayed color corrected' });
+          el.setAttribute('style', legacyStyleHtml({ ...attrs, color: corrected }).style);
+        }
+      } catch (error) { issues.push(fail('unsupported_legacy_style', field, error.message)); }
     }
     if (preserveLegacyContainers && ['p', 'h2', 'h3', 'h4', 'span', 'div'].includes(tag)) {
       try { legacyAttrs(el); } catch (error) { issues.push(fail('invalid_legacy_semantics', field, error.message)); }

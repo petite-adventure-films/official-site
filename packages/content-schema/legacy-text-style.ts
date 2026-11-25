@@ -1,6 +1,12 @@
-// Content values observed in the legacy snapshot, not CMS theme colors.
+// Article content colors, including approved migration corrections; not CMS theme colors.
+export const legacyColorCorrections: Record<string, string> = {
+  "#ff0000": "#d90000",
+  "#0d8bd4": "#0b75b3",
+};
 export const legacyStyleKeys = ['color', 'fontFamily', 'fontSize'];
 const colors: Record<string, string> = {
+  '#d90000': '#d90000', 'rgb(217, 0, 0)': '#d90000',
+  '#0b75b3': '#0b75b3', 'rgb(11, 117, 179)': '#0b75b3',
   '#0000ff': '#0000ff', 'rgb(0, 0, 255)': '#0000ff',
   '#ff0000': '#ff0000', 'rgb(255, 0, 0)': '#ff0000',
   '#000000': '#000000', 'rgb(0, 0, 0)': '#000000',

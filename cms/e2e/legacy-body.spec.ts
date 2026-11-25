@@ -9,9 +9,9 @@ test('legacy containers, styles, language and inline video survive editing and l
     { type: 'preservedBlock', attrs: { dir: 'auto', anchorId: 'old-section' }, content: [
       { type: 'paragraph', attrs: { lang: 'ja-JP' }, content: [
         { type: 'text', text: '元の文章 ' },
-        { type: 'preservedInline', attrs: { lang: 'EN-US', color: '#0000ff', anchorId: 'old-caption' }, marks: [{ type: 'bold' }], content: [{ type: 'text', text: 'English' }] },
+        { type: 'preservedInline', attrs: { lang: 'EN-US', color: '#0b75b3', anchorId: 'old-caption' }, marks: [{ type: 'bold' }], content: [{ type: 'text', text: 'English' }] },
       ] },
-      { type: 'preservedTextBlock', content: [{ type: 'text', text: '旧書体', marks: [{ type: 'legacyTextStyle', attrs: { fontFamily: 'Times New Roman,serif', color: '#ff0000' } }] }] },
+      { type: 'preservedTextBlock', content: [{ type: 'text', text: '旧書体', marks: [{ type: 'legacyTextStyle', attrs: { fontFamily: 'Times New Roman,serif', color: '#d90000' } }] }] },
     ] },
     { type: 'paragraph', content: [{ type: 'text', text: '動画の前' }, { type: 'inlineExternalVideo', attrs: video }, { type: 'text', text: '動画の後' }] },
     { type: 'paragraph', content: [{ type: 'text', text: '追記位置' }] },
@@ -23,7 +23,8 @@ test('legacy containers, styles, language and inline video survive editing and l
   await page.goto(`/cms/blog/${saved.id}/edit`);
   const body = page.getByRole('textbox', { name: '本文', exact: true });
   await expect(body.locator('#old-caption')).toHaveAttribute('lang', 'EN-US');
-  await expect(body.locator('#old-caption')).toHaveCSS('color', 'rgb(0, 0, 255)');
+  await expect(body.locator('#old-caption')).toHaveCSS('color', 'rgb(11, 117, 179)');
+  await expect(body.getByText('旧書体', { exact: true })).toHaveCSS('color', 'rgb(217, 0, 0)');
   await expect(body.locator('p iframe')).toHaveCount(1);
   await body.locator('p').last().click(); await page.keyboard.press('End'); await page.keyboard.insertText('に追記');
   await expect(page.getByRole('status')).toHaveText('保存済み');
@@ -39,8 +40,9 @@ test('legacy containers, styles, language and inline video survive editing and l
   await publicPage.goto((await publicLink.getAttribute('href'))!);
   await expect(publicPage.locator('#old-section')).toHaveAttribute('dir', 'auto');
   await expect(publicPage.locator('#old-caption')).toHaveAttribute('lang', 'EN-US');
-  await expect(publicPage.locator('#old-caption')).toHaveCSS('color', 'rgb(0, 0, 255)');
+  await expect(publicPage.locator('#old-caption')).toHaveCSS('color', 'rgb(11, 117, 179)');
   await expect(publicPage.locator('#old-caption')).toHaveCSS('font-weight', '700');
+  await expect(publicPage.getByText('旧書体', { exact: true })).toHaveCSS('color', 'rgb(217, 0, 0)');
   await expect(publicPage.locator('main p iframe')).toHaveCount(1);
   await expect(publicPage.locator('main')).toContainText('動画の前');
   await expect(publicPage.locator('main')).toContainText('動画の後');
