@@ -30,8 +30,9 @@ export function prepareEventPublication(input: unknown, context: {
   const slugError = slugIssue(slug);
   if (slugError) issue('slug', 'invalid_slug', slugError);
   const offline = draft.formats.includes('offline');
-  if (offline) {
-    if (!draft.venue.trim()) issue('venue', 'required', '会場名を入力してください。');
+  const retainVenue = offline || draft.formats.includes('unknown');
+  if (retainVenue) {
+    if (offline && !draft.venue.trim()) issue('venue', 'required', '会場名を入力してください。');
     if (draft.mapUrl) {
       try {
         const url = new URL(draft.mapUrl);
@@ -48,9 +49,9 @@ export function prepareEventPublication(input: unknown, context: {
   return { ok: true, payload: {
     type: 'event', payloadSchemaVersion: 'event-publication/v1', title: draft.title, slug,
     startDate: startDate!, ...(draft.multiDay ? { endDate: endDate! } : {}),
-    formats: [...draft.formats], status: draft.status, timeDescription: draft.timeDescription,
-    ...(offline ? { venue: draft.venue, address: draft.address, mapUrl: draft.mapUrl, access: draft.access } : {}),
-    venueNotes: draft.venueNotes, fee: draft.fee, organizer: draft.organizer, notes: draft.notes,
+    formats: [...draft.formats], status: draft.status, timeDescription: structuredClone(draft.timeDescription),
+    ...(retainVenue ? { venue: draft.venue, address: draft.address, mapUrl: draft.mapUrl, access: structuredClone(draft.access) } : {}),
+    venueNotes: structuredClone(draft.venueNotes), fee: structuredClone(draft.fee), organizer: structuredClone(draft.organizer), notes: structuredClone(draft.notes),
     filmTagIds: [...draft.filmTagIds], eventTagIds: [...draft.eventTagIds],
   } };
 }

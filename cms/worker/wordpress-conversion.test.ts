@@ -1,3 +1,4 @@
+import { prepareEventPublication } from './event-publication';
 import { describe, expect, it } from 'vitest';
 import { readFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -21,7 +22,7 @@ describe('WordPress conversion candidates', () => {
             import.meta.url,
           ),
         ),
-        fileURLToPath(
+        process.env.WP_CONVERSION_SNAPSHOT ?? fileURLToPath(
           new URL('../../astro/data/wordpress-export.json', import.meta.url),
         ),
         output,
@@ -32,7 +33,7 @@ describe('WordPress conversion candidates', () => {
     }
     const source = JSON.parse(
       readFileSync(
-        new URL('../../astro/data/wordpress-export.json', import.meta.url),
+        process.env.WP_CONVERSION_SNAPSHOT ?? new URL('../../astro/data/wordpress-export.json', import.meta.url),
         'utf8',
       ),
     );
@@ -58,6 +59,10 @@ describe('WordPress conversion candidates', () => {
             ? validateDraft(row.candidate)
             : validateArticleDraft(row.type, row.candidate);
       expect(valid, `${row.type}/${row.legacyId}`).toBe(true);
+      if (row.type === 'event') {
+        const result = prepareEventPublication(row.candidate, { contentId: String(row.legacyId), filmTagIds: new Set(row.candidate.filmTagIds), eventTagIds: new Set(row.candidate.eventTagIds) });
+        expect(result.ok, `${row.legacyId}: ${JSON.stringify(result)}`).toBe(true);
+      }
     }
   }, 60_000);
 });

@@ -1,10 +1,12 @@
+import { eventTextFields, validEventText } from '../../../packages/content-schema/event-text';
+import eventTextSchema from '../../../packages/content-schema/schemas/content/event-text.schema.json';
 import Ajv from 'ajv/dist/2020';
 import schema from '../../../packages/content-schema/schemas/content/event-publication.schema.json';
 import type { CmsEventSnapshot, CmsEventTag } from '../../../packages/content-schema/types/cms-events';
 import type { EventPublication } from '../../../packages/content-schema/types/event-publication';
 import type { Database } from '../repositories/content-drafts';
 
-const validate = new Ajv({ strictTypes: false }).compile<EventPublication>(schema);
+const validate = new Ajv({ strictTypes: false }).addSchema(eventTextSchema).compile<EventPublication>(schema);
 type Row = {
   id: string; version: number; hash: string; revisionContentId: string | null;
   revisionVersion: number | null; revisionHash: string | null; publishedAt: string | null;
@@ -32,7 +34,7 @@ export async function exportPublishedEvents(db: Database): Promise<CmsEventSnaps
         row.revisionHash !== row.hash || !row.payload || !row.publishedAt)
       throw new Error('invalid_publication_pointer');
     const payload: unknown = JSON.parse(row.payload);
-    if (!validate(payload) || payload.slug !== row.slug) throw new Error('invalid_publication_payload');
+    if (!validate(payload) || payload.slug !== row.slug || !eventTextFields.every(field => payload[field] === undefined || validEventText(payload[field]!))) throw new Error('invalid_publication_payload');
     const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(row.payload));
     const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
     if (hash !== row.hash) throw new Error('invalid_publication_hash');

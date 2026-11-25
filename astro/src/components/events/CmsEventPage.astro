@@ -4,6 +4,8 @@
 import PostLayout from '@layouts/PostLayout.astro';
 import ArticleHeaderTags from '@components/ArticleHeaderTags.astro';
 import PlainText from '@components/PlainText.astro';
+import EventText from './EventText.astro';
+import { eventTextPlain } from '../../../../packages/content-schema/event-text';
 import ExternalLink from '@components/ExternalLink.astro';
 import PublishedDate from '@components/PublishedDate.astro';
 import JsonLd from '@components/JsonLd.astro';
@@ -23,7 +25,11 @@ const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).h
   heading={p.title}
   ogType="article"
   noIndex
-  description={[p.title, p.timeDescription, p.venue ?? 'オンライン開催'].join(' ')}
+  description={[
+    p.title,
+    eventTextPlain(p.timeDescription),
+    p.venue || (p.formats.includes('online') ? 'オンライン開催' : ''),
+  ].join(' ')}
   crumbs={[{ to: '/events/', name: 'イベント・上映会' }]}
 >
   <JsonLd data={cmsEventStructuredData(event, eventUrl)} />
@@ -40,7 +46,7 @@ const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).h
         {
           p.timeDescription && (
             <div>
-              <PlainText value={p.timeDescription} />
+              <EventText value={p.timeDescription} />
             </div>
           )
         }
@@ -69,14 +75,14 @@ const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).h
         {
           p.access && (
             <div>
-              <PlainText value={p.access} />
+              <EventText value={p.access} />
             </div>
           )
         }
         {
           p.venueNotes && (
             <div>
-              <PlainText value={p.venueNotes} />
+              <EventText value={p.venueNotes} />
             </div>
           )
         }
@@ -88,7 +94,7 @@ const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).h
           <>
             <dt>入場料</dt>
             <dd>
-              <PlainText value={p.fee} />
+              <EventText value={p.fee} />
             </dd>
           </>
         </div>
@@ -100,7 +106,7 @@ const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).h
           <>
             <dt>主催者・問い合わせ</dt>
             <dd>
-              <PlainText value={p.organizer} />
+              <EventText value={p.organizer} />
             </dd>
           </>
         </div>
@@ -112,7 +118,7 @@ const eventUrl = new URL(`/events/${encodeURIComponent(p.slug)}/`, Astro.site).h
           <>
             <dt>備考</dt>
             <dd>
-              <PlainText value={p.notes} />
+              <EventText value={p.notes} />
             </dd>
           </>
         </div>

@@ -1,20 +1,21 @@
+import type { EventText } from '../../../../packages/content-schema/event-text';
 export type EventDraft = {
   title: string;
   // Omitted means the immutable content ID is used as the initial slug.
   slug?: string;
   startDate: string;
   endDate: string;
-  timeDescription: string;
+  timeDescription: EventText;
   venue: string;
   address: string;
   mapUrl: string;
-  access: string;
-  venueNotes: string;
-  fee: string;
-  organizer: string;
-  notes: string;
+  access: EventText;
+  venueNotes: EventText;
+  fee: EventText;
+  organizer: EventText;
+  notes: EventText;
   multiDay: boolean;
-  formats: ('offline' | 'online')[];
+  formats: ('offline' | 'online' | 'unknown')[];
   status: 'normal' | 'postponed' | 'cancelled';
   filmTagIds: string[];
   eventTagIds: string[];

@@ -1,3 +1,5 @@
+import { semanticKeys, preservedTypes, semanticHtml, containerHtml, validBodyAnchors } from '../../packages/content-schema/legacy-containers.ts';
+import { legacyStyleKeys, legacyStyleFromElement, legacyStyleHtml } from '../../packages/content-schema/legacy-text-style.ts';
 import {
   externalVideoKeys,
   videoFromElement,
@@ -14,10 +16,37 @@ const require = createRequire(new URL('../package.json', import.meta.url));
 const cms = createRequire(new URL('../../cms/package.json', import.meta.url));
 const tiptap = createRequire(cms.resolve('@tiptap/starter-kit'));
 const { JSDOM } = require('jsdom');
-const { generateJSON, generateHTML, getSchema, Node } = tiptap('@tiptap/core');
+const { generateJSON, generateHTML, getSchema, Node, Mark, Extension } = tiptap('@tiptap/core');
 const StarterKit = cms('@tiptap/starter-kit').default;
 const dom = new JSDOM(''); // No resource loading or script execution.
+function isMixedVideo(element) {
+  return element.parentElement?.localName === 'p' && [...element.parentElement.childNodes].some(node => node !== element && !(node.nodeType === 3 && !node.textContent.trim()));
+}
+function legacyAttrs(element) {
+  const attrs = Object.fromEntries(semanticKeys.map(key => [key, element.getAttribute(key === 'anchorId' ? 'id' : key)]).filter(([, value]) => value !== null));
+  semanticHtml(attrs);
+  return { ...attrs, ...(element.hasAttribute('style') ? legacyStyleFromElement(element) : {}) };
+}
 const extensions = [
+  Extension.create({ name: 'legacySemantics', addGlobalAttributes() { return [{ types: ['paragraph', 'heading'], attributes: Object.fromEntries(semanticKeys.map(key => [key, { default: null, parseHTML: element => element.getAttribute(key === 'anchorId' ? 'id' : key), renderHTML: attrs => attrs[key] === null ? {} : semanticHtml({ [key]: attrs[key] }) }])) }]; } }),
+  ...[['preservedInline', 'span', 'inline*', true], ['preservedTextBlock', 'div', 'inline*', false], ['preservedBlock', 'div', 'block*', false]].map(([name, tag, content, inline]) => Node.create({
+    name, group: inline ? 'inline' : 'block', inline, content,
+    addAttributes() { return Object.fromEntries([...semanticKeys, ...legacyStyleKeys].map(key => [key, { default: null }])); },
+    parseHTML() { return [{ tag: `${tag}[data-paf-node="${name}"]`, getAttrs: legacyAttrs }]; },
+    renderHTML({ node }) { return [tag, { ...containerHtml(Object.fromEntries(Object.entries(node.attrs).filter(([, value]) => value !== null))), 'data-paf-node': name }, 0]; },
+  })),
+  Node.create({
+    name: 'inlineExternalVideo', group: 'inline', inline: true, atom: true,
+    addAttributes() { return Object.fromEntries(externalVideoKeys.map(key => [key, { default: null }])); },
+    parseHTML() { return [{ tag: 'iframe[src]', getAttrs: element => isMixedVideo(element) ? videoFromElement(element) : false }]; },
+    renderHTML({ node }) { return ['iframe', videoFrameAttributes(Object.fromEntries(Object.entries(node.attrs).filter(([, value]) => value !== null)))]; },
+  }),
+  Mark.create({
+    name: 'legacyTextStyle',
+    addAttributes() { return Object.fromEntries(legacyStyleKeys.map(key => [key, { default: null }])); },
+    parseHTML() { return ['span[style]', 'strong[style]', 'b[style]'].map(tag => ({ tag, consuming: false, getAttrs: element => element.hasAttribute('data-paf-node') ? false : legacyStyleFromElement(element) })); },
+    renderHTML({ mark }) { return ['span', legacyStyleHtml(Object.fromEntries(Object.entries(mark.attrs).filter(([, value]) => value !== null))), 0]; },
+  }),
   Node.create({
     name: 'externalVideo',
     group: 'block',
@@ -31,7 +60,7 @@ const extensions = [
           tag: 'iframe[src]',
           getAttrs: (element) => {
             try {
-              return videoFromElement(element);
+              return isMixedVideo(element) ? false : videoFromElement(element);
             } catch {
               return false;
             }
@@ -79,6 +108,7 @@ const eventSchema = JSON.parse(
   await readFile(resolve(root, 'packages/content-schema/schemas/content/event-draft.schema.json')),
 );
 const ajv = new Ajv({ allErrors: true, strictTuples: false });
+ajv.addSchema(JSON.parse(await readFile(resolve(root, 'packages/content-schema/schemas/content/event-text.schema.json'))));
 const validateBlog = ajv.compile(blogSchema),
   validateEvent = ajv.compile(eventSchema);
 const filmMappings = JSON.parse(
@@ -161,12 +191,12 @@ const validUrl = (value) => {
 };
 function stored(n) {
   const keys =
-    n.type === 'externalVideo'
+    preservedTypes.includes(n.type) ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type)
       ? externalVideoKeys
       : n.type === 'link'
         ? ['href', 'target', 'title']
         : n.type === 'heading'
-          ? ['level']
+          ? ['level', ...semanticKeys]
           : n.type === 'orderedList'
             ? ['start']
             : [];
@@ -181,22 +211,35 @@ function stored(n) {
     ...(n.marks ? { marks: n.marks.map(stored) } : {}),
   };
 }
-export function convertBody(html, field = 'content') {
+export function convertBody(html, field = 'content', { normalizeLegacyNewTarget = false, preserveLegacyContainers = false, archiveLegacyAttributes = false, dedupeLegacyAnchor = false } = {}) {
   if (typeof html !== 'string') return { issues: [fail('invalid_text', field, typeof html)] };
   const document = new dom.window.DOMParser().parseFromString(html, 'text/html');
+  const transformations = [];
+  if (normalizeLegacyNewTarget) {
+    for (const anchor of document.querySelectorAll('a[target="_NEW"]')) {
+      if (anchor.getAttribute('href') !== normalizeLegacyNewTarget) continue;
+      transformations.push({ field, attribute: 'target', from: '_NEW', to: '_blank', href: anchor.getAttribute('href'), reason: '#491 user-approved 2026-11-25' });
+      anchor.setAttribute('target', '_blank');
+    }
+  }
+  if (dedupeLegacyAnchor) {
+    const anchors = [...document.querySelectorAll('[id]')].filter(el => el.id === 'fbPhotoSnowliftCaption');
+    for (const anchor of anchors.slice(1)) { transformations.push({ field, attribute: 'id', from: anchor.id, to: null, reason: '#490 article 10297 user-approved 2026-11-25; first anchor retained' }); anchor.removeAttribute('id'); }
+  }
   const issues = [],
     references = [];
   const allowed = new Set(
-    'iframe p br wbr strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
+    'span iframe p br wbr strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
   );
+  if (preserveLegacyContainers) allowed.add('div');
   // Inspect head too: parseFromString can move unsupported source elements there.
-  for (const el of document.querySelectorAll('*')) {
+  for (const [elementIndex, el] of [...document.querySelectorAll('*')].entries()) {
     const tag = el.localName;
     if (['html', 'head', 'body'].includes(tag)) {
       if (el.attributes.length) issues.push(fail('unsupported_attributes', field, tag));
       continue;
     }
-    if (!allowed.has(tag))
+    if (!allowed.has(tag) || (tag === 'span' && !preserveLegacyContainers && !el.hasAttribute('style')))
       issues.push(
         fail(
           ['img', 'iframe'].includes(tag) ? 'unresolved_asset_or_embed' : 'unsupported_element',
@@ -204,12 +247,18 @@ export function convertBody(html, field = 'content') {
           tag,
         ),
       );
-    for (const attr of el.attributes) {
+    for (const attr of [...el.attributes]) {
+      if (archiveLegacyAttributes && ['p', 'span', 'div', 'a'].includes(tag) && ['class', 'data-saferedirecturl', 'data-lynx-mode', 'data-lynx-uri', 'data-ft', 'data-tooltip', 'tabindex', 'aria-live'].includes(attr.name)) {
+        transformations.push({ field, elementIndex, tag, attribute: attr.name, from: attr.value, to: 'source.raw', reason: '#490 user-approved 2026-11-25; not applied to public HTML' });
+        el.removeAttribute(attr.name); continue;
+      }
       if (['href', 'src'].includes(attr.name))
         references.push({ field, tag, attribute: attr.name, url: attr.value });
       if (
+        !(preserveLegacyContainers && ['p', 'h2', 'h3', 'h4', 'span', 'div'].includes(tag) && ['id', 'lang', 'dir'].includes(attr.name)) &&
         !(tag === 'a' && ['href', 'target', 'rel', 'title'].includes(attr.name)) &&
         !(tag === 'ol' && attr.name === 'start') &&
+        !(['span', 'strong', 'b'].includes(tag) && attr.name === 'style') &&
         !(
           tag === 'iframe' &&
           ['src', 'title', 'width', 'height', 'frameborder', 'allowfullscreen'].includes(attr.name)
@@ -217,16 +266,15 @@ export function convertBody(html, field = 'content') {
       )
         issues.push(fail('unsupported_attribute', field, `${tag}.${attr.name}`));
     }
+    if (el.hasAttribute('style') && ['span', 'strong', 'b'].includes(tag)) {
+      try { legacyStyleFromElement(el); } catch (error) { issues.push(fail('unsupported_legacy_style', field, error.message)); }
+    }
+    if (preserveLegacyContainers && ['p', 'h2', 'h3', 'h4', 'span', 'div'].includes(tag)) {
+      try { legacyAttrs(el); } catch (error) { issues.push(fail('invalid_legacy_semantics', field, error.message)); }
+    }
     if (tag === 'iframe') {
       try {
         videoFromElement(el);
-        if (
-          el.parentElement?.localName === 'p' &&
-          [...el.parentElement.childNodes].some(
-            (node) => node !== el && !(node.nodeType === 3 && !node.textContent.trim()),
-          )
-        )
-          throw Error('mixed_video_paragraph');
         if (
           el.innerHTML.trim() ||
           (el.hasAttribute('frameborder') && el.getAttribute('frameborder') !== '0') ||
@@ -245,7 +293,7 @@ export function convertBody(html, field = 'content') {
     if (tag === 'ol' && el.hasAttribute('start') && !/^[1-9]\d*$/.test(el.getAttribute('start')))
       issues.push(fail('invalid_list_start', field, el.getAttribute('start')));
   }
-  if (issues.length) return { issues, references };
+  if (issues.length) return { issues, references, transformations };
   const previous = { window: globalThis.window, document: globalThis.document };
   try {
     globalThis.window = dom.window;
@@ -254,9 +302,17 @@ export function convertBody(html, field = 'content') {
     // Work on a copy; the source DOM and preserved raw HTML remain unchanged.
     const editable = document.body.cloneNode(true);
     for (const frame of editable.querySelectorAll('p > iframe'))
-      frame.parentElement.replaceWith(frame);
+      if (!isMixedVideo(frame)) frame.parentElement.replaceWith(frame);
+    if (preserveLegacyContainers) {
+      for (const el of editable.querySelectorAll('span,div')) {
+        const hasBlocks = [...el.children].some(child => ['div','p','h2','h3','h4','blockquote','ul','ol','hr','iframe'].includes(child.localName));
+        if (el.localName === 'div' && hasBlocks && [...el.childNodes].some(child => child.nodeType === 3 && child.textContent.trim())) throw Error('mixed_legacy_container');
+        el.setAttribute('data-paf-node', el.localName === 'span' ? 'preservedInline' : hasBlocks ? 'preservedBlock' : 'preservedTextBlock');
+      }
+    }
     const doc = stored(generateJSON(editable.innerHTML, extensions));
     pm.nodeFromJSON(doc).check();
+    if (!validBodyAnchors(doc)) throw Error('duplicate_or_reserved_anchor');
     const rendered = generateHTML(doc, extensions);
     const roundtrip = stored(generateJSON(rendered, extensions));
     if (JSON.stringify(doc) !== JSON.stringify(roundtrip)) throw Error('roundtrip_changed');
@@ -269,7 +325,7 @@ export function convertBody(html, field = 'content') {
           return `\n\u0000video:${JSON.stringify(videoFromElement(node))}\u0000\n`;
         if (node.localName === 'wbr') return '\u0000wbr\u0000';
         const text = [...node.childNodes].map(walk).join('');
-        return ['p', 'blockquote', 'h2', 'h3', 'h4', 'li', 'ul', 'ol'].includes(node.localName)
+        return ['div', 'p', 'blockquote', 'h2', 'h3', 'h4', 'li', 'ul', 'ol'].includes(node.localName)
           ? `\n${text}\n`
           : text;
       }
@@ -277,6 +333,27 @@ export function convertBody(html, field = 'content') {
     };
     const output = new dom.window.DOMParser().parseFromString(rendered, 'text/html');
     if (normalize(document.body) !== normalize(output.body)) throw Error('text_changed');
+    function styledCharacters(body) {
+      const result = [];
+      function visit(node, inherited = {}) {
+        if (node.nodeType === 3) {
+          for (const character of node.textContent) if (!/\s/.test(character)) result.push([character, Object.entries(inherited).sort()]);
+        } else if (node.nodeType === 1) {
+          const attrs = node.hasAttribute('style') ? { ...inherited, ...legacyStyleFromElement(node) } : inherited;
+          for (const child of node.childNodes) visit(child, attrs);
+        }
+      }
+      visit(body); return result;
+    }
+    if (JSON.stringify(styledCharacters(document.body)) !== JSON.stringify(styledCharacters(output.body))) throw Error('style_changed');
+    if (preserveLegacyContainers) {
+      const semantics = d => [...d.body.querySelectorAll('[id],[lang],[dir]')].map(el => ({ tag: el.localName, attrs: Object.fromEntries(['id','lang','dir'].filter(key => el.hasAttribute(key)).map(key => [key, el.getAttribute(key)])), text: normalize(el) }));
+      if (JSON.stringify(semantics(document)) !== JSON.stringify(semantics(output))) throw Error('semantics_changed');
+      for (const tag of ['span', 'div']) {
+        const count = output.querySelectorAll(tag === 'span' ? '[data-paf-node="preservedInline"]' : '[data-paf-node="preservedBlock"],[data-paf-node="preservedTextBlock"]').length;
+        if (document.body.querySelectorAll(tag).length !== count) throw Error('container_changed');
+      }
+    }
     const links = (d) =>
       [...d.body.querySelectorAll('a')].map((a) => ({
         href: a.getAttribute('href'),
@@ -321,9 +398,9 @@ export function convertBody(html, field = 'content') {
       })
     )
       throw Error('body_schema');
-    return { body, issues: [], references };
+    return { body, issues: [], references, transformations };
   } catch (error) {
-    return { issues: [fail('body_conversion_failed', field, error.message)], references };
+    return { issues: [fail('body_conversion_failed', field, error.message)], references, transformations };
   } finally {
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) delete globalThis[key];
@@ -331,7 +408,7 @@ export function convertBody(html, field = 'content') {
     }
   }
 }
-function plain(html, field, issues) {
+function plain(html, field, issues, references, transformations, legacyId) {
   if (typeof html !== 'string') {
     issues.push(fail('invalid_text', field, typeof html));
     return '';
@@ -342,10 +419,11 @@ function plain(html, field, issues) {
       (el) => !['html', 'head', 'body', 'p', 'br'].includes(el.localName) || el.attributes.length,
     )
   ) {
-    issues.push(
-      fail('event_rich_text_requires_contract', field, 'plain-text field cannot preserve HTML'),
-    );
-    return '';
+    const result = convertBody(html, field, { normalizeLegacyNewTarget: field === 'appendix_contents' ? ({ 3944: 'http://www.videoact.jp/', 3945: 'http://www.yunfest.org/' }[legacyId] ?? false) : false });
+    references.push(...(result.references ?? []));
+    transformations.push(...(result.transformations ?? []));
+    issues.push(...result.issues);
+    return result.body ?? '';
   }
   for (const br of d.body.querySelectorAll('br')) br.replaceWith('\n');
   for (const p of d.body.querySelectorAll('p')) p.append('\n');
@@ -370,6 +448,7 @@ export function prepare(snapshot, sourceHash) {
       if (!raw || typeof raw !== 'object' || Array.isArray(raw))
         throw Error(`invalid_record:${group}`);
       const issues = [],
+        transformations = [],
         references = [],
         type = types[group];
       for (const k of Object.keys(raw))
@@ -399,7 +478,8 @@ export function prepare(snapshot, sourceHash) {
         return ids;
       }
       function body(k) {
-        const result = convertBody(raw[k], k);
+        const result = convertBody(raw[k], k, { preserveLegacyContainers: true, archiveLegacyAttributes: true, dedupeLegacyAnchor: group === 'blogs' && raw.id === 10297 });
+        transformations.push(...(result.transformations ?? []));
         issues.push(...result.issues);
         references.push(...(result.references ?? []));
         return result.body ?? emptyBody();
@@ -463,29 +543,22 @@ export function prepare(snapshot, sourceHash) {
           title: draft.title,
           startDate: text('date_from'),
           endDate: text('date_to'),
-          timeDescription: plain(raw.dates_details, 'dates_details', issues),
+          timeDescription: plain(raw.dates_details, 'dates_details', issues, references, transformations, raw.id),
           venue: text('place'),
           address: text('address'),
           mapUrl: text('map'),
-          access: plain(raw.access_details, 'access_details', issues),
+          access: plain(raw.access_details, 'access_details', issues, references, transformations, raw.id),
           venueNotes: '',
-          fee: plain(raw.fee_details, 'fee_details', issues),
-          organizer: plain(raw.host_details, 'host_details', issues),
-          notes: plain(raw.appendix_contents, 'appendix_contents', issues),
+          fee: plain(raw.fee_details, 'fee_details', issues, references, transformations, raw.id),
+          organizer: plain(raw.host_details, 'host_details', issues, references, transformations, raw.id),
+          notes: plain(raw.appendix_contents, 'appendix_contents', issues, references, transformations, raw.id),
           multiDay: raw.date_from !== raw.date_to && raw.date_to !== '',
-          formats: ['offline'],
+          formats: ['unknown'],
           status: { '': 'normal', 1: 'postponed', 2: 'cancelled' }[raw.status],
           filmTagIds: draft.filmTagIds,
           eventTagIds: terms('event_tags', 'event'),
         };
-        // Online/offline and date interpretation need explicit mapping; do not infer from title.
-        issues.push(
-          fail(
-            'event_format_mapping_required',
-            'formats',
-            'legacy source has no explicit format field',
-          ),
-        );
+        // #491: explicitly preserve unknown attendance; never infer offline from venue/title.
         if (!validateEvent(draft))
           issues.push(fail('draft_schema', '', structuredClone(validateEvent.errors)));
       } else if (group === 'media') {
@@ -561,6 +634,7 @@ export function prepare(snapshot, sourceHash) {
           raw,
         },
         mappings: { filmIds },
+        transformations,
         references,
         issues,
         candidate: issues.length ? null : draft,

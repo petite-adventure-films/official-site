@@ -1,3 +1,5 @@
+import { BodyEditor } from '../../blog/components/BodyEditor';
+import type { EventText } from '../../../../../packages/content-schema/event-text';
 // Figma: https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=54-970
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Alert, Button, CircularProgress, Typography } from '@mui/material';
@@ -9,10 +11,10 @@ import type { EventDraft } from '../../events/draft';
 export type HistoryData<T = EventDraft> = { version: number; items: { id: string; kind: 'publication' | 'protectedDraft'; at: string; actorName: string; payload: T }[] };
 const text = (value: string) => value.trim() ? value : '-';
 export function EventHistoryContent({ value, tags }: { value: EventDraft; tags: Tags }) {
-  const groups: [string, [string, string][]][] = [
+  const groups: [string, [string, EventText][]][] = [
     ['日時', [['開催日', value.startDate + (value.multiDay ? ` 〜 ${text(value.endDate)}` : '')], ['時間の案内', value.timeDescription]]],
-    ['開催場所', [['開催形式', value.formats.map(f => f === 'offline' ? 'オフライン' : 'オンライン').join('・')],
-      ...(value.formats.includes('offline') ? [['会場名', value.venue], ['住所', value.address], ['地図URL', value.mapUrl], ['アクセス', value.access]] as [string, string][] : []), ['備考', value.venueNotes]]],
+    ['開催場所', [['開催形式', value.formats.map(f => f === 'offline' ? 'オフライン' : f === 'online' ? 'オンライン' : '不明').join('・')],
+      ...((value.formats.includes('offline') || value.formats.includes('unknown')) ? [['会場名', value.venue], ['住所', value.address], ['地図URL', value.mapUrl], ['アクセス', value.access]] as [string, EventText][] : []), ['備考', value.venueNotes]]],
     ['参加案内', [['料金', value.fee], ['主催者・問い合わせ', value.organizer], ['備考', value.notes]]],
     ['開催状況・タグ', [['開催状況', { normal: '通常開催', postponed: '延期', cancelled: '中止' }[value.status]],
       ['映画タグ', value.filmTagIds.map(id => tags.filmTags.find(t => t.id === id)?.name ?? '削除済みのタグ').join('・')],
@@ -20,7 +22,7 @@ export function EventHistoryContent({ value, tags }: { value: EventDraft; tags: 
   ];
   return <><Section label="記事タイトル"><Typography component="h1" variant="subtitle2" className="whitespace-pre-wrap break-words">{text(value.title)}</Typography></Section>
     {groups.map(([heading, fields]) => <Section key={heading} label={heading}><div className="flex flex-col gap-cms-heading">
-      <Typography component="h2" variant="subtitle2">{heading}</Typography><div>{fields.map(([label, value]) => <Typography key={label} variant="body2" className="whitespace-pre-wrap break-words">{label}：{text(value)}</Typography>)}</div>
+      <Typography component="h2" variant="subtitle2">{heading}</Typography><div>{fields.map(([label, value]) => <div key={label}>{typeof value === 'string' ? <Typography variant="body2" className="whitespace-pre-wrap break-words">{label}：{text(value)}</Typography> : <><Typography variant="body2">{label}</Typography><BodyEditor key={JSON.stringify(value.doc)} textOnly value={value.doc} /></>}</div>)}</div>
     </div></Section>)}</>;
 }
 export function HistoryView<T>({ id, section, renderContent }: { id: string; section: string; renderContent(value: T): ReactNode }) {

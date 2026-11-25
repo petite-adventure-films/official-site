@@ -135,3 +135,9 @@ test('embedded videos survive API storage, duplication and the publication/resto
   const invalid = structuredClone(payload); invalid.body.doc.content![0].attrs!.videoId = 'other';
   expect((await create('blog', invalid)).status).toBe(422);
 });
+test('legacy text styles allow only observed structured values', () => {
+  for (const attrs of [{ color: '#0000ff' }, { fontFamily: 'Times New Roman,serif', fontSize: 'medium' }, { color: 'red' }, { style: 'position:fixed' }, {}]) {
+    const payload = { ...emptyBlogDraft(), body: { schemaVersion: 2, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '旧書式', marks: [{ type: 'legacyTextStyle', attrs }] }] }] } } };
+    expect(validateBlogDraft(payload)).toBe('color' in attrs ? attrs.color === '#0000ff' : 'fontFamily' in attrs);
+  }
+});

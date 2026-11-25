@@ -1,0 +1,14 @@
+---
+// Reuses the existing public body renderer and plain-text presentation.
+import PlainText from '../PlainText.astro';
+import { createBodyRenderer } from '../../lib/released-cms-blogs';
+import { validEventText, type EventText } from '../../../../packages/content-schema/event-text';
+interface Props {
+  value: EventText;
+}
+const { value } = Astro.props;
+if (!validEventText(value)) throw new Error('invalid_event_text');
+const render = createBodyRenderer();
+---
+
+{typeof value === 'string' ? <PlainText value={value} /> : <div set:html={render(value.doc)} />}
