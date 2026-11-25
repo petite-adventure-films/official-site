@@ -36,8 +36,15 @@
       "maxLength": 20000
     },
     "timeDescription": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "venue": {
       "type": "string",
@@ -52,24 +59,59 @@
       "maxLength": 20000
     },
     "access": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "venueNotes": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "fee": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "organizer": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "notes": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "multiDay": {
       "type": "boolean"
@@ -81,9 +123,22 @@
       "items": {
         "enum": [
           "offline",
-          "online"
+          "online",
+          "unknown"
         ]
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "contains": {
+              "const": "unknown"
+            }
+          },
+          "then": {
+            "maxItems": 1
+          }
+        }
+      ]
     },
     "status": {
       "enum": [

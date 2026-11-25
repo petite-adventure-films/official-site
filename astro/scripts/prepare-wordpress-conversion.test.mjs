@@ -17,6 +17,72 @@ function snapshot(rows) {
     taxonomies: { blogTags: [] },
   };
 }
+
+test('approved color correction changes stored content, preserves the raw backup and is idempotent', () => {
+  const luminance = (hex) => {
+    const rgb = hex.slice(1).match(/../g).map(v => parseInt(v, 16) / 255)
+      .map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+    return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+  };
+  for (const [from, to] of [['#ff0000', '#d90000'], ['rgb(13, 139, 212)', '#0b75b3']]) {
+    const raw = { ...record(), content: `<p><span style="color: ${from};">色付き<strong>本文</strong></span></p>` };
+    const row = prepare(snapshot([raw]), 'hash').rows[0];
+    assert.deepEqual(row.issues, []);
+    assert.deepEqual(row.source.raw, raw);
+    assert.ok(JSON.stringify(row.candidate).includes(to));
+    assert.equal(row.transformations[0].to, to);
+    assert.ok((1.05 / (luminance(to) + 0.05)) >= 4.5);
+    const again = convertBody(`<p><span style="color: ${to}">色付き<strong>本文</strong></span></p>`, 'content', { preserveLegacyContainers: true });
+    assert.deepEqual(again.issues, []);
+    assert.deepEqual(again.body, row.candidate.body);
+    assert.deepEqual(again.transformations, []);
+  }
+});
+
+test('legacy styles retain character-level color and fonts, rejecting arbitrary CSS', () => {
+  for (const html of [
+    '<p>前<span style="color: #0000ff;">青<strong>太字</strong></span>後</p>',
+    '<p><strong style="color: #ff0000;">赤い太字</strong></p>',
+    '<p><span style="font-family: Times New Roman,serif;">English</span></p>',
+    '<p><span style="font-size: medium;">本文</span></p>',
+  ]) {
+    const result = convertBody(html);
+    assert.deepEqual(result.issues, [], html);
+    assert.ok(JSON.stringify(result.body).includes('legacyTextStyle'));
+  }
+  for (const style of ['color: #fff', 'color: #0000ff; position: fixed', 'background: url(https://example.com)', 'color: #0000ff; broken', 'color: #0000ff; color: #ff0000']) {
+    assert.ok(convertBody(`<p><span style="${style}">本文</span></p>`).issues.length);
+  }
+});
+
+test('legacy named link targets remain blocked unless the approved conversion option is explicit', () => {
+  const html = '<p><a href="https://example.com/" target="_NEW">案内</a></p>';
+  assert.ok(convertBody(html).issues.length);
+  const result = convertBody(html, 'appendix_contents', { normalizeLegacyNewTarget: 'https://example.com/' });
+  assert.deepEqual(result.issues, []);
+  assert.equal(result.body.doc.content[0].content[0].marks[0].attrs.target, '_blank');
+  assert.deepEqual(result.transformations, [{ field: 'appendix_contents', attribute: 'target', from: '_NEW', to: '_blank', href: 'https://example.com/', reason: '#491 user-approved 2026-11-25' }]);
+});
+
+test('preserves containers, inherited formatting, language and anchors while archiving only approved metadata', () => {
+  const html = '<div class="text_exposed_show" dir="auto"><p lang="ja-JP"><strong><span id="old" lang="EN-US" style="color: #0000ff;">Hello</span></strong>本文</p><div>追加<br>案内</div></div>';
+  const options = { preserveLegacyContainers: true, archiveLegacyAttributes: true };
+  const result = convertBody(html, 'content', options);
+  assert.deepEqual(result.issues, []);
+  const serialized = JSON.stringify(result.body);
+  for (const value of ['preservedBlock', 'preservedTextBlock', 'preservedInline', 'ja-JP', 'EN-US', 'old', '#0000ff', 'bold']) assert.ok(serialized.includes(value), value);
+  assert.ok(!serialized.includes('text_exposed_show'));
+  assert.equal(result.transformations[0].from, 'text_exposed_show');
+  assert.ok(convertBody('<div onclick="alert(1)">本文</div>', 'content', options).issues.length);
+  assert.ok(convertBody('<p id="nav-menu">衝突</p>', 'content', options).issues.length);
+  assert.ok(convertBody('<span id="a">一</span><span id="a">二</span>', 'content', options).issues.length);
+  const duplicate = '<p><span id="fbPhotoSnowliftCaption">一</span><span id="fbPhotoSnowliftCaption">二</span></p>';
+  assert.ok(convertBody(duplicate, 'content', options).issues.length);
+  const approved = convertBody(duplicate, 'content', { ...options, dedupeLegacyAnchor: true });
+  assert.deepEqual(approved.issues, []);
+  assert.equal(JSON.stringify(approved.body).split('fbPhotoSnowliftCaption').length - 1, 1);
+  assert.equal(approved.transformations.length, 1);
+});
 test('preserves text, formatting, link and line break in a schema-valid candidate', () => {
   const raw = record();
   const result = prepare(snapshot([raw]), 'hash');
@@ -47,7 +113,6 @@ test('never drops images, embeds, styles, anchors, unknown elements or attachmen
     '<img src="https://example.com/a.png">',
     '<iframe src="https://example.com/"></iframe>',
     '<p style="color:red">text</p>',
-    '<span id="old">text</span>',
     '<table><tr><td>text</td></tr></table>',
     '<a href="https://www.petiteadventurefilms.com/wp/wp-content/uploads/a.pdf">PDF</a>',
     '<script>alert(1)</script>',
@@ -264,5 +329,8 @@ test('never invents empty paragraphs around videos or silently splits mixed vide
     result.body.doc.content.map((n) => n.type),
     ['paragraph', 'externalVideo', 'paragraph'],
   );
-  assert.ok(convertBody(`<p>横の本文${frame}</p>`).issues.length);
+  const mixed = convertBody(`<p>横の本文${frame}後の本文</p>`);
+  assert.deepEqual(mixed.issues, []);
+  assert.deepEqual(mixed.body.doc.content[0].content.map(n => n.type), ['text', 'inlineExternalVideo', 'text']);
+  assert.equal(mixed.body.doc.content.length, 1);
 });

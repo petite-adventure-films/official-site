@@ -99,7 +99,24 @@
         },
         "attrs": {
           "type": "object",
-          "properties": {},
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            }
+          },
           "required": [],
           "additionalProperties": false
         },
@@ -129,6 +146,22 @@
                 2,
                 3,
                 4
+              ]
+            },
+            "anchorId": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
               ]
             }
           },
@@ -408,6 +441,9 @@
         },
         {
           "$ref": "#/$defs/assetLink"
+        },
+        {
+          "$ref": "#/$defs/legacyTextStyle"
         }
       ]
     },
@@ -421,6 +457,12 @@
         },
         {
           "$ref": "#/$defs/wordBreak"
+        },
+        {
+          "$ref": "#/$defs/inlineExternalVideo"
+        },
+        {
+          "$ref": "#/$defs/preservedInline"
         }
       ]
     },
@@ -449,6 +491,12 @@
         },
         {
           "$ref": "#/$defs/externalVideo"
+        },
+        {
+          "$ref": "#/$defs/preservedTextBlock"
+        },
+        {
+          "$ref": "#/$defs/preservedBlock"
         }
       ]
     },
@@ -599,6 +647,278 @@
         "attrs"
       ],
       "additionalProperties": false
+    },
+    "legacyTextStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "properties": {
+        "type": {
+          "const": "legacyTextStyle"
+        },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "color": {
+              "enum": [
+                "#0000ff",
+                "#ff0000",
+                "#000000",
+                "#0d8bd4",
+                "#d90000",
+                "#0b75b3"
+              ]
+            },
+            "fontFamily": {
+              "enum": [
+                "Times New Roman,serif",
+                "ＭＳ Ｐ明朝,serif"
+              ]
+            },
+            "fontSize": {
+              "const": "medium"
+            }
+          }
+        }
+      }
+    },
+    "inlineExternalVideo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "inlineExternalVideo"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "enum": [
+                "youtube",
+                "vimeo"
+              ]
+            },
+            "videoId": {
+              "type": "string"
+            },
+            "sourceUrl": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            }
+          },
+          "required": [
+            "provider",
+            "videoId",
+            "sourceUrl"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "preservedInline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "preservedInline"
+        },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            },
+            "color": {
+              "enum": [
+                "#0000ff",
+                "#ff0000",
+                "#000000",
+                "#0d8bd4",
+                "#d90000",
+                "#0b75b3"
+              ]
+            },
+            "fontFamily": {
+              "enum": [
+                "Times New Roman,serif",
+                "ＭＳ Ｐ明朝,serif"
+              ]
+            },
+            "fontSize": {
+              "const": "medium"
+            }
+          }
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/inline"
+          }
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      }
+    },
+    "preservedTextBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "preservedTextBlock"
+        },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            },
+            "color": {
+              "enum": [
+                "#0000ff",
+                "#ff0000",
+                "#000000",
+                "#0d8bd4",
+                "#d90000",
+                "#0b75b3"
+              ]
+            },
+            "fontFamily": {
+              "enum": [
+                "Times New Roman,serif",
+                "ＭＳ Ｐ明朝,serif"
+              ]
+            },
+            "fontSize": {
+              "const": "medium"
+            }
+          }
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/inline"
+          }
+        }
+      }
+    },
+    "preservedBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "preservedBlock"
+        },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            },
+            "color": {
+              "enum": [
+                "#0000ff",
+                "#ff0000",
+                "#000000",
+                "#0d8bd4",
+                "#d90000",
+                "#0b75b3"
+              ]
+            },
+            "fontFamily": {
+              "enum": [
+                "Times New Roman,serif",
+                "ＭＳ Ｐ明朝,serif"
+              ]
+            },
+            "fontSize": {
+              "const": "medium"
+            }
+          }
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      }
     }
   }
 }

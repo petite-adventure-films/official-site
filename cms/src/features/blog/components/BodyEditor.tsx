@@ -1,3 +1,7 @@
+import { LegacySemantics, LegacyContainers } from '../legacy-containers';
+import { semanticKeys, preservedTypes } from '../../../../../packages/content-schema/legacy-containers';
+import { LegacyTextStyle } from '../legacy-text-style';
+import { legacyStyleKeys } from '../../../../../packages/content-schema/legacy-text-style';
 // Figma: https://www.figma.com/design/hk5yiH5HW5Es7RMSzzJIIa?node-id=153-166
 import { useRef, useState } from 'react';
 import { EditorContent, useEditor, type JSONContent } from '@tiptap/react';
@@ -6,25 +10,25 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Menu, MenuIt
 import { validLink, type BodyNode } from '../draft';
 import { AssetImage, AssetLink } from '../media-nodes';
 import { WordBreak } from '../word-break';
-import { ExternalVideoNode } from '../external-video';
+import { ExternalVideoNode, InlineExternalVideoNode } from '../external-video';
 import { externalVideoKeys } from '../../../../../packages/content-schema/external-video';
 import { MediaPicker } from './MediaPicker';
 // Drop editor-generated null/default rendering attrs, not content or supported formatting.
 function stored(n: JSONContent): BodyNode {
-  const keys = n.type === 'externalVideo' ? externalVideoKeys : n.type === 'assetImage' ? ['assetId', 'alt'] : n.type === 'assetLink' ? ['assetId', 'assetKind'] : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level'] : n.type === 'orderedList' ? ['start'] : [];
+  const keys = preservedTypes.includes(n.type ?? '') ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type ?? '') ? externalVideoKeys : n.type === 'assetImage' ? ['assetId', 'alt'] : n.type === 'assetLink' ? ['assetId', 'assetKind'] : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level', ...semanticKeys] : n.type === 'orderedList' ? ['start'] : [];
   const attrs = Object.fromEntries(Object.entries(n.attrs ?? {}).filter(([k, v]) => keys.includes(k) && v != null));
   return { type: n.type!, ...(n.text !== undefined ? { text: n.text } : {}), ...(Object.keys(attrs).length ? { attrs } : {}), ...(n.content ? { content: n.content.map(stored) } : {}), ...(n.marks ? { marks: n.marks.map(stored) } : {}) };
 }
-export function BodyEditor({ value, change }: { value: BodyNode; change?: (doc: BodyNode) => void }) {
+export function BodyEditor({ value, change, label = '本文', textOnly = false }: { value: BodyNode; change?: (doc: BodyNode) => void; label?: string; textOnly?: boolean }) {
   const latest = useRef(change); latest.current = change;
   const [menu, setMenu] = useState<HTMLElement | null>(null);
   const [more, setMore] = useState<HTMLElement | null>(null);
   const [link, setLink] = useState<string | null>(null);
   const [mediaKind, setMediaKind] = useState<'image' | 'document' | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
-  const editor = useEditor({ extensions: [AssetImage, AssetLink, WordBreak, ExternalVideoNode, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
+  const editor = useEditor({ extensions: [...(textOnly ? [] : [AssetImage, AssetLink, ExternalVideoNode, InlineExternalVideoNode, LegacyTextStyle, LegacySemantics, ...LegacyContainers]), WordBreak, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
     content: value, editable: Boolean(change), shouldRerenderOnTransaction: true,
-    editorProps: { attributes: change ? { role: 'textbox', 'aria-label': '本文', 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
+    editorProps: { attributes: change ? { role: 'textbox', 'aria-label': label, 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
     onUpdate: ({ editor }) => latest.current?.(stored(editor.getJSON())),
   });
   if (!change) return <EditorContent editor={editor} />;
@@ -40,9 +44,9 @@ export function BodyEditor({ value, change }: { value: BodyNode; change?: (doc: 
         <Button size="small" color="inherit" onClick={() => setLink(editor?.getAttributes('link').href ?? '')}>リンク</Button>
       </div>
       <div className="flex flex-wrap gap-cms-actions">
-        <Button size="small" color="inherit" disabled={!editor} onClick={() => editor?.isActive('assetImage') ? setAlt(editor.getAttributes('assetImage').alt ?? '') : setMediaKind('image')}>画像</Button>
+        {!textOnly && <><Button size="small" color="inherit" disabled={!editor} onClick={() => editor?.isActive('assetImage') ? setAlt(editor.getAttributes('assetImage').alt ?? '') : setMediaKind('image')}>画像</Button>
         <Button size="small" color="inherit" disabled={!editor} onClick={() => setMediaKind('document')}>PDF</Button>
-        <Button size="small" disabled>動画</Button>
+        <Button size="small" disabled>動画</Button></>}
         <Button size="small" color="inherit" onClick={e => setMore(e.currentTarget)}>その他</Button>
         <Button size="small" color="inherit" disabled={!editor?.can().undo()} onClick={() => editor?.chain().focus().undo().run()}>元に戻す</Button>
         <Button size="small" color="inherit" disabled={!editor?.can().redo()} onClick={() => editor?.chain().focus().redo().run()}>やり直す</Button>

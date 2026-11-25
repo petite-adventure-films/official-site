@@ -34,7 +34,7 @@ Access JWTはJWKS署名・issuer・audience・期限を検証し、2人の許可
 種別はサーバーの登録一覧で検証する。未知・未対応の種別は422。idを使う操作の種別は保存済みレコードから取得し、クライアント指定で切り替えない。複製は同じ種別で作成し、履歴復元は保存時のpayloadSchemaVersionを検査する。
 
 
-キーワード `q` はtitle/timeDescription/venue/address/access/venueNotes/fee/organizer/notesのいずれかに文字列として部分一致する条件。英字は大文字小文字を区別しない。タグ名・地図URL・日付・状態は検索に含めない。SQLのパラメータとして渡し、`%`や`_`もワイルドカードに解釈しない。q未指定または空文字列なら全件。
+キーワード `q` はtitle/timeDescription/venue/address/access/venueNotes/fee/organizer/notesのいずれかに文字列として部分一致する条件。書式付き項目はtextノードの値で検索し、JSONキー・リンクURLを検索対象にしない。英字は大文字小文字を区別しない。タグ名・地図URL・日付・状態は検索に含めない。SQLのパラメータとして渡し、`%`や`_`もワイルドカードに解釈しない。q未指定または空文字列なら全件。
 
 複製は保存済みのコピー元とexpectedVersionを照合し、入力payloadとpayloadSchemaVersionだけを新IDの下書きへ引き継ぐ。新しい作成・編集日時と操作者を記録し、versionは1、copied_from_idにコピー元IDを記録する。0003_duplicate.sqlでコピー元の版検査・新規下書き・操作結果の記録を同一INSERTのトリガー内で原子的に確定する。同一操作IDの再送はコピー元の現状より先に保存済み結果を返す。
 

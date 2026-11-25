@@ -1,3 +1,5 @@
+import { eventTextFields, validEventText } from '../../../packages/content-schema/event-text';
+import eventTextSchema from '../../../packages/content-schema/schemas/content/event-text.schema.json';
 import Ajv from 'ajv/dist/2020';
 import snapshotSchema from '../../../packages/content-schema/schemas/cms-events.schema.json';
 import eventSchema from '../../../packages/content-schema/schemas/content/event-publication.schema.json';
@@ -13,6 +15,7 @@ export type {
 } from '../../../packages/content-schema/types/cms-events';
 export type CmsEventView = CmsEventRecord & { no: number; filmTags: Tag[]; eventTags: Tag[] };
 const ajv = new Ajv({ strictTypes: false });
+ajv.addSchema(eventTextSchema);
 ajv.addSchema(eventSchema);
 const validate = ajv.compile<CmsEventSnapshot>(snapshotSchema);
 export function safeHttpUrl(value: string): boolean {
@@ -55,6 +58,12 @@ export function parseCmsEvents(
   const slugs = new Set(legacy.map((event) => String(event.id)));
   for (const event of snapshot.events) {
     const payload = event.payload;
+    if (
+      !eventTextFields.every(
+        (field) => payload[field] === undefined || validEventText(payload[field]),
+      )
+    )
+      throw new Error('Invalid CMS event text');
     if (ids.has(event.id) || slugs.has(payload.slug) || slugIssue(payload.slug))
       throw new Error('Duplicate or reserved CMS event URL');
     ids.add(event.id);
@@ -122,12 +131,16 @@ export function cmsEventStructuredData(event: CmsEventView, url: string) {
       postponed: 'https://schema.org/EventPostponed',
       cancelled: 'https://schema.org/EventCancelled',
     }[p.status],
-    eventAttendanceMode:
-      p.formats.length === 2
-        ? 'https://schema.org/MixedEventAttendanceMode'
-        : p.formats[0] === 'online'
-          ? 'https://schema.org/OnlineEventAttendanceMode'
-          : 'https://schema.org/OfflineEventAttendanceMode',
+    ...(!p.formats.includes('unknown')
+      ? {
+          eventAttendanceMode:
+            p.formats.length === 2
+              ? 'https://schema.org/MixedEventAttendanceMode'
+              : p.formats[0] === 'online'
+                ? 'https://schema.org/OnlineEventAttendanceMode'
+                : 'https://schema.org/OfflineEventAttendanceMode',
+        }
+      : {}),
     ...(p.formats.includes('offline')
       ? {
           location: {

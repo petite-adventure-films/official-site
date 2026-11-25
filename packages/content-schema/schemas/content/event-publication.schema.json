@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.petiteadventurefilms.com/schemas/content/event-publication/v1",
   "title": "CMS event publication candidate v1",
-  "description": "Plain-text CMS data; not the legacy rich-text event/v1 payload. Semantic dates, URL ownership and referenced tags must also be validated before publication.",
+  "description": "CMS event publication. Text fields accept plain text or validated text-only editor JSON. Semantic dates, links, URL ownership and tags require validation.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -55,9 +55,22 @@
       "items": {
         "enum": [
           "offline",
-          "online"
+          "online",
+          "unknown"
         ]
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "contains": {
+              "const": "unknown"
+            }
+          },
+          "then": {
+            "maxItems": 1
+          }
+        }
+      ]
     },
     "status": {
       "enum": [
@@ -67,24 +80,59 @@
       ]
     },
     "timeDescription": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "venueNotes": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "fee": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "organizer": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "notes": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "venue": {
       "type": "string",
@@ -99,8 +147,15 @@
       "maxLength": 20000
     },
     "access": {
-      "type": "string",
-      "maxLength": 20000
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "$ref": "https://www.petiteadventurefilms.com/schemas/content/event-text/v1"
+        }
+      ]
     },
     "filmTagIds": {
       "type": "array",
@@ -147,11 +202,30 @@
         }
       },
       "else": {
-        "properties": {
-          "venue": false,
-          "address": false,
-          "mapUrl": false,
-          "access": false
+        "if": {
+          "properties": {
+            "formats": {
+              "contains": {
+                "const": "unknown"
+              }
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "venue",
+            "address",
+            "mapUrl",
+            "access"
+          ]
+        },
+        "else": {
+          "properties": {
+            "venue": false,
+            "address": false,
+            "mapUrl": false,
+            "access": false
+          }
         }
       }
     }

@@ -39,6 +39,19 @@ const request = (contentId: string, sourceId: string, expectedVersion: number, s
   actor: 'restorer', operationId: crypto.randomUUID(), contentId, sourceId, expectedVersion, sourceKind,
 });
 
+test('unknown attendance and formatted organizer survive publication and restoration', async () => {
+  const organizer = { schemaVersion: 2 as const, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '窓口', marks: [{ type: 'link', attrs: { href: 'https://example.com/', target: '_blank' } }] }] }] } };
+  const original = { ...payload('旧記事'), formats: ['unknown'] as const, organizer };
+  const draft = await drafts.save({ actor: 'author', operationId: crypto.randomUUID(), payload: { ...original, formats: [...original.formats] } });
+  const sourceId = await publish(draft.id);
+  await edit(draft.id, '別の内容');
+  const restored = await restore.restore(request(draft.id, sourceId, 2));
+  expect(restored.payload).toMatchObject({ organizer, formats: ['unknown'], venue: '会場' });
+  const matches = await drafts.list(1, '窓口');
+  expect(matches.items.map(item => item!.id)).toContain(draft.id);
+  expect((await drafts.list(1, 'https://example.com/')).items).toHaveLength(0);
+});
+
 test('restores published fields to draft, protects all previous input and leaves publication untouched', async () => {
   const draft = await save('公開内容');
   const sourceId = await publish(draft.id);

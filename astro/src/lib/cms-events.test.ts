@@ -1,8 +1,56 @@
 import { describe, expect, it } from 'vitest';
 import fixture from '../../fixtures/cms-events.json';
 import { cmsEventStructuredData, parseCmsEvents, plainTextLinks, safeHttpUrl } from './cms-events';
+import { createBodyRenderer } from './released-cms-blogs';
 const snapshot = () => structuredClone(fixture);
 describe('CMS public event data', () => {
+  it('renders formatted organizer with escaped text and retained link destination, title and target', () => {
+    const data = snapshot();
+    const organizer = {
+      schemaVersion: 2,
+      doc: {
+        type: 'doc',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: '<窓口>',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://example.com/?a=1&b=2',
+                      target: '_blank',
+                      title: '案内"',
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    };
+    Object.assign(data.events[0].payload, { organizer });
+    expect(parseCmsEvents(data, [])[0].payload.organizer).toEqual(organizer);
+    expect(createBodyRenderer()(organizer.doc)).toContain(
+      '<a href="https://example.com/?a=1&amp;b=2" target="_blank" rel="noopener noreferrer" title="案内&quot;">&lt;窓口&gt;</a>',
+    );
+    organizer.doc.content[0].content[0].marks[0].attrs.href = 'javascript:alert(1)';
+    expect(() => parseCmsEvents(data, [])).toThrow('Invalid CMS event text');
+    expect(() => createBodyRenderer()(organizer.doc)).toThrow();
+  });
+  it('keeps unknown attendance and venue data without inventing structured attendance or location', () => {
+    const data = snapshot();
+    Object.assign(data.events[0].payload, { formats: ['unknown'] });
+    const [event] = parseCmsEvents(data, []);
+    expect(event.payload.venue).toBe('まちの交流室');
+    const structured = cmsEventStructuredData(event, 'https://example.com/event/');
+    expect(structured).not.toHaveProperty('eventAttendanceMode');
+    expect(structured).not.toHaveProperty('location');
+  });
   it('reads plain text without HTML conversion and derives display numbers independently from slugs', () => {
     const events = parseCmsEvents(snapshot(), [{ id: 18010, published: '2020/01/01' }]);
     expect(events.map((event) => event.no)).toEqual([2, 3]);

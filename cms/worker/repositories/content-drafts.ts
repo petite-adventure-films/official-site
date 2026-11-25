@@ -39,7 +39,7 @@ export class ContentDraftRepository {
 
   async list(page: number, keyword: string, type: ContentType = 'event') {
     const fields = ['title', 'timeDescription', 'venue', 'address', 'access', 'venueNotes', 'fee', 'organizer', 'notes'];
-    const eventWhere = fields.map((field) => `instr(lower(COALESCE(json_extract(payload, '$.${field}'), '')), lower(?)) > 0`).join(' OR ');
+    const eventWhere = fields.map((field) => `instr(lower(CASE WHEN json_type(payload, '$.${field}') = 'object' THEN COALESCE((SELECT group_concat(value, '') FROM json_tree(content_drafts.payload, '$.${field}.doc') WHERE key = 'text' AND type = 'text'), '') ELSE COALESCE(json_extract(payload, '$.${field}'), '') END), lower(?)) > 0`).join(' OR ');
     const blogWhere = "instr(lower(COALESCE(json_extract(payload, '$.title'), '')), lower(?)) > 0 OR instr(lower(COALESCE((SELECT group_concat(value, '') FROM json_tree(content_drafts.payload, '$.body.doc') WHERE key = 'text' AND type = 'text'), '')), lower(?)) > 0";
     const where = `type = ? AND (${type !== 'event' ? blogWhere : eventWhere})`;
     const params = [type, ...(type !== 'event' ? [keyword, keyword] : fields.map(() => keyword))];

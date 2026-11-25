@@ -1,12 +1,41 @@
+import eventTextSchema from '../../packages/content-schema/schemas/content/event-text.schema.json';
 import Ajv from 'ajv/dist/2020';
 import { describe, expect, test } from 'vitest';
 import schema from '../../packages/content-schema/schemas/content/event-publication.schema.json';
 import { emptyDraft } from '../src/features/events/draft';
 import { prepareEventPublication } from './event-publication';
-const validate = new Ajv({ allErrors: true }).compile(schema);
+const validate = new Ajv({ allErrors: true }).addSchema(eventTextSchema).compile(schema);
 const context = { contentId: '9b081366-119c-4b37-ab1e-56b631b22222', filmTagIds: new Set(['film']), eventTagIds: new Set(['event']) };
 const valid = () => ({ ...emptyDraft(), title: '上映会', startDate: '2026/12/30', venue: '会場', filmTagIds: ['film'], eventTagIds: ['event'] });
 const prepare = (changes = {}) => prepareEventPublication({ ...valid(), ...changes }, context);
+
+test('publication retains formatted text and does not share mutable nodes with the draft', () => {
+  const organizer = { schemaVersion: 2, doc: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: '問い合わせ', marks: [{ type: 'link', attrs: { href: 'https://example.com/', target: '_blank', title: '窓口' } }] }] }] } };
+  const result = prepare({ organizer });
+  expect(result.ok).toBe(true);
+  if (!result.ok) throw Error();
+  expect(validate(result.payload)).toBe(true);
+  expect(result.payload.organizer).toEqual(organizer);
+  expect(result.payload.organizer).not.toBe(organizer);
+});
+
+test('unknown attendance retains venue information without assuming a venue is required', () => {
+  for (const status of ['normal', 'postponed', 'cancelled']) {
+    const result = prepare({ formats: ['unknown'], status, venue: '', address: '旧住所', access: '旧アクセス', mapUrl: 'https://example.com/map' });
+    expect(result.ok).toBe(true);
+    if (!result.ok) throw Error();
+    expect(result.payload).toMatchObject({ formats: ['unknown'], venue: '', address: '旧住所', access: '旧アクセス', mapUrl: 'https://example.com/map', status });
+    expect(validate(result.payload), JSON.stringify(validate.errors)).toBe(true);
+  }
+  expect(prepare({ formats: ['unknown'], mapUrl: 'javascript:alert(1)' }).ok).toBe(false);
+  for (const formats of [['unknown', 'offline'], ['online', 'unknown']]) {
+    expect(prepare({ formats }).ok).toBe(false);
+    const result = prepare();
+    if (!result.ok) throw Error();
+    expect(validate({ ...result.payload, formats })).toBe(false);
+  }
+  expect(prepare({ formats: [] }).ok).toBe(false);
+});
 
 test('collects field errors and never returns partially valid public data', () => {
   const draft = { ...emptyDraft(), slug: '', formats: [] };

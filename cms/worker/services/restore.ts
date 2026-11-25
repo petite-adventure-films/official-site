@@ -1,3 +1,4 @@
+import eventTextSchema from '../../../packages/content-schema/schemas/content/event-text.schema.json';
 import { isArticleType, type ArticleDraft } from '../../src/features/articles/draft';
 import { validateArticleDraft } from '../article-draft';
 import { articleDraftFromPublication } from '../article-publication';
@@ -12,7 +13,7 @@ import { validateDraft } from '../event-draft';
 import type { EventPublication } from '../event-publication';
 import { ContentDraftRepository, DraftConflict, DraftNotFound, type Database, type Draft } from '../repositories/content-drafts';
 
-const validatePublication = new Ajv({ allErrors: true }).compile(publicationSchema);
+const validatePublication = new Ajv({ allErrors: true }).addSchema(eventTextSchema).compile(publicationSchema);
 export class RestoreInvalid extends Error {}
 type SourceKind = 'publication' | 'protectedDraft';
 type Input = { actor: string; actorName?: string; operationId: string; contentId: string; expectedVersion: number; sourceKind: SourceKind; sourceId: string };
