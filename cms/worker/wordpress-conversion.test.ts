@@ -66,3 +66,24 @@ describe('WordPress conversion candidates', () => {
     }
   }, 60_000);
 });
+
+// The combined report contains private source records and stays in ignored local storage.
+describe('combined WordPress candidates', () => {
+  it.skipIf(!process.env.WP_COMBINED_REPORT)('validates unpublished candidates with CMS save validators', () => {
+    const report = JSON.parse(readFileSync(process.env.WP_COMBINED_REPORT!, 'utf8'));
+    expect(report.schemaVersion).toBe('wordpress-combined-preflight/v1');
+    expect(report.rows.length).toBe(report.summary.total);
+    let candidates = 0;
+    for (const row of report.rows) {
+      expect(row.publish).toBe(false);
+      expect(['publish', 'draft', 'private'].includes(row.source.status)).toBe(true);
+      if (!row.candidate) { expect(row.issues.length > 0).toBe(true); continue; }
+      candidates++;
+      const valid = row.type === 'blog' ? validateBlogDraft(row.candidate)
+        : row.type === 'event' ? validateDraft(row.candidate)
+        : validateArticleDraft(row.type, row.candidate);
+      expect(valid).toBe(true);
+    }
+    expect(candidates > 0).toBe(true);
+  });
+});

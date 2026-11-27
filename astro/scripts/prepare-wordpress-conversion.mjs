@@ -436,7 +436,7 @@ function plain(html, field, issues, references, transformations, legacyId) {
   for (const p of d.body.querySelectorAll('p')) p.append('\n');
   return d.body.textContent.trim();
 }
-export function prepare(snapshot, sourceHash) {
+export function prepare(snapshot, sourceHash, { emptyDraftSlugIds = new Set() } = {}) {
   if (snapshot.schemaVersion !== 1 || !snapshot.content || !snapshot.counts || !snapshot.source)
     throw Error('invalid_snapshot');
   if (Object.keys(snapshot.content).some((k) => !(k in fields)))
@@ -495,7 +495,7 @@ export function prepare(snapshot, sourceHash) {
       if (group === 'blogs') {
         try {
           slug = decodeURIComponent(text('name'));
-          if (!slug || /[\s/\\?#\u0000-\u001f]/.test(slug) || slug === '.' || slug === '..')
+          if ((!slug && !emptyDraftSlugIds.has(raw.id)) || /[\s/\\?#\u0000-\u001f]/.test(slug) || slug === '.' || slug === '..')
             throw Error('invalid');
         } catch {
           issues.push(fail('invalid_slug', 'name', raw.name));
