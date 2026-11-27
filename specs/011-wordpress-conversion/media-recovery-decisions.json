@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "wordpress-media-recovery-decisions/v1",
+  "decisions": [
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/772fb72deced2250ede512f0c243b17c.jpg",
+      "sha256": "66c4fb22c830743af175e0d93e76eeed2c9709994a3117d453732a562c56634a",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/81157d8378837fecff052940a887bc79.jpg",
+      "sha256": "3d25e6f662d7d9f308292a600ab3a1c5c80767fdda927903dffcccbf2716ebb1",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0-300x169.jpg",
+      "articleIds": [
+        4641
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/98c7fa0c2dfa03856bae70d05f77efb0.jpg",
+      "sha256": "1762aeff7704ff54573662c1170b24a800ca7a9960c5cd472f1561ed85cd9dae",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2-300x225.jpg",
+      "articleIds": [
+        4641
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2016/12/d76a8714f87e8cb3a307f1d003aa32f2.jpg",
+      "sha256": "b991b35593cc0e6a89ee592e9e4f04c31c4deafb030092a1ddb23029faf06e01",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re-300x183.jpg",
+      "articleIds": [
+        4708
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/DSC_1096_re.jpg",
+      "sha256": "8dcbbea774087fa13ba3b6b79632047ad40bfaa5695789c2161cc20d6c5258df",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1-300x169.jpg",
+      "articleIds": [
+        4708
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "https://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/01/Stills_1.jpg",
+      "sha256": "c87821945ee602de78e3da152094f7c775003b08ac641c9fa8dd76cc973d818d",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/03/DSCN8361-300x169.jpg",
+      "articleIds": [
+        4758
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2017/03/DSCN8361.jpg",
+      "sha256": "8762dff2feb8b1b1aafd9fc0dd6f4ee0b9ea3f366abb8eb71c1762f92181735f",
+      "displayPolicy": "preserve-original-aspect-ratio"
+    },
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487-300x300.jpg",
+      "articleIds": [
+        7161
+      ],
+      "decision": "recover-original",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "recoveryUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/181e1ad7eed84e31b4d3f681d4590487.jpg",
+      "sha256": "a785bca1800a765786c28977e92942e7046fa638239965e11ca9aa79862565fb",
+      "displayPolicy": "preserve-original-aspect-ratio",
+      "limitation": "original accepted; not a match to the old square crop"
+    },
+    {
+      "sourceUrl": "http://www.petiteadventurefilms.com/wp/wp-content/uploads/2018/01/26781509_10157123468734552_1040340645_o.jpg",
+      "articleIds": [
+        7277
+      ],
+      "decision": "exclude",
+      "approval": "#493 user-approved 2026-11-23",
+      "preserveOriginalHtml": true,
+      "reason": "source unavailable; approved omission without replacement"
+    }
+  ]
+}
