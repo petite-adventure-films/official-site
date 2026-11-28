@@ -1,3 +1,4 @@
+import { createMediaResolver } from './wordpress-body-media.mjs';
 // Local-only adapter: audited REST/WXR -> existing conversion and shared collision checks.
 import { createHash } from 'node:crypto';
 import { readFile, realpath, writeFile } from 'node:fs/promises';
@@ -8,7 +9,7 @@ const hash = value => createHash('sha256').update(value).digest('hex');
 const requireValue = (condition, code) => { if (!condition) throw Error(code); };
 const canonicalSlug = value => decodeURIComponent(value);
 
-export function prepareCombined(snapshot, intake, sourceHashes = {}) {
+export function prepareCombined(snapshot, intake, sourceHashes = {}, { mediaResolver } = {}) {
   requireValue(intake?.schemaVersion === 'wordpress-nonpublic-intake/v1' && Array.isArray(intake.posts) && Array.isArray(intake.attachments), 'invalid_intake');
   const combined = structuredClone(snapshot), origins = new Map(), emptyDraftSlugIds = new Set();
   const counts = { draft: 0, private: 0 };
@@ -51,7 +52,7 @@ export function prepareCombined(snapshot, intake, sourceHashes = {}) {
   }
   requireValue(counts.draft === intake.counts?.draft && counts.private === intake.counts?.private, 'intake_count_mismatch');
   combined.counts.blogs = combined.content.blogs.length;
-  const report = prepare(combined, sourceHashes.public, { emptyDraftSlugIds });
+  const report = prepare(combined, sourceHashes.public, { emptyDraftSlugIds, mediaResolver });
   // Public and nonpublic rows are distinguished by object identity, including duplicate IDs.
   for (const row of report.rows) {
     const origin = origins.get(row.legacyId);
@@ -80,19 +81,21 @@ export function prepareCombined(snapshot, intake, sourceHashes = {}) {
   }
   return { ...report, schemaVersion: 'wordpress-combined-preflight/v1', sourceHashes, intakeSourceHashes: intake.sourceHashes,
     attachments: structuredClone(intake.attachments), summary: { total: report.rows.length, byType, byCode, byStatus },
-    limitations: ['not an import or publication manifest; every row has publish:false', 'attachment usage, asset IDs, delivery visibility and URL ownership unverified', 'final synchronization and CMS access boundaries unverified'] };
+    limitations: ['not an import or publication manifest; every row has publish:false', mediaResolver ? 'registered media mapped in candidate bodies; URL ownership and remote import unverified' : 'attachment usage, asset IDs, delivery visibility and URL ownership unverified', 'final synchronization and CMS access boundaries unverified'] };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    requireValue(process.argv.length === 5, 'usage');
+    requireValue(process.argv.length === 5 || process.argv.length === 6, 'usage');
     const local = await realpath(fileURLToPath(new URL('../../.local', import.meta.url)));
     const [publicPath, intakePath] = await Promise.all(process.argv.slice(2,4).map(p => realpath(resolve(p))));
     const output = resolve(process.argv[4]);
     const outputParent = await realpath(dirname(output));
     requireValue([publicPath, intakePath, outputParent].every(p => p === local || p.startsWith(local + sep)), 'local_paths_required');
     const [publicBytes, intakeBytes] = await Promise.all([readFile(publicPath), readFile(intakePath)]);
-    const report = prepareCombined(JSON.parse(publicBytes), JSON.parse(intakeBytes), { public: hash(publicBytes), intake: hash(intakeBytes) });
+    let mediaResolver, assetMapHash;
+    if (process.argv[5]) { const path = await realpath(resolve(process.argv[5])); requireValue(path.startsWith(local + sep), 'local_asset_map_required'); const bytes = await readFile(path); assetMapHash = hash(bytes); mediaResolver = createMediaResolver(JSON.parse(bytes)); }
+    const report = prepareCombined(JSON.parse(publicBytes), JSON.parse(intakeBytes), { public: hash(publicBytes), intake: hash(intakeBytes), ...(assetMapHash ? { assetMap: assetMapHash } : {}) }, { mediaResolver });
     await writeFile(output, JSON.stringify(report, null, 2) + '\n', { flag: 'wx', mode: 0o600 });
     console.log(JSON.stringify(report.summary));
   } catch {

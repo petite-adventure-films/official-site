@@ -1,3 +1,4 @@
+import { bodyAssetReferences } from '../../packages/content-schema/body-media';
 import Ajv from 'ajv/dist/2020';
 import schema from '../../packages/content-schema/schemas/content/blog-draft.schema.json';
 import { validLink, type BodyNode } from '../src/features/blog/draft';
@@ -18,15 +19,10 @@ export function validateBlogDraft(value: unknown): value is Record<string, any> 
 }
 export async function validateBlogAssets(db: Database, doc: BodyNode) {
   const references = new Map<string, string>();
-  function visit(n: BodyNode) {
-    if (n.type === 'assetImage' || n.type === 'assetLink') {
-      const id = n.attrs!.assetId as string, kind = n.type === 'assetImage' ? 'image' : 'document';
-      if (references.has(id) && references.get(id) !== kind) throw new HttpError(422, 'asset_kind_mismatch');
-      references.set(id, kind);
-    }
-    [...(n.content ?? []), ...(n.marks ?? [])].forEach(visit);
+  for (const {id, kind} of bodyAssetReferences(doc)) {
+    if (references.has(id) && references.get(id) !== kind) throw new HttpError(422, 'asset_kind_mismatch');
+    references.set(id, kind);
   }
-  visit(doc);
   for (const [id, kind] of references) {
     const row = await db.prepare('SELECT asset_json FROM media_uploads WHERE id = ? AND asset_json IS NOT NULL').bind(id).first<{ asset_json: string }>();
     if (!row || JSON.parse(row.asset_json).kind !== kind) throw new HttpError(422, 'invalid_asset');

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Blog draft v1 — new editing subset",
+  "title": "Blog draft v1 \u2014 new editing subset",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -463,6 +463,9 @@
         },
         {
           "$ref": "#/$defs/preservedInline"
+        },
+        {
+          "$ref": "#/$defs/inlineAssetImage"
         }
       ]
     },
@@ -535,6 +538,65 @@
             "alt": {
               "type": "string",
               "maxLength": 2000
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "legacyClass": {
+              "type": "string",
+              "pattern": "^(alignnone|size-(full|large|medium|thumbnail)|wp-image-[0-9]+)( (alignnone|size-(full|large|medium|thumbnail)|wp-image-[0-9]+))*$"
+            },
+            "loading": {
+              "enum": [
+                "lazy",
+                "eager"
+              ]
+            },
+            "decoding": {
+              "enum": [
+                "async",
+                "sync",
+                "auto"
+              ]
+            },
+            "sizes": {
+              "type": "string",
+              "pattern": "^(auto, )?\\(max-width: [1-9][0-9]{0,4}px\\) 100vw, [1-9][0-9]{0,4}px$"
+            },
+            "sources": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "assetId",
+                  "width"
+                ],
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "pattern": "^asset_[a-f0-9]{32}$"
+                  },
+                  "width": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 99999
+                  }
+                }
+              }
             }
           },
           "required": [
@@ -564,7 +626,20 @@
               "pattern": "^asset_[a-f0-9]{32}$"
             },
             "assetKind": {
-              "const": "document"
+              "enum": [
+                "image",
+                "document"
+              ]
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "target": {
+              "enum": [
+                "_self",
+                "_blank"
+              ]
             }
           },
           "required": [
@@ -677,7 +752,7 @@
             "fontFamily": {
               "enum": [
                 "Times New Roman,serif",
-                "ＭＳ Ｐ明朝,serif"
+                "\uff2d\uff33 \uff30\u660e\u671d,serif"
               ]
             },
             "fontSize": {
@@ -780,7 +855,7 @@
             "fontFamily": {
               "enum": [
                 "Times New Roman,serif",
-                "ＭＳ Ｐ明朝,serif"
+                "\uff2d\uff33 \uff30\u660e\u671d,serif"
               ]
             },
             "fontSize": {
@@ -845,7 +920,7 @@
             "fontFamily": {
               "enum": [
                 "Times New Roman,serif",
-                "ＭＳ Ｐ明朝,serif"
+                "\uff2d\uff33 \uff30\u660e\u671d,serif"
               ]
             },
             "fontSize": {
@@ -904,7 +979,7 @@
             "fontFamily": {
               "enum": [
                 "Times New Roman,serif",
-                "ＭＳ Ｐ明朝,serif"
+                "\uff2d\uff33 \uff30\u660e\u671d,serif"
               ]
             },
             "fontSize": {
@@ -919,6 +994,102 @@
           }
         }
       }
+    },
+    "inlineAssetImage": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "inlineAssetImage"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[a-f0-9]{32}$"
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99999
+            },
+            "legacyClass": {
+              "type": "string",
+              "pattern": "^(alignnone|size-(full|large|medium|thumbnail)|wp-image-[0-9]+)( (alignnone|size-(full|large|medium|thumbnail)|wp-image-[0-9]+))*$"
+            },
+            "loading": {
+              "enum": [
+                "lazy",
+                "eager"
+              ]
+            },
+            "decoding": {
+              "enum": [
+                "async",
+                "sync",
+                "auto"
+              ]
+            },
+            "sizes": {
+              "type": "string",
+              "pattern": "^(auto, )?\\(max-width: [1-9][0-9]{0,4}px\\) 100vw, [1-9][0-9]{0,4}px$"
+            },
+            "sources": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "assetId",
+                  "width"
+                ],
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "pattern": "^asset_[a-f0-9]{32}$"
+                  },
+                  "width": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 99999
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "assetId",
+            "alt"
+          ],
+          "additionalProperties": false
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
     }
   }
 }

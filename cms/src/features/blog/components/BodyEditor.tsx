@@ -1,3 +1,4 @@
+import { imageTypes, imageKeys, assetLinkKeys } from '../../../../../packages/content-schema/body-media';
 import { LegacySemantics, LegacyContainers } from '../legacy-containers';
 import { semanticKeys, preservedTypes } from '../../../../../packages/content-schema/legacy-containers';
 import { LegacyTextStyle } from '../legacy-text-style';
@@ -8,14 +9,14 @@ import { EditorContent, useEditor, type JSONContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Menu, MenuItem, TextField } from '@mui/material';
 import { validLink, type BodyNode } from '../draft';
-import { AssetImage, AssetLink } from '../media-nodes';
+import { AssetImage, InlineAssetImage, AssetLink } from '../media-nodes';
 import { WordBreak } from '../word-break';
 import { ExternalVideoNode, InlineExternalVideoNode } from '../external-video';
 import { externalVideoKeys } from '../../../../../packages/content-schema/external-video';
 import { MediaPicker } from './MediaPicker';
 // Drop editor-generated null/default rendering attrs, not content or supported formatting.
 function stored(n: JSONContent): BodyNode {
-  const keys = preservedTypes.includes(n.type ?? '') ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type ?? '') ? externalVideoKeys : n.type === 'assetImage' ? ['assetId', 'alt'] : n.type === 'assetLink' ? ['assetId', 'assetKind'] : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level', ...semanticKeys] : n.type === 'orderedList' ? ['start'] : [];
+  const keys = preservedTypes.includes(n.type ?? '') ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type ?? '') ? externalVideoKeys : imageTypes.includes(n.type ?? '') ? imageKeys : n.type === 'assetLink' ? assetLinkKeys : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level', ...semanticKeys] : n.type === 'orderedList' ? ['start'] : [];
   const attrs = Object.fromEntries(Object.entries(n.attrs ?? {}).filter(([k, v]) => keys.includes(k) && v != null));
   return { type: n.type!, ...(n.text !== undefined ? { text: n.text } : {}), ...(Object.keys(attrs).length ? { attrs } : {}), ...(n.content ? { content: n.content.map(stored) } : {}), ...(n.marks ? { marks: n.marks.map(stored) } : {}) };
 }
@@ -26,7 +27,7 @@ export function BodyEditor({ value, change, label = '本文', textOnly = false }
   const [link, setLink] = useState<string | null>(null);
   const [mediaKind, setMediaKind] = useState<'image' | 'document' | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
-  const editor = useEditor({ extensions: [...(textOnly ? [] : [AssetImage, AssetLink, ExternalVideoNode, InlineExternalVideoNode, LegacyTextStyle, LegacySemantics, ...LegacyContainers]), WordBreak, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
+  const editor = useEditor({ extensions: [...(textOnly ? [] : [AssetImage, InlineAssetImage, AssetLink, ExternalVideoNode, InlineExternalVideoNode, LegacyTextStyle, LegacySemantics, ...LegacyContainers]), WordBreak, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
     content: value, editable: Boolean(change), shouldRerenderOnTransaction: true,
     editorProps: { attributes: change ? { role: 'textbox', 'aria-label': label, 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
     onUpdate: ({ editor }) => latest.current?.(stored(editor.getJSON())),
@@ -44,7 +45,7 @@ export function BodyEditor({ value, change, label = '本文', textOnly = false }
         <Button size="small" color="inherit" onClick={() => setLink(editor?.getAttributes('link').href ?? '')}>リンク</Button>
       </div>
       <div className="flex flex-wrap gap-cms-actions">
-        {!textOnly && <><Button size="small" color="inherit" disabled={!editor} onClick={() => editor?.isActive('assetImage') ? setAlt(editor.getAttributes('assetImage').alt ?? '') : setMediaKind('image')}>画像</Button>
+        {!textOnly && <><Button size="small" color="inherit" disabled={!editor} onClick={() => imageTypes.some(type => editor?.isActive(type)) ? setAlt(editor?.getAttributes(imageTypes.find(type => editor?.isActive(type))!).alt ?? '') : setMediaKind('image')}>画像</Button>
         <Button size="small" color="inherit" disabled={!editor} onClick={() => setMediaKind('document')}>PDF</Button>
         <Button size="small" disabled>動画</Button></>}
         <Button size="small" color="inherit" onClick={e => setMore(e.currentTarget)}>その他</Button>
@@ -58,7 +59,7 @@ export function BodyEditor({ value, change, label = '本文', textOnly = false }
       else editor?.chain().focus().insertContent({ type: 'text', text, marks: [{ type: 'assetLink', attrs: { assetId, assetKind: 'document' } }] }).run();
       setMediaKind(null);
     }} />}
-    <Dialog open={alt !== null} onClose={() => setAlt(null)} fullWidth maxWidth="sm"><DialogTitle variant="subtitle2">画像の代替テキスト</DialogTitle><DialogContent><TextField autoFocus fullWidth margin="dense" label="代替テキスト" value={alt ?? ''} onChange={e => setAlt(e.target.value)} /></DialogContent><DialogActions><Button onClick={() => setAlt(null)}>キャンセル</Button><Button disabled={(alt?.length ?? 0) > 2000} onClick={() => { editor?.chain().focus().updateAttributes('assetImage', { alt }).run(); setAlt(null); }}>適用</Button></DialogActions></Dialog>
+    <Dialog open={alt !== null} onClose={() => setAlt(null)} fullWidth maxWidth="sm"><DialogTitle variant="subtitle2">画像の代替テキスト</DialogTitle><DialogContent><TextField autoFocus fullWidth margin="dense" label="代替テキスト" value={alt ?? ''} onChange={e => setAlt(e.target.value)} /></DialogContent><DialogActions><Button onClick={() => setAlt(null)}>キャンセル</Button><Button disabled={(alt?.length ?? 0) > 2000} onClick={() => { editor?.chain().focus().updateAttributes(imageTypes.find(type => editor?.isActive(type)) ?? 'assetImage', { alt }).run(); setAlt(null); }}>適用</Button></DialogActions></Dialog>
     <Menu anchorEl={menu} open={Boolean(menu)} onClose={() => setMenu(null)}>
       <MenuItem onClick={() => { editor?.chain().focus().setParagraph().run(); setMenu(null); }}>段落</MenuItem>
       {([2, 3, 4] as const).map(level => <MenuItem key={level} onClick={() => { editor?.chain().focus().toggleHeading({ level }).run(); setMenu(null); }}>見出し{level}</MenuItem>)}

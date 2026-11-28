@@ -1,4 +1,9 @@
 import {
+  imageTypes,
+  imageAttributes,
+  assetLinkAttributes,
+} from '../../../packages/content-schema/body-media';
+import {
   semanticKeys,
   preservedTypes,
   semanticHtml,
@@ -34,6 +39,10 @@ const escape = (text: unknown) =>
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character] ??
       character,
   );
+const htmlAttributes = (attrs: Record<string, string | number>) =>
+  Object.entries(attrs)
+    .map(([k, v]) => ` ${k}="${escape(String(v))}"`)
+    .join('');
 const blocks = new Map(
   Object.entries({
     paragraph: 'p',
@@ -59,7 +68,7 @@ export function createBodyRenderer(
       if (mark.type === 'legacyTextStyle')
         return `<span style="${escape(legacyStyleHtml(mark.attrs ?? {}).style)}">${value}</span>`;
       if (mark.type === 'assetLink')
-        return `<a href="${escape(assetPath(mark.attrs?.assetId))}">${value}</a>`;
+        return `<a${htmlAttributes(assetLinkAttributes(mark.attrs ?? {}, assetPath))}>${value}</a>`;
       if (mark.type === 'link') {
         const { href, target, title } = mark.attrs ?? {};
         if (
@@ -92,8 +101,11 @@ export function createBodyRenderer(
       const display = node.type === 'inlineExternalVideo' ? 'display:inline-block;' : '';
       return `<${wrapper} style="${display}width:${String(width)}px;max-width:100%;aspect-ratio:${String(width)}/${String(height)}"><iframe ${htmlAttrs} loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%"></iframe></${wrapper}>`;
     }
-    if (node.type === 'assetImage')
-      return `<img src="${escape(assetPath(node.attrs?.assetId))}" alt="${escape(node.attrs?.alt)}">`;
+    if (imageTypes.includes(node.type))
+      return renderMarks(
+        `<img${htmlAttributes({ ...imageAttributes(node.attrs ?? {}, assetPath), ...(node.type === 'inlineAssetImage' ? { style: 'display:inline' } : {}) })}>`,
+        node.marks ?? [],
+      );
     if (node.type === 'hardBreak') return '<br>';
     if (node.type === 'wordBreak') return '<wbr>';
     if (node.type === 'horizontalRule') return '<hr>';

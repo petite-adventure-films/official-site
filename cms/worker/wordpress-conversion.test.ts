@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { validateBlogDraft } from './blog-draft';
+import { validateBlogAssets, validateBlogDraft } from './blog-draft';
 import { validateArticleDraft } from './article-draft';
 import { validateDraft } from './event-draft';
 
@@ -85,5 +85,20 @@ describe('combined WordPress candidates', () => {
       expect(valid).toBe(true);
     }
     expect(candidates > 0).toBe(true);
+  });
+});
+
+// Reconcile candidate references with the verified local registration without remote writes.
+describe('registered conversion media', () => {
+  it.skipIf(!process.env.WP_COMBINED_REPORT || !process.env.WP_ASSET_MAP)('resolves every candidate image, variant, link and attachment with the CMS asset validator', async () => {
+    const report = JSON.parse(readFileSync(process.env.WP_COMBINED_REPORT!, 'utf8'));
+    const map = JSON.parse(readFileSync(process.env.WP_ASSET_MAP!, 'utf8'));
+    const assets = new Map(map.assets.map((a: any) => [a.id, a]));
+    const db = {prepare: () => ({bind: (id: string) => ({first: async () => assets.has(id) ? {asset_json: JSON.stringify(assets.get(id))} : null})})};
+    for (const row of report.rows) {
+      if (!row.candidate) continue;
+      for (const field of ['body','articleBody']) if (row.candidate[field]) await validateBlogAssets(db as any, row.candidate[field].doc);
+      for (const id of row.candidate.attachmentAssetIds ?? []) expect((assets.get(id) as any)?.kind).toBe('document');
+    }
   });
 });

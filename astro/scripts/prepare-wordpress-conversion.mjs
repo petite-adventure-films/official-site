@@ -1,3 +1,5 @@
+import { rewriteBodyMedia } from './wordpress-body-media.mjs';
+import { imageTypes, imageKeys, assetLinkKeys, imageAttributes, assetLinkAttributes } from '../../packages/content-schema/body-media.ts';
 import { semanticKeys, preservedTypes, semanticHtml, containerHtml, validBodyAnchors } from '../../packages/content-schema/legacy-containers.ts';
 import { legacyColorCorrections, legacyStyleKeys, legacyStyleFromElement, legacyStyleHtml } from '../../packages/content-schema/legacy-text-style.ts';
 import {
@@ -27,7 +29,22 @@ function legacyAttrs(element) {
   semanticHtml(attrs);
   return { ...attrs, ...(element.hasAttribute('style') ? legacyStyleFromElement(element) : {}) };
 }
+let mediaPath = () => { throw Error('unresolved_media_path'); };
 const extensions = [
+  ...[['inlineAssetImage', true], ['assetImage', false]].map(([name, inline]) => Node.create({
+    name, group: inline ? 'inline' : 'block', inline, atom: true,
+    addAttributes() { return Object.fromEntries(imageKeys.map(key => [key, {default: null}])); },
+    parseHTML() { return [{tag: 'img[data-paf-asset]', getAttrs: el => {
+      const isInline = ['p','h2','h3','h4','span','a','strong','b','em','i','u','s','strike'].includes(el.parentElement?.localName) || el.parentElement?.getAttribute('data-paf-node') === 'preservedTextBlock' || (el.parentElement?.localName === 'body' && [...el.parentElement.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()));
+      return isInline === inline ? JSON.parse(el.getAttribute('data-paf-asset')) : false;
+    }}]; },
+    renderHTML({node}) { const attrs=Object.fromEntries(Object.entries(node.attrs).filter(([,v])=>v!=null));return ['img',{...imageAttributes(attrs,mediaPath),'data-paf-asset':JSON.stringify(attrs)}]; }
+  })),
+  Mark.create({name:'assetLink', priority:1100, excludes:'link assetLink', inclusive:false,
+    addAttributes(){return Object.fromEntries(assetLinkKeys.map(key=>[key,{default:null}]));},
+    parseHTML(){return [{tag:'a[data-paf-asset]',getAttrs:el=>JSON.parse(el.getAttribute('data-paf-asset'))}];},
+    renderHTML({mark}){const attrs=Object.fromEntries(Object.entries(mark.attrs).filter(([,v])=>v!=null));return ['a',{...assetLinkAttributes(attrs,mediaPath),'data-paf-asset':JSON.stringify(attrs)},0];}
+  }),
   Extension.create({ name: 'legacySemantics', addGlobalAttributes() { return [{ types: ['paragraph', 'heading'], attributes: Object.fromEntries(semanticKeys.map(key => [key, { default: null, parseHTML: element => element.getAttribute(key === 'anchorId' ? 'id' : key), renderHTML: attrs => attrs[key] === null ? {} : semanticHtml({ [key]: attrs[key] }) }])) }]; } }),
   ...[['preservedInline', 'span', 'inline*', true], ['preservedTextBlock', 'div', 'inline*', false], ['preservedBlock', 'div', 'block*', false]].map(([name, tag, content, inline]) => Node.create({
     name, group: inline ? 'inline' : 'block', inline, content,
@@ -191,7 +208,7 @@ const validUrl = (value) => {
 };
 function stored(n) {
   const keys =
-    preservedTypes.includes(n.type) ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type)
+    imageTypes.includes(n.type) ? imageKeys : n.type === 'assetLink' ? assetLinkKeys : preservedTypes.includes(n.type) ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type)
       ? externalVideoKeys
       : n.type === 'link'
         ? ['href', 'target', 'title']
@@ -211,7 +228,7 @@ function stored(n) {
     ...(n.marks ? { marks: n.marks.map(stored) } : {}),
   };
 }
-export function convertBody(html, field = 'content', { normalizeLegacyNewTarget = false, preserveLegacyContainers = false, archiveLegacyAttributes = false, dedupeLegacyAnchor = false } = {}) {
+export function convertBody(html, field = 'content', { normalizeLegacyNewTarget = false, preserveLegacyContainers = false, archiveLegacyAttributes = false, dedupeLegacyAnchor = false, mediaResolver, legacyId } = {}) {
   if (typeof html !== 'string') return { issues: [fail('invalid_text', field, typeof html)] };
   const document = new dom.window.DOMParser().parseFromString(html, 'text/html');
   const transformations = [];
@@ -228,10 +245,14 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
   }
   const issues = [],
     references = [];
+  if (mediaResolver) {
+    try { rewriteBodyMedia(document, mediaResolver, legacyId, field, transformations, references); } catch (error) { return { issues: [fail(error.message, field, 'media mapping failed')], references, transformations }; }
+  }
   const allowed = new Set(
     'span iframe p br wbr strong b em i u s strike a blockquote hr h2 h3 h4 ul ol li'.split(' '),
   );
   if (preserveLegacyContainers) allowed.add('div');
+  if (mediaResolver) allowed.add('img');
   // Inspect head too: parseFromString can move unsupported source elements there.
   for (const [elementIndex, el] of [...document.querySelectorAll('*')].entries()) {
     const tag = el.localName;
@@ -256,6 +277,8 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
         references.push({ field, tag, attribute: attr.name, url: attr.value });
       if (
         !(preserveLegacyContainers && ['p', 'h2', 'h3', 'h4', 'span', 'div'].includes(tag) && ['id', 'lang', 'dir'].includes(attr.name)) &&
+        !(mediaResolver && ['img','a'].includes(tag) && attr.name === 'data-paf-asset') &&
+        !(mediaResolver && tag === 'img' && ['src','alt','title','width','height','class','loading','decoding','srcset','sizes'].includes(attr.name)) &&
         !(tag === 'a' && ['href', 'target', 'rel', 'title'].includes(attr.name)) &&
         !(tag === 'ol' && attr.name === 'start') &&
         !(['span', 'strong', 'b'].includes(tag) && attr.name === 'style') &&
@@ -293,7 +316,7 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
         issues.push(fail('invalid_video', field, error.message));
       }
     }
-    if (tag === 'a' && (!validUrl(el.getAttribute('href') ?? '') || !el.textContent))
+    if (tag === 'a' && (!validUrl(el.getAttribute('href') ?? '') || (!el.textContent && !el.querySelector('img[data-paf-asset]'))))
       issues.push(fail('unsupported_link', field, el.getAttribute('href')));
     if (tag === 'a' && isOwnAttachment(el.getAttribute('href') ?? ''))
       issues.push(fail('unresolved_attachment_link', field, el.getAttribute('href')));
@@ -302,6 +325,8 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
   }
   if (issues.length) return { issues, references, transformations };
   const previous = { window: globalThis.window, document: globalThis.document };
+  const previousMediaPath = mediaPath;
+  if (mediaResolver) mediaPath = mediaResolver.path;
   try {
     globalThis.window = dom.window;
     globalThis.document = dom.window.document;
@@ -327,6 +352,7 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
       function walk(node) {
         if (node.nodeType === 3) return node.textContent;
         if (node.nodeType !== 1) return '';
+        if (node.localName === 'img') return `\u0000image:${JSON.stringify(Object.entries(JSON.parse(node.getAttribute('data-paf-asset'))).sort())}\u0000`;
         if (node.localName === 'br') return '\n';
         if (node.localName === 'iframe')
           return `\n\u0000video:${JSON.stringify(videoFromElement(node))}\u0000\n`;
@@ -363,7 +389,7 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
     }
     const links = (d) =>
       [...d.body.querySelectorAll('a')].map((a) => ({
-        href: a.getAttribute('href'),
+        href: a.hasAttribute('data-paf-asset') ? JSON.parse(a.getAttribute('data-paf-asset')).assetId : a.getAttribute('href'),
         target: a.getAttribute('target') || '_self',
         title: a.getAttribute('title'),
         text: normalize(a),
@@ -374,6 +400,7 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
     const counts = (d) =>
       [
         'a',
+        'img',
         'br',
         'wbr',
         'iframe',
@@ -409,6 +436,7 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
   } catch (error) {
     return { issues: [fail('body_conversion_failed', field, error.message)], references, transformations };
   } finally {
+    mediaPath = previousMediaPath;
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) delete globalThis[key];
       else globalThis[key] = value;
@@ -436,7 +464,7 @@ function plain(html, field, issues, references, transformations, legacyId) {
   for (const p of d.body.querySelectorAll('p')) p.append('\n');
   return d.body.textContent.trim();
 }
-export function prepare(snapshot, sourceHash, { emptyDraftSlugIds = new Set() } = {}) {
+export function prepare(snapshot, sourceHash, { emptyDraftSlugIds = new Set(), mediaResolver } = {}) {
   if (snapshot.schemaVersion !== 1 || !snapshot.content || !snapshot.counts || !snapshot.source)
     throw Error('invalid_snapshot');
   if (Object.keys(snapshot.content).some((k) => !(k in fields)))
@@ -485,7 +513,7 @@ export function prepare(snapshot, sourceHash, { emptyDraftSlugIds = new Set() } 
         return ids;
       }
       function body(k) {
-        const result = convertBody(raw[k], k, { preserveLegacyContainers: true, archiveLegacyAttributes: true, dedupeLegacyAnchor: group === 'blogs' && raw.id === 10297 });
+        const result = convertBody(raw[k], k, { preserveLegacyContainers: true, archiveLegacyAttributes: true, dedupeLegacyAnchor: group === 'blogs' && raw.id === 10297, mediaResolver, legacyId: raw.id });
         transformations.push(...(result.transformations ?? []));
         issues.push(...result.issues);
         references.push(...(result.references ?? []));
@@ -582,7 +610,13 @@ export function prepare(snapshot, sourceHash, { emptyDraftSlugIds = new Set() } 
         };
         if (raw.media_pdf_url !== false && text('media_pdf_url')) {
           references.push({ field: 'media_pdf_url', url: raw.media_pdf_url });
-          issues.push(fail('unresolved_attachment', 'media_pdf_url', raw.media_pdf_url));
+          try {
+            if (!mediaResolver) throw Error('unresolved_attachment');
+            const e = mediaResolver.resolve(raw.media_pdf_url, raw.id);
+            if (e.kind !== 'document' || e.disposition === 'excluded') throw Error('invalid_document_reference');
+            draft.attachmentAssetIds.push(e.assetId);
+            transformations.push({field:'media_pdf_url',from:raw.media_pdf_url,to:e.assetId,reason:'registered-attachment-field'});
+          } catch { issues.push(fail('unresolved_attachment', 'media_pdf_url', raw.media_pdf_url)); }
         }
       } else if (group === 'channels')
         draft = {

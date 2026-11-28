@@ -25,7 +25,7 @@ ajv.addSchema(
     ),
   ),
 );
-const validateAsset = ajv.compile(
+export const validateAsset = ajv.compile(
   JSON.parse(
     await readFile(
       new URL(
