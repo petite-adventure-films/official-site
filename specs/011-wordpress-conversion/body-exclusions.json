@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "wordpress-body-exclusions/v1",
+  "images": [
+    {
+      "articleId": 4772,
+      "sourceUrl": "https://ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif",
+      "attributes": {"class": "ajT", "src": "https://ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif"},
+      "sha256": "b1442e85b03bdcaf66dc58c7abb98745dd2687d86350be9a298a1d9382ac849b",
+      "bytes": 43,
+      "width": 1,
+      "height": 1,
+      "alpha": 0,
+      "decision": "exclude-from-body-preserve-original",
+      "approval": "user-approved 2026-11-28"
+    }
+  ]
+}

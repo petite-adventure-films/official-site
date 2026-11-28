@@ -99,20 +99,25 @@ export function createBodyRenderer(
         .join(' ');
       const wrapper = node.type === 'inlineExternalVideo' ? 'span' : 'div';
       const display = node.type === 'inlineExternalVideo' ? 'display:inline-block;' : '';
-      return `<${wrapper} style="${display}width:${String(width)}px;max-width:100%;aspect-ratio:${String(width)}/${String(height)}"><iframe ${htmlAttrs} loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%"></iframe></${wrapper}>`;
+      return `<${wrapper} style="${display}width:${String(width)}px;max-width:100%;aspect-ratio:${String(width)}/${String(height)}"><iframe ${htmlAttrs} ${node.attrs.loading === undefined ? 'loading="lazy" ' : ''}referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%"></iframe></${wrapper}>`;
     }
     if (imageTypes.includes(node.type))
       return renderMarks(
         `<img${htmlAttributes({ ...imageAttributes(node.attrs ?? {}, assetPath), ...(node.type === 'inlineAssetImage' ? { style: 'display:inline' } : {}) })}>`,
         node.marks ?? [],
       );
-    if (node.type === 'hardBreak') return '<br>';
-    if (node.type === 'wordBreak') return '<wbr>';
+    if (node.type === 'hardBreak') return renderMarks('<br>', node.marks ?? []);
+    if (node.type === 'wordBreak') return renderMarks('<wbr>', node.marks ?? []);
     if (node.type === 'horizontalRule') return '<hr>';
     if (node.type === 'text') return renderMarks(escape(node.text), node.marks ?? []);
     const level = Number(node.attrs?.level);
     if (preservedTypes.includes(node.type)) {
-      const tag = node.type === 'preservedInline' ? 'span' : 'div';
+      const tag =
+        node.type === 'preservedStrong'
+          ? 'strong'
+          : node.type === 'preservedInline'
+            ? 'span'
+            : 'div';
       const attrs = Object.entries(containerHtml(node.attrs ?? {}))
         .map(([key, value]) => ` ${key}="${escape(value)}"`)
         .join('');

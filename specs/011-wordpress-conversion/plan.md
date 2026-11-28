@@ -37,3 +37,7 @@
 ブランチ `codex/issue-492-asset-body-conversion` は最新 `version-4` から分岐し、同じ統合先へ戻す。登録台帳を入力として、画像の元位置をblock/inlineノードで保持する。寸法・title・既知WordPress class・loading/decoding・srcset/sizesは記事ごとの属性として保持し、実体metadataと混ぜない。旧classは保全用の限定文字列として保持し、Tailwindとの衝突を避けるためHTML classには出さない。画像とPDFへのリンクはassetKind付き参照とし、target/titleを維持する。未登録URL・未知属性・不正な表示値は停止する。合意済み復旧/除外は元URLと記事IDの両方で制限する。
 
 CMSは既存BodyEditorを継続する（Figma `153:166`、2026-11-28 MCPで定義・画像確認）。画像ボタンと代替テキストダイアログをinline画像にも接続する。外観・共通部品は追加しない。既存BodyEditor案の利用者受入とは区別して、保存・再読込と参照保持をブラウザで検証する。レスポンシブ候補も保存時・公開manifest作成時のasset検査に含める。40MiBの公開manifest制限、実記事の取込、旧URL移行と最終同期は別の残条件。
+
+## 残12件の解消（ #492 、2026-11-28）
+
+ブランチ `codex/issue-492-remaining-body-exceptions` は最新 `version-4` から分岐し同じ統合先へ戻す。strong内リンクはpreservedStrongノード、隣接リンクは保存用legacyBoundaryで境界を維持する。内部マーカーは公開HTMLへ出さない。記号の読み上げ名はpreservedInlineのariaLabelに保持し、role=img付きspanで出す。iframe loadingはlazy/eagerだけ許可する。未知属性・構造差の停止条件は維持する。CMSは既存BodyEditor（Figma `153:166`、2026-11-28 MCP確認）を継続し、操作部品や外観を追加しない。全件保存validatorと代表編集・再表示・ローカル公開で検証する。[結果と未完了](body-exceptions-20261128.md)。

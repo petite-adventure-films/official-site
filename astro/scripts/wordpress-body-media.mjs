@@ -12,6 +12,7 @@ const decisions = JSON.parse(
     ),
   ),
 ).decisions;
+const exclusions = JSON.parse(await readFile(new URL('../../specs/011-wordpress-conversion/body-exclusions.json', import.meta.url))).images;
 const check = (ok, code) => {
   if (!ok) throw Error(code);
 };
@@ -125,6 +126,11 @@ export function rewriteBodyMedia(
   check(!document.querySelector('[data-paf-asset]'), 'untrusted_asset_marker');
   for (const img of [...document.querySelectorAll('img')]) {
     const original = img.outerHTML;
+    const exclusion = exclusions.find(e => e.articleId === legacyId && e.sourceUrl === img.getAttribute('src'));
+    if (exclusion) {
+      check(img.attributes.length === Object.keys(exclusion.attributes).length && Object.entries(exclusion.attributes).every(([key,value])=>img.getAttribute(key) === value) && !img.closest('a'), 'exclusion_source_changed');
+      record(img,original,null,'approved-transparent-image-exclusion');references.push({field,tag:'img',attribute:'src',url:exclusion.sourceUrl});img.remove();continue;
+    }
     check(
       [...img.attributes].every((a) =>
         [

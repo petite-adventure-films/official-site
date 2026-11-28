@@ -405,6 +405,11 @@
                 "_blank",
                 "_self"
               ]
+            },
+            "legacyBoundary": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
             }
           },
           "required": [
@@ -466,6 +471,9 @@
         },
         {
           "$ref": "#/$defs/inlineAssetImage"
+        },
+        {
+          "$ref": "#/$defs/preservedStrong"
         }
       ]
     },
@@ -640,6 +648,11 @@
                 "_self",
                 "_blank"
               ]
+            },
+            "legacyBoundary": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
             }
           },
           "required": [
@@ -707,6 +720,12 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 99999
+            },
+            "loading": {
+              "enum": [
+                "lazy",
+                "eager"
+              ]
             }
           },
           "required": [
@@ -796,6 +815,12 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 99999
+            },
+            "loading": {
+              "enum": [
+                "lazy",
+                "eager"
+              ]
             }
           },
           "required": [
@@ -860,6 +885,11 @@
             },
             "fontSize": {
               "const": "medium"
+            },
+            "ariaLabel": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
             }
           }
         },
@@ -1090,6 +1120,71 @@
         "attrs"
       ],
       "additionalProperties": false
+    },
+    "preservedStrong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "preservedStrong"
+        },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "anchorId": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^[^\\s\\u0000-\\u001f\\u007f]+$"
+            },
+            "lang": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$"
+            },
+            "dir": {
+              "enum": [
+                "auto",
+                "ltr",
+                "rtl"
+              ]
+            },
+            "color": {
+              "enum": [
+                "#0000ff",
+                "#ff0000",
+                "#000000",
+                "#0d8bd4",
+                "#d90000",
+                "#0b75b3"
+              ]
+            },
+            "fontFamily": {
+              "enum": [
+                "Times New Roman,serif",
+                "\uff2d\uff33 \uff30\u660e\u671d,serif"
+              ]
+            },
+            "fontSize": {
+              "const": "medium"
+            }
+          }
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/inline"
+          }
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mark"
+          }
+        }
+      }
     }
   }
 }

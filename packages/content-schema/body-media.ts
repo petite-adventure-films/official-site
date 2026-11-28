@@ -13,7 +13,7 @@ export const imageKeys = [
   'sources',
   'sizes',
 ];
-export const assetLinkKeys = ['assetId', 'assetKind', 'target', 'title'];
+export const assetLinkKeys = ['assetId', 'assetKind', 'target', 'title', 'legacyBoundary'];
 export function imageAttributes(
   attrs: Record<string, any>,
   path: (id: string) => string,

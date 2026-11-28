@@ -27,10 +27,11 @@ function isMixedVideo(element) {
 function legacyAttrs(element) {
   const attrs = Object.fromEntries(semanticKeys.map(key => [key, element.getAttribute(key === 'anchorId' ? 'id' : key)]).filter(([, value]) => value !== null));
   semanticHtml(attrs);
-  return { ...attrs, ...(element.hasAttribute('style') ? legacyStyleFromElement(element) : {}) };
+  return { ...attrs, ...(element.hasAttribute('aria-label') ? {ariaLabel:element.getAttribute('aria-label')} : {}), ...(element.hasAttribute('style') ? legacyStyleFromElement(element) : {}) };
 }
 let mediaPath = () => { throw Error('unresolved_media_path'); };
 const extensions = [
+  Extension.create({name:'legacyLinkBoundaries',addGlobalAttributes(){return [{types:['link'],attributes:{legacyBoundary:{default:null,parseHTML:el=>el.hasAttribute('data-paf-boundary')?Number(el.getAttribute('data-paf-boundary')):null,renderHTML:attrs=>attrs.legacyBoundary==null?{}:{'data-paf-boundary':attrs.legacyBoundary}}}}];}}),
   ...[['inlineAssetImage', true], ['assetImage', false]].map(([name, inline]) => Node.create({
     name, group: inline ? 'inline' : 'block', inline, atom: true,
     addAttributes() { return Object.fromEntries(imageKeys.map(key => [key, {default: null}])); },
@@ -43,13 +44,13 @@ const extensions = [
   Mark.create({name:'assetLink', priority:1100, excludes:'link assetLink', inclusive:false,
     addAttributes(){return Object.fromEntries(assetLinkKeys.map(key=>[key,{default:null}]));},
     parseHTML(){return [{tag:'a[data-paf-asset]',getAttrs:el=>JSON.parse(el.getAttribute('data-paf-asset'))}];},
-    renderHTML({mark}){const attrs=Object.fromEntries(Object.entries(mark.attrs).filter(([,v])=>v!=null));return ['a',{...assetLinkAttributes(attrs,mediaPath),'data-paf-asset':JSON.stringify(attrs)},0];}
+    renderHTML({mark}){const attrs=Object.fromEntries(Object.entries(mark.attrs).filter(([,v])=>v!=null));return ['a',{...assetLinkAttributes(attrs,mediaPath),'data-paf-asset':JSON.stringify(attrs), ...(attrs.legacyBoundary == null ? {} : {'data-paf-boundary':attrs.legacyBoundary})},0];}
   }),
   Extension.create({ name: 'legacySemantics', addGlobalAttributes() { return [{ types: ['paragraph', 'heading'], attributes: Object.fromEntries(semanticKeys.map(key => [key, { default: null, parseHTML: element => element.getAttribute(key === 'anchorId' ? 'id' : key), renderHTML: attrs => attrs[key] === null ? {} : semanticHtml({ [key]: attrs[key] }) }])) }]; } }),
-  ...[['preservedInline', 'span', 'inline*', true], ['preservedTextBlock', 'div', 'inline*', false], ['preservedBlock', 'div', 'block*', false]].map(([name, tag, content, inline]) => Node.create({
-    name, group: inline ? 'inline' : 'block', inline, content,
-    addAttributes() { return Object.fromEntries([...semanticKeys, ...legacyStyleKeys].map(key => [key, { default: null }])); },
-    parseHTML() { return [{ tag: `${tag}[data-paf-node="${name}"]`, getAttrs: legacyAttrs }]; },
+  ...[["preservedStrong", 'strong', 'inline*', true], ['preservedInline', 'span', 'inline*', true], ['preservedTextBlock', 'div', 'inline*', false], ['preservedBlock', 'div', 'block*', false]].map(([name, tag, content, inline]) => Node.create({
+    name, priority:name === 'preservedStrong' ? 1100 : 100, group: inline ? 'inline' : 'block', inline, content,
+    addAttributes() { return Object.fromEntries([...semanticKeys, ...legacyStyleKeys, ...(name === 'preservedInline' ? ['ariaLabel'] : [])].map(key => [key, { default: null }])); },
+    parseHTML() { return [{ tag: `${tag}[data-paf-node="${name}"]`, priority: name === 'preservedStrong' ? 1000 : 50, getAttrs: legacyAttrs }]; },
     renderHTML({ node }) { return [tag, { ...containerHtml(Object.fromEntries(Object.entries(node.attrs).filter(([, value]) => value !== null))), 'data-paf-node': name }, 0]; },
   })),
   Node.create({
@@ -208,10 +209,10 @@ const validUrl = (value) => {
 };
 function stored(n) {
   const keys =
-    imageTypes.includes(n.type) ? imageKeys : n.type === 'assetLink' ? assetLinkKeys : preservedTypes.includes(n.type) ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type)
+    imageTypes.includes(n.type) ? imageKeys : n.type === 'assetLink' ? assetLinkKeys : preservedTypes.includes(n.type) ? [...semanticKeys, ...legacyStyleKeys, ...(n.type === 'preservedInline' ? ['ariaLabel'] : [])] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type)
       ? externalVideoKeys
       : n.type === 'link'
-        ? ['href', 'target', 'title']
+        ? ['href', 'target', 'title', 'legacyBoundary']
         : n.type === 'heading'
           ? ['level', ...semanticKeys]
           : n.type === 'orderedList'
@@ -269,7 +270,7 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
         ),
       );
     for (const attr of [...el.attributes]) {
-      if (archiveLegacyAttributes && ['p', 'span', 'div', 'a'].includes(tag) && ['class', 'data-saferedirecturl', 'data-lynx-mode', 'data-lynx-uri', 'data-ft', 'data-tooltip', 'tabindex', 'aria-live'].includes(attr.name)) {
+      if (archiveLegacyAttributes && ['p', 'span', 'div', 'a'].includes(tag) && ['class', 'data-saferedirecturl', 'data-lynx-mode', 'data-lynx-uri', 'data-ft', 'data-tooltip', 'tabindex', 'aria-live', 'data-aria-label-part', 'data-testid'].includes(attr.name)) {
         transformations.push({ field, elementIndex, tag, attribute: attr.name, from: attr.value, to: 'source.raw', reason: '#490 user-approved 2026-11-25; not applied to public HTML' });
         el.removeAttribute(attr.name); continue;
       }
@@ -279,12 +280,13 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
         !(preserveLegacyContainers && ['p', 'h2', 'h3', 'h4', 'span', 'div'].includes(tag) && ['id', 'lang', 'dir'].includes(attr.name)) &&
         !(mediaResolver && ['img','a'].includes(tag) && attr.name === 'data-paf-asset') &&
         !(mediaResolver && tag === 'img' && ['src','alt','title','width','height','class','loading','decoding','srcset','sizes'].includes(attr.name)) &&
+        !(preserveLegacyContainers && tag === 'span' && attr.name === 'aria-label' && el.children.length === 0 && el.textContent === '#' && attr.value.length > 0 && attr.value.length <= 2000) &&
         !(tag === 'a' && ['href', 'target', 'rel', 'title'].includes(attr.name)) &&
         !(tag === 'ol' && attr.name === 'start') &&
         !(['span', 'strong', 'b'].includes(tag) && attr.name === 'style') &&
         !(
           tag === 'iframe' &&
-          ['src', 'title', 'width', 'height', 'frameborder', 'allowfullscreen'].includes(attr.name)
+          ['src', 'title', 'width', 'height', 'frameborder', 'allowfullscreen', 'loading'].includes(attr.name)
         )
       )
         issues.push(fail('unsupported_attribute', field, `${tag}.${attr.name}`));
@@ -333,9 +335,16 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
     // Lift a video-only paragraph before parsing a block video, avoiding an invented empty paragraph.
     // Work on a copy; the source DOM and preserved raw HTML remain unchanged.
     const editable = document.body.cloneNode(true);
+    for (const [index, anchor] of [...editable.querySelectorAll('a')].entries()) {
+      const neighbor = direction => { let node = anchor[direction]; while(node?.nodeType===3 && !node.textContent.trim()) node=node[direction]; return node?.nodeType===1 && node.localName==='a'; };
+      if (!neighbor('previousSibling') && !neighbor('nextSibling')) continue;
+      anchor.setAttribute('data-paf-boundary', String(index));
+      if (anchor.hasAttribute('data-paf-asset')) { const attrs=JSON.parse(anchor.getAttribute('data-paf-asset')); attrs.legacyBoundary=index; anchor.setAttribute('data-paf-asset',JSON.stringify(attrs)); }
+    }
     for (const frame of editable.querySelectorAll('p > iframe'))
       if (!isMixedVideo(frame)) frame.parentElement.replaceWith(frame);
     if (preserveLegacyContainers) {
+      for (const strong of [...editable.querySelectorAll('strong')].filter(el=>el.querySelector('a'))) strong.setAttribute('data-paf-node','preservedStrong');
       for (const el of editable.querySelectorAll('span,div')) {
         const hasBlocks = [...el.children].some(child => ['div','p','h2','h3','h4','blockquote','ul','ol','hr','iframe'].includes(child.localName));
         if (el.localName === 'div' && hasBlocks && [...el.childNodes].some(child => child.nodeType === 3 && child.textContent.trim())) throw Error('mixed_legacy_container');
@@ -378,6 +387,8 @@ export function convertBody(html, field = 'content', { normalizeLegacyNewTarget 
       }
       visit(body); return result;
     }
+    const labels = d => [...d.querySelectorAll('span[aria-label]')].map(el=>({label:el.getAttribute('aria-label'),text:el.textContent}));
+    if (JSON.stringify(labels(document)) !== JSON.stringify(labels(output))) throw Error('accessible_label_changed');
     if (JSON.stringify(styledCharacters(document.body)) !== JSON.stringify(styledCharacters(output.body))) throw Error('style_changed');
     if (preserveLegacyContainers) {
       const semantics = d => [...d.body.querySelectorAll('[id],[lang],[dir]')].map(el => ({ tag: el.localName, attrs: Object.fromEntries(['id','lang','dir'].filter(key => el.hasAttribute(key)).map(key => [key, el.getAttribute(key)])), text: normalize(el) }));

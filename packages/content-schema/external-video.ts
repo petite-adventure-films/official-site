@@ -1,8 +1,8 @@
 export type ExternalVideo = {
   provider: 'youtube' | 'vimeo'; videoId: string; sourceUrl: string;
-  title?: string; width?: number; height?: number;
+  title?: string; width?: number; height?: number; loading?: 'lazy' | 'eager';
 };
-export const externalVideoKeys = ['provider', 'videoId', 'sourceUrl', 'title', 'width', 'height'];
+export const externalVideoKeys = ['provider', 'videoId', 'sourceUrl', 'title', 'width', 'height', 'loading'];
 export function parseVideoSource(source: unknown): Pick<ExternalVideo, 'provider' | 'videoId' | 'sourceUrl'> {
   if (typeof source !== 'string' || /[\u0000-\u0020\u007f\\]/.test(source)) throw new Error('invalid_video_url');
   const match = /^https:\/\/(www\.youtube\.com\/embed\/([A-Za-z0-9_-]{11})|player\.vimeo\.com\/video\/([0-9]+))(?:\?[^#]*)?$/.exec(source);
@@ -26,12 +26,15 @@ export function validExternalVideo(value: unknown): value is ExternalVideo {
   try {
     const parsed = parseVideoSource(v.sourceUrl);
     return parsed.provider === v.provider && parsed.videoId === v.videoId &&
+      (v.loading === undefined || ['lazy', 'eager'].includes(v.loading as string)) &&
       (v.title === undefined || (typeof v.title === 'string' && v.title.length <= 2000)) &&
       ['width', 'height'].every(key => v[key] === undefined || (typeof v[key] === 'number' && Number.isInteger(v[key]) && v[key] > 0 && v[key] <= 99999));
   } catch { return false; }
 }
 export function videoFromElement(element: Element): ExternalVideo {
   const result: ExternalVideo = parseVideoSource(element.getAttribute('src'));
+  const loading = element.getAttribute('loading');
+  if (loading !== null) result.loading = loading as ExternalVideo['loading'];
   const title = element.getAttribute('title');
   if (title !== null) result.title = title;
   for (const key of ['width', 'height'] as const) {
@@ -48,6 +51,7 @@ export function videoFrameAttributes(value: unknown, fallbackTitle = false): Rec
   if (!validExternalVideo(value)) throw new Error('invalid_video_attributes');
   return {
     src: value.sourceUrl,
+    ...(value.loading !== undefined ? {loading: value.loading} : {}),
     ...(value.title !== undefined ? { title: value.title } : fallbackTitle ? { title: value.provider === 'youtube' ? 'YouTube 動画' : 'Vimeo 動画' } : {}),
     ...(value.width !== undefined ? { width: value.width } : {}),
     ...(value.height !== undefined ? { height: value.height } : {}),

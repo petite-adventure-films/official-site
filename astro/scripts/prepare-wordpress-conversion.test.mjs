@@ -334,3 +334,13 @@ test('never invents empty paragraphs around videos or silently splits mixed vide
   assert.deepEqual(mixed.body.doc.content[0].content.map(n => n.type), ['text', 'inlineExternalVideo', 'text']);
   assert.equal(mixed.body.doc.content.length, 1);
 });
+
+test('retains loading and accessible symbol names while archiving known copy-only data', () => {
+ const r=convertBody('<p data-aria-label-part="0">本文<span aria-label="ハッシュタグ">#</span></p><div data-testid="post_message">末尾</div><p><iframe src="https://www.youtube.com/embed/abcdefghijk" loading="lazy"></iframe></p>','content',{preserveLegacyContainers:true,archiveLegacyAttributes:true});
+ assert.deepEqual(r.issues,[]);assert.equal(r.body.doc.content[0].content[1].attrs.ariaLabel,'ハッシュタグ');assert.equal(r.body.doc.content.at(-1).attrs.loading,'lazy');assert.equal(r.transformations.filter(t=>t.attribute.startsWith('data-')).length,2);
+ for(const html of ['<span aria-label="label">文章</span>','<iframe src="https://www.youtube.com/embed/abcdefghijk" loading="unknown"></iframe>','<p data-unknown="value">本文</p>'])assert.ok(convertBody(html,'content',{preserveLegacyContainers:true,archiveLegacyAttributes:true}).issues.length);
+});
+test('preserves a strong boundary around a link and keeps adjacent identical links separate',()=>{
+ const r=convertBody('<p><strong>前<a href="https://example.org/">中</a>後</strong> <a href="https://example.org/">一</a><a href="https://example.org/">二</a></p>','content',{preserveLegacyContainers:true});
+ assert.deepEqual(r.issues,[]);assert.equal(r.body.doc.content[0].content[0].type,'preservedStrong');const links=r.body.doc.content[0].content.filter(n=>n.marks?.some(m=>m.type==='link'));assert.equal(links.length,2);assert.notEqual(links[0].marks[0].attrs.legacyBoundary,links[1].marks[0].attrs.legacyBoundary);
+});
