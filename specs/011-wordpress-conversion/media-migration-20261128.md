@@ -57,7 +57,7 @@ WXRとの完全URL一致は559。残る185はHTTP/HTTPS差で、双方の取得�
 
 メディア一覧用の登録名には取得キャッシュのhashファイル名を使い、元ファイル名・URLと記事別用途は元台帳へ保持する。altや本文上の寸法を実体の共通属性に統合しない。
 
-専用環境で3実体を保存・再読込・assetId確定済み。同じ3実体を再実行し、assetIdと4URL対応が完全一致した。全6,472実体の登録は実行中。完了結果は後述の実行記録で確定する。
+専用環境で3実体を保存・再読込・assetId確定済み。同じ3実体を再実行し、assetIdと4URL対応が完全一致した。全6,472実体・6,820 URLの登録完了。約1,300実体の確定後に一度中断し、台帳を使って同じassetIdで再開した。登録成果のSHA-256は `3df9862dc9fa451d3db1652fd9263c7da8f9ad2f312a8c97141be553a7d9b4c7`。全asset/v1検査済みの引渡し台帳は独立2回でbyte一致し、SHA-256は `aca4a69d2499a7db71ebbe4c2aa733fb2ede11d9dfdd7da61a9b6f608d21f040`。
 
 ## 再現
 
@@ -94,3 +94,24 @@ node cms/scripts/register-wordpress-media.mjs \
 ## 正式asset対応の引渡し契約
 
 `prepare-wordpress-asset-map.mjs` は完全登録成果と実体検証成果のhash・全URL・全実体の一致、asset/v1 schema、専用環境への紐付けを確認する。不完全な少数試験成果、別環境、重複/未知assetId、実体metadata差は拒否する。出力は旧URL→確定assetId→専用配信URLと復旧/除外理由のローカル台帳で、 #492 の入力となる。登録結果の取得名/検証名/出力名の3引数で実行する。
+
+## 保全とローカル復元
+
+専用D1のSQL書出しを `.local/wordpress-conversion/migration-db-20261128.sql`（0600、11,903,193 bytes）へ保存した。SHA-256は `3a5c56aed93b8fc49bfb6aea8601b76b60459af29b8ad9949a0d844c12fc1914`。元の取得キャッシュと復旧元実体も保持している。
+
+SQLを独立したインメモリSQLiteへ復元し、全6,472 assetレコードが登録成果と一致すること、URL台帳6,820件、記事0件・公開履歴0件、integrity_check成功・外部キー違反0を確認した。リモートD1/R2への復元、外付け/独立クラウドの保管、定期運用の受入とは区別し、 #474 / #509 / #513 へ引き継ぐ。
+
+D1書出しはDBを一時的に利用不能にする場合があるため、今後は記事操作や配信検証と重ねない。Wranglerの書出しログには期限付きダウンロードURLが含まれるので、再実行時は標準出力もGit対象外の0600ローカルログへ閉じる。
+
+## 全件配信検査
+
+`audit-wordpress-media.mjs` でD1の全asset JSON・全URL台帳を登録成果と照合し、未確定予約0・記事0・公開履歴0を確認。匿名HTTPは初回6,457件成功・15件未完了。初回成果のhashと成功記録を検査して15件だけ再試行し、全6,472件のsize/SHA-256/MIME/nosniffとPDFのdownload指定を確認した。非添付3ルートは404。初回未完了の原因は特定していない。再検査成果SHA-256: `486fc18ee3e5601e9cb05cad6018830a8f9cdb1c1f9a383bbfab9c5cb1bb2f8c`。
+
+```sh
+node cms/scripts/audit-wordpress-media.mjs \
+  .local/wordpress-conversion/registered-new.json .local/wordpress-conversion/audit-new.json
+# 失敗分だけ再試行。元の成功記録とregistration hashを照合して引き継ぐ:
+node cms/scripts/audit-wordpress-media.mjs \
+  .local/wordpress-conversion/registered-new.json .local/wordpress-conversion/audit-retry.json \
+  --retry .local/wordpress-conversion/audit-new.json
+```
