@@ -24,7 +24,8 @@
     "test:e2e:serve": "node --import ./e2e/fixed-date.mjs ./node_modules/astro/bin/astro.mjs build --outDir .e2e-dist && astro preview --outDir .e2e-dist --host 127.0.0.1 --port 4325 --ignore-lock",
     "export:cms": "node scripts/export-cms.mjs",
     "dev:cms": "node scripts/dev-cms.mjs",
-    "test:e2e:cms": "playwright test --config playwright.cms.config.ts"
+    "test:e2e:cms": "playwright test --config playwright.cms.config.ts",
+    "test:wordpress-media-migration": "node --test scripts/prepare-wordpress-media-usage.test.mjs scripts/verify-wordpress-media-usage.test.mjs scripts/prepare-wordpress-asset-map.test.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.9",

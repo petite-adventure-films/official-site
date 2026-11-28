@@ -1,0 +1,21 @@
+// User approved direct attachment access on 2026-11-28; no article routes or bucket listing.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "paf-cms-migration-media",
+  "main": "worker/migration-media.ts",
+  "compatibility_date": "2026-07-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "account_id": "53b7ac20e59cefa91e5b88831768a248",
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "paf-cms-migration-db",
+      "database_id": "be43518c-b1b2-4a08-b04a-1703dee825f2",
+    },
+  ],
+  "r2_buckets": [
+    { "binding": "MEDIA", "bucket_name": "paf-cms-migration-media" },
+  ],
+}
