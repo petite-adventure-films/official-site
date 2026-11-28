@@ -10,7 +10,7 @@ export const ExternalVideoNode = Node.create({
     const attrs = Object.fromEntries(Object.entries(node.attrs).filter(([, value]) => value !== null));
     const frame = videoFrameAttributes(attrs, true);
     const width = frame.width ?? 560, height = frame.height ?? 315;
-    return [node.type.name === 'inlineExternalVideo' ? 'span' : 'div', { style: `${node.type.name === 'inlineExternalVideo' ? 'display:inline-block;' : ''}width:${width}px;max-width:100%;aspect-ratio:${width}/${height}` }, ['iframe', { ...frame, loading: 'lazy', referrerpolicy: 'strict-origin-when-cross-origin', style: 'width:100%;height:100%' }]];
+    return [node.type.name === 'inlineExternalVideo' ? 'span' : 'div', { style: `${node.type.name === 'inlineExternalVideo' ? 'display:inline-block;' : ''}width:${width}px;max-width:100%;aspect-ratio:${width}/${height}` }, ['iframe', { ...frame, loading: frame.loading ?? 'lazy', referrerpolicy: 'strict-origin-when-cross-origin', style: 'width:100%;height:100%' }]];
   },
 });
 

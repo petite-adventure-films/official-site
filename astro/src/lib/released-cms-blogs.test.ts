@@ -16,8 +16,18 @@ async function release(overrides = {}, duplicate = false) {
   const entry = {
     path: '/moved/',
     publishedAt: source.published,
-    content: { ...emptyBlogDraft(), slug: 'moved', title: source.title, categoryId: '2879' },
-    legacy: { id: source.id, slug: source.name, publishedAt: source.published, ...overrides },
+    content: {
+      ...emptyBlogDraft(),
+      slug: 'moved',
+      title: source.title,
+      categoryId: '2879',
+    },
+    legacy: {
+      id: source.id,
+      slug: source.name,
+      publishedAt: source.published,
+      ...overrides,
+    },
   };
   directory = await mkdtemp(join(tmpdir(), 'paf-legacy-render-'));
   const file = join(directory, 'blogs.json');
@@ -73,7 +83,11 @@ test('retains link target and title while escaping attributes and adding safe re
   const link = (attrs: Record<string, unknown>) =>
     render({ type: 'text', text: '<案内>', marks: [{ type: 'link', attrs }] });
   expect(
-    link({ href: 'https://example.com/?a=1&b=2', target: '_blank', title: '資料 "案内"' }),
+    link({
+      href: 'https://example.com/?a=1&b=2',
+      target: '_blank',
+      title: '資料 "案内"',
+    }),
   ).toBe(
     '<a href="https://example.com/?a=1&amp;b=2" target="_blank" rel="noopener noreferrer" title="資料 &quot;案内&quot;">&lt;案内&gt;</a>',
   );
@@ -154,7 +168,11 @@ test('blog and the three article types use the same preserved link output', asyn
               marks: [
                 {
                   type: 'link',
-                  attrs: { href: 'https://example.com/', target: '_blank', title: '説明' },
+                  attrs: {
+                    href: 'https://example.com/',
+                    target: '_blank',
+                    title: '説明',
+                  },
                 },
               ],
             },
@@ -203,10 +221,16 @@ test('renders only validated video URLs and preserves Vimeo access parameters, d
   expect(iframe?.getAttribute('title')).toBe(attrs.title);
   expect(doc.querySelector('div')?.style.aspectRatio).toBe('640/512');
   expect(() =>
-    render({ type: 'externalVideo', attrs: { ...attrs, videoId: 'different' } }),
+    render({
+      type: 'externalVideo',
+      attrs: { ...attrs, videoId: 'different' },
+    }),
   ).toThrow('invalid_blog_release_video');
   expect(() =>
-    render({ type: 'externalVideo', attrs: { ...attrs, sourceUrl: 'javascript:alert(1)' } }),
+    render({
+      type: 'externalVideo',
+      attrs: { ...attrs, sourceUrl: 'javascript:alert(1)' },
+    }),
   ).toThrow('invalid_blog_release_video');
 });
 
@@ -231,7 +255,12 @@ test('renders inline image attributes, responsive asset paths and attachment cli
         marks: [
           {
             type: 'assetLink',
-            attrs: { assetId: 'three', assetKind: 'image', target: '_blank', title: '拡大' },
+            attrs: {
+              assetId: 'three',
+              assetKind: 'image',
+              target: '_blank',
+              title: '拡大',
+            },
           },
         ],
       },
@@ -246,4 +275,99 @@ test('renders inline image attributes, responsive asset paths and attachment cli
   expect(html).toContain('style="display:inline"');
   expect(html).toContain('alt="説明&quot;"');
   expect(html).toContain('</a>後</p>');
+});
+
+test('retains a named symbol, strong container and explicit video loading', async () => {
+  const { createBodyRenderer } = await import('./released-cms-blogs');
+  const render = createBodyRenderer();
+  const html = render({
+    type: 'paragraph',
+    content: [
+      {
+        type: 'preservedStrong',
+        content: [
+          { type: 'text', text: '前' },
+          {
+            type: 'text',
+            text: '中',
+            marks: [
+              {
+                type: 'link',
+                attrs: { href: 'https://example.org/', legacyBoundary: 1 },
+              },
+            ],
+          },
+          { type: 'text', text: '後' },
+        ],
+      },
+      {
+        type: 'preservedInline',
+        attrs: { ariaLabel: '記号' },
+        content: [{ type: 'text', text: '#' }],
+      },
+    ],
+  });
+  expect(html).toContain('<strong>前<a href="https://example.org/">中</a>後</strong>');
+  expect(html).toContain('<span role="img" aria-label="記号">#</span>');
+  expect(html).not.toContain('legacyBoundary');
+  const video = render({
+    type: 'externalVideo',
+    attrs: {
+      provider: 'youtube',
+      videoId: 'abcdefghijk',
+      sourceUrl: 'https://www.youtube.com/embed/abcdefghijk',
+      loading: 'eager',
+    },
+  });
+  expect(video.match(/loading=/g)).toHaveLength(1);
+  expect(video).toContain('loading="eager"');
+});
+
+test.skipIf(!process.env.WP_COMBINED_REPORT)(
+  'preserves actual public strong and adjacent-link boundaries in rendered HTML',
+  async () => {
+    const { createBodyRenderer } = await import('./released-cms-blogs');
+    const file = process.env.WP_COMBINED_REPORT;
+    if (!file) throw new Error('missing_combined_report');
+    const report = JSON.parse(await readFile(file, 'utf8')) as {
+      rows: {
+        legacyId: number;
+        source: { raw: { content: string } };
+        candidate: { body: { doc: Parameters<ReturnType<typeof createBodyRenderer>>[0] } };
+      }[];
+    };
+    for (const id of [18043, 4318]) {
+      const row = report.rows.find((r: { legacyId: number }) => r.legacyId === id);
+      if (!row) throw new Error('missing_public_fixture');
+      const source = new DOMParser().parseFromString(row.source.raw.content, 'text/html');
+      const output = new DOMParser().parseFromString(
+        createBodyRenderer((id) => `/__cms-media/${String(id)}`)(row.candidate.body.doc),
+        'text/html',
+      );
+      for (const selector of ['strong', 'a'])
+        expect(output.querySelectorAll(selector).length).toBe(
+          source.querySelectorAll(selector).length,
+        );
+    }
+  },
+);
+
+test('retains link marks on explicit and discretionary breaks', async () => {
+  const { createBodyRenderer } = await import('./released-cms-blogs');
+  for (const [type, tag] of [
+    ['hardBreak', 'br'],
+    ['wordBreak', 'wbr'],
+  ]) {
+    expect(
+      createBodyRenderer()({
+        type,
+        marks: [
+          {
+            type: 'link',
+            attrs: { href: 'https://example.org/', legacyBoundary: 1 },
+          },
+        ],
+      }),
+    ).toBe(`<a href="https://example.org/"><${tag}></a>`);
+  }
 });

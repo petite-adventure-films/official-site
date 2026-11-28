@@ -180,3 +180,8 @@ test('approved recovery and exclusion are limited to the exact source and approv
     ),
   );
 });
+test('transparent mail spacer exclusion is exact and cannot remove changed article content',()=>{
+ const html='<p>前<img class="ajT" src="https://ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif">後</p>';
+ const options={mediaResolver:createMediaResolver(fixture()),legacyId:4772};assert.ok(convertBody(html+html,'content',options).issues.length);const r=convertBody(html,'content',options);assert.deepEqual(r.issues,[]);assert.equal(r.body.doc.content[0].content[0].text,'前後');assert.ok(r.transformations.some(t=>t.reason==='approved-transparent-image-exclusion'));
+ assert.ok(convertBody(html,'content',{...options,legacyId:1}).issues.length);assert.ok(convertBody(html.replace('class="ajT"','class="ajT" alt="意味のある説明"'),'content',options).issues.length);
+});

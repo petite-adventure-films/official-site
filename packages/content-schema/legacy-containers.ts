@@ -1,6 +1,6 @@
 import { legacyStyleHtml, legacyStyleKeys } from './legacy-text-style.ts';
 export const semanticKeys = ['anchorId', 'lang', 'dir'];
-export const preservedTypes = ['preservedInline', 'preservedBlock', 'preservedTextBlock'];
+export const preservedTypes = ['preservedInline', 'preservedBlock', 'preservedTextBlock', 'preservedStrong'];
 export function validBodyAnchors(node: { attrs?: Record<string, unknown>; content?: any[] }): boolean {
   // IDs owned by the shared public page navigation cannot be claimed by article content.
   const seen = new Set(['nav-toggle', 'nav-menu']);
@@ -22,7 +22,10 @@ export function semanticHtml(attrs: Record<string, unknown>): Record<string, str
   return result;
 }
 export function containerHtml(attrs: Record<string, unknown>): Record<string, string> {
+  const { ariaLabel, ...rest } = attrs;
+  if (ariaLabel !== undefined && (typeof ariaLabel !== 'string' || !ariaLabel || ariaLabel.length > 2000)) throw Error('invalid_accessible_label');
+  attrs = rest;
   const semantics = Object.fromEntries(Object.entries(attrs).filter(([key]) => !legacyStyleKeys.includes(key)));
   const style = Object.fromEntries(Object.entries(attrs).filter(([key]) => legacyStyleKeys.includes(key)));
-  return { ...semanticHtml(semantics), ...(Object.keys(style).length ? legacyStyleHtml(style) : {}) };
+  return { ...(ariaLabel !== undefined ? {role: 'img', 'aria-label': ariaLabel as string} : {}), ...semanticHtml(semantics), ...(Object.keys(style).length ? legacyStyleHtml(style) : {}) };
 }

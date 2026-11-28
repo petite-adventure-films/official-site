@@ -1,5 +1,5 @@
 import { imageTypes, imageKeys, assetLinkKeys } from '../../../../../packages/content-schema/body-media';
-import { LegacySemantics, LegacyContainers } from '../legacy-containers';
+import { LegacySemantics, LegacyContainers, LegacyLinkBoundaries } from '../legacy-containers';
 import { semanticKeys, preservedTypes } from '../../../../../packages/content-schema/legacy-containers';
 import { LegacyTextStyle } from '../legacy-text-style';
 import { legacyStyleKeys } from '../../../../../packages/content-schema/legacy-text-style';
@@ -16,7 +16,7 @@ import { externalVideoKeys } from '../../../../../packages/content-schema/extern
 import { MediaPicker } from './MediaPicker';
 // Drop editor-generated null/default rendering attrs, not content or supported formatting.
 function stored(n: JSONContent): BodyNode {
-  const keys = preservedTypes.includes(n.type ?? '') ? [...semanticKeys, ...legacyStyleKeys] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type ?? '') ? externalVideoKeys : imageTypes.includes(n.type ?? '') ? imageKeys : n.type === 'assetLink' ? assetLinkKeys : n.type === 'link' ? ['href', 'target', 'title'] : n.type === 'heading' ? ['level', ...semanticKeys] : n.type === 'orderedList' ? ['start'] : [];
+  const keys = preservedTypes.includes(n.type ?? '') ? [...semanticKeys, ...legacyStyleKeys, ...(n.type === 'preservedInline' ? ['ariaLabel'] : [])] : n.type === 'paragraph' ? semanticKeys : n.type === 'legacyTextStyle' ? legacyStyleKeys : ['externalVideo', 'inlineExternalVideo'].includes(n.type ?? '') ? externalVideoKeys : imageTypes.includes(n.type ?? '') ? imageKeys : n.type === 'assetLink' ? assetLinkKeys : n.type === 'link' ? ['href', 'target', 'title', 'legacyBoundary'] : n.type === 'heading' ? ['level', ...semanticKeys] : n.type === 'orderedList' ? ['start'] : [];
   const attrs = Object.fromEntries(Object.entries(n.attrs ?? {}).filter(([k, v]) => keys.includes(k) && v != null));
   return { type: n.type!, ...(n.text !== undefined ? { text: n.text } : {}), ...(Object.keys(attrs).length ? { attrs } : {}), ...(n.content ? { content: n.content.map(stored) } : {}), ...(n.marks ? { marks: n.marks.map(stored) } : {}) };
 }
@@ -27,7 +27,7 @@ export function BodyEditor({ value, change, label = '本文', textOnly = false }
   const [link, setLink] = useState<string | null>(null);
   const [mediaKind, setMediaKind] = useState<'image' | 'document' | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
-  const editor = useEditor({ extensions: [...(textOnly ? [] : [AssetImage, InlineAssetImage, AssetLink, ExternalVideoNode, InlineExternalVideoNode, LegacyTextStyle, LegacySemantics, ...LegacyContainers]), WordBreak, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: { openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink } })],
+  const editor = useEditor({ extensions: [...(textOnly ? [] : [AssetImage, InlineAssetImage, AssetLink, ExternalVideoNode, InlineExternalVideoNode, LegacyTextStyle, LegacySemantics, ...LegacyContainers]), WordBreak, LegacyLinkBoundaries, StarterKit.configure({ heading: { levels: [2, 3, 4] }, codeBlock: false, trailingNode: false, link: {openOnClick: false, autolink: false, linkOnPaste: false, isAllowedUri: validLink} })],
     content: value, editable: Boolean(change), shouldRerenderOnTransaction: true,
     editorProps: { attributes: change ? { role: 'textbox', 'aria-label': label, 'aria-multiline': 'true', class: 'cms-body-editor' } : { class: 'cms-body-editor' } },
     onUpdate: ({ editor }) => latest.current?.(stored(editor.getJSON())),
