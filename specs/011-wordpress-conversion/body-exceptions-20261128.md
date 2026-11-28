@@ -14,7 +14,7 @@
 
 2026-11-28、利用者から「この1点を除外し、原本を保全する」の回答を受領。公開記事4772の `https://ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif` は43 bytes、1×1ピクセル、完全透明、altなし。取得bytesのSHA-256は `b1442e85b03bdcaf66dc58c7abb98745dd2687d86350be9a298a1d9382ac849b`。
 
-[除外台帳](body-exclusions.json)に記事ID・URL・全属性・実体検査結果を記録した。対象記事とURLだけでなく属性集合の一致を要求し、リンク内や属性追加の場合は停止する。他記事へ除外を広げない。元HTML/URLは入力とsource.raw/変換記録、実体は `.local/wordpress-conversion/cleardot-20261128.gif` に保全。架空assetIdは登録しない。以前の #493 の8点復旧・1点除外とは別の合意。
+[除外台帳](body-exclusions.json)に記事ID・URL・全属性・実体検査結果を記録した。対象記事とURLだけでなく属性集合の一致を要求し、同一対象の複数出現・リンク内・属性追加の場合は停止する。他記事へ除外を広げない。元HTML/URLは入力とsource.raw/変換記録、実体は `.local/wordpress-conversion/cleardot-20261128.gif` に保全。架空assetIdは登録しない。以前の #493 の8点復旧・1点除外とは別の合意。
 
 ## 全件結果
 
