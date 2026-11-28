@@ -25,7 +25,8 @@
     "export:cms": "node scripts/export-cms.mjs",
     "dev:cms": "node scripts/dev-cms.mjs",
     "test:e2e:cms": "playwright test --config playwright.cms.config.ts",
-    "test:wordpress-media-migration": "node --test scripts/prepare-wordpress-media-usage.test.mjs scripts/verify-wordpress-media-usage.test.mjs scripts/prepare-wordpress-asset-map.test.mjs"
+    "test:wordpress-media-migration": "node --test scripts/prepare-wordpress-media-usage.test.mjs scripts/verify-wordpress-media-usage.test.mjs scripts/prepare-wordpress-asset-map.test.mjs",
+    "test:wordpress-conversion": "node --test scripts/prepare-wordpress-conversion.test.mjs scripts/prepare-wordpress-nonpublic.test.mjs scripts/wordpress-body-media.test.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.9",

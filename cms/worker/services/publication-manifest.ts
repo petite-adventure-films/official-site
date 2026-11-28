@@ -1,3 +1,4 @@
+import { bodyAssetReferences } from '../../../packages/content-schema/body-media';
 import { legacyBlogMetadata } from './legacy-blog';
 import { newsArticlePath } from '../../../packages/content-schema/publication-paths';
 import { isArticleType, type ArticleDraft, type ArticleType } from '../../src/features/articles/draft';
@@ -66,8 +67,7 @@ export async function buildPublicationManifest(db: Database, media: MediaBucket 
   news.forEach((article, index) => { article.path = newsArticlePath(article.path.split('#cms-')[1], index); });
   const ids = new Set<string>();
   function collect(node: BodyNode) {
-    if (node.type === 'assetImage' || node.type === 'assetLink') ids.add(node.attrs!.assetId as string);
-    for (const child of [...(node.content ?? []), ...(node.marks ?? [])]) collect(child);
+    for (const {id} of bodyAssetReferences(node)) ids.add(id);
   }
   for (const blog of blogs) collect(blog.content.body.doc);
   for (const article of articles) {

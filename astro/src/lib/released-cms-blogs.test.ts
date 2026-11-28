@@ -209,3 +209,41 @@ test('renders only validated video URLs and preserves Vimeo access parameters, d
     render({ type: 'externalVideo', attrs: { ...attrs, sourceUrl: 'javascript:alert(1)' } }),
   ).toThrow('invalid_blog_release_video');
 });
+
+test('renders inline image attributes, responsive asset paths and attachment click target', async () => {
+  const { createBodyRenderer } = await import('./released-cms-blogs');
+  const render = createBodyRenderer((id) => `/__cms-media/${String(id)}.png`);
+  const html = render({
+    type: 'paragraph',
+    content: [
+      { type: 'text', text: '前' },
+      {
+        type: 'inlineAssetImage',
+        attrs: {
+          assetId: 'one',
+          alt: '説明"',
+          title: '写真',
+          width: 200,
+          height: 150,
+          sources: [{ assetId: 'two', width: 400 }],
+          sizes: '(max-width: 400px) 100vw, 400px',
+        },
+        marks: [
+          {
+            type: 'assetLink',
+            attrs: { assetId: 'three', assetKind: 'image', target: '_blank', title: '拡大' },
+          },
+        ],
+      },
+      { type: 'text', text: '後' },
+    ],
+  });
+  expect(html).toContain(
+    '<p>前<a href="/__cms-media/three.png" target="_blank" title="拡大" rel="noopener noreferrer"><img',
+  );
+  expect(html).toContain('srcset="/__cms-media/two.png 400w"');
+  expect(html).toContain('width="200" height="150"');
+  expect(html).toContain('style="display:inline"');
+  expect(html).toContain('alt="説明&quot;"');
+  expect(html).toContain('</a>後</p>');
+});

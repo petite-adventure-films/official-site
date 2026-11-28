@@ -31,3 +31,9 @@
 ## 添付照合・登録（ #494 ）
 
 公開/非公開の実参照を抽出し、WXR宣言サイズと完全URLで対応付ける。scheme差は双方の実体hashで確認する。合意済み復旧/除外を明示的な対応表にし、専用D1/R2で予約→実体照合→asset確定→URL台帳を実行する。再開時のID保持と既存実体の上書き拒否を検証する。記事の公開状態は変更しない。[実装・検証](media-migration-20261128.md)。
+
+## 本文asset接続（ #492 、2026-11-28）
+
+ブランチ `codex/issue-492-asset-body-conversion` は最新 `version-4` から分岐し、同じ統合先へ戻す。登録台帳を入力として、画像の元位置をblock/inlineノードで保持する。寸法・title・既知WordPress class・loading/decoding・srcset/sizesは記事ごとの属性として保持し、実体metadataと混ぜない。旧classは保全用の限定文字列として保持し、Tailwindとの衝突を避けるためHTML classには出さない。画像とPDFへのリンクはassetKind付き参照とし、target/titleを維持する。未登録URL・未知属性・不正な表示値は停止する。合意済み復旧/除外は元URLと記事IDの両方で制限する。
+
+CMSは既存BodyEditorを継続する（Figma `153:166`、2026-11-28 MCPで定義・画像確認）。画像ボタンと代替テキストダイアログをinline画像にも接続する。外観・共通部品は追加しない。既存BodyEditor案の利用者受入とは区別して、保存・再読込と参照保持をブラウザで検証する。レスポンシブ候補も保存時・公開manifest作成時のasset検査に含める。40MiBの公開manifest制限、実記事の取込、旧URL移行と最終同期は別の残条件。
